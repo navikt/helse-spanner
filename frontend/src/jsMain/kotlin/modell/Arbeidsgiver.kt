@@ -1,11 +1,15 @@
 package modell
 
 import ArbeidsgiverDTO
+import ForkastetVedtaksperiodeDTO
+import VedtaksperiodeDTO
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import org.jetbrains.compose.web.css.*
+import kotlinx.serialization.json.JsonObject
+import org.jetbrains.compose.web.css.cssRem
+import org.jetbrains.compose.web.css.padding
 import org.jetbrains.compose.web.dom.Button
 import org.jetbrains.compose.web.dom.Div
 import org.jetbrains.compose.web.dom.Text
@@ -15,7 +19,8 @@ class Arbeidsgiver private constructor(
     private val orgnummer: String,
     private val vedtaksperioder: List<Vedtaksperiode>,
     private val mainView: MainView,
-    aktivitetslogg: Aktivitetslogg
+    aktivitetslogg: Aktivitetslogg,
+    private val json: JsonObject
 ) : KontekstFilter, NavigationView, DetaljView {
     val aktivitetslogg = aktivitetslogg.subset(this)
     var erAktiv by mutableStateOf(true)
@@ -46,6 +51,15 @@ class Arbeidsgiver private constructor(
         }
     }
 
+    @Composable
+    override fun renderDetaljer() {
+        aktivitetslogg.render()
+    }
+
+    override fun json(): String {
+        return json.toString()
+    }
+
     override fun kontekst(): Pair<String, Map<String, String>> {
         return "Arbeidsgiver" to mapOf(
             "organisasjonsnummer" to orgnummer
@@ -53,18 +67,31 @@ class Arbeidsgiver private constructor(
     }
 
     companion object {
-        fun from(dto: ArbeidsgiverDTO, aktivitetslogg: Aktivitetslogg, mainView: MainView) =
-            Arbeidsgiver(
-                dto.organisasjonsnummer,
-(                dto.vedtaksperioder.map { Vedtaksperiode.from(it, aktivitetslogg, false) }
-                        + dto.forkastede.map { Vedtaksperiode.from(it.vedtaksperiode, aktivitetslogg, true) }).sorted(),
-                mainView,
-                aktivitetslogg
+        fun from(dto: ArbeidsgiverDTO, json: JsonObject, aktivitetslogg: Aktivitetslogg, mainView: MainView): Arbeidsgiver {
+            val vedtaksperioder = dto.vedtaksperioderMap()
+            val forkastede = dto.forkastedeMap()
+            return Arbeidsgiver(
+                orgnummer = dto.organisasjonsnummer,
+                vedtaksperioder = tilVedtaksperioder(vedtaksperioder, forkastede, mainView, aktivitetslogg),
+                mainView = mainView,
+                aktivitetslogg = aktivitetslogg,
+                json = json
             )
-    }
+        }
 
-    @Composable
-    override fun renderDetaljer() {
-        aktivitetslogg.render()
+        private fun tilVedtaksperioder(
+            vedtaksperioder: List<Pair<VedtaksperiodeDTO, JsonObject>>,
+            forkastede: List<Pair<ForkastetVedtaksperiodeDTO, JsonObject>>,
+            mainView: MainView,
+            aktivitetslogg: Aktivitetslogg
+        ): List<Vedtaksperiode> {
+            val vedtaksperioder = vedtaksperioder.map { (dto, json) ->
+                Vedtaksperiode.from(dto, json, mainView, aktivitetslogg, false)
+            }
+            val forkastede = forkastede.map { (dto, json) ->
+                Vedtaksperiode.from(dto.vedtaksperiode, json, mainView, aktivitetslogg, true)
+            }
+            return (vedtaksperioder + forkastede).sorted()
+        }
     }
 }

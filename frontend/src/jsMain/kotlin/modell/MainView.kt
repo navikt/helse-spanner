@@ -4,6 +4,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import externals.JSONFormatter
+import kotlinx.browser.document
+import kotlinx.dom.clear
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.Button
 import org.jetbrains.compose.web.dom.Div
@@ -56,7 +59,16 @@ class MainView() {
 
     @Composable
     private fun jsonContainer() {
-        Div()
+        Div(attrs = {
+            id("json-container")
+        }) {
+            view?.json()?.let {
+                document.getElementById("json-container")?.apply {
+                    clear()
+                    appendChild(JSONFormatter(js("JSON.parse(it)")).render())
+                }
+            }
+        }
     }
 
     @Composable

@@ -4,6 +4,7 @@ plugins {
 
 kotlin {
     js(IR) {
+        useCommonJs()
         browser()
         binaries.executable()
     }
@@ -12,6 +13,7 @@ kotlin {
             dependencies {
                 implementation(compose.web.core)
                 implementation(compose.runtime)
+                implementation(npm("json-formatter-js", "2.3.4"))
                 implementation(project(":common"))
             }
         }

@@ -3,10 +3,10 @@ package modell
 import VedtaksperiodeDTO
 import androidx.compose.runtime.Composable
 import kotlinx.datetime.LocalDate
+import kotlinx.serialization.json.JsonObject
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.css.keywords.auto
 import org.jetbrains.compose.web.dom.Div
-import org.jetbrains.compose.web.dom.P
 import org.jetbrains.compose.web.dom.Text
 
 class Vedtaksperiode private constructor(
@@ -16,8 +16,10 @@ class Vedtaksperiode private constructor(
     private val tom: LocalDate,
     private val skjæringstidspunkt: LocalDate,
     private val tilstand: String,
-    private val forkastet: Boolean
-) : KontekstFilter, NavigationView, Comparable<Vedtaksperiode> {
+    private val forkastet: Boolean,
+    private val mainView: MainView,
+    private val json: JsonObject
+) : KontekstFilter, NavigationView, DetaljView, Comparable<Vedtaksperiode> {
     val aktivitetslogg = aktivitetslogg.subset(this)
 
     @Composable
@@ -29,6 +31,9 @@ class Vedtaksperiode private constructor(
             }
         }) {
             Div(attrs = {
+                onClick {
+                    mainView.setView(this@Vedtaksperiode)
+                }
                 style {
                     display(DisplayStyle.Flex)
                     flexDirection(FlexDirection.Row)
@@ -62,14 +67,23 @@ class Vedtaksperiode private constructor(
         })
     }
 
+    @Composable
+    override fun renderDetaljer() {
+        aktivitetslogg.render()
+    }
+
+    override fun json() = json.toString()
+
     override fun kontekst(): Pair<String, Map<String, String>> {
         return "Vedtaksperiode" to mapOf(
             "vedtaksperiodeId" to vedtaksperiodeId
         )
     }
 
+    override fun compareTo(other: Vedtaksperiode) = fom.compareTo(other.fom)
+
     companion object {
-        fun from(dto: VedtaksperiodeDTO, aktivitetslogg: Aktivitetslogg, forkastet: Boolean) =
+        fun from(dto: VedtaksperiodeDTO, json: JsonObject, mainView: MainView, aktivitetslogg: Aktivitetslogg, forkastet: Boolean) =
             Vedtaksperiode(
                 aktivitetslogg = aktivitetslogg,
                 vedtaksperiodeId = dto.id,
@@ -77,9 +91,9 @@ class Vedtaksperiode private constructor(
                 tom = dto.tom,
                 skjæringstidspunkt = dto.skjæringstidspunkt,
                 tilstand = dto.tilstand,
-                forkastet = forkastet
+                forkastet = forkastet,
+                json = json,
+                mainView = mainView
             )
     }
-
-    override fun compareTo(other: Vedtaksperiode) = fom.compareTo(other.fom)
 }

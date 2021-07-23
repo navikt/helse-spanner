@@ -5,27 +5,32 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.*
 
 object PersonParser {
-    private val parser = Json {
+    internal val parser = Json {
         ignoreUnknownKeys = true
     }
 
-    val json = Data.json
-    fun person(): PersonDTO = parser.decodeFromString(json)
+    val json = parser.decodeFromString<JsonObject>(Data.json)
+    fun person() = parser.decodeFromJsonElement<PersonDTO>(json) to json
 }
 
 @Serializable
 data class PersonDTO(
     val fødselsnummer: String,
     val aktivitetslogg: AktivitetsloggDTO,
-    val arbeidsgivere: List<ArbeidsgiverDTO>
-)
+    val arbeidsgivere: List<JsonObject>
+) {
+    fun arbeidsgivereMap() = this.arbeidsgivere.map { PersonParser.parser.decodeFromJsonElement<ArbeidsgiverDTO>(it) to it }
+}
 
 @Serializable
 data class ArbeidsgiverDTO(
     val organisasjonsnummer: String,
-    val vedtaksperioder: List<VedtaksperiodeDTO>,
-    val forkastede: List<ForkastetVedtaksperiodeDTO>
-)
+    val vedtaksperioder: List<JsonObject>,
+    val forkastede: List<JsonObject>
+) {
+    fun vedtaksperioderMap() = this.vedtaksperioder.map { PersonParser.parser.decodeFromJsonElement<VedtaksperiodeDTO>(it) to it }
+    fun forkastedeMap() = this.forkastede.map { PersonParser.parser.decodeFromJsonElement<ForkastetVedtaksperiodeDTO>(it) to it }
+}
 
 @Serializable
 data class ForkastetVedtaksperiodeDTO(

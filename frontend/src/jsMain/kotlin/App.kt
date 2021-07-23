@@ -31,7 +31,8 @@ private object GlobalStyles: StyleSheet() {
 
 fun main() {
     val mainView = MainView()
-    val person = Person.from(PersonParser.person(), mainView)
+    val (dto, json) = PersonParser.person()
+    val person = Person.from(dto, json, mainView)
     mainView.setView(person)
 
     renderComposable(rootElementId = "root") {
