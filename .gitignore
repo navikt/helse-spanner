@@ -1,0 +1,9 @@
+build/
+out/
+.gradle/
+
+.DS_Store
+
+.idea/
+!/.idea/codeStyles/*.xml
+!/.idea/runConfigurations/*.xml
