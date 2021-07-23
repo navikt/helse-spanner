@@ -1,14 +1,16 @@
+import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.*
 
-object Testerino {
+object PersonParser {
     private val parser = Json {
         ignoreUnknownKeys = true
     }
 
-    fun person(): PersonDTO = parser.decodeFromString(Data.json)
+    val json = Data.json
+    fun person(): PersonDTO = parser.decodeFromString(json)
 }
 
 @Serializable
@@ -21,12 +23,22 @@ data class PersonDTO(
 @Serializable
 data class ArbeidsgiverDTO(
     val organisasjonsnummer: String,
-    val vedtaksperioder: List<VedtaksperiodeDTO>
+    val vedtaksperioder: List<VedtaksperiodeDTO>,
+    val forkastede: List<ForkastetVedtaksperiodeDTO>
+)
+
+@Serializable
+data class ForkastetVedtaksperiodeDTO(
+    val vedtaksperiode: VedtaksperiodeDTO
 )
 
 @Serializable
 data class VedtaksperiodeDTO(
-    val id: String
+    val id: String,
+    val fom: LocalDate,
+    val tom: LocalDate,
+    val skjæringstidspunkt: LocalDate,
+    val tilstand: String
 )
 
 @Serializable

@@ -17,7 +17,7 @@ import org.w3c.dom.HTMLSelectElement
 
 class Aktivitetslogg private constructor(
     private val aktiviteter: List<Aktivitet>
-) : Renderable {
+) {
     var visAktiviteter by mutableStateOf(false)
 
     private val filters = mapOf<String, (aktivitet: Aktivitet) -> Boolean> (
@@ -33,7 +33,7 @@ class Aktivitetslogg private constructor(
     private fun aktiviteter() = aktiviteter.grupperEtterHendelse().mapValues { (_, values) -> values.filter(filter) }
 
     @Composable
-    override fun render(children: @Composable () -> Unit) {
+    fun render() {
         Button(attrs = {
 
             onClick {
@@ -95,12 +95,12 @@ class Aktivitetslogg private constructor(
 class Kontekst private constructor(
     private val kontekstType: String,
     private val kontekstMap: Map<String, String>,
-) : Renderable {
+) {
     override fun toString(): String = "$kontekstType = $kontekstMap"
     var visAktiviteter by mutableStateOf(false)
 
     @Composable
-    override fun render(children: @Composable () -> Unit) {
+    fun render(children: @Composable () -> Unit) {
         Div {
             Button(attrs = {
                 onClick {
@@ -140,7 +140,7 @@ class Aktivitet private constructor(
     val alvorlighetsgrad: String,
     private val tidsstempel: LocalDateTime,
     private val kontekster: List<Kontekst>
-) : Renderable {
+) {
     override fun toString(): String = "[$tidsstempel] $alvorlighetsgrad: $melding"
 
     fun validFor(kontekstFilter: KontekstFilter) = kontekster.any { it.validFor(kontekstFilter) }
@@ -158,7 +158,7 @@ class Aktivitet private constructor(
     }
 
     @Composable
-    override fun render(children: @Composable () -> Unit) {
+    fun render() {
         LogElement(alvorlighetsgrad)
         LogElement(tidsstempel.toString())
         LogElement(melding)

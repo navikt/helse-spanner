@@ -2,35 +2,64 @@ package modell
 
 import VedtaksperiodeDTO
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
-import org.jetbrains.compose.web.css.Color
-import org.jetbrains.compose.web.css.LineStyle
-import org.jetbrains.compose.web.css.border
-import org.jetbrains.compose.web.css.px
-import org.jetbrains.compose.web.dom.Button
+import kotlinx.datetime.LocalDate
+import org.jetbrains.compose.web.css.*
+import org.jetbrains.compose.web.css.keywords.auto
 import org.jetbrains.compose.web.dom.Div
+import org.jetbrains.compose.web.dom.P
 import org.jetbrains.compose.web.dom.Text
 
 class Vedtaksperiode private constructor(
+    aktivitetslogg: Aktivitetslogg,
     private val vedtaksperiodeId: String,
-    aktivitetslogg: Aktivitetslogg
-) : KontekstFilter, Renderable {
+    private val fom: LocalDate,
+    private val tom: LocalDate,
+    private val skjæringstidspunkt: LocalDate,
+    private val tilstand: String,
+    private val forkastet: Boolean
+) : KontekstFilter, NavigationView, Comparable<Vedtaksperiode> {
     val aktivitetslogg = aktivitetslogg.subset(this)
+
     @Composable
-    override fun render(children: @Composable () -> Unit) {
+    override fun renderNavigation() {
         Div(attrs = {
             style {
                 border(1.px, LineStyle.Solid, Color("black"))
+                padding(0.5.cssRem)
             }
         }) {
-            Div {
+            Div(attrs = {
+                style {
+                    display(DisplayStyle.Flex)
+                    flexDirection(FlexDirection.Row)
+                    fontSize(0.8.cssRem)
+                }
+            }) {
+                Text("Periode: $fom - $tom")
+                Separator()
+                Text("Skjæringstidspunkt: $skjæringstidspunkt")
+                Separator()
                 Text(vedtaksperiodeId)
+                Separator()
+                Text(tilstand)
+                if (forkastet) {
+                    Separator()
+                    Text("forkastet")
+                }
             }
-
-            aktivitetslogg.render()
         }
+    }
+
+    @Composable
+    private fun Separator() {
+        Div(attrs = {
+            style {
+                height(auto)
+                width(1.px)
+                property("margin", "0 1rem")
+                backgroundColor("black")
+            }
+        })
     }
 
     override fun kontekst(): Pair<String, Map<String, String>> {
@@ -40,10 +69,17 @@ class Vedtaksperiode private constructor(
     }
 
     companion object {
-        fun from(dto: VedtaksperiodeDTO, aktivitetslogg: Aktivitetslogg) =
+        fun from(dto: VedtaksperiodeDTO, aktivitetslogg: Aktivitetslogg, forkastet: Boolean) =
             Vedtaksperiode(
-                dto.id,
-                aktivitetslogg
+                aktivitetslogg = aktivitetslogg,
+                vedtaksperiodeId = dto.id,
+                fom = dto.fom,
+                tom = dto.tom,
+                skjæringstidspunkt = dto.skjæringstidspunkt,
+                tilstand = dto.tilstand,
+                forkastet = forkastet
             )
     }
+
+    override fun compareTo(other: Vedtaksperiode) = fom.compareTo(other.fom)
 }

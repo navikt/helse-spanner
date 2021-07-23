@@ -2,8 +2,9 @@ package modell
 
 import androidx.compose.runtime.Composable
 
-interface Renderable {
+interface NavigationView {
+
     @Composable
-    fun render(children: @Composable () -> Unit = {})
+    fun renderNavigation()
 }
 
