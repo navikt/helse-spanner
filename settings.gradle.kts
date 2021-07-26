@@ -6,6 +6,4 @@ pluginManagement {
         maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
     }
 }
-include("frontend")
-//include("common")//, "frontend")
-include("common")
+include("frontend", "common", "backend")
