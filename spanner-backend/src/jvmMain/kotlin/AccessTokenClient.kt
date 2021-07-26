@@ -10,7 +10,7 @@ import java.time.Duration
 import java.time.Instant
 import kotlin.collections.set
 
-class AccessTokenClient(
+internal class AccessTokenClient(
     private val aadAccessTokenUrl: String,
     private val clientId: String,
     private val clientSecret: String,

@@ -3,17 +3,22 @@ import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
 
-class RestClient(
+internal interface RestClient {
+    suspend fun hentPersonMedFnr(fnr: String): String
+    suspend fun hentPersonMedAktørId(aktørId: String): String
+}
+
+internal class ProdRestClient(
     private val httpClient: HttpClient,
     private val accessTokenClient: AccessTokenClient,
     private val spleisClientId: String,
     private val retryInterval: Long = 5000L
-) {
-    internal suspend fun hentPersonMedFnr(fnr: String): String {
+): RestClient {
+    override suspend fun hentPersonMedFnr(fnr: String): String {
         return hentPerson(mapOf("fnr" to fnr))
     }
 
-    internal suspend fun hentPersonMedAktørId(aktørId: String): String {
+    override suspend fun hentPersonMedAktørId(aktørId: String): String {
         return hentPerson(mapOf("aktørId" to aktørId))
     }
 

@@ -12,7 +12,6 @@ import io.ktor.features.*
 import io.ktor.http.*
 import io.ktor.jackson.*
 import io.ktor.request.*
-import io.ktor.response.*
 import io.ktor.routing.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
@@ -54,7 +53,7 @@ class AppBuilder(env: Map<String, String>) {
         clientSecret = env.getValue("AZURE_APP_CLIENT_SECRET"),
         httpClient = azureAdClient
     )
-    private val restClient = RestClient(
+    private val restClient = ProdRestClient(
         httpClient = spleisClient,
         accessTokenClient = accessTokenClient,
         spleisClientId = env.getValue("SPLEIS_CLIENT_ID")
