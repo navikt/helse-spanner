@@ -1,14 +1,19 @@
 import io.ktor.application.*
 import io.ktor.auth.*
 import io.ktor.auth.jwt.*
+import io.ktor.client.*
+import io.ktor.http.*
 
-internal const val API_BRUKER = "api_bruker"
-internal const val API_SERVICE = "api_service"
+internal val AZURE_OAUTH = "azure_oauth"
 
-internal fun Application.azureAdAppAuthentication(config: IAzureAdAppConfig) {
+internal fun Application.azureAdAppAuthentication(azureAdClient: IAzureAdClient, host: String) {
     install(Authentication) {
-        jwt(API_SERVICE) {
-            config.configureVerification(this)
+        oauth(AZURE_OAUTH) {
+            urlProvider = { "https://$host/api/oauth2/callback" }
+            providerLookup = {
+                azureAdClient.configuration()
+            }
+            client = azureAdClient.httpClient
         }
     }
 }

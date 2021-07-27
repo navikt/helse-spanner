@@ -31,6 +31,10 @@ plugins {
          exclude("com.fasterxml.jackson.core")
          exclude("com.fasterxml.jackson.dataformat")
      }
+
+     implementation("io.jsonwebtoken:jjwt-api:0.11.2")
+     runtimeOnly("io.jsonwebtoken:jjwt-impl:0.11.2")
+     runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.11.2")
  }
 
  application {
