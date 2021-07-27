@@ -5,9 +5,9 @@ import io.ktor.request.*
 import io.ktor.response.*
 import io.ktor.routing.*
 
-internal fun Application.api(prodRestClient: ProdRestClient) {
+internal fun Application.api(restClient: IRestClient) {
     routing {
-        authenticate("oidc") {
+        authenticate(API_SERVICE) {
             get("/api/person-fnr") {
                 val fnr = call.request.header("fnr")
 
@@ -16,7 +16,7 @@ internal fun Application.api(prodRestClient: ProdRestClient) {
                     return@get
                 }
 
-                val person = prodRestClient.hentPersonMedFnr(fnr)
+                val person = restClient.hentPersonMedFnr(fnr)
                 call.respond(HttpStatusCode.OK, person)
             }
 
@@ -27,9 +27,8 @@ internal fun Application.api(prodRestClient: ProdRestClient) {
                     call.respond(HttpStatusCode.BadRequest)
                     return@get
                 }
-
-                val person = prodRestClient.hentPersonMedAktørId(aktørId)?.let { call.respond(it) }
-                    ?: call.respond(HttpStatusCode.NotFound, "Resource not found")
+                val person = restClient.hentPersonMedAktørId(aktørId)
+                call.respond(HttpStatusCode.OK, person)
             }
         }
     }

@@ -25,9 +25,15 @@ plugins {
 
      implementation("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion")
      implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonVersion")
+
      implementation("ch.qos.logback:logback-classic:1.2.3")
+     implementation("net.logstash.logback:logstash-logback-encoder:6.6") {
+         exclude("com.fasterxml.jackson.core")
+         exclude("com.fasterxml.jackson.dataformat")
+     }
  }
 
  application {
      mainClass.set("AppKt")
+     applicationDefaultJvmArgs = listOf("-Dio.ktor.development=true")
  }

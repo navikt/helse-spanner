@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import io.ktor.application.*
-import io.ktor.auth.*
 import io.ktor.client.*
 import io.ktor.client.engine.apache.*
 import io.ktor.client.features.json.*
@@ -22,9 +21,10 @@ import java.net.ProxySelector
 import java.util.*
 
 class AppBuilder(env: Map<String, String>) {
+    private val isLocal = env.getOrDefault("LOCAL", "false").toBoolean()
     private val httpTraceLog = LoggerFactory.getLogger("tjenestekall")
 
-    private val appConfig = AppConfig(env)
+    private val appConfig = AppConfig(env, isLocal)
 
     private val azureAdClient = HttpClient(Apache) {
         engine {
@@ -47,17 +47,9 @@ class AppBuilder(env: Map<String, String>) {
             connectionRequestTimeout = 40_000
         }
     }
-    private val accessTokenClient = AccessTokenClient(
-        aadAccessTokenUrl = env.getValue("AZURE_OPENID_CONFIG_TOKEN_ENDPOINT"),
-        clientId = env.getValue("AZURE_APP_CLIENT_ID"),
-        clientSecret = env.getValue("AZURE_APP_CLIENT_SECRET"),
-        httpClient = azureAdClient
-    )
-    private val restClient = ProdRestClient(
-        httpClient = spleisClient,
-        accessTokenClient = accessTokenClient,
-        spleisClientId = env.getValue("SPLEIS_CLIENT_ID")
-    )
+
+    private val accessTokenClient = IAccessTokenClient.accessTokenClient(isLocal, azureAdClient, env)
+    private val restClient = IRestClient.restClient(spleisClient, accessTokenClient, env, isLocal)
 
     internal fun build() =
         embeddedServer(Netty, applicationEngineEnvironment {
@@ -78,12 +70,7 @@ class AppBuilder(env: Map<String, String>) {
                 nais()
                 azureAdAppAuthentication(appConfig.azureConfig)
                 routing {
-                    authenticate("oidc") {
-                        get("/api/person-fnr") {
-                            val fnr = call.request.header("fnr")!!
-                            restClient.hentPersonMedFnr(fnr)
-                        }
-                    }
+                    api(restClient)
                 }
             }
         })

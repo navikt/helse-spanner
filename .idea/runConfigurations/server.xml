@@ -3,13 +3,13 @@
     <ExternalSystemSettings>
       <option name="env">
         <map>
-          <entry key="DEVELOPMENT" value="true" />
+          <entry key="LOCAL" value="true" />
         </map>
       </option>
       <option name="executionName" />
       <option name="externalProjectPath" value="$PROJECT_DIR$/spanner-backend" />
       <option name="externalSystemIdString" value="GRADLE" />
-      <option name="scriptParameters" value="--continuous" />
+      <option name="scriptParameters" value="" />
       <option name="taskDescriptions">
         <list />
       </option>
@@ -18,7 +18,7 @@
           <option value="run" />
         </list>
       </option>
-      <option name="vmOptions" value="" />
+      <option name="vmOptions" value="-Dio.ktor.development=true" />
     </ExternalSystemSettings>
     <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
     <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>

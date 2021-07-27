@@ -3,7 +3,7 @@
     <ExternalSystemSettings>
       <option name="env">
         <map>
-          <entry key="DEVELOPMENT" value="true" />
+          <entry key="LOCAL" value="true" />
         </map>
       </option>
       <option name="executionName" />

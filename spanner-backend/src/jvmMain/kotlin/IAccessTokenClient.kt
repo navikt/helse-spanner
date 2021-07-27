@@ -10,20 +10,41 @@ import java.time.Duration
 import java.time.Instant
 import kotlin.collections.set
 
+internal interface IAccessTokenClient {
+    suspend fun hentAccessToken(scope: String): String
+
+    companion object {
+        internal fun accessTokenClient(isLocal: Boolean, azureAdClient: HttpClient, env: Map<String, String>) =
+            if (isLocal) LocalAccessTokenClient
+            else AccessTokenClient(
+                aadAccessTokenUrl = env.getValue("AZURE_OPENID_CONFIG_TOKEN_ENDPOINT"),
+                clientId = env.getValue("AZURE_APP_CLIENT_ID"),
+                clientSecret = env.getValue("AZURE_APP_CLIENT_SECRET"),
+                httpClient = azureAdClient
+            )
+    }
+}
+
+internal object LocalAccessTokenClient : IAccessTokenClient {
+    override suspend fun hentAccessToken(scope: String): String {
+        return "access_token"
+    }
+}
+
 internal class AccessTokenClient(
     private val aadAccessTokenUrl: String,
     private val clientId: String,
     private val clientSecret: String,
     private val httpClient: HttpClient
-) {
+): IAccessTokenClient {
 
-    private val log = LoggerFactory.getLogger(AccessTokenClient::class.java)
+    private val log = LoggerFactory.getLogger(IAccessTokenClient::class.java)
     private val mutex = Mutex()
 
     @Volatile
     private var tokenMap = HashMap<String, AadAccessToken>()
 
-    suspend fun hentAccessToken(scope: String): String {
+    override suspend fun hentAccessToken(scope: String): String {
         val omToMinutter = Instant.now().plusSeconds(120L)
         return mutex.withLock {
             (tokenMap[scope]

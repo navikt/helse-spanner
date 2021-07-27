@@ -8,18 +8,19 @@ import java.io.InputStream
 import java.net.HttpURLConnection
 import java.net.URL
 
-internal class AppConfig(env: Map<String, String> = System.getenv()) {
+internal class AppConfig(env: Map<String, String> = System.getenv(), isLocal: Boolean) {
     internal val ktorConfig = KtorConfig(
-        httpPort = env["HTTP_PORT"]?.toInt() ?: 8080
+        httpPort = env["HTTP_PORT"]?.toInt() ?: 9000
     )
 
-    internal val azureConfig = AzureAdAppConfig(
-        clientId = env.getValue("AZURE_APP_CLIENT_ID"),
-        configurationUrl = env.getValue("AZURE_APP_WELL_KNOWN_URL")
-    )
+    internal val azureConfig = if (!isLocal)
+        AzureAdAppConfig(
+            clientId = env.getValue("AZURE_APP_CLIENT_ID"),
+            configurationUrl = env.getValue("AZURE_APP_WELL_KNOWN_URL")
+        ) else LocalAzureAdAppConfig
 }
 
-internal class KtorConfig(private val httpPort: Int = 8080) {
+internal class KtorConfig(private val httpPort: Int = 9000) {
     fun configure(builder: ApplicationEngineEnvironmentBuilder) {
         builder.connector {
             port = httpPort
@@ -27,7 +28,15 @@ internal class KtorConfig(private val httpPort: Int = 8080) {
     }
 }
 
-internal class AzureAdAppConfig(private val clientId: String, configurationUrl: String) {
+internal interface IAzureAdAppConfig {
+    fun configureVerification(configuration: JWTAuthenticationProvider.Configuration)
+}
+
+internal object LocalAzureAdAppConfig : IAzureAdAppConfig {
+    override fun configureVerification(configuration: JWTAuthenticationProvider.Configuration) { return }
+}
+
+internal class AzureAdAppConfig(private val clientId: String, configurationUrl: String) : IAzureAdAppConfig {
     private val issuer: String
     private val jwkProvider: JwkProvider
     private val jwksUri: String
@@ -41,7 +50,7 @@ internal class AzureAdAppConfig(private val clientId: String, configurationUrl: 
         jwkProvider = JwkProviderBuilder(URL(this.jwksUri)).build()
     }
 
-    fun configureVerification(configuration: JWTAuthenticationProvider.Configuration) {
+    override fun configureVerification(configuration: JWTAuthenticationProvider.Configuration) {
         configuration.verifier(jwkProvider, issuer) {
             withAudience(clientId)
         }
