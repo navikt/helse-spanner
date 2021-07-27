@@ -5,12 +5,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import externals.JSONFormatter
-import kotlinx.browser.document
 import kotlinx.dom.clear
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.Button
 import org.jetbrains.compose.web.dom.Div
+import org.jetbrains.compose.web.dom.ElementScope
 import org.jetbrains.compose.web.dom.Text
+import org.w3c.dom.HTMLElement
 
 class MainView() {
     private var view by mutableStateOf<DetaljView?>(null)
@@ -59,15 +60,18 @@ class MainView() {
 
     @Composable
     private fun jsonContainer() {
-        Div(attrs = {
-            id("json-container")
-        }) {
+        Div {
             view?.json()?.let {
-                document.getElementById("json-container")?.apply {
-                    clear()
-                    appendChild(JSONFormatter(js("JSON.parse(it)")).render())
-                }
+                jsonRenderer(JSONFormatter(js("JSON.parse(it)")))
             }
+        }
+    }
+
+    @Composable
+    private fun ElementScope<HTMLElement>.jsonRenderer(jsonFormatter: JSONFormatter) {
+        DomSideEffect { htmlElement ->
+            htmlElement.clear()
+            htmlElement.appendChild(jsonFormatter.render())
         }
     }
 

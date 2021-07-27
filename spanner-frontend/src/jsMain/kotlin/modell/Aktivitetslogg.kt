@@ -35,7 +35,6 @@ class Aktivitetslogg private constructor(
     @Composable
     fun render() {
         Button(attrs = {
-
             onClick {
                 visAktiviteter = !visAktiviteter
                 if (!visAktiviteter) {
@@ -125,7 +124,7 @@ class Kontekst private constructor(
 
     fun validFor(kontekstFilter: KontekstFilter): Boolean {
         val (kontekstType, kontekstMap) = kontekstFilter.kontekst()
-        return this.kontekstType == kontekstType && kontekstMap.all { (key, value) -> kontekstMap[key] == value }
+        return this.kontekstType == kontekstType && this.kontekstMap.all { (key, value) -> kontekstMap[key] == value }
     }
 
     companion object {
