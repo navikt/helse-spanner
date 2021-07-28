@@ -3,7 +3,7 @@ import io.ktor.http.*
 import io.ktor.response.*
 import io.ktor.routing.*
 
-internal fun Application.nais() {
+internal fun Application.naisApi() {
     routing {
         get("/isalive") {
             call.respondText("ALIVE", ContentType.Text.Plain)

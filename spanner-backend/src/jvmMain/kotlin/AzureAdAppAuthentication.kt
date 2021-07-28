@@ -6,10 +6,10 @@ import io.ktor.http.*
 
 internal val AZURE_OAUTH = "azure_oauth"
 
-internal fun Application.azureAdAppAuthentication(azureAdClient: IAzureAdClient, host: String) {
+internal fun Application.azureAdAppAuthentication(azureAdClient: IAzureAdClient, host: Host) {
     install(Authentication) {
         oauth(AZURE_OAUTH) {
-            urlProvider = { "https://$host/api/oauth2/callback" }
+            urlProvider = { "$host/oauth2/callback" }
             providerLookup = {
                 azureAdClient.configuration()
             }

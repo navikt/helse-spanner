@@ -1,5 +1,6 @@
 val ktorVersion = "1.6.1"
 val jacksonVersion = "2.12.4"
+val junitJupiterVersion = "5.6.2"
 
 plugins {
      application
@@ -11,6 +12,7 @@ plugins {
      }
      sourceSets {
          val jvmMain by getting {}
+         val jvmTest by getting {}
      }
  }
 
@@ -35,7 +37,22 @@ plugins {
      implementation("io.jsonwebtoken:jjwt-api:0.11.2")
      runtimeOnly("io.jsonwebtoken:jjwt-impl:0.11.2")
      runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.11.2")
+
+     testImplementation("org.junit.jupiter:junit-jupiter-api:$junitJupiterVersion")
+     testImplementation("org.junit.jupiter:junit-jupiter-params:$junitJupiterVersion")
+     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junitJupiterVersion")
+
+     testImplementation("no.nav.security:mock-oauth2-server:0.3.4")
  }
+
+tasks {
+    withType<Test> {
+        useJUnitPlatform()
+        testLogging {
+            events("passed", "skipped", "failed")
+        }
+    }
+}
 
  application {
      mainClass.set("AppKt")

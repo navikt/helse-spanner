@@ -7,19 +7,16 @@ import io.ktor.routing.*
 import io.ktor.sessions.*
 import org.slf4j.LoggerFactory
 
-
-internal fun Application.api(restClient: IRestClient, isLocal: Boolean, azureAdClient: IAzureAdClient) {
+internal fun Application.authApi(azureAdClient: IAzureAdClient, isLocal: Boolean) {
     val sikkerLogg = LoggerFactory.getLogger("tjenestekall")
 
     routing {
         authenticate(AZURE_OAUTH, optional = isLocal) {
             get("/login") {}
 
-            get("/api/oauth2/callback") {
+            get("/oauth2/callback") {
                 val principal = call.authentication.principal<OAuthAccessTokenResponse.OAuth2>()
                     ?: throw Exception("No principal was given")
-
-                azureAdClient.verifyOidcResponse(principal)
 
                 val accessToken = principal.accessToken
                 val refreshToken = principal.refreshToken
@@ -39,9 +36,16 @@ internal fun Application.api(restClient: IRestClient, isLocal: Boolean, azureAdC
                 )
 
                 call.sessions.set(session)
-                call.respondRedirect("/")
-            }
 
+                call.respond(HttpStatusCode.OK)
+            }
+        }
+    }
+}
+
+internal fun Application.api(restClient: IRestClient, isLocal: Boolean) {
+    routing {
+        authenticate(AZURE_OAUTH, optional = isLocal) {
             get("/api/person-fnr") {
                 val fnr = call.request.header("fnr")
 

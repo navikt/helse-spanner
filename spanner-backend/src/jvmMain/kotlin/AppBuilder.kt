@@ -1,8 +1,3 @@
-import com.fasterxml.jackson.core.util.DefaultIndenter
-import com.fasterxml.jackson.core.util.DefaultPrettyPrinter
-import com.fasterxml.jackson.databind.SerializationFeature
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import io.ktor.application.*
 import io.ktor.client.*
 import io.ktor.client.engine.apache.*
@@ -21,10 +16,16 @@ import java.util.*
 
 class AppBuilder(private val env: Map<String, String>) {
     private val isLocal = env.getOrDefault("LOCAL", "false").toBoolean()
-    private val host = env.getOrDefault("HOST", "localhost:9000").toString()
+    private val host = if (isLocal) Localhost() else Deployed(env)
     private val httpTraceLog = LoggerFactory.getLogger("tjenestekall")
 
-    private val azureAdClient = IAzureAdClient.client(env, isLocal)
+    private val azureAdConfig = AzureAdConfig(
+        clientId = env.getOrDefault("AZURE_APP_CLIENT_ID", "unknown"),
+        clientSecret = env.getOrDefault("AZURE_APP_CLIENT_SECRET", "unknown"),
+        configurationUrl = env.getOrDefault("AZURE_APP_WELL_KNOWN_URL", "unknown")
+    )
+
+    private val azureAdClient = IAzureAdClient.client(azureAdConfig, isLocal)
 
     private val spleisClient = HttpClient(Apache) {
         install(JsonFeature) { serializer = JacksonSerializer() }
@@ -35,38 +36,34 @@ class AppBuilder(private val env: Map<String, String>) {
         }
     }
 
-    private val restClient = IRestClient.restClient(spleisClient, env, isLocal)
+    private val restClient = IRestClient.restClient(spleisClient, env.getValue("SPLEIS_CLIENT_ID"), isLocal)
 
     internal fun build() =
-        embeddedServer(Netty, applicationEngineEnvironment {
-            connector { port = env["HTTP_PORT"]?.toInt() ?: 9000 }
-            module {
-                install(CallId) {
-                    generate {
-                        UUID.randomUUID().toString()
-                    }
-                }
+        embeddedServer(Netty, port = host.port()) {
+            module(azureAdClient, host) {
                 install(CallLogging) {
                     logger = httpTraceLog
                     level = Level.INFO
                     callIdMdc("callId")
                     filter { call -> call.request.path().startsWith("/api/") }
                 }
-                install(ContentNegotiation) { register(ContentType.Application.Json, JacksonConverter(objectMapper)) }
-                install(Sessions) { cookie<SpannerSession>("spanner", storage = SessionStorageMemory()) }
-                nais()
-                azureAdAppAuthentication(azureAdClient, host)
                 routing {
-                    api(restClient, isLocal, azureAdClient)
+                    naisApi()
+                    authApi(azureAdClient, isLocal)
+                    api(restClient, isLocal)
                 }
             }
-        })
+        }
 }
 
-private val objectMapper = jacksonObjectMapper()
-    .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
-    .registerModule(JavaTimeModule())
-    .setDefaultPrettyPrinter(DefaultPrettyPrinter().apply {
-        indentArraysWith(DefaultPrettyPrinter.FixedSpaceIndenter.instance)
-        indentObjectsWith(DefaultIndenter("  ", "\n"))
-    })
+internal fun Application.module(azureAdClient: IAzureAdClient, host: Host, additional: Application.() -> Unit) {
+    install(CallId) {
+        generate {
+            UUID.randomUUID().toString()
+        }
+    }
+    install(ContentNegotiation) { register(ContentType.Application.Json, JacksonConverter(objectMapper)) }
+    install(Sessions) { cookie<SpannerSession>("spanner", storage = SessionStorageMemory()) }
+    azureAdAppAuthentication(azureAdClient, host)
+    additional()
+}

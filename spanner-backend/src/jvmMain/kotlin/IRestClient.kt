@@ -8,13 +8,9 @@ internal interface IRestClient {
     suspend fun hentPersonMedAktørId(aktørId: String, accessToken: String): String
 
     companion object {
-        fun restClient(
-            httpClient: HttpClient,
-            env: Map<String, String>,
-            isLocal: Boolean
-        ) =
+        fun restClient(httpClient: HttpClient, clientId: String, isLocal: Boolean) =
             if (isLocal) LocalRestClient
-            else RestClient(httpClient, env.getValue("SPLEIS_CLIENT_ID"))
+            else RestClient(httpClient, clientId)
     }
 }
 
