@@ -1,13 +1,11 @@
-import com.fasterxml.jackson.databind.JsonNode
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import io.jsonwebtoken.Claims
-import io.jsonwebtoken.Jws
-import io.jsonwebtoken.Jwts
+import io.jsonwebtoken.*
 import io.ktor.auth.*
 import io.ktor.http.*
-import java.io.InputStream
-import java.net.HttpURLConnection
-import java.net.URL
+import org.apache.commons.codec.binary.Base64.decodeBase64
+import java.math.BigInteger
+import java.security.Key
+import java.security.KeyFactory
+import java.security.spec.RSAPublicKeySpec
 
 internal abstract class IAzureAdConfig(
     private val clientId: String,
@@ -15,6 +13,8 @@ internal abstract class IAzureAdConfig(
 ) {
     abstract val authorizeUrl: String
     abstract val accessTokenUrl: String
+    abstract val jwksUri: String
+    private val defaultScopes = listOf("profile", "offline_access", "openid", "email")
 
     fun oauth2ServerSettings(azureAdClient: AzureAdClient) = OAuthServerSettings.OAuth2ServerSettings(
         name = "azure",
@@ -22,38 +22,53 @@ internal abstract class IAzureAdConfig(
         accessTokenUrl = accessTokenUrl,
         clientId = clientId,
         clientSecret = clientSecret,
-        defaultScopes = listOf("profile", "offline_access", "openid", "email"),
+        defaultScopes = defaultScopes,
         requestMethod = HttpMethod.Post
     )
 
     fun verifySignature(jwtToken: String): Jws<Claims> =
-        Jwts.parserBuilder().setSigningKey(clientSecret).build().parseClaimsJws(jwtToken)
+        Jwts.parserBuilder().setSigningKeyResolver(AzureAdSigningKeyResolver(jwksUri)).build().parseClaimsJws(jwtToken)
+
+    fun createRefreshRequestBody(map: Map<String, String>) =
+        map.toMutableMap().apply {
+            put("client_id", clientId)
+            put("client_secret", clientSecret)
+            put("scope", defaultScopes.joinToString(" "))
+        }.toMap()
 }
 
 internal class AzureAdConfig(
     clientId: String,
     clientSecret: String,
     configurationUrl: String
-): IAzureAdConfig(clientId, clientSecret) {
+) : IAzureAdConfig(clientId, clientSecret) {
     override val authorizeUrl: String
     override val accessTokenUrl: String
+    override val jwksUri: String
 
     init {
         configurationUrl.getJson().also {
             this.authorizeUrl = it["authorization_endpoint"].textValue()
             this.accessTokenUrl = it["token_endpoint"].textValue()
+            this.jwksUri = it["jwks_uri"].textValue()
         }
     }
+}
 
-    private fun String.getJson(): JsonNode {
-        val (responseCode, responseBody) = this.fetchUrl()
-        if (responseCode >= 300 || responseBody == null) throw RuntimeException("got status $responseCode from ${this}.")
-        return jacksonObjectMapper().readTree(responseBody)
-    }
+internal class AzureAdSigningKeyResolver(private val jwksUri: String) : SigningKeyResolverAdapter() {
+    override fun resolveSigningKey(jwsHeader: JwsHeader<*>, claims: Claims): Key {
+        val kid = jwsHeader.keyId
+        val json = jwksUri.getJson()
+        val keys = json["keys"]
 
-    private fun String.fetchUrl() = with(URL(this).openConnection() as HttpURLConnection) {
-        requestMethod = "GET"
-        val stream: InputStream? = if (responseCode < 300) this.inputStream else this.errorStream
-        responseCode to stream?.bufferedReader()?.readText()
+        val modulus = keys.find { it["kid"].asText() == kid }!!["n"].asText()
+        val exponent = keys.find { it["kid"].asText() == kid }!!["e"].asText()
+        val encodedModulus = decodeBase64(modulus)
+        val encodedExponent = decodeBase64(exponent)
+
+
+        val keySpec = RSAPublicKeySpec(BigInteger(1, encodedModulus), BigInteger(1, encodedExponent))
+        val keyFactory = KeyFactory.getInstance("RSA")
+        return keyFactory.generatePublic(keySpec)
     }
 }

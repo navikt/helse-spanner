@@ -1,17 +1,20 @@
+import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jws
 import io.ktor.auth.*
 import io.ktor.client.*
+import io.ktor.client.call.*
+import io.ktor.client.engine.*
 import io.ktor.client.engine.apache.*
+import io.ktor.client.features.cookies.*
 import io.ktor.client.features.json.*
+import io.ktor.client.request.*
+import io.ktor.client.statement.*
 import io.ktor.http.*
-import io.ktor.util.*
 import org.apache.http.impl.conn.SystemDefaultRoutePlanner
 import java.net.ProxySelector
-import java.time.Instant
 import java.time.LocalDateTime
-import java.time.ZoneId
 
 internal interface IAzureAdClient {
     companion object {
@@ -19,13 +22,14 @@ internal interface IAzureAdClient {
             if (!isLocal) AzureAdClient(config) else LocalAzureAdClient
     }
 
-    fun verifyOidcResponse(principal: OAuthAccessTokenResponse.OAuth2): Pair<String, Jws<Claims>>
+    fun verifyIdToken(idToken: String): Pair<String, Jws<Claims>>
     fun configuration(): OAuthServerSettings.OAuth2ServerSettings
+    suspend fun refreshAccessToken(session: SpannerSession): Boolean
     val httpClient: HttpClient
 }
 
 internal object LocalAzureAdClient : IAzureAdClient {
-    override fun verifyOidcResponse(principal: OAuthAccessTokenResponse.OAuth2): Pair<String, Jws<Claims>> {
+    override fun verifyIdToken(idToken: String): Pair<String, Jws<Claims>> {
         throw NotImplementedError("Er ikke i bruk lokalt")
     }
 
@@ -38,6 +42,10 @@ internal object LocalAzureAdClient : IAzureAdClient {
         defaultScopes = emptyList(),
         requestMethod = HttpMethod.Post
     )
+
+    override suspend fun refreshAccessToken(session: SpannerSession): Boolean {
+        TODO("Not yet implemented")
+    }
 
     override val httpClient = HttpClient(Apache)
 }
@@ -54,24 +62,47 @@ internal class AzureAdClient(private val config: IAzureAdConfig) : IAzureAdClien
                 registerModule(JavaTimeModule())
             }
         }
+        install(HttpCookies) { storage = AcceptAllCookiesStorage() }
     }
 
-    override fun verifyOidcResponse(principal: OAuthAccessTokenResponse.OAuth2): Pair<String, Jws<Claims>> {
-        val expiresIn = principal.expiresIn
-        require(
-            LocalDateTime.ofInstant(Instant.ofEpochMilli(expiresIn), ZoneId.systemDefault()) > LocalDateTime.now()
-        ) { "AccessToken er utgått" }
-
-        val idTokenString = principal.extraParameters.getOrFail("id_token")
-        val claims = config.verifySignature(idTokenString)
+    override fun verifyIdToken(idToken: String): Pair<String, Jws<Claims>> {
+        val claims = config.verifySignature(idToken)
         val idTokenExpiration = claims.body.expiration
 
         require(
-            idTokenExpiration.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime() > LocalDateTime.now()
+            idTokenExpiration.toLocalDateTime() > LocalDateTime.now()
         ) { "idToken er utgått" }
 
-        return idTokenString to claims
+        return idToken to claims
     }
 
     override fun configuration() = config.oauth2ServerSettings(this)
+
+    override suspend fun refreshAccessToken(session: SpannerSession): Boolean {
+        if (!session.accessToken.harRefreshToken()) return false
+
+        val response = httpClient.request<HttpResponse>(config.accessTokenUrl) {
+            accept(ContentType.Application.Json)
+            contentType(ContentType.Application.Json)
+            method = HttpMethod.Post
+            body = mapOf("grant_type" to "refresh_token")
+                .let {
+                    config.createRefreshRequestBody(it)
+                    session.accessToken.createRefreshRequestBody(it)
+                }
+        }
+
+        val accessToken = AccessToken.from(response.call.receive<JsonNode>())
+
+        try {
+            accessToken.verifyOidcResponse(this)
+        } catch (e: Exception) {
+            return false
+        }
+
+        session.update(accessToken)
+
+        return true
+    }
 }
+

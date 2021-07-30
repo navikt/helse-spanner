@@ -1,14 +1,18 @@
 import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
+import java.time.LocalDateTime
 import java.util.*
 
-data class SpannerSession(
-    val accessToken: String,
-    val refreshToken: String?,
-    val expiresIn: Long,
-    val idToken: String,
-    val bruker: String
-)
+internal class SpannerSession(
+    accessToken: AccessToken
+) {
+    var accessToken: AccessToken = accessToken // TODO: fiks plis evnt update accesstoken
+    private set
+
+    fun update(accessToken: AccessToken) {
+        this.accessToken = accessToken
+    }
+}
 
 fun createLocalToken(): String {
     return JWT.create()

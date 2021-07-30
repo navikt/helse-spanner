@@ -4,8 +4,8 @@ import io.ktor.client.statement.*
 import io.ktor.http.*
 
 internal interface IRestClient {
-    suspend fun hentPersonMedFnr(fnr: String, accessToken: String): String
-    suspend fun hentPersonMedAktørId(aktørId: String, accessToken: String): String
+    suspend fun hentPersonMedFnr(fnr: String, accessToken: AccessToken): String
+    suspend fun hentPersonMedAktørId(aktørId: String, accessToken: AccessToken): String
 
     companion object {
         fun restClient(httpClient: HttpClient, clientId: String, isLocal: Boolean) =
@@ -15,9 +15,9 @@ internal interface IRestClient {
 }
 
 internal object LocalRestClient: IRestClient {
-    override suspend fun hentPersonMedFnr(fnr: String, accessToken: String) = finnPerson(fnr)
+    override suspend fun hentPersonMedFnr(fnr: String, accessToken: AccessToken) = finnPerson(fnr)
 
-    override suspend fun hentPersonMedAktørId(aktørId: String, accessToken: String) = finnPerson(aktørId)
+    override suspend fun hentPersonMedAktørId(aktørId: String, accessToken: AccessToken) = finnPerson(aktørId)
 
     private fun finnPerson(id: String): String {
         return when (id) {
@@ -35,15 +35,15 @@ internal class RestClient(
     private val httpClient: HttpClient,
     private val spleisClientId: String
 ): IRestClient {
-    override suspend fun hentPersonMedFnr(fnr: String, accessToken: String): String {
+    override suspend fun hentPersonMedFnr(fnr: String, accessToken: AccessToken): String {
         return hentPerson(mapOf("fnr" to fnr), accessToken)
     }
 
-    override suspend fun hentPersonMedAktørId(aktørId: String, accessToken: String): String {
+    override suspend fun hentPersonMedAktørId(aktørId: String, accessToken: AccessToken): String {
         return hentPerson(mapOf("aktørId" to aktørId), accessToken)
     }
 
-    private suspend fun hentPerson(headers: Map<String, String>, accessToken: String): String {
+    private suspend fun hentPerson(headers: Map<String, String>, accessToken: AccessToken): String {
         return httpClient.get<HttpStatement>("http://spleis-api.tbd.svc.nais.local/api/person-jason") {
             header("Authorization", "Bearer $accessToken")
             headers.forEach { header(it.key, it.value) }

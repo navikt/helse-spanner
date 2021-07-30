@@ -1,3 +1,4 @@
+import com.nimbusds.jose.util.Base64
 import io.ktor.application.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
@@ -17,6 +18,7 @@ class OAuth2Test {
     private val clientId = "some_id"
     private val clientSecret = "some_secret"
     private val issuerId = "some_issuer"
+    private val name = "tullebukk"
 
     @BeforeAll
     fun beforeAll() {
@@ -32,9 +34,15 @@ class OAuth2Test {
     fun `can authenticate with oidc`() {
         val port = randomPort()
         val host = Localhost(port)
-        val config = Config(clientId, clientSecret, issuerId, mockOAuth2Server)
+        val config = Config(clientId, Base64.encode(clientSecret).toString(), issuerId, mockOAuth2Server)
         val client = AzureAdClient(config)
-        mockOAuth2Server.enqueueCallback(DefaultOAuth2TokenCallback(issuerId = issuerId, subject = "some_uuid"))
+        mockOAuth2Server.enqueueCallback(
+            DefaultOAuth2TokenCallback(
+                issuerId = issuerId,
+                subject = "some_uuid",
+                claims = mapOf("name" to name)
+            )
+        )
 
         withEmbeddedServer(
             port = host.port(),
@@ -43,8 +51,10 @@ class OAuth2Test {
                     authApi(client, false)
                 }
             }) {
-                val t = client.get<HttpResponse>("$host/login")
-            }
+
+            val t = client.get<HttpResponse>("$host/respond-ok")
+            val tx = client.get<HttpResponse>("$host/respond-ok")
+        }
     }
 
     private class Config(
@@ -55,6 +65,7 @@ class OAuth2Test {
     ) : IAzureAdConfig(clientId, clientSecret) {
         override val authorizeUrl = mockOAuth2Server.authorizationEndpointUrl(issuerId).toString()
         override val accessTokenUrl = mockOAuth2Server.tokenEndpointUrl(issuerId).toString()
+        override val jwksUri = mockOAuth2Server.jwksUrl(issuerId).toString()
     }
 
     private inline fun <reified R> AzureAdClient.get(url: String): R = runBlocking { httpClient.get(url) }
