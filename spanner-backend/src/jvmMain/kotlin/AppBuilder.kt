@@ -21,10 +21,11 @@ class AppBuilder(private val env: Map<String, String>) {
     private val host = if (isLocal) Localhost() else Deployed(env)
     private val httpTraceLog = LoggerFactory.getLogger("tjenestekall")
 
-    private val azureAdConfig = AzureAdConfig(
+    private val azureAdConfig = IAzureAdConfig.config(
         clientId = env.getOrDefault("AZURE_APP_CLIENT_ID", "unknown"),
         clientSecret = env.getOrDefault("AZURE_APP_CLIENT_SECRET", "unknown"),
-        configurationUrl = env.getOrDefault("AZURE_APP_WELL_KNOWN_URL", "unknown")
+        configurationUrl = env.getOrDefault("AZURE_APP_WELL_KNOWN_URL", "unknown"),
+        isLocal = isLocal
     )
 
     private val azureAdClient = IAzureAdClient.client(azureAdConfig, isLocal)
@@ -38,7 +39,11 @@ class AppBuilder(private val env: Map<String, String>) {
         }
     }
 
-    private val restClient = IRestClient.restClient(spleisClient, env.getValue("SPLEIS_CLIENT_ID"), isLocal)
+    private val restClient = IRestClient.restClient(
+        spleisClient,
+        env.getOrDefault("SPLEIS_CLIENT_ID", "unknown"),
+        isLocal
+    )
 
     internal fun build() =
         embeddedServer(Netty, port = host.port()) {

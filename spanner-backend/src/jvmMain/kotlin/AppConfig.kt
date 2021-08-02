@@ -35,6 +35,20 @@ internal abstract class IAzureAdConfig(
             add("client_secret" to clientSecret)
             add("scope" to defaultScopes.joinToString(" "))
         }.toList()
+
+    companion object {
+        fun config(clientId: String, clientSecret: String, configurationUrl: String, isLocal: Boolean) =
+            if (!isLocal) AzureAdConfig(clientId, clientSecret, configurationUrl) else LocalAzureAdConfig(clientId, clientSecret)
+    }
+}
+
+internal class LocalAzureAdConfig(
+    clientId: String,
+    clientSecret: String,
+) : IAzureAdConfig(clientId, clientSecret) {
+    override val authorizeUrl: String = "unknown"
+    override val accessTokenUrl: String = "unknown"
+    override val jwksUri: String = "unknown"
 }
 
 internal class AzureAdConfig(

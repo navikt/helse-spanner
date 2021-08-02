@@ -17,6 +17,11 @@ internal fun Application.authApi(azureAdClient: IAzureAdClient, isLocal: Boolean
             sikkerLogg.info("Nå intercepter vi :)")
             val session = call.sessions.get<SpannerSession>()
 
+            if (isLocal) {
+                if (session == null) call.sessions.set(SpannerSession.createLocalSession())
+                return@intercept
+            }
+
             if (session != null &&
                 (!session.accessToken.hasExpired() || azureAdClient.refreshAccessToken(session))
             ) {

@@ -14,6 +14,10 @@ internal class SpannerSession(
     fun update(accessToken: AccessToken) {
         this.accessToken = accessToken
     }
+
+    internal companion object {
+        internal fun createLocalSession() = SpannerSession(AccessToken.Companion.createLocalAccessToken())
+    }
 }
 
 fun createLocalToken(): String {

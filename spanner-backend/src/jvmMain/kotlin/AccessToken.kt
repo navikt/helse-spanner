@@ -52,5 +52,13 @@ internal class AccessToken private constructor(
                 bruker = JWT.decode(idToken).claims["name"]?.asString() ?: "unknown user"
             )
         }
+
+        fun createLocalAccessToken() = AccessToken(
+            accessToken = "access_token",
+            refreshToken = "refresh_token",
+            expiresAt = LocalDateTime.now().plusHours(1),
+            idToken = "id_token",
+            bruker = "spanner_dev"
+        )
     }
 }
