@@ -5,7 +5,6 @@ import io.jsonwebtoken.Jws
 import io.ktor.auth.*
 import io.ktor.client.*
 import io.ktor.client.call.*
-import io.ktor.client.engine.*
 import io.ktor.client.engine.apache.*
 import io.ktor.client.features.cookies.*
 import io.ktor.client.features.json.*
@@ -81,15 +80,17 @@ internal class AzureAdClient(private val config: IAzureAdConfig) : IAzureAdClien
     override suspend fun refreshAccessToken(session: SpannerSession): Boolean {
         if (!session.accessToken.harRefreshToken()) return false
 
+        val responseBody = listOf("grant_type" to "refresh_token")
+            .let {
+                val list = config.createRefreshRequestBody(it)
+                session.accessToken.createRefreshRequestBody(list)
+            }.formUrlEncode()
+
         val response = httpClient.request<HttpResponse>(config.accessTokenUrl) {
             accept(ContentType.Application.Json)
-            contentType(ContentType.Application.Json)
+            contentType(ContentType.Application.FormUrlEncoded)
             method = HttpMethod.Post
-            body = mapOf("grant_type" to "refresh_token")
-                .let {
-                    config.createRefreshRequestBody(it)
-                    session.accessToken.createRefreshRequestBody(it)
-                }
+            body = responseBody
         }
 
         val accessToken = AccessToken.from(response.call.receive<JsonNode>())

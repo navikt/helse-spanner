@@ -1,7 +1,8 @@
+import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility
+import com.fasterxml.jackson.annotation.PropertyAccessor
 import io.ktor.application.*
 import io.ktor.client.*
 import io.ktor.client.engine.apache.*
-import io.ktor.client.features.cookies.*
 import io.ktor.client.features.json.*
 import io.ktor.features.*
 import io.ktor.http.*
@@ -64,7 +65,12 @@ internal fun Application.module(azureAdClient: IAzureAdClient, host: Host, addit
         }
     }
     install(ContentNegotiation) { register(ContentType.Application.Json, JacksonConverter(objectMapper)) }
-    install(Sessions) { cookie<SpannerSession>("spanner", storage = SessionStorageMemory()) }
+    install(Sessions) {
+        cookie<SpannerSession>("spanner", storage = SessionStorageMemory()) {
+            serializer =
+                SpannerSessionSerializer(objectMapper.copy().setVisibility(PropertyAccessor.FIELD, Visibility.ANY))
+        }
+    }
     azureAdAppAuthentication(azureAdClient, host)
     additional()
 }

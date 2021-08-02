@@ -29,12 +29,12 @@ internal abstract class IAzureAdConfig(
     fun verifySignature(jwtToken: String): Jws<Claims> =
         Jwts.parserBuilder().setSigningKeyResolver(AzureAdSigningKeyResolver(jwksUri)).build().parseClaimsJws(jwtToken)
 
-    fun createRefreshRequestBody(map: Map<String, String>) =
-        map.toMutableMap().apply {
-            put("client_id", clientId)
-            put("client_secret", clientSecret)
-            put("scope", defaultScopes.joinToString(" "))
-        }.toMap()
+    fun createRefreshRequestBody(list: List<Pair<String, String>>) =
+        list.toMutableList().apply {
+            add("client_id" to clientId)
+            add("client_secret" to clientSecret)
+            add("scope" to defaultScopes.joinToString(" "))
+        }.toList()
 }
 
 internal class AzureAdConfig(
