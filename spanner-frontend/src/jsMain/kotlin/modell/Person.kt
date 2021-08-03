@@ -23,7 +23,7 @@ class Person private constructor(
     override fun renderNavigation() {
         Div(attrs = {
             onClick {
-                mainView.setView(this@Person)
+                mainView.setDetaljView(this@Person)
             }
         }) {
             Text(fødselsnummer)

@@ -7,4 +7,3 @@ interface NavigationView {
     @Composable
     fun renderNavigation()
 }
-

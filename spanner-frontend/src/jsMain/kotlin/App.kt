@@ -1,12 +1,11 @@
-import modell.MainView
-import modell.Person
+import modell.OuterViewContainer
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.css.selectors.CSSSelector
 import org.jetbrains.compose.web.css.selectors.id
 import org.jetbrains.compose.web.css.selectors.type
 import org.jetbrains.compose.web.renderComposable
 
-private object GlobalStyles: StyleSheet() {
+private object GlobalStyles : StyleSheet() {
     init {
         CSSSelector.Universal style {
             property("font-family", "Source Code Pro, monospace")
@@ -30,13 +29,10 @@ private object GlobalStyles: StyleSheet() {
 }
 
 fun main() {
-    val mainView = MainView()
-    val (dto, json) = PersonParser.person()
-    val person = Person.from(dto, json, mainView)
-    mainView.setView(person)
+    val viewContainer = OuterViewContainer()
 
     renderComposable(rootElementId = "root") {
         Style(GlobalStyles)
-        mainView.render(person)
+        viewContainer.render()
     }
 }

@@ -32,7 +32,7 @@ class Vedtaksperiode private constructor(
         }) {
             Div(attrs = {
                 onClick {
-                    mainView.setView(this@Vedtaksperiode)
+                    mainView.setDetaljView(this@Vedtaksperiode)
                 }
                 style {
                     display(DisplayStyle.Flex)

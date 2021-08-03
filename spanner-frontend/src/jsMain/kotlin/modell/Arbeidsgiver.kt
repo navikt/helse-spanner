@@ -34,7 +34,7 @@ class Arbeidsgiver private constructor(
         }) {
             Div(attrs = {
                 onClick {
-                    mainView.setView(this@Arbeidsgiver)
+                    mainView.setDetaljView(this@Arbeidsgiver)
                 }
             }) {
                 Text(orgnummer)

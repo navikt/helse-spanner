@@ -14,22 +14,24 @@ import org.jetbrains.compose.web.dom.Text
 import org.w3c.dom.HTMLElement
 
 class MainView() {
-    private var view by mutableStateOf<DetaljView?>(null)
-    private var detaljerRenderer by mutableStateOf<@Composable () -> Unit>({ view?.renderDetaljer() })
+    private var detaljView by mutableStateOf<DetaljView?>(null)
+    private var detaljerRenderer by mutableStateOf<@Composable () -> Unit>({ detaljView?.renderDetaljer() })
 
     @Composable
-    fun render(root: NavigationView) {
-        Div(attrs = {
+    fun render(personView: NavigationView?) {
+        if (personView == null) return
+
+        return Div(attrs = {
             style {
                 display(DisplayStyle.Flex)
                 flexDirection(FlexDirection.Row)
                 property("box-sizing", "border-box")
                 height(100.percent)
-                padding(2.cssRem)
+                marginTop(2.cssRem)
             }
         }) {
             Container {
-                root.renderNavigation()
+                personView.renderNavigation()
             }
             Container {
                 Div(attrs = {
@@ -40,7 +42,7 @@ class MainView() {
                 }) {
                     Button(attrs = {
                         onClick {
-                            detaljerRenderer = { view?.renderDetaljer() }
+                            detaljerRenderer = { detaljView?.renderDetaljer() }
                         }
                     }) {
                         Text("Detaljer")
@@ -61,7 +63,7 @@ class MainView() {
     @Composable
     private fun jsonContainer() {
         Div {
-            view?.json()?.let {
+            detaljView?.json()?.let {
                 jsonRenderer(JSONFormatter(js("JSON.parse(it)")))
             }
         }
@@ -90,7 +92,7 @@ class MainView() {
         }
     }
 
-    fun setView(newView: DetaljView) {
-        view = newView
+    fun setDetaljView(newView: DetaljView) {
+        detaljView = newView
     }
 }
