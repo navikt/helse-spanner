@@ -59,6 +59,14 @@ class AppBuilder(private val env: Map<String, String>) {
                     authApi(azureAdClient, isLocal)
                     api(restClient, isLocal)
                 }
+                if (isLocal) {
+                    install(CORS) {
+                        allowSameOrigin = true
+                        anyHost()
+                        header("fnr")
+                        header("aktorid")
+                    }
+                }
             }
         }
 }
