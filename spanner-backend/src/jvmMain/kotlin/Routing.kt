@@ -69,37 +69,34 @@ internal fun Application.authApi(azureAdClient: IAzureAdClient, isLocal: Boolean
     }
 }
 
-
-internal fun Application.api(restClient: IRestClient, isLocal: Boolean) {
+internal fun Application.api(restClient: IRestClient, azureAdClient: IAzureAdClient, isLocal: Boolean) {
     routing {
         authenticate(AZURE_OAUTH, optional = isLocal) {
             get("/api/person-fnr") {
-                val fnr = call.request.header("fnr")
+                val fnr = hentId("fnr", call).takeIf { it !== null } ?: return@get
+                val onBehalfOfToken = hentOnBehalfOfToken(azureAdClient, call).takeIf { it !== null } ?: return@get
 
-                if (fnr == null) {
-                    call.respond(HttpStatusCode.BadRequest)
-                    return@get
-                }
-
-                val accessToken = call.sessions.get<SpannerSession>()!!.accessToken
-                val person = restClient.hentPersonMedFnr(fnr, accessToken)
-
+                val person = restClient.hentPersonMedFnr(fnr, onBehalfOfToken)
                 call.respond(HttpStatusCode.OK, person)
             }
 
             get("/api/person-aktorid") {
-                val aktørId = call.request.header("aktorId")
+                val aktørId = hentId("aktorId", call).takeIf { it !== null } ?: return@get
+                val onBehalfOfToken = hentOnBehalfOfToken(azureAdClient, call).takeIf { it !== null } ?: return@get
 
-                if (aktørId == null) {
-                    call.respond(HttpStatusCode.BadRequest)
-                    return@get
-                }
-
-                val accessToken = call.sessions.get<SpannerSession>()!!.accessToken
-                val person = restClient.hentPersonMedAktørId(aktørId, accessToken)
-
+                val person = restClient.hentPersonMedAktørId(aktørId, onBehalfOfToken)
                 call.respond(HttpStatusCode.OK, person)
             }
         }
     }
 }
+
+private suspend fun hentOnBehalfOfToken(azureAdClient: IAzureAdClient, call: ApplicationCall) =
+    azureAdClient.hentOnBehalfOfToken(call.sessions.get<SpannerSession>()!!).also {
+        if (it == null) call.respond(HttpStatusCode.Unauthorized)
+    }
+
+private suspend fun hentId(idHeaderType: String, call: ApplicationCall) =
+    call.request.header(idHeaderType).also {
+        if (it == null) call.respond(HttpStatusCode.BadRequest)
+    }

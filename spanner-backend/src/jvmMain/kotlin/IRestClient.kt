@@ -6,20 +6,20 @@ import io.ktor.http.*
 import org.json.simple.JSONObject
 
 internal interface IRestClient {
-    suspend fun hentPersonMedFnr(fnr: String, accessToken: AccessToken): JSONObject
-    suspend fun hentPersonMedAktørId(aktørId: String, accessToken: AccessToken): JSONObject
+    suspend fun hentPersonMedFnr(fnr: String, onBehalfOfToken: String): JSONObject
+    suspend fun hentPersonMedAktørId(aktørId: String, onBehalfOfToken: String): JSONObject
 
     companion object {
-        fun restClient(httpClient: HttpClient, clientId: String, isLocal: Boolean) =
+        fun restClient(httpClient: HttpClient, isLocal: Boolean) =
             if (isLocal) LocalRestClient
-            else RestClient(httpClient, clientId)
+            else RestClient(httpClient)
     }
 }
 
 internal object LocalRestClient : IRestClient {
-    override suspend fun hentPersonMedFnr(fnr: String, accessToken: AccessToken) = finnPerson(fnr)
+    override suspend fun hentPersonMedFnr(fnr: String, onBehalfOfToken: String) = finnPerson(fnr)
 
-    override suspend fun hentPersonMedAktørId(aktørId: String, accessToken: AccessToken) = finnPerson(aktørId)
+    override suspend fun hentPersonMedAktørId(aktørId: String, onBehalfOfToken: String) = finnPerson(aktørId)
 
     private fun finnPerson(id: String): JSONObject {
         return when (id) {
@@ -35,21 +35,18 @@ internal object LocalRestClient : IRestClient {
         )
 }
 
-internal class RestClient(
-    private val httpClient: HttpClient,
-    private val spleisClientId: String
-) : IRestClient {
-    override suspend fun hentPersonMedFnr(fnr: String, accessToken: AccessToken): JSONObject {
-        return hentPerson(mapOf("fnr" to fnr), accessToken)
+internal class RestClient(private val httpClient: HttpClient) : IRestClient {
+    override suspend fun hentPersonMedFnr(fnr: String, onBehalfOfToken: String): JSONObject {
+        return hentPerson(mapOf("fnr" to fnr), onBehalfOfToken)
     }
 
-    override suspend fun hentPersonMedAktørId(aktørId: String, accessToken: AccessToken): JSONObject {
-        return hentPerson(mapOf("aktørId" to aktørId), accessToken)
+    override suspend fun hentPersonMedAktørId(aktørId: String, onBehalfOfToken: String): JSONObject {
+        return hentPerson(mapOf("aktorId" to aktørId), onBehalfOfToken)
     }
 
-    private suspend fun hentPerson(headers: Map<String, String>, accessToken: AccessToken): JSONObject {
+    private suspend fun hentPerson(headers: Map<String, String>, onBehalfOfToken: String): JSONObject {
         return httpClient.get<HttpStatement>("http://spleis-api.tbd.svc.nais.local/api/person-jason") {
-            header("Authorization", "Bearer $accessToken")
+            header("Authorization", "Bearer $onBehalfOfToken")
             headers.forEach { header(it.key, it.value) }
             accept(ContentType.Application.Json)
         }.receive()

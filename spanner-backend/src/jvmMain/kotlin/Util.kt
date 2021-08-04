@@ -31,3 +31,5 @@ internal fun String.fetchUrl() = with(URL(this).openConnection() as HttpURLConne
 }
 
 internal fun Date.toLocalDateTime() = toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime()
+
+internal fun JsonNode.isMissingOrNull() = isMissingNode || isNull

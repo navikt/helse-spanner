@@ -53,8 +53,8 @@ internal class AccessToken private constructor(
             )
         }
 
-        fun createLocalAccessToken() = AccessToken(
-            accessToken = "access_token",
+        fun createLocalAccessToken(accessToken: String = "access_token") = AccessToken(
+            accessToken = accessToken,
             refreshToken = "refresh_token",
             expiresAt = LocalDateTime.now().plusHours(1),
             idToken = "id_token",

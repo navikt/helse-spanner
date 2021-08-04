@@ -1,3 +1,4 @@
+import com.auth0.jwt.JWT
 import com.nimbusds.jose.util.Base64
 import io.ktor.application.*
 import io.ktor.client.call.*
@@ -19,8 +20,12 @@ class OAuth2Test {
     private val mockOAuth2Server = MockOAuth2Server()
     private val clientId = "some_id"
     private val clientSecret = "some_secret"
+    private val encodedClientSecret = Base64.encode(clientSecret).toString()
+    private val spleisClientId = "spleis_client_id"
     private val issuerId = "some_issuer"
     private val name = "tullebukk"
+    private val port = randomPort()
+    private val host = Localhost(port)
 
     @BeforeAll
     fun beforeAll() {
@@ -34,9 +39,7 @@ class OAuth2Test {
 
     @Test
     fun `Kan autentisere med oidc og forblir innlogget`() {
-        val port = randomPort()
-        val host = Localhost(port)
-        val config = Config(clientId, Base64.encode(clientSecret).toString(), issuerId, mockOAuth2Server)
+        val config = Config(clientId, encodedClientSecret, spleisClientId, issuerId, mockOAuth2Server)
         val client = AzureAdClient(config)
 
         kjørTestKall(host, client) {
@@ -58,9 +61,7 @@ class OAuth2Test {
 
     @Test
     fun `Kan logge ut, og må logge inn igjen etter det`() {
-        val port = randomPort()
-        val host = Localhost(port)
-        val config = Config(clientId, Base64.encode(clientSecret).toString(), issuerId, mockOAuth2Server)
+        val config = Config(clientId, encodedClientSecret, spleisClientId, issuerId, mockOAuth2Server)
         val client = AzureAdClient(config)
 
         enqueueCallback() // Legger en ny callback i køen fordi vi vil logge inn to ganger
@@ -94,6 +95,23 @@ class OAuth2Test {
         }
     }
 
+    @Test
+    fun `Kan hente onBehalfOf-token`() {
+        val config = Config(clientId, encodedClientSecret, spleisClientId, issuerId, mockOAuth2Server)
+        val client = AzureAdClient(config)
+
+        runBlocking {
+            val initialToken = mockOAuth2Server.issueToken(subject = clientId)
+            val session = SpannerSession(AccessToken.createLocalAccessToken(initialToken.serialize()))
+            val onBehalfOfToken = client.hentOnBehalfOfToken(session)
+
+            val decodedOnBehalfOf = JWT.decode(onBehalfOfToken)
+
+            assertEquals(clientId, decodedOnBehalfOf.subject)
+            assertEquals(listOf(spleisClientId), decodedOnBehalfOf.audience)
+        }
+    }
+
     private fun enqueueCallback() {
         mockOAuth2Server.enqueueCallback(
             DefaultOAuth2TokenCallback(
@@ -121,9 +139,10 @@ class OAuth2Test {
     private class Config(
         clientId: String,
         clientSecret: String,
+        spleisClientId: String,
         issuerId: String,
         mockOAuth2Server: MockOAuth2Server
-    ) : IAzureAdConfig(clientId, clientSecret) {
+    ) : IAzureAdConfig(clientId, clientSecret, spleisClientId) {
         override val authorizeUrl = mockOAuth2Server.authorizationEndpointUrl(issuerId).toString()
         override val accessTokenUrl = mockOAuth2Server.tokenEndpointUrl(issuerId).toString()
         override val jwksUri = mockOAuth2Server.jwksUrl(issuerId).toString()

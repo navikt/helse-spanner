@@ -24,6 +24,7 @@ class AppBuilder(private val env: Map<String, String>) {
     private val azureAdConfig = IAzureAdConfig.config(
         clientId = env.getOrDefault("AZURE_APP_CLIENT_ID", "unknown"),
         clientSecret = env.getOrDefault("AZURE_APP_CLIENT_SECRET", "unknown"),
+        spleisClientId = env.getOrDefault("SPLEIS_CLIENT_ID", "unknown"),
         configurationUrl = env.getOrDefault("AZURE_APP_WELL_KNOWN_URL", "unknown"),
         isLocal = isLocal
     )
@@ -41,7 +42,6 @@ class AppBuilder(private val env: Map<String, String>) {
 
     private val restClient = IRestClient.restClient(
         spleisClient,
-        env.getOrDefault("SPLEIS_CLIENT_ID", "unknown"),
         isLocal
     )
 
@@ -57,7 +57,7 @@ class AppBuilder(private val env: Map<String, String>) {
                 routing {
                     naisApi()
                     authApi(azureAdClient, isLocal)
-                    api(restClient, isLocal)
+                    api(restClient, azureAdClient, isLocal)
                 }
                 if (isLocal) {
                     install(CORS) {

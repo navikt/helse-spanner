@@ -24,6 +24,7 @@ internal interface IAzureAdClient {
     fun verifyIdToken(idToken: String): Pair<String, Jws<Claims>>
     fun configuration(): OAuthServerSettings.OAuth2ServerSettings
     suspend fun refreshAccessToken(session: SpannerSession): Boolean
+    suspend fun hentOnBehalfOfToken(session: SpannerSession): String?
     val httpClient: HttpClient
 }
 
@@ -45,6 +46,8 @@ internal object LocalAzureAdClient : IAzureAdClient {
     override suspend fun refreshAccessToken(session: SpannerSession): Boolean {
         TODO("Not yet implemented")
     }
+
+    override suspend fun hentOnBehalfOfToken(session: SpannerSession) = "onBehalfOfToken"
 
     override val httpClient = HttpClient(Apache)
 }
@@ -80,7 +83,7 @@ internal class AzureAdClient(private val config: IAzureAdConfig) : IAzureAdClien
     override suspend fun refreshAccessToken(session: SpannerSession): Boolean {
         if (!session.accessToken.harRefreshToken()) return false
 
-        val responseBody = listOf("grant_type" to "refresh_token")
+        val requestBody = listOf("grant_type" to "refresh_token")
             .let {
                 val list = config.createRefreshRequestBody(it)
                 session.accessToken.createRefreshRequestBody(list)
@@ -90,7 +93,7 @@ internal class AzureAdClient(private val config: IAzureAdConfig) : IAzureAdClien
             accept(ContentType.Application.Json)
             contentType(ContentType.Application.FormUrlEncoded)
             method = HttpMethod.Post
-            body = responseBody
+            body = requestBody
         }
 
         val accessToken = AccessToken.from(response.call.receive<JsonNode>())
@@ -105,5 +108,23 @@ internal class AzureAdClient(private val config: IAzureAdConfig) : IAzureAdClien
 
         return true
     }
-}
 
+    override suspend fun hentOnBehalfOfToken(session: SpannerSession): String? {
+        if (session.accessToken.hasExpired()) return null
+
+        val requestBody = listOf(
+            "grant_type" to "urn:ietf:params:oauth:grant-type:jwt-bearer",
+            "assertion" to session.accessToken.toString(),
+            "requested_token_use" to "on_behalf_of"
+        ).let { config.createOnBehalfOfRequestBody(it) }.formUrlEncode()
+
+        val response = httpClient.request<HttpResponse>(config.accessTokenUrl) {
+            accept(ContentType.Application.Json)
+            contentType(ContentType.Application.FormUrlEncoded)
+            method = HttpMethod.Post
+            body = requestBody
+        }
+
+        return response.call.receive<JsonNode>().path("access_token").takeUnless(JsonNode::isMissingOrNull)?.asText()
+    }
+}

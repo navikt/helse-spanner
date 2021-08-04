@@ -9,7 +9,8 @@ import java.security.spec.RSAPublicKeySpec
 
 internal abstract class IAzureAdConfig(
     private val clientId: String,
-    private val clientSecret: String
+    private val clientSecret: String,
+    private val spleisClientId: String
 ) {
     abstract val authorizeUrl: String
     abstract val accessTokenUrl: String
@@ -30,22 +31,36 @@ internal abstract class IAzureAdConfig(
         Jwts.parserBuilder().setSigningKeyResolver(AzureAdSigningKeyResolver(jwksUri)).build().parseClaimsJws(jwtToken)
 
     fun createRefreshRequestBody(list: List<Pair<String, String>>) =
+        createTokenRequestBody(list, defaultScopes.joinToString(" "))
+
+    fun createOnBehalfOfRequestBody(list: List<Pair<String, String>>) = createTokenRequestBody(list, spleisClientId)
+
+    private fun createTokenRequestBody(list: List<Pair<String, String>>, scope: String) =
         list.toMutableList().apply {
             add("client_id" to clientId)
             add("client_secret" to clientSecret)
-            add("scope" to defaultScopes.joinToString(" "))
+            add("scope" to scope)
         }.toList()
 
+
     companion object {
-        fun config(clientId: String, clientSecret: String, configurationUrl: String, isLocal: Boolean) =
-            if (!isLocal) AzureAdConfig(clientId, clientSecret, configurationUrl) else LocalAzureAdConfig(clientId, clientSecret)
+        fun config(
+            clientId: String,
+            clientSecret: String,
+            spleisClientId: String,
+            configurationUrl: String,
+            isLocal: Boolean
+        ) =
+            if (!isLocal) AzureAdConfig(clientId, clientSecret, spleisClientId, configurationUrl)
+            else LocalAzureAdConfig(clientId, clientSecret, spleisClientId)
     }
 }
 
 internal class LocalAzureAdConfig(
     clientId: String,
     clientSecret: String,
-) : IAzureAdConfig(clientId, clientSecret) {
+    spleisClientId: String
+) : IAzureAdConfig(clientId, clientSecret, spleisClientId) {
     override val authorizeUrl: String = "unknown"
     override val accessTokenUrl: String = "unknown"
     override val jwksUri: String = "unknown"
@@ -54,8 +69,9 @@ internal class LocalAzureAdConfig(
 internal class AzureAdConfig(
     clientId: String,
     clientSecret: String,
+    spleisClientId: String,
     configurationUrl: String
-) : IAzureAdConfig(clientId, clientSecret) {
+) : IAzureAdConfig(clientId, clientSecret, spleisClientId) {
     override val authorizeUrl: String
     override val accessTokenUrl: String
     override val jwksUri: String
