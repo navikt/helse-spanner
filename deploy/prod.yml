@@ -43,10 +43,10 @@ spec:
     - secret: spanner
   env:
     - name: LOCAL
-      value: false
+      value: "false"
     - name: SPLEIS_CLIENT_ID
       value: api://prod-fss.tbd.spleis/.default
     - name: HTTP_PORT
-      value: 9000
+      value: "9000"
     - name: HOST
       value: spanner.nais.adeo.no
