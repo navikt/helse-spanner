@@ -1,7 +1,6 @@
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.decodeFromJsonElement
@@ -11,8 +10,6 @@ object PersonParser {
         ignoreUnknownKeys = true
     }
 
-    val json = parser.decodeFromString<JsonObject>(Data.json)
-    fun person() = parser.decodeFromJsonElement<PersonDTO>(json) to json
     fun person(json: JsonObject) = parser.decodeFromJsonElement<PersonDTO>(json) to json
 }
 

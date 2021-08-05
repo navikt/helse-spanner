@@ -45,7 +45,7 @@ internal class RestClient(private val httpClient: HttpClient) : IRestClient {
     }
 
     private suspend fun hentPerson(headers: Map<String, String>, onBehalfOfToken: String): JSONObject {
-        return httpClient.get<HttpStatement>("http://spleis-api.tbd.svc.nais.local/api/person-jason") {
+        return httpClient.get<HttpStatement>("http://spleis-api.tbd.svc.nais.local/api/person-json") {
             header("Authorization", "Bearer $onBehalfOfToken")
             headers.forEach { header(it.key, it.value) }
             accept(ContentType.Application.Json)
