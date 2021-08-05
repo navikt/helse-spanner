@@ -35,7 +35,6 @@ spec:
       enabled: true
       claims:
         groups:
-          - id: "611669fa-de5c-4dc2-a0e8-6041a019992a"
           - id: "f787f900-6697-440d-a086-d5bb56e26a9c"
   webproxy: true
   secureLogs:
