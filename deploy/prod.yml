@@ -39,8 +39,6 @@ spec:
   webproxy: true
   secureLogs:
     enabled: true
-  envFrom:
-    - secret: spanner
   env:
     - name: LOCAL
       value: "false"
