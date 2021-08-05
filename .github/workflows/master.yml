@@ -4,19 +4,17 @@ on:
   push:
     branches:
       - master
-env:
-  APP: spanner
-  TEAM: tbd
-  IMAGE: docker.pkg.github.com/${{ github.repository }}/spanner
 
 jobs:
   set_version:
+    name: set image name
     runs-on: ubuntu-latest
     steps:
       - name: create docker tag
         run: echo "TAG=$(echo ${{ github.sha }} | cut -c1-7)" >> $GITHUB_ENV
     outputs:
-      tag: ${{ env.TAG }}
+      image: docker.pkg.github.com/${{ github.repository }}/spanner:${{ env.TAG }}
+
 
   build:
     name: build docker image
@@ -46,5 +44,5 @@ jobs:
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: prod-fss
-          RESOURCE: deploy/prod.yml
-          VAR: "image=${{env.IMAGE}}:${{ needs.set_version.outputs.tag }},team=${{env.TEAM}},app=${{env.APP}}"
+          RESOURCE: deploy/prod-api.yml
+          IMAGE: ${{ needs.set_version.outputs.image }}
