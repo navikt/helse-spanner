@@ -1,6 +1,7 @@
 import io.ktor.application.*
 import io.ktor.auth.*
 import io.ktor.http.*
+import io.ktor.http.content.*
 import io.ktor.request.*
 import io.ktor.response.*
 import io.ktor.routing.*
@@ -65,6 +66,20 @@ internal fun Application.authApi(azureAdClient: IAzureAdClient, isLocal: Boolean
         get("/respond-ok") {
             sikkerLogg.info("${call.sessions.get<SpannerSession>()?.accessToken?.bruker() ?: "ingen bruker"} er allerede logget inn")
             call.respondText("Er allerede logget inn som ${call.sessions.get<SpannerSession>()?.accessToken?.bruker()}")
+        }
+    }
+}
+
+internal fun Application.frontendRouting() {
+    routing {
+        get("/") {
+            call.respondText(
+                this::class.java.classLoader.getResource("static/index.html")!!.readText(),
+                ContentType.Text.Html
+            )
+        }
+        static("/") {
+            resources("static/")
         }
     }
 }

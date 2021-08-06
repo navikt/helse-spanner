@@ -56,6 +56,7 @@ class AppBuilder(private val env: Map<String, String>) {
                 }
                 routing {
                     naisApi()
+                    frontendRouting()
                     authApi(azureAdClient, isLocal)
                     api(restClient, azureAdClient, isLocal)
                 }
