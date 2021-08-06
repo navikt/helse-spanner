@@ -7,17 +7,17 @@ metadata:
     team: tbd
 spec:
   image: {{image}}
-  port: 9000
+  port: 8080
   ingresses:
     - https://spanner.intern.nav.no
   liveness:
     failureThreshold: 10
     initialDelay: 20
-    path: isAlive
+    path: isalive
     timeout: 1
   readiness:
     initialDelay: 20
-    path: isReady
+    path: isready
     timeout: 1
   replicas:
     cpuThresholdPercentage: 90
@@ -45,6 +45,6 @@ spec:
     - name: SPLEIS_CLIENT_ID
       value: api://prod-fss.tbd.spleis/.default
     - name: HTTP_PORT
-      value: "9000"
+      value: "8080"
     - name: HOST
       value: spanner.nais.adeo.no
