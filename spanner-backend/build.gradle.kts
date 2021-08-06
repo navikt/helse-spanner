@@ -9,6 +9,15 @@ plugins {
  kotlin {
      jvm {
          withJava()
+         val jvmJar by tasks.getting(org.gradle.jvm.tasks.Jar::class) {
+             doFirst {
+                 manifest {
+                     attributes["Main-Class"] = "AppKt"
+                 }
+                 from(configurations.getByName("runtimeClasspath").map { if (it.isDirectory) it else zipTree(it) })
+                 archiveFileName.set("app.jar")
+             }
+         }
      }
      sourceSets {
          val jvmMain by getting {}

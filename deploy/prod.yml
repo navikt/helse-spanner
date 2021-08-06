@@ -9,7 +9,7 @@ spec:
   image: {{image}}
   port: 3000
   ingresses:
-    - https://spanner.nais.adeo.no
+    - https://spanner.intern.nav.no
   liveness:
     failureThreshold: 10
     initialDelay: 20
