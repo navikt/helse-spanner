@@ -67,7 +67,9 @@ tasks {
             }
         }
 
-        from({ Paths.get(project(":spanner-frontend").buildDir.path, "distributions") })
+        from({ Paths.get(project(":spanner-frontend").buildDir.path, "distributions") }){
+            into("static")
+        }
 
         doLast {
             configurations.runtimeClasspath.get().forEach {
