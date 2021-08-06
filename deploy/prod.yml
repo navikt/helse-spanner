@@ -47,4 +47,4 @@ spec:
     - name: HTTP_PORT
       value: "8080"
     - name: HOST
-      value: spanner.nais.adeo.no
+      value: spanner.intern.nav.no
