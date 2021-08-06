@@ -1,3 +1,5 @@
+import java.nio.file.Paths
+
 val ktorVersion = "1.6.1"
 val jacksonVersion = "2.12.4"
 val junitJupiterVersion = "5.6.2"
@@ -54,6 +56,8 @@ tasks {
     }
 
     named<Jar>("jvmJar") {
+        mustRunAfter(clean, ":spanner-frontend:jsBrowserProductionWebpack")
+
         archiveFileName.set("app.jar")
 
         manifest {
@@ -62,6 +66,8 @@ tasks {
                 it.name
             }
         }
+
+        from({ Paths.get(project(":spanner-frontend").buildDir.path, "distributions") })
 
         doLast {
             configurations.runtimeClasspath.get().forEach {
