@@ -1,15 +1,30 @@
-import io.ktor.application.*
-import io.ktor.auth.*
-import io.ktor.http.*
-import io.ktor.http.content.*
-import io.ktor.request.*
-import io.ktor.response.*
-import io.ktor.routing.*
-import io.ktor.sessions.*
+import io.ktor.application.Application
+import io.ktor.application.ApplicationCall
+import io.ktor.application.ApplicationCallPipeline
+import io.ktor.application.call
+import io.ktor.auth.OAuthAccessTokenResponse
+import io.ktor.auth.authenticate
+import io.ktor.auth.authentication
+import io.ktor.http.ContentType
+import io.ktor.http.HttpStatusCode
+import io.ktor.http.content.resources
+import io.ktor.http.content.static
+import io.ktor.request.header
+import io.ktor.request.path
+import io.ktor.response.respond
+import io.ktor.response.respondRedirect
+import io.ktor.response.respondText
+import io.ktor.routing.get
+import io.ktor.routing.routing
+import io.ktor.sessions.clear
+import io.ktor.sessions.get
+import io.ktor.sessions.sessions
+import io.ktor.sessions.set
 import org.slf4j.LoggerFactory
 
+private val sikkerLogg = LoggerFactory.getLogger("tjenestekall")
+
 internal fun Application.authApi(azureAdClient: IAzureAdClient, isLocal: Boolean) {
-    val sikkerLogg = LoggerFactory.getLogger("tjenestekall")
 
     routing {
         intercept(phase = ApplicationCallPipeline.Call) {

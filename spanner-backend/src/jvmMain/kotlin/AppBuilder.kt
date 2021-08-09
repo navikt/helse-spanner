@@ -1,20 +1,27 @@
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility
 import com.fasterxml.jackson.annotation.PropertyAccessor
-import io.ktor.application.*
-import io.ktor.client.*
-import io.ktor.client.engine.apache.*
-import io.ktor.client.features.json.*
-import io.ktor.features.*
-import io.ktor.http.*
-import io.ktor.jackson.*
-import io.ktor.request.*
-import io.ktor.routing.*
-import io.ktor.server.engine.*
-import io.ktor.server.netty.*
-import io.ktor.sessions.*
+import io.ktor.application.Application
+import io.ktor.application.install
+import io.ktor.client.HttpClient
+import io.ktor.client.engine.apache.Apache
+import io.ktor.client.features.json.JacksonSerializer
+import io.ktor.client.features.json.JsonFeature
+import io.ktor.features.CORS
+import io.ktor.features.CallId
+import io.ktor.features.CallLogging
+import io.ktor.features.ContentNegotiation
+import io.ktor.features.callIdMdc
+import io.ktor.http.ContentType
+import io.ktor.jackson.JacksonConverter
+import io.ktor.routing.routing
+import io.ktor.server.engine.embeddedServer
+import io.ktor.server.netty.Netty
+import io.ktor.sessions.SessionStorageMemory
+import io.ktor.sessions.Sessions
+import io.ktor.sessions.cookie
+import java.util.*
 import org.slf4j.LoggerFactory
 import org.slf4j.event.Level
-import java.util.*
 
 class AppBuilder(private val env: Map<String, String>) {
     private val isLocal = env.getOrDefault("LOCAL", "false").toBoolean()
@@ -52,7 +59,6 @@ class AppBuilder(private val env: Map<String, String>) {
                     logger = httpTraceLog
                     level = Level.INFO
                     callIdMdc("callId")
-                    filter { call -> call.request.path().startsWith("/api/") }
                 }
                 routing {
                     naisApi()
