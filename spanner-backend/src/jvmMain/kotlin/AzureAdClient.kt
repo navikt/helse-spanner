@@ -115,6 +115,7 @@ internal class AzureAdClient(private val config: IAzureAdConfig) : IAzureAdClien
         val requestBody = listOf(
             "grant_type" to "urn:ietf:params:oauth:grant-type:jwt-bearer",
             "assertion" to session.accessToken.toString(),
+            "assertion_type" to "urn:ietf:params:oauth:client-assertion-type:jwt-bearer",
             "requested_token_use" to "on_behalf_of"
         ).let { config.createOnBehalfOfRequestBody(it) }.formUrlEncode()
 
