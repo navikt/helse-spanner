@@ -28,8 +28,7 @@ internal fun Application.authApi(azureAdClient: IAzureAdClient, isLocal: Boolean
 
     routing {
         intercept(phase = ApplicationCallPipeline.Call) {
-            val ignoredPaths = listOf("/login", "/oauth2/callback", "/logout", "/isalive", "/isready", "/stop")
-            if (call.request.path() in ignoredPaths) return@intercept
+            if (call.request.path() in listOf("/login", "/oauth2/callback", "/logout")) return@intercept
 
             sikkerLogg.info("Nå intercepter vi :)")
             val session = call.sessions.get<SpannerSession>()
