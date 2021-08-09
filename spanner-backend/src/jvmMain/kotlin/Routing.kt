@@ -99,7 +99,7 @@ internal fun Application.frontendRouting() {
     }
 }
 
-internal fun Application.api(restClient: IRestClient, azureAdClient: IAzureAdClient, isLocal: Boolean) {
+internal fun Application.api(restClient: IRestClient, azureAdClient: IAzureAdClient) {
     routing {
         get("/api/person-fnr") {
             val fnr = hentId("fnr", call).takeIf { it !== null } ?: return@get

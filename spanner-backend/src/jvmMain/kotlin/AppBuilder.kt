@@ -23,7 +23,7 @@ import java.util.*
 import org.slf4j.LoggerFactory
 import org.slf4j.event.Level
 
-class AppBuilder(private val env: Map<String, String>) {
+class AppBuilder(env: Map<String, String>) {
     private val isLocal = env.getOrDefault("LOCAL", "false").toBoolean()
     private val host = if (isLocal) Localhost() else Deployed(env)
     private val httpTraceLog = LoggerFactory.getLogger("tjenestekall")
@@ -64,7 +64,7 @@ class AppBuilder(private val env: Map<String, String>) {
                     naisApi()
                     frontendRouting()
                     authApi(azureAdClient, isLocal)
-                    api(restClient, azureAdClient, isLocal)
+                    api(restClient, azureAdClient)
                 }
                 if (isLocal) {
                     install(CORS) {
