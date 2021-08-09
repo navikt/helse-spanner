@@ -86,22 +86,21 @@ internal fun Application.frontendRouting() {
 
 internal fun Application.api(restClient: IRestClient, azureAdClient: IAzureAdClient, isLocal: Boolean) {
     routing {
-        authenticate(AZURE_OAUTH, optional = isLocal) {
-            get("/api/person-fnr") {
-                val fnr = hentId("fnr", call).takeIf { it !== null } ?: return@get
-                val onBehalfOfToken = hentOnBehalfOfToken(azureAdClient, call).takeIf { it !== null } ?: return@get
+        get("/api/person-fnr") {
+            val fnr = hentId("fnr", call).takeIf { it !== null } ?: return@get
+            val onBehalfOfToken = hentOnBehalfOfToken(azureAdClient, call).takeIf { it !== null } ?: return@get
 
-                val person = restClient.hentPersonMedFnr(fnr, onBehalfOfToken)
-                call.respond(HttpStatusCode.OK, person)
-            }
+            val person = restClient.hentPersonMedFnr(fnr, onBehalfOfToken)
+            call.respond(HttpStatusCode.OK, person)
+        }
 
-            get("/api/person-aktorid") {
-                val aktørId = hentId("aktorId", call).takeIf { it !== null } ?: return@get
-                val onBehalfOfToken = hentOnBehalfOfToken(azureAdClient, call).takeIf { it !== null } ?: return@get
+        get("/api/person-aktorid") {
+            val aktørId = hentId("aktorId", call).takeIf { it !== null } ?: return@get
+            val onBehalfOfToken = hentOnBehalfOfToken(azureAdClient, call).takeIf { it !== null } ?: return@get
 
-                val person = restClient.hentPersonMedAktørId(aktørId, onBehalfOfToken)
-                call.respond(HttpStatusCode.OK, person)
-            }
+            val person = restClient.hentPersonMedAktørId(aktørId, onBehalfOfToken)
+            call.respond(HttpStatusCode.OK, person)
+
         }
     }
 }
