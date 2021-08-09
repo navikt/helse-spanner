@@ -8,7 +8,7 @@ import io.ktor.http.*
 import kotlinx.serialization.json.JsonObject
 
 
-class SpannerClient(private val apiPort: Int = 8080) {
+class SpannerClient {
     private val client = HttpClient {
         install(JsonFeature) {
             serializer = KotlinxSerializer()
@@ -16,7 +16,6 @@ class SpannerClient(private val apiPort: Int = 8080) {
     }
 
     suspend fun hentPersonMedFnr(fnr: String) = client.request<JsonObject>("/api/person-fnr") {
-        port = apiPort
         method = HttpMethod.Get
         contentType(ContentType.Application.Json)
         accept(ContentType.Application.Json)
@@ -24,7 +23,6 @@ class SpannerClient(private val apiPort: Int = 8080) {
     }
 
     suspend fun hentPersonMedAktørId(aktørId: String) = client.request<JsonObject>("/api/person-aktorid") {
-        port = apiPort
         method = HttpMethod.Get
         contentType(ContentType.Application.Json)
         accept(ContentType.Application.Json)
