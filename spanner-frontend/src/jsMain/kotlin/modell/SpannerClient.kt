@@ -8,7 +8,7 @@ import io.ktor.http.*
 import kotlinx.serialization.json.JsonObject
 
 
-class SpannerClient(private val apiPort: Int = 9000) {
+class SpannerClient(private val apiPort: Int = 8080) {
     private val client = HttpClient {
         install(JsonFeature) {
             serializer = KotlinxSerializer()
