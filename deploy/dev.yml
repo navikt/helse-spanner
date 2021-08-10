@@ -1,0 +1,49 @@
+apiVersion: nais.io/v1alpha1
+kind: Application
+metadata:
+  name: spanner
+  namespace: tbd
+  labels:
+    team: tbd
+spec:
+  image: {{image}}
+  port: 8080
+  ingresses:
+    - https://spanner.dev.intern.nav.no
+  liveness:
+    failureThreshold: 10
+    initialDelay: 20
+    path: isalive
+    timeout: 1
+  readiness:
+    initialDelay: 20
+    path: isready
+    timeout: 1
+  replicas:
+    cpuThresholdPercentage: 90
+    max: 1
+    min: 1
+  resources:
+    limits:
+      cpu: 2000m
+      memory: 512Mi
+    requests:
+      cpu: 50m
+      memory: 128Mi
+  azure:
+    application:
+      tenant: nav.no
+      enabled: true
+      replyURLs:
+        - "https://spanner.dev.intern.nav.no/oauth2/callback"
+  secureLogs:
+    enabled: true
+  env:
+    - name: LOCAL
+      value: "false"
+    - name: SPLEIS_CLIENT_ID
+      value: api://dev-fss.tbd.spleis-api/.default
+    - name: HTTP_PORT
+      value: "8080"
+    - name: HOST
+      value: spanner.intern.nav.no

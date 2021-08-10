@@ -5,6 +5,5 @@ out/
 .DS_Store
 
 .idea/
-!/.idea/codeStyles/*.xml
-!/.idea/runConfigurations/*.xml
 
+spanner-backend/src/jvmMain/resources/.env

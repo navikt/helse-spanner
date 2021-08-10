@@ -3,6 +3,7 @@ import java.nio.file.Paths
 val ktorVersion = "1.6.1"
 val jacksonVersion = "2.12.4"
 val junitJupiterVersion = "5.6.2"
+val tokenValidatorVersion = "1.3.8"
 
 plugins {
      application
@@ -13,7 +14,11 @@ plugins {
          withJava()
      }
      sourceSets {
-         val jvmMain by getting {}
+         val jvmMain by getting {
+            dependencies {
+
+            }
+         }
          val jvmTest by getting {}
      }
  }
@@ -25,10 +30,16 @@ plugins {
      implementation("io.ktor:ktor-client-jackson:$ktorVersion")
      implementation("io.ktor:ktor-jackson:$ktorVersion")
      implementation("io.ktor:ktor-server-netty:$ktorVersion")
-     implementation("io.ktor:ktor-auth-jwt:$ktorVersion") { exclude(group = "junit") }
+     implementation("no.nav.security:token-validation-ktor:$tokenValidatorVersion")
+     implementation("io.ktor:ktor-server-sessions:$ktorVersion")
+     implementation("io.ktor:ktor-auth:$ktorVersion")
+     implementation("io.ktor:ktor-auth-jwt:$ktorVersion")
+     implementation("io.ktor:ktor-auth-jwt:$ktorVersion")
 
      implementation("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion")
      implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonVersion")
+
+     implementation("io.github.cdimascio:dotenv-kotlin:6.2.2")
 
      implementation("ch.qos.logback:logback-classic:1.2.3")
      implementation("net.logstash.logback:logstash-logback-encoder:6.6") {
@@ -45,6 +56,7 @@ plugins {
      testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junitJupiterVersion")
 
      testImplementation("no.nav.security:mock-oauth2-server:0.3.4")
+     testImplementation("io.ktor:ktor-server-test-host:$ktorVersion")
  }
 
 tasks {
@@ -61,7 +73,7 @@ tasks {
         archiveFileName.set("app.jar")
 
         manifest {
-            attributes["Main-Class"] = "AppKt"
+            attributes["Main-Class"] = "no.nav.spanner.AppKt"
             attributes["Class-Path"] = configurations.runtimeClasspath.get().joinToString(separator = " ") {
                 it.name
             }
@@ -82,6 +94,7 @@ tasks {
 }
 
  application {
-     mainClass.set("AppKt")
+     mainClass.set("no.nav.spanner.AppKt")
      applicationDefaultJvmArgs = listOf("-Dio.ktor.development=true")
  }
+

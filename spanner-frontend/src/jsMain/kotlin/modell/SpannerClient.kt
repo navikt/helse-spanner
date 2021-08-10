@@ -15,14 +15,14 @@ class SpannerClient {
         }
     }
 
-    suspend fun hentPersonMedFnr(fnr: String) = client.request<JsonObject>("/api/person-fnr") {
+    suspend fun hentPersonMedFnr(fnr: String) = client.request<JsonObject>("/api/person/") {
         method = HttpMethod.Get
         contentType(ContentType.Application.Json)
         accept(ContentType.Application.Json)
         header("fnr", fnr)
     }
 
-    suspend fun hentPersonMedAktørId(aktørId: String) = client.request<JsonObject>("/api/person-aktorid") {
+    suspend fun hentPersonMedAktørId(aktørId: String) = client.request<JsonObject>("/api/person/") {
         method = HttpMethod.Get
         contentType(ContentType.Application.Json)
         accept(ContentType.Application.Json)
