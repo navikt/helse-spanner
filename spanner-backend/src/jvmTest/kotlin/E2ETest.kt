@@ -51,7 +51,7 @@ class E2ETest {
     @Test
     fun login() {
         withTestApplication({
-            configuredModule(spleis, azureADConfig)
+            configuredModule(spleis, azureADConfig, EnvType.LOCAL)
         }) {
             cookiesSession {
                 handleRequest(HttpMethod.Get, "/") { }
@@ -70,7 +70,7 @@ class E2ETest {
     @Test
     fun `respond with redirect on no session`() {
         withTestApplication({
-            configuredModule(spleis, azureADConfig)
+            configuredModule(spleis, azureADConfig, EnvType.LOCAL)
         }) {
             handleRequest(HttpMethod.Get, "/api/person/") {
                 this.addHeader(IdType.FNR.header, "12345678910")
@@ -83,7 +83,7 @@ class E2ETest {
     @Test
     fun `respond with person json on person endpoint`() {
         withTestApplication({
-            configuredModule(spleis, azureADConfig)
+            configuredModule(spleis, azureADConfig, EnvType.LOCAL)
         }) {
             cookiesSession {
                 login()
@@ -91,7 +91,10 @@ class E2ETest {
                     this.addHeader(IdType.FNR.header, "42")
                 }.apply {
                     assertEquals(HttpStatusCode.OK, response.status())
-                    assertTrue(response.content?.contains("\"aktørId\": \"42\"") ?: false, "response was: ${response.content}")
+                    assertTrue(
+                        response.content?.contains("\"aktørId\": \"42\"") ?: false,
+                        "response was: ${response.content}"
+                    )
                 }
             }
 

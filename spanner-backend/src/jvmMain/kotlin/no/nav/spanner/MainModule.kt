@@ -19,17 +19,29 @@ enum class IdType(val header: String) {
     FNR("fnr"), AKTORID("aktorId")
 }
 
+enum class EnvType {
+    LOCAL, PROD;
+
+    companion object {
+        fun fromString(env: String) = when (env) {
+            "prod" -> PROD
+            "local" -> LOCAL
+            else -> throw IllegalArgumentException("Illegal environment - env: $env")
+        }
+    }
+}
+
 fun Application.mainModule() {
     val config = AzureADConfig.fromEnv()
     val azureAD = AzureAD(config)
-    val env = this.environment.config.property("ktor.environment").getString()
-    log.info("Application environment = ${env}")
-    val spleis = if (env == "local") LokaleKjenninger else Spleis(azureAD)
-    return configuredModule(spleis, config)
+    val env = EnvType.fromString(this.environment.config.property("ktor.environment").getString())
+    log.info("Application environment = $env")
+    val spleis = if (env == EnvType.LOCAL) LokaleKjenninger else Spleis(azureAD)
+    return configuredModule(spleis, config, env)
 }
 
 
-fun Application.configuredModule(spleis: Personer, config: AzureADConfig) {
+fun Application.configuredModule(spleis: Personer, config: AzureADConfig, env: EnvType) {
     install(CallId) {
         generate {
             UUID.randomUUID().toString()
@@ -53,7 +65,7 @@ fun Application.configuredModule(spleis: Personer, config: AzureADConfig) {
     install(Authentication) {
         oauth("oauth") {
             //skipWhen { call -> call.sessions.get<UserSession>() != null }
-            urlProvider = { redirectUrl("/oauth2/callback") }
+            urlProvider = { redirectUrl("/oauth2/callback", env) }
             skipWhen { call -> call.sessions.get<SpannerSession>() != null }
             providerLookup = {
                 OAuthServerSettings.OAuth2ServerSettings(
@@ -103,9 +115,11 @@ private fun ApplicationCall.personId() =
     } ?: Pair(IdType.AKTORID, request.header(IdType.AKTORID.header))
 
 
-private fun ApplicationCall.redirectUrl(path: String): String {
+private fun ApplicationCall.redirectUrl(path: String, env: EnvType): String {
     val defaultPort = if (request.origin.scheme == "http") 80 else 443
-    val hostPort = request.host() + request.port().let { port -> if (port == defaultPort) "" else ":$port" }
     val protocol = request.origin.scheme
+    val hostPort = request.host() + request.port().let {
+            port -> if (port == defaultPort || env == EnvType.PROD) "" else ":$port"
+    }
     return "$protocol://$hostPort$path"
 }
