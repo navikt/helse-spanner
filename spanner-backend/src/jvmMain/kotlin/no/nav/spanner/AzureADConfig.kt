@@ -1,12 +1,9 @@
 package no.nav.spanner
 
-import io.github.cdimascio.dotenv.dotenv
-import io.ktor.config.*
+import io.github.cdimascio.dotenv.Dotenv
 
 class AzureADConfig(
-    val issuer: String,
     val discoveryUrl: String,
-    val acceptedAudience: String,
     val clientId: String,
     val clientSecret: String,
     val spleisClientId: String,
@@ -16,22 +13,12 @@ class AzureADConfig(
     val tokenEndpoint = discovered["token_endpoint"]?.textValue()
         ?: throw RuntimeException("Unable to discover token endpoint")
     val authorizationEndpoint = autorhizationUrl ?: discovered["authorization_endpoint"]?.textValue()
-        ?: throw RuntimeException("Unable to discover authorization endpoint")
-
-    fun ktorStyle() = MapApplicationConfig().apply {
-        put("no.nav.security.jwt.issuers.size", "1")
-        put("no.nav.security.jwt.issuers.0.issuer_name", issuer)
-        put("no.nav.security.jwt.issuers.0.discoveryurl", discoveryUrl)
-        put("no.nav.security.jwt.issuers.0.accepted_audience", acceptedAudience)
-        put("no.nav.security.jwt.issuers.0.cookie_name", "aad-idtoken")
-    }
+    ?: throw RuntimeException("Unable to discover authorization endpoint")
 
     companion object {
-        fun fromEnv() = with(dotenv()) {
+        fun fromEnv() = with(Dotenv.configure().ignoreIfMissing().load()) {
             AzureADConfig(
-                issuer = get("ISSUER"),
-                discoveryUrl = get("DISCOVERY_URL"),
-                acceptedAudience = get("ACCEPTED_AUDIENCE"),
+                discoveryUrl = get("AZURE_APP_WELL_KNOWN_URL"),
                 clientId = get("AZURE_APP_CLIENT_ID"),
                 clientSecret = get("AZURE_APP_CLIENT_SECRET"),
                 spleisClientId = get("SPLEIS_CLIENT_ID"),
@@ -39,5 +26,4 @@ class AzureADConfig(
             )
         }
     }
-
 }

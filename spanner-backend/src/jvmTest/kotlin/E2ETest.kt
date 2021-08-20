@@ -18,8 +18,6 @@ import org.junit.jupiter.api.Test
 
 class E2ETest {
     private val azureADConfig = AzureADConfig(
-        acceptedAudience = "aud-localhost",
-        issuer = mockAuth.issuerUrl("default").toString(),
         discoveryUrl = mockAuth.wellKnownUrl("default").toString(),
         clientId = "whatever",
         clientSecret = "supersecret",
