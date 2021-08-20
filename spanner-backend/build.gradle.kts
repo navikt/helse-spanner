@@ -72,18 +72,18 @@ tasks {
 
         archiveFileName.set("app.jar")
 
+        manifest {
+            attributes["Main-Class"] = "no.nav.spanner.AppKt"
+            attributes["Class-Path"] = configurations.runtimeClasspath.get().joinToString(separator = " ") {
+                it.name
+            }
+        }
+
         from({ Paths.get(project(":spanner-frontend").buildDir.path, "distributions") }){
             into("static")
         }
 
         doLast {
-            manifest {
-                attributes["Main-Class"] = "no.nav.spanner.AppKt"
-                attributes["Class-Path"] = configurations.runtimeClasspath.get().joinToString(separator = " ") {
-                    it.name
-                }
-            }
-
             configurations.runtimeClasspath.get().forEach {
                 val file = File("$buildDir/libs/${it.name}")
                 if (!file.exists())
