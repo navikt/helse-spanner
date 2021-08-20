@@ -116,8 +116,8 @@ private fun ApplicationCall.personId() =
 
 
 private fun ApplicationCall.redirectUrl(path: String, env: EnvType): String {
-    val defaultPort = if (request.origin.scheme == "http") 80 else 443
-    val protocol = request.origin.scheme
+    val protocol = if (env == EnvType.PROD) "https" else request.origin.scheme
+    val defaultPort = if (protocol == "http") 80 else 443
     val hostPort = request.host() + request.port().let {
             port -> if (port == defaultPort || env == EnvType.PROD) "" else ":$port"
     }
