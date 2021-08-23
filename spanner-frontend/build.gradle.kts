@@ -1,6 +1,7 @@
 val ktorVersion = "1.6.1"
 
 plugins {
+    kotlin("multiplatform")
     id("org.jetbrains.compose") version "0.5.0-build228"
 }
 
