@@ -67,7 +67,16 @@ tasks {
         }
     }
 
+    named<ProcessResources>("jvmProcessResources") {
+        duplicatesStrategy = DuplicatesStrategy.WARN
+    }
+
+    named<ProcessResources>("jvmTestProcessResources") {
+        duplicatesStrategy = DuplicatesStrategy.WARN
+    }
+
     named<Jar>("jvmJar") {
+        duplicatesStrategy = DuplicatesStrategy.WARN
         mustRunAfter(clean, ":spanner-frontend:jsBrowserProductionWebpack")
 
         archiveFileName.set("app.jar")
