@@ -10,6 +10,7 @@ data class Log(
     val loggerName: String? = null,
     val loggerClass: Class<out Any>? = null,
     val context: Map<String, String> = mapOf(),
+    val exception: Throwable? = null,
     val sensitivContext: Map<String, String> = mapOf(),
 ) {
     private fun context(key: String, value: String, sensitivt: Boolean = false): Log {
@@ -38,25 +39,35 @@ data class Log(
 
     }
 
+    fun exception(error: Throwable): Log {
+        return copy(exception = error)
+    }
+
     private fun doLog(level: LogLevel, message: String?) {
         val pair = "class" to (loggerName ?: loggerClass!!.toString())
         val applikasjonslLog = loggerName?.let { LoggerFactory.getLogger(it) } ?: LoggerFactory.getLogger(loggerClass!!)
-        val messageStr = "${message?.let { "$message, " } ?: ""}, "
+        val messageStr = message?.let { "$message, " } ?: ""
         val tjenestekall = LoggerFactory.getLogger("tjenestekall")
         val applikasjonMessage = "$messageStr$context"
         val tjenestekallMessage = "$messageStr${sensitivContext + pair}"
         when (level) {
             INFO -> {
-                applikasjonslLog.info(applikasjonMessage)
-                tjenestekall.info(tjenestekallMessage)
+                exception?.let { applikasjonslLog.info(applikasjonMessage, exception) }
+                    ?: applikasjonslLog.info(applikasjonMessage)
+                exception?.let { tjenestekall.info(tjenestekallMessage, exception) }
+                    ?: tjenestekall.info(tjenestekallMessage)
             }
             WARN -> {
-                applikasjonslLog.warn(applikasjonMessage)
-                tjenestekall.warn(tjenestekallMessage)
+                exception?.let { applikasjonslLog.warn(applikasjonMessage, exception) }
+                    ?: applikasjonslLog.warn(applikasjonMessage)
+                exception?.let { tjenestekall.warn(tjenestekallMessage, exception) }
+                    ?: tjenestekall.warn(tjenestekallMessage)
             }
             ERROR -> {
-                applikasjonslLog.error(applikasjonMessage)
-                tjenestekall.error(tjenestekallMessage)
+                exception?.let { applikasjonslLog.error(applikasjonMessage, exception) }
+                    ?: applikasjonslLog.error(applikasjonMessage)
+                exception?.let { tjenestekall.error(tjenestekallMessage, exception) }
+                    ?: tjenestekall.error(tjenestekallMessage)
             }
         }
     }
@@ -73,6 +84,10 @@ data class Log(
         doLog(ERROR, message)
     }
 
+    fun log(level: LogLevel, message: String? = null) {
+        doLog(level, message)
+    }
+
 
     companion object {
         fun logger(loggerName: String) =
@@ -81,6 +96,6 @@ data class Log(
         fun logger(loggingClass: Class<out Any>) =
             Log(loggerClass = loggingClass)
 
-        private enum class LogLevel { INFO, WARN, ERROR }
+        enum class LogLevel { INFO, WARN, ERROR }
     }
 }

@@ -12,6 +12,9 @@ import io.ktor.request.*
 import io.ktor.response.*
 import io.ktor.routing.*
 import io.ktor.sessions.*
+import no.nav.spanner.Log.Companion.LogLevel
+import no.nav.spanner.Log.Companion.LogLevel.ERROR
+import no.nav.spanner.Log.Companion.LogLevel.INFO
 import org.slf4j.event.Level
 import java.util.*
 
@@ -31,15 +34,18 @@ enum class EnvType {
     }
 }
 
+val logg = Log.logger("Application")
+
 fun Application.mainModule() {
     val config = AzureADConfig.fromEnv()
     val azureAD = AzureAD(config)
     val env = EnvType.fromString(this.environment.config.property("ktor.environment").getString())
-    log.info("Application environment = $env")
+    logg
+        .åpent("applicationEnvironment", env)
+        .info("Spanner startet")
     val spleis = if (env == EnvType.LOCAL) LokaleKjenninger else Spleis(azureAD)
     return configuredModule(spleis, config, env)
 }
-
 
 fun Application.configuredModule(spleis: Personer, config: AzureADConfig, env: EnvType) {
     install(CallId) {
@@ -49,6 +55,28 @@ fun Application.configuredModule(spleis: Personer, config: AzureADConfig, env: E
     }
     install(CallLogging) {
         level = Level.INFO
+    }
+
+    install(StatusPages) {
+        suspend fun respondToException(status: HttpStatusCode, call: ApplicationCall, cause: Throwable, level: LogLevel) {
+            val errorId = UUID.randomUUID()
+            logg
+                .åpent("errorId", errorId)
+                .åpent("status", status)
+                .call(call)
+                .exception(cause)
+                .log(level)
+            call.respond(status, "Error id: $errorId")
+        }
+        exception<NotFoundException> { cause ->
+            respondToException(HttpStatusCode.NotFound, call, cause, INFO)
+        }
+        exception<BadRequestException> { cause ->
+            respondToException(HttpStatusCode.BadRequest, call, cause, INFO)
+        }
+        exception<Throwable> { cause ->
+            respondToException(HttpStatusCode.InternalServerError, call, cause, ERROR)
+        }
     }
 
     install(ContentNegotiation) { register(ContentType.Application.Json, JacksonConverter(objectMapper)) }
@@ -83,26 +111,38 @@ fun Application.configuredModule(spleis: Personer, config: AzureADConfig, env: E
     }
 
     naisApi()
+
     routing {
         authenticate("oauth") {
             frontendRouting()
             oidc()
             get("/api/person/") {
-                val (idType, idValue) = call.personId()
-                Log.logger("Application")
-                    .åpent("idType", idType)
-                    .sensitivt("idValue", idValue)
-                    .call(this.call)
-                    .info()
-                if (idValue.isNullOrBlank()) {
-                    call.respond(
-                        HttpStatusCode.BadRequest,
-                        "${IdType.AKTORID.header} or ${IdType.FNR.header} must be set"
-                    )
-                } else {
-                    val accessToken = call.sessions.get<SpannerSession>()?.accessToken.toString()
-                    val person = spleis.person(idValue, idType, accessToken)
-                    call.respondText(person, ContentType.Application.Json, HttpStatusCode.OK)
+                try {
+                    val (idType, idValue) = call.personId()
+                    logg
+                        .åpent("idType", idType)
+                        .sensitivt("idValue", idValue)
+                        .call(this.call)
+                        .info()
+                    if (idValue.isNullOrBlank()) {
+                        call.respond(
+                            HttpStatusCode.BadRequest,
+                            "${IdType.AKTORID.header} or ${IdType.FNR.header} must be set"
+                        )
+                    } else {
+                        val accessToken = call.sessions.get<SpannerSession>()?.accessToken.toString()
+                        val person = spleis.person(idValue, idType, accessToken)
+                        call.respondText(person, ContentType.Application.Json, HttpStatusCode.OK)
+                    }
+
+                } catch (err: Exception) {
+                    val errorId = UUID.randomUUID()
+                    logg
+                        .åpent("errorId", errorId)
+                        .call(call)
+                        .exception(err)
+                        .error()
+                    call.respond(HttpStatusCode.InternalServerError, "Error id: $errorId")
                 }
             }
         }
