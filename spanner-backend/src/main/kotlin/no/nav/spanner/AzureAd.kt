@@ -27,7 +27,11 @@ class AzureAD(private val config: AzureADConfig) {
             "assertion_type" to "urn:ietf:params:oauth:client-assertion-type:jwt-bearer",
             "requested_token_use" to "on_behalf_of"
         ).let { createOnBehalfOfRequestBody(it) }.formUrlEncode()
-
+        //TODO: Fjern før vi produksjonssetter
+        Log.logger(AzureAD::class.java)
+            .sensitivt("accessToken", accessToken.token)
+            .sensitivt("requestBody", requestBody)
+            .info("Token slik vi sennder til ad")
         val response = httpClient.post<HttpResponse>(config.tokenEndpoint) {
             accept(ContentType.Application.Json)
             contentType(ContentType.Application.FormUrlEncoded)
