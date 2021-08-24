@@ -104,7 +104,7 @@ fun Application.configuredModule(spleis: Personer, config: AzureADConfig, env: E
                     requestMethod = HttpMethod.Post,
                     clientId = config.clientId,
                     clientSecret = config.clientSecret,
-                    defaultScopes = listOf("openid", "profile", "email")
+                    defaultScopes = listOf("openid", "${config.clientId}/.default")
                 )
             }
             client = httpClient
