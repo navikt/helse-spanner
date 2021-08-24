@@ -16,8 +16,7 @@ fun Route.oidc() {
         val principal: OAuthAccessTokenResponse.OAuth2? = call.principal()
         val accessToken = principal?.accessToken.toString()
         call.sessions.set(SpannerSession(accessToken))
-        logg.sensitivt("accessToken", accessToken)
-            .info("Hentet access token")
+        logg.info("Hentet access token")
         // todo set cookie
         call.respondRedirect("/")
     }
