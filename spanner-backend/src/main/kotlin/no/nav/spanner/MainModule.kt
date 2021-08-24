@@ -55,6 +55,7 @@ fun Application.configuredModule(spleis: Personer, config: AzureADConfig, env: E
     }
     install(CallLogging) {
         level = Level.INFO
+        filter { call -> !call.request.path().startsWith("/internal") }
     }
 
     install(StatusPages) {
