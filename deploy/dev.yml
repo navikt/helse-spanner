@@ -46,6 +46,6 @@ spec:
     - name: HTTP_PORT
       value: "8080"
     - name: HOST
-      value: spanner.intern.nav.no
+      value: spanner.dev.intern.nav.no
     - name: KTOR_ENV
       value: prod
