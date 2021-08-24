@@ -25,7 +25,7 @@ data class Log(
 
 
     fun call(call: ApplicationCall): Log {
-        return åpent("httpMethod", call.request.httpMethod)
+        return åpent("httpMethod", call.request.httpMethod.value)
             .åpent("httpPath", call.request.path())
             .sensitivt("httpUrl", call.request.uri)
     }
