@@ -82,7 +82,10 @@ fun Application.configuredModule(spleis: Personer, config: AzureADConfig, env: E
 
     install(ContentNegotiation) { register(ContentType.Application.Json, JacksonConverter(objectMapper)) }
     install(Sessions) {
-        cookie<SpannerSession>("spanner", storage = SessionStorageMemory())
+        cookie<SpannerSession>("spanner", storage = SessionStorageMemory()) {
+            this.cookie.secure = true
+            cookie.extensions["SameSite"] = "strict"
+        }
     }
 
     val httpClient = HttpClient(CIO) {
