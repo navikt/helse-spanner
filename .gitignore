@@ -7,3 +7,4 @@ out/
 .idea/
 
 spanner-backend/src/jvmMain/resources/.env
+.env
