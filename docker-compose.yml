@@ -22,3 +22,7 @@ services:
       AUTHORIZATION_URL: http://localhost:8888/default/authorize
       KTOR_ENV: local
       SPLEIS_API_URL: http://dummy
+  audit.nais:
+    image: balabit/syslog-ng:latest
+    volumes:
+      - ${PWD}/audit-test.conf:/etc/syslog-ng/syslog-ng.conf

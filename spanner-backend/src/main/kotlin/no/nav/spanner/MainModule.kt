@@ -15,6 +15,7 @@ import io.ktor.sessions.*
 import no.nav.spanner.Log.Companion.LogLevel
 import no.nav.spanner.Log.Companion.LogLevel.ERROR
 import no.nav.spanner.Log.Companion.LogLevel.INFO
+import org.slf4j.LoggerFactory
 import org.slf4j.event.Level
 import java.util.*
 
@@ -83,10 +84,12 @@ fun Application.configuredModule(spleis: Personer, config: AzureADConfig, env: E
     install(ContentNegotiation) { register(ContentType.Application.Json, JacksonConverter(objectMapper)) }
     install(Sessions) {
         cookie<SpannerSession>("spanner", storage = SessionStorageMemory()) {
-            this.cookie.secure = true
+            this.cookie.secure = env != EnvType.LOCAL
             cookie.extensions["SameSite"] = "strict"
         }
     }
+
+    val auditLog = LoggerFactory.getLogger("auditLogger")
 
     val httpClient = HttpClient(CIO) {
         install(JsonFeature) {
@@ -121,6 +124,11 @@ fun Application.configuredModule(spleis: Personer, config: AzureADConfig, env: E
             frontendRouting()
             oidc()
             get("/api/person/") {
+//                call.sessions.get<SpannerSession>()?.let { session ->
+//                    logg.info("Audit logger på person api")
+//                    auditLog.info("CEF:0|my-nice-app|auditLog|1.0|audit:access|my-nice-app audit log|INFO|end=1618308696856 suid=X123456 duid=01010199999")
+//                }
+
                 try {
                     val (idType, idValue) = call.personId()
                     logg
