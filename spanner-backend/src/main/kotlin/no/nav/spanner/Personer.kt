@@ -18,7 +18,7 @@ interface Personer {
     suspend fun person(id: String, idType: IdType, accessToken: String): String
 }
 
-class Spleis(private val azureAD: AzureAD, private val url: String = "http://spleis-api.tbd.svc.cluster.local") :
+class Spleis(private val azureAD: AzureAD, url: String = "http://spleis-api.tbd.svc.cluster.local") :
     Personer {
     private val httpClient = HttpClient(CIO) {
         install(JsonFeature) {
@@ -27,6 +27,7 @@ class Spleis(private val azureAD: AzureAD, private val url: String = "http://spl
             }
         }
     }
+    private val url = URLBuilder(url).path("api", "person-json").build()
 
     companion object {
         fun fromEnv(azureAD: AzureAD) = with(Dotenv.configure().ignoreIfMissing().load()) {
@@ -46,7 +47,7 @@ class Spleis(private val azureAD: AzureAD, private val url: String = "http://spl
             .info("Retreiving on behalf of token")
         val response = httpClient.get<HttpResponse>(url) {
             header("Authorization", "Bearer $oboToken")
-            header(idType.name, id)
+            header(idType.header, id)
             accept(ContentType.Application.Json)
         }
         log
