@@ -165,7 +165,7 @@ class Aktivitet private constructor(
 
     companion object {
         fun from(dto: AktivitetDTO, kontekster: List<Kontekst>) =
-            Aktivitet(dto.melding, dto.alvorlighetsgrad, dto.tidsstempel, dto.kontekster.map(kontekster::get))
+            Aktivitet(dto.melding, dto.alvorlighetsgrad, dto.tidstempeltoLocal(), dto.kontekster.map(kontekster::get))
 
         fun List<Aktivitet>.grupperEtterHendelse() = groupBy { it.kontekster.hendelseskontekst() }
     }
@@ -174,3 +174,6 @@ class Aktivitet private constructor(
 fun interface KontekstFilter {
     fun kontekst(): Pair<String, Map<String, String>>
 }
+
+fun AktivitetDTO.tidstempeltoLocal() =
+    LocalDateTime.parse(tidsstempel.replace(" ", "T"))

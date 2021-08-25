@@ -56,7 +56,7 @@ data class AktivitetsloggDTO(
 data class AktivitetDTO(
     val melding: String,
     val alvorlighetsgrad: String,
-    val tidsstempel: LocalDateTime,
+    val tidsstempel: String,
     val kontekster: List<Int>
 )
 
