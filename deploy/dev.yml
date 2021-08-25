@@ -53,3 +53,5 @@ spec:
       value: spanner.dev.intern.nav.no
     - name: KTOR_ENV
       value: prod
+    - name: SPLEIS_API_URL
+      value: https://spleis-api.dev-fss-pub.nais.io

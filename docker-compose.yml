@@ -21,3 +21,4 @@ services:
       SPLEIS_CLIENT_ID: foobar
       AUTHORIZATION_URL: http://localhost:8888/default/authorize
       KTOR_ENV: local
+      SPLEIS_API_URL: http://dummy

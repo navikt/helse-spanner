@@ -43,7 +43,7 @@ fun Application.mainModule() {
     logg
         .åpent("applicationEnvironment", env)
         .info("Spanner startet")
-    val spleis = if (env == EnvType.LOCAL) LokaleKjenninger else Spleis(azureAD)
+    val spleis = if (env == EnvType.LOCAL) LokaleKjenninger else Spleis.fromEnv(azureAD)
     return configuredModule(spleis, config, env)
 }
 
