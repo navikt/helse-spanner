@@ -34,6 +34,8 @@ spec:
     application:
       enabled: true
       claims:
+        extra:
+          - "NAVident"
         groups:
           - id: "f787f900-6697-440d-a086-d5bb56e26a9c"
   webproxy: true

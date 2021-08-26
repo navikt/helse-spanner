@@ -5,6 +5,23 @@ services:
     image: ghcr.io/navikt/mock-oauth2-server:0.3.4
     ports:
       - 8888:8080
+    environment:
+      JSON_CONFIG: '{
+  "tokenCallbacks": [
+    {
+      "issuerId": "default",
+      "requestMappings": [
+        {
+          "requestParam": "grant_type",
+          "match": "authorization_code",
+          "claims": {
+            "NAVident": "H12345"
+          }
+        }
+      ]
+    }
+  ]
+}'
   spanner:
     depends_on:
       - mock-oauth2-server

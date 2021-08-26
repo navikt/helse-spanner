@@ -45,27 +45,27 @@ data class Log(
 
     private fun doLog(level: LogLevel, message: String?) {
         val pair = "class" to (loggerName ?: loggerClass!!.toString())
-        val applikasjonslLog = loggerName?.let { LoggerFactory.getLogger(it) } ?: LoggerFactory.getLogger(loggerClass!!)
+        val applikasjonsLog = loggerName?.let { LoggerFactory.getLogger(it) } ?: LoggerFactory.getLogger(loggerClass!!)
         val messageStr = message?.let { "$message, " } ?: ""
         val tjenestekall = LoggerFactory.getLogger("tjenestekall")
         val applikasjonMessage = "$messageStr$context"
         val tjenestekallMessage = "$messageStr${sensitivContext + pair}"
         when (level) {
             INFO -> {
-                exception?.let { applikasjonslLog.info(applikasjonMessage, exception) }
-                    ?: applikasjonslLog.info(applikasjonMessage)
+                exception?.let { applikasjonsLog.info(applikasjonMessage, exception) }
+                    ?: applikasjonsLog.info(applikasjonMessage)
                 exception?.let { tjenestekall.info(tjenestekallMessage, exception) }
                     ?: tjenestekall.info(tjenestekallMessage)
             }
             WARN -> {
-                exception?.let { applikasjonslLog.warn(applikasjonMessage, exception) }
-                    ?: applikasjonslLog.warn(applikasjonMessage)
+                exception?.let { applikasjonsLog.warn(applikasjonMessage, exception) }
+                    ?: applikasjonsLog.warn(applikasjonMessage)
                 exception?.let { tjenestekall.warn(tjenestekallMessage, exception) }
                     ?: tjenestekall.warn(tjenestekallMessage)
             }
             ERROR -> {
-                exception?.let { applikasjonslLog.error(applikasjonMessage, exception) }
-                    ?: applikasjonslLog.error(applikasjonMessage)
+                exception?.let { applikasjonsLog.error(applikasjonMessage, exception) }
+                    ?: applikasjonsLog.error(applikasjonMessage)
                 exception?.let { tjenestekall.error(tjenestekallMessage, exception) }
                     ?: tjenestekall.error(tjenestekallMessage)
             }

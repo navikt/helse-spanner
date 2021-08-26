@@ -34,6 +34,9 @@ spec:
     application:
       tenant: nav.no
       enabled: true
+      claims:
+        extra:
+          - "NAVident"
       replyURLs:
         - "https://spanner.dev.intern.nav.no/oauth2/callback"
   accessPolicy:

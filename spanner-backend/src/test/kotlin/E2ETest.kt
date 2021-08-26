@@ -10,6 +10,7 @@ import io.ktor.http.*
 import io.ktor.server.testing.*
 import kotlinx.coroutines.runBlocking
 import no.nav.security.mock.oauth2.MockOAuth2Server
+import no.nav.security.mock.oauth2.token.DefaultOAuth2TokenCallback
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
@@ -17,6 +18,7 @@ import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 
 class E2ETest {
+
     private val azureADConfig = AzureADConfig(
         discoveryUrl = mockAuth.wellKnownUrl("default").toString(),
         clientId = "whatever",
@@ -50,6 +52,7 @@ class E2ETest {
 
     @Test
     fun login() {
+
         withTestApplication({
             configuredModule(spleis, azureADConfig, EnvType.LOCAL)
         }) {
@@ -69,6 +72,7 @@ class E2ETest {
 
     @Test
     fun `respond with redirect on no session`() {
+
         withTestApplication({
             configuredModule(spleis, azureADConfig, EnvType.LOCAL)
         }) {
@@ -82,6 +86,11 @@ class E2ETest {
 
     @Test
     fun `respond with person json on person endpoint`() {
+        mockAuth.enqueueCallback(
+            DefaultOAuth2TokenCallback(
+                claims = mapOf("NAVident" to "H12345")
+            )
+        )
         withTestApplication({
             configuredModule(spleis, azureADConfig, EnvType.LOCAL)
         }) {
@@ -108,6 +117,7 @@ class E2ETest {
         @JvmStatic
         fun setupMock() {
             mockAuth.start()
+
         }
 
         @AfterAll

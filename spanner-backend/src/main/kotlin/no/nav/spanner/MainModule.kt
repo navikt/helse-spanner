@@ -12,6 +12,7 @@ import io.ktor.request.*
 import io.ktor.response.*
 import io.ktor.routing.*
 import io.ktor.sessions.*
+import no.nav.spanner.AuditLogger.Companion.audit
 import no.nav.spanner.Log.Companion.LogLevel
 import no.nav.spanner.Log.Companion.LogLevel.ERROR
 import no.nav.spanner.Log.Companion.LogLevel.INFO
@@ -61,7 +62,12 @@ fun Application.configuredModule(spleis: Personer, config: AzureADConfig, env: E
     install(XForwardedHeaderSupport)
 
     install(StatusPages) {
-        suspend fun respondToException(status: HttpStatusCode, call: ApplicationCall, cause: Throwable, level: LogLevel) {
+        suspend fun respondToException(
+            status: HttpStatusCode,
+            call: ApplicationCall,
+            cause: Throwable,
+            level: LogLevel
+        ) {
             val errorId = UUID.randomUUID()
             logg
                 .åpent("errorId", errorId)
@@ -111,7 +117,7 @@ fun Application.configuredModule(spleis: Personer, config: AzureADConfig, env: E
                     requestMethod = HttpMethod.Post,
                     clientId = config.clientId,
                     clientSecret = config.clientSecret,
-                    defaultScopes = listOf("openid", "${config.clientId}/.default")
+                    defaultScopes = listOf("openid", "${config.clientId}/.default", "NAVident")
                 )
             }
             client = httpClient
@@ -125,12 +131,14 @@ fun Application.configuredModule(spleis: Personer, config: AzureADConfig, env: E
             frontendRouting()
             oidc()
             get("/api/person/") {
+//                sesjon().accessLog.
 //                call.sessions.get<SpannerSession>()?.let { session ->
 //                    logg.info("Audit logger på person api")
 //                    auditLog.info("CEF:0|my-nice-app|auditLog|1.0|audit:access|my-nice-app audit log|INFO|end=1618308696856 suid=X123456 duid=01010199999")
 //                }
 
                 try {
+                    sesjon().audit().log(call)
                     val (idType, idValue) = call.personId()
                     logg
                         .åpent("idType", idType)

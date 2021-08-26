@@ -13,10 +13,17 @@ fun Route.oidc() {
     get("/login") { /* Redirects to 'authorizeUrl' automatically*/ }
 
     get("/oauth2/callback") {
-        val principal: OAuthAccessTokenResponse.OAuth2? = call.principal()
-        val accessToken = principal?.accessToken.toString()
-        call.sessions.set(SpannerSession(accessToken))
-        logg.info("Hentet access token")
+        val principal: OAuthAccessTokenResponse.OAuth2 = call.principal()!!
+
+        val accessToken = principal.accessToken
+        val idToken = principal.extraParameters["id_token"]!!
+        val refreshToken = principal.refreshToken!!
+        call.sessions.set(SpannerSession(accessToken, idToken, refreshToken))
+        logg
+            //TODO: Fjern token fra logg
+            .åpent("token", accessToken.asJwt().claims)
+            .åpent("id_token", idToken.asJwt().claims)
+            .info("Hentet tokens")
         // todo set cookie
         call.respondRedirect("/")
     }
