@@ -58,7 +58,7 @@ fun Application.configuredModule(spleis: Personer, config: AzureADConfig, env: E
         level = Level.INFO
         filter { call -> !call.request.path().startsWith("/internal") }
     }
-    install(ForwardedHeaderSupport)
+    install(XForwardedHeaderSupport)
 
     install(StatusPages) {
         suspend fun respondToException(status: HttpStatusCode, call: ApplicationCall, cause: Throwable, level: LogLevel) {
