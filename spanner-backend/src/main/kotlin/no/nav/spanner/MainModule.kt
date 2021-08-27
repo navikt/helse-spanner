@@ -58,6 +58,7 @@ fun Application.configuredModule(spleis: Personer, config: AzureADConfig, env: E
         level = Level.INFO
         filter { call -> !call.request.path().startsWith("/internal") }
     }
+    install(ForwardedHeaderSupport)
 
     install(StatusPages) {
         suspend fun respondToException(status: HttpStatusCode, call: ApplicationCall, cause: Throwable, level: LogLevel) {
@@ -84,8 +85,8 @@ fun Application.configuredModule(spleis: Personer, config: AzureADConfig, env: E
     install(ContentNegotiation) { register(ContentType.Application.Json, JacksonConverter(objectMapper)) }
     install(Sessions) {
         cookie<SpannerSession>("spanner", storage = SessionStorageMemory()) {
-            //this.cookie.secure = env != EnvType.LOCAL TODO lar seg ikke gjøre pga Linkerd?
-            cookie.extensions["SameSite"] = "strict"
+            this.cookie.secure = env != EnvType.LOCAL
+            cookie.extensions["SameSite"] = if (env != EnvType.LOCAL) "lax" else  "strict"
         }
     }
 
