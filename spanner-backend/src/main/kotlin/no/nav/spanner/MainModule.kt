@@ -86,7 +86,7 @@ fun Application.configuredModule(spleis: Personer, config: AzureADConfig, env: E
     install(Sessions) {
         cookie<SpannerSession>("spanner", storage = SessionStorageMemory()) {
             this.cookie.secure = env != EnvType.LOCAL
-            cookie.extensions["SameSite"] = if (env != EnvType.LOCAL) "lax" else  "strict"
+            cookie.extensions["SameSite"] = if (env != EnvType.LOCAL) "strict" else "lax"
         }
     }
 
