@@ -17,8 +17,8 @@ fun Route.oidc() {
 
         val accessToken = principal.accessToken
         val idToken = principal.extraParameters["id_token"]!!
-        val refreshToken = principal.refreshToken!!
-        call.sessions.set(SpannerSession(accessToken, idToken, refreshToken))
+        // val refreshToken = principal.refreshToken!! TODO vi får ikke refresh token fra AD
+        call.sessions.set(SpannerSession(accessToken, idToken, "refreshToken"))
         logg
             //TODO: Fjern token fra logg
             .åpent("token", accessToken.asJwt().claims)
