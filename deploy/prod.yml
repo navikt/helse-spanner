@@ -38,7 +38,12 @@ spec:
           - "NAVident"
         groups:
           - id: "f787f900-6697-440d-a086-d5bb56e26a9c"
-  webproxy: true
+      replyURLs:
+        - "https://spanner.intern.nav.no/oauth2/callback"
+      accessPolicy:
+        outbound:
+          external:
+            - host: spleis-api.prod-fss-pub.nais.io
   secureLogs:
     enabled: true
   env:
@@ -52,3 +57,5 @@ spec:
       value: spanner.intern.nav.no
     - name: KTOR_ENV
       value: prod
+    - name: SPLEIS_API_URL
+      value: https://spleis-api.prod-fss-pub.nais.io
