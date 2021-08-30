@@ -17,14 +17,14 @@ fun Route.oidc() {
 
         val accessToken = principal.accessToken
         val idToken = principal.extraParameters["id_token"]!!
+        val expiry = principal.expiresIn
         // val refreshToken = principal.refreshToken!! TODO vi får ikke refresh token fra AD
-        call.sessions.set(SpannerSession(accessToken, idToken, "refreshToken"))
+        call.sessions.set(SpannerSession(accessToken, idToken, "refreshToken", expiry))
         logg
             //TODO: Fjern token fra logg
             .åpent("token", accessToken.asJwt().claims)
             .åpent("id_token", idToken.asJwt().claims)
             .info("Hentet tokens")
-        // todo set cookie
         call.respondRedirect("/")
     }
 }

@@ -1,5 +1,7 @@
 package no.nav.spanner
 
+import FeilRespons
+import com.fasterxml.jackson.module.kotlin.readValue
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.engine.apache.*
@@ -8,6 +10,7 @@ import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
 import io.ktor.server.testing.*
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 import no.nav.security.mock.oauth2.MockOAuth2Server
 import no.nav.security.mock.oauth2.token.DefaultOAuth2TokenCallback
@@ -107,6 +110,29 @@ class E2ETest {
                 }
             }
 
+        }
+    }
+
+    @Test
+    fun `unauthorized response when session expires`() {
+        mockAuth.enqueueCallback(
+            DefaultOAuth2TokenCallback(
+                expiry = 1,
+                claims = mapOf("NAVident" to "H12345")
+            )
+        )
+        withTestApplication({
+            configuredModule(spleis, azureADConfig, EnvType.LOCAL)
+        }) {
+            cookiesSession {
+                login()
+                handleRequest(HttpMethod.Get, "/api/person/") { }
+                    .apply {
+                        assertEquals(HttpStatusCode.Unauthorized, response.status())
+                        val feil = objectMapper.readValue<FeilRespons>(response.content!!)
+                        assertTrue(!feil.description.isNullOrEmpty())
+                    }
+            }
         }
     }
 

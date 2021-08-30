@@ -1,5 +1,7 @@
 package no.nav.spanner
 
+import FeilRespons
+import com.fasterxml.jackson.module.kotlin.readValue
 import io.ktor.application.*
 import io.ktor.auth.*
 import io.ktor.client.*
@@ -12,12 +14,14 @@ import io.ktor.request.*
 import io.ktor.response.*
 import io.ktor.routing.*
 import io.ktor.sessions.*
+import io.ktor.util.pipeline.*
 import no.nav.spanner.AuditLogger.Companion.audit
 import no.nav.spanner.Log.Companion.LogLevel
 import no.nav.spanner.Log.Companion.LogLevel.ERROR
 import no.nav.spanner.Log.Companion.LogLevel.INFO
 import org.slf4j.LoggerFactory
 import org.slf4j.event.Level
+import java.time.LocalDateTime
 import java.util.*
 
 enum class IdType(val header: String) {
@@ -75,13 +79,17 @@ fun Application.configuredModule(spleis: Personer, config: AzureADConfig, env: E
                 .call(call)
                 .exception(cause)
                 .log(level)
-            call.respond(status, "Error id: $errorId")
+            call.respond(status, FeilRespons(errorId.toString(), cause.message))
         }
         exception<NotFoundException> { cause ->
             respondToException(HttpStatusCode.NotFound, call, cause, INFO)
         }
         exception<BadRequestException> { cause ->
             respondToException(HttpStatusCode.BadRequest, call, cause, INFO)
+        }
+        exception<InvalidSession> { cause ->
+            call.sessions.clear<SpannerSession>()
+            respondToException(HttpStatusCode.Unauthorized, call, cause, INFO)
         }
         exception<Throwable> { cause ->
             respondToException(HttpStatusCode.InternalServerError, call, cause, ERROR)
@@ -93,10 +101,12 @@ fun Application.configuredModule(spleis: Personer, config: AzureADConfig, env: E
         cookie<SpannerSession>("spanner", storage = SessionStorageMemory()) {
             this.cookie.secure = env != EnvType.LOCAL
             cookie.extensions["SameSite"] = if (env != EnvType.LOCAL) "strict" else "lax"
+            serializer = object: SessionSerializer<SpannerSession> {
+                override fun deserialize(text: String): SpannerSession = objectMapper.readValue(text)
+                override fun serialize(session: SpannerSession) = objectMapper.writeValueAsString(session)
+            }
         }
     }
-
-    val auditLog = LoggerFactory.getLogger("auditLogger")
 
     val httpClient = HttpClient(CIO) {
         install(JsonFeature) {
@@ -106,9 +116,9 @@ fun Application.configuredModule(spleis: Personer, config: AzureADConfig, env: E
 
     install(Authentication) {
         oauth("oauth") {
-            //skipWhen { call -> call.sessions.get<UserSession>() != null }
             urlProvider = { redirectUrl("/oauth2/callback", env) }
             skipWhen { call -> call.sessions.get<SpannerSession>() != null }
+
             providerLookup = {
                 OAuthServerSettings.OAuth2ServerSettings(
                     name = "AAD",
@@ -131,12 +141,7 @@ fun Application.configuredModule(spleis: Personer, config: AzureADConfig, env: E
             frontendRouting()
             oidc()
             get("/api/person/") {
-//                sesjon().accessLog.
-//                call.sessions.get<SpannerSession>()?.let { session ->
-//                    logg.info("Audit logger på person api")
-//                    auditLog.info("CEF:0|my-nice-app|auditLog|1.0|audit:access|my-nice-app audit log|INFO|end=1618308696856 suid=X123456 duid=01010199999")
-//                }
-
+                checkIfsessionValid()
                 try {
                     sesjon().audit().log(call)
                     val (idType, idValue) = call.personId()
@@ -184,3 +189,11 @@ private fun ApplicationCall.redirectUrl(path: String, env: EnvType): String {
     }
     return "$protocol://$hostPort$path"
 }
+
+private fun PipelineContext<Unit, ApplicationCall>.checkIfsessionValid() {
+    if (sesjon().validBefore < LocalDateTime.now()) {
+        throw InvalidSession("access token utgått: validBefore=${sesjon().validBefore} now=${LocalDateTime.now()}")
+    }
+}
+
+class InvalidSession(message: String): RuntimeException(message)
