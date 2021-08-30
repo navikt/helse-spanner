@@ -32,6 +32,7 @@ spec:
       memory: 128Mi
   azure:
     application:
+      tenant: nav.no
       enabled: true
       claims:
         extra:
@@ -40,6 +41,7 @@ spec:
           - id: "f787f900-6697-440d-a086-d5bb56e26a9c"
       replyURLs:
         - "https://spanner.intern.nav.no/oauth2/callback"
+      allowAllUsers: false
   accessPolicy:
     outbound:
       external:

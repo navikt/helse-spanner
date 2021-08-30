@@ -41,6 +41,7 @@ spec:
           - id: "f787f900-6697-440d-a086-d5bb56e26a9c"
       replyURLs:
         - "https://spanner.dev.intern.nav.no/oauth2/callback"
+      allowAllUsers: false
   accessPolicy:
     outbound:
       external:
