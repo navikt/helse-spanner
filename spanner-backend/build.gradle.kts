@@ -11,6 +11,7 @@ plugins {
 
 
 dependencies {
+    implementation(project(":spanner-common"))
     implementation("io.ktor:ktor-server-cio:$ktorVersion")
     implementation("io.ktor:ktor-client-cio:$ktorVersion")
     implementation("io.ktor:ktor-client-apache:$ktorVersion")
