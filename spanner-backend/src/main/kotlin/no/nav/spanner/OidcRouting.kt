@@ -21,9 +21,6 @@ fun Route.oidc() {
         // val refreshToken = principal.refreshToken!! TODO vi får ikke refresh token fra AD
         call.sessions.set(SpannerSession(accessToken, idToken, "refreshToken", expiry))
         logg
-            //TODO: Fjern token fra logg
-            .åpent("token", accessToken.asJwt().claims)
-            .åpent("id_token", idToken.asJwt().claims)
             .info("Hentet tokens")
         call.respondRedirect("/")
     }
