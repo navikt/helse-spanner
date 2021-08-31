@@ -1,17 +1,23 @@
 import kotlinx.browser.document
-import react.RProps
-import react.child
+import react.*
 import react.dom.h2
 import react.dom.render
-import react.functionalComponent
 
-external interface WelcomeProps : RProps {
-    var name: String
+external interface WelcomeProps : Props {
+    operator fun component1(): Any
+
+    var navn: String
 }
 
-private val welcome = functionalComponent<WelcomeProps> { props ->
+private val welcome = fc<WelcomeProps> {props ->
     h2 {
-        +"Hello, ${props.name}"
+        +"Hello, ${props.navn}"
+    }
+}
+
+fun RBuilder.welcome(handler: WelcomeProps.() -> Unit) = child(welcome) {
+    attrs {
+        handler()
     }
 }
 
@@ -19,6 +25,6 @@ fun main() {
     document.bgColor = "blue"
 
     render(document.getElementById("root")) {
-        child(welcome) { attrs.name = "Noen" }
+        welcome  { navn = "Verden"}
     }
 }
