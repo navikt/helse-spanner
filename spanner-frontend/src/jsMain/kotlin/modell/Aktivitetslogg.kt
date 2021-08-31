@@ -10,6 +10,7 @@ import androidx.compose.runtime.setValue
 import components.Grid
 import kotlinx.datetime.LocalDateTime
 import modell.Aktivitet.Companion.grupperEtterHendelse
+import modell.Kontekst.Companion.harHendelseskontekst
 import modell.Kontekst.Companion.hendelseskontekst
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.*
@@ -130,6 +131,7 @@ class Kontekst private constructor(
     companion object {
         fun from(dto: KontekstDTO): Kontekst = Kontekst(dto.kontekstType, dto.kontekstMap)
 
+        fun List<Kontekst>.harHendelseskontekst() = any { it.kontekstMap.containsKey("meldingsreferanseId")}
         fun List<Kontekst>.hendelseskontekst() = first { it.kontekstMap.containsKey("meldingsreferanseId") }
     }
 }
@@ -167,7 +169,7 @@ class Aktivitet private constructor(
         fun from(dto: AktivitetDTO, kontekster: List<Kontekst>) =
             Aktivitet(dto.melding, dto.alvorlighetsgrad, dto.tidstempeltoLocal(), dto.kontekster.map(kontekster::get))
 
-        fun List<Aktivitet>.grupperEtterHendelse() = groupBy { it.kontekster.hendelseskontekst() }
+        fun List<Aktivitet>.grupperEtterHendelse() = filter{it.kontekster.harHendelseskontekst()}.groupBy { it.kontekster.hendelseskontekst() }
     }
 }
 
