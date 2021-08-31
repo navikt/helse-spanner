@@ -38,7 +38,7 @@ class OuterViewContainer() {
             nyPerson = Person.from(dto, json, mainView)
             mainView.setDetaljView(nyPerson)
         } catch (e: Exception) {
-            console.error("Feil ved parsing av respons til Person - Respons: ", personJson.toString())
+            console.error("Feil ved parsing av respons til Person - Respons: ", e)
         }
 
         mainViewRenderer = { mainView.render(nyPerson) }
