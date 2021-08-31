@@ -1,6 +1,10 @@
 plugins {
     kotlin("multiplatform")
-    kotlin("plugin.serialization") version "1.5.10"
+    kotlin("plugin.serialization") version "1.5.30"
+}
+
+repositories {
+    mavenCentral()
 }
 
 kotlin {

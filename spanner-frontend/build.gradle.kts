@@ -2,7 +2,7 @@ val ktorVersion = "1.6.1"
 
 plugins {
     kotlin("multiplatform")
-    id("org.jetbrains.compose") version "0.5.0-build228"
+    id("org.jetbrains.compose") version "1.0.0-alpha4-build321"
 }
 
 kotlin {
@@ -11,6 +11,7 @@ kotlin {
         browser()
         binaries.executable()
     }
+
     sourceSets {
         val jsMain by getting {
             dependencies {

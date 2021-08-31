@@ -62,7 +62,7 @@ class Vedtaksperiode private constructor(
                 height(auto)
                 width(1.px)
                 property("margin", "0 1rem")
-                backgroundColor("black")
+                backgroundColor(Color.black)
             }
         })
     }

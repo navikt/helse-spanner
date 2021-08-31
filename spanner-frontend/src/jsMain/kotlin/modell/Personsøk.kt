@@ -31,7 +31,7 @@ class Personsøk {
             Div(attrs = { style { marginLeft(1.cssRem) } }) {
                 TextInput(
                     value = inputText,
-                    attrsBuilder = {
+                    attrs = {
                         onInput {
                             inputText = it.value
                         }
@@ -59,7 +59,7 @@ class Personsøk {
             }
 
             if (feilmelding.isNotEmpty()) {
-                Div(attrs = { style { marginLeft(1.cssRem); color("red") } }) {
+                Div(attrs = { style { marginLeft(1.cssRem); color(Color.red) } }) {
                     Text(feilmelding)
                 }
             }

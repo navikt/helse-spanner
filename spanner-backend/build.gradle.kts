@@ -68,6 +68,7 @@ tasks {
 
     jar {
         mustRunAfter(clean, ":spanner-frontend:jsBrowserProductionWebpack")
+        //mustRunAfter(clean, ":spanner-react:browserProductionWebpack")
 
         archiveFileName.set("app.jar")
 
@@ -79,6 +80,7 @@ tasks {
         }
 
         from({ Paths.get(project(":spanner-frontend").buildDir.path, "distributions") }) {
+            //from({ Paths.get(project(":spanner-react").buildDir.path, "distributions") }) {
             into("static")
         }
 
