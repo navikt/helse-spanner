@@ -14,10 +14,12 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 import no.nav.security.mock.oauth2.MockOAuth2Server
 import no.nav.security.mock.oauth2.token.DefaultOAuth2TokenCallback
+import org.junit.Ignore
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 class E2ETest {
@@ -129,6 +131,24 @@ class E2ETest {
                 handleRequest(HttpMethod.Get, "/api/person/") { }
                     .apply {
                         assertEquals(HttpStatusCode.Unauthorized, response.status())
+                        val feil = objectMapper.readValue<FeilRespons>(response.content!!)
+                        assertTrue(!feil.description.isNullOrEmpty())
+                    }
+            }
+        }
+    }
+
+    @Disabled
+    @Test
+    fun `valid json error message response`() {
+        withTestApplication({
+            configuredModule(spleis, azureADConfig, EnvType.LOCAL)
+        }) {
+            cookiesSession {
+                login()
+                handleRequest(HttpMethod.Get, "/api/person/") { }
+                    .apply {
+                        assertEquals(HttpStatusCode.InternalServerError, response.status())
                         val feil = objectMapper.readValue<FeilRespons>(response.content!!)
                         assertTrue(!feil.description.isNullOrEmpty())
                     }
