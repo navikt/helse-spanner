@@ -1,8 +1,8 @@
-val ktorVersion = "1.6.1"
+val ktorVersion: String by project
 
 plugins {
     kotlin("multiplatform")
-    id("org.jetbrains.compose") version "1.0.0-alpha4-build321"
+    id("org.jetbrains.compose") version "1.0.0-alpha4-build331"
 }
 
 kotlin {
