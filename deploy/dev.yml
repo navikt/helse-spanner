@@ -49,15 +49,13 @@ spec:
   secureLogs:
     enabled: true
   env:
-    - name: LOCAL
+    - name: DEVELOPMENT
       value: "false"
     - name: SPLEIS_CLIENT_ID
       value: api://dev-fss.tbd.spleis-api/.default
     - name: HTTP_PORT
       value: "8080"
-    - name: HOST
+    - name: HTTP_HOST
       value: spanner.dev.intern.nav.no
-    - name: KTOR_ENV
-      value: prod
     - name: SPLEIS_API_URL
       value: https://spleis-api.dev-fss-pub.nais.io

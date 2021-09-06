@@ -10,9 +10,6 @@ import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import io.ktor.application.*
 import io.ktor.sessions.*
 import io.ktor.util.pipeline.*
-import java.io.InputStream
-import java.net.HttpURLConnection
-import java.net.URL
 import java.time.ZoneId
 import java.util.*
 
@@ -24,17 +21,9 @@ internal val objectMapper = jacksonObjectMapper()
         indentObjectsWith(DefaultIndenter("  ", "\n"))
     })
 
-internal fun String.getJson(): JsonNode {
-    val (responseCode, responseBody) = this.fetchUrl()
-    if (responseCode >= 300 || responseBody == null) throw RuntimeException("got status $responseCode from ${this}.")
-    return jacksonObjectMapper().readTree(responseBody)
-}
 
-internal fun String.fetchUrl() = with(URL(this).openConnection() as HttpURLConnection) {
-    requestMethod = "GET"
-    val stream: InputStream? = if (responseCode < 300) this.inputStream else this.errorStream
-    responseCode to stream?.bufferedReader()?.readText()
-}
+
+
 
 internal fun Date.toLocalDateTime() = toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime()
 

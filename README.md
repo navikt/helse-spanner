@@ -1,4 +1,5 @@
-# Spanner
+
+# 🪣 Spanner 🪣
 
 ## Beskrivelse
 Parser og viser spleis json på en mer oversiktlig måte

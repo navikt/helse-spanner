@@ -2,7 +2,6 @@ package no.nav.spanner
 
 import com.auth0.jwt.JWT
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
-import io.github.cdimascio.dotenv.Dotenv
 import io.ktor.client.*
 import io.ktor.client.engine.cio.*
 import io.ktor.client.features.json.*
@@ -30,12 +29,10 @@ class Spleis(private val azureAD: AzureAD, url: String = "http://spleis-api.tbd.
     private val url = URLBuilder(url).path("api", "person-json").build()
 
     companion object {
-        fun fromEnv(azureAD: AzureAD) = with(Dotenv.configure().ignoreIfMissing().load()) {
-            Spleis(
-                azureAD = azureAD,
-                url = get("SPLEIS_API_URL"),
-            )
-        }
+        fun from(spannerConfig: Config, azureAD: AzureAD) = Spleis(
+            azureAD = azureAD,
+            url = spannerConfig.spleisUrl,
+        )
     }
 
     override suspend fun person(id: String, idType: IdType, accessToken: String): String {

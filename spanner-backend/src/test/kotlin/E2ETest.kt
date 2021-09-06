@@ -10,16 +10,13 @@ import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
 import io.ktor.server.testing.*
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 import no.nav.security.mock.oauth2.MockOAuth2Server
 import no.nav.security.mock.oauth2.token.DefaultOAuth2TokenCallback
-import org.junit.Ignore
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeAll
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 class E2ETest {
@@ -46,7 +43,7 @@ class E2ETest {
         val authResponse = runBlocking { httpClient.get<HttpResponse>(loginLocation).receive<HttpResponse>() }
         assertEquals(HttpStatusCode.Found, authResponse.status)
         val authLocation = authResponse.headers["location"]!!
-        val callbackResponse = handleRequest(HttpMethod.Get, authLocation.removePrefix("http://localhost")).response
+        handleRequest(HttpMethod.Get, authLocation.removePrefix("http://localhost")).response
     }
 
     private fun TestApplicationEngine.expectRedirect(url: String): String {
@@ -59,7 +56,7 @@ class E2ETest {
     fun login() {
 
         withTestApplication({
-            configuredModule(spleis, azureADConfig, EnvType.LOCAL)
+            spanner(spleis, azureADConfig, true)
         }) {
             cookiesSession {
                 handleRequest(HttpMethod.Get, "/") { }
@@ -79,7 +76,7 @@ class E2ETest {
     fun `respond with redirect on no session`() {
 
         withTestApplication({
-            configuredModule(spleis, azureADConfig, EnvType.LOCAL)
+            spanner(spleis, azureADConfig, true)
         }) {
             handleRequest(HttpMethod.Get, "/api/person/") {
                 this.addHeader(IdType.FNR.header, "12345678910")
@@ -97,7 +94,7 @@ class E2ETest {
             )
         )
         withTestApplication({
-            configuredModule(spleis, azureADConfig, EnvType.LOCAL)
+            spanner(spleis, azureADConfig, true)
         }) {
             cookiesSession {
                 login()
@@ -124,7 +121,7 @@ class E2ETest {
             )
         )
         withTestApplication({
-            configuredModule(spleis, azureADConfig, EnvType.LOCAL)
+            spanner(spleis, azureADConfig, true)
         }) {
             cookiesSession {
                 login()
@@ -138,11 +135,10 @@ class E2ETest {
         }
     }
 
-    @Disabled
     @Test
     fun `valid json error message response`() {
         withTestApplication({
-            configuredModule(spleis, azureADConfig, EnvType.LOCAL)
+            spanner(spleis, azureADConfig, true)
         }) {
             cookiesSession {
                 login()
