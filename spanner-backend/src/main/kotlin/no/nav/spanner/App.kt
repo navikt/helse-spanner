@@ -7,12 +7,14 @@ import com.natpryce.konfig.overriding
 import io.ktor.server.cio.*
 import io.ktor.server.engine.*
 import org.slf4j.LoggerFactory
+import java.io.File
 
 
 val logg = Log.logger("Spanner")
 
 fun main() {
     val configProps = ConfigurationProperties.systemProperties() overriding
+            ConfigurationProperties.fromOptionalFile(File(".env")) overriding
             EnvironmentVariables();
 
     val spannerConfig = Config.from(configProps)
