@@ -13,8 +13,8 @@ val logg = Log.logger("Spanner")
 
 fun main() {
     val configProps = ConfigurationProperties.systemProperties() overriding
-            EnvironmentVariables() overriding
-            ConfigurationProperties.fromResource(".env");
+            EnvironmentVariables();
+
     val spannerConfig = Config.from(configProps)
     logg
         .åpent("Spanner config", spannerConfig)
