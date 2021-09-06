@@ -15,12 +15,12 @@ class AzureADConfig(
     val clientId: String,
     val clientSecret: String,
     val spleisClientId: String,
-    autorhizationUrl: String? = null
+    authorizationUrl: String? = null
 ) {
     private val discovered = discoveryUrl.discover()
     val tokenEndpoint = discovered["token_endpoint"]?.textValue()
         ?: throw RuntimeException("Unable to discover token endpoint")
-    val authorizationEndpoint = autorhizationUrl ?: discovered["authorization_endpoint"]?.textValue()
+    val authorizationEndpoint = authorizationUrl ?: discovered["authorization_endpoint"]?.textValue()
     ?: throw RuntimeException("Unable to discover authorization endpoint")
 
     companion object {
@@ -29,7 +29,7 @@ class AzureADConfig(
             clientId = config[Key("AZURE_APP_CLIENT_ID", stringType)],
             clientSecret = config[Key("AZURE_APP_CLIENT_SECRET", stringType)],
             spleisClientId = config[Key("SPLEIS_CLIENT_ID", stringType)],
-            autorhizationUrl = config[Key("AUTHORIZATION_URL", stringType)],
+            authorizationUrl = config.getOrNull(Key("AUTHORIZATION_URL", stringType)),
         )
     }
 }
