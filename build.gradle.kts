@@ -1,8 +1,13 @@
+val ktorVersion = "1.6.2"
+
 plugins {
-    kotlin("multiplatform") version "1.5.21" apply false
+    kotlin("multiplatform") version "1.5.30" apply false
 }
 
 subprojects {
+    ext {
+        set("ktorVersion", ktorVersion)
+    }
     repositories {
         mavenCentral()
         maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")

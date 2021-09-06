@@ -1,14 +1,13 @@
 import java.nio.file.Paths
 
-val ktorVersion = "1.6.3"
 val jacksonVersion = "2.12.5"
 val junitJupiterVersion = "5.7.2"
+val ktorVersion = "1.6.3"
 val tokenValidatorVersion = "1.3.8"
 
 plugins {
     kotlin("jvm")
 }
-
 
 dependencies {
     implementation(project(":spanner-common"))
@@ -62,8 +61,6 @@ tasks {
             events("passed", "skipped", "failed")
         }
     }
-
-
 
     jar {
         mustRunAfter(clean, ":spanner-frontend:jsBrowserProductionWebpack")
