@@ -35,7 +35,6 @@ fun main() {
 
         connector {
             port = spannerConfig.port
-            host = spannerConfig.host
         }
     }).start(true)
 }
