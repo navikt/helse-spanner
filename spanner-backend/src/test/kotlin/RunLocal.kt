@@ -1,5 +1,7 @@
 package no.nav.spanner
 
+import io.ktor.application.*
+import io.ktor.features.*
 import io.ktor.server.cio.*
 import io.ktor.server.engine.*
 import no.nav.security.mock.oauth2.MockOAuth2Server
@@ -27,7 +29,7 @@ fun startLocal() {
         true,
         8080,
         "0.0.0.0",
-    "not is use"
+        "not is use"
     )
 
     val spleis = LokaleKjenninger
@@ -37,6 +39,9 @@ fun startLocal() {
         developmentMode = spannerConfig.development
 
         module {
+            install(CORS) {
+                this.anyHost()
+            }
             spanner(spleis, adConfig, spannerConfig.development)
         }
 
