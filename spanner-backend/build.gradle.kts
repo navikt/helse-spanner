@@ -64,6 +64,7 @@ tasks {
 
     jar {
         mustRunAfter(clean, ":spanner-frontend:jsBrowserProductionWebpack")
+        mustRunAfter(clean, ":frontend:npm_run_build")
         //mustRunAfter(clean, ":spanner-react:browserProductionWebpack")
 
         archiveFileName.set("app.jar")
@@ -78,6 +79,16 @@ tasks {
         from({ Paths.get(project(":spanner-frontend").buildDir.path, "distributions") }) {
             //from({ Paths.get(project(":spanner-react").buildDir.path, "distributions") }) {
             into("static")
+        }
+
+        from({ Paths.get(project(":frontend").buildDir.path) }) {
+            //from({ Paths.get(project(":spanner-react").buildDir.path, "distributions") }) {
+            into("static/react")
+        }
+
+        from({ Paths.get(project(":frontend").buildDir.path, "assets") }) {
+            //from({ Paths.get(project(":spanner-react").buildDir.path, "distributions") }) {
+            into("static/assets")
         }
 
         doLast {

@@ -6,4 +6,4 @@ pluginManagement {
         maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
     }
 }
-include("spanner-common", "spanner-frontend", "spanner-react", "spanner-backend")
+include("spanner-common", "spanner-frontend", "frontend", "spanner-backend")
