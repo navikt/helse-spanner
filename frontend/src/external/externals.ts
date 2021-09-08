@@ -1,10 +1,10 @@
-import {Backend} from "./backend";
-import {restBackend} from "./restBackend";
+import { Backend } from './backend'
+import { restBackend } from './restBackend'
 
 export type Externals = {
-    backend: Backend
+  backend: Backend
 }
 
 export let externals = {
-    backend: restBackend
+  backend: restBackend,
 }

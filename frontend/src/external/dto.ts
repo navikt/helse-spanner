@@ -1,3 +1,3 @@
 export type PersonDto = {
-    aktørId: String
+  aktørId: String
 }
