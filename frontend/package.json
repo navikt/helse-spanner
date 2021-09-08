@@ -4,7 +4,16 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "prepare": "cd .. && npx husky install frontend/.husky"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,css,json,md}": [
+      "prettier --write"
+    ],
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix --rule react-hooks/exhaustive-deps:off"
+    ]
   },
   "dependencies": {
     "prettier": "^2.3.2",
