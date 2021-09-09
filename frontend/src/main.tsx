@@ -22,12 +22,3 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 )
-
-export const TestApp = () =>
-    <React.StrictMode>
-        <BackendContext.Provider value={hardCodedBackend}>
-            <QueryClientProvider client={queryClient}>
-                <App />
-            </QueryClientProvider>
-        </BackendContext.Provider>
-    </React.StrictMode>
