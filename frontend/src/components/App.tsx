@@ -1,16 +1,20 @@
 import React from 'react'
-import './App.css'
 import {Søk} from './Søk'
 import {Person} from './Person'
+import {Header} from "./Header";
+import styles from "./App.module.css";
+import classNames from "classnames";
 
 export const App = React.memo(() => {
     const [aktørId, setAktørId] = React.useState<string | undefined>(undefined)
     return (
         <div className="App">
-            <header className="App-header">
+            <Header>
                 <Søk setAktørId={setAktørId}/>
+            </Header>
+            <div className={classNames(styles.App)}>
                 {aktørId && <Person aktørId={aktørId}/>}
-            </header>
+            </div>
         </div>
     )
 })
