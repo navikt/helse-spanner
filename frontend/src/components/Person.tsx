@@ -1,8 +1,8 @@
 import React from 'react'
-import {PersonDto} from './external/dto'
+import {PersonDto} from '../external/dto'
 import {useQuery} from 'react-query'
-import {useBackend} from './external/backend'
-import * as Utils from './Utils'
+import {useBackend} from '../external/backend'
+import * as Utils from '../utils'
 import {PersonVisning} from "./PersonVisning";
 
 export type FetchPersonProps = {

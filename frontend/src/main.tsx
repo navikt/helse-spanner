@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
-import { App } from './App'
+import { App } from './components/App'
 import { Environment } from './external/environment'
 import { hardCodedBackend } from './external/jsonBackend'
 import { restBackend } from './external/restBackend'

@@ -1,10 +1,10 @@
 import React from "react";
 import {Backend, BackendContext} from "./external/backend";
 import {QueryClient, QueryClientProvider} from "react-query";
-import {App} from "./App";
+import {App} from "./components/App";
 import {PersonDto} from "./external/dto";
 import TestingLibrary from '@testing-library/react';
-import fn = jest.fn;
+
 
 const queryClient = new QueryClient()
 

@@ -1,5 +1,5 @@
 import { PersonDto } from './dto'
-import * as Utils from '../Utils'
+import * as Utils from '../utils'
 
 export type Backend = {
   personForFnr: (fnr: string) => Promise<PersonDto>

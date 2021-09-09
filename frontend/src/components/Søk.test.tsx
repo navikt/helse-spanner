@@ -1,7 +1,7 @@
 import React from 'react'
 import UserEvent from '@testing-library/user-event'
-import {testApp} from './TestApp'
-import {createTestPerson} from "./testData";
+import {testApp} from '../TestApp'
+import {createTestPerson} from "../testData";
 
 test('bruker søker opp en person', async () => {
   const testRender = testApp([createTestPerson()])
