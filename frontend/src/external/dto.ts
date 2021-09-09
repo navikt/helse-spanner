@@ -1,3 +1,4 @@
 export type PersonDto = {
-  aktørId: String
+  aktørId: string
+  fødselsnummer: string
 }

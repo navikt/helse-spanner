@@ -1,12 +1,11 @@
 import React from 'react'
-import TestingLibrary from '@testing-library/react'
 import UserEvent from '@testing-library/user-event'
-import { TestApp } from './TestApp'
+import {testApp} from './TestApp'
+import {createTestPerson} from "./testData";
 
 test('bruker søker opp en person', async () => {
-
-  const testRender = TestingLibrary.render(<TestApp />)
-  UserEvent.type(testRender.getByTestId('søkefelt'), 'banan')
+  const testRender = testApp([createTestPerson()])
+  UserEvent.type(testRender.getByTestId('søkefelt'), '42')
   UserEvent.click(testRender.getByTestId('søkeknapp'))
   await testRender.findByTestId('personTittel')
   const title = testRender.getByTestId('personTittel').textContent

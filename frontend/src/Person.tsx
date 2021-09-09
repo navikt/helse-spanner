@@ -15,7 +15,7 @@ export const usePerson = () => Utils.useContext(PersonContext)
 export const Person = React.memo((props: FetchPersonProps) => {
   const backend = useBackend()
   const { isSuccess, isLoading, isError, data } = useQuery(['person', props.aktørId], () =>
-    backend.personForAktørId(props.aktørId)
+     backend.personForAktørId(props.aktørId)
   )
   if (isSuccess) {
     return <PersonContext.Provider value={data}>

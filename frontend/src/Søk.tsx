@@ -7,7 +7,6 @@ export type SøkProps = {
 export const Søk = React.memo((props: SøkProps) => {
   const [søketekst, setSøketekst] = React.useState('')
   const sendSøk = () => {
-    console.log("Aksjon!", søketekst)
     if (søketekst.trim() === '') {
       props.setAktørId(undefined)
     } else {

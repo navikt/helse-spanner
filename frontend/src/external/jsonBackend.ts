@@ -2,10 +2,10 @@ import { Backend } from './backend'
 import { PersonDto } from './dto'
 
 export let hardCodedBackend: Backend = {
-  personForAktørId(aktørId: String): Promise<PersonDto> {
+  personForAktørId(aktørId: string): Promise<PersonDto> {
     return Promise.resolve(jsonPerson)
   },
-  personForFnr(fnr: String): Promise<PersonDto> {
+  personForFnr(fnr: string): Promise<PersonDto> {
     return Promise.resolve(jsonPerson)
   },
 }
