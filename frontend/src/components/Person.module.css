@@ -1,5 +1,16 @@
 .FeilMelding {
     border: 2px red dotted;
     color: black;
+    font-size: x-large;
+    padding: 1em;
+}
+
+.FeilIkon {
+    font-size: xxx-large;
+}
+
+.Spinner {
+    color: black;
+    font-size: x-large;
     padding: 1em;
 }

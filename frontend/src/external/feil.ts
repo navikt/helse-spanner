@@ -2,6 +2,7 @@ import { FeilDto } from './dto'
 
 export class backendFeil extends Error {
   feilId: string | undefined
+  status: number
 
   constructor(status: number, feilDto?: FeilDto) {
     !!feilDto
@@ -9,6 +10,7 @@ export class backendFeil extends Error {
       : super(`Feil fra server: ${status}`)
     this.feilId = feilDto?.error_id
     this.name = 'backendFeil'
+    this.status = status
   }
 }
 
