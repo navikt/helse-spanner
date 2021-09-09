@@ -7,6 +7,7 @@ export type SøkProps = {
 export const Søk = React.memo((props: SøkProps) => {
   const [søketekst, setSøketekst] = React.useState('')
   const sendSøk = () => {
+    console.log("Aksjon!", søketekst)
     if (søketekst.trim() === '') {
       props.setAktørId(undefined)
     } else {
@@ -16,8 +17,8 @@ export const Søk = React.memo((props: SøkProps) => {
 
   return (
     <>
-      <input value={søketekst} onChange={(e) => setSøketekst(e.target.value)} />
-      <button onClick={sendSøk}>Søk</button>
+      <input value={søketekst} onChange={(e) => setSøketekst(e.target.value)} data-testid="søkefelt" />
+      <button onClick={sendSøk} data-testid="søkeknapp">Søk</button>
     </>
   )
 })
