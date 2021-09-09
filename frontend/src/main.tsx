@@ -7,8 +7,11 @@ import { hardCodedBackend } from './external/jsonBackend'
 import { restBackend } from './external/restBackend'
 import { BackendContext } from './external/backend'
 import {QueryClient, QueryClientProvider} from 'react-query'
+import {finnesIkke} from "./external/feil";
+import {testBackend} from "./external/testBackend";
 
 const backend = Environment.isDevelopment ? hardCodedBackend : restBackend
+//let backend = testBackend([], {"40": new finnesIkke})
 
 const queryClient = new QueryClient()
 
