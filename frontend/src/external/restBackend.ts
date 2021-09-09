@@ -1,5 +1,6 @@
 import { Backend } from './backend'
 import { PersonDto } from './dto'
+import { feilVedDårligRespons, wrapNnettverksFeil } from './feil'
 
 export const restBackend: Backend = {
   personForAktørId(aktørId: string): Promise<PersonDto> {
@@ -9,7 +10,10 @@ export const restBackend: Backend = {
         Accept: 'application/json',
         aktorId: `${aktørId}`,
       },
-    }).then((response) => response.json())
+    })
+      .catch(wrapNnettverksFeil)
+      .then(feilVedDårligRespons)
+      .then((response) => response.json())
   },
   personForFnr(fnr: string): Promise<PersonDto> {
     return fetch(`${baseUrl}/personer/`, {
@@ -18,7 +22,10 @@ export const restBackend: Backend = {
         Accept: 'application/json',
         fnr: `${fnr}`,
       },
-    }).then((response) => response.json())
+    })
+      .catch(wrapNnettverksFeil)
+      .then(feilVedDårligRespons)
+      .then((response) => response.json())
   },
 }
-const baseUrl = 'http://0.0.0.0:8080/api'
+const baseUrl = 'http://localhost:8080/api'

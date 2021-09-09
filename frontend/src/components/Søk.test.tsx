@@ -21,5 +21,5 @@ test('bruker søker opp en person som ikke finnes', async () => {
   await testRender.findByTestId('feil-melding')
   const melding = testRender.getByTestId('feil-melding').textContent
 
-  expect(melding).toContain('Fant ikke')
+  expect(melding).toContain('Feil fra server')
 })

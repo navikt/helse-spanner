@@ -30,7 +30,6 @@ export const Person = React.memo((props: FetchPersonProps) => {
             </p>
         </div>)
     } else if (isLoading) {
-        console.log("Laster person....")
         return (<div >
             <p>
                 Laster...
