@@ -24,7 +24,7 @@ function feilmelding(container: HTMLElement = document.body) {
 }
 
 function person(container: HTMLElement = document.body) {
-  return testingLibrary.getByTestId(container,"personTittel");
+  return testingLibrary.getByTestId(container,"person-header-fnr");
 }
 
 function respons(container: HTMLElement = document.body) {

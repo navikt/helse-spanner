@@ -1,0 +1,43 @@
+
+.PersonHeader {
+    display: inline-block;
+    border: 1px solid black;
+    padding: 4px;
+    margin-bottom: 1em;
+}
+
+.PersonHeader h1 {
+    display: inline;
+    font-size: medium;
+}
+
+.PersonHeader span {
+    margin-left: 1em;
+}
+
+.PersonHeader dl div {
+    display: inline-block;
+}
+
+.PersonHeader dl {
+    display:inline;
+}
+
+.PersonHeader dt {
+    margin-inline-start: 1em;
+    display:inline-block;
+}
+
+.PersonHeader dd {
+    margin-inline-start: 5px;
+    display:inline-block;
+}
+
+.PersonHeader dt::after {
+    content: ": ";
+}
+
+.PersonHeader dd p {
+    margin: 0;
+    padding: 0;
+}

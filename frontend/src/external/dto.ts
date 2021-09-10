@@ -1,6 +1,7 @@
 export type PersonDto = {
   aktørId: string
   fødselsnummer: string
+  opprettet: string
 }
 
 export type FeilDto = {

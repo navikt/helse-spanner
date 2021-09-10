@@ -1,6 +1,6 @@
 import React from 'react'
 import {Søk} from './Søk'
-import {Person} from './Person'
+import {PersonData} from './PersonData'
 import {Header} from "./Header";
 import styles from "./App.module.css";
 import classNames from "classnames";
@@ -13,7 +13,7 @@ export const App = React.memo(() => {
                 <Søk setAktørId={setAktørId}/>
             </Header>
             <div className={classNames(styles.App)}>
-                {aktørId && <Person aktørId={aktørId}/>}
+                {aktørId && <PersonData aktørId={aktørId}/>}
             </div>
         </div>
     )

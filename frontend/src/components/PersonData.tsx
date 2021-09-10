@@ -3,10 +3,10 @@ import {PersonDto} from '../external/dto'
 import {useQuery} from 'react-query'
 import {useBackend} from '../external/backend'
 import * as Utils from '../utils'
-import {PersonVisning} from "./PersonVisning";
 import classNames from "classnames";
 import styles from "./Person.module.css";
 import {backendFeil, finnesIkke, httpFeil} from "../external/feil";
+import {PersonView} from "./PersonView";
 
 export type FetchPersonProps = {
     aktørId: string
@@ -44,7 +44,7 @@ const Spinner = () => (
     </div>
 )
 
-export const Person = React.memo((props: FetchPersonProps) => {
+export const PersonData = React.memo((props: FetchPersonProps) => {
     const backend = useBackend()
     const {isLoading, isError, data, error} = useQuery(['person', props.aktørId], () =>
         backend.personForAktørId(props.aktørId)
@@ -55,6 +55,6 @@ export const Person = React.memo((props: FetchPersonProps) => {
         return <Feilmelding feil={error}/>
     }
         return <PersonContext.Provider value={data}>
-            <PersonVisning/>
+            <PersonView/>
         </PersonContext.Provider>
 })
