@@ -3,23 +3,48 @@ import UserEvent from '@testing-library/user-event'
 import {testApp} from '../testApp'
 import {createTestPerson} from "../testData";
 import {finnesIkke} from "../external/feil";
+import testingLibrary, {getByTestId} from '@testing-library/react';
+
+
+function søk(text: string = "42") {
+  UserEvent.type(søkefelt(), text)
+  UserEvent.click(søkeknapp())
+}
+
+function søkefelt(container: HTMLElement = document.body) {
+  return testingLibrary.getByTestId(container,"søkefelt");
+}
+
+function søkeknapp(container: HTMLElement = document.body) {
+  return testingLibrary.getByTestId(container,"søkeknapp");
+}
+
+function feilmelding(container: HTMLElement = document.body) {
+  return testingLibrary.getByTestId(container,"feil-melding");
+}
+
+function person(container: HTMLElement = document.body) {
+  return testingLibrary.getByTestId(container,"personTittel");
+}
+
+function respons(container: HTMLElement = document.body) {
+  return testingLibrary.waitForElementToBeRemoved( () => getByTestId(container, "spinner"));
+}
+
+
 
 test('bruker søker opp en person', async () => {
-  const testRender = testApp([createTestPerson()])
-  UserEvent.type(testRender.getByTestId('søkefelt'), '42')
-  UserEvent.click(testRender.getByTestId('søkeknapp'))
-  await testRender.findByTestId('personTittel')
-  const title = testRender.getByTestId('personTittel').textContent
-
-  expect(title).toEqual('42')
+  testApp([createTestPerson()]);
+  søk('42')
+  await respons()
+  expect(person().textContent).toEqual('42')
 })
 
-test('bruker søker opp en person som ikke finnes', async () => {
-  const testRender = testApp([], {"40": new finnesIkke})
-  UserEvent.type(testRender.getByTestId('søkefelt'), '40')
-  UserEvent.click(testRender.getByTestId('søkeknapp'))
-  await testRender.findByTestId('feil-melding')
-  const melding = testRender.getByTestId('feil-melding').textContent
 
-  expect(melding).toContain('Personen finnes ikke i spleis')
+test('bruker søker opp en person som ikke finnes', async () => {
+  testApp([], {"40": new finnesIkke});
+  søk("40")
+  await respons()
+  expect(feilmelding().textContent)
+      .toContain('Personen finnes ikke i spleis')
 })

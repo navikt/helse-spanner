@@ -37,7 +37,7 @@ const Feilmelding = ({feil} : {feil: any}) => {
     </div>)
 }
 const Spinner = () => (
-    <div className={styles.Spinner}>
+    <div className={styles.Spinner} data-testid="spinner">
         <p>
             Laster...
         </p>
