@@ -1,23 +1,22 @@
-import {PersonDto} from "./dto";
-import {Backend} from "./backend";
-
+import { PersonDto } from './dto'
+import { Backend } from './backend'
 
 export let testBackend = (testPersoner: PersonDto[] = [], errorPersoner: Record<string, Error> = {}): Backend => {
-    let aktorPersoner: Record<string, PersonDto> = testPersoner.reduce( (old, person) => {
+    let aktorPersoner: Record<string, PersonDto> = testPersoner.reduce((old, person) => {
         return {
             ...old,
             [person.aktørId]: person
         }
     }, {})
 
-    let fnrPersoner: Record<string, PersonDto> = testPersoner.reduce( (old, person) => {
+    let fnrPersoner: Record<string, PersonDto> = testPersoner.reduce((old, person) => {
         return {
             ...old,
             [person.fødselsnummer]: person
         }
     }, {})
 
-    return  {
+    return {
         personForAktørId(aktørId: string): Promise<PersonDto> {
             let person = aktorPersoner[aktørId]
             if (!person) {
@@ -40,5 +39,6 @@ export let testBackend = (testPersoner: PersonDto[] = [], errorPersoner: Record<
                 return Promise.resolve(person)
             }
             return Promise.resolve(person)
-        },
-    }}
+        }
+    }
+}

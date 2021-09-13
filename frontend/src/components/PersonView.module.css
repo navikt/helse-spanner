@@ -4,7 +4,7 @@
     padding: 2px;
     grid-template-columns: 25% 75%;
     grid-template-areas:
-            "header header"
-            "nav content";
-    background-color:  	#E8E8E8;
+        'header header'
+        'nav content';
+    background-color: #e8e8e8;
 }

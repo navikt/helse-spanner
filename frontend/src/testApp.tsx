@@ -1,31 +1,29 @@
-import React from "react";
-import {Backend, BackendContext} from "./external/backend";
-import query from "react-query";
-import {App} from "./components/App";
-import {PersonDto} from "./external/dto";
-import testingLibrary from '@testing-library/react';
-import {testBackend} from "./external/testBackend";
-
+import React from 'react'
+import { Backend, BackendContext } from './external/backend'
+import query from 'react-query'
+import { App } from './components/App'
+import { PersonDto } from './external/dto'
+import testingLibrary from '@testing-library/react'
+import { testBackend } from './external/testBackend'
 
 const queryClient = new query.QueryClient({
     defaultOptions: {
         queries: {
-            retryDelay: 0,
-        },
-
-    },
+            retryDelay: 0
+        }
+    }
 })
 query.setLogger({
     log: () => {},
     warn: () => {},
-    error: () => {},
-});
+    error: () => {}
+})
 
 type TestAppProps = {
     backend: Backend
 }
 
-export const TestApp = (props: TestAppProps) =>
+export const TestApp = (props: TestAppProps) => (
     <React.StrictMode>
         <BackendContext.Provider value={props.backend}>
             <query.QueryClientProvider client={queryClient}>
@@ -33,7 +31,7 @@ export const TestApp = (props: TestAppProps) =>
             </query.QueryClientProvider>
         </BackendContext.Provider>
     </React.StrictMode>
-
+)
 
 export const testApp = (testPersoner: PersonDto[] = [], errorPersoner: Record<string, Error> = {}) => {
     let backend = testBackend(testPersoner, errorPersoner)
