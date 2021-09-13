@@ -30,7 +30,7 @@ const useToggleHighlighted = () => {
     const id = useId()
     return React.useMemo(
         () => () => {
-            if (isHighlighted) setHighlight(undefined)
+            if (isHighlighted) setHighlight({})
             else setHighlight(id)
         },
         [setHighlight, id, isHighlighted]
