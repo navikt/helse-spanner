@@ -25,3 +25,8 @@ export const useContext = <T>(context: React.Context<T | undefined>) => {
     return ret
 }
 
+export type Highlight = {
+    arbeidsgiver?: string
+    vedtaksperiode?: string
+}
+

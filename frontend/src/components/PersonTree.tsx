@@ -2,6 +2,8 @@ import classNames from "classnames";
 import styles from "./PersonTree.module.css";
 import React from "react";
 import {ArbeidsgiverContext, useArbeidsgiver, usePerson, useVedtak, VedtakContext} from "../contexts";
+import {useRecoilState} from "recoil";
+import {highligthState} from "../state";
 
 
 export function PersonTree() {
@@ -21,8 +23,14 @@ export function PersonTree() {
 
 function ArbeidsgiverNode() {
     const arbeidsgiver = useArbeidsgiver()
+    const [_, setHighlight] = useRecoilState(highligthState)
+
+    const onClick = () => {
+        setHighlight(arbeidsgiver.organisasjonsnummer);
+    };
+
     return (
-        <div className={classNames(styles.ArbeidsgiverNode)} >
+        <div className={classNames(styles.ArbeidsgiverNode)}  onClick={onClick}>
             {arbeidsgiver.organisasjonsnummer}
             {
                 arbeidsgiver.vedtaksperioder.map(vedtak => (
