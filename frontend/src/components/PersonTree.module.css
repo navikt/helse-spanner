@@ -1,0 +1,18 @@
+
+.PersonTree {
+    border: black solid 1px;
+    min-height: 10em;
+    max-width: 20em;
+}
+
+.PersonTree .rc-tree-child-tree {
+    display: block;
+}
+.PersonTree .node-motion {
+    transition: all .3s;
+    overflow-y: hidden;
+}
+
+.ArbeidsgiverNode {
+    border: black solid 1px;
+}

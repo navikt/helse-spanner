@@ -1,8 +1,8 @@
 import React from "react";
-import {usePerson} from "./PersonData";
 import parseISO from 'date-fns/parseISO';
 import classNames from "classnames";
 import styles from "./PersonHeader.module.css";
+import {usePerson} from "../contexts";
 
 export function PersonHeader() {
     const person = usePerson()

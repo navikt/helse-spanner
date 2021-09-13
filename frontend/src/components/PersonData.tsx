@@ -1,19 +1,15 @@
 import React from 'react'
-import {PersonDto} from '../external/dto'
 import {useQuery} from 'react-query'
 import {useBackend} from '../external/backend'
-import * as Utils from '../utils'
 import classNames from "classnames";
 import styles from "./Person.module.css";
 import {backendFeil, finnesIkke, httpFeil} from "../external/feil";
 import {PersonView} from "./PersonView";
+import {PersonContext} from "../contexts";
 
 export type FetchPersonProps = {
     aktørId: string
 }
-
-export const PersonContext = Utils.createContext<PersonDto>()
-export const usePerson = () => Utils.useContext(PersonContext)
 
 
 const Feilmelding = ({feil} : {feil: any}) => {
