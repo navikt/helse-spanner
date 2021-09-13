@@ -2,7 +2,7 @@ import React from 'react'
 import parseISO from 'date-fns/parseISO'
 import classNames from 'classnames'
 import styles from './PersonHeader.module.css'
-import { usePerson } from '../contexts'
+import { usePerson } from '../../state/contexts'
 
 export const PersonHeader = React.memo(() => {
     const person = usePerson()

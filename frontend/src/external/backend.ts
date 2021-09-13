@@ -1,5 +1,5 @@
-import { PersonDto } from './dto'
-import { createContext, useContext } from '../contexts'
+import { PersonDto } from '../state/dto'
+import { createContext, useContext } from '../state/contexts'
 
 export type Backend = {
     personForFnr: (fnr: string) => Promise<PersonDto>

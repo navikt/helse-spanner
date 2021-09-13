@@ -1,11 +1,11 @@
 import React from 'react'
 import { useQuery } from 'react-query'
-import { useBackend } from '../external/backend'
+import { useBackend } from '../../external/backend'
 import classNames from 'classnames'
 import styles from './Person.module.css'
-import { backendFeil, finnesIkke, httpFeil } from '../external/feil'
+import { backendFeil, finnesIkke, httpFeil } from '../../external/feil'
 import { PersonView } from './PersonView'
-import { PersonContext } from '../contexts'
+import { PersonContext } from '../../state/contexts'
 
 export type FetchPersonProps = {
     aktørId: string

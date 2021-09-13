@@ -1,4 +1,4 @@
-import { PersonDto } from './dto'
+import { PersonDto } from '../state/dto'
 import { Backend } from './backend'
 
 export let testBackend = (testPersoner: PersonDto[] = [], errorPersoner: Record<string, Error> = {}): Backend => {

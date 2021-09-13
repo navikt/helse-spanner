@@ -1,5 +1,5 @@
 import { Backend } from './backend'
-import { PersonDto } from './dto'
+import { PersonDto } from '../state/dto'
 import { feilVedDårligRespons, wrapNnettverksFeil } from './feil'
 
 export const restBackend: Backend = {

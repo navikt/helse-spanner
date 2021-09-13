@@ -1,4 +1,4 @@
-import { PersonDto, ArbeidsgiverDto, VedtakDto } from './external/dto'
+import { PersonDto, ArbeidsgiverDto, VedtakDto } from './dto'
 import React, { useMemo } from 'react'
 
 //For å slippe defaultvalue til context.

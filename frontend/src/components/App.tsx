@@ -1,7 +1,7 @@
 import React from 'react'
-import { Søk } from './Søk'
-import { PersonData } from './PersonData'
-import { Header } from './Header'
+import { Søk } from './søk/Søk'
+import { PersonData } from './person/PersonData'
+import { Header } from './søk/Header'
 import styles from './App.module.css'
 import classNames from 'classnames'
 

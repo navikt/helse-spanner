@@ -1,4 +1,4 @@
-import { FeilDto } from './dto'
+import { FeilDto } from '../state/dto'
 
 export class backendFeil extends Error {
     feilId: string | undefined

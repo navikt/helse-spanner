@@ -1,9 +1,9 @@
 import classNames from 'classnames'
 import styles from './PersonTree.module.css'
 import React from 'react'
-import { ArbeidsgiverContext, idEqual, useArbeidsgiver, useId, usePerson, useVedtak, VedtakContext } from '../contexts'
+import { ArbeidsgiverContext, idEqual, useArbeidsgiver, useId, usePerson, useVedtak, VedtakContext } from '../../state/contexts'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
-import { highligthState } from '../state'
+import { highligthState } from '../../state/state'
 
 export const PersonTree = React.memo(() => {
     const person = usePerson()

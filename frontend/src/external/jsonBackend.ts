@@ -1,5 +1,5 @@
 import { Backend } from './backend'
-import { PersonDto } from './dto'
+import { PersonDto } from '../state/dto'
 
 export let hardCodedBackend: Backend = {
     personForAktørId(ignore: string): Promise<PersonDto> {

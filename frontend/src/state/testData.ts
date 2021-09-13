@@ -1,4 +1,4 @@
-import { ArbeidsgiverDto, PersonDto, VedtakDto } from './external/dto'
+import { ArbeidsgiverDto, PersonDto, VedtakDto } from './dto'
 
 let next_id = 1
 

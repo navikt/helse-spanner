@@ -1,8 +1,8 @@
 import React from 'react'
 import UserEvent from '@testing-library/user-event'
-import { testApp } from '../testApp'
-import { createTestPerson } from '../testData'
-import { finnesIkke } from '../external/feil'
+import { testApp } from '../../testApp'
+import { createTestPerson } from '../../state/testData'
+import { finnesIkke } from '../../external/feil'
 import testingLibrary, { getByTestId } from '@testing-library/react'
 
 function søk(text: string = '42') {
