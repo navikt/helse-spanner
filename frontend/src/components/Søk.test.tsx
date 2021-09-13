@@ -31,10 +31,11 @@ function respons(container: HTMLElement = document.body) {
 }
 
 test('bruker søker opp en person', async () => {
-    testApp([createTestPerson()])
-    søk('42')
+    const per = createTestPerson();
+    testApp([per])
+    søk(per.aktørId)
     await respons()
-    expect(person().textContent).toEqual('42')
+    expect(person().textContent).toEqual(per.fødselsnummer)
 })
 
 test('bruker søker opp en person som ikke finnes', async () => {

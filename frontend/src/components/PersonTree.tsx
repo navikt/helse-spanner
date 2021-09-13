@@ -10,7 +10,7 @@ export const PersonTree = React.memo(() => {
     return (
         <div className={classNames(styles.PersonTree)}>
             {person.arbeidsgivere.map(arbeidsgiver => (
-                <ArbeidsgiverContext.Provider value={arbeidsgiver} key={arbeidsgiver.organisasjonsnummer}>
+                <ArbeidsgiverContext.Provider value={arbeidsgiver} key={arbeidsgiver.id}>
                     <ArbeidsgiverNode />
                 </ArbeidsgiverContext.Provider>
             ))}

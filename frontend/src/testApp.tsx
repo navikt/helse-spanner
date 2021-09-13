@@ -5,18 +5,19 @@ import { App } from './components/App'
 import { PersonDto } from './external/dto'
 import testingLibrary from '@testing-library/react'
 import { testBackend } from './external/testBackend'
+import { RecoilRoot } from 'recoil'
 
 const queryClient = new query.QueryClient({
     defaultOptions: {
         queries: {
-            retryDelay: 0
-        }
-    }
+            retryDelay: 0,
+        },
+    },
 })
 query.setLogger({
     log: () => {},
     warn: () => {},
-    error: () => {}
+    error: () => {},
 })
 
 type TestAppProps = {
@@ -25,11 +26,13 @@ type TestAppProps = {
 
 export const TestApp = (props: TestAppProps) => (
     <React.StrictMode>
-        <BackendContext.Provider value={props.backend}>
-            <query.QueryClientProvider client={queryClient}>
-                <App />
-            </query.QueryClientProvider>
-        </BackendContext.Provider>
+        <RecoilRoot>
+            <BackendContext.Provider value={props.backend}>
+                <query.QueryClientProvider client={queryClient}>
+                    <App />
+                </query.QueryClientProvider>
+            </BackendContext.Provider>
+        </RecoilRoot>
     </React.StrictMode>
 )
 
