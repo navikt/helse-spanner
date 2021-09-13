@@ -4,7 +4,7 @@ import classNames from "classnames";
 import styles from "./PersonHeader.module.css";
 import {usePerson} from "../contexts";
 
-export function PersonHeader() {
+export const PersonHeader = React.memo(()=> {
     const person = usePerson()
     return (
         <div className={classNames(styles.PersonHeader)} >
@@ -18,4 +18,4 @@ export function PersonHeader() {
             </dl>
         </div>
     )
-}
+})

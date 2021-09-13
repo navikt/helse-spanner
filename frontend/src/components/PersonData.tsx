@@ -12,7 +12,7 @@ export type FetchPersonProps = {
 }
 
 
-const Feilmelding = ({feil} : {feil: any}) => {
+const Feilmelding = React.memo(({feil} : {feil: any}) => {
     let feiltekst, ikon
 
     if(feil instanceof httpFeil) {
@@ -31,14 +31,15 @@ const Feilmelding = ({feil} : {feil: any}) => {
     return (<div className={classNames(styles.FeilMelding)}  data-testid="feil-melding">
         <span className={styles.FeilIkon}>{ikon}</span>{feiltekst}
     </div>)
-}
-const Spinner = () => (
+})
+
+const Spinner = React.memo(() => (
     <div className={styles.Spinner} data-testid="spinner">
         <p>
             Laster...
         </p>
     </div>
-)
+))
 
 export const PersonData = React.memo((props: FetchPersonProps) => {
     const backend = useBackend()

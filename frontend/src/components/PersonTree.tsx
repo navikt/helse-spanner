@@ -6,7 +6,7 @@ import {useRecoilState} from "recoil";
 import {highligthState} from "../state";
 
 
-export function PersonTree() {
+export const PersonTree = React.memo(() => {
     const person = usePerson()
     return (
         <div className={classNames(styles.PersonTree)} >
@@ -19,11 +19,11 @@ export function PersonTree() {
             }
         </div>
     )
-}
+})
 
-function ArbeidsgiverNode() {
+const ArbeidsgiverNode = React.memo(() => {
     const arbeidsgiver = useArbeidsgiver()
-    const [_, setHighlight] = useRecoilState(highligthState)
+    const [ignore, setHighlight] = useRecoilState(highligthState)
 
     const onClick = () => {
         setHighlight(arbeidsgiver.organisasjonsnummer);
@@ -41,13 +41,13 @@ function ArbeidsgiverNode() {
             }
         </div>
     )
-}
+})
 
-function VedtaksNode() {
+const VedtaksNode = React.memo(() => {
     const vedtak = useVedtak()
     return (
         <div className={classNames(styles.ArbeidsgiverNode)} >
             {vedtak.fom} - {vedtak.tom}
         </div>
     )
-}
+})

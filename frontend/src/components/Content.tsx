@@ -4,7 +4,7 @@ import {useRecoilValue} from "recoil";
 import {highligthState} from "../state";
 import {usePerson} from "../contexts";
 
-export const Content = () => {
+export const Content = React.memo(() => {
     const person = usePerson()
     const highlight = useRecoilValue(highligthState)
 
@@ -14,4 +14,4 @@ export const Content = () => {
             <ReactJson src={highlight == '' ? person : person.arbeidsgivere[0] } collapsed={true}/>
         </div>
     )
-}
+})
