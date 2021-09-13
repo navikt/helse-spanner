@@ -1,5 +1,6 @@
 
 .PersonTree {
+    grid-area: nav;
     border: black solid 1px;
     min-height: 10em;
     max-width: 20em;
