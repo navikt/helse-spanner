@@ -17,3 +17,7 @@
 .ArbeidsgiverNode {
     border: black solid 1px;
 }
+
+.Highlighted {
+    background: blue;
+}
