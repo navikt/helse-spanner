@@ -12,7 +12,7 @@ export const PersonTree = React.memo(() => {
         <div className={classNames(styles.PersonTree)} >
             {
                 person.arbeidsgivere.map(arbeidsgiver => (
-                    <ArbeidsgiverContext.Provider value={arbeidsgiver}>
+                    <ArbeidsgiverContext.Provider value={arbeidsgiver} key={arbeidsgiver.organisasjonsnummer}>
                         <ArbeidsgiverNode />
                     </ArbeidsgiverContext.Provider>
                 ))
@@ -34,7 +34,7 @@ const ArbeidsgiverNode = React.memo(() => {
             {arbeidsgiver.organisasjonsnummer}
             {
                 arbeidsgiver.vedtaksperioder.map(vedtak => (
-                    <VedtakContext.Provider value={vedtak}>
+                    <VedtakContext.Provider value={vedtak} key={vedtak.id}>
                         <VedtaksNode />
                     </VedtakContext.Provider>
                 ))
