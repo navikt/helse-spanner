@@ -1,4 +1,8 @@
-let mode = import.meta?.env?.MODE;
+const viteMode = import.meta?.env?.MODE;
+const nodeMode = process?.env?.NODE_ENV
 export const Environment = {
-    isDevelopment: (mode && (mode === 'development')) ?? true
+    isDevelopment:
+        ((viteMode && (viteMode === 'development')) ||
+        (nodeMode && (nodeMode === 'test')))
+        ?? false
 }
