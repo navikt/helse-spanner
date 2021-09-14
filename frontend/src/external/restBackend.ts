@@ -1,10 +1,11 @@
 import { Backend } from './backend'
 import { PersonDto } from '../state/dto'
 import { feilVedDårligRespons, wrapNnettverksFeil } from './feil'
+import {Environment} from "./environment";
 
 export const restBackend: Backend = {
     personForAktørId(aktørId: string): Promise<PersonDto> {
-        return fetch(`${baseUrl}/personer/`, {
+        return fetch(`${baseUrl}/api/personer/`, {
             method: 'get',
             headers: {
                 Accept: 'application/json',
@@ -16,7 +17,7 @@ export const restBackend: Backend = {
             .then(response => response.json())
     },
     personForFnr(fnr: string): Promise<PersonDto> {
-        return fetch(`${baseUrl}/personer/`, {
+        return fetch(`${baseUrl}/api/personer/`, {
             method: 'get',
             headers: {
                 Accept: 'application/json',
@@ -28,4 +29,6 @@ export const restBackend: Backend = {
             .then(response => response.json())
     }
 }
-const baseUrl = 'http://localhost:8080/api'
+
+const baseUrl: string =
+    Environment.isDevelopment ? "http://localhost:8080" : "";
