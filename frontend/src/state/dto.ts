@@ -24,7 +24,7 @@ export type VedtakDto = {
     id: string
 }
 
-export type Aktivitet = {
+export interface Aktivitet {
     kontekster: number[]
     alvorlighetsgrad: string
     aktivitet?: string
@@ -32,11 +32,6 @@ export type Aktivitet = {
     detaljer: any
     tidsstempel: string
     behovtype?: string
-}
-
-export type Aktivitetslogg = {
-    aktiviteter: Aktivitet[]
-    kontekster: Kontekst[]
 }
 
 export type Kontekst = {
@@ -52,4 +47,9 @@ export type KontekstMap = {
     organisasjonsnummer?: string
     tilstand?: string
     utbetalingId?: string
+}
+
+export type Aktivitetslogg = {
+    aktiviteter: Aktivitet[]
+    kontekster: Kontekst[]
 }
