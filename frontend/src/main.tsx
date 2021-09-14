@@ -9,7 +9,7 @@ import { BackendContext } from './external/backend'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { RecoilRoot } from 'recoil'
 
-const backend = Environment.isDevelopment ? hardCodedBackend : restBackend
+const backend = Environment.isDevelopment ? hardCodedBackend : restBackend(false)
 // let backend = testBackend([], {"40": new finnesIkke})
 
 const queryClient = new QueryClient()

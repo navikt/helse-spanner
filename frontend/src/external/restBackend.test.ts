@@ -1,7 +1,7 @@
-import { restBackend } from './restBackend'
+import * as RestBackend from './restBackend'
 import fetchMock from 'fetch-mock'
 import { backendFeil, httpFeil } from './feil'
-
+const restBackend = RestBackend.restBackend (true)
 test('ok fra backend er ok', async () => {
     fetchMock.get('http://localhost:8080/api/personer/', { foo: 'bar' })
     expect(await restBackend.personForAktørId('foo')).toEqual({ foo: 'bar' })
