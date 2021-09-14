@@ -7,7 +7,7 @@ export const restBackend = (development: boolean): Backend => {
         development ? "http://localhost:8080" : "";
     return {
         personForAktørId(aktørId: string): Promise<PersonDto> {
-        return fetch(`${baseUrl}/api/personer/`, {
+        return fetch(`${baseUrl}/api/person/`, {
             method: 'get',
             headers: {
                 Accept: 'application/json',
@@ -19,7 +19,7 @@ export const restBackend = (development: boolean): Backend => {
             .then(response => response.json())
     },
         personForFnr(fnr: string): Promise<PersonDto> {
-        return fetch(`${baseUrl}/api/personer/`, {
+        return fetch(`${baseUrl}/api/person/`, {
             method: 'get',
             headers: {
                 Accept: 'application/json',

@@ -3,13 +3,13 @@ import fetchMock from 'fetch-mock'
 import { backendFeil, httpFeil } from './feil'
 const restBackend = RestBackend.restBackend (true)
 test('ok fra backend er ok', async () => {
-    fetchMock.get('http://localhost:8080/api/personer/', { foo: 'bar' })
+    fetchMock.get('http://localhost:8080/api/person/', { foo: 'bar' })
     expect(await restBackend.personForAktørId('foo')).toEqual({ foo: 'bar' })
     fetchMock.restore()
 })
 
 test('Feil fra backend kan legge ved feildto i body for mer detaljer', async () => {
-    fetchMock.get('http://localhost:8080/api/personer/', {
+    fetchMock.get('http://localhost:8080/api/person/', {
         status: 418,
         body: JSON.stringify({ error_id: 'FOO', description: 'Bad' })
     })
@@ -21,7 +21,7 @@ test('Feil fra backend kan legge ved feildto i body for mer detaljer', async () 
 })
 
 test('Feil fra backend uten gyldig feildto blir fortsatt backendfeil', async () => {
-    fetchMock.get('http://localhost:8080/api/personer/', {
+    fetchMock.get('http://localhost:8080/api/person/', {
         status: 418
     })
 
@@ -33,7 +33,7 @@ test('Feil fra backend uten gyldig feildto blir fortsatt backendfeil', async () 
 })
 
 test('Feil fra nettverksstacke reject gir httpError', async () => {
-    fetchMock.get('http://localhost:8080/api/personer/', {
+    fetchMock.get('http://localhost:8080/api/person/', {
         throws: Error('Connection refused')
     })
     let thrownError = await getHttpFeil(async () => restBackend.personForAktørId('foo'))
