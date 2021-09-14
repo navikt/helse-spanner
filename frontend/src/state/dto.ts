@@ -17,6 +17,7 @@ export type ArbeidsgiverDto = {
 }
 
 export type VedtakDto = {
+    tilstand: string;
     fom: string
     tom: string
     id: string

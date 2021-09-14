@@ -48,7 +48,7 @@ const ArbeidsgiverNode = React.memo(() => {
 
     return (
         <div className={classNames(styles.ArbeidsgiverNode)} onClick={stopPropagation}>
-            <p className={classNames(isHighlighted && styles.Highlighted)} onClick={setHighlight}>
+            <p className={classNames(isHighlighted && styles.Highlighted, styles.TreeText)} onClick={setHighlight}>
                 {arbeidsgiver.organisasjonsnummer}
             </p>
             {arbeidsgiver.vedtaksperioder.map(vedtak => (
@@ -66,8 +66,8 @@ const VedtaksNode = React.memo(() => {
     const isHighlighted = useIsHighlighted()
     return (
         <div className={classNames(styles.ArbeidsgiverNode)} onClick={stopPropagation}>
-            <p className={classNames(isHighlighted && styles.Highlighted)} onClick={setHighlight}>
-                {vedtak.fom} - {vedtak.tom}
+            <p className={classNames(isHighlighted && styles.Highlighted, styles.TreeText, styles.Indentation2)} onClick={setHighlight}>
+                {vedtak.fom} - {vedtak.tom}<br/>{vedtak.tilstand}
             </p>
         </div>
     )

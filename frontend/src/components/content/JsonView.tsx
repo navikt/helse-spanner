@@ -9,7 +9,7 @@ import {
 } from '../../state/contexts'
 import ReactJson from 'react-json-view'
 
-export const ArbeidsgiverJson = React.memo(() => {
+const Arbeidsgiver = React.memo(() => {
     const arbeidsgiver = useArbeidsgiver()
 
     const isSelected = useIsSelected()
@@ -21,7 +21,7 @@ export const ArbeidsgiverJson = React.memo(() => {
     )
 })
 
-export const PersonJson = React.memo(() => {
+const Person = React.memo(() => {
     const person = usePerson()
     const isSelected = useIsSelected()
     if (!isSelected) return null
@@ -32,7 +32,7 @@ export const PersonJson = React.memo(() => {
     )
 })
 
-export const VedtaksperiodeJson = React.memo(() => {
+const Vedtaksperiode = React.memo(() => {
     const vedtaksperiode = useVedtak()
     const isSelected = useIsSelected()
     if (!isSelected) return null
@@ -47,13 +47,13 @@ export const JsonView = React.memo(() => {
     const person = usePerson()
     return (
         <>
-            <PersonJson />
+            <Person />
             {person.arbeidsgivere.map((arbeidsgiver) => (
                 <ArbeidsgiverContext.Provider value={arbeidsgiver} key={arbeidsgiver.id}>
-                    <ArbeidsgiverJson />
+                    <Arbeidsgiver />
                     {arbeidsgiver.vedtaksperioder.map((vedtaksperiode) => (
                         <VedtakContext.Provider value={vedtaksperiode} key={vedtaksperiode.id}>
-                            <VedtaksperiodeJson />
+                            <Vedtaksperiode />
                         </VedtakContext.Provider>
                     ))}
                 </ArbeidsgiverContext.Provider>
