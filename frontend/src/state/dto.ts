@@ -3,6 +3,7 @@ export type PersonDto = {
     aktørId: string
     fødselsnummer: string
     opprettet: string
+    aktivitetslogg: Aktivitetslogg
 }
 
 export type FeilDto = {
@@ -17,8 +18,38 @@ export type ArbeidsgiverDto = {
 }
 
 export type VedtakDto = {
-    tilstand: string;
+    tilstand: string
     fom: string
     tom: string
     id: string
+}
+
+export type Aktivitet = {
+    kontekster: number[]
+    alvorlighetsgrad: string
+    aktivitet?: string
+    melding: string
+    detaljer: any
+    tidsstempel: string
+    behovtype?: string
+}
+
+export type Aktivitetslogg = {
+    aktiviteter: Aktivitet[]
+    kontekster: Kontekst[]
+}
+
+export type Kontekst = {
+    kontekstType: string
+    kontekstMap: KontekstMap
+}
+
+export type KontekstMap = {
+    meldingsreferanseId?: string
+    vedtaksperiodeId?: string
+    aktørId?: string
+    fødselsnummer?: string
+    organisasjonsnummer?: string
+    tilstand?: string
+    utbetalingId?: string
 }

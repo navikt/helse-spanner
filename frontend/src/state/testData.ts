@@ -15,6 +15,10 @@ export const createTestPerson = (
     fødselsnummer,
     opprettet,
     arbeidsgivere,
+    aktivitetslogg: {
+        aktiviteter: [],
+        kontekster: []
+    }
 })
 
 export const createTestArbeidsgiver = (
@@ -35,4 +39,5 @@ export const createTestVedtaksperiode = (
     fom,
     tom,
     id,
+    tilstand: "START"
 })
