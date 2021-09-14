@@ -1,3 +1,4 @@
+let mode = import.meta?.env?.MODE;
 export const Environment = {
-    isDevelopment: import.meta.env.MODE === 'development'
+    isDevelopment: (mode && (mode === 'development')) ?? true
 }
