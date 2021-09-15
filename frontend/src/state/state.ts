@@ -5,10 +5,13 @@ export const highligthState = Recoil.atom<Id>({
     key: 'highligthState',
     default: {}
 })
+export enum ContentView {
+    Json = "Json",
+    Aktivitetslogg = "Aktivitetslogg",
+}
 
-
-export const displayViewState = Recoil.atom<string[]>({
+export const displayViewState = Recoil.atom<ContentView[]>({
     key: 'displayViewState',
-    default: ["json"]
+    default: [ContentView.Json]
 })
 

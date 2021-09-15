@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from 'react'
+import React, {PropsWithChildren} from 'react'
 import {
     AktivitetsloggContext,
     ArbeidsgiverContext,
@@ -9,10 +9,10 @@ import {
     useVedtak,
     VedtakContext,
 } from '../../state/contexts'
-import { Aktivitet, Aktivitetslogg, Kontekst } from '../../state/dto'
-import { mapNotUndefined } from '../../utils'
+import {Aktivitet, Aktivitetslogg, Kontekst} from '../../state/dto'
+import {mapNotUndefined} from '../../utils'
 import {useRecoilValue} from "recoil";
-import {displayViewState} from "../../state/state";
+import {ContentView, displayViewState} from "../../state/state";
 
 const AktiviteterForPerson = React.memo(() => {
     const isSelected = useIsSelected()
@@ -42,7 +42,7 @@ const AktiviteterForArbeidsgiver = React.memo(() => {
 export const AktivitetsloggView = React.memo(() => {
     const person = usePerson()
     const useDisplayView = useRecoilValue(displayViewState)
-    if(!useDisplayView.includes("Aktiviteter")) return null
+    if(!useDisplayView.includes(ContentView.Aktivitetslogg)) return null
 
     return (
         <AktivitetsloggContext.Provider value={person.aktivitetslogg}>
