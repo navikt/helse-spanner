@@ -1,7 +1,7 @@
-import { PersonDto, ArbeidsgiverDto, VedtakDto } from './dto'
-import React, { useMemo } from 'react'
-import { useRecoilValue } from 'recoil'
-import { highligthState } from './state'
+import {Aktivitetslogg, ArbeidsgiverDto, PersonDto, VedtakDto} from './dto'
+import React, {useMemo} from 'react'
+import {useRecoilValue} from 'recoil'
+import {highligthState} from './state'
 
 //For å slippe defaultvalue til context.
 //https://kentcdodds.com/blog/how-to-use-react-context-effectively
@@ -23,6 +23,9 @@ export const usePerson = () => useContext(PersonContext)
 export const useArbeidsgiver = () => useContext(ArbeidsgiverContext)
 export const useVedtak = () => useContext(VedtakContext)
 
+export const AktivitetsloggContext = createContext<Aktivitetslogg>()
+export const useAktivitetslogg = () => useContext(AktivitetsloggContext)
+
 export type Id = {
     arbeidsgiver?: string
     vedtaksperiode?: string
@@ -41,7 +44,6 @@ export const useId = (): Id => {
 }
 
 export const idEqual = (a: Id, b: Id) => a.arbeidsgiver === b.arbeidsgiver && a.vedtaksperiode === b.vedtaksperiode
-
 export const useIsSelected = () => {
     const highlighted = useRecoilValue(highligthState)
     const id = useId()
