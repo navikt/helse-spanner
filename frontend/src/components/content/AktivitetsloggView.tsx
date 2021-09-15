@@ -2,7 +2,7 @@ import React from 'react'
 import {
     AktivitetsloggContext,
     ArbeidsgiverContext,
-    useAktivitetslogg,
+    useAktivitetslogg, useArbeidsgiver,
     useIsSelected,
     usePerson,
     useVedtak,
@@ -12,29 +12,45 @@ import {Aktivitet, Aktivitetslogg, Kontekst} from '../../state/dto'
 import {mapNotUndefined} from '../../utils'
 
 
-const Person = React.memo(() => {
+const AktiviteterForPerson = React.memo(() => {
     const isSelected = useIsSelected()
+    const aktivitetslogg = useAktivitetslogg()
     if (!isSelected) return null
-    return <div></div>
+
+    return (
+        <AktivitetListeView aktiviteter={aktivitetslogg.aktiviteter} />
+    )
 })
 
-const Arbeidsgiver = React.memo(() => {
+const AktiviteterForArbeidsgiver = React.memo(() => {
     const isSelected = useIsSelected()
+    const aktivitetslogg = useAktivitetslogg()
+    const arbeidsgiver = useArbeidsgiver()
     if (!isSelected) return null
-    return <div></div>
+
+    const aktiviteter = aktiviteterForKontekst(
+        aktivitetslogg,
+        (kontekst) =>
+            (!!kontekst.kontekstMap.organisasjonsnummer && kontekst.kontekstMap.organisasjonsnummer === arbeidsgiver.organisasjonsnummer) ??
+            false
+    )
+
+    return (
+        <AktivitetListeView aktiviteter={aktiviteter} />
+    )
 })
 
 export const AktivitetsloggView = React.memo(() => {
     const person = usePerson()
     return (
         <AktivitetsloggContext.Provider value={person.aktivitetslogg}>
-            <Person />
+            <AktiviteterForPerson />
             {person.arbeidsgivere.map((arbeidsgiver) => (
                 <ArbeidsgiverContext.Provider value={arbeidsgiver} key={arbeidsgiver.id}>
-                    <Arbeidsgiver />
+                    <AktiviteterForArbeidsgiver />
                     {arbeidsgiver.vedtaksperioder.map((vedtaksperiode) => (
                         <VedtakContext.Provider value={vedtaksperiode} key={vedtaksperiode.id}>
-                            <Vedtaksperiode />
+                            <AktiviteterForVedtaksperiode />
                         </VedtakContext.Provider>
                     ))}
                 </ArbeidsgiverContext.Provider>
@@ -43,7 +59,7 @@ export const AktivitetsloggView = React.memo(() => {
     )
 })
 
-const Vedtaksperiode = React.memo(() => {
+const AktiviteterForVedtaksperiode = React.memo(() => {
     const vedtaksperiode = useVedtak()
     const aktivitetslogg = useAktivitetslogg()
     const isSelected = useIsSelected()
@@ -57,9 +73,7 @@ const Vedtaksperiode = React.memo(() => {
     )
 
     return (
-        <div>
             <AktivitetListeView aktiviteter={aktiviteter} />
-        </div>
     )
 })
 
