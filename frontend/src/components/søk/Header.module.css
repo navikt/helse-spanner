@@ -3,8 +3,26 @@
     min-height: 50px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
+    display: grid;
+    grid-template-columns: max-content max-content min-content;
+    align-content: center;
 }
 
 .SpannSpan {
     font-size: xxx-large;
+}
+
+.SpannSpanText {
+    color: white;
+}
+
+.Søk {
+    margin-left: 1em;
+    align-self: center;
+}
+
+.Søk input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }

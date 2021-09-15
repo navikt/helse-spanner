@@ -4,7 +4,10 @@ import classNames from 'classnames'
 
 export const Header: React.FC<object> = React.memo(({ children }) => (
     <header className={classNames(styles.Header)}>
-        <span className={classNames(styles.SpannSpan)}>🪣</span>
+        <span>
+            <span className={classNames(styles.SpannSpan)}>🪣</span>
+            <span className={classNames(styles.SpannSpanText)}>er</span>
+        </span>
         {children}
     </header>
 ))

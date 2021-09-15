@@ -5,6 +5,8 @@ import { Header } from './søk/Header'
 import styles from './App.module.css'
 import classNames from 'classnames'
 
+
+
 export const App = React.memo(() => {
     const [aktørId, setAktørId] = React.useState<string | undefined>(undefined)
     return (

@@ -1,4 +1,6 @@
 import React from 'react'
+import styles from './Header.module.css'
+import classNames from 'classnames'
 
 export type SøkProps = {
     setAktørId: (aktørId?: string) => void
@@ -15,11 +17,11 @@ export const Søk = React.memo((props: SøkProps) => {
     }
 
     return (
-        <>
-            <input value={søketekst} onChange={e => setSøketekst(e.target.value)} data-testid="søkefelt" />
+        <div className={classNames(styles.Søk)}>
+            <input type={"number"} autoFocus={true} value={søketekst} onChange={e => setSøketekst(e.target.value)} data-testid="søkefelt" />
             <button onClick={sendSøk} data-testid="søkeknapp">
                 Søk
             </button>
-        </>
+        </div>
     )
 })
