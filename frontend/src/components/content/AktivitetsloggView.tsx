@@ -1,25 +1,25 @@
-import React from 'react'
+import React, { PropsWithChildren } from 'react'
 import {
     AktivitetsloggContext,
     ArbeidsgiverContext,
-    useAktivitetslogg, useArbeidsgiver,
+    useAktivitetslogg,
+    useArbeidsgiver,
     useIsSelected,
     usePerson,
     useVedtak,
     VedtakContext,
 } from '../../state/contexts'
-import {Aktivitet, Aktivitetslogg, Kontekst} from '../../state/dto'
-import {mapNotUndefined} from '../../utils'
-
+import { Aktivitet, Aktivitetslogg, Kontekst } from '../../state/dto'
+import { mapNotUndefined } from '../../utils'
+import {useRecoilValue} from "recoil";
+import {displayViewState} from "../../state/state";
 
 const AktiviteterForPerson = React.memo(() => {
     const isSelected = useIsSelected()
     const aktivitetslogg = useAktivitetslogg()
     if (!isSelected) return null
 
-    return (
-        <AktivitetListeView aktiviteter={aktivitetslogg.aktiviteter} />
-    )
+    return <AktivitetListeView aktiviteter={aktivitetslogg.aktiviteter} />
 })
 
 const AktiviteterForArbeidsgiver = React.memo(() => {
@@ -31,26 +31,34 @@ const AktiviteterForArbeidsgiver = React.memo(() => {
     const aktiviteter = aktiviteterForKontekst(
         aktivitetslogg,
         (kontekst) =>
-            (!!kontekst.kontekstMap.organisasjonsnummer && kontekst.kontekstMap.organisasjonsnummer === arbeidsgiver.organisasjonsnummer) ??
+            (!!kontekst.kontekstMap.organisasjonsnummer &&
+                kontekst.kontekstMap.organisasjonsnummer === arbeidsgiver.organisasjonsnummer) ??
             false
     )
 
-    return (
-        <AktivitetListeView aktiviteter={aktiviteter} />
-    )
+    return <AktivitetListeView aktiviteter={aktiviteter} />
 })
 
 export const AktivitetsloggView = React.memo(() => {
     const person = usePerson()
+    const useDisplayView = useRecoilValue(displayViewState)
+    if(!useDisplayView.includes("Aktiviteter")) return null
+
     return (
         <AktivitetsloggContext.Provider value={person.aktivitetslogg}>
-            <AktiviteterForPerson />
+            <ShowIfSelected>
+                <AktiviteterForPerson />
+            </ShowIfSelected>
             {person.arbeidsgivere.map((arbeidsgiver) => (
                 <ArbeidsgiverContext.Provider value={arbeidsgiver} key={arbeidsgiver.id}>
-                    <AktiviteterForArbeidsgiver />
+                    <ShowIfSelected>
+                        <AktiviteterForArbeidsgiver />
+                    </ShowIfSelected>
                     {arbeidsgiver.vedtaksperioder.map((vedtaksperiode) => (
                         <VedtakContext.Provider value={vedtaksperiode} key={vedtaksperiode.id}>
-                            <AktiviteterForVedtaksperiode />
+                            <ShowIfSelected>
+                                <AktiviteterForVedtaksperiode />
+                            </ShowIfSelected>
                         </VedtakContext.Provider>
                     ))}
                 </ArbeidsgiverContext.Provider>
@@ -60,6 +68,7 @@ export const AktivitetsloggView = React.memo(() => {
 })
 
 const AktiviteterForVedtaksperiode = React.memo(() => {
+    console.log('Rendrer vedtak view')
     const vedtaksperiode = useVedtak()
     const aktivitetslogg = useAktivitetslogg()
     const isSelected = useIsSelected()
@@ -72,16 +81,15 @@ const AktiviteterForVedtaksperiode = React.memo(() => {
             false
     )
 
-    return (
-            <AktivitetListeView aktiviteter={aktiviteter} />
-    )
+    return <AktivitetListeView aktiviteter={aktiviteter} />
 })
 
 const AktivitetListeView = React.memo(({ aktiviteter }: { aktiviteter: Aktivitet[] }) => {
     const kontekstFinnesiAktiviteter = (kontekst: Kontekst, index: number): boolean =>
         !!aktiviteter.find((aktivitet) => aktivitet.kontekster.includes(index))
 
-    const erMeldingsKontekst = (kontekst: Kontekst) => !!kontekst.kontekstMap.meldingsreferanseId && kontekst.kontekstType != 'GjenopptaBehandling'
+    const erMeldingsKontekst = (kontekst: Kontekst) =>
+        !!kontekst.kontekstMap.meldingsreferanseId && kontekst.kontekstType != 'GjenopptaBehandling'
 
     const aktivitetslogg = useAktivitetslogg()
 
@@ -95,13 +103,19 @@ const AktivitetListeView = React.memo(({ aktiviteter }: { aktiviteter: Aktivitet
         <div>
             {hendelseKontektster.map(([kontekst, index]) => {
                 const kontekstAktiviter = aktiviteter.filter((aktivitet) => aktivitet.kontekster.includes(index))
-                return <HendelseView aktiviteter={kontekstAktiviter} kontekst={kontekst} key={kontekst.kontekstMap.meldingsreferanseId} />
+                return (
+                    <HendelseView
+                        aktiviteter={kontekstAktiviter}
+                        kontekst={kontekst}
+                        key={kontekst.kontekstMap.meldingsreferanseId}
+                    />
+                )
             })}
         </div>
     )
 })
 
-const HendelseView = React.memo(({ aktiviteter, kontekst }: { aktiviteter: Aktivitet[], kontekst: Kontekst}) => {
+const HendelseView = React.memo(({ aktiviteter, kontekst }: { aktiviteter: Aktivitet[]; kontekst: Kontekst }) => {
     return (
         <div>
             <p>{kontekst.kontekstType}</p>
@@ -112,7 +126,13 @@ const HendelseView = React.memo(({ aktiviteter, kontekst }: { aktiviteter: Aktiv
     )
 })
 
-const AktivitetView = React.memo(({ aktivitet }: { aktivitet: Aktivitet }) => <p>{ "------ " + aktivitet.melding}</p>)
+const AktivitetView = React.memo(({ aktivitet }: { aktivitet: Aktivitet }) => <p>{'------ ' + aktivitet.melding}</p>)
+
+const ShowIfSelected: React.FC<PropsWithChildren<any>> = React.memo(({ children }) => {
+    const isSelected = useIsSelected()
+    if (!isSelected) return null
+    return <>{children}</>
+})
 
 const aktiviteterForKontekst = (
     aktivitetslogg: Aktivitetslogg,
