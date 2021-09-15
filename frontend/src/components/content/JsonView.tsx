@@ -9,7 +9,7 @@ import {
 } from '../../state/contexts'
 import ReactJson from 'react-json-view'
 import {useRecoilValue} from "recoil";
-import {displayViewState} from "../../state/state";
+import {ContentView, displayViewState} from "../../state/state";
 
 const Arbeidsgiver = React.memo(() => {
     const arbeidsgiver = useArbeidsgiver()
@@ -48,7 +48,7 @@ const Vedtaksperiode = React.memo(() => {
 export const JsonView = React.memo(() => {
     const person = usePerson()
     const useDisplayView = useRecoilValue(displayViewState)
-    if(!useDisplayView.includes("Json")) return null
+    if(!useDisplayView.includes(ContentView.Json)) return null
     return (
         <>
             <Person />
