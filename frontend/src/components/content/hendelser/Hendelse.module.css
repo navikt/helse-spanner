@@ -1,16 +1,16 @@
-.HendelseToggleButton {
+.Ekspander {
     width: 12em;
     text-align: left;
     margin-left: 0.5em;
 }
 
-.HendelseDatoText {
+.DatoText {
     font-size: small;
     color: grey;
     display: inline-block;
 }
 
-.HendelseIDText {
+.Meldingsreferanse {
     font-size: small;
     color: grey;
     margin-left: 0.5rem;
@@ -18,7 +18,7 @@
     width: 17.5rem;
 }
 
-.HendelseIDButton  {
+.KopierMeldingsreferanse  {
     align-items: center;
     outline: none;
     border: none;
@@ -31,17 +31,17 @@
     margin-left: 0.5rem;
 }
 
-.HendelseIDButton:hover {
+.KopierMeldingsreferanse:hover {
     background-color: lightgray;
     color: white;
 }
 
 
-.HendelseIDButton:focus-visible {
+.KopierMeldingsreferanse:focus-visible {
     color: grey;
 }
 
-.HendelseIDButton:active {
+.KopierMeldingsreferanse:active {
     filter: brightness(50%);
 }
 

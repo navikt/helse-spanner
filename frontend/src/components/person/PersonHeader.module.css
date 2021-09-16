@@ -1,4 +1,4 @@
-.PersonHeader {
+.Header {
     grid-area: header;
     display: inline-block;
     border: 1px solid black;
@@ -6,38 +6,32 @@
     margin-bottom: 1em;
 }
 
-.PersonHeader h1 {
-    display: inline;
-    font-size: medium;
+.Header dl div {
+    display: inline-block;
 }
-
-.PersonHeader span {
-    margin-left: 1em;
-}
-
-.PersonHeader dl div {
+.Ingress {
     display: inline-block;
 }
 
-.PersonHeader dl {
+.Ingress dl {
     display: inline;
 }
 
-.PersonHeader dt {
+.Ingress dt {
     margin-inline-start: 1em;
     display: inline-block;
 }
 
-.PersonHeader dd {
+.Ingress dd {
     margin-inline-start: 5px;
     display: inline-block;
 }
 
-.PersonHeader dt::after {
+.Ingress dt::after {
     content: ': ';
 }
 
-.PersonHeader dd p {
+.Ingress dd p {
     margin: 0;
     padding: 0;
 }

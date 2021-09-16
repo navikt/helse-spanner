@@ -7,8 +7,8 @@ import { usePerson } from '../../state/contexts'
 export const PersonHeader = React.memo(() => {
     const person = usePerson()
     return (
-        <div className={classNames(styles.PersonHeader)}>
-            <dl>
+        <div className={classNames(styles.Header)}>
+            <dl className={classNames(styles.Ingress)}>
                 <dt>fnr</dt>
                 <dd>
                     <p data-testid={'person-header-fnr'}>{person.fødselsnummer}</p>

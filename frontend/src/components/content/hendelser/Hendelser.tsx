@@ -2,7 +2,7 @@ import React from "react";
 import {AktivitetDto, AktivitetsloggDto, KontekstDto} from "../../../state/dto";
 import {useAktivitetslogg} from "../../../state/contexts";
 import {mapNotUndefined} from "../../../utils";
-import styles from "./Henelser.module.css";
+import styles from "./Hendelser.module.css";
 import {Hendelse} from "./Hendelse";
 
 export const Hendelser = React.memo(({aktiviteter}: { aktiviteter: AktivitetDto[] }) => {
@@ -21,7 +21,7 @@ export const Hendelser = React.memo(({aktiviteter}: { aktiviteter: AktivitetDto[
     })
 
     return (
-        <div className={styles.AktivitetListeView}>
+        <div className={styles.Hendelser}>
             {hendelseKontektster.map(([kontekst, index]) => {
                 const kontekstAktiviter = aktiviteter.filter((aktivitet) => aktivitet.kontekster.includes(index))
                 return (
