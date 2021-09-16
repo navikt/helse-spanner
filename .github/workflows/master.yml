@@ -25,6 +25,12 @@ jobs:
       - uses: actions/setup-java@v1
         with:
           java-version: '16.x'
+      - uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
       - name: test and build
         run: ./gradlew test build
       - name: build docker image
