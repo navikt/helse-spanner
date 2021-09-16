@@ -5,6 +5,12 @@
 
 .AktivitetView {
     margin-left: 3rem;
+    padding-bottom: 0.3em;
+    padding-top: 0.3em;
+}
+
+.AktivitetViewLinje {
+    padding-inline: 0.5em;
 }
 
 .HendelseToggleButton {
@@ -57,4 +63,20 @@
 .Icon {
     height: 1rem;
     transition: filter 0.2s ease;
+}
+
+.AktivitetViewAlvorlighetsgradLabel {
+    width: 3rem;
+}
+
+.AktivitetViewMeldingText {
+    margin-left: 1em;
+}
+
+.Warning {
+    background-color: wheat;
+}
+
+.Error {
+    background-color: lightpink;
 }

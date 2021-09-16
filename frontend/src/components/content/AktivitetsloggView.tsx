@@ -165,8 +165,12 @@ type AktivitetViewProps = {
 }
 
 const AktivitetView: React.FC<AktivitetViewProps> = React.memo(({ aktivitet }: { aktivitet: Aktivitet }) => {
+    const isWarning = aktivitet.alvorlighetsgrad == "WARN"
     return  <div className={styles.AktivitetView}>
-        {aktivitet.alvorlighetsgrad} {format(parseISO(aktivitet.tidsstempel), "yyyy-MM-dd HH:mm")} {aktivitet.melding}
+        <span className={classNames(styles.AktivitetViewLinje, isWarning && styles.Warning)}>
+            <bdi className={styles.AktivitetViewAlvorlighetsgradLabel}>{aktivitet.alvorlighetsgrad}</bdi>
+            <bdi className={styles.AktivitetViewMeldingText}>{aktivitet.melding}</bdi>
+        </span>
     </div>
 })
 
