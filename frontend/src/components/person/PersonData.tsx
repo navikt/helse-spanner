@@ -1,6 +1,6 @@
 import React from 'react'
 import { useQuery } from 'react-query'
-import { useBackend } from '../../external/backend'
+import { personRequestFactory, useBackend } from '../../external/backend'
 import classNames from 'classnames'
 import styles from './Person.module.css'
 import { backendFeil, finnesIkke, httpFeil } from '../../external/feil'
@@ -43,18 +43,21 @@ const Spinner = React.memo(() => (
 
 export const PersonData = React.memo((props: FetchPersonProps) => {
     const backend = useBackend()
-    const { isLoading, isError, data, error } = useQuery(['person', props.aktørId], () =>
-        backend.personForAktørId(props.aktørId)
-    )
-    if (isLoading) {
-        return <Spinner />
-    }
-    if (isError) {
+    try {
+        const request = personRequestFactory(props.aktørId, backend)
+        const { isLoading, isError, data, error } = useQuery(['person', props.aktørId], request)
+        if (isLoading) {
+            return <Spinner />
+        }
+        if (isError) {
+            return <Feilmelding feil={error} />
+        }
+        return (
+            <PersonContext.Provider value={data}>
+                <PersonView />
+            </PersonContext.Provider>
+        )
+    } catch (error) {
         return <Feilmelding feil={error} />
     }
-    return (
-        <PersonContext.Provider value={data}>
-            <PersonView />
-        </PersonContext.Provider>
-    )
 })

@@ -5,14 +5,14 @@ export let testBackend = (testPersoner: PersonDto[] = [], errorPersoner: Record<
     let aktorPersoner: Record<string, PersonDto> = testPersoner.reduce((old, person) => {
         return {
             ...old,
-            [person.aktørId]: person
+            [person.aktørId]: person,
         }
     }, {})
 
     let fnrPersoner: Record<string, PersonDto> = testPersoner.reduce((old, person) => {
         return {
             ...old,
-            [person.fødselsnummer]: person
+            [person.fødselsnummer]: person,
         }
     }, {})
 
@@ -31,14 +31,14 @@ export let testBackend = (testPersoner: PersonDto[] = [], errorPersoner: Record<
 
         personForFnr(fnr: string): Promise<PersonDto> {
             let person = fnrPersoner[fnr]
-            if (!!person) {
-                let person = errorPersoner[fnr]
-                if (!!person) {
+            if (!person) {
+                let testError = errorPersoner[fnr]
+                if (!testError) {
                     throw Error(`No test fixture with ${fnr}`)
                 }
-                return Promise.resolve(person)
+                return Promise.reject(person)
             }
             return Promise.resolve(person)
-        }
+        },
     }
 }

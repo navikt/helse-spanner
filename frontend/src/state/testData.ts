@@ -1,13 +1,12 @@
 import { ArbeidsgiverDto, PersonDto, VedtakDto } from './dto'
 
-let next_id = 1
+let next_id = 42
 
-const new_id = () =>
-    `${next_id++}`
+const new_id = () => `${next_id++}`
 
 export const createTestPerson = (
     aktørId: string = new_id(),
-    fødselsnummer: string = '42',
+    fødselsnummer: string = '42123245125',
     opprettet = '2021-01-01',
     arbeidsgivere: ArbeidsgiverDto[] = [createTestArbeidsgiver(), createTestArbeidsgiver('554321')]
 ): PersonDto => ({
@@ -17,14 +16,14 @@ export const createTestPerson = (
     arbeidsgivere,
     aktivitetslogg: {
         aktiviteter: [],
-        kontekster: []
-    }
+        kontekster: [],
+    },
 })
 
 export const createTestArbeidsgiver = (
     organisasjonsnummer: string = '12345',
     vedtaksperioder: VedtakDto[] = [createTestVedtaksperiode(), createTestVedtaksperiode('2021-01-01', '2021-02-03')],
-    id: string = new_id(),
+    id: string = new_id()
 ): ArbeidsgiverDto => ({
     id,
     organisasjonsnummer,
@@ -39,5 +38,5 @@ export const createTestVedtaksperiode = (
     fom,
     tom,
     id,
-    tilstand: "START"
+    tilstand: 'START',
 })

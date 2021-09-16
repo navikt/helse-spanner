@@ -31,16 +31,18 @@ function respons(container: HTMLElement = document.body) {
 }
 
 test('bruker søker opp en person', async () => {
-    const per = createTestPerson();
+    const per = createTestPerson()
+    console.log(`per aktor = ${per.aktørId}`)
     testApp([per])
+
     søk(per.aktørId)
     await respons()
     expect(person().textContent).toEqual(per.fødselsnummer)
 })
 
 test('bruker søker opp en person som ikke finnes', async () => {
-    testApp([], { '40': new finnesIkke() })
-    søk('40')
+    testApp([], { '43': new finnesIkke() })
+    søk('43')
     await respons()
     expect(feilmelding().textContent).toContain('Personen finnes ikke i spleis')
 })
