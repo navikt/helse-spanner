@@ -1,10 +1,11 @@
-import React from 'react'
-import { JsonView } from './JsonView'
-import { HendelseView } from './hendelser/HendelseView'
-import { useRecoilState } from 'recoil'
-import { ContentView, displayViewState } from '../../state/state'
+import React, {PropsWithChildren} from 'react'
+import {JsonView} from './JsonView'
+import {HendelseView} from './hendelser/HendelseView'
+import {useRecoilState} from 'recoil'
+import {ContentView, displayViewState} from '../../state/state'
 import classNames from 'classnames'
 import styles from './Content.module.css'
+import {useIsSelected} from "../../state/contexts";
 
 export const Content = React.memo(() => {
     return (
@@ -34,4 +35,9 @@ const ViewButton: React.FC<{ view: ContentView }> = React.memo(({ view }) => {
             {view}
         </button>
     )
+})
+export const ShowIfSelected: React.FC<PropsWithChildren<any>> = React.memo(({children}) => {
+    const isSelected = useIsSelected()
+    if (!isSelected) return null
+    return <>{children}</>
 })

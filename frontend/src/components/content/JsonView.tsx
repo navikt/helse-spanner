@@ -1,21 +1,12 @@
 import React from 'react'
-import {
-    ArbeidsgiverContext,
-    useArbeidsgiver,
-    useIsSelected,
-    usePerson,
-    useVedtak,
-    VedtakContext,
-} from '../../state/contexts'
+import { ArbeidsgiverContext, useArbeidsgiver, usePerson, useVedtak, VedtakContext } from '../../state/contexts'
 import ReactJson from 'react-json-view'
-import {useRecoilValue} from "recoil";
-import {ContentView, displayViewState} from "../../state/state";
+import { useRecoilValue } from 'recoil'
+import { ContentView, displayViewState } from '../../state/state'
+import { ShowIfSelected } from './Content'
 
 const Arbeidsgiver = React.memo(() => {
     const arbeidsgiver = useArbeidsgiver()
-
-    const isSelected = useIsSelected()
-    if (!isSelected) return null
     return (
         <div>
             <ReactJson src={arbeidsgiver} name={null} collapsed={1} />
@@ -25,8 +16,6 @@ const Arbeidsgiver = React.memo(() => {
 
 const Person = React.memo(() => {
     const person = usePerson()
-    const isSelected = useIsSelected()
-    if (!isSelected) return null
     return (
         <div>
             <ReactJson src={person} name={null} collapsed={1} />
@@ -36,8 +25,6 @@ const Person = React.memo(() => {
 
 const Vedtaksperiode = React.memo(() => {
     const vedtaksperiode = useVedtak()
-    const isSelected = useIsSelected()
-    if (!isSelected) return null
     return (
         <div>
             <ReactJson src={vedtaksperiode} name={null} collapsed={1} />
@@ -48,16 +35,22 @@ const Vedtaksperiode = React.memo(() => {
 export const JsonView = React.memo(() => {
     const person = usePerson()
     const useDisplayView = useRecoilValue(displayViewState)
-    if(!useDisplayView.includes(ContentView.Json)) return null
+    if (!useDisplayView.includes(ContentView.Json)) return null
     return (
         <>
-            <Person />
+            <ShowIfSelected>
+                <Person />
+            </ShowIfSelected>
             {person.arbeidsgivere.map((arbeidsgiver) => (
                 <ArbeidsgiverContext.Provider value={arbeidsgiver} key={arbeidsgiver.id}>
-                    <Arbeidsgiver />
+                    <ShowIfSelected>
+                        <Arbeidsgiver />
+                    </ShowIfSelected>
                     {arbeidsgiver.vedtaksperioder.map((vedtaksperiode) => (
                         <VedtakContext.Provider value={vedtaksperiode} key={vedtaksperiode.id}>
-                            <Vedtaksperiode />
+                            <ShowIfSelected>
+                                <Vedtaksperiode />
+                            </ShowIfSelected>
                         </VedtakContext.Provider>
                     ))}
                 </ArbeidsgiverContext.Provider>
