@@ -1,6 +1,6 @@
 import React from 'react'
 import { JsonView } from './JsonView'
-import { AktivitetsloggView } from './AktivitetsloggView'
+import { HendelseView } from './hendelser/HendelseView'
 import { useRecoilState } from 'recoil'
 import { ContentView, displayViewState } from '../../state/state'
 import classNames from 'classnames'
@@ -14,7 +14,7 @@ export const Content = React.memo(() => {
                 <ViewButton view={ContentView.Hendelser} />
             </div>
             <JsonView />
-            <AktivitetsloggView />
+            <HendelseView />
         </div>
     )
 })
