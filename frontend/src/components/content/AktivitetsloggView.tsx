@@ -13,6 +13,9 @@ import {Aktivitet, Aktivitetslogg, Kontekst} from '../../state/dto'
 import {mapNotUndefined} from '../../utils'
 import {useRecoilValue} from "recoil";
 import {ContentView, displayViewState} from "../../state/state";
+import classNames from 'classnames'
+import styles from './AktivitetsloggView.module.css'
+import copyIcon from "material-design-icons/content/svg/production/ic_content_copy_24px.svg";
 
 const AktiviteterForPerson = React.memo(() => {
     const isSelected = useIsSelected()
@@ -116,9 +119,14 @@ const AktivitetListeView = React.memo(({ aktiviteter }: { aktiviteter: Aktivitet
 })
 
 const HendelseView = React.memo(({ aktiviteter, kontekst }: { aktiviteter: Aktivitet[]; kontekst: Kontekst }) => {
+    const writeToClipboard = (data: string) => navigator.clipboard.writeText(data).catch(error => console.warn("Error copying to clipboard:", error));
+    const copyMeldingRefId = () => writeToClipboard(kontekst.kontekstMap.meldingsreferanseId ?? "" )
+
     return (
         <div>
-            <p>{kontekst.kontekstType}</p>
+            <button>{kontekst.kontekstType} {}</button>
+            <span className={classNames(styles.HendelseIDText)}>{kontekst.kontekstMap.meldingsreferanseId}</span>
+            <button className={styles.HendelseIDButton}><img src={copyIcon} className={styles.Icon} alt={"kopier tekst"} onClick={copyMeldingRefId}/></button>
             {aktiviteter.map((it, index) => (
                 <AktivitetView key={index} aktivitet={it} />
             ))}

@@ -1,0 +1,39 @@
+
+
+.HendelseIDText {
+    font-size: small;
+    color: grey;
+    margin-left: 0.5rem;
+}
+
+.HendelseIDButton  {
+    align-items: center;
+    outline: none;
+    border: none;
+    background: none;
+    color: white;
+    transition: color 0.2s ease;
+    display: inline;
+    width: min-content;
+    padding: 2px;
+    margin-left: 0.5rem;
+}
+
+.HendelseIDButton:hover {
+    background-color: lightgray;
+    color: white;
+}
+
+
+.HendelseIDButton:focus-visible {
+    color: grey;
+}
+
+.HendelseIDButton:active {
+    filter: brightness(50%);
+}
+
+.Icon {
+    height: 1rem;
+    transition: filter 0.2s ease;
+}
