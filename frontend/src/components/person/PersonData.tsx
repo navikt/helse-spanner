@@ -36,9 +36,7 @@ const Feilmelding = React.memo(({ feil }: { feil: any }) => {
 })
 
 const Spinner = React.memo(() => (
-    <div className={styles.Spinner} data-testid="spinner">
-        <p>Laster...</p>
-    </div>
+    <div className={styles.Spinner} data-testid="spinner" />
 ))
 
 export const PersonData = React.memo((props: FetchPersonProps) => {
