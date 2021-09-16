@@ -11,11 +11,13 @@ import {
 } from '../../state/contexts'
 import {Aktivitet, Aktivitetslogg, Kontekst} from '../../state/dto'
 import {mapNotUndefined} from '../../utils'
-import {useRecoilValue} from "recoil";
-import {ContentView, displayViewState} from "../../state/state";
+import {useRecoilState, useRecoilValue} from "recoil";
+import {ContentView, displayViewState, expandedHendelserState} from "../../state/state";
 import classNames from 'classnames'
 import styles from './AktivitetsloggView.module.css'
 import copyIcon from "material-design-icons/content/svg/production/ic_content_copy_24px.svg";
+import parseISO from "date-fns/parseISO";
+import {format} from "date-fns";
 
 const AktiviteterForPerson = React.memo(() => {
     const isSelected = useIsSelected()
@@ -103,7 +105,7 @@ const AktivitetListeView = React.memo(({ aktiviteter }: { aktiviteter: Aktivitet
     })
 
     return (
-        <div>
+        <div className={styles.AktivitetListeView}>
             {hendelseKontektster.map(([kontekst, index]) => {
                 const kontekstAktiviter = aktiviteter.filter((aktivitet) => aktivitet.kontekster.includes(index))
                 return (
@@ -120,21 +122,55 @@ const AktivitetListeView = React.memo(({ aktiviteter }: { aktiviteter: Aktivitet
 
 const HendelseView = React.memo(({ aktiviteter, kontekst }: { aktiviteter: Aktivitet[]; kontekst: Kontekst }) => {
     const writeToClipboard = (data: string) => navigator.clipboard.writeText(data).catch(error => console.warn("Error copying to clipboard:", error));
-    const copyMeldingRefId = () => writeToClipboard(kontekst.kontekstMap.meldingsreferanseId ?? "" )
+    let meldingsReferanseId = ""
+        if( kontekst.kontekstMap.meldingsreferanseId != undefined) {
+            meldingsReferanseId = kontekst.kontekstMap.meldingsreferanseId
+        } else {
+            throw Error(`kontekst = ${kontekst} har ikke meldingsreferanseId` )
+        }
+    const copyMeldingRefId = () => writeToClipboard(meldingsReferanseId)
+
+    const [expandedHendelser, setExpandedHendelser] = useRecoilState(expandedHendelserState)
+    const isExpanded = expandedHendelser.includes(meldingsReferanseId)
+
+    const toggleSelected = () => {
+        if (isExpanded) {
+            setExpandedHendelser(expandedHendelser.filter((it) => it !== meldingsReferanseId))
+        } else {
+            setExpandedHendelser([...expandedHendelser, meldingsReferanseId])
+        }
+    }
 
     return (
         <div>
-            <button>{kontekst.kontekstType} {}</button>
+            <span className={classNames(styles.HendelseDatoText)}>{format(parseISO(aktiviteter[0].tidsstempel), "yyyy-MM-dd")}</span>
+            <button onClick={toggleSelected} className={styles.HendelseToggleButton}>{kontekst.kontekstType}</button>
             <span className={classNames(styles.HendelseIDText)}>{kontekst.kontekstMap.meldingsreferanseId}</span>
             <button className={styles.HendelseIDButton}><img src={copyIcon} className={styles.Icon} alt={"kopier tekst"} onClick={copyMeldingRefId}/></button>
-            {aktiviteter.map((it, index) => (
-                <AktivitetView key={index} aktivitet={it} />
-            ))}
+
+
+            {isExpanded &&
+                <div style={{gridArea: "aktiviteter"}}>{
+                    aktiviteter.map((it, index) => (
+                        <AktivitetView key={index} aktivitet={it} />
+                    ))}
+                </div>
+            }
         </div>
     )
 })
 
-const AktivitetView = React.memo(({ aktivitet }: { aktivitet: Aktivitet }) => <p>{'------ ' + aktivitet.melding}</p>)
+type AktivitetViewProps = {
+    aktivitet: Aktivitet
+}
+
+const AktivitetView: React.FC<AktivitetViewProps> = React.memo(({ aktivitet }: { aktivitet: Aktivitet }) => {
+    return  <div className={styles.AktivitetView}>
+        {aktivitet.alvorlighetsgrad} {format(parseISO(aktivitet.tidsstempel), "yyyy-MM-dd HH:mm")} {aktivitet.melding}
+    </div>
+})
+
+
 
 const ShowIfSelected: React.FC<PropsWithChildren<any>> = React.memo(({ children }) => {
     const isSelected = useIsSelected()

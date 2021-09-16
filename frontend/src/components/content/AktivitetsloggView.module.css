@@ -1,9 +1,30 @@
 
+.AktivitetListeView {
+    display: block;
+}
+
+.AktivitetView {
+    margin-left: 3rem;
+}
+
+.HendelseToggleButton {
+    width: 12em;
+    text-align: left;
+    margin-left: 0.5em;
+}
+
+.HendelseDatoText {
+    font-size: small;
+    color: grey;
+    display: inline-block;
+}
 
 .HendelseIDText {
     font-size: small;
     color: grey;
     margin-left: 0.5rem;
+    display: inline-block;
+    width: 17.5rem;
 }
 
 .HendelseIDButton  {
