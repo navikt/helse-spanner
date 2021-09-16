@@ -7,7 +7,7 @@ export const highligthState = Recoil.atom<Id>({
 })
 export enum ContentView {
     Json = "Json",
-    Aktivitetslogg = "Aktivitetslogg",
+    Hendelser = "Hendelser",
 }
 
 export const displayViewState = Recoil.atom<ContentView[]>({

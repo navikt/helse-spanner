@@ -11,7 +11,7 @@ export const Content = React.memo(() => {
         <div>
             <div>
                 <ViewButton view={ContentView.Json} />
-                <ViewButton view={ContentView.Aktivitetslogg} />
+                <ViewButton view={ContentView.Hendelser} />
             </div>
             <JsonView />
             <AktivitetsloggView />

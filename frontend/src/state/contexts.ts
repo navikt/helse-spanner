@@ -1,4 +1,4 @@
-import {Aktivitetslogg, ArbeidsgiverDto, PersonDto, VedtakDto} from './dto'
+import {AktivitetsloggDto, ArbeidsgiverDto, PersonDto, VedtakDto} from './dto'
 import React, {useMemo} from 'react'
 import {useRecoilValue} from 'recoil'
 import {highligthState} from './state'
@@ -23,7 +23,7 @@ export const usePerson = () => useContext(PersonContext)
 export const useArbeidsgiver = () => useContext(ArbeidsgiverContext)
 export const useVedtak = () => useContext(VedtakContext)
 
-export const AktivitetsloggContext = createContext<Aktivitetslogg>()
+export const AktivitetsloggContext = createContext<AktivitetsloggDto>()
 export const useAktivitetslogg = () => useContext(AktivitetsloggContext)
 
 export type Id = {

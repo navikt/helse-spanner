@@ -3,7 +3,7 @@ export type PersonDto = {
     aktørId: string
     fødselsnummer: string
     opprettet: string
-    aktivitetslogg: Aktivitetslogg
+    aktivitetslogg: AktivitetsloggDto
 }
 
 export type FeilDto = {
@@ -24,7 +24,7 @@ export type VedtakDto = {
     id: string
 }
 
-export interface Aktivitet {
+export interface AktivitetDto {
     kontekster: number[]
     alvorlighetsgrad: string
     aktivitet?: string
@@ -34,12 +34,12 @@ export interface Aktivitet {
     behovtype?: string
 }
 
-export type Kontekst = {
+export type KontekstDto = {
     kontekstType: string
-    kontekstMap: KontekstMap
+    kontekstMap: KontekstMapDto
 }
 
-export type KontekstMap = {
+export type KontekstMapDto = {
     meldingsreferanseId?: string
     vedtaksperiodeId?: string
     aktørId?: string
@@ -49,7 +49,7 @@ export type KontekstMap = {
     utbetalingId?: string
 }
 
-export type Aktivitetslogg = {
-    aktiviteter: Aktivitet[]
-    kontekster: Kontekst[]
+export type AktivitetsloggDto = {
+    aktiviteter: AktivitetDto[]
+    kontekster: KontekstDto[]
 }
