@@ -6,7 +6,7 @@ import classNames from 'classnames'
 import styles from './Hendelse.module.css'
 import { format } from 'date-fns'
 import parseISO from 'date-fns/parseISO'
-import copyIcon from 'material-design-icons/content/svg/production/ic_content_copy_24px.svg'
+import { Copy } from '@navikt/ds-icons'
 import { Aktivitet } from './Aktivitet'
 
 export const Hendelse = React.memo(
@@ -41,13 +41,8 @@ export const Hendelse = React.memo(
                     {kontekst.kontekstType}
                 </button>
                 <span className={classNames(styles.Meldingsreferanse)}>{kontekst.kontekstMap.meldingsreferanseId}</span>
-                <button className={classNames(styles.KopierMeldingsreferanse)}>
-                    <img
-                        src={copyIcon}
-                        className={classNames(styles.Icon)}
-                        alt={'kopier tekst'}
-                        onClick={copyMeldingRefId}
-                    />
+                <button className={classNames(styles.KopierMeldingsreferanse)} aria-label={"Kopier melding id"} onClick={copyMeldingRefId} >
+                    <Copy color={"black"} />
                 </button>
 
                 {isExpanded && (
