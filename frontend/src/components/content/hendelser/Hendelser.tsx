@@ -10,7 +10,9 @@ import compareAsc from 'date-fns/compareAsc'
 type BeriketKontekst = {
     kontekst: KontekstDto
     aktiviteter: AktivitetDto[]
-    opprettet: Date
+    opprettet: Date,
+    harError: boolean
+    harWarning: boolean
 }
 const berikKontekster = (
     alleAktiviteter: AktivitetDto[],
@@ -23,15 +25,27 @@ const berikKontekster = (
                 .map((it) => parseISO(it.tidsstempel))
                 .sort(compareAsc)
                 .find(hasValue) ?? parseISO('1900-01-01')
+        const harError =
+            !!aktiviteter
+                .find(it => it.alvorlighetsgrad == "ERROR")
+        const harWarning =
+            !!aktiviteter
+                .find(it => it.alvorlighetsgrad == "WARN")
         return {
             kontekst,
             aktiviteter,
             opprettet,
+            harError,
+            harWarning
         }
     })
 }
 
 export const Hendelser = React.memo(({ aktiviteter }: { aktiviteter: AktivitetDto[] }) => {
+    const [visBareFeil, setVisBareFeil] = React.useState(false)
+    const toggleVisBareFeil = () =>
+        setVisBareFeil(!visBareFeil)
+
     const kontekstFinnesiAktiviteter = (kontekst: KontekstDto, index: number): boolean =>
         !!aktiviteter.find((aktivitet) => aktivitet.kontekster.includes(index))
 
@@ -53,12 +67,13 @@ export const Hendelser = React.memo(({ aktiviteter }: { aktiviteter: AktivitetDt
     )
     return (
         <div className={styles.Hendelser}>
-            {berikedeKontekster.map(({ kontekst, aktiviteter }) => {
+            <button onClick={toggleVisBareFeil}>Vis bare feil</button>
+            {berikedeKontekster.map((it) => {
                 return (
-                    <Hendelse
-                        aktiviteter={aktiviteter}
-                        kontekst={kontekst}
-                        key={kontekst.kontekstMap.meldingsreferanseId}
+                    (!visBareFeil || it.harError || it.harWarning) &&<Hendelse
+                        aktiviteter={it.aktiviteter}
+                        kontekst={it.kontekst}
+                        key={it.kontekst.kontekstMap.meldingsreferanseId}
                     />
                 )
             })}

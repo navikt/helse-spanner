@@ -23,7 +23,7 @@ const Person = React.memo(() => {
     )
 })
 
-const Vedtaksperiode = React.memo(() => {
+const VedtaksperiodeJsonView = React.memo(() => {
     const vedtaksperiode = useVedtak()
     return (
         <div>
@@ -49,7 +49,7 @@ export const JsonView = React.memo(() => {
                     {arbeidsgiver.vedtaksperioder.map((vedtaksperiode) => (
                         <VedtakContext.Provider value={vedtaksperiode} key={vedtaksperiode.id}>
                             <ShowIfSelected>
-                                <Vedtaksperiode />
+                                <VedtaksperiodeJsonView />
                             </ShowIfSelected>
                         </VedtakContext.Provider>
                     ))}
