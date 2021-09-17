@@ -2,17 +2,18 @@ import React, {PropsWithChildren} from 'react'
 import {JsonView} from './JsonView'
 import {HendelseView} from './hendelser/HendelseView'
 import {useRecoilState} from 'recoil'
-import {ContentView, displayViewState} from '../../state/state'
+import {displayViewState} from '../../state/state'
 import classNames from 'classnames'
 import styles from './Content.module.css'
 import {useIsSelected} from "../../state/contexts";
+import {ContentViewId} from "./ContentView";
 
 export const Content = React.memo(() => {
     return (
         <div>
             <div>
-                <ViewButton view={ContentView.Json} />
-                <ViewButton view={ContentView.Hendelser} />
+                <ViewButton view={ContentViewId.Json} />
+                <ViewButton view={ContentViewId.Hendelser} />
             </div>
             <JsonView />
             <HendelseView />
@@ -20,7 +21,7 @@ export const Content = React.memo(() => {
     )
 })
 
-const ViewButton: React.FC<{ view: ContentView }> = React.memo(({ view }) => {
+const ViewButton: React.FC<{ view: ContentViewId }> = React.memo(({ view }) => {
     const [displayViews, setDisplayViews] = useRecoilState(displayViewState)
     const isSelected = displayViews.includes(view)
     const toggleSelected = () => {

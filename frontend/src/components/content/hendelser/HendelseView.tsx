@@ -1,17 +1,13 @@
 import React from 'react'
 import {
     AktivitetsloggContext,
-    ArbeidsgiverContext,
     useAktivitetslogg,
     useArbeidsgiver,
     usePerson,
     useVedtak,
-    VedtakContext,
 } from '../../../state/contexts'
-import { useRecoilValue } from 'recoil'
-import { ContentView, displayViewState } from '../../../state/state'
 import { aktiviteterForKontekst, Hendelser } from './Hendelser'
-import { ShowIfSelected } from '../Content'
+import { ContentView } from '../ContentView'
 
 const HendelserForPerson = React.memo(() => {
     const aktivitetslogg = useAktivitetslogg()
@@ -47,28 +43,14 @@ const HendelserForVedtaksperiode = React.memo(() => {
 
 export const HendelseView = React.memo(() => {
     const person = usePerson()
-    const useDisplayView = useRecoilValue(displayViewState)
-    if (!useDisplayView.includes(ContentView.Hendelser)) return null
 
     return (
         <AktivitetsloggContext.Provider value={person.aktivitetslogg}>
-            <ShowIfSelected>
-                <HendelserForPerson />
-            </ShowIfSelected>
-            {person.arbeidsgivere.map((arbeidsgiver) => (
-                <ArbeidsgiverContext.Provider value={arbeidsgiver} key={arbeidsgiver.id}>
-                    <ShowIfSelected>
-                        <HendelserForArbeidsgiver />
-                    </ShowIfSelected>
-                    {arbeidsgiver.vedtaksperioder.map((vedtaksperiode) => (
-                        <VedtakContext.Provider value={vedtaksperiode} key={vedtaksperiode.id}>
-                            <ShowIfSelected>
-                                <HendelserForVedtaksperiode />
-                            </ShowIfSelected>
-                        </VedtakContext.Provider>
-                    ))}
-                </ArbeidsgiverContext.Provider>
-            ))}
+            <ContentView
+                person={HendelserForPerson}
+                arbeidsgiver={HendelserForArbeidsgiver}
+                vedtaksperiode={HendelserForVedtaksperiode}
+            />
         </AktivitetsloggContext.Provider>
     )
 })
