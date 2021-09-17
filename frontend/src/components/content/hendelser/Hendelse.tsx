@@ -8,6 +8,7 @@ import { format } from 'date-fns'
 import parseISO from 'date-fns/parseISO'
 import { Copy } from '@navikt/ds-icons'
 import { Aktivitet } from './Aktivitet'
+import commonStyles from '../../Common.module.css'
 
 export const Hendelse = React.memo(
     ({ aktiviteter, kontekst }: { aktiviteter: AktivitetDto[]; kontekst: KontekstDto }) => {
@@ -32,19 +33,30 @@ export const Hendelse = React.memo(
             }
         }
 
+        const isError = aktiviteter.find((it) => it.alvorlighetsgrad == 'ERROR')
+
+        const isWarning = aktiviteter.find((it) => it.alvorlighetsgrad == 'WARN')
+
         return (
             <div>
-                <span className={classNames(styles.DatoText)}>
-                    {format(parseISO(aktiviteter[0].tidsstempel), 'yyyy-MM-dd')}
+                <span className={classNames(isWarning && commonStyles.Warning, isError && commonStyles.Error)}>
+                    <span className={classNames(styles.DatoText)}>
+                        {format(parseISO(aktiviteter[0].tidsstempel), 'yyyy-MM-dd')}
+                    </span>
+                    <button onClick={toggleSelected} className={styles.Ekspander}>
+                        {kontekst.kontekstType}
+                    </button>
+                    <span className={classNames(styles.Meldingsreferanse)}>
+                        {kontekst.kontekstMap.meldingsreferanseId}
+                    </span>
+                    <button
+                        className={classNames(styles.KopierMeldingsreferanse)}
+                        aria-label={'Kopier melding id'}
+                        onClick={copyMeldingRefId}
+                    >
+                        <Copy color={'black'} />
+                    </button>
                 </span>
-                <button onClick={toggleSelected} className={styles.Ekspander}>
-                    {kontekst.kontekstType}
-                </button>
-                <span className={classNames(styles.Meldingsreferanse)}>{kontekst.kontekstMap.meldingsreferanseId}</span>
-                <button className={classNames(styles.KopierMeldingsreferanse)} aria-label={"Kopier melding id"} onClick={copyMeldingRefId} >
-                    <Copy color={"black"} />
-                </button>
-
                 {isExpanded && (
                     <div style={{ gridArea: 'aktiviteter' }}>
                         {aktiviteter.map((it, index) => (
