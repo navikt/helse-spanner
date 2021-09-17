@@ -2,7 +2,7 @@ import React from 'react'
 import UserEvent from '@testing-library/user-event'
 import { testApp } from '../../testApp'
 import { createTestPerson } from '../../state/testData'
-import { finnesIkke } from '../../external/feil'
+import { lagfinnesIkkeFeil } from '../../external/feil'
 import testingLibrary, { getByTestId } from '@testing-library/react'
 
 function søk(text: string = '42') {
@@ -41,7 +41,7 @@ test('bruker søker opp en person', async () => {
 })
 
 test('bruker søker opp en person som ikke finnes', async () => {
-    testApp([], { '43': new finnesIkke() })
+    testApp([], { '43': lagfinnesIkkeFeil() })
     søk('43')
     await respons()
     expect(feilmelding().textContent).toContain('Personen finnes ikke i spleis')
