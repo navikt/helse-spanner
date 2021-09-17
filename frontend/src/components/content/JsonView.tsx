@@ -1,7 +1,9 @@
 import React from 'react'
-import {useArbeidsgiver, usePerson, useVedtak} from '../../state/contexts'
+import { ArbeidsgiverContext, useArbeidsgiver, usePerson, useVedtak, VedtakContext } from '../../state/contexts'
 import ReactJson from 'react-json-view'
-import {ContentView} from "./ContentView";
+import { useRecoilValue } from 'recoil'
+import { ContentView, displayViewState } from '../../state/state'
+import { ShowIfSelected } from './Content'
 
 const Arbeidsgiver = React.memo(() => {
     const arbeidsgiver = useArbeidsgiver()
@@ -31,5 +33,28 @@ const Vedtaksperiode = React.memo(() => {
 })
 
 export const JsonView = React.memo(() => {
-    return <ContentView person={Person} arbeidsgiver={Arbeidsgiver} vedtaksperiode={Vedtaksperiode} />
+    const person = usePerson()
+    const useDisplayView = useRecoilValue(displayViewState)
+    if (!useDisplayView.includes(ContentView.Json)) return null
+    return (
+        <>
+            <ShowIfSelected>
+                <Person />
+            </ShowIfSelected>
+            {person.arbeidsgivere.map((arbeidsgiver) => (
+                <ArbeidsgiverContext.Provider value={arbeidsgiver} key={arbeidsgiver.id}>
+                    <ShowIfSelected>
+                        <Arbeidsgiver />
+                    </ShowIfSelected>
+                    {arbeidsgiver.vedtaksperioder.map((vedtaksperiode) => (
+                        <VedtakContext.Provider value={vedtaksperiode} key={vedtaksperiode.id}>
+                            <ShowIfSelected>
+                                <Vedtaksperiode />
+                            </ShowIfSelected>
+                        </VedtakContext.Provider>
+                    ))}
+                </ArbeidsgiverContext.Provider>
+            ))}
+        </>
+    )
 })

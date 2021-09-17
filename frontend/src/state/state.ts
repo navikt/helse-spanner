@@ -1,15 +1,18 @@
 import Recoil from 'recoil'
-import {Id} from './contexts'
-import {ContentViewId} from "../components/content/ContentView";
+import { Id } from './contexts'
 
 export const highligthState = Recoil.atom<Id>({
     key: 'highligthState',
     default: {}
 })
+export enum ContentView {
+    Json = "Json",
+    Hendelser = "Hendelser",
+}
 
-export const displayViewState = Recoil.atom<ContentViewId[]>({
+export const displayViewState = Recoil.atom<ContentView[]>({
     key: 'displayViewState',
-    default: [ContentViewId.Json]
+    default: [ContentView.Json]
 })
 
 export const expandedHendelserState = Recoil.atom<string[]>({
