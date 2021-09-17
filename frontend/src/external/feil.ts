@@ -4,14 +4,20 @@ export class backendFeil extends Error {
     feilId: string | undefined
     status: number
 
-    constructor(status: number, feilDto?: FeilDto) {
-        !!feilDto
-            ? super(`Feil fra server: ${status}. Feilkode: ${feilDto.error_id}. ${feilDto.description}`)
-            : super(`Feil fra server: ${status}`)
-        this.feilId = feilDto?.error_id
+    constructor(message: string, status: number, feilId: string | undefined) {
+        super(message)
+        this.feilId = feilId
         this.name = 'backendFeil'
         this.status = status
     }
+}
+
+export const lagBackendFeil = (status: number, feilDto?: FeilDto) => {
+    const feilId = feilDto?.error_id
+    const message = !!feilDto
+        ? `Feil fra server: ${status}. Feilkode: ${feilDto.error_id}. ${feilDto.description}`
+        : `Feil fra server: ${status}`
+    return new backendFeil(message, status, feilId)
 }
 
 export class httpFeil extends Error {
@@ -25,10 +31,14 @@ export class httpFeil extends Error {
 }
 
 export class finnesIkke extends backendFeil {
-    constructor(feilDto?: FeilDto) {
-        super(404, feilDto)
+    constructor(feilId: string | undefined) {
+        super('Backend fant ikke element', 404, feilId)
         this.name = 'notFoundFeil'
     }
+}
+export const lagfinnesIkkeFeil = (feilDto?: FeilDto) => {
+    const feilId = feilDto?.error_id
+    return new finnesIkke(feilId)
 }
 
 const fraResponse = async (response: Response): Promise<backendFeil> => {
@@ -39,7 +49,7 @@ const fraResponse = async (response: Response): Promise<backendFeil> => {
         console.log('Fikk svar fra server uten feilDto')
     }
 
-    return response.status === 404 ? new finnesIkke(feilDto) : new backendFeil(response.status, feilDto)
+    return response.status === 404 ? lagfinnesIkkeFeil(feilDto) : lagBackendFeil(response.status, feilDto)
 }
 
 export const feilVedDårligRespons = async (response: Response): Promise<Response> => {

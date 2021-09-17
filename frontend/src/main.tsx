@@ -6,13 +6,20 @@ import { Environment } from './external/environment'
 import { hardCodedBackend } from './external/jsonBackend'
 import { restBackend } from './external/restBackend'
 import { BackendContext } from './external/backend'
-import { QueryClient, QueryClientProvider } from 'react-query'
+import query, { QueryClientProvider } from 'react-query'
 import { RecoilRoot } from 'recoil'
 
 const backend = Environment.isDevelopment ? hardCodedBackend : restBackend(false)
 // let backend = testBackend([], {"40": new finnesIkke})
 
-const queryClient = new QueryClient()
+const queryClient = new query.QueryClient({
+    defaultOptions: {
+        queries: {
+            retryDelay: 500,
+            retry: 2,
+        },
+    },
+})
 
 ReactDOM.render(
     <React.StrictMode>
