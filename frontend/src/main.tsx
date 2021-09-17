@@ -6,7 +6,7 @@ import { Environment } from './external/environment'
 import { hardCodedBackend } from './external/jsonBackend'
 import { restBackend } from './external/restBackend'
 import { BackendContext } from './external/backend'
-import query, { QueryClientProvider } from 'react-query'
+import * as query from 'react-query'
 import { RecoilRoot } from 'recoil'
 
 const backend = Environment.isDevelopment ? hardCodedBackend : restBackend(false)
@@ -25,9 +25,9 @@ ReactDOM.render(
     <React.StrictMode>
         <RecoilRoot>
             <BackendContext.Provider value={backend}>
-                <QueryClientProvider client={queryClient}>
+                <query.QueryClientProvider client={queryClient}>
                     <App />
-                </QueryClientProvider>
+                </query.QueryClientProvider>
             </BackendContext.Provider>
         </RecoilRoot>
     </React.StrictMode>,
