@@ -8,7 +8,7 @@ import { PersonView } from './PersonView'
 import { PersonContext } from '../../state/contexts'
 
 export type FetchPersonProps = {
-    aktørId: string
+    personId: string
 }
 
 const Feilmelding = React.memo(({ feil }: { feil: any }) => {
@@ -42,8 +42,8 @@ const Spinner = React.memo(() => (
 export const PersonData = React.memo((props: FetchPersonProps) => {
     const backend = useBackend()
     try {
-        const request = personRequestFactory(props.aktørId, backend)
-        const { isLoading, isError, data, error } = useQuery(['person', props.aktørId], request)
+        const request = personRequestFactory(props.personId, backend)
+        const { isLoading, isError, data, error } = useQuery(['person', props.personId], request)
         if (isLoading) {
             return <Spinner />
         }

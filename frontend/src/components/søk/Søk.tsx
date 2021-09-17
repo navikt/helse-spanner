@@ -3,16 +3,16 @@ import styles from './Header.module.css'
 import classNames from 'classnames'
 
 export type SøkProps = {
-    setAktørId: (aktørId?: string) => void
+    setPersonId: (personId?: string) => void
 }
 
 export const Søk = React.memo((props: SøkProps) => {
     const [søketekst, setSøketekst] = React.useState('')
     const sendSøk = () => {
         if (søketekst.trim() === '') {
-            props.setAktørId(undefined)
+            props.setPersonId(undefined)
         } else {
-            props.setAktørId(søketekst.trim())
+            props.setPersonId(søketekst.trim())
             setSøketekst("")
         }
     }
