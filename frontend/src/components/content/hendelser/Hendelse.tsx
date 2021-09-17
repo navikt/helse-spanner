@@ -39,16 +39,17 @@ export const Hendelse = React.memo(
 
         return (
             <div>
-                <span className={classNames(isWarning && commonStyles.Warning, isError && commonStyles.Error)}>
-                    <span className={classNames(styles.DatoText)}>
+                <div className={classNames(styles.Header, isWarning && commonStyles.Warning, isError && commonStyles.Error)}>
+                    <div className={classNames(styles.DatoText)}>
                         {format(parseISO(aktiviteter[0].tidsstempel), 'yyyy-MM-dd')}
-                    </span>
+                    </div>
+
                     <button onClick={toggleSelected} className={styles.Ekspander}>
                         {kontekst.kontekstType}
                     </button>
-                    <span className={classNames(styles.Meldingsreferanse)}>
+                    <div className={classNames(styles.Meldingsreferanse)}>
                         {kontekst.kontekstMap.meldingsreferanseId}
-                    </span>
+                    </div>
                     <button
                         className={classNames(styles.KopierMeldingsreferanse)}
                         aria-label={'Kopier melding id'}
@@ -56,7 +57,7 @@ export const Hendelse = React.memo(
                     >
                         <Copy color={'black'} />
                     </button>
-                </span>
+                </div>
                 {isExpanded && (
                     <div style={{ gridArea: 'aktiviteter' }}>
                         {aktiviteter.map((it, index) => (

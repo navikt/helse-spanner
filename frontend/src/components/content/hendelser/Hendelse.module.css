@@ -1,3 +1,7 @@
+.Header {
+    display: flex;
+}
+
 .Ekspander {
     width: 12em;
     text-align: left;

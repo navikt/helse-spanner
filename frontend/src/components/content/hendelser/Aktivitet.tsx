@@ -11,9 +11,9 @@ export const Aktivitet: React.FC<AktivitetViewProps> = React.memo(({aktivitet}: 
     const isWarning = aktivitet.alvorlighetsgrad == "WARN"
     const isError = aktivitet.alvorlighetsgrad == "ERROR"
     return <div className={styles.AktivitetView}>
-        <span className={classNames(styles.HeaderLinje, isWarning && commonStyles.Warning, isError && commonStyles.Error)}>
-            <bdi className={styles.AktivitetViewAlvorlighetsgradLabel}>{aktivitet.alvorlighetsgrad}</bdi>
-            <bdi className={styles.AktivitetViewMeldingText}>{aktivitet.melding}</bdi>
-        </span>
+        <div className={classNames(styles.HeaderLinje, isWarning && commonStyles.Warning, isError && commonStyles.Error)}>
+            <div className={styles.AktivitetViewAlvorlighetsgradLabel}>{aktivitet.alvorlighetsgrad}</div>
+            <div className={styles.AktivitetViewMeldingText}>{aktivitet.melding}</div>
+        </div>
     </div>
 })
