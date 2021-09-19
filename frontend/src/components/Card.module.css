@@ -1,0 +1,15 @@
+.Card {
+    padding: 1.5rem;
+    background-color: white;
+    border-radius: 0.5rem;
+    transition: all 0.2s ease;
+    width: max-content;
+}
+
+.HeaderCard {
+    background-color: white;
+    border-radius: 0.5rem;
+    transition: all 0.2s ease;
+    width: 100%;
+    margin-bottom: 1em;
+}
