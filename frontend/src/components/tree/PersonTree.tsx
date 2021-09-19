@@ -16,11 +16,17 @@ import { Next, Expand } from '@navikt/ds-icons'
 
 export const PersonTree = React.memo(() => {
     const person = usePerson()
+
+    const setExpandedArbeidsgivere = useSetRecoilState(expandedArbeidsgivereState)
+    const expandAllArbeidsgivere = () =>
+        setExpandedArbeidsgivere((_) => person.arbeidsgivere.map((arb) => arb.organisasjonsnummer))
+    const closeAllArbeidsgivere = () => setExpandedArbeidsgivere((_) => [])
+
     return (
         <div className={classNames(styles.PersonTree)}>
-            <SelectableTreeNode indent={0}>
-                {person.aktørId}
-            </SelectableTreeNode>
+            <button onClick={expandAllArbeidsgivere}>Åpne alle</button>
+            <button onClick={closeAllArbeidsgivere}>Lukk alle</button>
+            <SelectableTreeNode indent={0}>{person.aktørId}</SelectableTreeNode>
             {person.arbeidsgivere.map((arbeidsgiver) => (
                 <ArbeidsgiverContext.Provider value={arbeidsgiver} key={arbeidsgiver.id}>
                     <ArbeidsgiverNode />
@@ -34,7 +40,7 @@ const useSelect = () => {
     const setSelected = useSetRecoilState(selectedState)
     const id = useId()
     return React.useMemo(
-        () => (e:React.MouseEvent) => {
+        () => (e: React.MouseEvent) => {
             setSelected(id)
             e.stopPropagation()
         },
@@ -42,12 +48,12 @@ const useSelect = () => {
     )
 }
 
-const SelectableTreeNode = React.memo<React.PropsWithChildren<{indent: number }>>(({ indent = 0, children }) => {
+const SelectableTreeNode = React.memo<React.PropsWithChildren<{ indent: number }>>(({ indent = 0, children }) => {
     const isSelected = useIsSelected()
     const select = useSelect()
     return (
         <div
-            style={{ marginLeft: `${indent * 0.9}em`, cursor: "pointer" }}
+            style={{ marginLeft: `${indent * 0.9}em`, cursor: 'pointer' }}
             className={classNames(styles.TreeNode, isSelected && styles.Highlighted)}
             onClick={select}
         >
@@ -62,43 +68,42 @@ const ArbeidsgiverNode = React.memo(() => {
     const [expandedArbeidsgivere, setExpandedArbeidsgivere] = useRecoilState(expandedArbeidsgivereState)
     const isExpanded = expandedArbeidsgivere.includes(arbeidsgiver.organisasjonsnummer)
 
-    const toggleExpandArbeidsgivere = () => {
+    const toggleExpandArbeidsgiver = () => {
         const isExpanded = expandedArbeidsgivere.includes(arbeidsgiver.organisasjonsnummer)
-        if(isExpanded) {
-            setExpandedArbeidsgivere(expandedArbeidsgivere =>
+        if (isExpanded) {
+            setExpandedArbeidsgivere((expandedArbeidsgivere) =>
                 expandedArbeidsgivere.filter(
-                    (expandedOrgnummer) => expandedOrgnummer != arbeidsgiver.organisasjonsnummer)
+                    (expandedOrgnummer) => expandedOrgnummer != arbeidsgiver.organisasjonsnummer
+                )
             )
         } else {
-            setExpandedArbeidsgivere(expandedArbeidsgivere =>
-                [...expandedArbeidsgivere, arbeidsgiver.organisasjonsnummer])
+            setExpandedArbeidsgivere((expandedArbeidsgivere) => [
+                ...expandedArbeidsgivere,
+                arbeidsgiver.organisasjonsnummer,
+            ])
         }
     }
 
     return (
         <>
             <div className={styles.ArbeidsgiverNode}>
-                <ExpandToggle isExpanded={isExpanded} onClick={ () =>toggleExpandArbeidsgivere()} />
-                <SelectableTreeNode indent={0}>
-                    {arbeidsgiver.organisasjonsnummer}
-                </SelectableTreeNode>
+                <ExpandToggle isExpanded={isExpanded} onClick={() => toggleExpandArbeidsgiver()} />
+                <SelectableTreeNode indent={0}>{arbeidsgiver.organisasjonsnummer}</SelectableTreeNode>
             </div>
-            {isExpanded && arbeidsgiver.vedtaksperioder.map((vedtak) => (
-                <VedtakContext.Provider value={vedtak} key={vedtak.id}>
-                    <VedtaksNode />
-                </VedtakContext.Provider>
-            ))}
+            {isExpanded &&
+                arbeidsgiver.vedtaksperioder.map((vedtak) => (
+                    <VedtakContext.Provider value={vedtak} key={vedtak.id}>
+                        <VedtaksNode />
+                    </VedtakContext.Provider>
+                ))}
         </>
     )
 })
 
-
-
-
-const ExpandToggle = React.memo<React.PropsWithoutRef<{onClick: () => void, isExpanded: boolean }>>((props) => {
+const ExpandToggle = React.memo<React.PropsWithoutRef<{ onClick: () => void; isExpanded: boolean }>>((props) => {
     return (
         <button onClick={props.onClick} className={styles.ExpandArbeidsgiverButton}>
-            { props.isExpanded? <Expand /> : <Next />  }
+            {props.isExpanded ? <Expand /> : <Next />}
         </button>
     )
 })
