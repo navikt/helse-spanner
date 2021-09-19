@@ -1,9 +1,9 @@
 import React from 'react'
-import { ArbeidsgiverContext, useArbeidsgiver, usePerson, useVedtak, VedtakContext } from '../../state/contexts'
+import {useArbeidsgiver, usePerson, useVedtak} from '../../state/contexts'
 import ReactJson from 'react-json-view'
-import { useRecoilValue } from 'recoil'
-import { ContentView, displayViewState } from '../../state/state'
-import { ShowIfSelected } from './Content'
+import {ContentView, displayViewState} from '../../state/state'
+import {ContentCatgegoryHOC} from "./ContentCatgegoryHOC";
+import {useRecoilValue} from "recoil";
 
 const Arbeidsgiver = React.memo(() => {
     const arbeidsgiver = useArbeidsgiver()
@@ -23,7 +23,7 @@ const Person = React.memo(() => {
     )
 })
 
-const VedtaksperiodeJsonView = React.memo(() => {
+const Vedtaksperiode = React.memo(() => {
     const vedtaksperiode = useVedtak()
     return (
         <div>
@@ -33,28 +33,8 @@ const VedtaksperiodeJsonView = React.memo(() => {
 })
 
 export const JsonView = React.memo(() => {
-    const person = usePerson()
+    let displayName = ContentView.Json
     const useDisplayView = useRecoilValue(displayViewState)
-    if (!useDisplayView.includes(ContentView.Json)) return null
-    return (
-        <>
-            <ShowIfSelected>
-                <Person />
-            </ShowIfSelected>
-            {person.arbeidsgivere.map((arbeidsgiver) => (
-                <ArbeidsgiverContext.Provider value={arbeidsgiver} key={arbeidsgiver.id}>
-                    <ShowIfSelected>
-                        <Arbeidsgiver />
-                    </ShowIfSelected>
-                    {arbeidsgiver.vedtaksperioder.map((vedtaksperiode) => (
-                        <VedtakContext.Provider value={vedtaksperiode} key={vedtaksperiode.id}>
-                            <ShowIfSelected>
-                                <VedtaksperiodeJsonView />
-                            </ShowIfSelected>
-                        </VedtakContext.Provider>
-                    ))}
-                </ArbeidsgiverContext.Provider>
-            ))}
-        </>
-    )
+    if (!useDisplayView.includes(displayName)) return null
+    return <ContentCatgegoryHOC {...{ Person, Arbeidsgiver, Vedtaksperiode }}/>
 })
