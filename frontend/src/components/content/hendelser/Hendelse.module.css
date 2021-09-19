@@ -12,6 +12,7 @@
     font-size: small;
     color: grey;
     display: inline-block;
+    min-width: 6em;
 }
 
 .Meldingsreferanse {

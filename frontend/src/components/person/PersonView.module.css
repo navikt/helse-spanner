@@ -2,8 +2,20 @@
     margin: 1em;
     display: grid;
     padding: 2px;
-    grid-template-columns: 25% 75%;
+    grid-template-columns: 200px auto;
     grid-template-areas:
         'header header'
         'nav content';
+}
+
+@media (min-width: calc(800px)) {
+    .PersonView {
+        margin: 1em;
+        display: grid;
+        padding: 2px;
+        grid-template-columns: 300px auto;
+        grid-template-areas:
+        'header header'
+        'nav content';
+    }
 }

@@ -1,11 +1,11 @@
-import React, {PropsWithChildren} from 'react'
-import {JsonView} from './JsonView'
-import {HendelseView} from './hendelser/HendelseView'
-import {useRecoilState} from 'recoil'
-import {ContentView, displayViewState} from '../../state/state'
+import React, { PropsWithChildren } from 'react'
+import { JsonView } from './JsonView'
+import { HendelseView } from './hendelser/HendelseView'
+import { useRecoilState } from 'recoil'
+import { ContentView, displayViewState } from '../../state/state'
 import classNames from 'classnames'
 import styles from './Content.module.css'
-import {useIsSelected} from "../../state/contexts";
+import { useIsSelected } from '../../state/contexts'
 
 export const Content = React.memo(() => {
     return (
@@ -14,8 +14,10 @@ export const Content = React.memo(() => {
                 <ViewButton view={ContentView.Json} />
                 <ViewButton view={ContentView.Hendelser} />
             </div>
-            <JsonView />
-            <HendelseView />
+            <div className={classNames(styles.ContentCards)}>
+                <JsonView />
+                <HendelseView />
+            </div>
         </div>
     )
 })
@@ -36,7 +38,7 @@ const ViewButton: React.FC<{ view: ContentView }> = React.memo(({ view }) => {
         </button>
     )
 })
-export const ShowIfSelected: React.FC<PropsWithChildren<any>> = React.memo(({children}) => {
+export const ShowIfSelected: React.FC<PropsWithChildren<any>> = React.memo(({ children }) => {
     const isSelected = useIsSelected()
     if (!isSelected) return null
     return <>{children}</>
