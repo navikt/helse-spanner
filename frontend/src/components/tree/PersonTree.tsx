@@ -4,6 +4,7 @@ import React from 'react'
 import {
     ArbeidsgiverContext,
     ForkastetVedtaksperiodeContext,
+    idEqual,
     useArbeidsgiver,
     useForkastetVedtaksperiode,
     useId,
@@ -43,14 +44,23 @@ export const PersonTree = React.memo(() => {
 PersonTree.displayName = "PersonTree"
 
 const useSelect = () => {
-    const setSelected = useSetRecoilState(selectedState)
+    const [selected, setSelected] = useRecoilState(selectedState)
+    const isSelected = useIsSelected()
     const id = useId()
+    const toggleSelect = () => {
+        if (!isSelected) setSelected([...selected, id])
+        else setSelected(selected.filter((it) => !idEqual(it, id)))
+    }
+    const setOnlySelected = () => {
+        setSelected([id])
+    }
     return React.useMemo(
         () => (e: React.MouseEvent) => {
-            setSelected(id)
+            if (e.ctrlKey || e.metaKey) toggleSelect()
+            else setOnlySelected()
             e.stopPropagation()
         },
-        [setSelected, id]
+        [setSelected, id, selected]
     )
 }
 

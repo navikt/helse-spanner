@@ -68,7 +68,7 @@ export const idEqual = (a: Id, b: Id) =>
     a.forkastetVedtaksperiode === b.forkastetVedtaksperiode
 
 export const useIsSelected = () => {
-    const highlighted = useRecoilValue(selectedState)
+    const selected = useRecoilValue(selectedState)
     const id = useId()
-    return highlighted && idEqual(id, highlighted)
+    return !!selected.find(it => idEqual(it, id))
 }

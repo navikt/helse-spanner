@@ -1,9 +1,9 @@
 import Recoil from 'recoil'
 import { Id } from './contexts'
 
-export const selectedState = Recoil.atom<Id>({
+export const selectedState = Recoil.atom<Id[]>({
     key: 'highligthState',
-    default: {}
+    default: [{}]
 })
 export enum ContentView {
     Json = "Json",
