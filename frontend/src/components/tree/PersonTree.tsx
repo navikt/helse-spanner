@@ -12,6 +12,7 @@ import {
 } from '../../state/contexts'
 import { useSetRecoilState } from 'recoil'
 import { selectedState } from '../../state/state'
+import { Next } from '@navikt/ds-icons'
 
 export const PersonTree = React.memo(() => {
     const person = usePerson()
@@ -60,6 +61,7 @@ const ArbeidsgiverNode = React.memo(() => {
 
     return (
         <>
+            < Next />
         <SelectableTreeNode indent={1}>
                 {arbeidsgiver.organisasjonsnummer}
         </SelectableTreeNode>

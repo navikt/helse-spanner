@@ -1,6 +1,5 @@
 .PersonTree {
     grid-area: nav;
-    border: black solid 2px;
     min-height: 10em;
     max-width: 20em;
 }
@@ -12,16 +11,17 @@
 }
 
 .ArbeidsgiverNode {
+    cursor: pointer;
 }
 
 .Highlighted {
-    background: blue;
+    background: rgba(144, 202, 249, 0.20);
+    outline: 1px solid rgba(144, 202, 249, 0.50);
 }
 
 .TreeNode {
     margin: 0;
     padding: 3px;
-    border-bottom: gray solid 1px;
 }
 
 .Indentation2 {
