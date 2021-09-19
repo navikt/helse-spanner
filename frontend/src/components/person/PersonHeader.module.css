@@ -1,10 +1,7 @@
 .Header {
-    grid-area: header;
     display: inline-block;
-    border: 1px solid black;
-    padding: 4px;
-    margin-bottom: 1em;
 }
+
 
 .Header dl div {
     display: inline-block;
