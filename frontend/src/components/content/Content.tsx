@@ -5,7 +5,7 @@ import { useRecoilState } from 'recoil'
 import { ContentView, displayViewState } from '../../state/state'
 import classNames from 'classnames'
 import styles from './Content.module.css'
-import { useIsSelected } from '../../state/contexts'
+import { useIsOnlySelected, useIsSelected } from '../../state/contexts'
 import {Card} from "../Card";
 
 export const Content = React.memo(() => {
@@ -40,7 +40,8 @@ const ViewButton: React.FC<{ view: ContentView }> = React.memo(({ view }) => {
     )
 })
 export const ShowIfSelected: React.FC<PropsWithChildren<any>> = React.memo(({ children }) => {
-    const isSelected = useIsSelected()
-    if (!isSelected) return null
-    return <Card  className={classNames(styles.ContentCard)}>{children}</Card>
+    const selectedColor = useIsSelected()
+    const onlySelected = useIsOnlySelected()
+    if (!selectedColor) return null
+    return (<div style={{borderStyle: onlySelected?`solid` : 'none', borderWidth: "7px", borderColor: selectedColor}}  className={classNames(styles.ContentCard)}>{children}</div>)
 })

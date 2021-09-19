@@ -61,6 +61,17 @@ export const useId = (): Id => {
     )
 }
 
+const selectColors = [
+    "LightBlue",
+    "DarkGray",
+    "DarkOrange",
+    "Turquoise",
+    "DarkSeaGreen",
+    "Orchid",
+    "Gold",
+    "LawnGreen",
+]
+
 export const idEqual = (a: Id, b: Id) =>
     a.arbeidsgiver === b.arbeidsgiver &&
     a.vedtaksperiode === b.vedtaksperiode &&
@@ -70,5 +81,16 @@ export const idEqual = (a: Id, b: Id) =>
 export const useIsSelected = () => {
     const selected = useRecoilValue(selectedState)
     const id = useId()
-    return !!selected.find(it => idEqual(it, id))
+    const index = selected.findIndex(it => idEqual(it, id))
+    if(index == -1)
+        return undefined
+    else
+        return selectColors[index % selectColors.length]
 }
+
+export const useIsOnlySelected = () => {
+    const selected = useRecoilValue(selectedState)
+    return selected.length > 1
+}
+
+

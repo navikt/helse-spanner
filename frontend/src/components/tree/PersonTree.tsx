@@ -69,12 +69,12 @@ interface SelectableTreeNodeProps extends React.HTMLAttributes<HTMLDivElement> {
 // export const Card: React.FC<CardProps> = ({ className, children, ...rest }) => (
 
 const SelectableTreeNode= React.memo<SelectableTreeNodeProps>(({ className, indent = 0, children, ...rest }) => {
-    const isSelected = useIsSelected()
+    const selected = useIsSelected()
     const select = useSelect()
     return (
         <div
-            style={{ marginLeft: `${indent * 0.9}em`, cursor: 'pointer' }}
-            className={classNames(styles.TreeNode, isSelected && styles.Highlighted, className)}
+            style={{ marginLeft: `${indent * 0.9}em`, background: selected , cursor: 'pointer' }}
+            className={classNames(styles.TreeNode, !!selected && styles.Highlighted, className)}
             onClick={select}
             {...rest}
         >
