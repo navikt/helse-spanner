@@ -1,7 +1,7 @@
 import {AktivitetsloggDto, ArbeidsgiverDto, PersonDto, VedtakDto} from './dto'
 import React, {useMemo} from 'react'
 import {useRecoilValue} from 'recoil'
-import {highligthState} from './state'
+import {selectedState} from './state'
 
 //For å slippe defaultvalue til context.
 //https://kentcdodds.com/blog/how-to-use-react-context-effectively
@@ -45,7 +45,7 @@ export const useId = (): Id => {
 
 export const idEqual = (a: Id, b: Id) => a.arbeidsgiver === b.arbeidsgiver && a.vedtaksperiode === b.vedtaksperiode
 export const useIsSelected = () => {
-    const highlighted = useRecoilValue(highligthState)
+    const highlighted = useRecoilValue(selectedState)
     const id = useId()
     return highlighted && idEqual(id, highlighted)
 }
