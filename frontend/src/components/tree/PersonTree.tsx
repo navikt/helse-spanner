@@ -10,8 +10,8 @@ import {
     useVedtak,
     VedtakContext,
 } from '../../state/contexts'
-import { useSetRecoilState } from 'recoil'
-import { selectedState } from '../../state/state'
+import { useRecoilState, useSetRecoilState } from 'recoil'
+import { expandedArbeidsgivereState, expandedHendelserState, selectedState } from '../../state/state'
 import { Next } from '@navikt/ds-icons'
 
 export const PersonTree = React.memo(() => {
@@ -58,6 +58,9 @@ const SelectableTreeNode = React.memo<React.PropsWithChildren<{indent: number }>
 
 const ArbeidsgiverNode = React.memo(() => {
     const arbeidsgiver = useArbeidsgiver()
+
+    const [expandedArbeidsgivere, setExpandedArbeidsgivere] = useRecoilState(expandedArbeidsgivereState)
+    const isExpanded = expandedArbeidsgivere.includes(arbeidsgiver.organisasjonsnummer)
 
     return (
         <>

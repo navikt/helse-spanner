@@ -20,4 +20,9 @@ export const expandedHendelserState = Recoil.atom<string[]>({
     default: []
 })
 
+export const expandedArbeidsgivereState = Recoil.atom<string[]>({
+    key: 'expandedArbeidsgiver',
+    default: []
+})
+
 
