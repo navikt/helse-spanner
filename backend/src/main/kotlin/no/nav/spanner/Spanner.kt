@@ -26,6 +26,7 @@ enum class IdType(val header: String) {
     FNR("fnr"), AKTORID("aktorId")
 }
 
+private val logg = Log.logger("Spanner")
 
 fun Application.spanner(spleis: Personer, config: AzureADConfig, development: Boolean) {
 

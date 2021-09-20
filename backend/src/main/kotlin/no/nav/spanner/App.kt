@@ -10,12 +10,12 @@ import org.slf4j.LoggerFactory
 import java.io.File
 
 
-val logg = Log.logger("Spanner")
+private val logg = Log.logger("Main")
 
 fun main() {
     val configProps = ConfigurationProperties.systemProperties() overriding
             ConfigurationProperties.fromOptionalFile(File(".env")) overriding
-            EnvironmentVariables();
+            EnvironmentVariables()
 
     val spannerConfig = Config.from(configProps)
     logg
