@@ -5,4 +5,4 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
-include("frontend", "spanner-backend")
+include("frontend", "backend")

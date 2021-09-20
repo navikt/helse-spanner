@@ -6,5 +6,5 @@ out/
 
 .idea/
 
-spanner-backend/src/jvmMain/resources/.env
+backend/src/jvmMain/resources/.env
 .env
