@@ -11,9 +11,8 @@ export const PersonView = React.memo(() => {
         <div className={classNames(styles.PersonView)} data-testid="person">
             <HeaderCard style={{gridArea: "header"}}><PersonHeader /></HeaderCard>
             <Card style={{width: "80%", height: "100%"}}><PersonTree /></Card>
-            <Card style={{height: "100%"}}>
+
                 <Content />
-            </Card>
         </div>
     )
 })

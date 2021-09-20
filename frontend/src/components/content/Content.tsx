@@ -6,6 +6,7 @@ import { ContentView, displayViewState } from '../../state/state'
 import classNames from 'classnames'
 import styles from './Content.module.css'
 import { useIsSelected } from '../../state/contexts'
+import {Card} from "../Card";
 
 export const Content = React.memo(() => {
     return (
@@ -41,5 +42,5 @@ const ViewButton: React.FC<{ view: ContentView }> = React.memo(({ view }) => {
 export const ShowIfSelected: React.FC<PropsWithChildren<any>> = React.memo(({ children }) => {
     const isSelected = useIsSelected()
     if (!isSelected) return null
-    return <>{children}</>
+    return <Card  className={classNames(styles.ContentCard)}>{children}</Card>
 })

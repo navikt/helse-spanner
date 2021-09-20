@@ -111,7 +111,7 @@ const ExpandToggle = React.memo<React.PropsWithoutRef<{ onClick: () => void; isE
 const VedtaksNode = React.memo(() => {
     const vedtak = useVedtak()
     return (
-        <SelectableTreeNode indent={3}>
+        <SelectableTreeNode indent={1.2}>
             {vedtak.fom} - {vedtak.tom}
             <br />
             {vedtak.tilstand}
