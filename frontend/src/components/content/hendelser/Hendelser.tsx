@@ -10,7 +10,7 @@ import compareAsc from 'date-fns/compareAsc'
 type BeriketKontekst = {
     kontekst: KontekstDto
     aktiviteter: AktivitetDto[]
-    opprettet: Date,
+    opprettet: Date
     harError: boolean
     harWarning: boolean
 }
@@ -25,26 +25,21 @@ const berikKontekster = (
                 .map((it) => parseISO(it.tidsstempel))
                 .sort(compareAsc)
                 .find(hasValue) ?? parseISO('1900-01-01')
-        const harError =
-            !!aktiviteter
-                .find(it => it.alvorlighetsgrad == "ERROR")
-        const harWarning =
-            !!aktiviteter
-                .find(it => it.alvorlighetsgrad == "WARN")
+        const harError = !!aktiviteter.find((it) => it.alvorlighetsgrad == 'ERROR')
+        const harWarning = !!aktiviteter.find((it) => it.alvorlighetsgrad == 'WARN')
         return {
             kontekst,
             aktiviteter,
             opprettet,
             harError,
-            harWarning
+            harWarning,
         }
     })
 }
 
 export const Hendelser = React.memo(({ aktiviteter }: { aktiviteter: AktivitetDto[] }) => {
     const [visBareFeil, setVisBareFeil] = React.useState(false)
-    const toggleVisBareFeil = () =>
-        setVisBareFeil(!visBareFeil)
+    const toggleVisBareFeil = () => setVisBareFeil(!visBareFeil)
 
     const kontekstFinnesiAktiviteter = (kontekst: KontekstDto, index: number): boolean =>
         !!aktiviteter.find((aktivitet) => aktivitet.kontekster.includes(index))
@@ -54,15 +49,31 @@ export const Hendelser = React.memo(({ aktiviteter }: { aktiviteter: AktivitetDt
 
     const aktivitetslogg = useAktivitetslogg()
 
-    const hendelseKontektster: [KontekstDto, number][] = mapNotUndefined(
+    const hendelseKontektster = mapNotUndefined(
         aktivitetslogg.kontekster,
-        (kontekst, index) => {
-            if (kontekstFinnesiAktiviteter(kontekst, index) && erMeldingsKontekst(kontekst)) {
+        (kontekst, index): [KontekstDto, number] | undefined => {
+            if (kontekstFinnesiAktiviteter(kontekst, index)) {
                 return [kontekst, index]
             } else return undefined
         }
-    )
-    const berikedeKontekster = berikKontekster(aktiviteter, hendelseKontektster).sort((a, b) =>
+    ).filter(([kontekst]) => erMeldingsKontekst(kontekst))
+
+
+    //Dette er ikke helt bra, vi kan miste aktiviteter som bare er tilknyttet en melding. Det ville være bedre å hennte
+    // aktiviteter for alle kontekstene assosiert med meldingsreferanse.
+    const hendelseKontektsterUtenDuplikater = hendelseKontektster.filter(([tilDedup, dedupOriginalIndex]) => {
+        const [konflikterendeKontekst] = hendelseKontektster
+            .slice(dedupOriginalIndex + 1)
+            .find(([it]) => it.kontekstMap.meldingsreferanseId === tilDedup.kontekstMap.meldingsreferanseId)
+        ?? [undefined]
+        if (!!konflikterendeKontekst) {
+            console.warn(`Fant flere kontekster med samme referanseid (${tilDedup.kontekstMap.meldingsreferanseId}). Konteksttyper: ${tilDedup.kontekstType}, ${konflikterendeKontekst.kontekstType}`)
+            return false
+        }
+        return true
+    })
+
+    const berikedeKontekster = berikKontekster(aktiviteter, hendelseKontektsterUtenDuplikater).sort((a, b) =>
         compareAsc(a.opprettet, b.opprettet)
     )
     return (
@@ -70,11 +81,13 @@ export const Hendelser = React.memo(({ aktiviteter }: { aktiviteter: AktivitetDt
             <button onClick={toggleVisBareFeil}>Vis bare feil</button>
             {berikedeKontekster.map((it) => {
                 return (
-                    (!visBareFeil || it.harError || it.harWarning) &&<Hendelse
-                        aktiviteter={it.aktiviteter}
-                        kontekst={it.kontekst}
-                        key={it.kontekst.kontekstMap.meldingsreferanseId}
-                    />
+                    (!visBareFeil || it.harError || it.harWarning) && (
+                        <Hendelse
+                            aktiviteter={it.aktiviteter}
+                            kontekst={it.kontekst}
+                            key={it.kontekst.kontekstMap.meldingsreferanseId}
+                        />
+                    )
                 )
             })}
         </div>
