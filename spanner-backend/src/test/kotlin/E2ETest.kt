@@ -1,6 +1,5 @@
 package no.nav.spanner
 
-import FeilRespons
 import com.fasterxml.jackson.module.kotlin.readValue
 import io.ktor.client.*
 import io.ktor.client.call.*

@@ -6,11 +6,14 @@ val ktorVersion = "1.6.3"
 val tokenValidatorVersion = "1.3.8"
 
 plugins {
-    kotlin("jvm")
+    kotlin("jvm") version "1.5.30"
+}
+
+repositories {
+    mavenCentral()
 }
 
 dependencies {
-    implementation(project(":spanner-common"))
     implementation("io.ktor:ktor-server-core:$ktorVersion")
     implementation("io.ktor:ktor-server-cio:$ktorVersion")
     implementation("io.ktor:ktor-client-cio:$ktorVersion")
@@ -63,9 +66,7 @@ tasks {
     }
 
     jar {
-        mustRunAfter(clean, ":spanner-frontend:jsBrowserProductionWebpack")
         mustRunAfter(clean, ":frontend:npm_run_build")
-        //mustRunAfter(clean, ":spanner-react:browserProductionWebpack")
 
         archiveFileName.set("app.jar")
 
@@ -76,20 +77,16 @@ tasks {
             }
         }
 
-        from({ Paths.get(project(":spanner-frontend").buildDir.path, "distributions") }) {
+
+        from({ Paths.get(project(":frontend").buildDir.path) }) {
             //from({ Paths.get(project(":spanner-react").buildDir.path, "distributions") }) {
             into("static")
         }
 
-        from({ Paths.get(project(":frontend").buildDir.path) }) {
-            //from({ Paths.get(project(":spanner-react").buildDir.path, "distributions") }) {
-            into("static/react")
-        }
-
-        from({ Paths.get(project(":frontend").buildDir.path, "assets") }) {
-            //from({ Paths.get(project(":spanner-react").buildDir.path, "distributions") }) {
-            into("static/assets")
-        }
+//        from({ Paths.get(project(":frontend").buildDir.path, "assets") }) {
+//            //from({ Paths.get(project(":spanner-react").buildDir.path, "distributions") }) {
+//            into("static/assets")
+//        }
 
         doLast {
             configurations.runtimeClasspath.get()
