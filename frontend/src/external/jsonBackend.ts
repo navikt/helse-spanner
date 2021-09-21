@@ -10,7 +10,7 @@ export let hardCodedBackend: Backend = {
     }
 }
 
-let jsonPerson = {
+let jsonPerson : PersonDto = {
     aktørId: '42',
     fødselsnummer: '12020052345',
     opprettet: '2021-07-23T15:51:22.005045076',
@@ -13568,7 +13568,218 @@ let jsonPerson = {
                     }
                 }
             ],
-            forkastede: [],
+            forkastede: [{
+
+                årsak: "Ikke støttet",
+                vedtaksperiode: {
+                    fom: '2018-01-01',
+                    tom: '2018-01-31',
+                    sykmeldingFom: '2018-01-01',
+                    sykmeldingTom: '2018-01-31',
+                    hendelseIder: ['63551019-688a-47e7-ab03-cdbadc9121aa', '2d648189-49f1-4532-b2b3-1e4955c8fe41'],
+                    inntektskilde: 'FLERE_ARBEIDSGIVERE',
+                    id: 'aa1c6035-10e5-41aa-b775-996dd60b44aa',
+                    tilstand: 'TIL_INFOTRYGD',
+                    skjæringstidspunktFraInfotrygd: '2017-12-01',
+                    inntektsmeldingInfo: null,
+                    skjæringstidspunkt: '2017-12-01',
+                    dataForSimulering: {
+                        totalbeløp: 2000,
+                        perioder: [
+                            {
+                                fom: '2018-01-17',
+                                tom: '2018-01-20',
+                                utbetalinger: [
+                                    {
+                                        forfallsdato: '2018-01-21',
+                                        utbetalesTil: {
+                                            id: 'arbeidsgiver 1',
+                                            navn: 'Org Orgesen AS'
+                                        },
+                                        feilkonto: false,
+                                        detaljer: [
+                                            {
+                                                fom: '2018-01-17',
+                                                tom: '2018-01-20',
+                                                konto: '81549300',
+                                                beløp: 2000,
+                                                klassekode: {
+                                                    kode: 'SPREFAG-IOP',
+                                                    beskrivelse: 'Sykepenger, Refusjon arbeidsgiver'
+                                                },
+                                                uføregrad: 100,
+                                                utbetalingstype: 'YTEL',
+                                                tilbakeføring: false,
+                                                sats: {
+                                                    sats: 1000,
+                                                    antall: 2,
+                                                    type: 'DAG'
+                                                },
+                                                refunderesOrgnummer: 'arbeidsgiver 1'
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    utbetalinger: [],
+                    utbetalingstidslinje: {
+                        dager: [
+                            {
+                                type: 'NavDag',
+                                grad: 100.0,
+                                arbeidsgiverBetalingProsent: 100.0,
+                                skjæringstidspunkt: '2017-12-01',
+                                totalGrad: 100.0,
+                                dekningsgrunnlag: 692.3076923076923,
+                                aktuellDagsinntekt: 692.3076923076923,
+                                arbeidsgiverbeløp: 693.0,
+                                personbeløp: 0.0,
+                                er6GBegrenset: false,
+                                fom: '2018-01-01',
+                                tom: '2018-01-05'
+                            },
+                            {
+                                type: 'NavHelgDag',
+                                grad: 100.0,
+                                arbeidsgiverBetalingProsent: 100.0,
+                                skjæringstidspunkt: '2017-12-01',
+                                totalGrad: 100.0,
+                                dekningsgrunnlag: 0.0,
+                                aktuellDagsinntekt: 0.0,
+                                arbeidsgiverbeløp: 0.0,
+                                personbeløp: 0.0,
+                                er6GBegrenset: false,
+                                fom: '2018-01-06',
+                                tom: '2018-01-07'
+                            },
+                            {
+                                type: 'NavDag',
+                                grad: 100.0,
+                                arbeidsgiverBetalingProsent: 100.0,
+                                skjæringstidspunkt: '2017-12-01',
+                                totalGrad: 100.0,
+                                dekningsgrunnlag: 692.3076923076923,
+                                aktuellDagsinntekt: 692.3076923076923,
+                                arbeidsgiverbeløp: 693.0,
+                                personbeløp: 0.0,
+                                er6GBegrenset: false,
+                                fom: '2018-01-08',
+                                tom: '2018-01-12'
+                            },
+                            {
+                                type: 'NavHelgDag',
+                                grad: 100.0,
+                                arbeidsgiverBetalingProsent: 100.0,
+                                skjæringstidspunkt: '2017-12-01',
+                                totalGrad: 100.0,
+                                dekningsgrunnlag: 0.0,
+                                aktuellDagsinntekt: 0.0,
+                                arbeidsgiverbeløp: 0.0,
+                                personbeløp: 0.0,
+                                er6GBegrenset: false,
+                                fom: '2018-01-13',
+                                tom: '2018-01-14'
+                            },
+                            {
+                                type: 'NavDag',
+                                grad: 100.0,
+                                arbeidsgiverBetalingProsent: 100.0,
+                                skjæringstidspunkt: '2017-12-01',
+                                totalGrad: 100.0,
+                                dekningsgrunnlag: 692.3076923076923,
+                                aktuellDagsinntekt: 692.3076923076923,
+                                arbeidsgiverbeløp: 693.0,
+                                personbeløp: 0.0,
+                                er6GBegrenset: false,
+                                fom: '2018-01-15',
+                                tom: '2018-01-19'
+                            },
+                            {
+                                type: 'NavHelgDag',
+                                grad: 100.0,
+                                arbeidsgiverBetalingProsent: 100.0,
+                                skjæringstidspunkt: '2017-12-01',
+                                totalGrad: 100.0,
+                                dekningsgrunnlag: 0.0,
+                                aktuellDagsinntekt: 0.0,
+                                arbeidsgiverbeløp: 0.0,
+                                personbeløp: 0.0,
+                                er6GBegrenset: false,
+                                fom: '2018-01-20',
+                                tom: '2018-01-21'
+                            },
+                            {
+                                type: 'NavDag',
+                                grad: 100.0,
+                                arbeidsgiverBetalingProsent: 100.0,
+                                skjæringstidspunkt: '2017-12-01',
+                                totalGrad: 100.0,
+                                dekningsgrunnlag: 692.3076923076923,
+                                aktuellDagsinntekt: 692.3076923076923,
+                                arbeidsgiverbeløp: 693.0,
+                                personbeløp: 0.0,
+                                er6GBegrenset: false,
+                                fom: '2018-01-22',
+                                tom: '2018-01-26'
+                            },
+                            {
+                                type: 'NavHelgDag',
+                                grad: 100.0,
+                                arbeidsgiverBetalingProsent: 100.0,
+                                skjæringstidspunkt: '2017-12-01',
+                                totalGrad: 100.0,
+                                dekningsgrunnlag: 0.0,
+                                aktuellDagsinntekt: 0.0,
+                                arbeidsgiverbeløp: 0.0,
+                                personbeløp: 0.0,
+                                er6GBegrenset: false,
+                                fom: '2018-01-27',
+                                tom: '2018-01-28'
+                            },
+                            {
+                                type: 'NavDag',
+                                grad: 100.0,
+                                arbeidsgiverBetalingProsent: 100.0,
+                                skjæringstidspunkt: '2017-12-01',
+                                totalGrad: 100.0,
+                                dekningsgrunnlag: 692.3076923076923,
+                                aktuellDagsinntekt: 692.3076923076923,
+                                arbeidsgiverbeløp: 693.0,
+                                personbeløp: 0.0,
+                                er6GBegrenset: false,
+                                fom: '2018-01-29',
+                                tom: '2018-01-31'
+                            }
+                        ]
+                    },
+                    forlengelseFraInfotrygd: 'JA',
+                    opprettet: '2021-07-23T15:51:22.205815071',
+                    oppdatert: '2021-07-23T15:51:24.342046123',
+                    sykdomstidslinje: {
+                        låstePerioder: [],
+                        periode: {
+                            fom: '2018-01-01',
+                            tom: '2018-01-31'
+                        },
+                        dager: [
+                            {
+                                type: 'SYKEDAG',
+                                kilde: {
+                                    type: 'Søknad',
+                                    id: '2d648189-49f1-4532-b2b3-1e4955c8fe41',
+                                    tidsstempel: '2018-01-01T00:00:00'
+                                },
+                                grad: 100.0,
+                                arbeidsgiverBetalingProsent: 100.0,
+                                fom: '2018-01-01',
+                                tom: '2018-01-31'
+                            }
+                        ]
+                    }
+                }
+            }],
             feriepengeutbetalinger: [],
             arbeidsforholdhistorikk: [
                 {

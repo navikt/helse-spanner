@@ -3,7 +3,9 @@ import styles from './PersonTree.module.css'
 import React from 'react'
 import {
     ArbeidsgiverContext,
+    ForkastetVedtaksperiodeContext,
     useArbeidsgiver,
+    useForkastetVedtaksperiode,
     useId,
     useIsSelected,
     usePerson,
@@ -13,6 +15,8 @@ import {
 import { useRecoilState, useSetRecoilState } from 'recoil'
 import { expandedArbeidsgivereState, selectedState } from '../../state/state'
 import { Next, Expand } from '@navikt/ds-icons'
+import parseISO from 'date-fns/parseISO'
+import compareAsc from 'date-fns/compareAsc'
 
 export const PersonTree = React.memo(() => {
     const person = usePerson()
@@ -36,6 +40,8 @@ export const PersonTree = React.memo(() => {
     )
 })
 
+PersonTree.displayName = "PersonTree"
+
 const useSelect = () => {
     const setSelected = useSetRecoilState(selectedState)
     const id = useId()
@@ -48,14 +54,19 @@ const useSelect = () => {
     )
 }
 
-const SelectableTreeNode = React.memo<React.PropsWithChildren<{ indent: number }>>(({ indent = 0, children }) => {
+interface SelectableTreeNodeProps extends React.HTMLAttributes<HTMLDivElement> {indent: number}
+
+// export const Card: React.FC<CardProps> = ({ className, children, ...rest }) => (
+
+const SelectableTreeNode= React.memo<SelectableTreeNodeProps>(({ className, indent = 0, children, ...rest }) => {
     const isSelected = useIsSelected()
     const select = useSelect()
     return (
         <div
             style={{ marginLeft: `${indent * 0.9}em`, cursor: 'pointer' }}
-            className={classNames(styles.TreeNode, isSelected && styles.Highlighted)}
+            className={classNames(styles.TreeNode, isSelected && styles.Highlighted, className)}
             onClick={select}
+            {...rest}
         >
             {children}
         </div>
@@ -90,12 +101,31 @@ const ArbeidsgiverNode = React.memo(() => {
                 <ExpandToggle isExpanded={isExpanded} onClick={() => toggleExpandArbeidsgiver()} />
                 <SelectableTreeNode indent={0}>{arbeidsgiver.organisasjonsnummer}</SelectableTreeNode>
             </div>
-            {isExpanded &&
-                arbeidsgiver.vedtaksperioder.map((vedtak) => (
-                    <VedtakContext.Provider value={vedtak} key={vedtak.id}>
-                        <VedtaksNode />
-                    </VedtakContext.Provider>
-                ))}
+            {isExpanded && <Vedtaksperioder />}
+        </>
+    )
+})
+
+const Vedtaksperioder = React.memo(() => {
+    const arbeidsgiver = useArbeidsgiver()
+    let vedtaksperioder: [JSX.Element, Date][] = arbeidsgiver.vedtaksperioder.map((vedtak) => [
+        <VedtakContext.Provider value={vedtak} key={vedtak.id}>
+            <VedtaksNode />
+        </VedtakContext.Provider>,
+        parseISO(vedtak.fom),
+    ])
+    let forkastedeVedtaksperioder: [JSX.Element, Date][] = arbeidsgiver.forkastede.map((forkastelse) => [
+        <ForkastetVedtaksperiodeContext.Provider value={forkastelse.vedtaksperiode} key={forkastelse.vedtaksperiode.id}>
+            <ForkastetVedtaksNode />
+        </ForkastetVedtaksperiodeContext.Provider>,
+        parseISO(forkastelse.vedtaksperiode.fom),
+    ])
+    const sorterteVedtak = [...vedtaksperioder, ...forkastedeVedtaksperioder].sort(([_, a], [ignore, b]) =>
+        compareAsc(a, b)
+    )
+    return (
+        <>
+            {sorterteVedtak.map(([vedtak]) => vedtak)}
         </>
     )
 })
@@ -112,6 +142,19 @@ const VedtaksNode = React.memo(() => {
     const vedtak = useVedtak()
     return (
         <SelectableTreeNode indent={1.2}>
+            {vedtak.fom} - {vedtak.tom}
+            <br />
+            {vedtak.tilstand}
+        </SelectableTreeNode>
+    )
+})
+
+const ForkastetVedtaksNode = React.memo(() => {
+    const vedtak = useForkastetVedtaksperiode()
+    return (
+        <SelectableTreeNode className={styles.Forkastet} indent={1.2}>
+            <div className={classNames(styles.ForkastetLabel)}>Forkastet</div>
+            {" "}
             {vedtak.fom} - {vedtak.tom}
             <br />
             {vedtak.tilstand}

@@ -1,4 +1,4 @@
-import { ArbeidsgiverDto, PersonDto, VedtakDto } from './dto'
+import { ArbeidsgiverDto, FokastelseDto, FokastetVedtaksperiodeDto, PersonDto, UtbetalingDto, VedtakDto } from './dto'
 
 let next_id = 42
 
@@ -23,11 +23,15 @@ export const createTestPerson = (
 export const createTestArbeidsgiver = (
     organisasjonsnummer: string = '12345',
     vedtaksperioder: VedtakDto[] = [createTestVedtaksperiode(), createTestVedtaksperiode('2021-01-01', '2021-02-03')],
+    forkastedeVedtaksperioder: FokastetVedtaksperiodeDto[] = [],
+    utbetalinger: UtbetalingDto[] = [],
     id: string = new_id()
 ): ArbeidsgiverDto => ({
     id,
     organisasjonsnummer,
     vedtaksperioder,
+    forkastede: forkastedeVedtaksperioder.map((it): FokastelseDto => ({ årsak: 'Ikke støttet', vedtaksperiode: it })),
+    utbetalinger,
 })
 
 export const createTestVedtaksperiode = (

@@ -4,17 +4,22 @@ export type PersonDto = {
     fødselsnummer: string
     opprettet: string
     aktivitetslogg: AktivitetsloggDto
+    [x: string]: any
 }
 
 export type FeilDto = {
     error_id: string
     description?: string
+    [x: string]: any
 }
 
 export type ArbeidsgiverDto = {
     id: string
     organisasjonsnummer: string
     vedtaksperioder: VedtakDto[]
+    forkastede: FokastelseDto[]
+    utbetalinger: UtbetalingDto[]
+    [x: string]: any
 }
 
 export type VedtakDto = {
@@ -22,6 +27,30 @@ export type VedtakDto = {
     fom: string
     tom: string
     id: string
+    [x: string]: any
+}
+
+//Får forkastet vedtaksperiode oppgradert versjoner? Hvis ikke må forkastet vedtaksperiode være egen type ettersom den
+//kan være på et eget format
+export type FokastetVedtaksperiodeDto = {
+    tilstand: string
+    fom: string
+    tom: string
+    id: string
+    [x: string]: any
+}
+
+export type FokastelseDto = {
+    vedtaksperiode: FokastetVedtaksperiodeDto
+    årsak: string
+}
+
+export type UtbetalingDto = {
+    status: string
+    fom: string
+    tom: string
+    id: string
+    [x: string]: any
 }
 
 export interface AktivitetDto {
@@ -32,6 +61,7 @@ export interface AktivitetDto {
     detaljer: any
     tidsstempel: string
     behovtype?: string
+    [x: string]: any
 }
 
 export type KontekstDto = {
@@ -47,6 +77,8 @@ export type KontekstMapDto = {
     organisasjonsnummer?: string
     tilstand?: string
     utbetalingId?: string
+    [x: string]: any
+
 }
 
 export type AktivitetsloggDto = {

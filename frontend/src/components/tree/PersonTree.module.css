@@ -42,3 +42,22 @@
 .Indentation2 {
     padding-left: 2rem;
 }
+
+.Forkastet {
+    color: lightslategray;
+
+
+}
+
+.ForkastetLabel {
+    display: inline-block;
+    font-size: small;
+    font-weight: bold;
+    font-family: sans-serif;
+    font-variant: small-caps;
+    vertical-align: center;
+    background-color: lightslategray;
+    color: white;
+
+
+}
