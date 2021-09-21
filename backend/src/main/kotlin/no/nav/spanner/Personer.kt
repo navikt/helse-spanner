@@ -15,9 +15,10 @@ val logger = LoggerFactory.getLogger(Spleis::class.java)
 
 interface Personer {
     suspend fun person(id: String, idType: IdType, accessToken: String): String
+    suspend fun hendelse(meldingsreferanse: String, accessToken: String): String
 }
 
-class Spleis(private val azureAD: AzureAD, url: String = "http://spleis-api.tbd.svc.cluster.local") :
+class Spleis(private val azureAD: AzureAD, private val baseUrl: String = "http://spleis-api.tbd.svc.cluster.local") :
     Personer {
     private val httpClient = HttpClient(CIO) {
         install(JsonFeature) {
@@ -26,16 +27,16 @@ class Spleis(private val azureAD: AzureAD, url: String = "http://spleis-api.tbd.
             }
         }
     }
-    private val url = URLBuilder(url).path("api", "person-json").build()
 
     companion object {
         fun from(spannerConfig: Config, azureAD: AzureAD) = Spleis(
             azureAD = azureAD,
-            url = spannerConfig.spleisUrl,
+            baseUrl = spannerConfig.spleisUrl,
         )
     }
 
     override suspend fun person(id: String, idType: IdType, accessToken: String): String {
+     val url = URLBuilder(baseUrl).path("api", "person-json").build()
         val oboToken =
             token(accessToken)
         val log = Log.logger(Personer::class.java)
@@ -53,6 +54,25 @@ class Spleis(private val azureAD: AzureAD, url: String = "http://spleis-api.tbd.
         return response.readText()
     }
 
+    override suspend fun hendelse(meldingsreferanse: String, accessToken: String): String {
+     val url = URLBuilder(baseUrl).path("api", "hendelse-json", meldingsreferanse).build()
+        val oboToken =
+            token(accessToken)
+        val log = Log.logger(Personer::class.java)
+        log
+            .sensitivt("oboTokenLength", oboToken.length)
+            .info("Retreiving on behalf of token")
+        val response = httpClient.get<HttpResponse>(url) {
+            header("Authorization", "Bearer $oboToken")
+            accept(ContentType.Application.Json)
+        }
+        log
+            .response(response)
+            .info("Response from spleis")
+        return response.readText()
+    }
+
+
     private suspend fun token(accessToken: String) = (azureAD.hentOnBehalfOfToken(JWT.decode(accessToken)))
 }
 
@@ -63,6 +83,10 @@ object LokaleKjenninger : Personer {
         else -> throw NotFoundException("no person with identifier: ${id}")
     }.also {
         logger.trace("person fetched = ${it}")
+    }
+
+    override suspend fun hendelse(meldingsreferanse: String, accessToken: String): String {
+        return "{}"
     }
 
     private fun lesJson(filnavn: String) =

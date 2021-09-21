@@ -136,6 +136,20 @@ fun Application.spanner(spleis: Personer, config: AzureADConfig, development: Bo
                     call.respondText(person, ContentType.Application.Json, HttpStatusCode.OK)
                 }
             }
+
+            get("/api/hendelse/{meldingsreferanse}") {
+                checkIfsessionValid()
+                sesjon().audit().log(call)
+                val meldingsreferanse = call.parameters["meldingsreferanse"] ?: throw BadRequestException("Mangler meldingsreferanse")
+                logg
+                    .åpent("meldingsreferanse", meldingsreferanse)
+                    .call(this.call)
+                    .info()
+
+                    val accessToken = call.sessions.get<SpannerSession>()?.accessToken.toString()
+                    val hendelse = spleis.hendelse(meldingsreferanse, accessToken)
+                    call.respondText(hendelse, ContentType.Application.Json, HttpStatusCode.OK)
+            }
         }
     }
 }

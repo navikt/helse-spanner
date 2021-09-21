@@ -112,6 +112,29 @@ class E2ETest {
     }
 
     @Test
+    fun `respond with message json on hendelse endpoint`() {
+        mockAuth.enqueueCallback(
+            DefaultOAuth2TokenCallback(
+                claims = mapOf("NAVident" to "H12345")
+            )
+        )
+        withTestApplication({
+            spanner(spleis, azureADConfig, true)
+        }) {
+            cookiesSession {
+                login()
+                handleRequest(HttpMethod.Get, "/api/hendelse/42").apply {
+                    assertEquals(HttpStatusCode.OK, response.status())
+                    assertTrue(
+                        response.content == "{}"
+                    )
+                }
+            }
+
+        }
+    }
+
+    @Test
     fun `unauthorized response when session expires`() {
         mockAuth.enqueueCallback(
             DefaultOAuth2TokenCallback(
