@@ -6,6 +6,9 @@ import styles from './Hendelser.module.css'
 import { Hendelse } from './Hendelse'
 import parseISO from 'date-fns/parseISO'
 import compareAsc from 'date-fns/compareAsc'
+import classNames from "classnames";
+import {useRecoilState} from "recoil";
+import {skjulPåminnelserState, visBareFeilState} from "../../../state/state";
 
 type BeriketKontekst = {
     kontekst: KontekstDto
@@ -38,14 +41,16 @@ const berikKontekster = (
 }
 
 export const Hendelser = React.memo(({ aktiviteter }: { aktiviteter: AktivitetDto[] }) => {
-    const [visBareFeil, setVisBareFeil] = React.useState(false)
+    const [visBareFeil, setVisBareFeil] = useRecoilState(visBareFeilState)
+    const [skjulPåminnelser, setSkjulPåminnelser] = useRecoilState(skjulPåminnelserState)
     const toggleVisBareFeil = () => setVisBareFeil(!visBareFeil)
+    const toggleVisPåminnelser = () => setSkjulPåminnelser(!skjulPåminnelser)
 
     const kontekstFinnesiAktiviteter = (kontekst: KontekstDto, index: number): boolean =>
         !!aktiviteter.find((aktivitet) => aktivitet.kontekster.includes(index))
 
     const erMeldingsKontekst = (kontekst: KontekstDto) =>
-        !!kontekst.kontekstMap.meldingsreferanseId && kontekst.kontekstType != 'GjenopptaBehandling'
+        !!kontekst.kontekstMap.meldingsreferanseId && kontekst.kontekstType != 'GjenopptaBehandling' && (!skjulPåminnelser || (kontekst.kontekstType != 'Påminnelse' && kontekst.kontekstType != 'Utbetalingshistorikk'))
 
     const aktivitetslogg = useAktivitetslogg()
 
@@ -78,7 +83,8 @@ export const Hendelser = React.memo(({ aktiviteter }: { aktiviteter: AktivitetDt
     )
     return (
         <div className={styles.Hendelser}>
-            <button onClick={toggleVisBareFeil}>Vis bare feil</button>
+            <button onClick={toggleVisBareFeil} className={classNames(visBareFeil && styles.ViewButtonSelected)}>Vis bare feil</button>
+            <button onClick={toggleVisPåminnelser} className={classNames(skjulPåminnelser && styles.ViewButtonSelected)}>Skjul påminnelser og utbetalingshitorikk</button>
             {berikedeKontekster.map((it) => {
                 return (
                     (!visBareFeil || it.harError || it.harWarning) && (

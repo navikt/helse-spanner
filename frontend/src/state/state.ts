@@ -25,4 +25,11 @@ export const expandedArbeidsgivereState = Recoil.atom<string[]>({
     default: []
 })
 
-
+export const  visBareFeilState = Recoil.atom({
+    key: 'visBareFeilState',
+    default: false
+})
+export const  skjulPåminnelserState = Recoil.atom({
+    key: 'skjulPåminnelserState',
+    default: true
+})

@@ -3,3 +3,7 @@
     display: block;
 }
 
+.ViewButtonSelected {
+    border-style:inset;
+    background-color: gray;
+}
