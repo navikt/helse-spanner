@@ -4,6 +4,7 @@ import com.auth0.jwt.JWT
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import io.ktor.client.*
 import io.ktor.client.engine.cio.*
+import io.ktor.client.features.*
 import io.ktor.client.features.json.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
@@ -43,11 +44,19 @@ class Spleis(private val azureAD: AzureAD, private val baseUrl: String = "http:/
         log
             .sensitivt("oboTokenLength", oboToken.length)
             .info("Retreiving on behalf of token")
-        val response = httpClient.get<HttpResponse>(url) {
-            header("Authorization", "Bearer $oboToken")
-            header(idType.header, id)
-            accept(ContentType.Application.Json)
-        }
+        val response =
+            try {
+                httpClient.get<HttpResponse>(url) {
+                    header("Authorization", "Bearer $oboToken")
+                    header(idType.header, id)
+                    accept(ContentType.Application.Json)
+                }
+            } catch (e : ClientRequestException) {
+                if(e.response.status == HttpStatusCode.NotFound) {
+                    throw NotFoundException("Fant ikke person")
+                }
+                throw e
+            }
         log
             .response(response)
             .info("Response from spleis")
@@ -62,9 +71,16 @@ class Spleis(private val azureAD: AzureAD, private val baseUrl: String = "http:/
         log
             .sensitivt("oboTokenLength", oboToken.length)
             .info("Retreiving on behalf of token")
-        val response = httpClient.get<HttpResponse>(url) {
+        val response = try {
+        httpClient.get<HttpResponse>(url) {
             header("Authorization", "Bearer $oboToken")
             accept(ContentType.Application.Json)
+        }
+        } catch (e : ClientRequestException) {
+            if(e.response.status == HttpStatusCode.NotFound) {
+                throw NotFoundException("Fant ikke melding med referanse $meldingsreferanse")
+            }
+            throw e
         }
         log
             .response(response)
