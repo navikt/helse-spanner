@@ -6,7 +6,7 @@ import { ContentView, displayViewState } from '../../state/state'
 import classNames from 'classnames'
 import styles from './Content.module.css'
 import { useIsOnlySelected, useIsSelected } from '../../state/contexts'
-import {Card} from "../Card";
+import { Card } from '../Card'
 
 export const Content = React.memo(() => {
     return (
@@ -26,15 +26,29 @@ export const Content = React.memo(() => {
 const ViewButton: React.FC<{ view: ContentView }> = React.memo(({ view }) => {
     const [displayViews, setDisplayViews] = useRecoilState(displayViewState)
     const isSelected = displayViews.includes(view)
-    const toggleSelected = () => {
-        if (isSelected) {
-            setDisplayViews(displayViews.filter((it) => it !== view))
-        } else {
-            setDisplayViews([...displayViews, view])
-        }
-    }
+
+    const selectCategory = React.useMemo(
+        () => (e: React.MouseEvent) => {
+            const toggleSelect = () => {
+                if (displayViews.includes(view)) {
+                    setDisplayViews(displayViews.filter((it) => it !== view))
+                } else {
+                    setDisplayViews([...displayViews, view])
+                }
+            }
+            const setOnlySelected = () => {
+                setDisplayViews([view])
+            }
+
+            if (e.ctrlKey || e.metaKey) toggleSelect()
+            else setOnlySelected()
+            e.stopPropagation()
+        },
+        [displayViews, setDisplayViews]
+    )
+
     return (
-        <button className={classNames(isSelected && styles.ViewButtonSelected)} onClick={toggleSelected}>
+        <button className={classNames(isSelected && styles.ViewButtonSelected)} onClick={selectCategory}>
             {view}
         </button>
     )
@@ -43,5 +57,12 @@ export const ShowIfSelected: React.FC<PropsWithChildren<any>> = React.memo(({ ch
     const selectedColor = useIsSelected()
     const onlySelected = useIsOnlySelected()
     if (!selectedColor) return null
-    return (<div style={{borderStyle: onlySelected?`solid` : 'none', borderWidth: "7px", borderColor: selectedColor}}  className={classNames(styles.ContentCard)}>{children}</div>)
+    return (
+        <Card
+            style={{ borderStyle: onlySelected ? `solid` : 'none', borderWidth: '7px', borderColor: selectedColor }}
+            className={classNames(styles.ContentCard)}
+        >
+            {children}
+        </Card>
+    )
 })
