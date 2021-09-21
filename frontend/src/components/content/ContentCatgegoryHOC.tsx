@@ -38,3 +38,4 @@ export const ContentCatgegoryHOC = React.memo<CategoryComponents>(components => 
         </>
     )
 })
+ContentCatgegoryHOC.displayName="ContentCatgegoryHOC"

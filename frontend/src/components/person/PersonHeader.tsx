@@ -25,3 +25,4 @@ export const PersonHeader = React.memo(() => {
         </div>
     )
 })
+PersonHeader.displayName="PersonHeader"

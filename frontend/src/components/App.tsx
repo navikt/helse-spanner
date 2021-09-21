@@ -18,3 +18,4 @@ export const App = React.memo(() => {
         </div>
     )
 })
+App.displayName="App"

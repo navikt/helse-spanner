@@ -9,9 +9,11 @@ export const Card: React.FC<CardProps> = ({ className, children, ...rest }) => (
         {children}
     </div>
 );
+Card.displayName="Card"
 
 export const HeaderCard: React.FC<CardProps> = ({ className, children, ...rest }) => (
     <div className={classNames(styles.HeaderCard, className)} {...rest}>
         {children}
     </div>
 );
+HeaderCard.displayName="HeaderCard"

@@ -13,6 +13,7 @@ const Arbeidsgiver = React.memo(() => {
         </div>
     )
 })
+Arbeidsgiver.displayName="JsonView.Arbeidsgiver"
 
 const Person = React.memo(() => {
     const person = usePerson()
@@ -22,6 +23,7 @@ const Person = React.memo(() => {
         </div>
     )
 })
+Person.displayName="JsonView.Person"
 
 const Vedtaksperiode = React.memo(() => {
     const vedtaksperiode = useVedtak()
@@ -31,6 +33,7 @@ const Vedtaksperiode = React.memo(() => {
         </div>
     )
 })
+Vedtaksperiode.displayName="JsonView.Vedtaksperiode"
 
 export const JsonView = React.memo(() => {
     let displayName = ContentView.Json
@@ -38,3 +41,4 @@ export const JsonView = React.memo(() => {
     if (!useDisplayView.includes(displayName)) return null
     return <ContentCatgegoryHOC {...{ Person, Arbeidsgiver, Vedtaksperiode }}/>
 })
+JsonView.displayName="JsonView"

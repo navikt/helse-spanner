@@ -34,10 +34,12 @@ const Feilmelding = React.memo(({ feil }: { feil: any }) => {
         </div>
     )
 })
+Feilmelding.displayName="Feilmelding"
 
 const Spinner = React.memo(() => (
     <div style={{padding: "10em"}}><div className={styles.Spinner} data-testid="spinner" />️</div>
 ))
+Spinner.displayName="Spinner"
 
 export const PersonData = React.memo((props: FetchPersonProps) => {
     const backend = useBackend()
@@ -59,3 +61,4 @@ export const PersonData = React.memo((props: FetchPersonProps) => {
         return <Feilmelding feil={error} />
     }
 })
+PersonData.displayName="PersonData"

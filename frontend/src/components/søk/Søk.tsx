@@ -26,3 +26,4 @@ export const Søk = React.memo((props: SøkProps) => {
         </div>
     )
 })
+Søk.displayName="Søk"

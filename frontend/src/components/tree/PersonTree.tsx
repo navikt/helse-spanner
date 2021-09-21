@@ -82,6 +82,7 @@ const SelectableTreeNode= React.memo<SelectableTreeNodeProps>(({ className, inde
         </div>
     )
 })
+SelectableTreeNode.displayName="SelectableTreeNode"
 
 const ArbeidsgiverNode = React.memo(() => {
     const arbeidsgiver = useArbeidsgiver()
@@ -115,6 +116,7 @@ const ArbeidsgiverNode = React.memo(() => {
         </>
     )
 })
+ArbeidsgiverNode.displayName="ArbeidsgiverNode"
 
 const Vedtaksperioder = React.memo(() => {
     const arbeidsgiver = useArbeidsgiver()
@@ -139,6 +141,7 @@ const Vedtaksperioder = React.memo(() => {
         </>
     )
 })
+Vedtaksperioder.displayName="Vedtaksperioder"
 
 const ExpandToggle = React.memo<React.PropsWithoutRef<{ onClick: () => void; isExpanded: boolean }>>((props) => {
     return (
@@ -147,6 +150,7 @@ const ExpandToggle = React.memo<React.PropsWithoutRef<{ onClick: () => void; isE
         </button>
     )
 })
+ExpandToggle.displayName="ExpandToggle"
 
 const VedtaksNode = React.memo(() => {
     const vedtak = useVedtak()
@@ -158,6 +162,7 @@ const VedtaksNode = React.memo(() => {
         </SelectableTreeNode>
     )
 })
+VedtaksNode.displayName="VedtaksNode"
 
 const ForkastetVedtaksNode = React.memo(() => {
     const vedtak = useForkastetVedtaksperiode()
@@ -171,3 +176,4 @@ const ForkastetVedtaksNode = React.memo(() => {
         </SelectableTreeNode>
     )
 })
+ForkastetVedtaksNode.displayName="ForkastetVedtaksNode"

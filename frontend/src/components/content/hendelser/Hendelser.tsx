@@ -93,6 +93,10 @@ export const Hendelser = React.memo(({ aktiviteter }: { aktiviteter: AktivitetDt
         </div>
     )
 })
+
+Hendelser.displayName="Hendelser"
+
+
 export const aktiviteterForKontekst = (
     aktivitetslogg: AktivitetsloggDto,
     filter: (kontekst: KontekstDto) => boolean

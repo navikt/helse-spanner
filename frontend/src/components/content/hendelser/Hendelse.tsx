@@ -69,3 +69,5 @@ export const Hendelse = React.memo(
         )
     }
 )
+
+Hendelse.displayName="Hendelse"

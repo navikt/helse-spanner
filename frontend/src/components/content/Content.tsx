@@ -22,6 +22,7 @@ export const Content = React.memo(() => {
         </div>
     )
 })
+Content.displayName="Content"
 
 const ViewButton: React.FC<{ view: ContentView }> = React.memo(({ view }) => {
     const [displayViews, setDisplayViews] = useRecoilState(displayViewState)
@@ -53,6 +54,7 @@ const ViewButton: React.FC<{ view: ContentView }> = React.memo(({ view }) => {
         </button>
     )
 })
+ViewButton.displayName="ViewButton"
 export const ShowIfSelected: React.FC<PropsWithChildren<any>> = React.memo(({ children }) => {
     const selectedColor = useIsSelected()
     const onlySelected = useIsOnlySelected()
@@ -66,3 +68,4 @@ export const ShowIfSelected: React.FC<PropsWithChildren<any>> = React.memo(({ ch
         </Card>
     )
 })
+ShowIfSelected.displayName="ShowIfSelected"

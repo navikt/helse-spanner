@@ -17,3 +17,5 @@ export const Aktivitet: React.FC<AktivitetViewProps> = React.memo(({aktivitet}: 
         </div>
     </div>
 })
+
+Aktivitet.displayName="Aktivitet"

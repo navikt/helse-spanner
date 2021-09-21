@@ -15,6 +15,7 @@ const Person = React.memo(() => {
     const aktivitetslogg = useAktivitetslogg()
     return <Hendelser aktiviteter={aktivitetslogg.aktiviteter} />
 })
+Person.displayName="HendelseView.Person"
 
 const Arbeidsgiver = React.memo(() => {
     const aktivitetslogg = useAktivitetslogg()
@@ -29,6 +30,7 @@ const Arbeidsgiver = React.memo(() => {
 
     return <Hendelser aktiviteter={aktiviteter} />
 })
+Arbeidsgiver.displayName="HendelseView.Arbeidsgiver"
 
 const Vedtaksperiode = React.memo(() => {
     const vedtaksperiode = useVedtak()
@@ -42,6 +44,7 @@ const Vedtaksperiode = React.memo(() => {
 
     return <Hendelser aktiviteter={aktiviteter} />
 })
+Vedtaksperiode.displayName="HendelseView.Vedtaksperiode"
 
 export const HendelseView = React.memo(() => {
     const person = usePerson()
@@ -53,3 +56,5 @@ export const HendelseView = React.memo(() => {
         </AktivitetsloggContext.Provider>
     )
 })
+
+Hendelser.displayName="HendelseView"

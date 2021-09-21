@@ -16,3 +16,4 @@ export const PersonView = React.memo(() => {
         </div>
     )
 })
+PersonView.displayName="PersonView"
