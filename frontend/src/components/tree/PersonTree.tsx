@@ -13,8 +13,12 @@ import {
     useVedtak,
     VedtakContext,
 } from '../../state/contexts'
-import { useRecoilState, useSetRecoilState } from 'recoil'
-import { expandedArbeidsgivereState, selectedState } from '../../state/state'
+import {useRecoilState, useRecoilValue, useSetRecoilState} from 'recoil'
+import {
+    expandedArbeidsgivereState,
+    hideForkastedeVedtakState,
+    selectedState,
+} from '../../state/state'
 import { Next, Expand } from '@navikt/ds-icons'
 import parseISO from 'date-fns/parseISO'
 import compareAsc from 'date-fns/compareAsc'
@@ -27,10 +31,16 @@ export const PersonTree = React.memo(() => {
         setExpandedArbeidsgivere((_) => person.arbeidsgivere.map((arb) => arb.organisasjonsnummer))
     const closeAllArbeidsgivere = () => setExpandedArbeidsgivere((_) => [])
 
+    const [hideForkastedeVedtak, setHideForkastedeVedtak] = useRecoilState(hideForkastedeVedtakState)
+    const toggleHideForkastedeVedtak = () => {
+        setHideForkastedeVedtak((state) => !state)
+    }
+
     return (
         <div className={classNames(styles.PersonTree)}>
             <button onClick={expandAllArbeidsgivere}>Åpne alle</button>
             <button onClick={closeAllArbeidsgivere}>Lukk alle</button>
+            <button style={(hideForkastedeVedtak && {borderStyle:"inset", backgroundColor: "grey"}) || {}} onClick={toggleHideForkastedeVedtak}>Skjul forkastede</button>
             <SelectableTreeNode indent={0}>{person.aktørId}</SelectableTreeNode>
             {person.arbeidsgivere.map((arbeidsgiver) => (
                 <ArbeidsgiverContext.Provider value={arbeidsgiver} key={arbeidsgiver.id}>
@@ -166,6 +176,11 @@ VedtaksNode.displayName="VedtaksNode"
 
 const ForkastetVedtaksNode = React.memo(() => {
     const vedtak = useForkastetVedtaksperiode()
+    const hideForkastedeVedtak = useRecoilValue(hideForkastedeVedtakState)
+
+    if(hideForkastedeVedtak) {
+        return null
+    }
     return (
         <SelectableTreeNode className={styles.Forkastet} indent={1.2}>
             <div className={classNames(styles.ForkastetLabel)}>Forkastet</div>

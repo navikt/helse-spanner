@@ -3,7 +3,7 @@ import { Id } from './contexts'
 import {KontekstDto} from "./dto";
 
 export const selectedState = Recoil.atom<Id[]>({
-    key: 'highligthState',
+    key: 'highligth',
     default: [{}]
 })
 export enum ContentView {
@@ -12,7 +12,7 @@ export enum ContentView {
 }
 
 export const displayViewState = Recoil.atom<ContentView[]>({
-    key: 'displayViewState',
+    key: 'displayView',
     default: [ContentView.Json]
 })
 
@@ -27,12 +27,17 @@ export const expandedArbeidsgivereState = Recoil.atom<string[]>({
 })
 
 export const  visBareFeilState = Recoil.atom({
-    key: 'visBareFeilState',
+    key: 'visBareFeil',
     default: false
 })
 export const  skjulPåminnelserState = Recoil.atom({
-    key: 'skjulPåminnelserState',
+    key: 'skjulPåminnelser',
     default: true
+})
+
+export const  hideForkastedeVedtakState = Recoil.atom({
+    key: 'skjulForkastedeVedtak',
+    default: false
 })
 
 export const  åpneHendelseDokumentState = Recoil.atom<KontekstDto[]>({
