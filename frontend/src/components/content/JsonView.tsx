@@ -1,9 +1,8 @@
 import React from 'react'
-import {useArbeidsgiver, useForkastetVedtaksperiode, usePerson, useUtbetaling, useVedtak} from '../../state/contexts'
+import { useArbeidsgiver, useForkastetVedtaksperiode, usePerson, useUtbetaling, useVedtak } from '../../state/contexts'
 import ReactJson from 'react-json-view'
-import {ContentView, displayViewState} from '../../state/state'
-import {ContentCatgegoryHOC} from "./ContentCatgegoryHOC";
-import {useRecoilValue} from "recoil";
+import { ContentView } from '../../state/state'
+import { ContentCategory } from './ContentCategory'
 
 const Arbeidsgiver = React.memo(() => {
     const arbeidsgiver = useArbeidsgiver()
@@ -13,7 +12,7 @@ const Arbeidsgiver = React.memo(() => {
         </div>
     )
 })
-Arbeidsgiver.displayName="JsonView.Arbeidsgiver"
+Arbeidsgiver.displayName = 'JsonView.Arbeidsgiver'
 
 const Person = React.memo(() => {
     const person = usePerson()
@@ -23,7 +22,7 @@ const Person = React.memo(() => {
         </div>
     )
 })
-Person.displayName="JsonView.Person"
+Person.displayName = 'JsonView.Person'
 
 const Vedtaksperiode = React.memo(() => {
     const vedtaksperiode = useVedtak()
@@ -33,7 +32,7 @@ const Vedtaksperiode = React.memo(() => {
         </div>
     )
 })
-Vedtaksperiode.displayName="JsonView.Vedtaksperiode"
+Vedtaksperiode.displayName = 'JsonView.Vedtaksperiode'
 
 const ForkastetVedtaksperiode = React.memo(() => {
     const vedtaksperiode = useForkastetVedtaksperiode()
@@ -43,22 +42,25 @@ const ForkastetVedtaksperiode = React.memo(() => {
         </div>
     )
 })
-Vedtaksperiode.displayName="JsonView.Vedtaksperiode"
+Vedtaksperiode.displayName = 'JsonView.Vedtaksperiode'
 
 const Utbetaling = React.memo(() => {
     const utbetaling = useUtbetaling()
     return (
         <div>
             <ReactJson src={utbetaling} name={null} collapsed={1} />
+            <ReactJson {...{src:utbetaling}} />
         </div>
     )
 })
-Vedtaksperiode.displayName="JsonView.Utbetaling"
+Vedtaksperiode.displayName = 'JsonView.Utbetaling'
 
 export const JsonView = React.memo(() => {
-    let displayName = ContentView.Json
-    const useDisplayView = useRecoilValue(displayViewState)
-    if (!useDisplayView.includes(displayName)) return null
-    return <ContentCatgegoryHOC {...{ Person, Arbeidsgiver, Vedtaksperiode, ForkastetVedtaksperiode, Utbetaling }}/>
+    return (
+        <ContentCategory
+            displayName={ContentView.Json}
+            {...{ Person, Arbeidsgiver, Vedtaksperiode, ForkastetVedtaksperiode, Utbetaling }}
+        />
+    )
 })
-JsonView.displayName="JsonView"
+JsonView.displayName = 'JsonView'
