@@ -78,10 +78,13 @@ export type KontekstMapDto = {
     tilstand?: string
     utbetalingId?: string
     [x: string]: any
-
 }
 
 export type AktivitetsloggDto = {
     aktiviteter: AktivitetDto[]
     kontekster: KontekstDto[]
+}
+
+export type MeldingDto = {
+    id: string
 }

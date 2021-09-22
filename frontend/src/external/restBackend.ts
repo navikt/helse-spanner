@@ -1,5 +1,5 @@
 import { Backend } from './backend'
-import { PersonDto } from '../state/dto'
+import {MeldingDto, PersonDto} from '../state/dto'
 import { feilVedDårligRespons, wrapNnettverksFeil } from './feil'
 
 export const restBackend = (development: boolean): Backend => {
@@ -29,7 +29,18 @@ export const restBackend = (development: boolean): Backend => {
             .catch(wrapNnettverksFeil)
             .then(feilVedDårligRespons)
             .then(response => response.json())
-    }
+    },
+        hendelseForRef(meldingsreferanse: string): Promise<MeldingDto>  {
+            return fetch(`${baseUrl}/api/hendelse/${meldingsreferanse}`, {
+                method: 'get',
+                headers: {
+                    Accept: 'application/json',
+                }
+            })
+                .catch(wrapNnettverksFeil)
+                .then(feilVedDårligRespons)
+                .then(response => response.json())
+        }
     }
 }
 

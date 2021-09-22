@@ -1,7 +1,7 @@
-import { PersonDto } from '../state/dto'
+import {MeldingDto, PersonDto} from '../state/dto'
 import { Backend } from './backend'
 
-export let testBackend = (testPersoner: PersonDto[] = [], errorPersoner: Record<string, Error> = {}): Backend => {
+export let testBackend = (testPersoner: PersonDto[] = [], errorPersoner: Record<string, Error> = {}, testMeldinger: MeldingDto[] = []): Backend => {
     let aktorPersoner: Record<string, PersonDto> = testPersoner.reduce((old, person) => {
         return {
             ...old,
@@ -16,7 +16,21 @@ export let testBackend = (testPersoner: PersonDto[] = [], errorPersoner: Record<
         }
     }, {})
 
+    let meldinger: Record<string, MeldingDto> = testMeldinger.reduce((old, melding) => {
+        return {
+            ...old,
+            [melding.id]: melding,
+        }
+    }, {})
+
     return {
+        hendelseForRef(meldingsreferanse: string): Promise<MeldingDto> {
+            let melding = meldinger[meldingsreferanse]
+            if (!melding) {
+                throw Error(`No test fixture with ${meldingsreferanse}`)
+            }
+            return Promise.resolve(melding)
+        },
         personForAktørId(aktørId: string): Promise<PersonDto> {
             let person = aktorPersoner[aktørId]
             if (!person) {
@@ -39,6 +53,6 @@ export let testBackend = (testPersoner: PersonDto[] = [], errorPersoner: Record<
                 return Promise.reject(person)
             }
             return Promise.resolve(person)
-        },
+        }
     }
 }

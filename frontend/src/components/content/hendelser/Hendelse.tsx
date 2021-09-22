@@ -1,12 +1,12 @@
 import React from 'react'
 import { AktivitetDto, KontekstDto } from '../../../state/dto'
 import { useRecoilState } from 'recoil'
-import { expandedHendelserState } from '../../../state/state'
+import {expandedHendelserState, åpneHendelseDokumentState} from '../../../state/state'
 import classNames from 'classnames'
 import styles from './Hendelse.module.css'
 import { format } from 'date-fns'
 import parseISO from 'date-fns/parseISO'
-import { Copy } from '@navikt/ds-icons'
+import {Copy, FileContent} from '@navikt/ds-icons'
 import { Aktivitet } from './Aktivitet'
 import commonStyles from '../../Common.module.css'
 
@@ -24,7 +24,6 @@ export const Hendelse = React.memo(
 
         const [expandedHendelser, setExpandedHendelser] = useRecoilState(expandedHendelserState)
         const isExpanded = expandedHendelser.includes(meldingsReferanseId)
-
         const toggleSelected = () => {
             if (isExpanded) {
                 setExpandedHendelser(expandedHendelser.filter((it) => it !== meldingsReferanseId))
@@ -32,6 +31,15 @@ export const Hendelse = React.memo(
                 setExpandedHendelser([...expandedHendelser, meldingsReferanseId])
             }
         }
+
+        const [åpneHendelser, setÅpneHendelser] = useRecoilState(åpneHendelseDokumentState)
+        const åpneHendelse = React.useMemo( () => () => {
+            const nyåpneHendelser = [...åpneHendelser, kontekst]
+            const unique = nyåpneHendelser.filter((v, i, a) => a.indexOf(v) === i);
+            setÅpneHendelser(() => unique)
+        },
+            [åpneHendelser, setÅpneHendelser]
+        )
 
         const isError = aktiviteter.find((it) => it.alvorlighetsgrad == 'ERROR')
 
@@ -56,6 +64,13 @@ export const Hendelse = React.memo(
                         onClick={copyMeldingRefId}
                     >
                         <Copy color={'black'} />
+                    </button>
+                    <button
+                        className={classNames(styles.KopierMeldingsreferanse)}
+                        aria-label={'Åpne hendelse dokument'}
+                        onClick={åpneHendelse}
+                    >
+                        <FileContent color={'black'} />
                     </button>
                 </div>
                 {isExpanded && (

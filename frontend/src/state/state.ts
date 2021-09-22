@@ -1,5 +1,6 @@
 import Recoil from 'recoil'
 import { Id } from './contexts'
+import {KontekstDto} from "./dto";
 
 export const selectedState = Recoil.atom<Id[]>({
     key: 'highligthState',
@@ -32,4 +33,9 @@ export const  visBareFeilState = Recoil.atom({
 export const  skjulPåminnelserState = Recoil.atom({
     key: 'skjulPåminnelserState',
     default: true
+})
+
+export const  åpneHendelseDokumentState = Recoil.atom<KontekstDto[]>({
+    key: 'åpneHendelseDokument',
+    default: []
 })

@@ -1,9 +1,10 @@
-import { PersonDto } from '../state/dto'
+import {MeldingDto, PersonDto} from '../state/dto'
 import { createContext, useContext } from '../state/contexts'
 
 export type Backend = {
     personForFnr: (fnr: string) => Promise<PersonDto>
     personForAktørId: (aktørId: string) => Promise<PersonDto>
+    hendelseForRef: (meldingsreferanse: string) => Promise<MeldingDto>
 }
 
 export const BackendContext = createContext<Backend>()

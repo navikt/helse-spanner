@@ -1,0 +1,13 @@
+
+.LukkHendelseButton {
+    border-style:none;
+    background-color: transparent;
+}
+
+.LukkHendelseButton:hover {
+    background-color: lightgray;
+}
+
+.LukkHendelseButton:active {
+    background-color: gray;
+}

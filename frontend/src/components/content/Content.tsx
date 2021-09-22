@@ -7,6 +7,7 @@ import classNames from 'classnames'
 import styles from './Content.module.css'
 import { useIsOnlySelected, useIsSelected } from '../../state/contexts'
 import { Card } from '../Card'
+import {HendelseDokumentView} from "./hendelseDokument/HendelseDokumentView";
 
 export const Content = React.memo(() => {
     return (
@@ -18,6 +19,7 @@ export const Content = React.memo(() => {
             <div className={classNames(styles.ContentCards)}>
                 <JsonView />
                 <HendelseView />
+                <HendelseDokumentView />
             </div>
         </div>
     )
@@ -62,7 +64,6 @@ export const ShowIfSelected: React.FC<PropsWithChildren<any>> = React.memo(({ ch
     return (
         <Card
             style={{ borderStyle: onlySelected ? `solid` : 'none', borderWidth: '7px', borderColor: selectedColor }}
-            className={classNames(styles.ContentCard)}
         >
             {children}
         </Card>
