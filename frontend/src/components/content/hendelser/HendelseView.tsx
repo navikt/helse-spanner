@@ -3,7 +3,7 @@ import {
     AktivitetsloggContext,
     useAktivitetslogg,
     useArbeidsgiver, useForkastetVedtaksperiode,
-    usePerson,
+    usePerson, useUtbetaling,
     useVedtak,
 } from '../../../state/contexts'
 import { useRecoilValue } from 'recoil'
@@ -63,13 +63,30 @@ const ForkastetVedtaksperiode = React.memo(() => {
 })
 Vedtaksperiode.displayName="HendelseView.ForkastetVedtaksperiode"
 
+
+const Utbetaling = React.memo(() => {
+    const utbetaling = useUtbetaling()
+    const aktivitetslogg = useAktivitetslogg()
+
+
+    const aktiviteter = aktiviteterForKontekst(
+        aktivitetslogg,
+        (kontekst) =>
+            (!!kontekst.kontekstMap.utbetalingId && kontekst.kontekstMap.utbetalingId === utbetaling.id) ??
+            false
+    )
+
+    return <Hendelser aktiviteter={aktiviteter} />
+})
+Vedtaksperiode.displayName="HendelseView.Utbetaling"
+
 export const HendelseView = React.memo(() => {
     const person = usePerson()
     const useDisplayView = useRecoilValue(displayViewState)
     if (!useDisplayView.includes(ContentView.Hendelser)) return null
     return (
         <AktivitetsloggContext.Provider value={person.aktivitetslogg}>
-            <ContentCatgegoryHOC {...{ Person, Arbeidsgiver, Vedtaksperiode, ForkastetVedtaksperiode }}/>
+            <ContentCatgegoryHOC {...{ Person, Arbeidsgiver, Vedtaksperiode, ForkastetVedtaksperiode, Utbetaling: Utbetaling }}/>
         </AktivitetsloggContext.Provider>
     )
 })
