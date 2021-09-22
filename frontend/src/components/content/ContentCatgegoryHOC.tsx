@@ -1,4 +1,4 @@
-import { ArbeidsgiverContext, usePerson, VedtakContext } from '../../state/contexts'
+import {ArbeidsgiverContext, ForkastetVedtaksperiodeContext, usePerson, VedtakContext} from '../../state/contexts'
 import { ShowIfSelected } from './Content'
 import React from 'react'
 
@@ -6,6 +6,7 @@ type CategoryComponents = {
     Person: React.FC | undefined
     Arbeidsgiver: React.FC | undefined
     Vedtaksperiode: React.FC | undefined
+    ForkastetVedtaksperiode: React.FC | undefined
 }
 
 export const ContentCatgegoryHOC = React.memo<CategoryComponents>(components => {
@@ -32,6 +33,15 @@ export const ContentCatgegoryHOC = React.memo<CategoryComponents>(components => 
                                 </ShowIfSelected>
                             )}
                         </VedtakContext.Provider>
+                    ))}
+                    {arbeidsgiver.forkastede.map((forkastet) => (
+                        <ForkastetVedtaksperiodeContext.Provider value={forkastet.vedtaksperiode} key={forkastet.vedtaksperiode.id}>
+                            {components.ForkastetVedtaksperiode && (
+                                <ShowIfSelected>
+                                    <components.ForkastetVedtaksperiode />
+                                </ShowIfSelected>
+                            )}
+                        </ForkastetVedtaksperiodeContext.Provider>
                     ))}
                 </ArbeidsgiverContext.Provider>
             ))}

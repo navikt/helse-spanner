@@ -1,5 +1,5 @@
 import React from 'react'
-import {useArbeidsgiver, usePerson, useVedtak} from '../../state/contexts'
+import {useArbeidsgiver, useForkastetVedtaksperiode, usePerson, useVedtak} from '../../state/contexts'
 import ReactJson from 'react-json-view'
 import {ContentView, displayViewState} from '../../state/state'
 import {ContentCatgegoryHOC} from "./ContentCatgegoryHOC";
@@ -35,10 +35,20 @@ const Vedtaksperiode = React.memo(() => {
 })
 Vedtaksperiode.displayName="JsonView.Vedtaksperiode"
 
+const ForkastetVedtaksperiode = React.memo(() => {
+    const vedtaksperiode = useForkastetVedtaksperiode()
+    return (
+        <div>
+            <ReactJson src={vedtaksperiode} name={null} collapsed={1} />
+        </div>
+    )
+})
+Vedtaksperiode.displayName="JsonView.Vedtaksperiode"
+
 export const JsonView = React.memo(() => {
     let displayName = ContentView.Json
     const useDisplayView = useRecoilValue(displayViewState)
     if (!useDisplayView.includes(displayName)) return null
-    return <ContentCatgegoryHOC {...{ Person, Arbeidsgiver, Vedtaksperiode }}/>
+    return <ContentCatgegoryHOC {...{ Person, Arbeidsgiver, Vedtaksperiode, ForkastetVedtaksperiode }}/>
 })
 JsonView.displayName="JsonView"
