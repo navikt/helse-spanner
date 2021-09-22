@@ -10,7 +10,7 @@ export const Feilmelding = React.memo(({feil}: { feil: any }) => {
         feiltekst = `Fikk ikke kontakt med server: ${feil.message}`
         ikon = '✂️🔌'
     } else if (feil instanceof finnesIkke) {
-        feiltekst = `Personen finnes ikke i spleis.` + (!!feil.feilId ? ` FeilId: ${feil.feilId}` : '')
+        feiltekst = `Ressursen finnes ikke i spleis.` + (!!feil.feilId ? ` FeilId: ${feil.feilId}` : '')
         ikon = '🤷'
     } else if (feil instanceof backendFeil) {
         feiltekst = `Feil fra backend. Status: ${feil.status}` + (!!feil.feilId ? ` FeilId: ${feil.feilId}` : '')
