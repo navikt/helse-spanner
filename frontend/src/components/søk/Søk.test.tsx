@@ -44,5 +44,5 @@ test('bruker søker opp en person som ikke finnes', async () => {
     testApp([], { '43': lagfinnesIkkeFeil() })
     søk('43')
     await respons()
-    expect(feilmelding().textContent).toContain('Personen finnes ikke i spleis')
+    expect(feilmelding().textContent).toContain('Ressursen finnes ikke i spleis')
 })
