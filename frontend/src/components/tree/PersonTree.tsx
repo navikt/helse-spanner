@@ -9,8 +9,8 @@ import {
     useForkastetVedtaksperiode,
     useId,
     useIsSelected,
-    usePerson,
-    useVedtak,
+    usePerson, useUtbetaling,
+    useVedtak, UtbetalingContext,
     VedtakContext,
 } from '../../state/contexts'
 import {useRecoilState, useRecoilValue, useSetRecoilState} from 'recoil'
@@ -122,7 +122,7 @@ const ArbeidsgiverNode = React.memo(() => {
                 <ExpandToggle isExpanded={isExpanded} onClick={() => toggleExpandArbeidsgiver()} />
                 <SelectableTreeNode indent={0}>{arbeidsgiver.organisasjonsnummer}</SelectableTreeNode>
             </div>
-            {isExpanded && <Vedtaksperioder />}
+            {isExpanded && <><Vedtaksperioder/><Utbetalinger/></> }
         </>
     )
 })
@@ -192,3 +192,38 @@ const ForkastetVedtaksNode = React.memo(() => {
     )
 })
 ForkastetVedtaksNode.displayName="ForkastetVedtaksNode"
+
+
+const Utbetalinger = React.memo(() => {
+    const arbeidsgiver = useArbeidsgiver()
+    let utbetalinger: [JSX.Element, Date][] = arbeidsgiver.utbetalinger.map((utbetaling) => [
+        <UtbetalingContext.Provider value={utbetaling} key={utbetaling.id}>
+            <UtbetalingsNode />
+        </UtbetalingContext.Provider>,
+        parseISO(utbetaling.fom),
+    ])
+
+    const sorterteUtbetalinger = [...utbetalinger].sort(([_, a], [ignore, b]) =>
+        compareAsc(a, b)
+    )
+    return (
+        <>
+            {sorterteUtbetalinger.map(([utbetaling]) => utbetaling)}
+        </>
+    )
+})
+Vedtaksperioder.displayName="Vedtaksperioder"
+
+
+const UtbetalingsNode = React.memo(() => {
+    const utbetaling = useUtbetaling() 
+    return (
+        <SelectableTreeNode className={styles.Forkastet} indent={1.2}>
+            <div>Utbetaling</div>
+            {" "}
+            {utbetaling.fom} - {utbetaling.tom}
+            <br />
+            {utbetaling.status}
+        </SelectableTreeNode>
+    )
+})
