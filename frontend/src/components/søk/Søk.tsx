@@ -13,17 +13,24 @@ export const Søk = React.memo((props: SøkProps) => {
             props.setPersonId(undefined)
         } else {
             props.setPersonId(søketekst.trim())
-            setSøketekst("")
         }
     }
 
     return (
         <div className={classNames(styles.Søk)}>
-            <input placeholder="fnr/aktør-id" type={"number"} autoFocus={true} value={søketekst} onChange={e => setSøketekst(e.target.value)} data-testid="søkefelt" />
+            <input
+                placeholder="fnr/aktør-id"
+                type={'number'}
+                autoFocus={true}
+                value={søketekst}
+                onChange={(e) => setSøketekst(e.target.value)}
+                data-testid="søkefelt"
+                onKeyDown={(event) => event.key == 'Enter' && sendSøk()}
+            />
             <button onClick={sendSøk} data-testid="søkeknapp">
                 Søk
             </button>
         </div>
     )
 })
-Søk.displayName="Søk"
+Søk.displayName = 'Søk'
