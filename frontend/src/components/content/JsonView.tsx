@@ -49,7 +49,6 @@ const Utbetaling = React.memo(() => {
     return (
         <div>
             <ReactJson src={utbetaling} name={null} collapsed={1} />
-            <ReactJson {...{src:utbetaling}} />
         </div>
     )
 })

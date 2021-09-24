@@ -1,5 +1,4 @@
 .PersonTree {
-    grid-area: nav;
     min-height: 10em;
     max-width: 20em;
 }
@@ -58,6 +57,4 @@
     vertical-align: center;
     background-color: lightslategray;
     color: white;
-
-
 }

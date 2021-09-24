@@ -11,12 +11,12 @@ import {HendelseDokumentView} from "./hendelseDokument/HendelseDokumentView";
 
 export const Content = React.memo(() => {
     return (
-        <div>
+        <div style={{gridArea: "content"}}>
             <div>
                 <ViewButton view={ContentView.Json} />
                 <ViewButton view={ContentView.Hendelser} />
             </div>
-            <div className={classNames(styles.ContentCards)}>
+            <div  className={classNames(styles.ContentCards)}>
                 <JsonView />
                 <HendelseView />
                 <HendelseDokumentView />
