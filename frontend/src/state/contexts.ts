@@ -1,5 +1,4 @@
 import {
-    AktivitetsloggDto,
     ArbeidsgiverDto,
     FokastetVedtaksperiodeDto,
     PersonDto,
@@ -9,6 +8,7 @@ import {
 import React, {useMemo} from 'react'
 import {useRecoilValue} from 'recoil'
 import {selectedState} from './state'
+import {Aktivitetslogg} from "./model";
 
 //For å slippe defaultvalue til context.
 //https://kentcdodds.com/blog/how-to-use-react-context-effectively
@@ -35,7 +35,7 @@ export const useForkastetVedtaksperiode = () => useContext(ForkastetVedtaksperio
 export const useUtbetaling = () => useContext(UtbetalingContext)
 
 
-export const AktivitetsloggContext = createContext<AktivitetsloggDto>()
+export const AktivitetsloggContext = createContext<Aktivitetslogg>()
 export const useAktivitetslogg = () => useContext(AktivitetsloggContext)
 
 export type Id = {

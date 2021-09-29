@@ -17,7 +17,7 @@ export const displayViewState = Recoil.atom<ContentView[]>({
     default: [ContentView.Json]
 })
 
-export const expandedHendelserState = Recoil.atom<string[]>({
+export const expandedHendelserState = Recoil.atom<number[]>({
     key: 'expandedHendelser',
     default: []
 })
