@@ -166,9 +166,8 @@ const VedtaksNode = React.memo(() => {
     const vedtak = useVedtak()
     return (
         <SelectableTreeNode indent={1.2} className={styles.LøvNode} >
-            {vedtak.fom} - {vedtak.tom}
-            <br />
-            {vedtak.tilstand}
+            <div>{vedtak.fom} - {vedtak.tom}</div>
+            <span className={styles.TilstandText}>{vedtak.tilstand}</span>
         </SelectableTreeNode>
     )
 })
@@ -183,11 +182,8 @@ const ForkastetVedtaksNode = React.memo(() => {
     }
     return (
         <SelectableTreeNode className={classNames(styles.Forkastet, styles.LøvNode)} indent={1.2}>
-            <div className={classNames(styles.ForkastetLabel)}>Forkastet</div>
-            {" "}
-            {vedtak.fom} - {vedtak.tom}
-            <br />
-            {vedtak.tilstand}
+            <div className={classNames(styles.ForkastetLabel)}>{vedtak.fom} - {vedtak.tom}</div>
+            <span className={styles.TilstandText}>{vedtak.tilstand}</span>
         </SelectableTreeNode>
     )
 })
@@ -219,11 +215,9 @@ const UtbetalingsNode = React.memo(() => {
     const utbetaling = useUtbetaling()
     return (
         <SelectableTreeNode className={styles.LøvNode} indent={1.2}>
-            <div>Utbetaling</div>
-            {" "}
-            {utbetaling.fom} - {utbetaling.tom}
-            <br />
-            {utbetaling.status}
+            <div><i>Utbetaling</i> 💰</div>
+            <div>{utbetaling.fom} - {utbetaling.tom}</div>
+            <span className={styles.TilstandText}>{utbetaling.status}</span>
         </SelectableTreeNode>
     )
 })

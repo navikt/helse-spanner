@@ -52,12 +52,13 @@
 
 .Forkastet {
     color: lightslategray;
-
-
+    background-color: rgba(228, 220, 214, 0.29);
 }
 
-.ForkastetLabel {
-    display: inline-block;
+.ForkastetLabel::before {
+    content: "Forkastet";
+    margin-right: 0.3rem;
+    padding: 1px 2px;
     font-size: small;
     font-weight: bold;
     font-family: sans-serif;
@@ -65,4 +66,8 @@
     vertical-align: center;
     background-color: lightslategray;
     color: white;
+}
+
+.TilstandText {
+    font-size: small;
 }
