@@ -1,5 +1,4 @@
 import React from 'react'
-import { AktivitetDto, KontekstDto } from '../../../state/dto'
 import { useRecoilState } from 'recoil'
 import {expandedHendelserState, åpneHendelseDokumentState} from '../../../state/state'
 import classNames from 'classnames'
@@ -9,11 +8,13 @@ import parseISO from 'date-fns/parseISO'
 import {Copy, FileContent} from '@navikt/ds-icons'
 import { Aktivitet } from './Aktivitet'
 import commonStyles from '../../Common.module.css'
+import {Kontekst} from "../../../state/model";
 
 export const Hendelse = React.memo(
-    ({ aktiviteter, kontekst }: { aktiviteter: AktivitetDto[]; kontekst: KontekstDto }) => {
+    ({ kontekst }: { kontekst: Kontekst }) => {
         const writeToClipboard = (data: string) =>
             navigator.clipboard.writeText(data).catch((error) => console.warn('Error copying to clipboard:', error))
+        const aktiviteter = kontekst.aktiviteter
         let meldingsReferanseId = ''
         if (kontekst.kontekstMap.meldingsreferanseId != undefined) {
             meldingsReferanseId = kontekst.kontekstMap.meldingsreferanseId
@@ -23,12 +24,12 @@ export const Hendelse = React.memo(
         const copyMeldingRefId = () => writeToClipboard(meldingsReferanseId)
 
         const [expandedHendelser, setExpandedHendelser] = useRecoilState(expandedHendelserState)
-        const isExpanded = expandedHendelser.includes(meldingsReferanseId)
+        const isExpanded = expandedHendelser.includes(kontekst.id)
         const toggleSelected = () => {
             if (isExpanded) {
-                setExpandedHendelser(expandedHendelser.filter((it) => it !== meldingsReferanseId))
+                setExpandedHendelser(expandedHendelser.filter((it) => it !== kontekst.id))
             } else {
-                setExpandedHendelser([...expandedHendelser, meldingsReferanseId])
+                setExpandedHendelser([...expandedHendelser, kontekst.id])
             }
         }
 

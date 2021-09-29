@@ -9,19 +9,24 @@ import {
     useVedtak,
 } from '../../../state/contexts'
 import { ContentView } from '../../../state/state'
-import { aktiviteterForKontekst, Hendelser } from './Hendelser'
+import { Hendelser } from './Hendelser'
 import { ContentCategory } from '../ContentCategory'
+import { Aktivitetslogg, Kontekst } from '../../../state/model'
+import {AktivitetDto, PersonDto} from '../../../state/dto'
+import parseISO from "date-fns/parseISO";
+import compareAsc from "date-fns/compareAsc";
+import {hasValue} from "../../../utils";
 
 const Person = React.memo(() => {
     const aktivitetslogg = useAktivitetslogg()
-    return <Hendelser aktiviteter={aktivitetslogg.aktiviteter} />
+    return <Hendelser hendelser={aktivitetslogg.kontekster.filter(it => it.erHendelsekontekst)} />
 })
 Person.displayName = 'HendelseView.Person'
 
 const Arbeidsgiver = React.memo(() => {
     const aktivitetslogg = useAktivitetslogg()
     const arbeidsgiver = useArbeidsgiver()
-    const aktiviteter = aktiviteterForKontekst(
+    const hendelser = hendelserAssosiertMedKontekst(
         aktivitetslogg,
         (kontekst) =>
             (!!kontekst.kontekstMap.organisasjonsnummer &&
@@ -29,21 +34,21 @@ const Arbeidsgiver = React.memo(() => {
             false
     )
 
-    return <Hendelser aktiviteter={aktiviteter} />
+    return <Hendelser hendelser={hendelser} />
 })
 Arbeidsgiver.displayName = 'HendelseView.Arbeidsgiver'
 
 const Vedtaksperiode = React.memo(() => {
     const vedtaksperiode = useVedtak()
     const aktivitetslogg = useAktivitetslogg()
-    const aktiviteter = aktiviteterForKontekst(
+    const hendelser = hendelserAssosiertMedKontekst(
         aktivitetslogg,
         (kontekst) =>
             (!!kontekst.kontekstMap.vedtaksperiodeId && kontekst.kontekstMap.vedtaksperiodeId === vedtaksperiode.id) ??
             false
     )
 
-    return <Hendelser aktiviteter={aktiviteter} />
+    return <Hendelser hendelser={hendelser} />
 })
 Vedtaksperiode.displayName = 'HendelseView.Vedtaksperiode'
 
@@ -51,14 +56,14 @@ const ForkastetVedtaksperiode = React.memo(() => {
     const vedtaksperiode = useForkastetVedtaksperiode()
     const aktivitetslogg = useAktivitetslogg()
 
-    const aktiviteter = aktiviteterForKontekst(
+    const hendelser = hendelserAssosiertMedKontekst(
         aktivitetslogg,
         (kontekst) =>
             (!!kontekst.kontekstMap.vedtaksperiodeId && kontekst.kontekstMap.vedtaksperiodeId === vedtaksperiode.id) ??
             false
     )
 
-    return <Hendelser aktiviteter={aktiviteter} />
+    return <Hendelser hendelser={hendelser} />
 })
 Vedtaksperiode.displayName = 'HendelseView.ForkastetVedtaksperiode'
 
@@ -66,20 +71,22 @@ const Utbetaling = React.memo(() => {
     const utbetaling = useUtbetaling()
     const aktivitetslogg = useAktivitetslogg()
 
-    const aktiviteter = aktiviteterForKontekst(
+    const hendelser = hendelserAssosiertMedKontekst(
         aktivitetslogg,
         (kontekst) =>
             (!!kontekst.kontekstMap.utbetalingId && kontekst.kontekstMap.utbetalingId === utbetaling.id) ?? false
     )
 
-    return <Hendelser aktiviteter={aktiviteter} />
+    return <Hendelser hendelser={hendelser} />
 })
 Vedtaksperiode.displayName = 'HendelseView.Utbetaling'
 
+
 export const HendelseView = React.memo(() => {
     const person = usePerson()
+    const aktivitetslogg: Aktivitetslogg = React.useMemo(() => aktivitetsloggFraPerson(person), [person])
     return (
-        <AktivitetsloggContext.Provider value={person.aktivitetslogg}>
+        <AktivitetsloggContext.Provider value={aktivitetslogg}>
             <ContentCategory
                 displayName={ContentView.Hendelser}
                 {...{ Person, Arbeidsgiver, Vedtaksperiode, ForkastetVedtaksperiode, Utbetaling }}
@@ -89,3 +96,50 @@ export const HendelseView = React.memo(() => {
 })
 
 Hendelser.displayName = 'HendelseView'
+
+function aktivitetsloggFraPerson(person: PersonDto): Aktivitetslogg {
+    const alleAktiviteter = person.aktivitetslogg.aktiviteter
+    const kontekstDtoer = person.aktivitetslogg.kontekster
+
+    const kontekster = kontekstDtoer.map(
+        (kontekstDto, index): Kontekst => {
+            const aktiviteter = alleAktiviteter.filter((aktivitet) => aktivitet.kontekster.includes(index))
+            const opprettet =
+                aktiviteter
+                    .map((it) => parseISO(it.tidsstempel))
+                    .sort(compareAsc)
+                    .find(hasValue) ?? parseISO('1900-01-01')
+            const harError = !!aktiviteter.find((it) => it.alvorlighetsgrad == 'ERROR')
+            const harWarning = !!aktiviteter.find((it) => it.alvorlighetsgrad == 'WARN')
+            return {
+                kontekstType: kontekstDto.kontekstType,
+                    kontekstMap: kontekstDto.kontekstMap,
+                aktiviteter,
+                id: index,
+                erHendelsekontekst: !!kontekstDto.kontekstMap.meldingsreferanseId,
+                opprettet,
+                harError,
+                harWarning
+            }
+        })
+
+    return {
+        aktiviteter: alleAktiviteter,
+        kontekster,
+    }
+}
+
+
+const hendelserAssosiertMedKontekst = (
+    aktivitetslogg: Aktivitetslogg,
+    kontekstErInteressant: (kontekst: Kontekst) => boolean
+): Kontekst[] => {
+    const interessanteKontekster = aktivitetslogg.kontekster.filter(kontekstErInteressant).map((it) => it.id)
+
+    const harInteressantKontekst = (aktivitet: AktivitetDto) =>
+        !!aktivitet.kontekster.find((id) => interessanteKontekster.includes(id))
+
+    return aktivitetslogg.kontekster
+        .filter((kontekst) => kontekst.erHendelsekontekst)
+        .filter((hendelseKontekst) => !!hendelseKontekst.aktiviteter.find(harInteressantKontekst))
+}
