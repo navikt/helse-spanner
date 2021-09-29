@@ -120,7 +120,7 @@ const ArbeidsgiverNode = React.memo(() => {
         <>
             <div className={styles.ArbeidsgiverNode}>
                 <ExpandToggle isExpanded={isExpanded} onClick={() => toggleExpandArbeidsgiver()} />
-                <SelectableTreeNode indent={0}>{arbeidsgiver.organisasjonsnummer}</SelectableTreeNode>
+                <SelectableTreeNode indent={0}>{arbeidsgiver.organisasjonsnummer} ({arbeidsgiver.vedtaksperioder.length})</SelectableTreeNode>
             </div>
             {isExpanded && <><Vedtaksperioder/><Utbetalinger/></> }
         </>
