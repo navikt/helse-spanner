@@ -9,6 +9,7 @@ export const selectedState = Recoil.atom<Id[]>({
 export enum ContentView {
     Json = "Json",
     Hendelser = "Hendelser",
+    Ingress = "Ingress",
 }
 
 export const displayViewState = Recoil.atom<ContentView[]>({

@@ -8,6 +8,7 @@ import styles from './Content.module.css'
 import { useIsOnlySelected, useIsSelected } from '../../state/contexts'
 import { Card } from '../Card'
 import {HendelseDokumentView} from "./hendelseDokument/HendelseDokumentView";
+import {IngressView} from "./IngressView";
 
 export const Content = React.memo(() => {
     return (
@@ -15,11 +16,13 @@ export const Content = React.memo(() => {
             <div>
                 <ViewButton view={ContentView.Json} />
                 <ViewButton view={ContentView.Hendelser} />
+                <ViewButton view={ContentView.Ingress} />
             </div>
             <div  className={classNames(styles.ContentCards)}>
                 <JsonView />
                 <HendelseView />
                 <HendelseDokumentView />
+                <IngressView />
             </div>
         </div>
     )
