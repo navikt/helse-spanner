@@ -165,7 +165,7 @@ ExpandToggle.displayName="ExpandToggle"
 const VedtaksNode = React.memo(() => {
     const vedtak = useVedtak()
     return (
-        <SelectableTreeNode indent={1.2}>
+        <SelectableTreeNode indent={1.2} className={styles.LøvNode} >
             {vedtak.fom} - {vedtak.tom}
             <br />
             {vedtak.tilstand}
@@ -182,7 +182,7 @@ const ForkastetVedtaksNode = React.memo(() => {
         return null
     }
     return (
-        <SelectableTreeNode className={styles.Forkastet} indent={1.2}>
+        <SelectableTreeNode className={classNames(styles.Forkastet, styles.LøvNode)} indent={1.2}>
             <div className={classNames(styles.ForkastetLabel)}>Forkastet</div>
             {" "}
             {vedtak.fom} - {vedtak.tom}
@@ -216,9 +216,9 @@ Vedtaksperioder.displayName="Vedtaksperioder"
 
 
 const UtbetalingsNode = React.memo(() => {
-    const utbetaling = useUtbetaling() 
+    const utbetaling = useUtbetaling()
     return (
-        <SelectableTreeNode className={styles.Forkastet} indent={1.2}>
+        <SelectableTreeNode className={styles.LøvNode} indent={1.2}>
             <div>Utbetaling</div>
             {" "}
             {utbetaling.fom} - {utbetaling.tom}

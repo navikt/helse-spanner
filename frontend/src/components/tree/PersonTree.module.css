@@ -3,6 +3,11 @@
     max-width: 20em;
 }
 
+.LøvNode {
+    background-color: seashell;
+    padding: .5em!important;
+    margin-bottom: .5em!important;
+}
 
 .PersonTree .node-motion {
     transition: all 0.3s;
