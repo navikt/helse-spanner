@@ -41,7 +41,7 @@ export const PersonTree = React.memo(() => {
             <button onClick={expandAllArbeidsgivere}>Åpne alle</button>
             <button onClick={closeAllArbeidsgivere}>Lukk alle</button>
             <button style={(hideForkastedeVedtak && {borderStyle:"inset", backgroundColor: "grey"}) || {}} onClick={toggleHideForkastedeVedtak}>Skjul forkastede</button>
-            <SelectableTreeNode indent={0}>{person.aktørId}</SelectableTreeNode>
+            <SelectableTreeNode indent={0} className={styles.PersonNode}>{person.aktørId}</SelectableTreeNode>
             {person.arbeidsgivere.map((arbeidsgiver) => (
                 <ArbeidsgiverContext.Provider value={arbeidsgiver} key={arbeidsgiver.id}>
                     <ArbeidsgiverNode />
