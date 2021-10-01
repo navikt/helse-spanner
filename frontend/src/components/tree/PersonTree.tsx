@@ -182,7 +182,7 @@ const ForkastetVedtaksNode = React.memo(() => {
     }
     return (
         <SelectableTreeNode className={classNames(styles.Forkastet, styles.LøvNode)} indent={1.2}>
-            <div className={classNames(styles.ForkastetLabel)}>{vedtak.fom} - {vedtak.tom}</div>
+            <div className={styles.ForkastetLabel}>{vedtak.fom} - {vedtak.tom}</div>
             <span className={styles.TilstandText}>{vedtak.tilstand}</span>
         </SelectableTreeNode>
     )

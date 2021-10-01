@@ -70,4 +70,8 @@
 
 .TilstandText {
     font-size: small;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
