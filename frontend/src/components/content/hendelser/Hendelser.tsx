@@ -107,9 +107,9 @@ export const aktiviteterForKontekst = (
     aktivitetslogg: AktivitetsloggDto,
     filter: (kontekst: KontekstDto) => boolean
 ): AktivitetDto[] => {
-    const mapping = (y: KontekstDto, index: number) => filter(y) && index
-    const konteksterIndex = mapNotUndefined(aktivitetslogg.kontekster, mapping)
+    const mapping = (y: KontekstDto, index: number): number | undefined => filter(y) ? index : undefined
+    const relevanteKontekstIndexer = mapNotUndefined(aktivitetslogg.kontekster, mapping)
     return aktivitetslogg.aktiviteter.filter((aktivitet) =>
-        aktivitet.kontekster.find((kontekstI) => konteksterIndex.includes(kontekstI))
+        aktivitet.kontekster.some((kontekstIndex) => relevanteKontekstIndexer.includes(kontekstIndex))
     )
 }
