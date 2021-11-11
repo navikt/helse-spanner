@@ -8,8 +8,8 @@ const Vedtaksperiode = React.memo(() => {
     const vedtaksperiode = useVedtak()
     return (
         <div>
-            <a href={`https://sporing.intern.nav.no/tilstandsmaskin/${vedtaksperiode.id}`}>Sporing</a>
-            <a href={`https://sporing.dev.intern.nav.no/tilstandsmaskin/${vedtaksperiode.id}`}>(dev)</a>
+            <a href={`https://sporing.intern.nav.no/tilstandsmaskin/${vedtaksperiode.id}`} target="_blank">Sporing (prod)</a><br/>
+            <a href={`https://sporing.dev.intern.nav.no/tilstandsmaskin/${vedtaksperiode.id}`} target="_blank">Sporing (dev)</a>
         </div>
     )
 })
