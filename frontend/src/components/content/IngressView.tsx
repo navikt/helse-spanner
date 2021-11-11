@@ -6,12 +6,10 @@ import {useVedtak} from "../../state/contexts";
 
 const Vedtaksperiode = React.memo(() => {
     const vedtaksperiode = useVedtak()
-    const erDev = window.location.origin.includes("dev")
+    const sporing = window.location.origin.includes("dev") ? 'https://sporing.dev.intern.nav.no' : 'https://sporing.intern.nav.no'
     return (
         <div>
-            {erDev
-                ? <a href={`https://sporing.dev.intern.nav.no/tilstandsmaskin/${vedtaksperiode.id}`} target="_blank">Sporing (dev)</a>
-                : <a href={`https://sporing.intern.nav.no/tilstandsmaskin/${vedtaksperiode.id}`} target="_blank">Sporing (prod)</a>}
+            <a href={`${sporing}/tilstandsmaskin/${vedtaksperiode.id}`} target="_blank">Sporing</a>
         </div>
     )
 })
