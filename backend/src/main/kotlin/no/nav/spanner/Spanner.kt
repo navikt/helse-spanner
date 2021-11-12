@@ -76,7 +76,7 @@ fun Application.spanner(spleis: Personer, config: AzureADConfig, development: Bo
     install(Sessions) {
         cookie<SpannerSession>("spanner", storage = SessionStorageMemory()) {
             this.cookie.secure = !development
-            cookie.extensions["SameSite"] = if (development) "lax" else "strict"
+            cookie.extensions["SameSite"] = "strict"
             serializer = object : SessionSerializer<SpannerSession> {
                 override fun deserialize(text: String): SpannerSession = objectMapper.readValue(text)
                 override fun serialize(session: SpannerSession) = objectMapper.writeValueAsString(session)
