@@ -2,6 +2,7 @@ package no.nav.spanner
 
 import io.ktor.application.*
 import io.ktor.auth.*
+import io.ktor.http.*
 import io.ktor.response.*
 import io.ktor.routing.*
 import io.ktor.sessions.*
@@ -22,6 +23,16 @@ fun Route.oidc() {
         call.sessions.set(SpannerSession(accessToken, idToken, "refreshToken", expiry))
         logg
             .info("Hentet tokens")
-        call.respondRedirect("/")
+        call.respondText(
+            " <html xmlns=\"http://www.w3.org/1999/xhtml\">    \n" +
+                    "  <head>      \n" +
+                    "    <title>OIDC site-refresh</title>      \n" +
+                    "    <meta http-equiv=\"refresh\" content=\"0;URL='/'\" />    \n" +
+                    "  </head>    \n" +
+                    "  <body> \n" +
+                    "    <p>Refreshing site \uD83D\uDD12</p> \n" +
+                    "  </body>  \n" +
+                    "</html>     ", ContentType.Text.Html
+        )
     }
 }
