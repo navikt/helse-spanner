@@ -66,7 +66,7 @@ tasks {
     }
 
     jar {
-        mustRunAfter(clean, ":frontend:npm_run_build")
+        mustRunAfter(":frontend:npm_run_build")
 
         archiveFileName.set("app.jar")
 
