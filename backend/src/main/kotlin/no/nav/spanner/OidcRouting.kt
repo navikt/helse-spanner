@@ -19,8 +19,7 @@ fun Route.oidc() {
         val accessToken = principal.accessToken
         val idToken = principal.extraParameters["id_token"]!!
         val expiry = principal.expiresIn
-        // val refreshToken = principal.refreshToken!! TODO vi får ikke refresh token fra AD
-        call.sessions.set(SpannerSession(accessToken, idToken, "refreshToken", expiry))
+        call.sessions.set(SpannerSession(accessToken, idToken, expiry))
         logg
             .info("Hentet tokens")
         call.respondText(
