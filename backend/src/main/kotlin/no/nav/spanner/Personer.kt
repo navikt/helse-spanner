@@ -23,7 +23,7 @@ class Spleis(private val azureAD: AzureAD, private val baseUrl: String = "http:/
     Personer {
     private val httpClient = HttpClient(CIO) {
         engine {
-            requestTimeout = 30000
+            requestTimeout = 60000
         }
         install(JsonFeature) {
             serializer = JacksonSerializer {
