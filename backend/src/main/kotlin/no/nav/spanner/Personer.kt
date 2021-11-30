@@ -22,6 +22,9 @@ interface Personer {
 class Spleis(private val azureAD: AzureAD, private val baseUrl: String = "http://spleis-api.tbd.svc.cluster.local") :
     Personer {
     private val httpClient = HttpClient(CIO) {
+        engine {
+            requestTimeout = 30000
+        }
         install(JsonFeature) {
             serializer = JacksonSerializer {
                 registerModule(JavaTimeModule())
