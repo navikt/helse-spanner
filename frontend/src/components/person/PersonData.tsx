@@ -7,14 +7,14 @@ import {Spinner} from "../Spinner";
 import {Feilmelding} from "../Feilmelding";
 
 export type FetchPersonProps = {
-    personId: string
+    personId: { value: string }
 }
 
 export const PersonData = React.memo((props: FetchPersonProps) => {
     const backend = useBackend()
     try {
-        const request = personRequestFactory(props.personId, backend)
-        const { isLoading, isError, data, error } = useQuery(['person', props.personId], request)
+        const request = personRequestFactory(props.personId.value, backend)
+        const { isLoading, isError, data, error } = useQuery(['person', props.personId.value], request)
         if (isLoading) {
             return <Spinner />
         }

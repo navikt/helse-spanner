@@ -14,7 +14,7 @@ export const App = React.memo(() => {
             <Header>
                 <Søk setPersonId={setPersonId} />
             </Header>
-            <div className={classNames(styles.App)}>{personId && <PersonData personId={personId.value} />}</div>
+            <div className={classNames(styles.App)}>{personId && <PersonData personId={personId} />}</div>
         </div>
     )
 })
