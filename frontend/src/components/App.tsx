@@ -8,13 +8,13 @@ import classNames from 'classnames'
 
 
 export const App = React.memo(() => {
-    const [personId, setPersonId] = React.useState<string | undefined>(undefined)
+    const [personId, setPersonId] = React.useState<{ value: string } | undefined>(undefined)
     return (
         <div className="App">
             <Header>
                 <Søk setPersonId={setPersonId} />
             </Header>
-            <div className={classNames(styles.App)}>{personId && <PersonData personId={personId} />}</div>
+            <div className={classNames(styles.App)}>{personId && <PersonData personId={personId.value} />}</div>
         </div>
     )
 })

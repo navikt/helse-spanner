@@ -2,8 +2,9 @@ import React from 'react'
 import styles from './Header.module.css'
 import classNames from 'classnames'
 
+
 export type SøkProps = {
-    setPersonId: (personId?: string) => void
+    setPersonId: ( personId: { value: string } | undefined ) => void
 }
 
 export const Søk = React.memo((props: SøkProps) => {
@@ -12,7 +13,7 @@ export const Søk = React.memo((props: SøkProps) => {
         if (søketekst.trim() === '') {
             props.setPersonId(undefined)
         } else {
-            props.setPersonId(søketekst.trim())
+            props.setPersonId({ value: søketekst.trim()})
         }
     }
 
