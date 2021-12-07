@@ -10,7 +10,7 @@ export type FetchPersonProps = {
     personId: { value: string }
 }
 
-export const PersonData = React.memo((props: FetchPersonProps) => {
+export const PersonData = (props: FetchPersonProps) => {
     const backend = useBackend()
     try {
         const request = personRequestFactory(props.personId.value, backend)
@@ -29,5 +29,5 @@ export const PersonData = React.memo((props: FetchPersonProps) => {
     } catch (error) {
         return <Feilmelding feil={error} />
     }
-})
+}
 PersonData.displayName="PersonData"
