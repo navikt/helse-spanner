@@ -122,7 +122,10 @@ const ArbeidsgiverNode = React.memo(() => {
                 <ExpandToggle isExpanded={isExpanded} onClick={() => toggleExpandArbeidsgiver()} />
                 <SelectableTreeNode indent={0}>{arbeidsgiver.organisasjonsnummer} ({arbeidsgiver.vedtaksperioder.length})</SelectableTreeNode>
             </div>
-            {isExpanded && <><Vedtaksperioder/><Utbetalinger/></> }
+            {isExpanded && <>
+                <Vedtaksperioder />
+                <Utbetalinger />
+            </> }
         </>
     )
 })
@@ -194,7 +197,10 @@ const Utbetalinger = React.memo(() => {
     const arbeidsgiver = useArbeidsgiver()
     let utbetalinger: [JSX.Element, Date][] = arbeidsgiver.utbetalinger.map((utbetaling) => [
         <UtbetalingContext.Provider value={utbetaling} key={utbetaling.id}>
-            <UtbetalingsNode />
+            {utbetaling.status == 'FORKASTET'
+                ? <ForkastetUtbetalingNode />
+                : <UtbetalingsNode />
+            }
         </UtbetalingContext.Provider>,
         parseISO(utbetaling.fom),
     ])
@@ -214,8 +220,19 @@ Vedtaksperioder.displayName="Vedtaksperioder"
 const UtbetalingsNode = React.memo(() => {
     const utbetaling = useUtbetaling()
     return (
-        <SelectableTreeNode className={styles.LøvNode} indent={1.2}>
+        <SelectableTreeNode className={classNames(styles.LøvNode, styles.Utbetaling)} indent={1.2}>
             <div><i>Utbetaling</i> 💰</div>
+            <div>{utbetaling.fom} - {utbetaling.tom}</div>
+            <span className={styles.TilstandText}>{utbetaling.status}</span>
+        </SelectableTreeNode>
+    )
+})
+
+const ForkastetUtbetalingNode = React.memo(() => {
+    const utbetaling = useUtbetaling()
+    return (
+        <SelectableTreeNode className={classNames(styles.LøvNode, styles.ForkastetUtbetaling)} indent={1.2}>
+            <div className={styles.ForkastetLabel}><i>Utbetaling</i> 💰</div>
             <div>{utbetaling.fom} - {utbetaling.tom}</div>
             <span className={styles.TilstandText}>{utbetaling.status}</span>
         </SelectableTreeNode>

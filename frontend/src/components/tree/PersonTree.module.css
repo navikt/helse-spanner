@@ -55,6 +55,15 @@
     background-color: rgba(228, 220, 214, 0.29);
 }
 
+.Utbetaling {
+    background-color: rgba(61, 157, 28, 0.16);
+}
+
+.ForkastetUtbetaling {
+    color: lightslategray;
+    background-color: rgba(118, 162, 115, 0.13);
+}
+
 .ForkastetLabel::before {
     content: "Forkastet";
     margin-right: 0.3rem;
