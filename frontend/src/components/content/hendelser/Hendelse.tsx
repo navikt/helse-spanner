@@ -9,11 +9,10 @@ import {Copy, FileContent} from '@navikt/ds-icons'
 import { Aktivitet } from './Aktivitet'
 import commonStyles from '../../Common.module.css'
 import {Kontekst} from "../../../state/model";
+import {writeToClipboard} from "../../../utils";
 
 export const Hendelse = React.memo(
     ({ kontekst }: { kontekst: Kontekst }) => {
-        const writeToClipboard = (data: string) =>
-            navigator.clipboard.writeText(data).catch((error) => console.warn('Error copying to clipboard:', error))
         const aktiviteter = kontekst.aktiviteter
         let meldingsReferanseId = ''
         if (kontekst.kontekstMap.meldingsreferanseId != undefined) {
