@@ -113,7 +113,7 @@ function aktivitetsloggFraPerson(person: PersonDto): Aktivitetslogg {
             const harWarning = !!aktiviteter.find((it) => it.alvorlighetsgrad == 'WARN')
             return {
                 kontekstType: kontekstDto.kontekstType,
-                    kontekstMap: kontekstDto.kontekstMap,
+                kontekstMap: kontekstDto.kontekstMap,
                 aktiviteter,
                 id: index,
                 erHendelsekontekst: !!kontekstDto.kontekstMap.meldingsreferanseId,
@@ -137,9 +137,9 @@ const hendelserAssosiertMedKontekst = (
     const interessanteKontekster = aktivitetslogg.kontekster.filter(kontekstErInteressant).map((it) => it.id)
 
     const harInteressantKontekst = (aktivitet: AktivitetDto) =>
-        !!aktivitet.kontekster.find((id) => interessanteKontekster.includes(id))
+        aktivitet.kontekster.some((id) => interessanteKontekster.includes(id))
 
     return aktivitetslogg.kontekster
         .filter((kontekst) => kontekst.erHendelsekontekst)
-        .filter((hendelseKontekst) => !!hendelseKontekst.aktiviteter.find(harInteressantKontekst))
+        .filter((hendelseKontekst) => hendelseKontekst.aktiviteter.some(harInteressantKontekst))
 }
