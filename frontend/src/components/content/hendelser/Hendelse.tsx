@@ -34,6 +34,11 @@ export const Hendelse = React.memo(
 
         const [åpneHendelser, setÅpneHendelser] = useRecoilState(åpneHendelseDokumentState)
         const åpneHendelse = React.useMemo( () => () => {
+            const ikkeLagretISpleis = ['Utbetalingshistorikk', 'Påminnelse']
+            if (ikkeLagretISpleis.includes(kontekst.kontekstType)) {
+                alert(`Hendelser av type ${kontekst.kontekstType} er ikke lagret i Spleis.\n\n\n:(`);
+                return
+            }
             const nyåpneHendelser = [...åpneHendelser, kontekst]
             const unique = nyåpneHendelser.filter((v, i, a) => a.indexOf(v) === i);
             setÅpneHendelser(() => unique)
