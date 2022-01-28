@@ -4,10 +4,3 @@
     flex-wrap: wrap;
     align-items: flex-start;
 }
-
-
-
-.ViewButtonSelected {
-    border-style:inset;
-    background-color: gray;
-}

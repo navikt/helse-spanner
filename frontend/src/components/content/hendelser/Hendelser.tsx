@@ -1,5 +1,6 @@
 import React from 'react'
 import styles from './Hendelser.module.css'
+import commonStyles from "../../Common.module.css"
 import { Hendelse } from './Hendelse'
 import compareAsc from 'date-fns/compareAsc'
 import classNames from 'classnames'
@@ -28,12 +29,12 @@ export const Hendelser = React.memo(({ hendelser }: { hendelser: Kontekst[] }) =
     return (
         <>
             <div className={styles.Header}>
-                <button onClick={toggleVisBareFeil} className={classNames(visBareFeil && styles.ViewButtonSelected)}>
+                <button onClick={toggleVisBareFeil} className={classNames(visBareFeil && commonStyles.AktivKnapp)}>
                     Vis bare feil
                 </button>
                 <button
                     onClick={toggleVisPåminnelser}
-                    className={classNames(skjulPåminnelser && styles.ViewButtonSelected)}
+                    className={classNames(skjulPåminnelser && commonStyles.AktivKnapp)}
                 >
                     Skjul påminnelser og utbetalingshitorikk
                 </button>

@@ -5,3 +5,8 @@
 .Error {
     background-color: lightpink;
 }
+
+.AktivKnapp {
+    background-color: #bebebe;
+    border-style: inset;
+}

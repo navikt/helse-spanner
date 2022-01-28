@@ -5,6 +5,7 @@ import { useRecoilState } from 'recoil'
 import { ContentView, displayViewState } from '../../state/state'
 import classNames from 'classnames'
 import styles from './Content.module.css'
+import commonStyles from '../Common.module.css'
 import { useIsOnlySelected, useIsSelected } from '../../state/contexts'
 import { Card } from '../Card'
 import {HendelseDokumentView} from "./hendelseDokument/HendelseDokumentView";
@@ -54,7 +55,7 @@ const ViewButton: React.FC<{ view: ContentView }> = React.memo(({ view }) => {
     )
 
     return (
-        <button className={classNames(isSelected && styles.ViewButtonSelected)} onClick={selectCategory}>
+        <button className={classNames(isSelected && commonStyles.AktivKnapp)} onClick={selectCategory}>
             {view}
         </button>
     )

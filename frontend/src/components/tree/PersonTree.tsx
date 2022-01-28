@@ -1,5 +1,6 @@
 import classNames from 'classnames'
 import styles from './PersonTree.module.css'
+import commonStyles from "../Common.module.css"
 import React from 'react'
 import {
     ArbeidsgiverContext,
@@ -41,7 +42,7 @@ export const PersonTree = React.memo(() => {
         <div className={classNames(styles.PersonTree)}>
             <button onClick={expandAllArbeidsgivere}>Åpne alle</button>
             <button onClick={closeAllArbeidsgivere}>Lukk alle</button>
-            <button style={(hideForkastedeVedtak && {borderStyle:"inset", backgroundColor: "grey"}) || {}} onClick={toggleHideForkastedeVedtak}>Skjul forkastede</button>
+            <button className={classNames(hideForkastedeVedtak && commonStyles.AktivKnapp)} onClick={toggleHideForkastedeVedtak}>Skjul forkastede</button>
             <SelectableTreeNode indent={0} className={styles.PersonNode}>{person.aktørId}</SelectableTreeNode>
             {person.arbeidsgivere.map((arbeidsgiver) => (
                 <ArbeidsgiverContext.Provider value={arbeidsgiver} key={arbeidsgiver.id}>
@@ -51,7 +52,6 @@ export const PersonTree = React.memo(() => {
         </div>
     )
 })
-
 PersonTree.displayName = "PersonTree"
 
 const useSelect = () => {
@@ -76,8 +76,6 @@ const useSelect = () => {
 }
 
 interface SelectableTreeNodeProps extends React.HTMLAttributes<HTMLDivElement> {indent: number}
-
-// export const Card: React.FC<CardProps> = ({ className, children, ...rest }) => (
 
 const SelectableTreeNode= React.memo<SelectableTreeNodeProps>(({ className, indent = 0, children, ...rest }) => {
     const selected = useIsSelected()
@@ -216,7 +214,6 @@ const Utbetalinger = React.memo(() => {
     )
 })
 Vedtaksperioder.displayName="Vedtaksperioder"
-
 
 const UtbetalingsNode = React.memo(() => {
     const utbetaling = useUtbetaling()
