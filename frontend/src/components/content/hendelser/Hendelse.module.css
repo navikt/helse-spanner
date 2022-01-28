@@ -1,8 +1,16 @@
-.Header {
+.Hendelselinje {
     display: flex;
+    align-items: center;
 }
 
-.Ekspander {
+.Hendelselinje + .Hendelselinje {
+    border-top: #efefef solid 0.1em;
+    padding: 0.1em 0;
+    margin-top: 0.1em;
+    margin-bottom: -0.1em;
+}
+
+.Hendelsetype {
     width: 12em;
     text-align: left;
     margin-left: 0.5em;
@@ -11,8 +19,7 @@
 .DatoText {
     font-size: small;
     color: grey;
-    display: inline-block;
-    min-width: 6em;
+    min-width: 4em;
 }
 
 .Meldingsreferanse {

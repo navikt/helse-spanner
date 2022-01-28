@@ -22,6 +22,7 @@ import {
 import { Next, Expand } from '@navikt/ds-icons'
 import parseISO from 'date-fns/parseISO'
 import compareAsc from 'date-fns/compareAsc'
+import { somNorskDato } from '../i18n'
 
 export const PersonTree = React.memo(() => {
     const person = usePerson()
@@ -167,9 +168,10 @@ ExpandToggle.displayName="ExpandToggle"
 
 const VedtaksNode = React.memo(() => {
     const vedtak = useVedtak()
+    const [fom, tom] = [vedtak.fom, vedtak.tom].map(somNorskDato)
     return (
         <SelectableTreeNode indent={1.2} className={styles.LøvNode} >
-            <div>{vedtak.fom} - {vedtak.tom}</div>
+            <div>{fom} - {tom}</div>
             <span className={styles.TilstandText}>{vedtak.tilstand}</span>
         </SelectableTreeNode>
     )
@@ -177,21 +179,20 @@ const VedtaksNode = React.memo(() => {
 VedtaksNode.displayName="VedtaksNode"
 
 const ForkastetVedtaksNode = React.memo(() => {
-    const vedtak = useForkastetVedtaksperiode()
     const hideForkastedeVedtak = useRecoilValue(hideForkastedeVedtakState)
-
-    if(hideForkastedeVedtak) {
+    if (hideForkastedeVedtak) {
         return null
     }
+    const vedtak = useForkastetVedtaksperiode()
+    const [fom, tom] = [vedtak.fom, vedtak.tom].map(somNorskDato)
     return (
         <SelectableTreeNode className={classNames(styles.Forkastet, styles.LøvNode)} indent={1.2}>
-            <div className={styles.ForkastetLabel}>{vedtak.fom} - {vedtak.tom}</div>
+            <div className={styles.ForkastetLabel}>{fom} - {tom}</div>
             <span className={styles.TilstandText}>{vedtak.tilstand}</span>
         </SelectableTreeNode>
     )
 })
 ForkastetVedtaksNode.displayName="ForkastetVedtaksNode"
-
 
 const Utbetalinger = React.memo(() => {
     const arbeidsgiver = useArbeidsgiver()
@@ -219,10 +220,11 @@ Vedtaksperioder.displayName="Vedtaksperioder"
 
 const UtbetalingsNode = React.memo(() => {
     const utbetaling = useUtbetaling()
+    const [fom, tom] = [utbetaling.fom, utbetaling.tom].map(somNorskDato)
     return (
         <SelectableTreeNode className={classNames(styles.LøvNode, styles.Utbetaling)} indent={1.2}>
             <div><i>Utbetaling</i> 💰</div>
-            <div>{utbetaling.fom} - {utbetaling.tom}</div>
+            <div>{fom} - {tom}</div>
             <span className={styles.TilstandText}>{utbetaling.status}</span>
         </SelectableTreeNode>
     )

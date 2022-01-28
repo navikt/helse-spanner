@@ -3,13 +3,12 @@ import { useRecoilState } from 'recoil'
 import {expandedHendelserState, åpneHendelseDokumentState} from '../../../state/state'
 import classNames from 'classnames'
 import styles from './Hendelse.module.css'
-import { format } from 'date-fns'
-import parseISO from 'date-fns/parseISO'
 import {Copy, FileContent} from '@navikt/ds-icons'
 import { Aktivitet } from './Aktivitet'
 import commonStyles from '../../Common.module.css'
 import {Kontekst} from "../../../state/model";
 import {writeToClipboard} from "../../../utils";
+import { somNorskDato } from '../../i18n'
 
 export const Hendelse = React.memo(
     ({ kontekst }: { kontekst: Kontekst }) => {
@@ -51,13 +50,13 @@ export const Hendelse = React.memo(
         const isWarning = aktiviteter.find((it) => it.alvorlighetsgrad == 'WARN')
 
         return (
-            <div>
-                <div className={classNames(styles.Header, isWarning && commonStyles.Warning, isError && commonStyles.Error)}>
+            <>
+                <div className={classNames(styles.Hendelselinje, isWarning && commonStyles.Warning, isError && commonStyles.Error)}>
                     <div className={classNames(styles.DatoText)}>
-                        {format(parseISO(aktiviteter[0].tidsstempel), 'yyyy-MM-dd')}
+                        {somNorskDato(aktiviteter[0].tidsstempel)}
                     </div>
 
-                    <button onClick={toggleSelected} className={styles.Ekspander}>
+                    <button onClick={toggleSelected} className={styles.Hendelsetype}>
                         {kontekst.kontekstType}
                     </button>
                     <div className={classNames(styles.Meldingsreferanse)}>
@@ -85,7 +84,7 @@ export const Hendelse = React.memo(
                         ))}
                     </div>
                 )}
-            </div>
+            </>
         )
     }
 )

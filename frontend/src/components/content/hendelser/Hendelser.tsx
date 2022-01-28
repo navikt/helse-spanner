@@ -26,20 +26,22 @@ export const Hendelser = React.memo(({ hendelser }: { hendelser: Kontekst[] }) =
     const sorterteHendelser = filtrerteHendelser.sort((a, b) => compareAsc(a.opprettet, b.opprettet))
 
     return (
-        <div className={styles.Hendelser}>
-            <button onClick={toggleVisBareFeil} className={classNames(visBareFeil && styles.ViewButtonSelected)}>
-                Vis bare feil
-            </button>
-            <button
-                onClick={toggleVisPåminnelser}
-                className={classNames(skjulPåminnelser && styles.ViewButtonSelected)}
-            >
-                Skjul påminnelser og utbetalingshitorikk
-            </button>
+        <>
+            <div className={styles.Header}>
+                <button onClick={toggleVisBareFeil} className={classNames(visBareFeil && styles.ViewButtonSelected)}>
+                    Vis bare feil
+                </button>
+                <button
+                    onClick={toggleVisPåminnelser}
+                    className={classNames(skjulPåminnelser && styles.ViewButtonSelected)}
+                >
+                    Skjul påminnelser og utbetalingshitorikk
+                </button>
+            </div>
             {sorterteHendelser.map((it) => {
                 return (!visBareFeil || it.harError || it.harWarning) && <Hendelse kontekst={it} key={it.id} />
             })}
-        </div>
+        </>
     )
 })
 

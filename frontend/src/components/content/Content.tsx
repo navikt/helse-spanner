@@ -21,8 +21,8 @@ export const Content = React.memo(() => {
             <div  className={classNames(styles.ContentCards)}>
                 <JsonView />
                 <HendelseView />
-                <HendelseDokumentView />
                 <IngressView />
+                <HendelseDokumentView />
             </div>
         </div>
     )
