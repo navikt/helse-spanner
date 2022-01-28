@@ -17,7 +17,7 @@ export let jsonPerson: PersonDto = {
             {
                 kontekster: [0, 1],
                 alvorlighetsgrad: 'INFO',
-                melding: 'Ny arbeidsgiver med organisasjonsnummer arbeidsgiver 1 for denne personen',
+                melding: 'Ny arbeidsgiver med organisasjonsnummer 999888777 for denne personen',
                 detaljer: {},
                 tidsstempel: '2021-07-23T15:51:22.16700',
             },
@@ -45,7 +45,7 @@ export let jsonPerson: PersonDto = {
             {
                 kontekster: [6, 1],
                 alvorlighetsgrad: 'INFO',
-                melding: 'Ny arbeidsgiver med organisasjonsnummer arbeidsgiver 2 for denne personen',
+                melding: 'Ny arbeidsgiver med organisasjonsnummer 888000999 for denne personen',
                 detaljer: {},
                 tidsstempel: '2021-07-23T15:51:22.23900',
             },
@@ -891,7 +891,7 @@ export let jsonPerson: PersonDto = {
                 detaljer: {
                     maksdato: '2018-11-13',
                     saksbehandler: 'SPLEIS',
-                    mottaker: 'arbeidsgiver 1',
+                    mottaker: '999888777',
                     fagområde: 'SPREF',
                     linjer: [
                         {
@@ -961,7 +961,7 @@ export let jsonPerson: PersonDto = {
                                     meldingsreferanseId: 'b55532c3-9f28-4038-944b-e5372685eab7',
                                     aktørId: '42',
                                     fødselsnummer: '12020052345',
-                                    organisasjonsnummer: 'arbeidsgiver 1',
+                                    organisasjonsnummer: '999888777',
                                 },
                             },
                             {
@@ -974,7 +974,7 @@ export let jsonPerson: PersonDto = {
                             {
                                 kontekstType: 'Arbeidsgiver',
                                 kontekstMap: {
-                                    organisasjonsnummer: 'arbeidsgiver 1',
+                                    organisasjonsnummer: '999888777',
                                 },
                             },
                             {
@@ -993,12 +993,12 @@ export let jsonPerson: PersonDto = {
                     },
                     aktiveVedtaksperioder: [
                         {
-                            orgnummer: 'arbeidsgiver 1',
+                            orgnummer: '999888777',
                             vedtaksperiodeId: '311c6035-10e5-414f-b775-996dd60b444b',
                             periodetype: 'OVERGANG_FRA_IT',
                         },
                         {
-                            orgnummer: 'arbeidsgiver 2',
+                            orgnummer: '888000999',
                             vedtaksperiodeId: 'c95128bc-9b82-4aae-9d95-65b73df69c96',
                             periodetype: 'OVERGANG_FRA_IT',
                         },
@@ -1027,7 +1027,7 @@ export let jsonPerson: PersonDto = {
                 behovtype: 'Utbetaling',
                 melding: 'Trenger å sende utbetaling til Oppdrag',
                 detaljer: {
-                    mottaker: 'arbeidsgiver 1',
+                    mottaker: '999888777',
                     fagområde: 'SPREF',
                     linjer: [
                         {
@@ -1334,7 +1334,7 @@ export let jsonPerson: PersonDto = {
                 detaljer: {
                     maksdato: '2018-11-13',
                     saksbehandler: 'SPLEIS',
-                    mottaker: 'arbeidsgiver 2',
+                    mottaker: '888000999',
                     fagområde: 'SPREF',
                     linjer: [
                         {
@@ -1411,7 +1411,7 @@ export let jsonPerson: PersonDto = {
                                     meldingsreferanseId: '5326b2c1-c1f6-4cbd-ba5e-77843ebb2491',
                                     aktørId: '42',
                                     fødselsnummer: '12020052345',
-                                    organisasjonsnummer: 'arbeidsgiver 2',
+                                    organisasjonsnummer: '888000999',
                                 },
                             },
                             {
@@ -1424,7 +1424,7 @@ export let jsonPerson: PersonDto = {
                             {
                                 kontekstType: 'Arbeidsgiver',
                                 kontekstMap: {
-                                    organisasjonsnummer: 'arbeidsgiver 2',
+                                    organisasjonsnummer: '888000999',
                                 },
                             },
                             {
@@ -1445,14 +1445,14 @@ export let jsonPerson: PersonDto = {
                                     meldingsreferanseId: 'e5d8af77-69b0-4f90-849d-fe4436e7d2a7',
                                     aktørId: '42',
                                     fødselsnummer: '12020052345',
-                                    organisasjonsnummer: 'arbeidsgiver 2',
+                                    organisasjonsnummer: '888000999',
                                 },
                             },
                         ],
                     },
                     aktiveVedtaksperioder: [
                         {
-                            orgnummer: 'arbeidsgiver 2',
+                            orgnummer: '888000999',
                             vedtaksperiodeId: 'c95128bc-9b82-4aae-9d95-65b73df69c96',
                             periodetype: 'OVERGANG_FRA_IT',
                         },
@@ -1481,7 +1481,7 @@ export let jsonPerson: PersonDto = {
                 behovtype: 'Utbetaling',
                 melding: 'Trenger å sende utbetaling til Oppdrag',
                 detaljer: {
-                    mottaker: 'arbeidsgiver 2',
+                    mottaker: '888000999',
                     fagområde: 'SPREF',
                     linjer: [
                         {
@@ -1809,7 +1809,7 @@ export let jsonPerson: PersonDto = {
                 detaljer: {
                     maksdato: '2018-11-13',
                     saksbehandler: 'SPLEIS',
-                    mottaker: 'arbeidsgiver 1',
+                    mottaker: '999888777',
                     fagområde: 'SPREF',
                     linjer: [
                         {
@@ -1879,7 +1879,7 @@ export let jsonPerson: PersonDto = {
                                     meldingsreferanseId: '06e07a1e-93e6-4363-9b13-73ab8b1915e0',
                                     aktørId: '42',
                                     fødselsnummer: '12020052345',
-                                    organisasjonsnummer: 'arbeidsgiver 1',
+                                    organisasjonsnummer: '999888777',
                                 },
                             },
                             {
@@ -1892,7 +1892,7 @@ export let jsonPerson: PersonDto = {
                             {
                                 kontekstType: 'Arbeidsgiver',
                                 kontekstMap: {
-                                    organisasjonsnummer: 'arbeidsgiver 1',
+                                    organisasjonsnummer: '999888777',
                                 },
                             },
                             {
@@ -1911,7 +1911,7 @@ export let jsonPerson: PersonDto = {
                     },
                     aktiveVedtaksperioder: [
                         {
-                            orgnummer: 'arbeidsgiver 1',
+                            orgnummer: '999888777',
                             vedtaksperiodeId: '8b9e808a-255e-4e59-ac5a-27e931ce4e49',
                             periodetype: 'INFOTRYGDFORLENGELSE',
                         },
@@ -1940,7 +1940,7 @@ export let jsonPerson: PersonDto = {
                 behovtype: 'Utbetaling',
                 melding: 'Trenger å sende utbetaling til Oppdrag',
                 detaljer: {
-                    mottaker: 'arbeidsgiver 1',
+                    mottaker: '999888777',
                     fagområde: 'SPREF',
                     linjer: [
                         {
@@ -2008,7 +2008,7 @@ export let jsonPerson: PersonDto = {
             {
                 kontekster: [51, 1],
                 alvorlighetsgrad: 'INFO',
-                melding: 'Ny arbeidsgiver med organisasjonsnummer arbeidsgiver 3 for denne personen',
+                melding: 'Ny arbeidsgiver med organisasjonsnummer 975111975 for denne personen',
                 detaljer: {},
                 tidsstempel: '2021-07-23T15:51:24.82100',
             },
@@ -2085,7 +2085,7 @@ export let jsonPerson: PersonDto = {
             {
                 kontekster: [55, 1],
                 alvorlighetsgrad: 'INFO',
-                melding: 'Ny arbeidsgiver med organisasjonsnummer arbeidsgiver 4 for denne personen',
+                melding: 'Ny arbeidsgiver med organisasjonsnummer 987111666 for denne personen',
                 detaljer: {},
                 tidsstempel: '2021-07-23T15:51:24.83300',
             },
@@ -2661,7 +2661,7 @@ export let jsonPerson: PersonDto = {
                 detaljer: {
                     maksdato: '2020-12-29',
                     saksbehandler: 'SPLEIS',
-                    mottaker: 'arbeidsgiver 3',
+                    mottaker: '975111975',
                     fagområde: 'SPREF',
                     linjer: [
                         {
@@ -2738,7 +2738,7 @@ export let jsonPerson: PersonDto = {
                                     meldingsreferanseId: '62abb256-7a37-4467-a91a-2d1e188c95fb',
                                     aktørId: '42',
                                     fødselsnummer: '12020052345',
-                                    organisasjonsnummer: 'arbeidsgiver 3',
+                                    organisasjonsnummer: '975111975',
                                 },
                             },
                             {
@@ -2751,7 +2751,7 @@ export let jsonPerson: PersonDto = {
                             {
                                 kontekstType: 'Arbeidsgiver',
                                 kontekstMap: {
-                                    organisasjonsnummer: 'arbeidsgiver 3',
+                                    organisasjonsnummer: '975111975',
                                 },
                             },
                             {
@@ -2772,7 +2772,7 @@ export let jsonPerson: PersonDto = {
                                     meldingsreferanseId: '96d91c24-7061-4d53-89b7-717691b1cf20',
                                     aktørId: '42',
                                     fødselsnummer: '12020052345',
-                                    organisasjonsnummer: 'arbeidsgiver 3',
+                                    organisasjonsnummer: '975111975',
                                 },
                             },
                             {
@@ -2785,12 +2785,12 @@ export let jsonPerson: PersonDto = {
                     },
                     aktiveVedtaksperioder: [
                         {
-                            orgnummer: 'arbeidsgiver 3',
+                            orgnummer: '975111975',
                             vedtaksperiodeId: '0cbdd5ba-3281-4f6f-b0c0-01e02a1d428d',
                             periodetype: 'FØRSTEGANGSBEHANDLING',
                         },
                         {
-                            orgnummer: 'arbeidsgiver 4',
+                            orgnummer: '987111666',
                             vedtaksperiodeId: 'f910b376-8ad4-4c96-8e4f-1dfae0d6468f',
                             periodetype: 'FØRSTEGANGSBEHANDLING',
                         },
@@ -2819,7 +2819,7 @@ export let jsonPerson: PersonDto = {
                 behovtype: 'Utbetaling',
                 melding: 'Trenger å sende utbetaling til Oppdrag',
                 detaljer: {
-                    mottaker: 'arbeidsgiver 3',
+                    mottaker: '975111975',
                     fagområde: 'SPREF',
                     linjer: [
                         {
@@ -3119,7 +3119,7 @@ export let jsonPerson: PersonDto = {
                 detaljer: {
                     maksdato: '2020-12-29',
                     saksbehandler: 'SPLEIS',
-                    mottaker: 'arbeidsgiver 4',
+                    mottaker: '987111666',
                     fagområde: 'SPREF',
                     linjer: [
                         {
@@ -3204,7 +3204,7 @@ export let jsonPerson: PersonDto = {
                                     meldingsreferanseId: '1435d054-85a6-4d50-b3a6-31b03d94295a',
                                     aktørId: '42',
                                     fødselsnummer: '12020052345',
-                                    organisasjonsnummer: 'arbeidsgiver 4',
+                                    organisasjonsnummer: '987111666',
                                 },
                             },
                             {
@@ -3217,7 +3217,7 @@ export let jsonPerson: PersonDto = {
                             {
                                 kontekstType: 'Arbeidsgiver',
                                 kontekstMap: {
-                                    organisasjonsnummer: 'arbeidsgiver 4',
+                                    organisasjonsnummer: '987111666',
                                 },
                             },
                             {
@@ -3238,7 +3238,7 @@ export let jsonPerson: PersonDto = {
                                     meldingsreferanseId: '748cc349-e4a1-4e33-8764-aa999ab76589',
                                     aktørId: '42',
                                     fødselsnummer: '12020052345',
-                                    organisasjonsnummer: 'arbeidsgiver 4',
+                                    organisasjonsnummer: '987111666',
                                 },
                             },
                             {
@@ -3253,7 +3253,7 @@ export let jsonPerson: PersonDto = {
                                     meldingsreferanseId: 'f6014818-e8b6-48d4-bfce-342af0e63538',
                                     aktørId: '42',
                                     fødselsnummer: '12020052345',
-                                    organisasjonsnummer: 'arbeidsgiver 4',
+                                    organisasjonsnummer: '987111666',
                                 },
                             },
                             {
@@ -3266,7 +3266,7 @@ export let jsonPerson: PersonDto = {
                     },
                     aktiveVedtaksperioder: [
                         {
-                            orgnummer: 'arbeidsgiver 4',
+                            orgnummer: '987111666',
                             vedtaksperiodeId: 'f910b376-8ad4-4c96-8e4f-1dfae0d6468f',
                             periodetype: 'FØRSTEGANGSBEHANDLING',
                         },
@@ -3295,7 +3295,7 @@ export let jsonPerson: PersonDto = {
                 behovtype: 'Utbetaling',
                 melding: 'Trenger å sende utbetaling til Oppdrag',
                 detaljer: {
-                    mottaker: 'arbeidsgiver 4',
+                    mottaker: '987111666',
                     fagområde: 'SPREF',
                     linjer: [
                         {
@@ -3464,7 +3464,7 @@ export let jsonPerson: PersonDto = {
                     meldingsreferanseId: '63551019-688a-47e7-ab03-cdbadc9121aa',
                     aktørId: '42',
                     fødselsnummer: '12020052345',
-                    organisasjonsnummer: 'arbeidsgiver 1',
+                    organisasjonsnummer: '999888777',
                 },
             },
             {
@@ -3477,7 +3477,7 @@ export let jsonPerson: PersonDto = {
             {
                 kontekstType: 'Arbeidsgiver',
                 kontekstMap: {
-                    organisasjonsnummer: 'arbeidsgiver 1',
+                    organisasjonsnummer: '999888777',
                 },
             },
             {
@@ -3504,13 +3504,13 @@ export let jsonPerson: PersonDto = {
                     meldingsreferanseId: 'ae744f79-76e2-483d-911b-3b53ceab3fba',
                     aktørId: '42',
                     fødselsnummer: '12020052345',
-                    organisasjonsnummer: 'arbeidsgiver 2',
+                    organisasjonsnummer: '888000999',
                 },
             },
             {
                 kontekstType: 'Arbeidsgiver',
                 kontekstMap: {
-                    organisasjonsnummer: 'arbeidsgiver 2',
+                    organisasjonsnummer: '888000999',
                 },
             },
             {
@@ -3525,7 +3525,7 @@ export let jsonPerson: PersonDto = {
                     meldingsreferanseId: '2d648189-49f1-4532-b2b3-1e4955c8fe41',
                     aktørId: '42',
                     fødselsnummer: '12020052345',
-                    organisasjonsnummer: 'arbeidsgiver 1',
+                    organisasjonsnummer: '999888777',
                 },
             },
             {
@@ -3540,7 +3540,7 @@ export let jsonPerson: PersonDto = {
                     meldingsreferanseId: '05622a3f-f5e5-4b46-af2c-7e4c04beb78d',
                     aktørId: '42',
                     fødselsnummer: '12020052345',
-                    organisasjonsnummer: 'arbeidsgiver 1',
+                    organisasjonsnummer: '999888777',
                 },
             },
             {
@@ -3555,7 +3555,7 @@ export let jsonPerson: PersonDto = {
                     meldingsreferanseId: 'b55532c3-9f28-4038-944b-e5372685eab7',
                     aktørId: '42',
                     fødselsnummer: '12020052345',
-                    organisasjonsnummer: 'arbeidsgiver 1',
+                    organisasjonsnummer: '999888777',
                 },
             },
             {
@@ -3570,7 +3570,7 @@ export let jsonPerson: PersonDto = {
                     meldingsreferanseId: '3838ecd5-17e5-4ccc-b7cb-623c37e3445c',
                     aktørId: '42',
                     fødselsnummer: '12020052345',
-                    organisasjonsnummer: 'arbeidsgiver 1',
+                    organisasjonsnummer: '999888777',
                 },
             },
             {
@@ -3579,7 +3579,7 @@ export let jsonPerson: PersonDto = {
                     meldingsreferanseId: 'e1affa5a-fc36-40e7-93b0-53b6b3ef3e0b',
                     aktørId: '42',
                     fødselsnummer: '12020052345',
-                    organisasjonsnummer: 'arbeidsgiver 2',
+                    organisasjonsnummer: '888000999',
                 },
             },
             {
@@ -3588,7 +3588,7 @@ export let jsonPerson: PersonDto = {
                     meldingsreferanseId: 'cfe55b5d-4170-4cab-be20-dc661caed0bc',
                     aktørId: '42',
                     fødselsnummer: '12020052345',
-                    organisasjonsnummer: 'arbeidsgiver 2',
+                    organisasjonsnummer: '888000999',
                 },
             },
             {
@@ -3597,7 +3597,7 @@ export let jsonPerson: PersonDto = {
                     meldingsreferanseId: '5326b2c1-c1f6-4cbd-ba5e-77843ebb2491',
                     aktørId: '42',
                     fødselsnummer: '12020052345',
-                    organisasjonsnummer: 'arbeidsgiver 2',
+                    organisasjonsnummer: '888000999',
                 },
             },
             {
@@ -3606,7 +3606,7 @@ export let jsonPerson: PersonDto = {
                     meldingsreferanseId: '5598dafb-b356-43a9-8c43-cb6a8ec8ba2c',
                     aktørId: '42',
                     fødselsnummer: '12020052345',
-                    organisasjonsnummer: 'arbeidsgiver 2',
+                    organisasjonsnummer: '888000999',
                 },
             },
             {
@@ -3621,7 +3621,7 @@ export let jsonPerson: PersonDto = {
                     meldingsreferanseId: '3b18e98a-a494-49cf-952e-d335761e18bd',
                     aktørId: '42',
                     fødselsnummer: '12020052345',
-                    organisasjonsnummer: 'arbeidsgiver 1',
+                    organisasjonsnummer: '999888777',
                 },
             },
             {
@@ -3642,7 +3642,7 @@ export let jsonPerson: PersonDto = {
                     meldingsreferanseId: '5f5c58cb-3d2c-490b-9e8d-35b9c38928c6',
                     aktørId: '42',
                     fødselsnummer: '12020052345',
-                    organisasjonsnummer: 'arbeidsgiver 1',
+                    organisasjonsnummer: '999888777',
                 },
             },
             {
@@ -3657,7 +3657,7 @@ export let jsonPerson: PersonDto = {
                     meldingsreferanseId: 'ffa564d3-e625-4bcb-ac82-fd679000e7b6',
                     aktørId: '42',
                     fødselsnummer: '12020052345',
-                    organisasjonsnummer: 'arbeidsgiver 1',
+                    organisasjonsnummer: '999888777',
                 },
             },
             {
@@ -3666,7 +3666,7 @@ export let jsonPerson: PersonDto = {
                     meldingsreferanseId: 'f20a511c-5c05-4c73-aac2-fe6033d90572',
                     aktørId: '42',
                     fødselsnummer: '12020052345',
-                    organisasjonsnummer: 'arbeidsgiver 1',
+                    organisasjonsnummer: '999888777',
                 },
             },
             {
@@ -3675,7 +3675,7 @@ export let jsonPerson: PersonDto = {
                     meldingsreferanseId: 'ebcb165b-fcb6-40ea-a077-ae35cc82b993',
                     aktørId: '42',
                     fødselsnummer: '12020052345',
-                    organisasjonsnummer: 'arbeidsgiver 1',
+                    organisasjonsnummer: '999888777',
                 },
             },
             {
@@ -3696,7 +3696,7 @@ export let jsonPerson: PersonDto = {
                     meldingsreferanseId: 'ebcb165b-fcb6-40ea-a077-ae35cc82b993',
                     aktørId: '42',
                     fødselsnummer: '12020052345',
-                    organisasjonsnummer: 'arbeidsgiver 1',
+                    organisasjonsnummer: '999888777',
                 },
             },
             {
@@ -3705,7 +3705,7 @@ export let jsonPerson: PersonDto = {
                     meldingsreferanseId: 'e5d8af77-69b0-4f90-849d-fe4436e7d2a7',
                     aktørId: '42',
                     fødselsnummer: '12020052345',
-                    organisasjonsnummer: 'arbeidsgiver 2',
+                    organisasjonsnummer: '888000999',
                 },
             },
             {
@@ -3720,7 +3720,7 @@ export let jsonPerson: PersonDto = {
                     meldingsreferanseId: 'c5153942-a60b-4399-9333-417fb8c502f1',
                     aktørId: '42',
                     fødselsnummer: '12020052345',
-                    organisasjonsnummer: 'arbeidsgiver 2',
+                    organisasjonsnummer: '888000999',
                 },
             },
             {
@@ -3735,7 +3735,7 @@ export let jsonPerson: PersonDto = {
                     meldingsreferanseId: 'afb18c5f-9986-401c-96fc-cd2e5c2103b7',
                     aktørId: '42',
                     fødselsnummer: '12020052345',
-                    organisasjonsnummer: 'arbeidsgiver 2',
+                    organisasjonsnummer: '888000999',
                 },
             },
             {
@@ -3744,7 +3744,7 @@ export let jsonPerson: PersonDto = {
                     meldingsreferanseId: '4aa5365a-4ce7-4ac3-8d90-4eab693cb239',
                     aktørId: '42',
                     fødselsnummer: '12020052345',
-                    organisasjonsnummer: 'arbeidsgiver 2',
+                    organisasjonsnummer: '888000999',
                 },
             },
             {
@@ -3753,7 +3753,7 @@ export let jsonPerson: PersonDto = {
                     meldingsreferanseId: '3ada6670-b00b-43a1-9ff9-2d5be219632d',
                     aktørId: '42',
                     fødselsnummer: '12020052345',
-                    organisasjonsnummer: 'arbeidsgiver 2',
+                    organisasjonsnummer: '888000999',
                 },
             },
             {
@@ -3762,7 +3762,7 @@ export let jsonPerson: PersonDto = {
                     meldingsreferanseId: '263262ca-d9d0-4fd1-9ae2-7dabc186114e',
                     aktørId: '42',
                     fødselsnummer: '12020052345',
-                    organisasjonsnummer: 'arbeidsgiver 2',
+                    organisasjonsnummer: '888000999',
                 },
             },
             {
@@ -3771,7 +3771,7 @@ export let jsonPerson: PersonDto = {
                     meldingsreferanseId: 'e553c3cd-7fef-4b93-b8e4-d13a1c5f4838',
                     aktørId: '42',
                     fødselsnummer: '12020052345',
-                    organisasjonsnummer: 'arbeidsgiver 1',
+                    organisasjonsnummer: '999888777',
                 },
             },
             {
@@ -3792,7 +3792,7 @@ export let jsonPerson: PersonDto = {
                     meldingsreferanseId: '8e4d7dbf-bc83-4c8c-a5f8-758cdca521e8',
                     aktørId: '42',
                     fødselsnummer: '12020052345',
-                    organisasjonsnummer: 'arbeidsgiver 1',
+                    organisasjonsnummer: '999888777',
                 },
             },
             {
@@ -3801,7 +3801,7 @@ export let jsonPerson: PersonDto = {
                     meldingsreferanseId: '06e07a1e-93e6-4363-9b13-73ab8b1915e0',
                     aktørId: '42',
                     fødselsnummer: '12020052345',
-                    organisasjonsnummer: 'arbeidsgiver 1',
+                    organisasjonsnummer: '999888777',
                 },
             },
             {
@@ -3810,7 +3810,7 @@ export let jsonPerson: PersonDto = {
                     meldingsreferanseId: '9a837ea3-4c53-4fd7-b27d-360fc3b7d80b',
                     aktørId: '42',
                     fødselsnummer: '12020052345',
-                    organisasjonsnummer: 'arbeidsgiver 1',
+                    organisasjonsnummer: '999888777',
                 },
             },
             {
@@ -3825,7 +3825,7 @@ export let jsonPerson: PersonDto = {
                     meldingsreferanseId: 'd4012dc3-07d4-473c-b84d-79d001497d90',
                     aktørId: '42',
                     fødselsnummer: '12020052345',
-                    organisasjonsnummer: 'arbeidsgiver 1',
+                    organisasjonsnummer: '999888777',
                 },
             },
             {
@@ -3834,7 +3834,7 @@ export let jsonPerson: PersonDto = {
                     meldingsreferanseId: '7030980f-e034-449f-82c3-aa7c04bd7c1d',
                     aktørId: '42',
                     fødselsnummer: '12020052345',
-                    organisasjonsnummer: 'arbeidsgiver 1',
+                    organisasjonsnummer: '999888777',
                 },
             },
             {
@@ -3843,7 +3843,7 @@ export let jsonPerson: PersonDto = {
                     meldingsreferanseId: '0bd95ee8-6bfc-4f41-9b5a-d5c0e11f5ffa',
                     aktørId: '42',
                     fødselsnummer: '12020052345',
-                    organisasjonsnummer: 'arbeidsgiver 1',
+                    organisasjonsnummer: '999888777',
                 },
             },
             {
@@ -3852,7 +3852,7 @@ export let jsonPerson: PersonDto = {
                     meldingsreferanseId: '3f9d0c06-bb2f-45fd-af11-4344acaa39e3',
                     aktørId: '42',
                     fødselsnummer: '12020052345',
-                    organisasjonsnummer: 'arbeidsgiver 1',
+                    organisasjonsnummer: '999888777',
                 },
             },
             {
@@ -3861,13 +3861,13 @@ export let jsonPerson: PersonDto = {
                     meldingsreferanseId: '98840587-a5ec-452c-aa8e-dcf8fedb9acf',
                     aktørId: '42',
                     fødselsnummer: '12020052345',
-                    organisasjonsnummer: 'arbeidsgiver 3',
+                    organisasjonsnummer: '975111975',
                 },
             },
             {
                 kontekstType: 'Arbeidsgiver',
                 kontekstMap: {
-                    organisasjonsnummer: 'arbeidsgiver 3',
+                    organisasjonsnummer: '975111975',
                 },
             },
             {
@@ -3882,7 +3882,7 @@ export let jsonPerson: PersonDto = {
                     meldingsreferanseId: '1be09eb6-c2ae-43b2-a229-3b31273bcf35',
                     aktørId: '42',
                     fødselsnummer: '12020052345',
-                    organisasjonsnummer: 'arbeidsgiver 3',
+                    organisasjonsnummer: '975111975',
                 },
             },
             {
@@ -3891,13 +3891,13 @@ export let jsonPerson: PersonDto = {
                     meldingsreferanseId: 'fd19ee7d-9ccc-44ba-b744-85f98f0ba2a6',
                     aktørId: '42',
                     fødselsnummer: '12020052345',
-                    organisasjonsnummer: 'arbeidsgiver 4',
+                    organisasjonsnummer: '987111666',
                 },
             },
             {
                 kontekstType: 'Arbeidsgiver',
                 kontekstMap: {
-                    organisasjonsnummer: 'arbeidsgiver 4',
+                    organisasjonsnummer: '987111666',
                 },
             },
             {
@@ -3912,7 +3912,7 @@ export let jsonPerson: PersonDto = {
                     meldingsreferanseId: '68d3b572-65fe-44d4-a799-ec8d4a547708',
                     aktørId: '42',
                     fødselsnummer: '12020052345',
-                    organisasjonsnummer: 'arbeidsgiver 4',
+                    organisasjonsnummer: '987111666',
                 },
             },
             {
@@ -3921,7 +3921,7 @@ export let jsonPerson: PersonDto = {
                     meldingsreferanseId: 'fa2f19e0-de69-4fe2-a5f5-93249298468f',
                     aktørId: '42',
                     fødselsnummer: '12020052345',
-                    organisasjonsnummer: 'arbeidsgiver 3',
+                    organisasjonsnummer: '975111975',
                 },
             },
             {
@@ -3930,7 +3930,7 @@ export let jsonPerson: PersonDto = {
                     meldingsreferanseId: '1435d054-85a6-4d50-b3a6-31b03d94295a',
                     aktørId: '42',
                     fødselsnummer: '12020052345',
-                    organisasjonsnummer: 'arbeidsgiver 4',
+                    organisasjonsnummer: '987111666',
                 },
             },
             {
@@ -3939,7 +3939,7 @@ export let jsonPerson: PersonDto = {
                     meldingsreferanseId: '62abb256-7a37-4467-a91a-2d1e188c95fb',
                     aktørId: '42',
                     fødselsnummer: '12020052345',
-                    organisasjonsnummer: 'arbeidsgiver 3',
+                    organisasjonsnummer: '975111975',
                 },
             },
             {
@@ -3948,7 +3948,7 @@ export let jsonPerson: PersonDto = {
                     meldingsreferanseId: 'b90cab25-8baf-466a-9a8f-0fbf8680dbbd',
                     aktørId: '42',
                     fødselsnummer: '12020052345',
-                    organisasjonsnummer: 'arbeidsgiver 3',
+                    organisasjonsnummer: '975111975',
                 },
             },
             {
@@ -3963,7 +3963,7 @@ export let jsonPerson: PersonDto = {
                     meldingsreferanseId: 'ba096f46-9299-4823-afdb-12e326fd4389',
                     aktørId: '42',
                     fødselsnummer: '12020052345',
-                    organisasjonsnummer: 'arbeidsgiver 3',
+                    organisasjonsnummer: '975111975',
                 },
             },
             {
@@ -3972,7 +3972,7 @@ export let jsonPerson: PersonDto = {
                     meldingsreferanseId: '96d91c24-7061-4d53-89b7-717691b1cf20',
                     aktørId: '42',
                     fødselsnummer: '12020052345',
-                    organisasjonsnummer: 'arbeidsgiver 3',
+                    organisasjonsnummer: '975111975',
                 },
             },
             {
@@ -3987,7 +3987,7 @@ export let jsonPerson: PersonDto = {
                     meldingsreferanseId: 'a34d2c19-0d90-457d-b764-708a1eb2531a',
                     aktørId: '42',
                     fødselsnummer: '12020052345',
-                    organisasjonsnummer: 'arbeidsgiver 3',
+                    organisasjonsnummer: '975111975',
                 },
             },
             {
@@ -3996,7 +3996,7 @@ export let jsonPerson: PersonDto = {
                     meldingsreferanseId: 'e35b10c5-55f9-4b50-a54a-55c1644e1c96',
                     aktørId: '42',
                     fødselsnummer: '12020052345',
-                    organisasjonsnummer: 'arbeidsgiver 3',
+                    organisasjonsnummer: '975111975',
                 },
             },
             {
@@ -4005,7 +4005,7 @@ export let jsonPerson: PersonDto = {
                     meldingsreferanseId: '37e9ff59-12bd-45a5-a00a-cbeec897cce1',
                     aktørId: '42',
                     fødselsnummer: '12020052345',
-                    organisasjonsnummer: 'arbeidsgiver 3',
+                    organisasjonsnummer: '975111975',
                 },
             },
             {
@@ -4014,7 +4014,7 @@ export let jsonPerson: PersonDto = {
                     meldingsreferanseId: '6ea1d30c-4863-46b3-91dd-aef639b171af',
                     aktørId: '42',
                     fødselsnummer: '12020052345',
-                    organisasjonsnummer: 'arbeidsgiver 3',
+                    organisasjonsnummer: '975111975',
                 },
             },
             {
@@ -4023,7 +4023,7 @@ export let jsonPerson: PersonDto = {
                     meldingsreferanseId: '6ea1d30c-4863-46b3-91dd-aef639b171af',
                     aktørId: '42',
                     fødselsnummer: '12020052345',
-                    organisasjonsnummer: 'arbeidsgiver 3',
+                    organisasjonsnummer: '975111975',
                 },
             },
             {
@@ -4032,7 +4032,7 @@ export let jsonPerson: PersonDto = {
                     meldingsreferanseId: '748cc349-e4a1-4e33-8764-aa999ab76589',
                     aktørId: '42',
                     fødselsnummer: '12020052345',
-                    organisasjonsnummer: 'arbeidsgiver 4',
+                    organisasjonsnummer: '987111666',
                 },
             },
             {
@@ -4047,7 +4047,7 @@ export let jsonPerson: PersonDto = {
                     meldingsreferanseId: 'f6014818-e8b6-48d4-bfce-342af0e63538',
                     aktørId: '42',
                     fødselsnummer: '12020052345',
-                    organisasjonsnummer: 'arbeidsgiver 4',
+                    organisasjonsnummer: '987111666',
                 },
             },
             {
@@ -4062,7 +4062,7 @@ export let jsonPerson: PersonDto = {
                     meldingsreferanseId: '2711926b-1457-4d73-a4b4-49a344207204',
                     aktørId: '42',
                     fødselsnummer: '12020052345',
-                    organisasjonsnummer: 'arbeidsgiver 4',
+                    organisasjonsnummer: '987111666',
                 },
             },
             {
@@ -4071,7 +4071,7 @@ export let jsonPerson: PersonDto = {
                     meldingsreferanseId: 'f80e815c-0d6c-49ae-b170-04135bf8dd88',
                     aktørId: '42',
                     fødselsnummer: '12020052345',
-                    organisasjonsnummer: 'arbeidsgiver 4',
+                    organisasjonsnummer: '987111666',
                 },
             },
             {
@@ -4080,7 +4080,7 @@ export let jsonPerson: PersonDto = {
                     meldingsreferanseId: 'ab8ba7fb-bf1f-48a4-b641-2140f81d1541',
                     aktørId: '42',
                     fødselsnummer: '12020052345',
-                    organisasjonsnummer: 'arbeidsgiver 4',
+                    organisasjonsnummer: '987111666',
                 },
             },
             {
@@ -4089,7 +4089,7 @@ export let jsonPerson: PersonDto = {
                     meldingsreferanseId: '6f9b08c0-f7a6-4957-a4e5-a34d2e24a766',
                     aktørId: '42',
                     fødselsnummer: '12020052345',
-                    organisasjonsnummer: 'arbeidsgiver 4',
+                    organisasjonsnummer: '987111666',
                 },
             },
             {
@@ -4098,7 +4098,7 @@ export let jsonPerson: PersonDto = {
                     meldingsreferanseId: 'f9ec4e01-70e6-4335-8a58-9d49950e4525',
                     aktørId: '42',
                     fødselsnummer: '12020052345',
-                    organisasjonsnummer: 'arbeidsgiver 4',
+                    organisasjonsnummer: '987111666',
                 },
             },
             {
@@ -4113,7 +4113,7 @@ export let jsonPerson: PersonDto = {
                     meldingsreferanseId: '46cc3d12-96f0-47b2-a7f2-2714dcde314f',
                     aktørId: '42',
                     fødselsnummer: '12020052345',
-                    organisasjonsnummer: 'arbeidsgiver 4',
+                    organisasjonsnummer: '987111666',
                 },
             },
             {
@@ -4122,7 +4122,7 @@ export let jsonPerson: PersonDto = {
                     meldingsreferanseId: 'd091256d-da14-40d4-9ac0-05c008966085',
                     aktørId: '42',
                     fødselsnummer: '12020052345',
-                    organisasjonsnummer: 'arbeidsgiver 4',
+                    organisasjonsnummer: '987111666',
                 },
             },
             {
@@ -4135,7 +4135,7 @@ export let jsonPerson: PersonDto = {
     },
     arbeidsgivere: [
         {
-            organisasjonsnummer: 'arbeidsgiver 1',
+            organisasjonsnummer: '999888777',
             id: '7925315b-1083-4722-87fa-c32f802d89d1',
             beregnetUtbetalingstidslinjer: [
                 {
@@ -4144,7 +4144,7 @@ export let jsonPerson: PersonDto = {
                     vilkårsgrunnlagHistorikkInnslagId: 'c51145fd-1f7e-4b0b-b180-ef2f3baded1c',
                     inntektshistorikkInnslagId: '1affef55-8323-45c6-a4cd-f3158edacf46',
                     tidsstempel: '2021-07-23T15:51:22.593251271',
-                    organisasjonsnummer: 'arbeidsgiver 1',
+                    organisasjonsnummer: '999888777',
                     utbetalingstidslinje: {
                         dager: [
                             {
@@ -4282,7 +4282,7 @@ export let jsonPerson: PersonDto = {
                     vilkårsgrunnlagHistorikkInnslagId: 'c51145fd-1f7e-4b0b-b180-ef2f3baded1c',
                     inntektshistorikkInnslagId: '0c55667a-2bdd-470b-bfdf-4480fed685f7',
                     tidsstempel: '2021-07-23T15:51:22.802868242',
-                    organisasjonsnummer: 'arbeidsgiver 2',
+                    organisasjonsnummer: '888000999',
                     utbetalingstidslinje: {
                         dager: [
                             {
@@ -4420,7 +4420,7 @@ export let jsonPerson: PersonDto = {
                     vilkårsgrunnlagHistorikkInnslagId: 'c51145fd-1f7e-4b0b-b180-ef2f3baded1c',
                     inntektshistorikkInnslagId: 'fe5fbfa9-27a2-4333-a7cc-b8f0b47417dd',
                     tidsstempel: '2021-07-23T15:51:22.82502276',
-                    organisasjonsnummer: 'arbeidsgiver 1',
+                    organisasjonsnummer: '999888777',
                     utbetalingstidslinje: {
                         dager: [
                             {
@@ -4558,7 +4558,7 @@ export let jsonPerson: PersonDto = {
                     vilkårsgrunnlagHistorikkInnslagId: 'c51145fd-1f7e-4b0b-b180-ef2f3baded1c',
                     inntektshistorikkInnslagId: '2b625939-3437-44bb-a4b6-9453229d89dc',
                     tidsstempel: '2021-07-23T15:51:24.407798591',
-                    organisasjonsnummer: 'arbeidsgiver 2',
+                    organisasjonsnummer: '888000999',
                     utbetalingstidslinje: {
                         dager: [
                             {
@@ -4696,7 +4696,7 @@ export let jsonPerson: PersonDto = {
                     vilkårsgrunnlagHistorikkInnslagId: 'c51145fd-1f7e-4b0b-b180-ef2f3baded1c',
                     inntektshistorikkInnslagId: '0ff47705-593a-46b6-8038-fca19bbcafaa',
                     tidsstempel: '2021-07-23T15:51:24.675903849',
-                    organisasjonsnummer: 'arbeidsgiver 1',
+                    organisasjonsnummer: '999888777',
                     utbetalingstidslinje: {
                         dager: [
                             {
@@ -4960,7 +4960,7 @@ export let jsonPerson: PersonDto = {
                     vilkårsgrunnlagHistorikkInnslagId: 'b77e2aab-a454-4b78-a3a4-ef87e5f1959a',
                     inntektshistorikkInnslagId: 'bae9d400-0d3a-460d-9b8c-79ab123f9285',
                     tidsstempel: '2021-07-23T15:51:25.02251869',
-                    organisasjonsnummer: 'arbeidsgiver 3',
+                    organisasjonsnummer: '975111975',
                     utbetalingstidslinje: {
                         dager: [
                             {
@@ -8329,7 +8329,7 @@ export let jsonPerson: PersonDto = {
                     vilkårsgrunnlagHistorikkInnslagId: 'b77e2aab-a454-4b78-a3a4-ef87e5f1959a',
                     inntektshistorikkInnslagId: '630cbf92-c164-4fec-b8c2-46b34a1d07ee',
                     tidsstempel: '2021-07-23T15:51:25.567998181',
-                    organisasjonsnummer: 'arbeidsgiver 4',
+                    organisasjonsnummer: '987111666',
                     utbetalingstidslinje: {
                         dager: [
                             {
@@ -12731,7 +12731,7 @@ export let jsonPerson: PersonDto = {
                         ],
                     },
                     arbeidsgiverOppdrag: {
-                        mottaker: 'arbeidsgiver 1',
+                        mottaker: '999888777',
                         fagområde: 'SPREF',
                         linjer: [
                             {
@@ -13056,7 +13056,7 @@ export let jsonPerson: PersonDto = {
                         ],
                     },
                     arbeidsgiverOppdrag: {
-                        mottaker: 'arbeidsgiver 1',
+                        mottaker: '999888777',
                         fagområde: 'SPREF',
                         linjer: [
                             {
@@ -13163,7 +13163,7 @@ export let jsonPerson: PersonDto = {
                                     {
                                         forfallsdato: '2018-01-21',
                                         utbetalesTil: {
-                                            id: 'arbeidsgiver 1',
+                                            id: '999888777',
                                             navn: 'Org Orgesen AS',
                                         },
                                         feilkonto: false,
@@ -13185,7 +13185,7 @@ export let jsonPerson: PersonDto = {
                                                     antall: 2,
                                                     type: 'DAG',
                                                 },
-                                                refunderesOrgnummer: 'arbeidsgiver 1',
+                                                refunderesOrgnummer: '999888777',
                                             },
                                         ],
                                     },
@@ -13371,7 +13371,7 @@ export let jsonPerson: PersonDto = {
                                     {
                                         forfallsdato: '2018-01-21',
                                         utbetalesTil: {
-                                            id: 'arbeidsgiver 1',
+                                            id: '999888777',
                                             navn: 'Org Orgesen AS',
                                         },
                                         feilkonto: false,
@@ -13393,7 +13393,7 @@ export let jsonPerson: PersonDto = {
                                                     antall: 2,
                                                     type: 'DAG',
                                                 },
-                                                refunderesOrgnummer: 'arbeidsgiver 1',
+                                                refunderesOrgnummer: '999888777',
                                             },
                                         ],
                                     },
@@ -13583,7 +13583,7 @@ export let jsonPerson: PersonDto = {
                                         {
                                             forfallsdato: '2018-01-21',
                                             utbetalesTil: {
-                                                id: 'arbeidsgiver 1',
+                                                id: '999888777',
                                                 navn: 'Org Orgesen AS',
                                             },
                                             feilkonto: false,
@@ -13605,7 +13605,7 @@ export let jsonPerson: PersonDto = {
                                                         antall: 2,
                                                         type: 'DAG',
                                                     },
-                                                    refunderesOrgnummer: 'arbeidsgiver 1',
+                                                    refunderesOrgnummer: '999888777',
                                                 },
                                             ],
                                         },
@@ -13778,7 +13778,7 @@ export let jsonPerson: PersonDto = {
                     skjæringstidspunkt: '2017-12-01',
                     arbeidsforhold: [
                         {
-                            orgnummer: 'arbeidsgiver 1',
+                            orgnummer: '999888777',
                             fom: '1970-01-01',
                             tom: null,
                         },
@@ -13789,12 +13789,12 @@ export let jsonPerson: PersonDto = {
                     skjæringstidspunkt: '2020-01-01',
                     arbeidsforhold: [
                         {
-                            orgnummer: 'arbeidsgiver 1',
+                            orgnummer: '999888777',
                             fom: '1970-01-01',
                             tom: '2020-12-01',
                         },
                         {
-                            orgnummer: 'arbeidsgiver 1',
+                            orgnummer: '999888777',
                             fom: '2020-01-01',
                             tom: null,
                         },
@@ -13803,7 +13803,7 @@ export let jsonPerson: PersonDto = {
             ],
         },
         {
-            organisasjonsnummer: 'arbeidsgiver 2',
+            organisasjonsnummer: '888000999',
             id: '224d1fbf-110d-4886-a1dc-33bea43f100f',
             beregnetUtbetalingstidslinjer: [
                 {
@@ -13812,7 +13812,7 @@ export let jsonPerson: PersonDto = {
                     vilkårsgrunnlagHistorikkInnslagId: 'c51145fd-1f7e-4b0b-b180-ef2f3baded1c',
                     inntektshistorikkInnslagId: '42ac0d60-3acf-4ff2-bc3f-7208c3ee991b',
                     tidsstempel: '2021-07-23T15:51:22.593417659',
-                    organisasjonsnummer: 'arbeidsgiver 1',
+                    organisasjonsnummer: '999888777',
                     utbetalingstidslinje: {
                         dager: [
                             {
@@ -13950,7 +13950,7 @@ export let jsonPerson: PersonDto = {
                     vilkårsgrunnlagHistorikkInnslagId: 'c51145fd-1f7e-4b0b-b180-ef2f3baded1c',
                     inntektshistorikkInnslagId: 'e758abc8-0b7a-45d3-b572-588f528b790e',
                     tidsstempel: '2021-07-23T15:51:22.802896813',
-                    organisasjonsnummer: 'arbeidsgiver 2',
+                    organisasjonsnummer: '888000999',
                     utbetalingstidslinje: {
                         dager: [
                             {
@@ -14088,7 +14088,7 @@ export let jsonPerson: PersonDto = {
                     vilkårsgrunnlagHistorikkInnslagId: 'c51145fd-1f7e-4b0b-b180-ef2f3baded1c',
                     inntektshistorikkInnslagId: '72a0ff27-f688-476b-969b-764a704d5471',
                     tidsstempel: '2021-07-23T15:51:22.825111689',
-                    organisasjonsnummer: 'arbeidsgiver 1',
+                    organisasjonsnummer: '999888777',
                     utbetalingstidslinje: {
                         dager: [
                             {
@@ -14226,7 +14226,7 @@ export let jsonPerson: PersonDto = {
                     vilkårsgrunnlagHistorikkInnslagId: 'c51145fd-1f7e-4b0b-b180-ef2f3baded1c',
                     inntektshistorikkInnslagId: '4edfb7c9-61df-4cf2-8ae4-4b5edd5de0ba',
                     tidsstempel: '2021-07-23T15:51:24.407880104',
-                    organisasjonsnummer: 'arbeidsgiver 2',
+                    organisasjonsnummer: '888000999',
                     utbetalingstidslinje: {
                         dager: [
                             {
@@ -14364,7 +14364,7 @@ export let jsonPerson: PersonDto = {
                     vilkårsgrunnlagHistorikkInnslagId: 'c51145fd-1f7e-4b0b-b180-ef2f3baded1c',
                     inntektshistorikkInnslagId: '71cbd972-103b-4ae1-96e0-7bbb86303343',
                     tidsstempel: '2021-07-23T15:51:24.675930374',
-                    organisasjonsnummer: 'arbeidsgiver 1',
+                    organisasjonsnummer: '999888777',
                     utbetalingstidslinje: {
                         dager: [
                             {
@@ -14628,7 +14628,7 @@ export let jsonPerson: PersonDto = {
                     vilkårsgrunnlagHistorikkInnslagId: 'b77e2aab-a454-4b78-a3a4-ef87e5f1959a',
                     inntektshistorikkInnslagId: 'ebb3bb1e-4211-4861-9cf4-444afc005e18',
                     tidsstempel: '2021-07-23T15:51:25.022553221',
-                    organisasjonsnummer: 'arbeidsgiver 3',
+                    organisasjonsnummer: '975111975',
                     utbetalingstidslinje: {
                         dager: [
                             {
@@ -17997,7 +17997,7 @@ export let jsonPerson: PersonDto = {
                     vilkårsgrunnlagHistorikkInnslagId: 'b77e2aab-a454-4b78-a3a4-ef87e5f1959a',
                     inntektshistorikkInnslagId: '4260d6e4-ebe0-48f2-adac-ead2b5e31273',
                     tidsstempel: '2021-07-23T15:51:25.568047075',
-                    organisasjonsnummer: 'arbeidsgiver 4',
+                    organisasjonsnummer: '987111666',
                     utbetalingstidslinje: {
                         dager: [
                             {
@@ -22249,7 +22249,7 @@ export let jsonPerson: PersonDto = {
                         ],
                     },
                     arbeidsgiverOppdrag: {
-                        mottaker: 'arbeidsgiver 2',
+                        mottaker: '888000999',
                         fagområde: 'SPREF',
                         linjer: [
                             {
@@ -22442,7 +22442,7 @@ export let jsonPerson: PersonDto = {
                         ],
                     },
                     arbeidsgiverOppdrag: {
-                        mottaker: 'arbeidsgiver 2',
+                        mottaker: '888000999',
                         fagområde: 'SPREF',
                         linjer: [
                             {
@@ -22531,7 +22531,7 @@ export let jsonPerson: PersonDto = {
                                     {
                                         forfallsdato: '2018-01-21',
                                         utbetalesTil: {
-                                            id: 'arbeidsgiver 2',
+                                            id: '888000999',
                                             navn: 'Org Orgesen AS',
                                         },
                                         feilkonto: false,
@@ -22553,7 +22553,7 @@ export let jsonPerson: PersonDto = {
                                                     antall: 2,
                                                     type: 'DAG',
                                                 },
-                                                refunderesOrgnummer: 'arbeidsgiver 2',
+                                                refunderesOrgnummer: '888000999',
                                             },
                                         ],
                                     },
@@ -22726,7 +22726,7 @@ export let jsonPerson: PersonDto = {
                     skjæringstidspunkt: '2017-12-01',
                     arbeidsforhold: [
                         {
-                            orgnummer: 'arbeidsgiver 2',
+                            orgnummer: '888000999',
                             fom: '1970-01-01',
                             tom: null,
                         },
@@ -22737,12 +22737,12 @@ export let jsonPerson: PersonDto = {
                     skjæringstidspunkt: '2020-01-01',
                     arbeidsforhold: [
                         {
-                            orgnummer: 'arbeidsgiver 2',
+                            orgnummer: '888000999',
                             fom: '1970-01-01',
                             tom: '2020-12-01',
                         },
                         {
-                            orgnummer: 'arbeidsgiver 2',
+                            orgnummer: '888000999',
                             fom: '2020-01-01',
                             tom: null,
                         },
@@ -22751,7 +22751,7 @@ export let jsonPerson: PersonDto = {
             ],
         },
         {
-            organisasjonsnummer: 'arbeidsgiver 3',
+            organisasjonsnummer: '975111975',
             id: '4d233c7e-87e9-4dd4-99bb-acdbce59f449',
             beregnetUtbetalingstidslinjer: [
                 {
@@ -22760,7 +22760,7 @@ export let jsonPerson: PersonDto = {
                     vilkårsgrunnlagHistorikkInnslagId: 'b77e2aab-a454-4b78-a3a4-ef87e5f1959a',
                     inntektshistorikkInnslagId: '572d16e5-ea40-485c-bc4b-07f35b8f06c1',
                     tidsstempel: '2021-07-23T15:51:25.022567336',
-                    organisasjonsnummer: 'arbeidsgiver 3',
+                    organisasjonsnummer: '975111975',
                     utbetalingstidslinje: {
                         dager: [
                             {
@@ -22855,7 +22855,7 @@ export let jsonPerson: PersonDto = {
                     vilkårsgrunnlagHistorikkInnslagId: 'b77e2aab-a454-4b78-a3a4-ef87e5f1959a',
                     inntektshistorikkInnslagId: '2871c6e7-0652-4a61-97d4-1cae228e8b5d',
                     tidsstempel: '2021-07-23T15:51:25.568068767',
-                    organisasjonsnummer: 'arbeidsgiver 4',
+                    organisasjonsnummer: '987111666',
                     utbetalingstidslinje: {
                         dager: [
                             {
@@ -23628,7 +23628,7 @@ export let jsonPerson: PersonDto = {
                         ],
                     },
                     arbeidsgiverOppdrag: {
-                        mottaker: 'arbeidsgiver 3',
+                        mottaker: '975111975',
                         fagområde: 'SPREF',
                         linjer: [
                             {
@@ -23724,7 +23724,7 @@ export let jsonPerson: PersonDto = {
                                     {
                                         forfallsdato: '2018-01-21',
                                         utbetalesTil: {
-                                            id: 'arbeidsgiver 3',
+                                            id: '975111975',
                                             navn: 'Org Orgesen AS',
                                         },
                                         feilkonto: false,
@@ -23746,7 +23746,7 @@ export let jsonPerson: PersonDto = {
                                                     antall: 2,
                                                     type: 'DAG',
                                                 },
-                                                refunderesOrgnummer: 'arbeidsgiver 3',
+                                                refunderesOrgnummer: '975111975',
                                             },
                                         ],
                                     },
@@ -23873,7 +23873,7 @@ export let jsonPerson: PersonDto = {
             arbeidsforholdhistorikk: [],
         },
         {
-            organisasjonsnummer: 'arbeidsgiver 4',
+            organisasjonsnummer: '987111666',
             id: 'e0675396-66b2-4c23-a290-aed8f93cbf68',
             beregnetUtbetalingstidslinjer: [
                 {
@@ -23882,7 +23882,7 @@ export let jsonPerson: PersonDto = {
                     vilkårsgrunnlagHistorikkInnslagId: 'b77e2aab-a454-4b78-a3a4-ef87e5f1959a',
                     inntektshistorikkInnslagId: 'f87069c6-3265-41c5-a44d-1ba71e2842c6',
                     tidsstempel: '2021-07-23T15:51:25.022593949',
-                    organisasjonsnummer: 'arbeidsgiver 3',
+                    organisasjonsnummer: '975111975',
                     utbetalingstidslinje: {
                         dager: [
                             {
@@ -23977,7 +23977,7 @@ export let jsonPerson: PersonDto = {
                     vilkårsgrunnlagHistorikkInnslagId: 'b77e2aab-a454-4b78-a3a4-ef87e5f1959a',
                     inntektshistorikkInnslagId: 'ad32188d-2b95-436a-95cc-bd51277ad909',
                     tidsstempel: '2021-07-23T15:51:25.568080245',
-                    organisasjonsnummer: 'arbeidsgiver 4',
+                    organisasjonsnummer: '987111666',
                     utbetalingstidslinje: {
                         dager: [
                             {
@@ -24924,7 +24924,7 @@ export let jsonPerson: PersonDto = {
                         ],
                     },
                     arbeidsgiverOppdrag: {
-                        mottaker: 'arbeidsgiver 4',
+                        mottaker: '987111666',
                         fagområde: 'SPREF',
                         linjer: [
                             {
@@ -25074,7 +25074,7 @@ export let jsonPerson: PersonDto = {
                         ],
                     },
                     arbeidsgiverOppdrag: {
-                        mottaker: 'arbeidsgiver 4',
+                        mottaker: '987111666',
                         fagområde: 'SPREF',
                         linjer: [
                             {
@@ -25172,7 +25172,7 @@ export let jsonPerson: PersonDto = {
                                         {
                                             forfallsdato: '2018-01-21',
                                             utbetalesTil: {
-                                                id: 'arbeidsgiver 4',
+                                                id: '987111666',
                                                 navn: 'Org Orgesen AS',
                                             },
                                             feilkonto: false,
@@ -25194,7 +25194,7 @@ export let jsonPerson: PersonDto = {
                                                         antall: 2,
                                                         type: 'DAG',
                                                     },
-                                                    refunderesOrgnummer: 'arbeidsgiver 4',
+                                                    refunderesOrgnummer: '987111666',
                                                 },
                                             ],
                                         },
@@ -25395,14 +25395,14 @@ export let jsonPerson: PersonDto = {
             ferieperioder: [],
             arbeidsgiverutbetalingsperioder: [
                 {
-                    orgnr: 'arbeidsgiver 1',
+                    orgnr: '999888777',
                     fom: '2017-12-01',
                     tom: '2017-12-31',
                     grad: 100,
                     inntekt: 14993.333333333334,
                 },
                 {
-                    orgnr: 'arbeidsgiver 2',
+                    orgnr: '888000999',
                     fom: '2017-12-01',
                     tom: '2017-12-31',
                     grad: 100,
@@ -25413,7 +25413,7 @@ export let jsonPerson: PersonDto = {
             ukjenteperioder: [],
             inntekter: [
                 {
-                    orgnr: 'arbeidsgiver 1',
+                    orgnr: '999888777',
                     sykepengerFom: '2017-12-01',
                     inntekt: 15000.0,
                     refusjonTilArbeidsgiver: true,
@@ -25421,7 +25421,7 @@ export let jsonPerson: PersonDto = {
                     lagret: '2021-07-23T15:51:25.466750164',
                 },
                 {
-                    orgnr: 'arbeidsgiver 2',
+                    orgnr: '888000999',
                     sykepengerFom: '2017-12-01',
                     inntekt: 15000.0,
                     refusjonTilArbeidsgiver: true,
