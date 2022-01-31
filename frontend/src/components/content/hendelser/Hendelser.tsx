@@ -36,7 +36,7 @@ export const Hendelser = React.memo(({ hendelser }: { hendelser: Kontekst[] }) =
                     onClick={toggleVisPåminnelser}
                     className={classNames(skjulPåminnelser && commonStyles.AktivKnapp)}
                 >
-                    Skjul påminnelser og utbetalingshitorikk
+                    Skjul påminnelser og utbetalingshistorikk
                 </button>
             </div>
             {sorterteHendelser.map((it) => {
