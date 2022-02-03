@@ -7,14 +7,15 @@ import {Spinner} from "../Spinner";
 import {Feilmelding} from "../Feilmelding";
 
 export type FetchPersonProps = {
-    personId: { value: string }
+    personId: string,
+    cacheBuster: number,
 }
 
 export const PersonData = (props: FetchPersonProps) => {
     const backend = useBackend()
     try {
-        const request = personRequestFactory(props.personId.value, backend)
-        const { isLoading, isError, data, error } = useQuery(['person', props.personId.value], request)
+        const request = personRequestFactory(props.personId, backend)
+        const { isLoading, isError, data, error } = useQuery(['person', props.personId, props.cacheBuster], request)
         if (isLoading) {
             return <Spinner />
         }

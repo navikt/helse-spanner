@@ -4,16 +4,16 @@ import classNames from 'classnames'
 
 
 export type SøkProps = {
-    setPersonId: ( personId: { value: string } | undefined ) => void
+    onSearch: (personId: string | undefined ) => void
 }
 
 export const Søk = React.memo((props: SøkProps) => {
     const [søketekst, setSøketekst] = React.useState('')
     const sendSøk = () => {
         if (søketekst.trim() === '') {
-            props.setPersonId(undefined)
+            props.onSearch(undefined)
         } else {
-            props.setPersonId({ value: søketekst.trim()})
+            props.onSearch(søketekst.trim())
         }
     }
 
