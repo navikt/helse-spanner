@@ -119,7 +119,7 @@ const ArbeidsgiverNode = React.memo(() => {
         <>
             <div className={styles.ArbeidsgiverNode}>
                 <ExpandToggle isExpanded={isExpanded} onClick={() => toggleExpandArbeidsgiver()} />
-                <SelectableTreeNode indent={0}>{arbeidsgiver.organisasjonsnummer} ({arbeidsgiver.vedtaksperioder.length})</SelectableTreeNode>
+                <SelectableTreeNode indent={0}><ArbeidsgiverSummary /></SelectableTreeNode>
             </div>
             {isExpanded && <>
                 <Vedtaksperioder />
@@ -129,6 +129,25 @@ const ArbeidsgiverNode = React.memo(() => {
     )
 })
 ArbeidsgiverNode.displayName="ArbeidsgiverNode"
+
+const ArbeidsgiverSummary = (): JSX.Element => {
+    const arbeidsgiver = useArbeidsgiver()
+
+    const antallVedtaksperioder = arbeidsgiver.vedtaksperioder.length
+    const antallForkastedeVedtaksperioder = arbeidsgiver.forkastede.length
+    const antallUtbetalinger = arbeidsgiver.utbetalinger.length
+
+    return (
+        <div className={styles.ArbeidsgiverSummary}>
+            {arbeidsgiver.organisasjonsnummer}
+            <span className={styles.tall}>
+                <span className={styles.antallAktive}>{antallVedtaksperioder}</span>
+                &nbsp;-&nbsp;<span className={styles.antallForkastede}>{antallForkastedeVedtaksperioder}</span>
+                &nbsp;|&nbsp;<span className={styles.antallUtbetalinger}>{antallUtbetalinger}</span>
+            </span>
+        </div>
+    )
+}
 
 const Vedtaksperioder = React.memo(() => {
     const arbeidsgiver = useArbeidsgiver()
