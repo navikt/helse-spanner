@@ -14,7 +14,7 @@ import {IngressView} from "./IngressView";
 export const Content = React.memo(() => {
     return (
         <div style={{gridArea: "content"}}>
-            <div>
+            <div style={{ marginLeft: '0.6rem' }}>
                 <ViewButton view={ContentView.Json} />
                 <ViewButton view={ContentView.Hendelser} />
                 <ViewButton view={ContentView.Ingress} />
