@@ -22,7 +22,7 @@ const ForkastetVedtaksperiode = React.memo(() => {
     const vedtaksperiode = useForkastetVedtaksperiode()
     return _ingressView(vedtaksperiode.id)
 })
-ForkastetVedtaksperiode.displayName = 'IngressView.Person'
+ForkastetVedtaksperiode.displayName = 'IngressView.ForkastetVedtaksperiode'
 
 const Person = React.memo(() => {
     const p = usePerson()
