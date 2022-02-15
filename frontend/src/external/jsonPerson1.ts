@@ -118,6 +118,13 @@ export let jsonPerson: PersonDto = {
             },
             {
                 kontekster: [11, 1, 2, 3, 10],
+                alvorlighetsgrad: 'ERROR',
+                melding: 'Det har skjedd noe alvorlig galt i IT, kontakt support',
+                detaljer: {},
+                tidsstempel: '2021-07-23T15:51:22.35300',
+            },
+            {
+                kontekster: [11, 1, 2, 3, 10],
                 alvorlighetsgrad: 'INFO',
                 melding: 'Sjekker utbetalte perioder',
                 detaljer: {},

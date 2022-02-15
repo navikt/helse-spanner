@@ -20,9 +20,8 @@ export const Hendelser = React.memo(({ hendelser }: { hendelser: Kontekst[] }) =
     const toggleVisPåminnelser = () => setSkjulPåminnelser(!skjulPåminnelser)
 
     const filtrerteHendelser = hendelser
-        .filter((it) => !skjulPåminnelser || !erPåminnelse(it))
+        .filter((it) => !skjulPåminnelser || !erPåminnelse(it) || harFeil(it))
         .filter((it) => !visBareFeil || harFeil(it))
-    skjulPåminnelser ? hendelser.filter((it) => !erPåminnelse(it)) : hendelser
 
     const sorterteHendelser = filtrerteHendelser.sort((a, b) => compareAsc(a.opprettet, b.opprettet))
 
