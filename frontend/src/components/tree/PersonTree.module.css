@@ -5,7 +5,7 @@
 
 .LøvNode {
     background-color: seashell;
-    padding: .5em!important;
+    padding: 0.5em !important;
 }
 
 .PersonTree .node-motion {
@@ -15,7 +15,7 @@
 
 .PersonNode {
     margin: 0.2rem 0 !important;
-    padding: .3em!important;
+    padding: 0.3em !important;
 }
 
 .ArbeidsgiverNode {
@@ -58,20 +58,20 @@
 }
 
 .ExpandArbeidsgiverButton:hover {
-    background: rgba(189, 195, 199, 0.50);
-    outline: 1px solid rgba(189, 195, 199, 0.80);
+    background: rgba(189, 195, 199, 0.5);
+    outline: 1px solid rgba(189, 195, 199, 0.8);
 }
 
 .Highlighted {
-    background: rgba(144, 202, 249, 0.20);
-    box-shadow: 0 0 0 1px rgba(144, 202, 249, 0.50);
+    background: rgba(144, 202, 249, 0.2);
+    box-shadow: 0 0 0 1px rgba(144, 202, 249, 0.5);
 }
 
 .Highlighted .antallForkastede {
     color: lightslategrey;
 }
 .Highlighted .tall {
-    background-color: rgba(23, 136, 136, 0.20);
+    background-color: rgba(23, 136, 136, 0.2);
 }
 
 .TreeNode {
@@ -99,7 +99,7 @@
 }
 
 .ForkastetLabel::before {
-    content: "Forkastet";
+    content: 'Forkastet';
     margin-right: 0.3rem;
     padding: 1px 2px;
     font-size: small;

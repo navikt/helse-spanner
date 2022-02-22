@@ -1,7 +1,11 @@
-import {MeldingDto, PersonDto} from '../state/dto'
+import { MeldingDto, PersonDto } from '../state/dto'
 import { Backend } from './backend'
 
-export let testBackend = (testPersoner: PersonDto[] = [], errorPersoner: Record<string, Error> = {}, testMeldinger: MeldingDto[] = []): Backend => {
+export let testBackend = (
+    testPersoner: PersonDto[] = [],
+    errorPersoner: Record<string, Error> = {},
+    testMeldinger: MeldingDto[] = []
+): Backend => {
     let aktorPersoner: Record<string, PersonDto> = testPersoner.reduce((old, person) => {
         return {
             ...old,
@@ -53,6 +57,6 @@ export let testBackend = (testPersoner: PersonDto[] = [], errorPersoner: Record<
                 return Promise.reject(person)
             }
             return Promise.resolve(person)
-        }
+        },
     }
 }

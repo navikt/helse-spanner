@@ -8,18 +8,18 @@ import styles from './Content.module.css'
 import commonStyles from '../Common.module.css'
 import { useIsOnlySelected, useIsSelected } from '../../state/contexts'
 import { Card } from '../Card'
-import {HendelseDokumentView} from "./hendelseDokument/HendelseDokumentView";
-import {IngressView} from "./IngressView";
+import { HendelseDokumentView } from './hendelseDokument/HendelseDokumentView'
+import { IngressView } from './IngressView'
 
 export const Content = React.memo(() => {
     return (
-        <div style={{gridArea: "content"}}>
+        <div style={{ gridArea: 'content' }}>
             <div style={{ marginLeft: '0.6rem' }}>
                 <ViewButton view={ContentView.Json} />
                 <ViewButton view={ContentView.Hendelser} />
                 <ViewButton view={ContentView.Ingress} />
             </div>
-            <div  className={classNames(styles.ContentCards)}>
+            <div className={classNames(styles.ContentCards)}>
                 <JsonView />
                 <HendelseView />
                 <IngressView />
@@ -28,7 +28,7 @@ export const Content = React.memo(() => {
         </div>
     )
 })
-Content.displayName="Content"
+Content.displayName = 'Content'
 
 const ViewButton: React.FC<{ view: ContentView }> = React.memo(({ view }) => {
     const [displayViews, setDisplayViews] = useRecoilState(displayViewState)
@@ -60,17 +60,15 @@ const ViewButton: React.FC<{ view: ContentView }> = React.memo(({ view }) => {
         </button>
     )
 })
-ViewButton.displayName="ViewButton"
+ViewButton.displayName = 'ViewButton'
 export const ShowIfSelected: React.FC<PropsWithChildren<any>> = React.memo(({ children }) => {
     const selectedColor = useIsSelected()
     const onlySelected = useIsOnlySelected()
     if (!selectedColor) return null
     return (
-        <Card
-            style={{ borderStyle: onlySelected ? `solid` : 'none', borderWidth: '7px', borderColor: selectedColor }}
-        >
+        <Card style={{ borderStyle: onlySelected ? `solid` : 'none', borderWidth: '7px', borderColor: selectedColor }}>
             {children}
         </Card>
     )
 })
-ShowIfSelected.displayName="ShowIfSelected"
+ShowIfSelected.displayName = 'ShowIfSelected'

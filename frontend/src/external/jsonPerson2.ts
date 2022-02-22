@@ -1,4 +1,4 @@
-import {PersonDto} from "../state/dto";
+import { PersonDto } from '../state/dto'
 
 export const jsonPerson2: PersonDto = {
     aktørId: '2936740315660',

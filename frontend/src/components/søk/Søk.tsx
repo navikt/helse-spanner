@@ -2,9 +2,8 @@ import React from 'react'
 import styles from './Header.module.css'
 import classNames from 'classnames'
 
-
 export type SøkProps = {
-    onSearch: (personId: string | undefined ) => void
+    onSearch: (personId: string | undefined) => void
 }
 
 export const Søk = React.memo((props: SøkProps) => {

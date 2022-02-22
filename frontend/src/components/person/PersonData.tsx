@@ -1,14 +1,14 @@
 import React from 'react'
-import {useQuery} from 'react-query'
-import {personRequestFactory, useBackend} from '../../external/backend'
-import {PersonView} from './PersonView'
-import {PersonContext} from '../../state/contexts'
-import {Spinner} from "../Spinner";
-import {Feilmelding} from "../Feilmelding";
+import { useQuery } from 'react-query'
+import { personRequestFactory, useBackend } from '../../external/backend'
+import { PersonView } from './PersonView'
+import { PersonContext } from '../../state/contexts'
+import { Spinner } from '../Spinner'
+import { Feilmelding } from '../Feilmelding'
 
 export type FetchPersonProps = {
-    personId: string,
-    cacheBuster: number,
+    personId: string
+    cacheBuster: number
 }
 
 export const PersonData = (props: FetchPersonProps) => {
@@ -31,4 +31,4 @@ export const PersonData = (props: FetchPersonProps) => {
         return <Feilmelding feil={error} />
     }
 }
-PersonData.displayName="PersonData"
+PersonData.displayName = 'PersonData'

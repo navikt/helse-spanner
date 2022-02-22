@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './Hendelser.module.css'
-import commonStyles from "../../Common.module.css"
+import commonStyles from '../../Common.module.css'
 import { Hendelse } from './Hendelse'
 import compareAsc from 'date-fns/compareAsc'
 import classNames from 'classnames'
@@ -45,4 +45,4 @@ export const Hendelser = React.memo(({ hendelser }: { hendelser: Kontekst[] }) =
     )
 })
 
-Hendelser.displayName="Hendelser"
+Hendelser.displayName = 'Hendelser'

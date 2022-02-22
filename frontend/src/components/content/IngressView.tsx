@@ -1,14 +1,18 @@
-import React from "react";
-import {ContentCategory} from "./ContentCategory";
-import {ContentView} from "../../state/state";
-import {Hendelser} from "./hendelser/Hendelser";
-import {useForkastetVedtaksperiode, usePerson, useVedtak} from "../../state/contexts"
+import React from 'react'
+import { ContentCategory } from './ContentCategory'
+import { ContentView } from '../../state/state'
+import { Hendelser } from './hendelser/Hendelser'
+import { useForkastetVedtaksperiode, usePerson, useVedtak } from '../../state/contexts'
 
-const sporing = window.location.origin.includes("dev") ? 'https://sporing.dev.intern.nav.no' : 'https://sporing.intern.nav.no'
+const sporing = window.location.origin.includes('dev')
+    ? 'https://sporing.dev.intern.nav.no'
+    : 'https://sporing.intern.nav.no'
 const _ingressView = (vedtaksperiodeId: string) => {
     return (
         <div>
-            <a href={`${sporing}/tilstandsmaskin/${vedtaksperiodeId}`} target="_blank">Sporing</a>
+            <a href={`${sporing}/tilstandsmaskin/${vedtaksperiodeId}`} target="_blank">
+                Sporing
+            </a>
         </div>
     )
 }
@@ -28,7 +32,9 @@ const Person = React.memo(() => {
     const p = usePerson()
     return (
         <div>
-            <a href={`${sporing}/person/${p.aktørId}`} target="_blank">Sporing</a>
+            <a href={`${sporing}/person/${p.aktørId}`} target="_blank">
+                Sporing
+            </a>
         </div>
     )
 })
@@ -36,11 +42,7 @@ Person.displayName = 'IngressView.Person'
 
 export const IngressView = React.memo(() => {
     return (
-        <ContentCategory
-            displayName={ContentView.Ingress}
-            {...{Person, Vedtaksperiode, ForkastetVedtaksperiode}}
-        />
-
+        <ContentCategory displayName={ContentView.Ingress} {...{ Person, Vedtaksperiode, ForkastetVedtaksperiode }} />
     )
 })
 

@@ -5,10 +5,10 @@ import {
     UtbetalingContext,
     VedtakContext,
 } from '../../state/contexts'
-import {ShowIfSelected} from './Content'
+import { ShowIfSelected } from './Content'
 import React from 'react'
-import {useRecoilValue} from 'recoil'
-import {ContentView, displayViewState} from '../../state/state'
+import { useRecoilValue } from 'recoil'
+import { ContentView, displayViewState } from '../../state/state'
 
 type ContentCategoryProperties = {
     displayName: ContentView
@@ -21,13 +21,13 @@ type ContentCategoryProperties = {
 
 export const ContentCategory = React.memo<ContentCategoryProperties>(
     ({
-         displayName,
-         Person = undefined,
-         Arbeidsgiver = undefined,
-         Vedtaksperiode = undefined,
-         ForkastetVedtaksperiode = undefined,
-         Utbetaling = undefined,
-     }) => {
+        displayName,
+        Person = undefined,
+        Arbeidsgiver = undefined,
+        Vedtaksperiode = undefined,
+        ForkastetVedtaksperiode = undefined,
+        Utbetaling = undefined,
+    }) => {
         const person = usePerson()
         const useDisplayView = useRecoilValue(displayViewState)
         if (!useDisplayView.includes(displayName)) return null
@@ -35,21 +35,21 @@ export const ContentCategory = React.memo<ContentCategoryProperties>(
             <>
                 {Person && (
                     <ShowIfSelected>
-                        <Person/>
+                        <Person />
                     </ShowIfSelected>
                 )}
                 {person.arbeidsgivere.map((arbeidsgiver) => (
                     <ArbeidsgiverContext.Provider value={arbeidsgiver} key={arbeidsgiver.id}>
                         {Arbeidsgiver && (
                             <ShowIfSelected>
-                                <Arbeidsgiver/>
+                                <Arbeidsgiver />
                             </ShowIfSelected>
                         )}
                         {arbeidsgiver.vedtaksperioder.map((vedtaksperiode) => (
                             <VedtakContext.Provider value={vedtaksperiode} key={vedtaksperiode.id}>
                                 {Vedtaksperiode && (
                                     <ShowIfSelected>
-                                        <Vedtaksperiode/>
+                                        <Vedtaksperiode />
                                     </ShowIfSelected>
                                 )}
                             </VedtakContext.Provider>
@@ -61,7 +61,7 @@ export const ContentCategory = React.memo<ContentCategoryProperties>(
                             >
                                 {ForkastetVedtaksperiode && (
                                     <ShowIfSelected>
-                                        <ForkastetVedtaksperiode/>
+                                        <ForkastetVedtaksperiode />
                                     </ShowIfSelected>
                                 )}
                             </ForkastetVedtaksperiodeContext.Provider>
@@ -70,7 +70,7 @@ export const ContentCategory = React.memo<ContentCategoryProperties>(
                             <UtbetalingContext.Provider value={utbetaling} key={utbetaling.id}>
                                 {Utbetaling && (
                                     <ShowIfSelected>
-                                        <Utbetaling/>
+                                        <Utbetaling />
                                     </ShowIfSelected>
                                 )}
                             </UtbetalingContext.Provider>

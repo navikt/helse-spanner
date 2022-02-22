@@ -6,6 +6,6 @@ export const somNorskDato = (dato: string) => {
         const date = parseISO(dato)
         return format(date, 'dd.MM.yyyy')
     } catch (e) {
-        return "[ugyldig dato]"
+        return '[ugyldig dato]'
     }
 }

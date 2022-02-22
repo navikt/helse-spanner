@@ -1,4 +1,4 @@
-import {MeldingDto, PersonDto} from '../state/dto'
+import { MeldingDto, PersonDto } from '../state/dto'
 import { createContext, useContext } from '../state/contexts'
 
 export type Backend = {

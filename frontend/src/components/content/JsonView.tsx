@@ -3,7 +3,7 @@ import { useArbeidsgiver, useForkastetVedtaksperiode, usePerson, useUtbetaling, 
 import ReactJson from 'react-json-view'
 import { ContentView } from '../../state/state'
 import { ContentCategory } from './ContentCategory'
-import { writeToClipboard } from "../../utils";
+import { writeToClipboard } from '../../utils'
 
 const Arbeidsgiver = React.memo(() => {
     const arbeidsgiver = useArbeidsgiver()
@@ -57,7 +57,10 @@ Vedtaksperiode.displayName = 'JsonView.Utbetaling'
 
 // Stripper vekk anførselstegn fra innholder den kopierer ut fra JSON-en
 const ReactJsonMedBedreKopiering = (props: { src: object }) => (
-    <ReactJson src={props.src} name={null} collapsed={1}
+    <ReactJson
+        src={props.src}
+        name={null}
+        collapsed={1}
         enableClipboard={(data) => writeToClipboard(String(data.src))}
     />
 )

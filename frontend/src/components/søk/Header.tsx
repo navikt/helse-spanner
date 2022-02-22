@@ -11,4 +11,4 @@ export const Header: React.FC<object> = React.memo(({ children }) => (
         {children}
     </header>
 ))
-Header.displayName="Header"
+Header.displayName = 'Header'

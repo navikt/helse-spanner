@@ -1,4 +1,4 @@
-import {PersonDto} from "../state/dto";
+import { PersonDto } from '../state/dto'
 
 export let jsonPerson: PersonDto = {
     aktørId: '42',

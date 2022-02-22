@@ -1,47 +1,47 @@
 import Recoil from 'recoil'
 import { Id } from './contexts'
-import {KontekstDto} from "./dto";
+import { KontekstDto } from './dto'
 
 export const selectedState = Recoil.atom<Id[]>({
     key: 'highligth',
-    default: [{}]
+    default: [{}],
 })
 export enum ContentView {
-    Json = "Data",
-    Hendelser = "Hendelser",
-    Ingress = "Ingress",
+    Json = 'Data',
+    Hendelser = 'Hendelser',
+    Ingress = 'Ingress',
 }
 
 export const displayViewState = Recoil.atom<ContentView[]>({
     key: 'displayView',
-    default: [ContentView.Json]
+    default: [ContentView.Json],
 })
 
 export const expandedHendelserState = Recoil.atom<number[]>({
     key: 'expandedHendelser',
-    default: []
+    default: [],
 })
 
 export const expandedArbeidsgivereState = Recoil.atom<string[]>({
     key: 'expandedArbeidsgiver',
-    default: []
+    default: [],
 })
 
-export const  visBareFeilState = Recoil.atom({
+export const visBareFeilState = Recoil.atom({
     key: 'visBareFeil',
-    default: false
+    default: false,
 })
-export const  skjulPåminnelserState = Recoil.atom({
+export const skjulPåminnelserState = Recoil.atom({
     key: 'skjulPåminnelser',
-    default: true
+    default: true,
 })
 
-export const  hideForkastedeVedtakState = Recoil.atom({
+export const hideForkastedeVedtakState = Recoil.atom({
     key: 'skjulForkastedeVedtak',
-    default: false
+    default: false,
 })
 
-export const  åpneHendelseDokumentState = Recoil.atom<KontekstDto[]>({
+export const åpneHendelseDokumentState = Recoil.atom<KontekstDto[]>({
     key: 'åpneHendelseDokument',
-    default: []
+    default: [],
 })

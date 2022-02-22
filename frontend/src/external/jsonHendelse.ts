@@ -4,7 +4,7 @@ export const jsonHendelse = {
     status: 'NY',
     aktorId: '2936740315660',
     sykmeldingId: '77a9d498-cfa8-4b91-8c22-94e6d62bde27',
-    arbeidsgiver: {navn: 'PENGELØS SPAREBANK', orgnummer: '972674818'},
+    arbeidsgiver: { navn: 'PENGELØS SPAREBANK', orgnummer: '972674818' },
     arbeidssituasjon: 'ARBEIDSTAKER',
     korrigerer: null,
     korrigertAv: null,
@@ -563,7 +563,7 @@ export const jsonHendelse = {
                             max: null,
                             svartype: 'RADIO',
                             kriterieForVisningAvUndersporsmal: 'CHECKED',
-                            svar: [{verdi: 'CHECKED'}],
+                            svar: [{ verdi: 'CHECKED' }],
                             undersporsmal: [
                                 {
                                     id: '1516322',
@@ -612,7 +612,7 @@ export const jsonHendelse = {
     avsendertype: null,
     ettersending: false,
     mottaker: null,
-    fodselsnummer: {verdi: '25107021135'},
+    fodselsnummer: { verdi: '25107021135' },
     egenmeldtSykmelding: false,
     harRedusertVenteperiode: null,
     behandlingsdager: null,
@@ -621,8 +621,8 @@ export const jsonHendelse = {
     fnr: '25107021135',
     system_read_count: 1,
     system_participating_services: [
-        {service: 'spedisjon', instance: 'spedisjon-6c7d54d87c-t4c68', time: '2021-04-29T09:03:46.181318'},
-        {service: 'spleis', instance: 'spleis-667db79bdb-mqwdc', time: '2021-04-29T09:03:46.516690371'},
+        { service: 'spedisjon', instance: 'spedisjon-6c7d54d87c-t4c68', time: '2021-04-29T09:03:46.181318' },
+        { service: 'spleis', instance: 'spleis-667db79bdb-mqwdc', time: '2021-04-29T09:03:46.516690371' },
     ],
     '@event_name': 'ny_søknad',
     '@id': 'a1e20539-b20d-4998-919b-52c44facc5a0',

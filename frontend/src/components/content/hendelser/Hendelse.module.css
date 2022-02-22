@@ -30,7 +30,7 @@
     width: 18rem;
 }
 
-.KopierMeldingsreferanse  {
+.KopierMeldingsreferanse {
     align-items: center;
     outline: none;
     border: none;
@@ -47,7 +47,6 @@
     background-color: lightgray;
     color: white;
 }
-
 
 .KopierMeldingsreferanse:focus-visible {
     color: grey;

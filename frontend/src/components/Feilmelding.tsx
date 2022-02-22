@@ -1,9 +1,9 @@
-import React from "react";
-import {backendFeil, finnesIkke, httpFeil} from "../external/feil";
-import classNames from "classnames";
-import styles from "./person/Person.module.css";
+import React from 'react'
+import { backendFeil, finnesIkke, httpFeil } from '../external/feil'
+import classNames from 'classnames'
+import styles from './person/Person.module.css'
 
-export const Feilmelding = React.memo(({feil}: { feil: any }) => {
+export const Feilmelding = React.memo(({ feil }: { feil: any }) => {
     let feiltekst, ikon
 
     if (feil instanceof httpFeil) {
@@ -27,4 +27,4 @@ export const Feilmelding = React.memo(({feil}: { feil: any }) => {
     )
 })
 
-Feilmelding.displayName="Feilmelding"
+Feilmelding.displayName = 'Feilmelding'

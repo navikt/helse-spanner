@@ -1,14 +1,8 @@
-import {
-    ArbeidsgiverDto,
-    FokastetVedtaksperiodeDto,
-    PersonDto,
-    UtbetalingDto,
-    VedtakDto
-} from './dto'
-import React, {useMemo} from 'react'
-import {useRecoilValue} from 'recoil'
-import {selectedState} from './state'
-import {Aktivitetslogg} from "./model";
+import { ArbeidsgiverDto, FokastetVedtaksperiodeDto, PersonDto, UtbetalingDto, VedtakDto } from './dto'
+import React, { useMemo } from 'react'
+import { useRecoilValue } from 'recoil'
+import { selectedState } from './state'
+import { Aktivitetslogg } from './model'
 
 //For å slippe defaultvalue til context.
 //https://kentcdodds.com/blog/how-to-use-react-context-effectively
@@ -33,7 +27,6 @@ export const useArbeidsgiver = () => useContext(ArbeidsgiverContext)
 export const useVedtak = () => useContext(VedtakContext)
 export const useForkastetVedtaksperiode = () => useContext(ForkastetVedtaksperiodeContext)
 export const useUtbetaling = () => useContext(UtbetalingContext)
-
 
 export const AktivitetsloggContext = createContext<Aktivitetslogg>()
 export const useAktivitetslogg = () => useContext(AktivitetsloggContext)
@@ -61,16 +54,7 @@ export const useId = (): Id => {
     )
 }
 
-const selectColors = [
-    "LightBlue",
-    "DarkGray",
-    "DarkOrange",
-    "Turquoise",
-    "DarkSeaGreen",
-    "Orchid",
-    "Gold",
-    "LawnGreen",
-]
+const selectColors = ['LightBlue', 'DarkGray', 'DarkOrange', 'Turquoise', 'DarkSeaGreen', 'Orchid', 'Gold', 'LawnGreen']
 
 export const idEqual = (a: Id, b: Id) =>
     a.arbeidsgiver === b.arbeidsgiver &&
@@ -81,16 +65,12 @@ export const idEqual = (a: Id, b: Id) =>
 export const useIsSelected = () => {
     const selected = useRecoilValue(selectedState)
     const id = useId()
-    const index = selected.findIndex(it => idEqual(it, id))
-    if(index == -1)
-        return undefined
-    else
-        return selectColors[index % selectColors.length]
+    const index = selected.findIndex((it) => idEqual(it, id))
+    if (index == -1) return undefined
+    else return selectColors[index % selectColors.length]
 }
 
 export const useIsOnlySelected = () => {
     const selected = useRecoilValue(selectedState)
     return selected.length > 1
 }
-
-
