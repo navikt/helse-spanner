@@ -8,9 +8,9 @@ export const HendelseDokumentView = React.memo(({}) => {
 
     return (
         <>
-            {åpneHendelser.map((åpneHendelse) => {
-                return <HendelseDokument kontekst={åpneHendelse} key={åpneHendelse.kontekstMap.meldingsreferanseId} />
-            })}
+            {åpneHendelser.map((hendelse) => (
+                <HendelseDokument kontekst={hendelse} key={hendelse.kontekstMap.meldingsreferanseId} />
+            ))}
         </>
     )
 })

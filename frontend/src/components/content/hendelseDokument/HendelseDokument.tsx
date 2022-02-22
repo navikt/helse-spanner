@@ -1,7 +1,7 @@
 import React from 'react'
 import { KontekstDto } from '../../../state/dto'
 import { Card } from '../../Card'
-import { useRecoilState } from 'recoil'
+import { useSetRecoilState } from 'recoil'
 import { åpneHendelseDokumentState } from '../../../state/state'
 import classNames from 'classnames'
 import styles from './HendelseDokument.module.css'
@@ -13,14 +13,8 @@ import { Feilmelding } from '../../Feilmelding'
 import ReactJson from 'react-json-view'
 
 export const HendelseDokument = React.memo<{ kontekst: KontekstDto }>(({ kontekst }) => {
-    const [åpneHendelser, setÅpneHendelser] = useRecoilState(åpneHendelseDokumentState)
-    const lukkHendelse = React.useMemo(
-        () => () => {
-            const removed = åpneHendelser.filter((hendelse) => hendelse !== kontekst)
-            setÅpneHendelser(() => removed)
-        },
-        [åpneHendelser, setÅpneHendelser]
-    )
+    const setÅpneHendelser = useSetRecoilState(åpneHendelseDokumentState)
+    const fjernFraÅpneHendelser = () => setÅpneHendelser((prev) => prev.filter((hendelse) => hendelse !== kontekst))
 
     if (kontekst.kontekstMap.meldingsreferanseId == undefined) {
         throw Error('Kontekst mangler meldingsreferanse, burde ikke kunne skje')
@@ -32,7 +26,7 @@ export const HendelseDokument = React.memo<{ kontekst: KontekstDto }>(({ konteks
             <button
                 className={classNames(styles.LukkHendelseButton)}
                 aria-label={'Lukk hendelse dokument'}
-                onClick={lukkHendelse}
+                onClick={fjernFraÅpneHendelser}
             >
                 <Close color={'black'} />
             </button>

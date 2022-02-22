@@ -66,14 +66,14 @@ export const Hendelse = React.memo(({ kontekst }: { kontekst: Kontekst }) => {
                 <div className={classNames(styles.Meldingsreferanse)}>{kontekst.kontekstMap.meldingsreferanseId}</div>
                 <button
                     className={classNames(styles.KopierMeldingsreferanse)}
-                    aria-label={'Kopier melding id'}
+                    aria-label={'Kopier melding-id'}
                     onClick={copyMeldingRefId}
                 >
                     <Copy color={'black'} />
                 </button>
                 <button
                     className={classNames(styles.KopierMeldingsreferanse)}
-                    aria-label={'Åpne hendelse dokument'}
+                    aria-label={'Åpne hendelsedokument'}
                     onClick={åpneHendelse}
                 >
                     <FileContent color={'black'} />
