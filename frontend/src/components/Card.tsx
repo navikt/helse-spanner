@@ -16,7 +16,7 @@ export const ContentCard: React.FC<CardProps> = ({ className, children, ...rest 
         {children}
     </div>
 )
-Card.displayName = 'ContentCard'
+ContentCard.displayName = 'ContentCard'
 
 export const HeaderCard: React.FC<CardProps> = ({ className, children, ...rest }) => (
     <div className={classNames(styles.HeaderCard, className)} {...rest}>
