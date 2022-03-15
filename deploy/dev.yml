@@ -45,7 +45,7 @@ spec:
   accessPolicy:
     outbound:
       external:
-        - host: https://spleis-api.dev.intern.nav.no
+        - host: spleis-api.dev.intern.nav.no
   secureLogs:
     enabled: true
   env:

@@ -45,17 +45,17 @@ spec:
   accessPolicy:
     outbound:
       external:
-        - host: spleis-api.prod-fss-pub.nais.io
+        - host: spleis-api.intern.nav.no
   secureLogs:
     enabled: true
   env:
     - name: DEVELOPMENT
       value: "false"
     - name: SPLEIS_CLIENT_ID
-      value: api://prod-fss.tbd.spleis-api/.default
+      value: api://prod-gcp.tbd.spleis-api/.default
     - name: HTTP_PORT
       value: "8080"
     - name: HTTP_HOST
       value: spanner.intern.nav.no
     - name: SPLEIS_API_URL
-      value: https://spleis-api.prod-fss-pub.nais.io
+      value: "https://spleis-api.intern.nav.no/"
