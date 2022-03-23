@@ -58,4 +58,4 @@ spec:
     - name: HTTP_HOST
       value: spanner.intern.nav.no
     - name: SPLEIS_API_URL
-      value: "https://spleis-api.intern.nav.no/"
+      value: http://spleis-api
