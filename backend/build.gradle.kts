@@ -2,7 +2,7 @@ import java.nio.file.Paths
 
 val jacksonVersion = "2.12.5"
 val junitJupiterVersion = "5.7.2"
-val ktorVersion = "1.6.3"
+val ktorVersion = "1.6.8"
 val tokenValidatorVersion = "1.3.8"
 
 plugins {
@@ -79,14 +79,8 @@ tasks {
 
 
         from({ Paths.get(project(":frontend").buildDir.path) }) {
-            //from({ Paths.get(project(":spanner-react").buildDir.path, "distributions") }) {
             into("static")
         }
-
-//        from({ Paths.get(project(":frontend").buildDir.path, "assets") }) {
-//            //from({ Paths.get(project(":spanner-react").buildDir.path, "distributions") }) {
-//            into("static/assets")
-//        }
 
         doLast {
             configurations.runtimeClasspath.get()
