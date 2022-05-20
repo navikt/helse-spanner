@@ -55,13 +55,21 @@ const Utbetaling = React.memo(() => {
 })
 Vedtaksperiode.displayName = 'JsonView.Utbetaling'
 
+// Vi kan velge mellom to implementasjoner:
 // Stripper vekk anførselstegn fra innholder den kopierer ut fra JSON-en
+// eller
+// Kopierer hele json-strukturen
+// begge er nyttige, og det er vanskelig å vite hvem som er best
+// idéelt lager vi en funksjon "kopierLurtOgSmart" og som ser på `data.scr`
+// og kjører JSON.stringify(src.data) om det er en json-struktur eller String(data.src) om det er et verdi-felt.
+//
+// Jeg tar en råsjans og bruker JSON.stringify nå, siden det er sykt mye vanskeligere å få ut en fornuftig json enn å fjerne fnutter.
 const ReactJsonMedBedreKopiering = (props: { src: object }) => (
     <ReactJson
         src={props.src}
         name={null}
         collapsed={1}
-        enableClipboard={(data) => writeToClipboard(String(data.src))}
+        enableClipboard={(data) => writeToClipboard(JSON.stringify(data.src))}
     />
 )
 
