@@ -2,7 +2,7 @@
 # 🪣 Spanner 🪣
 
 ## Beskrivelse
-Parser og viser spleis json på en mer oversiktlig måte
+Parser og viser Spleis-JSON på en mer oversiktlig måte
 
 ## Henvendelser
 Spørsmål knyttet til koden eller prosjektet kan stilles som issues her på GitHub.
