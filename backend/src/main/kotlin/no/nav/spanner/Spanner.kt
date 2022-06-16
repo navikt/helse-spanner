@@ -1,7 +1,5 @@
 package no.nav.spanner
 
-import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.kotlin.readValue
 import io.ktor.client.*
 import io.ktor.client.engine.cio.*
@@ -111,7 +109,7 @@ fun Application.spanner(spleis: Personer, config: AzureADConfig, development: Bo
 
     val httpClient = HttpClient(CIO) {
         install(io.ktor.client.plugins.contentnegotiation.ContentNegotiation) {
-            register(ContentType.Application.Json, JacksonConverter(ObjectMapper().registerModule(JavaTimeModule())))
+            register(ContentType.Application.Json, JacksonConverter())
         }
     }
 

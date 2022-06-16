@@ -28,6 +28,7 @@ class E2ETest {
         spleisClientId = "los spleisos"
     )
 
+    private val azureAD = AzureAD(azureADConfig)
     private val spleis = LokaleKjenninger
 
     suspend fun ApplicationTestBuilder.login() {
