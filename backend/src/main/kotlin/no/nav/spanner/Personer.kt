@@ -40,7 +40,9 @@ class Spleis(private val azureAD: AzureAD, private val baseUrl: String = "http:/
     }
 
     override suspend fun person(id: String, idType: IdType, accessToken: String): String {
-     val url = URLBuilder(baseUrl).path("api", "person-json").toString()
+        val url = URLBuilder(baseUrl).apply {
+            path("api", "person-json")
+        }.build()
         val oboToken =
             token(accessToken)
         val log = Log.logger(Personer::class.java)
