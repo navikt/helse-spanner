@@ -28,10 +28,9 @@ class E2ETest {
         spleisClientId = "los spleisos"
     )
 
-    private val azureAD = AzureAD(azureADConfig)
     private val spleis = LokaleKjenninger
 
-    suspend fun ApplicationTestBuilder.login() {
+    fun ApplicationTestBuilder.login() {
         val loginLocation = expectRedirect("/login")
         val httpClient = HttpClient(Apache) {
             followRedirects = false
@@ -40,14 +39,14 @@ class E2ETest {
                 register(ContentType.Application.Json, JacksonConverter())
             }
         }
-        val authResponse = runBlocking { httpClient.prepareGet(loginLocation).body<HttpResponse>() }
+        val authResponse = runBlocking { httpClient.prepareGet(loginLocation).execute() }
         assertEquals(HttpStatusCode.Found, authResponse.status)
         val authLocation = authResponse.headers["location"]!!
-        client.prepareGet(authLocation.removePrefix("http://localhost")).execute()
+        runBlocking { client.prepareGet(authLocation.removePrefix("http://localhost")).execute() }
     }
 
-    private suspend fun ApplicationTestBuilder.expectRedirect(url: String): String {
-        val response = client.prepareGet(url).execute()
+    private fun ApplicationTestBuilder.expectRedirect(url: String): String {
+        val response = runBlocking { client.prepareGet(url).execute() }
         assertEquals(HttpStatusCode.Found, response.status)
         return response.headers["location"]!!
     }
@@ -69,6 +68,21 @@ class E2ETest {
 
     }
 
+    // This works
+    @Test
+    fun `respond with redirect on no session deprecated`() {
+        withTestApplication({
+            spanner(spleis, azureADConfig, true)
+        }) {
+            handleRequest(HttpMethod.Get, "/api/person/") {
+                this.addHeader(IdType.FNR.header, "12345678910")
+            }.apply {
+                assertEquals(HttpStatusCode.Found, response.status())
+            }
+        }
+    }
+
+    // This does not work why!!!
     @Test
     fun `respond with redirect on no session`() {
         testApplication {
