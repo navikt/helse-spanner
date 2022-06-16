@@ -1,10 +1,12 @@
 package no.nav.spanner
 
-import io.ktor.application.*
 import io.ktor.http.*
-import io.ktor.http.content.*
-import io.ktor.response.*
-import io.ktor.routing.*
+import io.ktor.server.application.call
+import io.ktor.server.http.content.resources
+import io.ktor.server.http.content.static
+import io.ktor.server.response.respondText
+import io.ktor.server.routing.Route
+import io.ktor.server.routing.get
 
 internal fun Route.frontendRouting() {
     get("/") {

@@ -2,12 +2,13 @@ package no.nav.spanner
 
 import com.fasterxml.jackson.module.kotlin.readValue
 import io.ktor.client.*
-import io.ktor.client.call.*
 import io.ktor.client.engine.apache.*
-import io.ktor.client.features.json.*
+import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.client.plugins.cookies.HttpCookies
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
+import io.ktor.serialization.jackson.JacksonConverter
 import io.ktor.server.testing.*
 import kotlinx.coroutines.runBlocking
 import no.nav.security.mock.oauth2.MockOAuth2Server
@@ -27,61 +28,55 @@ class E2ETest {
         spleisClientId = "los spleisos"
     )
 
-    private val azureAD = AzureAD(azureADConfig)
     private val spleis = LokaleKjenninger
 
-    fun TestApplicationEngine.login() {
+    suspend fun ApplicationTestBuilder.login() {
         val loginLocation = expectRedirect("/login")
         val httpClient = HttpClient(Apache) {
             followRedirects = false
             this.expectSuccess = false
-            install(JsonFeature) {
-                serializer = JacksonSerializer()
+            install(ContentNegotiation) {
+                register(ContentType.Application.Json, JacksonConverter())
             }
         }
-        val authResponse = runBlocking { httpClient.get<HttpResponse>(loginLocation).receive<HttpResponse>() }
+        val authResponse = runBlocking { httpClient.prepareGet(loginLocation).body<HttpResponse>() }
         assertEquals(HttpStatusCode.Found, authResponse.status)
         val authLocation = authResponse.headers["location"]!!
-        handleRequest(HttpMethod.Get, authLocation.removePrefix("http://localhost")).response
+        client.prepareGet(authLocation.removePrefix("http://localhost")).execute()
     }
 
-    private fun TestApplicationEngine.expectRedirect(url: String): String {
-        val response = handleRequest(HttpMethod.Get, url).response
-        assertEquals(HttpStatusCode.Found, response.status())
+    private suspend fun ApplicationTestBuilder.expectRedirect(url: String): String {
+        val response = client.prepareGet(url).execute()
+        assertEquals(HttpStatusCode.Found, response.status)
         return response.headers["location"]!!
     }
 
     @Test
     fun login() {
-
-        withTestApplication({
-            spanner(spleis, azureADConfig, true)
-        }) {
-            cookiesSession {
-                handleRequest(HttpMethod.Get, "/") { }
-                    .apply {
-                        assertEquals(HttpStatusCode.Found, response.status())
-                    }
-                login()
-                handleRequest(HttpMethod.Get, "/") { }
-                    .apply {
-                        assertEquals(HttpStatusCode.OK, response.status())
-                    }
+        testApplication {
+            val client = createClient {
+                install(HttpCookies)
             }
+            application { spanner(spleis, azureADConfig, true) }
+            val response = client.get("/")
+
+            assertEquals(HttpStatusCode.Found, response.status)
+            login()
+            assertEquals(HttpStatusCode.OK, response.status)
+
         }
+
     }
 
     @Test
     fun `respond with redirect on no session`() {
+        testApplication {
+            application { spanner(spleis, azureADConfig, true) }
 
-        withTestApplication({
-            spanner(spleis, azureADConfig, true)
-        }) {
-            handleRequest(HttpMethod.Get, "/api/person/") {
-                this.addHeader(IdType.FNR.header, "12345678910")
-            }.apply {
-                assertEquals(HttpStatusCode.Found, response.status())
+            val response = client.get("/api/person/") {
+                header(IdType.FNR.header, "12345678910")
             }
+            assertEquals(HttpStatusCode.Found, response.status)
         }
     }
 
@@ -92,22 +87,23 @@ class E2ETest {
                 claims = mapOf("NAVident" to "H12345")
             )
         )
-        withTestApplication({
-            spanner(spleis, azureADConfig, true)
-        }) {
-            cookiesSession {
-                login()
-                handleRequest(HttpMethod.Get, "/api/person/") {
-                    this.addHeader(IdType.FNR.header, "42")
-                }.apply {
-                    assertEquals(HttpStatusCode.OK, response.status())
-                    assertTrue(
-                        response.content?.contains("\"aktørId\": \"42\"") ?: false,
-                        "response was: ${response.content}"
-                    )
-                }
+        println(" mockAuthport: " + mockAuth.config.httpServer.port())
+
+        testApplication {
+            val client = createClient {
+                install(HttpCookies)
+            }
+            application { spanner(spleis, azureADConfig, true) }
+
+            val response = client.get("/api/person/") {
+                header(IdType.FNR.header, "42")
             }
 
+            assertEquals(HttpStatusCode.OK, response.status)
+            assertTrue(
+                response.bodyAsText().contains("\"aktørId\": \"42\""),
+                "response was: ${response.bodyAsText()}"
+            )
         }
     }
 
@@ -118,20 +114,23 @@ class E2ETest {
                 claims = mapOf("NAVident" to "H12345")
             )
         )
-        withTestApplication({
-            spanner(spleis, azureADConfig, true)
-        }) {
-            cookiesSession {
-                login()
-                handleRequest(HttpMethod.Get, "/api/hendelse/42").apply {
-                    assertEquals(HttpStatusCode.OK, response.status())
-                    assertTrue(
-                        response.content == "{}"
-                    )
-                }
-            }
 
+        testApplication {
+
+            val client = createClient {
+                install(HttpCookies)
+            }
+            application { spanner(spleis, azureADConfig, true) }
+
+            login()
+
+            val response = client.get("/api/hendelse/42")
+            assertEquals(HttpStatusCode.OK, response.status)
+            assertTrue(
+                response.bodyAsText() == "{}"
+            )
         }
+
     }
 
     @Test
@@ -142,35 +141,35 @@ class E2ETest {
                 claims = mapOf("NAVident" to "H12345")
             )
         )
-        withTestApplication({
-            spanner(spleis, azureADConfig, true)
-        }) {
-            cookiesSession {
-                login()
-                handleRequest(HttpMethod.Get, "/api/person/") { }
-                    .apply {
-                        assertEquals(HttpStatusCode.Unauthorized, response.status())
-                        val feil = objectMapper.readValue<FeilRespons>(response.content!!)
-                        assertTrue(!feil.description.isNullOrEmpty())
-                    }
+        testApplication {
+            val client = createClient {
+                install(HttpCookies)
             }
+            application { spanner(spleis, azureADConfig, true) }
+
+            val response = client.get("/api/person/")
+
+            assertEquals(HttpStatusCode.Unauthorized, response.status)
+            val feil = objectMapper.readValue<FeilRespons>(response.bodyAsText())
+            assertTrue(!feil.description.isNullOrEmpty())
         }
     }
 
     @Test
     fun `valid json error message response`() {
-        withTestApplication({
-            spanner(spleis, azureADConfig, true)
-        }) {
-            cookiesSession {
-                login()
-                handleRequest(HttpMethod.Get, "/api/person/") { }
-                    .apply {
-                        assertEquals(HttpStatusCode.InternalServerError, response.status())
-                        val feil = objectMapper.readValue<FeilRespons>(response.content!!)
-                        assertTrue(!feil.description.isNullOrEmpty())
-                    }
+        testApplication {
+            val client = createClient {
+                install(HttpCookies)
             }
+            application { spanner(spleis, azureADConfig, true) }
+
+            login()
+
+            val response = client.get("/api/person/")
+
+            assertEquals(HttpStatusCode.InternalServerError, response.status)
+            val feil = objectMapper.readValue<FeilRespons>(response.bodyAsText())
+            assertTrue(!feil.description.isNullOrEmpty())
         }
     }
 

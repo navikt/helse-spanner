@@ -1,18 +1,43 @@
 package no.nav.spanner
 
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.kotlin.readValue
-import io.ktor.application.*
-import io.ktor.auth.*
 import io.ktor.client.*
 import io.ktor.client.engine.cio.*
-import io.ktor.client.features.json.*
-import io.ktor.features.*
 import io.ktor.http.*
-import io.ktor.jackson.*
-import io.ktor.request.*
-import io.ktor.response.*
-import io.ktor.routing.*
-import io.ktor.sessions.*
+import io.ktor.server.auth.Authentication
+import io.ktor.server.plugins.forwardedheaders.XForwardedHeaders
+import io.ktor.serialization.jackson.JacksonConverter
+import io.ktor.server.application.Application
+import io.ktor.server.application.ApplicationCall
+import io.ktor.server.application.call
+import io.ktor.server.application.install
+import io.ktor.server.auth.authenticate
+import io.ktor.server.auth.oauth
+import io.ktor.server.plugins.BadRequestException
+import io.ktor.server.plugins.NotFoundException
+import io.ktor.server.plugins.callid.CallId
+import io.ktor.server.plugins.callloging.CallLogging
+import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.server.plugins.origin
+import io.ktor.server.plugins.statuspages.StatusPages
+import io.ktor.server.request.header
+import io.ktor.server.request.host
+import io.ktor.server.request.path
+import io.ktor.server.request.port
+import io.ktor.server.response.respond
+import io.ktor.server.response.respondText
+import io.ktor.server.routing.get
+import io.ktor.server.routing.routing
+import io.ktor.server.sessions.SessionSerializer
+import io.ktor.server.sessions.SessionStorageMemory
+import io.ktor.server.sessions.Sessions
+import io.ktor.server.sessions.clear
+import io.ktor.server.sessions.cookie
+import io.ktor.server.sessions.get
+import io.ktor.server.sessions.sessions
+import io.ktor.server.auth.OAuthServerSettings
 import io.ktor.util.pipeline.*
 import no.nav.spanner.AuditLogger.Companion.audit
 import no.nav.spanner.Log.Companion.LogLevel
@@ -39,7 +64,7 @@ fun Application.spanner(spleis: Personer, config: AzureADConfig, development: Bo
         level = Level.INFO
         filter { call -> !call.request.path().startsWith("/internal") }
     }
-    install(XForwardedHeaderSupport)
+    install(XForwardedHeaders)
 
     install(StatusPages) {
         suspend fun respondToException(
@@ -57,17 +82,17 @@ fun Application.spanner(spleis: Personer, config: AzureADConfig, development: Bo
                 .log(level)
             call.respond(status, FeilRespons(errorId.toString(), cause.message))
         }
-        exception<NotFoundException> { cause ->
+        exception<NotFoundException> { call, cause ->
             respondToException(HttpStatusCode.NotFound, call, cause, INFO)
         }
-        exception<BadRequestException> { cause ->
+        exception<BadRequestException> { call, cause ->
             respondToException(HttpStatusCode.BadRequest, call, cause, INFO)
         }
-        exception<InvalidSession> { cause ->
+        exception<InvalidSession> { call, cause ->
             call.sessions.clear<SpannerSession>()
             respondToException(HttpStatusCode.Unauthorized, call, cause, INFO)
         }
-        exception<Throwable> { cause ->
+        exception<Throwable> { call, cause ->
             respondToException(HttpStatusCode.InternalServerError, call, cause, ERROR)
         }
     }
@@ -85,8 +110,8 @@ fun Application.spanner(spleis: Personer, config: AzureADConfig, development: Bo
     }
 
     val httpClient = HttpClient(CIO) {
-        install(JsonFeature) {
-            serializer = JacksonSerializer()
+        install(io.ktor.client.plugins.contentnegotiation.ContentNegotiation) {
+            register(ContentType.Application.Json, JacksonConverter(ObjectMapper().registerModule(JavaTimeModule())))
         }
     }
 
@@ -140,15 +165,16 @@ fun Application.spanner(spleis: Personer, config: AzureADConfig, development: Bo
             get("/api/hendelse/{meldingsreferanse}") {
                 checkIfsessionValid()
                 sesjon().audit().log(call)
-                val meldingsreferanse = call.parameters["meldingsreferanse"] ?: throw BadRequestException("Mangler meldingsreferanse")
+                val meldingsreferanse =
+                    call.parameters["meldingsreferanse"] ?: throw BadRequestException("Mangler meldingsreferanse")
                 logg
                     .åpent("meldingsreferanse", meldingsreferanse)
                     .call(this.call)
                     .info()
 
-                    val accessToken = call.sessions.get<SpannerSession>()?.accessToken.toString()
-                    val hendelse = spleis.hendelse(meldingsreferanse, accessToken)
-                    call.respondText(hendelse, ContentType.Application.Json, HttpStatusCode.OK)
+                val accessToken = call.sessions.get<SpannerSession>()?.accessToken.toString()
+                val hendelse = spleis.hendelse(meldingsreferanse, accessToken)
+                call.respondText(hendelse, ContentType.Application.Json, HttpStatusCode.OK)
             }
         }
     }
@@ -163,7 +189,7 @@ private fun ApplicationCall.personId() =
 private fun ApplicationCall.redirectUrl(path: String, development: Boolean): String {
     val protocol = if (!development) "https" else request.origin.scheme
     val defaultPort = if (protocol == "http") 80 else 443
-    val host = if(!development) request.host() else "localhost"
+    val host = if (!development) request.host() else "localhost"
 
     val hostPort = host + request.port().let { port ->
         if (port == defaultPort || !development) "" else ":$port"

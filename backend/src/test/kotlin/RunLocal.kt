@@ -1,9 +1,9 @@
 package no.nav.spanner
 
-import io.ktor.application.*
-import io.ktor.features.*
+import io.ktor.server.application.install
 import io.ktor.server.cio.*
 import io.ktor.server.engine.*
+import io.ktor.server.plugins.cors.routing.CORS
 import no.nav.security.mock.oauth2.MockOAuth2Server
 import no.nav.security.mock.oauth2.OAuth2Config
 import no.nav.security.mock.oauth2.token.DefaultOAuth2TokenCallback

@@ -1,10 +1,11 @@
 package no.nav.spanner
 
-import io.ktor.application.*
 import io.ktor.http.HttpMethod.Companion.Get
 import io.ktor.http.HttpMethod.Companion.Post
 import io.ktor.http.HttpMethod.Companion.Put
-import io.ktor.request.*
+import io.ktor.server.application.ApplicationCall
+import io.ktor.server.request.httpMethod
+import io.ktor.server.request.path
 import no.nav.spanner.AuditLogger.Operasjon.*
 import org.slf4j.LoggerFactory
 import java.time.ZonedDateTime.now
