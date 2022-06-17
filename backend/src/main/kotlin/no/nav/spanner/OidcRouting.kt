@@ -1,11 +1,14 @@
 package no.nav.spanner
 
-import io.ktor.application.*
-import io.ktor.auth.*
 import io.ktor.http.*
-import io.ktor.response.*
-import io.ktor.routing.*
-import io.ktor.sessions.*
+import io.ktor.server.application.call
+import io.ktor.server.auth.OAuthAccessTokenResponse
+import io.ktor.server.auth.principal
+import io.ktor.server.response.respondText
+import io.ktor.server.routing.Route
+import io.ktor.server.routing.get
+import io.ktor.server.sessions.sessions
+import io.ktor.server.sessions.set
 import no.nav.spanner.Log.Companion.logger
 
 

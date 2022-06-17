@@ -2,21 +2,20 @@ package no.nav.spanner
 
 import com.auth0.jwt.interfaces.DecodedJWT
 import com.fasterxml.jackson.databind.JsonNode
+import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.engine.apache.*
-import io.ktor.client.features.json.*
+import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.request.*
-import io.ktor.client.statement.*
 import io.ktor.http.*
+import io.ktor.serialization.jackson.JacksonConverter
 
 class AzureAD(private val config: AzureADConfig) {
     private val httpClient = HttpClient(Apache) {
-        install(JsonFeature) {
-            serializer = JacksonSerializer {
-                registerModule(JavaTimeModule())
-            }
+        install(ContentNegotiation) {
+            register(ContentType.Application.Json, JacksonConverter(ObjectMapper().registerModule(JavaTimeModule())))
         }
     }
 
@@ -27,16 +26,16 @@ class AzureAD(private val config: AzureADConfig) {
             "assertion_type" to "urn:ietf:params:oauth:client-assertion-type:jwt-bearer",
             "requested_token_use" to "on_behalf_of"
         ).let { createOnBehalfOfRequestBody(it) }.formUrlEncode()
-        val response = httpClient.post<HttpResponse>(config.tokenEndpoint) {
+        val response = httpClient.preparePost(config.tokenEndpoint) {
             accept(ContentType.Application.Json)
             contentType(ContentType.Application.FormUrlEncoded)
-            body = requestBody
-        }
+            setBody(requestBody)
+        }.execute()
         Log.logger(AzureAD::class.java)
             .response(response)
             .info("Retreiving on behalf of token")
         return response
-            .receive<JsonNode>()
+            .body<JsonNode>()
             .path("access_token")
             .takeUnless(JsonNode::isMissingOrNull)
             ?.asText()!!

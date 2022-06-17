@@ -1,15 +1,17 @@
 package no.nav.spanner
 
 import com.auth0.jwt.JWT
+import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import io.ktor.client.*
 import io.ktor.client.engine.cio.*
-import io.ktor.client.features.*
-import io.ktor.client.features.json.*
+import io.ktor.client.plugins.ClientRequestException
+import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
-import io.ktor.features.*
 import io.ktor.http.*
+import io.ktor.serialization.jackson.JacksonConverter
+import io.ktor.server.plugins.NotFoundException
 import org.slf4j.LoggerFactory
 
 val logger = LoggerFactory.getLogger(Spleis::class.java)
@@ -25,10 +27,8 @@ class Spleis(private val azureAD: AzureAD, private val baseUrl: String = "http:/
         engine {
             requestTimeout = 60000
         }
-        install(JsonFeature) {
-            serializer = JacksonSerializer {
-                registerModule(JavaTimeModule())
-            }
+        install(ContentNegotiation) {
+            register(ContentType.Application.Json, JacksonConverter(ObjectMapper().registerModule(JavaTimeModule())))
         }
     }
 
@@ -40,7 +40,9 @@ class Spleis(private val azureAD: AzureAD, private val baseUrl: String = "http:/
     }
 
     override suspend fun person(id: String, idType: IdType, accessToken: String): String {
-     val url = URLBuilder(baseUrl).path("api", "person-json").build()
+        val url = URLBuilder(baseUrl).apply {
+            path("api", "person-json")
+        }.build()
         val oboToken =
             token(accessToken)
         val log = Log.logger(Personer::class.java)
@@ -49,13 +51,13 @@ class Spleis(private val azureAD: AzureAD, private val baseUrl: String = "http:/
             .info("Retreiving on behalf of token")
         val response =
             try {
-                httpClient.get<HttpResponse>(url) {
+                httpClient.prepareGet(url) {
                     header("Authorization", "Bearer $oboToken")
                     header(idType.header, id)
                     accept(ContentType.Application.Json)
-                }
-            } catch (e : ClientRequestException) {
-                if(e.response.status == HttpStatusCode.NotFound) {
+                }.execute()
+            } catch (e: ClientRequestException) {
+                if (e.response.status == HttpStatusCode.NotFound) {
                     throw NotFoundException("Fant ikke person")
                 }
                 throw e
@@ -63,11 +65,13 @@ class Spleis(private val azureAD: AzureAD, private val baseUrl: String = "http:/
         log
             .response(response)
             .info("Response from spleis")
-        return response.readText()
+        return response.bodyAsText()
     }
 
     override suspend fun hendelse(meldingsreferanse: String, accessToken: String): String {
-     val url = URLBuilder(baseUrl).path("api", "hendelse-json", meldingsreferanse).build()
+        val url = URLBuilder(baseUrl).apply {
+            path("api", "hendelse-json", meldingsreferanse)
+        }.build()
         val oboToken =
             token(accessToken)
         val log = Log.logger(Personer::class.java)
@@ -75,12 +79,12 @@ class Spleis(private val azureAD: AzureAD, private val baseUrl: String = "http:/
             .sensitivt("oboTokenLength", oboToken.length)
             .info("Retreiving on behalf of token")
         val response = try {
-        httpClient.get<HttpResponse>(url) {
-            header("Authorization", "Bearer $oboToken")
-            accept(ContentType.Application.Json)
-        }
-        } catch (e : ClientRequestException) {
-            if(e.response.status == HttpStatusCode.NotFound) {
+            httpClient.prepareGet(url) {
+                header("Authorization", "Bearer $oboToken")
+                accept(ContentType.Application.Json)
+            }.execute()
+        } catch (e: ClientRequestException) {
+            if (e.response.status == HttpStatusCode.NotFound) {
                 throw NotFoundException("Fant ikke melding med referanse $meldingsreferanse")
             }
             throw e
@@ -88,7 +92,7 @@ class Spleis(private val azureAD: AzureAD, private val baseUrl: String = "http:/
         log
             .response(response)
             .info("Response from spleis")
-        return response.readText()
+        return response.bodyAsText()
     }
 
 
