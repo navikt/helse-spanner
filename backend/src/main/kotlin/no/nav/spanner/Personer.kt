@@ -56,8 +56,8 @@ class Spleis(private val azureAD: AzureAD, private val baseUrl: String = "http:/
                     header(idType.header, id)
                     accept(ContentType.Application.Json)
                 }.execute()
-            } catch (e : ClientRequestException) {
-                if(e.response.status == HttpStatusCode.NotFound) {
+            } catch (e: ClientRequestException) {
+                if (e.response.status == HttpStatusCode.NotFound) {
                     throw NotFoundException("Fant ikke person")
                 }
                 throw e
@@ -69,7 +69,9 @@ class Spleis(private val azureAD: AzureAD, private val baseUrl: String = "http:/
     }
 
     override suspend fun hendelse(meldingsreferanse: String, accessToken: String): String {
-     val url = URLBuilder(baseUrl).path("api", "hendelse-json", meldingsreferanse).toString()
+        val url = URLBuilder(baseUrl).apply {
+            path("api", "hendelse-json", meldingsreferanse)
+        }.build()
         val oboToken =
             token(accessToken)
         val log = Log.logger(Personer::class.java)
@@ -77,12 +79,12 @@ class Spleis(private val azureAD: AzureAD, private val baseUrl: String = "http:/
             .sensitivt("oboTokenLength", oboToken.length)
             .info("Retreiving on behalf of token")
         val response = try {
-        httpClient.prepareGet(url) {
-            header("Authorization", "Bearer $oboToken")
-            accept(ContentType.Application.Json)
-        }.execute()
-        } catch (e : ClientRequestException) {
-            if(e.response.status == HttpStatusCode.NotFound) {
+            httpClient.prepareGet(url) {
+                header("Authorization", "Bearer $oboToken")
+                accept(ContentType.Application.Json)
+            }.execute()
+        } catch (e: ClientRequestException) {
+            if (e.response.status == HttpStatusCode.NotFound) {
                 throw NotFoundException("Fant ikke melding med referanse $meldingsreferanse")
             }
             throw e
