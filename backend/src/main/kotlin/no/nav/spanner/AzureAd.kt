@@ -42,6 +42,33 @@ class AzureAD(private val config: AzureADConfig) {
             ?.asText()!!
     }
 
+    internal suspend fun refreshToken(refreshToken: String): SpannerSession {
+        val requestBody = listOf(
+            "tenant" to "nav.no",
+            "client_id" to config.clientId,
+            "grant_type" to "refresh_token",
+            "scope" to "openid offline_access ${config.clientId}/.default",
+            "refresh_token" to refreshToken,
+            "client_secret" to config.clientSecret,
+        ).formUrlEncode()
+        val response = httpClient.post<HttpResponse>(config.tokenEndpoint) {
+            accept(ContentType.Application.Json)
+            contentType(ContentType.Application.FormUrlEncoded)
+            body = requestBody
+        }
+        Log.logger(AzureAD::class.java)
+            .response(response)
+            .info("Refreshing session")
+
+        val jsonRespons = response.receive<JsonNode>()
+        return SpannerSession(
+            accessToken = jsonRespons.path("access_token").asText()!!,
+            refreshToken = jsonRespons.path("refresh_token").asText()!!,
+            idToken = jsonRespons.path("id_token").asText()!!,
+            expiresIn = jsonRespons.path("expires_in").asLong()
+        )
+    }
+
     private fun createOnBehalfOfRequestBody(list: List<Pair<String, String>>) =
         createTokenRequestBody(list, config.spleisClientId)
 

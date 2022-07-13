@@ -17,9 +17,10 @@ fun Route.oidc() {
         val principal: OAuthAccessTokenResponse.OAuth2 = call.principal()!!
 
         val accessToken = principal.accessToken
+        val refreshToken = principal.refreshToken!!
         val idToken = principal.extraParameters["id_token"]!!
         val expiry = principal.expiresIn
-        call.sessions.set(SpannerSession(accessToken, idToken, expiry))
+        call.sessions.set(SpannerSession(accessToken, refreshToken, idToken, expiry))
         logg
             .info("Hentet tokens")
         call.respondText(

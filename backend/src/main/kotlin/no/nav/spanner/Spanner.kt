@@ -89,6 +89,7 @@ fun Application.spanner(spleis: Personer, config: AzureADConfig, development: Bo
             serializer = JacksonSerializer()
         }
     }
+    val azureAd = AzureAD(config)
 
     install(Authentication) {
         oauth("oauth") {
@@ -103,7 +104,7 @@ fun Application.spanner(spleis: Personer, config: AzureADConfig, development: Bo
                     requestMethod = HttpMethod.Post,
                     clientId = config.clientId,
                     clientSecret = config.clientSecret,
-                    defaultScopes = listOf("openid", "${config.clientId}/.default")
+                    defaultScopes = listOf("openid", "offline_access", "${config.clientId}/.default")
                 )
             }
             client = httpClient
@@ -117,7 +118,10 @@ fun Application.spanner(spleis: Personer, config: AzureADConfig, development: Bo
             frontendRouting()
             oidc()
             get("/api/person/") {
-                checkIfsessionValid()
+                if (sesjon().validUntil < LocalDateTime.now()) {
+                    val spannerSession = azureAd.refreshToken(sesjon().refreshToken)
+                    call.sessions.set(spannerSession)
+                }
                 sesjon().audit().log(call)
                 val (idType, idValue) = call.personId()
                 logg
@@ -138,7 +142,10 @@ fun Application.spanner(spleis: Personer, config: AzureADConfig, development: Bo
             }
 
             get("/api/hendelse/{meldingsreferanse}") {
-                checkIfsessionValid()
+                if (sesjon().validUntil < LocalDateTime.now()) {
+                    val spannerSession = azureAd.refreshToken(sesjon().refreshToken)
+                    call.sessions.set(spannerSession)
+                }
                 sesjon().audit().log(call)
                 val meldingsreferanse = call.parameters["meldingsreferanse"] ?: throw BadRequestException("Mangler meldingsreferanse")
                 logg
@@ -169,12 +176,6 @@ private fun ApplicationCall.redirectUrl(path: String, development: Boolean): Str
         if (port == defaultPort || !development) "" else ":$port"
     }
     return "$protocol://$hostPort$path"
-}
-
-private fun PipelineContext<Unit, ApplicationCall>.checkIfsessionValid() {
-    if (sesjon().validBefore < LocalDateTime.now()) {
-        throw InvalidSession("access token utgått: validBefore=${sesjon().validBefore} now=${LocalDateTime.now()}")
-    }
 }
 
 class InvalidSession(message: String) : RuntimeException(message)

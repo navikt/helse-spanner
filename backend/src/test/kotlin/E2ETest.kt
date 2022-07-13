@@ -135,7 +135,7 @@ class E2ETest {
     }
 
     @Test
-    fun `unauthorized response when session expires`() {
+    fun `session should refresh token when access token expires`() {
         mockAuth.enqueueCallback(
             DefaultOAuth2TokenCallback(
                 expiry = 1,
@@ -147,12 +147,15 @@ class E2ETest {
         }) {
             cookiesSession {
                 login()
-                handleRequest(HttpMethod.Get, "/api/person/") { }
-                    .apply {
-                        assertEquals(HttpStatusCode.Unauthorized, response.status())
-                        val feil = objectMapper.readValue<FeilRespons>(response.content!!)
-                        assertTrue(!feil.description.isNullOrEmpty())
-                    }
+                handleRequest(HttpMethod.Get, "/api/person/") {
+                    this.addHeader(IdType.FNR.header, "42")
+                }.apply {
+                    assertEquals(HttpStatusCode.OK, response.status())
+                    assertTrue(
+                        response.content?.contains("\"aktørId\": \"42\"") ?: false,
+                        "response was: ${response.content}"
+                    )
+                }
             }
         }
     }
