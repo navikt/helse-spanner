@@ -30,6 +30,10 @@
     width: 18rem;
 }
 
+.SkriftMedNestenLikBredde {
+    font-family: verdana, sans-serif;
+}
+
 .KopierMeldingsreferanse {
     align-items: center;
     outline: none;

@@ -58,12 +58,12 @@ export const Hendelse = React.memo(({ kontekst }: { kontekst: Kontekst }) => {
                     isError && commonStyles.Error
                 )}
             >
-                <div className={classNames(styles.DatoText)}>{somNorskDato(aktiviteter[0].tidsstempel)}</div>
+                <div className={classNames(styles.DatoText, styles.SkriftMedNestenLikBredde)}>{somNorskDato(aktiviteter[0].tidsstempel)}</div>
 
                 <button onClick={toggleSelected} className={styles.Hendelsetype}>
                     {kontekst.kontekstType}
                 </button>
-                <div className={classNames(styles.Meldingsreferanse)}>{kontekst.kontekstMap.meldingsreferanseId}</div>
+                <div className={classNames(styles.Meldingsreferanse, styles.SkriftMedNestenLikBredde)}>{kontekst.kontekstMap.meldingsreferanseId}</div>
                 <button
                     className={classNames(styles.KopierMeldingsreferanse)}
                     aria-label={'Kopier melding-id'}
