@@ -254,13 +254,14 @@ const UtbetalingsNode = React.memo(() => {
 
 const ForkastetUtbetalingNode = React.memo(() => {
     const utbetaling = useUtbetaling()
+    const [fom, tom] = [utbetaling.fom, utbetaling.tom].map(somNorskDato)
     return (
         <SelectableTreeNode className={classNames(styles.LøvNode, styles.ForkastetUtbetaling)} indent={1.2}>
             <div className={styles.ForkastetLabel}>
                 <i>Utbetaling</i> 💰
             </div>
             <div>
-                {utbetaling.fom} - {utbetaling.tom}
+                {fom} - {tom}
             </div>
             <span className={styles.TilstandText}>{utbetaling.status}</span>
         </SelectableTreeNode>
