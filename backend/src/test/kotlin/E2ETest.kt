@@ -23,8 +23,7 @@ class E2ETest {
     private val azureADConfig = AzureADConfig(
         discoveryUrl = mockAuth.wellKnownUrl("default").toString(),
         clientId = "whatever",
-        clientSecret = "supersecret",
-        spleisClientId = "los spleisos"
+        clientSecret = "supersecret"
     )
 
     private val azureAD = AzureAD(azureADConfig)

@@ -48,16 +48,21 @@ spec:
         - application: spleis-api
           namespace: tbd
           cluster: prod-gcp
+        - application: sparsom-api
+          namespace: tbd
+          cluster: prod-gcp
   secureLogs:
     enabled: true
   env:
     - name: DEVELOPMENT
       value: "false"
     - name: SPLEIS_CLIENT_ID
-      value: api://prod-gcp.tbd.spleis-api/.default
+      value: api://prod-gcp.tbd.sparsom-api/.default
     - name: HTTP_PORT
       value: "8080"
     - name: HTTP_HOST
       value: spanner.intern.nav.no
     - name: SPLEIS_API_URL
       value: http://spleis-api
+    - name: SPARSOM_API_URL
+      value: http://sparsom-api

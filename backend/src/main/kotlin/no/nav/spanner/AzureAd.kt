@@ -20,13 +20,13 @@ class AzureAD(private val config: AzureADConfig) {
         }
     }
 
-    suspend fun hentOnBehalfOfToken(accessToken: DecodedJWT): String {
+    suspend fun hentOnBehalfOfToken(accessToken: DecodedJWT, clientId: String): String {
         val requestBody = listOf(
             "grant_type" to "urn:ietf:params:oauth:grant-type:jwt-bearer",
             "assertion" to accessToken.token,
             "assertion_type" to "urn:ietf:params:oauth:client-assertion-type:jwt-bearer",
             "requested_token_use" to "on_behalf_of"
-        ).let { createOnBehalfOfRequestBody(it) }.formUrlEncode()
+        ).let { createOnBehalfOfRequestBody(clientId, it) }.formUrlEncode()
         val response = httpClient.post<HttpResponse>(config.tokenEndpoint) {
             accept(ContentType.Application.Json)
             contentType(ContentType.Application.FormUrlEncoded)
@@ -69,8 +69,8 @@ class AzureAD(private val config: AzureADConfig) {
         )
     }
 
-    private fun createOnBehalfOfRequestBody(list: List<Pair<String, String>>) =
-        createTokenRequestBody(list, config.spleisClientId)
+    private fun createOnBehalfOfRequestBody(clientId: String, list: List<Pair<String, String>>) =
+        createTokenRequestBody(list, clientId)
 
     private fun createTokenRequestBody(list: List<Pair<String, String>>, scope: String) =
         list.toMutableList().apply {

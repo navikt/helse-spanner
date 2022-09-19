@@ -22,14 +22,16 @@ fun startLocal() {
     val adConfig = AzureADConfig(
         discoveryUrl = mockAuth.wellKnownUrl("default").toString(),
         clientId = "whatever",
-        clientSecret = "supersecret",
-        spleisClientId = "los spleisos"
+        clientSecret = "supersecret"
     )
     val spannerConfig = Config(
         true,
         8080,
         "0.0.0.0",
-        "not is use"
+        "not is use",
+        "not is use",
+        "not is use",
+        "not is use",
     )
 
     val spleis = LokaleKjenninger

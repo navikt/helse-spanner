@@ -14,7 +14,6 @@ class AzureADConfig(
     val discoveryUrl: String,
     val clientId: String,
     val clientSecret: String,
-    val spleisClientId: String,
     authorizationUrl: String? = null
 ) {
     private val discovered = discoveryUrl.discover()
@@ -28,7 +27,6 @@ class AzureADConfig(
             discoveryUrl = config[Key("AZURE_APP_WELL_KNOWN_URL", stringType)],
             clientId = config[Key("AZURE_APP_CLIENT_ID", stringType)],
             clientSecret = config[Key("AZURE_APP_CLIENT_SECRET", stringType)],
-            spleisClientId = config[Key("SPLEIS_CLIENT_ID", stringType)],
             authorizationUrl = config.getOrNull(Key("AUTHORIZATION_URL", stringType)),
         )
     }
