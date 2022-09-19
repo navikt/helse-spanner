@@ -57,6 +57,8 @@ spec:
     - name: DEVELOPMENT
       value: "false"
     - name: SPLEIS_CLIENT_ID
+      value: api://prod-gcp.tbd.spleis-api/.default
+    - name: SPARSOM_CLIENT_ID
       value: api://prod-gcp.tbd.sparsom-api/.default
     - name: HTTP_PORT
       value: "8080"
