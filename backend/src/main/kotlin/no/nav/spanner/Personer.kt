@@ -1,6 +1,8 @@
 package no.nav.spanner
 
 import com.auth0.jwt.JWT
+import com.fasterxml.jackson.databind.node.ObjectNode
+import com.fasterxml.jackson.databind.util.RawValue
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import io.ktor.client.*
 import io.ktor.client.engine.cio.*
@@ -57,8 +59,6 @@ class Spleis(
             .info("Retreiving on behalf of token")
         val response =
             try {
-                aktivitetslogg(accessToken, id) // bare gjør kallet; ikke bruke ennå
-
                 httpClient.get<HttpResponse>(url) {
                     header("Authorization", "Bearer $oboToken")
                     header(idType.header, id)
@@ -70,10 +70,13 @@ class Spleis(
                 }
                 throw e
             }
+        val aktivitetslogg = aktivitetslogg(accessToken, id) // bare gjør kallet; ikke bruke ennå
         log
             .response(response)
             .info("Response from spleis")
-        return response.readText()
+        val node = objectMapper.readTree(response.readText()) as ObjectNode
+        node.putRawValue("aktivitetsloggV2", RawValue(aktivitetslogg))
+        return node.toString()
     }
 
     private suspend fun aktivitetslogg(accessToken: String, ident: String): String? {
