@@ -13,7 +13,6 @@ import io.ktor.request.*
 import io.ktor.response.*
 import io.ktor.routing.*
 import io.ktor.sessions.*
-import io.ktor.util.pipeline.*
 import no.nav.spanner.AuditLogger.Companion.audit
 import no.nav.spanner.Log.Companion.LogLevel
 import no.nav.spanner.Log.Companion.LogLevel.ERROR
@@ -170,7 +169,7 @@ private fun ApplicationCall.personId() =
 private fun ApplicationCall.redirectUrl(path: String, development: Boolean): String {
     val protocol = if (!development) "https" else request.origin.scheme
     val defaultPort = if (protocol == "http") 80 else 443
-    val host = if(!development) request.host() else "localhost"
+    val host = if (!development) request.host() else "localhost"
 
     val hostPort = host + request.port().let { port ->
         if (port == defaultPort || !development) "" else ":$port"

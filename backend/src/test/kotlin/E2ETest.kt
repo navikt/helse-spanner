@@ -26,8 +26,7 @@ class E2ETest {
         clientSecret = "supersecret"
     )
 
-    private val azureAD = AzureAD(azureADConfig)
-    private val spleis = LokaleKjenninger
+    private val lokaleKjenninger = LokaleKjenninger
 
     fun TestApplicationEngine.login() {
         val loginLocation = expectRedirect("/login")
@@ -54,7 +53,7 @@ class E2ETest {
     fun login() {
 
         withTestApplication({
-            spanner(spleis, azureADConfig, true)
+            spanner(lokaleKjenninger, azureADConfig, true)
         }) {
             cookiesSession {
                 handleRequest(HttpMethod.Get, "/") { }
@@ -74,7 +73,7 @@ class E2ETest {
     fun `respond with redirect on no session`() {
 
         withTestApplication({
-            spanner(spleis, azureADConfig, true)
+            spanner(lokaleKjenninger, azureADConfig, true)
         }) {
             handleRequest(HttpMethod.Get, "/api/person/") {
                 this.addHeader(IdType.FNR.header, "12345678910")
@@ -92,7 +91,7 @@ class E2ETest {
             )
         )
         withTestApplication({
-            spanner(spleis, azureADConfig, true)
+            spanner(lokaleKjenninger, azureADConfig, true)
         }) {
             cookiesSession {
                 login()
@@ -118,7 +117,7 @@ class E2ETest {
             )
         )
         withTestApplication({
-            spanner(spleis, azureADConfig, true)
+            spanner(lokaleKjenninger, azureADConfig, true)
         }) {
             cookiesSession {
                 login()
@@ -142,7 +141,7 @@ class E2ETest {
             )
         )
         withTestApplication({
-            spanner(spleis, azureADConfig, true)
+            spanner(lokaleKjenninger, azureADConfig, true)
         }) {
             cookiesSession {
                 login()
@@ -162,7 +161,7 @@ class E2ETest {
     @Test
     fun `valid json error message response`() {
         withTestApplication({
-            spanner(spleis, azureADConfig, true)
+            spanner(lokaleKjenninger, azureADConfig, true)
         }) {
             cookiesSession {
                 login()
@@ -183,7 +182,6 @@ class E2ETest {
         @JvmStatic
         fun setupMock() {
             mockAuth.start()
-
         }
 
         @AfterAll

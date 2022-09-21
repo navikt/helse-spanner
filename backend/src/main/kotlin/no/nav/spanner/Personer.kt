@@ -1,8 +1,6 @@
 package no.nav.spanner
 
 import com.auth0.jwt.JWT
-import com.fasterxml.jackson.databind.node.ObjectNode
-import com.fasterxml.jackson.databind.util.RawValue
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import io.ktor.client.*
 import io.ktor.client.engine.cio.*
@@ -12,6 +10,7 @@ import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.features.*
 import io.ktor.http.*
+import kotlinx.coroutines.*
 import org.slf4j.LoggerFactory
 
 val logger = LoggerFactory.getLogger(Spleis::class.java)
@@ -65,18 +64,27 @@ class Spleis(
                     accept(ContentType.Application.Json)
                 }
             } catch (e : ClientRequestException) {
-                if(e.response.status == HttpStatusCode.NotFound) {
+                if (e.response.status == HttpStatusCode.NotFound) {
                     throw NotFoundException("Fant ikke person")
                 }
                 throw e
             }
-        val aktivitetslogg = aktivitetslogg(accessToken, id) // bare gjør kallet; ikke bruke ennå
+
+        coroutineScope {
+            launch(Dispatchers.IO) {
+                try {
+                    // bare gjør kallet; ikke bruke ennå
+                    aktivitetslogg(accessToken, id)
+                } catch (e: Exception) {
+                    logger.warn("Det gikk ikke å hente aktivitetslogg fra sparsom", e)
+                }
+            }
+        }
+
         log
             .response(response)
             .info("Response from spleis")
-        val node = objectMapper.readTree(response.readText()) as ObjectNode
-        node.putRawValue("aktivitetsloggV2", RawValue(aktivitetslogg))
-        return node.toString()
+        return response.readText()
     }
 
     private suspend fun aktivitetslogg(accessToken: String, ident: String): String? {
@@ -115,7 +123,7 @@ class Spleis(
             accept(ContentType.Application.Json)
         }
         } catch (e : ClientRequestException) {
-            if(e.response.status == HttpStatusCode.NotFound) {
+            if (e.response.status == HttpStatusCode.NotFound) {
                 throw NotFoundException("Fant ikke melding med referanse $meldingsreferanse")
             }
             throw e
