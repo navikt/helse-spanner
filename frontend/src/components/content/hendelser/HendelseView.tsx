@@ -96,7 +96,7 @@ Hendelser.displayName = 'HendelseView'
 function aktivitetsloggFraPerson(person: PersonDto): AktivitetsloggV2 {
     let alleAktiviteter = person.aktivitetsloggV2?.aktiviteter ?? [];
     let hendelsekontekster: { detaljer: KontekstMapV2Dto, kontekstType: string }[] = []
-    let filtered = alleAktiviteter
+    alleAktiviteter
         .flatMap((it) => Object.keys(it.kontekster).map((kontekstType) => {
             return {
                 "kontekstType": kontekstType,
@@ -104,15 +104,9 @@ function aktivitetsloggFraPerson(person: PersonDto): AktivitetsloggV2 {
             }
         }))
         .filter((it) =>  !!it.detaljer.meldingsreferanseId)
-
-    console.log(`Filtered: ${JSON.stringify(filtered)}`)
-    filtered
         .forEach((kontekst) => {
             if (!hendelsekontekster.some((it) => it.detaljer.meldingsreferanseId == kontekst.detaljer.meldingsreferanseId)) {
-                console.log(`Legger til!`)
                 hendelsekontekster.push(kontekst)
-            } else {
-                console.log(`Legger ikke til`)
             }
         })
     return {
