@@ -28,10 +28,8 @@ export const useVedtak = () => useContext(VedtakContext)
 export const useForkastetVedtaksperiode = () => useContext(ForkastetVedtaksperiodeContext)
 export const useUtbetaling = () => useContext(UtbetalingContext)
 
-export const AktivitetsloggContext = createContext<Aktivitetslogg>()
-export const AktivitetsloggV2Context = createContext<AktivitetsloggV2>()
+export const AktivitetsloggContext = createContext<AktivitetsloggV2>()
 export const useAktivitetslogg = () => useContext(AktivitetsloggContext)
-export const useAktivitetsloggV2 = () => useContext(AktivitetsloggV2Context)
 
 export type Id = {
     arbeidsgiver?: string

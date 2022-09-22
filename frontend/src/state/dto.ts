@@ -90,8 +90,9 @@ export type AktivitetsloggV2Dto = {
     aktiviteter: AktivitetV2Dto[]
 }
 export interface AktivitetV2Dto {
+    id: number
     nivå: string
-    melding: string
+    tekst: string
     tidsstempel: string
     kontekster: KonteksterDto
 }

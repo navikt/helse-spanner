@@ -1,7 +1,7 @@
 import React from 'react'
 import {
     AktivitetsloggContext,
-    useAktivitetslogg, useAktivitetsloggV2,
+    useAktivitetslogg,
     useArbeidsgiver,
     useForkastetVedtaksperiode,
     usePerson,
@@ -11,29 +11,26 @@ import {
 import { ContentView } from '../../../state/state'
 import { Hendelser } from './Hendelser'
 import { ContentCategory } from '../ContentCategory'
-import {Aktivitetslogg, AktivitetsloggV2, Hendelsekontekst, Kontekst} from '../../../state/model'
-import {AktivitetDto, KontekstMapV2Dto, PersonDto} from '../../../state/dto'
+import {AktivitetsloggV2, Hendelsekontekst} from '../../../state/model'
+import {KontekstMapV2Dto, PersonDto} from '../../../state/dto'
 import parseISO from 'date-fns/parseISO'
 import compareAsc from 'date-fns/compareAsc'
 import { hasValue } from '../../../utils'
 
 const Person = React.memo(() => {
     const aktivitetslogg = useAktivitetslogg()
-    return <Hendelser hendelser={aktivitetslogg.kontekster.filter((it) => it.erHendelsekontekst)} />
+    return <Hendelser hendelser={aktivitetslogg.hendelsekontekster} />
 })
 Person.displayName = 'HendelseView.Person'
 
 const Arbeidsgiver = React.memo(() => {
     const aktivitetslogg = useAktivitetslogg()
     const arbeidsgiver = useArbeidsgiver()
-    const hendelser = hendelserAssosiertMedKontekst(
-        aktivitetslogg,
-        (kontekst) =>
-            (!!kontekst.kontekstMap.organisasjonsnummer &&
-                kontekst.kontekstMap.organisasjonsnummer === arbeidsgiver.organisasjonsnummer) ??
-            false
+    const hendelser = hendelserAssosiertMedKontekst(aktivitetslogg, (kontekstType, kontekst) =>
+        (!!kontekst.organisasjonsnummer &&
+            kontekst.organisasjonsnummer === arbeidsgiver.organisasjonsnummer) ??
+        false
     )
-
     return <Hendelser hendelser={hendelser} />
 })
 Arbeidsgiver.displayName = 'HendelseView.Arbeidsgiver'
@@ -43,8 +40,8 @@ const Vedtaksperiode = React.memo(() => {
     const aktivitetslogg = useAktivitetslogg()
     const hendelser = hendelserAssosiertMedKontekst(
         aktivitetslogg,
-        (kontekst) =>
-            (!!kontekst.kontekstMap.vedtaksperiodeId && kontekst.kontekstMap.vedtaksperiodeId === vedtaksperiode.id) ??
+        (kontekstType, kontekst) =>
+            (!!kontekst.vedtaksperiodeId && kontekst.vedtaksperiodeId === vedtaksperiode.id) ??
             false
     )
 
@@ -58,8 +55,8 @@ const ForkastetVedtaksperiode = React.memo(() => {
 
     const hendelser = hendelserAssosiertMedKontekst(
         aktivitetslogg,
-        (kontekst) =>
-            (!!kontekst.kontekstMap.vedtaksperiodeId && kontekst.kontekstMap.vedtaksperiodeId === vedtaksperiode.id) ??
+        (kontekstType, kontekst) =>
+            (!!kontekst.vedtaksperiodeId && kontekst.vedtaksperiodeId === vedtaksperiode.id) ??
             false
     )
 
@@ -73,8 +70,8 @@ const Utbetaling = React.memo(() => {
 
     const hendelser = hendelserAssosiertMedKontekst(
         aktivitetslogg,
-        (kontekst) =>
-            (!!kontekst.kontekstMap.utbetalingId && kontekst.kontekstMap.utbetalingId === utbetaling.id) ?? false
+        (kontekstType, kontekst) =>
+            (!!kontekst.utbetalingId && kontekst.utbetalingId === utbetaling.id) ?? false
     )
 
     return <Hendelser hendelser={hendelser} />
@@ -83,9 +80,7 @@ Vedtaksperiode.displayName = 'HendelseView.Utbetaling'
 
 export const HendelseView = React.memo(() => {
     const person = usePerson()
-    const aktivitetslogg: Aktivitetslogg = React.useMemo(() => aktivitetsloggFraPerson(person), [person])
-    // todo: ta i bruk
-    const aktivitetsloggv2: AktivitetsloggV2 = React.useMemo(() => aktivitetsloggV2FraPerson(person), [person])
+    const aktivitetslogg: AktivitetsloggV2 = React.useMemo(() => aktivitetsloggFraPerson(person), [person])
     return (
         <AktivitetsloggContext.Provider value={aktivitetslogg}>
             <ContentCategory
@@ -98,41 +93,10 @@ export const HendelseView = React.memo(() => {
 
 Hendelser.displayName = 'HendelseView'
 
-function aktivitetsloggFraPerson(person: PersonDto): Aktivitetslogg {
-    const alleAktiviteter = person.aktivitetslogg.aktiviteter
-    const kontekstDtoer = person.aktivitetslogg.kontekster
-
-    const kontekster = kontekstDtoer.map((kontekstDto, index): Kontekst => {
-        const aktiviteter = alleAktiviteter.filter((aktivitet) => aktivitet.kontekster.includes(index))
-        const opprettet =
-            aktiviteter
-                .map((it) => parseISO(it.tidsstempel))
-                .sort(compareAsc)
-                .find(hasValue) ?? parseISO('1900-01-01')
-        const harError = !!aktiviteter.find((it) => it.alvorlighetsgrad == 'ERROR')
-        const harWarning = !!aktiviteter.find((it) => it.alvorlighetsgrad == 'WARN')
-        return {
-            kontekstType: kontekstDto.kontekstType,
-            kontekstMap: kontekstDto.kontekstMap,
-            aktiviteter,
-            id: index,
-            erHendelsekontekst: !!kontekstDto.kontekstMap.meldingsreferanseId,
-            opprettet,
-            harError,
-            harWarning,
-        }
-    })
-
-    return {
-        aktiviteter: alleAktiviteter,
-        kontekster,
-    }
-}
-
-function aktivitetsloggV2FraPerson(person: PersonDto): AktivitetsloggV2 {
+function aktivitetsloggFraPerson(person: PersonDto): AktivitetsloggV2 {
     let alleAktiviteter = person.aktivitetsloggV2?.aktiviteter ?? [];
     let hendelsekontekster: { detaljer: KontekstMapV2Dto, kontekstType: string }[] = []
-    alleAktiviteter
+    let filtered = alleAktiviteter
         .flatMap((it) => Object.keys(it.kontekster).map((kontekstType) => {
             return {
                 "kontekstType": kontekstType,
@@ -140,14 +104,20 @@ function aktivitetsloggV2FraPerson(person: PersonDto): AktivitetsloggV2 {
             }
         }))
         .filter((it) =>  !!it.detaljer.meldingsreferanseId)
+
+    console.log(`Filtered: ${JSON.stringify(filtered)}`)
+    filtered
         .forEach((kontekst) => {
-            if (!!hendelsekontekster.find((it) => it.detaljer.meldingsreferanseId == kontekst.detaljer.meldingsreferanseId)) {
+            if (!hendelsekontekster.some((it) => it.detaljer.meldingsreferanseId == kontekst.detaljer.meldingsreferanseId)) {
+                console.log(`Legger til!`)
                 hendelsekontekster.push(kontekst)
+            } else {
+                console.log(`Legger ikke til`)
             }
         })
     return {
         aktiviteter: alleAktiviteter,
-        hendelsekontekster: hendelsekontekster.map((it) => {
+        hendelsekontekster: hendelsekontekster.map((it, index) => {
             const aktiviteter = alleAktiviteter.filter((aktivitet) => aktivitet.kontekster.hasOwnProperty(it.kontekstType)
                 && aktivitet.kontekster[it.kontekstType].meldingsreferanseId == it.detaljer.meldingsreferanseId)
             const opprettet =
@@ -161,7 +131,7 @@ function aktivitetsloggV2FraPerson(person: PersonDto): AktivitetsloggV2 {
                 kontekstType: it.kontekstType,
                 kontekstMap: it.detaljer,
                 aktiviteter,
-                id: 0, // TODO: fjerne?
+                id: index,
                 erHendelsekontekst: true,
                 opprettet,
                 harError,
@@ -172,15 +142,11 @@ function aktivitetsloggV2FraPerson(person: PersonDto): AktivitetsloggV2 {
 }
 
 const hendelserAssosiertMedKontekst = (
-    aktivitetslogg: Aktivitetslogg,
-    kontekstErInteressant: (kontekst: Kontekst) => boolean
-): Kontekst[] => {
-    const interessanteKontekster = aktivitetslogg.kontekster.filter(kontekstErInteressant).map((it) => it.id)
-
-    const harInteressantKontekst = (aktivitet: AktivitetDto) =>
-        aktivitet.kontekster.some((id) => interessanteKontekster.includes(id))
-
-    return aktivitetslogg.kontekster
-        .filter((kontekst) => kontekst.erHendelsekontekst)
-        .filter((hendelseKontekst) => hendelseKontekst.aktiviteter.some(harInteressantKontekst))
+    aktivitetslogg: AktivitetsloggV2,
+    kontekstErInteressant: (kontekstType: string, kontekst: KontekstMapV2Dto) => boolean
+): Hendelsekontekst[] => {
+    return aktivitetslogg.hendelsekontekster
+        .filter((hendelseKontekst) => hendelseKontekst.aktiviteter.some((aktivitet) => {
+            return Object.keys(aktivitet.kontekster).some((kontekstType) => kontekstErInteressant(kontekstType, aktivitet.kontekster[kontekstType]))
+        }))
 }

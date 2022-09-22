@@ -6,14 +6,14 @@ import compareAsc from 'date-fns/compareAsc'
 import classNames from 'classnames'
 import { useRecoilState } from 'recoil'
 import { skjulPåminnelserState, visBareFeilState } from '../../../state/state'
-import { Kontekst } from '../../../state/model'
+import {Hendelsekontekst} from '../../../state/model'
 
-const erPåminnelse = (kontekst: Kontekst) =>
+const erPåminnelse = (kontekst: Hendelsekontekst) =>
     kontekst.kontekstType == 'Påminnelse' || kontekst.kontekstType == 'Utbetalingshistorikk'
 
-const harFeil = (kontekst: Kontekst) => kontekst.harError || kontekst.harWarning
+const harFeil = (kontekst: Hendelsekontekst) => kontekst.harError || kontekst.harWarning
 
-export const Hendelser = React.memo(({ hendelser }: { hendelser: Kontekst[] }) => {
+export const Hendelser = React.memo(({ hendelser }: { hendelser: Hendelsekontekst[] }) => {
     const [visBareFeil, setVisBareFeil] = useRecoilState(visBareFeilState)
     const [skjulPåminnelser, setSkjulPåminnelser] = useRecoilState(skjulPåminnelserState)
     const toggleVisBareFeil = () => setVisBareFeil(!visBareFeil)

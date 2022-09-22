@@ -6,11 +6,11 @@ import styles from './Hendelse.module.css'
 import { Copy, FileContent } from '@navikt/ds-icons'
 import { Aktivitet } from './Aktivitet'
 import commonStyles from '../../Common.module.css'
-import { Kontekst } from '../../../state/model'
+import {Hendelsekontekst} from '../../../state/model'
 import { writeToClipboard } from '../../../utils'
 import { somNorskDato } from '../../i18n'
 
-export const Hendelse = React.memo(({ kontekst }: { kontekst: Kontekst }) => {
+export const Hendelse = React.memo(({ kontekst }: { kontekst: Hendelsekontekst }) => {
     const aktiviteter = kontekst.aktiviteter
     let meldingsReferanseId = ''
     if (kontekst.kontekstMap.meldingsreferanseId != undefined) {
@@ -45,9 +45,9 @@ export const Hendelse = React.memo(({ kontekst }: { kontekst: Kontekst }) => {
         [åpneHendelser, setÅpneHendelser]
     )
 
-    const isError = aktiviteter.find((it) => it.alvorlighetsgrad == 'ERROR')
+    const isError = aktiviteter.find((it) => it.nivå == 'FUNKSJONELL_FEIL')
 
-    const isWarning = aktiviteter.find((it) => it.alvorlighetsgrad == 'WARN')
+    const isWarning = aktiviteter.find((it) => it.nivå == 'VARSEL')
 
     return (
         <>
