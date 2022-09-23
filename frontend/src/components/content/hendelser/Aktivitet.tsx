@@ -19,7 +19,7 @@ export const Aktivitet: React.FC<AktivitetViewProps> = React.memo(({ aktivitet }
                     isError && commonStyles.Error
                 )}
             >
-                <div className={styles.AktivitetViewAlvorlighetsgradLabel}>{aktivitet.nivå}</div>
+                <div className={styles.AktivitetViewAlvorlighetsgradLabel}>{aktivitet.nivå.replace("FUNKSJONELL_FEIL", "FEIL")}</div>
                 <div className={styles.AktivitetViewMeldingText}>{aktivitet.tekst}</div>
             </div>
         </div>

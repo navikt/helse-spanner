@@ -31183,7 +31183,7 @@ export let jsonPerson: PersonDto = {
             {
                 id: 583114,
                 tidsstempel: "2022-09-13T04:21:50.385",
-                nivå: "INFO",
+                nivå: "FUNKSJONELL_FEIL",
                 tekst: "Forsøker å gjenoppta 2022-06-15 - 2022-07-15 (AvventerGodkjenning)",
                 kontekster: {
                     Person: {
