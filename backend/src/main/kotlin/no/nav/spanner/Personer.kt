@@ -55,6 +55,13 @@ class Spleis(
         val url = URLBuilder(baseUrl).path("api", "person-json").build()
         val oboToken = token(accessToken, spleisClientId)
         val log = Log.logger(Personer::class.java)
+        val aktivitetslogg: Deferred<String?> =
+            withContext(Dispatchers.IO) {
+                async {
+                    aktivitetslogg(accessToken, id)
+                }
+            }
+
         log
             .sensitivt("oboTokenLength", oboToken.length)
             .info("Retreiving on behalf of token")
@@ -72,12 +79,11 @@ class Spleis(
                 throw e
             }
 
-        val aktivitetslogg = aktivitetslogg(accessToken, id)
         log
             .response(response)
             .info("Response from spleis")
         val node = objectMapper.readTree(response.readText()) as ObjectNode
-        node.putRawValue("aktivitetsloggV2", RawValue(aktivitetslogg))
+        node.putRawValue("aktivitetsloggV2", RawValue(aktivitetslogg.await()))
         return node.toString()
     }
 
