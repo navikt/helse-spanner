@@ -42,7 +42,7 @@ internal class AuditLogger(private val brukerIdent: String) {
     }
 
     companion object {
-        private val logger = LoggerFactory.getLogger("tjenestekall")
+        private val logger = LoggerFactory.getLogger("auditLogger")
         fun SpannerSession.audit() =
             AuditLogger(idToken.asJwt().getClaim("NAVident").asString())
     }
