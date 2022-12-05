@@ -41,6 +41,8 @@ services:
       AUTHORIZATION_URL: http://localhost:8888/default/authorize
       DEVELOPMENT: true
       SPLEIS_API_URL: http://dummy
+      SPARSOM_API_URL: http://dummy
+      SPARSOM_CLIENT_ID: "test"
   audit.nais:
     image: balabit/syslog-ng:latest
     volumes:
