@@ -20,7 +20,7 @@ export const Søk = React.memo((props: SøkProps) => {
         <div className={classNames(styles.Søk)}>
             <input
                 placeholder="fnr/aktør-id"
-                type={'number'}
+                type={'text'}
                 autoFocus={true}
                 value={søketekst}
                 onChange={(e) => setSøketekst(e.target.value)}
