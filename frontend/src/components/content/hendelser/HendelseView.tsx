@@ -141,6 +141,7 @@ const hendelserAssosiertMedKontekst = (
 ): Hendelsekontekst[] => {
     return aktivitetslogg.hendelsekontekster
         .filter((hendelseKontekst) => hendelseKontekst.aktiviteter.some((aktivitet) => {
+            if (aktivitet.tekst.match(/Forsøker å gjenoppta/)) return false
             return Object.keys(aktivitet.kontekster).some((kontekstType) => kontekstErInteressant(kontekstType, aktivitet.kontekster[kontekstType]))
         }))
 }
