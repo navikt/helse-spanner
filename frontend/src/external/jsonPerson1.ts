@@ -987,7 +987,7 @@ export let jsonPerson: PersonDto = {
                             {
                                 kontekstType: 'Vedtaksperiode',
                                 kontekstMap: {
-                                    vedtaksperiodeId: '311c6035-10e5-414f-b775-996dd60b444b',
+                                    vedtaksperiodeId: '79343398-04ca-4a49-91b2-8757caa29bba',
                                 },
                             },
                             {
@@ -1001,7 +1001,7 @@ export let jsonPerson: PersonDto = {
                     aktiveVedtaksperioder: [
                         {
                             orgnummer: '999888777',
-                            vedtaksperiodeId: '311c6035-10e5-414f-b775-996dd60b444b',
+                            vedtaksperiodeId: '79343398-04ca-4a49-91b2-8757caa29bba',
                             periodetype: 'OVERGANG_FRA_IT',
                         },
                         {
@@ -1905,7 +1905,7 @@ export let jsonPerson: PersonDto = {
                             {
                                 kontekstType: 'Vedtaksperiode',
                                 kontekstMap: {
-                                    vedtaksperiodeId: '8b9e808a-255e-4e59-ac5a-27e931ce4e49',
+                                    vedtaksperiodeId: 'e005b52c-986f-471c-a311-16d97efbe937',
                                 },
                             },
                             {
@@ -1919,7 +1919,7 @@ export let jsonPerson: PersonDto = {
                     aktiveVedtaksperioder: [
                         {
                             orgnummer: '999888777',
-                            vedtaksperiodeId: '8b9e808a-255e-4e59-ac5a-27e931ce4e49',
+                            vedtaksperiodeId: 'e005b52c-986f-471c-a311-16d97efbe937',
                             periodetype: 'INFOTRYGDFORLENGELSE',
                         },
                     ],
@@ -3490,7 +3490,7 @@ export let jsonPerson: PersonDto = {
             {
                 kontekstType: 'Vedtaksperiode',
                 kontekstMap: {
-                    vedtaksperiodeId: '311c6035-10e5-414f-b775-996dd60b444b',
+                    vedtaksperiodeId: '79343398-04ca-4a49-91b2-8757caa29bba',
                 },
             },
             {
@@ -3784,7 +3784,7 @@ export let jsonPerson: PersonDto = {
             {
                 kontekstType: 'Vedtaksperiode',
                 kontekstMap: {
-                    vedtaksperiodeId: '8b9e808a-255e-4e59-ac5a-27e931ce4e49',
+                    vedtaksperiodeId: 'e005b52c-986f-471c-a311-16d97efbe937',
                 },
             },
             {
@@ -13155,7 +13155,7 @@ export let jsonPerson: PersonDto = {
                     sykmeldingTom: '2018-01-31',
                     hendelseIder: ['63551019-688a-47e7-ab03-cdbadc9121aa', '2d648189-49f1-4532-b2b3-1e4955c8fe41'],
                     inntektskilde: 'FLERE_ARBEIDSGIVERE',
-                    id: '311c6035-10e5-414f-b775-996dd60b444b',
+                    id: '79343398-04ca-4a49-91b2-8757caa29bba',
                     tilstand: 'AVSLUTTET',
                     skjæringstidspunktFraInfotrygd: '2017-12-01',
                     inntektsmeldingInfo: null,
@@ -13363,7 +13363,7 @@ export let jsonPerson: PersonDto = {
                     sykmeldingTom: '2018-02-28',
                     hendelseIder: ['e553c3cd-7fef-4b93-b8e4-d13a1c5f4838', '8e4d7dbf-bc83-4c8c-a5f8-758cdca521e8'],
                     inntektskilde: 'EN_ARBEIDSGIVER',
-                    id: '8b9e808a-255e-4e59-ac5a-27e931ce4e49',
+                    id: 'e005b52c-986f-471c-a311-16d97efbe937',
                     tilstand: 'AVSLUTTET',
                     skjæringstidspunktFraInfotrygd: '2017-12-01',
                     inntektsmeldingInfo: null,
