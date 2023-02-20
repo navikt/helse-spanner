@@ -19,7 +19,8 @@ import { hasValue } from '../../../utils'
 
 const Person = React.memo(() => {
     const aktivitetslogg = useAktivitetslogg()
-    return <Hendelser hendelser={aktivitetslogg.hendelsekontekster} />
+    const hendelser = hendelserAssosiertMedKontekst(aktivitetslogg, () => true)
+    return <Hendelser hendelser={hendelser} />
 })
 Person.displayName = 'HendelseView.Person'
 
@@ -147,7 +148,7 @@ const hendelserAssosiertMedKontekst = (
                 kontekstType: hendelsekontekst.kontekstType,
                 kontekstMap: hendelsekontekst.kontekstMap,
                 aktiviteter: hendelsekontekst.aktiviteter.map((aktivitet) => {
-                    const erInteressant = !aktivitet.tekst.match(/Forsøker å gjenoppta/) && Object.keys(aktivitet.kontekster).some((kontekstType) => kontekstErInteressant(kontekstType, aktivitet.kontekster[kontekstType]))
+                    const erInteressant = Object.keys(aktivitet.kontekster).some((kontekstType) => kontekstErInteressant(kontekstType, aktivitet.kontekster[kontekstType]))
                     return {
                         id: aktivitet.id,
                         nivå: aktivitet.nivå,
@@ -164,11 +165,7 @@ const hendelserAssosiertMedKontekst = (
                 harWarning: hendelsekontekst.harWarning
             }
         })
-        .filter((hendelsekontekst) => hendelsekontekst.aktiviteter.some((aktivitet) => aktivitet.interessant))
-/*
-    return aktivitetslogg.hendelsekontekster
-        .filter((hendelseKontekst) => hendelseKontekst.aktiviteter.some((aktivitet) => {
-            if (aktivitet.tekst.match(/Forsøker å gjenoppta/)) return false
-            return Object.keys(aktivitet.kontekster).some((kontekstType) => kontekstErInteressant(kontekstType, aktivitet.kontekster[kontekstType]))
-        }))*/
+        .filter((hendelsekontekst) => hendelsekontekst.aktiviteter.some((aktivitet) =>
+            aktivitet.interessant && !aktivitet.tekst.match(/Forsøker å gjenoppta/)
+        ))
 }
