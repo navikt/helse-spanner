@@ -10,14 +10,15 @@ type AktivitetViewProps = {
 export const Aktivitet: React.FC<AktivitetViewProps> = React.memo(({ aktivitet }: { aktivitet: AktivitetV2Dto }) => {
     const isWarning = aktivitet.nivå == 'VARSEL'
     const isError = aktivitet.nivå == 'FUNKSJONELL_FEIL'
-    console.log(`aktivitet interessant = ${aktivitet.interessant}: ${aktivitet}`)
+    console.log(`aktivitet interessant = ${aktivitet.interessant}: ${JSON.stringify(aktivitet)}`)
     return (
         <div className={styles.AktivitetView}>
             <div
                 className={classNames(
                     styles.HeaderLinje,
                     isWarning && commonStyles.Warning,
-                    isError && commonStyles.Error
+                    isError && commonStyles.Error,
+                    !aktivitet.interessant && styles.IkkeInteressant
                 )}
             >
                 <div className={styles.AktivitetViewAlvorlighetsgradLabel}>{aktivitet.nivå.replace("FUNKSJONELL_FEIL", "FEIL")}</div>
