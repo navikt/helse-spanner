@@ -95,6 +95,7 @@ export interface AktivitetV2Dto {
     tekst: string
     tidsstempel: string
     kontekster: KonteksterDto
+    interessant?: boolean
 }
 
 export type KonteksterDto = {

@@ -10,6 +10,7 @@ type AktivitetViewProps = {
 export const Aktivitet: React.FC<AktivitetViewProps> = React.memo(({ aktivitet }: { aktivitet: AktivitetV2Dto }) => {
     const isWarning = aktivitet.nivå == 'VARSEL'
     const isError = aktivitet.nivå == 'FUNKSJONELL_FEIL'
+    console.log(`aktivitet interessant = ${aktivitet.interessant}: ${aktivitet}`)
     return (
         <div className={styles.AktivitetView}>
             <div

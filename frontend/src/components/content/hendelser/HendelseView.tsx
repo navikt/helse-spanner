@@ -12,7 +12,7 @@ import { ContentView } from '../../../state/state'
 import { Hendelser } from './Hendelser'
 import { ContentCategory } from '../ContentCategory'
 import {AktivitetsloggV2, Hendelsekontekst} from '../../../state/model'
-import {KontekstMapV2Dto, PersonDto} from '../../../state/dto'
+import {KonteksterDto, KontekstMapV2Dto, PersonDto} from '../../../state/dto'
 import parseISO from 'date-fns/parseISO'
 import compareAsc from 'date-fns/compareAsc'
 import { hasValue } from '../../../utils'
@@ -139,9 +139,36 @@ const hendelserAssosiertMedKontekst = (
     aktivitetslogg: AktivitetsloggV2,
     kontekstErInteressant: (kontekstType: string, kontekst: KontekstMapV2Dto) => boolean
 ): Hendelsekontekst[] => {
+    // alle aktiviteter som har en kontekst som matcher skal få 'interessant' = true
+
+    return aktivitetslogg.hendelsekontekster
+        .map((hendelsekontekst) => {
+            return {
+                kontekstType: hendelsekontekst.kontekstType,
+                kontekstMap: hendelsekontekst.kontekstMap,
+                aktiviteter: hendelsekontekst.aktiviteter.map((aktivitet) => {
+                    const erInteressant = aktivitet.tekst.match(/Forsøker å gjenoppta/) && Object.keys(aktivitet.kontekster).some((kontekstType) => kontekstErInteressant(kontekstType, aktivitet.kontekster[kontekstType]))
+                    return {
+                        id: aktivitet.id,
+                        nivå: aktivitet.nivå,
+                        tekst: aktivitet.tekst,
+                        tidsstempel: aktivitet.tidsstempel,
+                        kontekster: aktivitet.kontekster,
+                        interessant: erInteressant ?? true
+                    }
+                }),
+                id: hendelsekontekst.id,
+                erHendelsekontekst: hendelsekontekst.erHendelsekontekst,
+                opprettet: hendelsekontekst.opprettet,
+                harError: hendelsekontekst.harError,
+                harWarning: hendelsekontekst.harWarning
+            }
+        })
+        .filter((hendelsekontekst) => hendelsekontekst.aktiviteter.some((aktivitet) => aktivitet.interessant ?? true))
+/*
     return aktivitetslogg.hendelsekontekster
         .filter((hendelseKontekst) => hendelseKontekst.aktiviteter.some((aktivitet) => {
             if (aktivitet.tekst.match(/Forsøker å gjenoppta/)) return false
             return Object.keys(aktivitet.kontekster).some((kontekstType) => kontekstErInteressant(kontekstType, aktivitet.kontekster[kontekstType]))
-        }))
+        }))*/
 }

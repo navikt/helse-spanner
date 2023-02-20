@@ -142,6 +142,7 @@ object LokaleKjenninger : Personer {
     override suspend fun person(id: String, idType: IdType, accessToken: String) = when (id) {
         "42",
         "12020052345" -> lesJson("12020052345")
+        "2392363031327" -> lesJson("2392363031327")
         else -> throw NotFoundException("no person with identifier: ${id}")
     }.also {
         logger.trace("person fetched = ${it}")
