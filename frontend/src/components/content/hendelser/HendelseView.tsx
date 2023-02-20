@@ -147,14 +147,14 @@ const hendelserAssosiertMedKontekst = (
                 kontekstType: hendelsekontekst.kontekstType,
                 kontekstMap: hendelsekontekst.kontekstMap,
                 aktiviteter: hendelsekontekst.aktiviteter.map((aktivitet) => {
-                    const erInteressant = aktivitet.tekst.match(/Forsøker å gjenoppta/) && Object.keys(aktivitet.kontekster).some((kontekstType) => kontekstErInteressant(kontekstType, aktivitet.kontekster[kontekstType]))
+                    const erInteressant = !aktivitet.tekst.match(/Forsøker å gjenoppta/) && Object.keys(aktivitet.kontekster).some((kontekstType) => kontekstErInteressant(kontekstType, aktivitet.kontekster[kontekstType]))
                     return {
                         id: aktivitet.id,
                         nivå: aktivitet.nivå,
                         tekst: aktivitet.tekst,
                         tidsstempel: aktivitet.tidsstempel,
                         kontekster: aktivitet.kontekster,
-                        interessant: erInteressant ?? true
+                        interessant: erInteressant
                     }
                 }),
                 id: hendelsekontekst.id,
@@ -164,7 +164,7 @@ const hendelserAssosiertMedKontekst = (
                 harWarning: hendelsekontekst.harWarning
             }
         })
-        .filter((hendelsekontekst) => hendelsekontekst.aktiviteter.some((aktivitet) => aktivitet.interessant ?? true))
+        .filter((hendelsekontekst) => hendelsekontekst.aktiviteter.some((aktivitet) => aktivitet.interessant))
 /*
     return aktivitetslogg.hendelsekontekster
         .filter((hendelseKontekst) => hendelseKontekst.aktiviteter.some((aktivitet) => {
