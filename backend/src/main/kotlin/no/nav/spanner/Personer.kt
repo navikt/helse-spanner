@@ -55,36 +55,36 @@ class Spleis(
         val url = URLBuilder(baseUrl).path("api", "person-json").build()
         val oboToken = token(accessToken, spleisClientId)
         val log = Log.logger(Personer::class.java)
-        val aktivitetslogg: Deferred<String?> =
-            coroutineScope {
-                async(Dispatchers.IO) {
-                    aktivitetslogg(accessToken, id)
-                }
+
+        return coroutineScope {
+            val aktivitetslogg: Deferred<String?> = async(Dispatchers.IO) {
+                aktivitetslogg(accessToken, id)
             }
 
-        log
-            .sensitivt("oboTokenLength", oboToken.length)
-            .info("OBO token length")
-        val response =
-            try {
-                httpClient.get<HttpResponse>(url) {
-                    header("Authorization", "Bearer $oboToken")
-                    header(idType.header, id)
-                    accept(ContentType.Application.Json)
+            log
+                .sensitivt("oboTokenLength", oboToken.length)
+                .info("OBO token length")
+            val response =
+                try {
+                    httpClient.get<HttpResponse>(url) {
+                        header("Authorization", "Bearer $oboToken")
+                        header(idType.header, id)
+                        accept(ContentType.Application.Json)
+                    }
+                } catch (e: ClientRequestException) {
+                    if (e.response.status == HttpStatusCode.NotFound) {
+                        throw NotFoundException("Fant ikke person")
+                    }
+                    throw e
                 }
-            } catch (e: ClientRequestException) {
-                if (e.response.status == HttpStatusCode.NotFound) {
-                    throw NotFoundException("Fant ikke person")
-                }
-                throw e
-            }
 
-        log
-            .response(response)
-            .info("Response from spleis")
-        val node = objectMapper.readTree(response.readText()) as ObjectNode
-        node.putRawValue("aktivitetsloggV2", RawValue(aktivitetslogg.await()))
-        return node.toString()
+            log
+                .response(response)
+                .info("Response from spleis")
+            val node = objectMapper.readTree(response.readText()) as ObjectNode
+            node.putRawValue("aktivitetsloggV2", RawValue(aktivitetslogg.await()))
+            node.toString()
+        }
     }
 
     private suspend fun aktivitetslogg(accessToken: String, ident: String): String? {
