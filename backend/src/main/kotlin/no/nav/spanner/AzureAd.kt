@@ -34,7 +34,7 @@ class AzureAD(private val config: AzureADConfig) {
         }
         Log.logger(AzureAD::class.java)
             .response(response)
-            .info("Retreiving on behalf of token")
+            .info("OBO token retrieved")
         return response
             .receive<JsonNode>()
             .path("access_token")

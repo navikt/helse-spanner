@@ -56,15 +56,15 @@ class Spleis(
         val oboToken = token(accessToken, spleisClientId)
         val log = Log.logger(Personer::class.java)
         val aktivitetslogg: Deferred<String?> =
-            withContext(Dispatchers.IO) {
-                async {
+            coroutineScope {
+                async(Dispatchers.IO) {
                     aktivitetslogg(accessToken, id)
                 }
             }
 
         log
             .sensitivt("oboTokenLength", oboToken.length)
-            .info("Retreiving on behalf of token")
+            .info("OBO token length")
         val response =
             try {
                 httpClient.get<HttpResponse>(url) {
@@ -72,7 +72,7 @@ class Spleis(
                     header(idType.header, id)
                     accept(ContentType.Application.Json)
                 }
-            } catch (e : ClientRequestException) {
+            } catch (e: ClientRequestException) {
                 if (e.response.status == HttpStatusCode.NotFound) {
                     throw NotFoundException("Fant ikke person")
                 }
@@ -95,7 +95,7 @@ class Spleis(
         val log = Log.logger(Personer::class.java)
         log
             .sensitivt("oboTokenLength", oboToken.length)
-            .info("Retreiving on behalf of token")
+            .info("OBO token length")
         try {
             val response = httpClient.get<HttpResponse>(url) {
                 header("Authorization", "Bearer $oboToken")
