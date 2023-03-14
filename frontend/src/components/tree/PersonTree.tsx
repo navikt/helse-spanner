@@ -22,6 +22,13 @@ import { Next, Expand } from '@navikt/ds-icons'
 import parseISO from 'date-fns/parseISO'
 import compareAsc from 'date-fns/compareAsc'
 import { somNorskDato } from '../i18n'
+import { personSporingUrl, tilstandsmaskinSporingUrl } from './links'
+
+const SporingLenke: React.FC<{ url: string }> = ({ url }) => (
+    <a href={url} target="_blank">
+        🔎
+    </a>
+)
 
 export const PersonTree = React.memo(() => {
     const person = usePerson()
@@ -47,7 +54,10 @@ export const PersonTree = React.memo(() => {
                 Skjul forkastede
             </button>
             <SelectableTreeNode indent={0} className={styles.PersonNode}>
-                {person.aktørId}
+                <div>
+                    <span>{person.aktørId}</span>
+                    <SporingLenke url={personSporingUrl(person.aktørId)} />
+                </div>
             </SelectableTreeNode>
             {person.arbeidsgivere.map((arbeidsgiver) => (
                 <ArbeidsgiverContext.Provider value={arbeidsgiver} key={arbeidsgiver.id}>
@@ -195,8 +205,11 @@ const VedtaksNode = React.memo(() => {
     const [fom, tom] = [vedtak.fom, vedtak.tom].map(somNorskDato)
     return (
         <SelectableTreeNode indent={1.2} className={styles.LøvNode}>
-            <div>
-                {fom} - {tom}
+            <div className={styles.VedtakNodeHeader}>
+                <span>
+                    {fom} - {tom}
+                </span>
+                <SporingLenke url={tilstandsmaskinSporingUrl(vedtak.id)} />
             </div>
             <span className={styles.TilstandText}>{vedtak.tilstand}</span>
         </SelectableTreeNode>

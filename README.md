@@ -17,3 +17,5 @@ For å teste lokalt med OAuth, audit-logging og ekte kall til backend
 
 1. `./gradlew build`
 2. `docker compose up` (eller `docker-compose up`)
+
+Da når du spanner på http://localhost:8080/spanner

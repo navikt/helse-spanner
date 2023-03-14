@@ -1,7 +1,6 @@
 import React from 'react'
 import { ContentCategory } from './ContentCategory'
 import { ContentView } from '../../state/state'
-import { Hendelser } from './hendelser/Hendelser'
 import { useForkastetVedtaksperiode, usePerson, useVedtak } from '../../state/contexts'
 
 const sporing = window.location.origin.includes('dev')
@@ -46,4 +45,4 @@ export const IngressView = React.memo(() => {
     )
 })
 
-Hendelser.displayName = 'IngressView'
+IngressView.displayName = 'IngressView'

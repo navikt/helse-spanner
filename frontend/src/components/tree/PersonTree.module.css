@@ -8,6 +8,14 @@
     padding: 0.5em !important;
 }
 
+.VedtakNodeHeader {
+    display: flex;
+    justify-content: space-between;
+}
+.VedtakNodeHeader a {
+    text-decoration: none;
+}
+
 .PersonTree .node-motion {
     transition: all 0.3s;
     overflow-y: hidden;
@@ -16,6 +24,13 @@
 .PersonNode {
     margin: 0.2rem 0 !important;
     padding: 0.3em !important;
+}
+.PersonNode > div {
+    display: flex;
+    justify-content: space-between;
+}
+.PersonNode a {
+    text-decoration: none;
 }
 
 .ArbeidsgiverNode {
@@ -78,10 +93,6 @@
     margin: 0 0 0.5em;
     padding: 3px;
     border-radius: 0.3em;
-}
-
-.Indentation2 {
-    padding-left: 2rem;
 }
 
 .Forkastet {
