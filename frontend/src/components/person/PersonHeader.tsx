@@ -2,6 +2,7 @@ import React from 'react'
 import parseISO from 'date-fns/parseISO'
 import styles from './PersonHeader.module.css'
 import { usePerson } from '../../state/contexts'
+import { speilUrl } from '../tree/links'
 
 export const PersonHeader = React.memo(() => {
     const person = usePerson()
@@ -22,7 +23,7 @@ export const PersonHeader = React.memo(() => {
                 </dd>
                 <dt>🪞</dt>
                 <dd>
-                    <a href={`https://speil.dev.intern.nav.no/person/${person.aktørId}`} target="_blank" className={styles.SpeilLink}>
+                    <a href={speilUrl(person.aktørId)} target="_blank" className={styles.SpeilLink}>
                         trykk her
                     </a>
                 </dd>
