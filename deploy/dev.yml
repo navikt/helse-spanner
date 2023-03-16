@@ -10,6 +10,7 @@ spec:
   port: 8080
   ingresses:
     - https://spanner.dev.intern.nav.no
+    - https://spanner.intern.dev.nav.no
   liveness:
     failureThreshold: 10
     initialDelay: 20
@@ -43,6 +44,7 @@ spec:
           - id: "317665ad-1402-458e-b8e6-9cb50afc1252" # speil-brukere-dev
       replyURLs:
         - "https://spanner.dev.intern.nav.no/oauth2/callback"
+        - "https://spanner.intern.dev.nav.no/oauth2/callback"
       allowAllUsers: false
   accessPolicy:
     outbound:
@@ -65,7 +67,7 @@ spec:
     - name: HTTP_PORT
       value: "8080"
     - name: HTTP_HOST
-      value: spanner.dev.intern.nav.no
+      value: spanner.intern.dev.nav.no
     - name: SPLEIS_API_URL
       value: http://spleis-api
     - name: SPARSOM_API_URL
