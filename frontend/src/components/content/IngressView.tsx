@@ -4,7 +4,7 @@ import { ContentView } from '../../state/state'
 import { useForkastetVedtaksperiode, usePerson, useVedtak } from '../../state/contexts'
 
 const sporing = window.location.origin.includes('dev')
-    ? 'https://sporing.dev.intern.nav.no'
+    ? 'https://sporing.intern.dev.nav.no'
     : 'https://sporing.intern.nav.no'
 const _ingressView = (vedtaksperiodeId: string) => {
     return (
