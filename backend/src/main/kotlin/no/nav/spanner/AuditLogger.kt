@@ -11,16 +11,8 @@ import java.time.ZonedDateTime.now
 
 internal class AuditLogger(private val brukerIdent: String) {
 
-    fun log(
-        operasjon: Operasjon = LES,
-        fnr: Long?,
-        aktorId: Long?,
-        message: String = "Sporingslogg"
-    ) {
-        val nå = now().toEpochSecond()
-        val subject = fnr?.toString()?.padStart(9, '0') ?: aktorId
-        val duidStr = subject?.let { " duid=$it" } ?: ""
-        logger.info("CEF:0|Spanner|auditLog|1.0|${operasjon.logString}|$message|INFO|end=$nå suid=$brukerIdent$duidStr")
+    private fun log(melding: String) {
+        logger.info(melding)
     }
 
     fun log(call: ApplicationCall) {
@@ -32,7 +24,18 @@ internal class AuditLogger(private val brukerIdent: String) {
         val message = call.request.path()
         val fnr = call.request.headers[IdType.FNR.header]
         val aktorId = call.request.headers[IdType.AKTORID.header]
-        log(operasjon, fnr?.toLong(), aktorId?.toLong(), message)
+        val melding = lagMelding(operasjon, fnr?.toLong(), aktorId?.toLong(), message)
+        log(melding)
+    }
+
+    internal fun lagMelding(operasjon: Operasjon = LES,
+                            fnr: Long?,
+                            aktorId: Long?,
+                            message: String = "Sporingslogg"): String {
+        val now = now().toEpochSecond()
+        val subject = fnr?.toString()?.padStart(9, '0') ?: aktorId
+        val duidStr = subject?.let { " duid=$it" } ?: ""
+        return "CEF:0|Spanner|auditLog|1.0|${operasjon.logString}|$message|INFO|end=$now suid=$brukerIdent$duidStr"
     }
 
     enum class Operasjon(val logString: String) {
