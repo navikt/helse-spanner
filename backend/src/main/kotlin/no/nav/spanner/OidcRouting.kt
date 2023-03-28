@@ -15,7 +15,9 @@ fun Route.oidc() {
     get("/login") { /* Redirects to 'authorizeUrl' automatically*/ }
 
     get("/oauth2/callback") {
-        val principal: OAuthAccessTokenResponse.OAuth2 = call.principal()!!
+        val principal: OAuthAccessTokenResponse.OAuth2 = call.principal() ?: return@get call.respondRedirect("/").also {
+            logg.info("principal var visst null, vi redirecter til '/'!")
+        }
 
         val accessToken = principal.accessToken
         val refreshToken = principal.refreshToken!!
