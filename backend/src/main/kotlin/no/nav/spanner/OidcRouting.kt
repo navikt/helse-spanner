@@ -7,6 +7,7 @@ import io.ktor.response.*
 import io.ktor.routing.*
 import io.ktor.sessions.*
 import no.nav.spanner.Log.Companion.logger
+import org.intellij.lang.annotations.Language
 
 
 fun Route.oidc() {
@@ -21,18 +22,19 @@ fun Route.oidc() {
         val idToken = principal.extraParameters["id_token"]!!
         val expiry = principal.expiresIn
         call.sessions.set(SpannerSession(accessToken, refreshToken, idToken, expiry))
-        logg
-            .info("Hentet tokens")
-        call.respondText(
-            " <html xmlns=\"http://www.w3.org/1999/xhtml\">    \n" +
-                    "  <head>      \n" +
-                    "    <title>OIDC site-refresh</title>      \n" +
-                    "    <meta http-equiv=\"refresh\" content=\"0;URL='/'\" />    \n" +
-                    "  </head>    \n" +
-                    "  <body> \n" +
-                    "    <p>Refreshing site \uD83D\uDD12</p> \n" +
-                    "  </body>  \n" +
-                    "</html>     ", ContentType.Text.Html
-        )
+        logg.info("Hentet tokens")
+        @Language("HTML")
+        val refreshHtml = """<!doctype html>
+        <html>
+            <head>  
+                <meta charset="UTF-8">
+                <title>OIDC site-refresh</title>  
+                <meta http-equiv="refresh" content="0;URL='/'" />
+            </head>
+            <body>
+                <p>Refreshing site \uD83D\uDD12</p>
+            </body>
+        </html>"""
+        call.respondText(refreshHtml, ContentType.Text.Html)
     }
 }
