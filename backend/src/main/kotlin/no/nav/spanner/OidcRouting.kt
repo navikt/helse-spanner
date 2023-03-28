@@ -34,7 +34,7 @@ fun Route.oidc() {
                 <meta http-equiv="refresh" content="0;URL='/'" />
             </head>
             <body>
-                <p>Refreshing site \uD83D\uDD12</p>
+                <p>Tar deg tilbake, vent litt 🤪</p>
             </body>
         </html>"""
         call.respondText(refreshHtml, ContentType.Text.Html)
