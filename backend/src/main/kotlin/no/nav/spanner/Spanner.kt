@@ -139,6 +139,49 @@ fun Application.spanner(spleis: Personer, config: AzureADConfig, development: Bo
                     call.respondText(person, ContentType.Application.Json, HttpStatusCode.OK)
                 }
             }
+            /*
+                har ikke funksjonalitet fra frontend ennå, men kan kalles manuelt fra devtools feks:
+
+                fetch("/api/speil-person/", {
+                    method: 'get',
+                    headers: {
+                        Accept: 'application/json',
+                        fnr: 'xxxxxxxxxxx'
+                    }
+                }).then(function (response) {
+                    console.log(response)
+                    response.json().then(function (json) {
+                        console.log(json)
+                    })
+                })
+             */
+            get("/api/speil-person/") {
+                if (sesjon().validUntil < LocalDateTime.now()) {
+                    val spannerSession = azureAd.refreshToken(sesjon().refreshToken)
+                    call.sessions.set(spannerSession)
+                }
+                sesjon().audit().log(call)
+                val (idType, idValue) = call.personId()
+                if (idType != IdType.FNR) {
+                    call.respond(HttpStatusCode.BadRequest, "funker bare med fnr")
+                    return@get
+                }
+                logg
+                    .åpent("idType", idType)
+                    .sensitivt("idValue", idValue)
+                    .call(this.call)
+                    .info()
+                if (idValue.isNullOrBlank()) {
+                    call.respond(
+                        HttpStatusCode.BadRequest,
+                        "${IdType.FNR.header} must be set"
+                    )
+                } else {
+                    val accessToken = call.sessions.get<SpannerSession>()?.accessToken.toString()
+                    val person = spleis.speilperson(idValue, accessToken)
+                    call.respondText(person, ContentType.Application.Json, HttpStatusCode.OK)
+                }
+            }
 
             get("/api/hendelse/{meldingsreferanse}") {
                 if (sesjon().validUntil < LocalDateTime.now()) {

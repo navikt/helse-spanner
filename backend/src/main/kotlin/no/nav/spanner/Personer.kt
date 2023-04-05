@@ -19,6 +19,7 @@ val logger = LoggerFactory.getLogger(Spleis::class.java)
 
 interface Personer {
     suspend fun person(id: String, idType: IdType, accessToken: String): String
+    suspend fun speilperson(fnr: String, accessToken: String): String
     suspend fun hendelse(meldingsreferanse: String, accessToken: String): String
 }
 
@@ -87,6 +88,41 @@ class Spleis(
         }
     }
 
+    override suspend fun speilperson(fnr: String, accessToken: String): String {
+        val url = URLBuilder(baseUrl).path("v2", "graphql").build()
+        val oboToken = token(accessToken, spleisClientId)
+        val log = Log.logger(Personer::class.java)
+
+        log
+            .sensitivt("oboTokenLength", oboToken.length)
+            .info("OBO token length")
+        val response =
+            try {
+                httpClient.post<HttpResponse>(url) {
+                    header("Authorization", "Bearer $oboToken")
+                    accept(ContentType.Application.Json)
+                    body = """{
+            "query": "",
+            "variables": {
+              "fnr": "$fnr"
+            },
+            "operationName": "HentSnapshotSpanner"
+        }"""
+                }
+            } catch (e: ClientRequestException) {
+                if (e.response.status == HttpStatusCode.NotFound) {
+                    throw NotFoundException("Fant ikke person")
+                }
+                throw e
+            }
+
+        log
+            .response(response)
+            .info("Response from spleis")
+        val node = objectMapper.readTree(response.readText()) as ObjectNode
+        return node.toString()
+    }
+
     private suspend fun aktivitetslogg(accessToken: String, ident: String): String? {
         val url = URLBuilder(sparsomBaseUrl).path("api", "aktiviteter").apply {
             parameters.append("ident", ident)
@@ -149,6 +185,10 @@ object LokaleKjenninger : Personer {
     }
 
     override suspend fun hendelse(meldingsreferanse: String, accessToken: String): String {
+        return "{}"
+    }
+
+    override suspend fun speilperson(fnr: String, accessToken: String): String {
         return "{}"
     }
 
