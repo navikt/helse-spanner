@@ -90,7 +90,7 @@ class Spleis(
     }
 
     override suspend fun speilperson(fnr: String, accessToken: String): String {
-        val url = URLBuilder(baseUrl).path("graphql").build()
+        val url = URLBuilder(baseUrl).path("v2", "graphql").build()
         val oboToken = token(accessToken, spleisClientId)
         val log = Log.logger(Personer::class.java)
 
