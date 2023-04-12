@@ -14,6 +14,7 @@ import io.ktor.features.*
 import io.ktor.http.*
 import kotlinx.coroutines.*
 import org.slf4j.LoggerFactory
+import java.net.URL
 
 val logger = LoggerFactory.getLogger(Spleis::class.java)
 
@@ -89,7 +90,7 @@ class Spleis(
     }
 
     override suspend fun speilperson(fnr: String, accessToken: String): String {
-        val url = URLBuilder(baseUrl).path("v2", "graphql").build()
+        val url = URLBuilder(baseUrl).path("graphql").build()
         val oboToken = token(accessToken, spleisClientId)
         val log = Log.logger(Personer::class.java)
 
@@ -98,11 +99,12 @@ class Spleis(
             .info("OBO token length")
         val response =
             try {
+                val query = URL("https://raw.githubusercontent.com/navikt/helse-spesialist/master/spesialist-api/src/main/resources/graphql/hentSnapshot.graphql").readText()
                 httpClient.post<HttpResponse>(url) {
                     header("Authorization", "Bearer $oboToken")
                     accept(ContentType.Application.Json)
                     body = """{
-            "query": "",
+            "query": "$query",
             "variables": {
               "fnr": "$fnr"
             },
