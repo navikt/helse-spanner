@@ -99,7 +99,7 @@ class Spleis(
             .info("OBO token length")
         val response =
             try {
-                val query = URL("https://raw.githubusercontent.com/navikt/helse-spesialist/master/spesialist-api/src/main/resources/graphql/hentSnapshot.graphql").readText()
+                val query = Spleis::class.java.getResource("hentSnapshotSpanner.graphql")?.readText()!!
                 httpClient.post<HttpResponse>(url) {
                     header("Authorization", "Bearer $oboToken")
                     accept(ContentType.Application.Json)

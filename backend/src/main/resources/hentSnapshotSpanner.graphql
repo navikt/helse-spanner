@@ -1,0 +1,245 @@
+fragment oppdrag on GraphQLOppdrag {
+    fagsystemId
+    tidsstempel
+    utbetalingslinjer {
+        tom
+        fom
+        grad
+        dagsats
+    }
+    simulering {
+        totalbelop
+        perioder {
+            fom
+            tom
+            utbetalinger {
+                detaljer {
+                    belop
+                    antallSats
+                    faktiskFom
+                    faktiskTom
+                    klassekode
+                    klassekodeBeskrivelse
+                    konto
+                    refunderesOrgNr
+                    sats
+                    tilbakeforing
+                    typeSats
+                    uforegrad
+                    utbetalingstype
+                }
+                feilkonto
+                forfall
+                utbetalesTilId
+                utbetalesTilNavn
+            }
+        }
+    }
+}
+
+fragment grunnlag on GraphQLVilkarsgrunnlag {
+    id
+    inntekter {
+        arbeidsgiver
+        omregnetArsinntekt {
+            belop
+            inntekterFraAOrdningen {
+                maned
+                sum
+            }
+            kilde
+            manedsbelop
+        }
+        sammenligningsgrunnlag {
+            belop
+            inntekterFraAOrdningen {
+                maned
+                sum
+            }
+        }
+        deaktivert
+    }
+    arbeidsgiverrefusjoner {
+        arbeidsgiver
+        refusjonsopplysninger {
+            fom
+            tom
+            belop
+            meldingsreferanseId
+        }
+    }
+    omregnetArsinntekt
+    sammenligningsgrunnlag
+    skjaeringstidspunkt
+    sykepengegrunnlag
+}
+
+query HentSnapshotSpanner($fnr: String!) {
+    person(fnr: $fnr) {
+        aktorId
+        arbeidsgivere {
+            organisasjonsnummer
+            ghostPerioder {
+                id
+                fom
+                tom
+                skjaeringstidspunkt
+                vilkarsgrunnlagId
+                deaktivert
+            }
+            generasjoner {
+                id
+                perioder {
+                    __typename
+                    erForkastet
+                    fom
+                    tom
+                    inntektstype
+                    opprettet
+                    periodetype
+                    periodetilstand
+                    skjaeringstidspunkt
+                    tidslinje {
+                        begrunnelser
+                        dato
+                        grad
+                        kilde {
+                            id
+                            type
+                        }
+                        sykdomsdagtype
+                        utbetalingsdagtype
+                        utbetalingsinfo {
+                            arbeidsgiverbelop
+                            inntekt
+                            personbelop
+                            refusjonsbelop
+                            totalGrad
+                            utbetaling
+                        }
+                    }
+                    hendelser {
+                        ... on GraphQLInntektsmelding {
+                            __typename
+                            beregnetInntekt
+                            id
+                            mottattDato
+                            type
+                        }
+                        ... on GraphQLSoknadArbeidsgiver {
+                            __typename
+                            fom
+                            id
+                            rapportertDato
+                            sendtArbeidsgiver
+                            tom
+                            type
+                        }
+                        ... on GraphQLSoknadNav {
+                            __typename
+                            fom
+                            id
+                            rapportertDato
+                            sendtNav
+                            tom
+                            type
+                        }
+                        ... on GraphQLSykmelding {
+                            __typename
+                            fom
+                            id
+                            rapportertDato
+                            tom
+                            type
+                        }
+                    }
+                    vedtaksperiodeId
+                    ... on GraphQLUberegnetPeriode {
+                        __typename
+                        id
+                    }
+                    ... on GraphQLBeregnetPeriode {
+                        __typename
+                        id
+                        aktivitetslogg {
+                            alvorlighetsgrad
+                            melding
+                            tidsstempel
+                            vedtaksperiodeId
+                        }
+                        beregningId
+                        forbrukteSykedager
+                        gjenstaendeSykedager
+                        maksdato
+                        periodevilkar {
+                            alder {
+                                alderSisteSykedag
+                                oppfylt
+                            }
+                            soknadsfrist {
+                                oppfylt
+                                sendtNav
+                                soknadFom
+                                soknadTom
+                            }
+                            sykepengedager {
+                                forbrukteSykedager
+                                gjenstaendeSykedager
+                                maksdato
+                                oppfylt
+                                skjaeringstidspunkt
+                            }
+                        }
+                        utbetaling {
+                            id
+                            arbeidsgiverFagsystemId
+                            arbeidsgiverNettoBelop
+                            personFagsystemId
+                            personNettoBelop
+                            statusEnum
+                            typeEnum
+                            vurdering {
+                                automatisk
+                                godkjent
+                                ident
+                                tidsstempel
+                            }
+                            personoppdrag {
+                                ...oppdrag
+                            }
+                            arbeidsgiveroppdrag {
+                                ...oppdrag
+                            }
+                        }
+                        vilkarsgrunnlagId
+                    }
+                }
+            }
+        }
+        dodsdato
+        fodselsnummer
+        versjon
+        vilkarsgrunnlag {
+            vilkarsgrunnlagtype
+            ...grunnlag
+            ... on GraphQLInfotrygdVilkarsgrunnlag {
+                __typename
+            }
+            ... on GraphQLSpleisVilkarsgrunnlag {
+                __typename
+                antallOpptjeningsdagerErMinst
+                avviksprosent
+                grunnbelop
+                sykepengegrunnlagsgrense {
+                    grunnbelop
+                    grense
+                    virkningstidspunkt
+                }
+                oppfyllerKravOmMedlemskap
+                oppfyllerKravOmMinstelonn
+                oppfyllerKravOmOpptjening
+                opptjeningFra
+            }
+        }
+    }
+}
