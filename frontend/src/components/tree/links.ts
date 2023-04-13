@@ -5,6 +5,6 @@ export const tilstandsmaskinSporingUrl = (id: string) => `https://${sporingHostn
 export const personSporingUrl = (aktørId: string) => `https://${sporingHostname}/person/${aktørId}`
 
 const speilHostname = window.location.origin.includes('dev')
-    ? 'speil.dev.intern.nav.no'
+    ? 'speil.intern.dev.nav.no'
     : 'speil.intern.nav.no'
 export const speilUrl = (aktørId: string) => `https://${speilHostname}/person/${aktørId}`
