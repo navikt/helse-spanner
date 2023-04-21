@@ -6,9 +6,9 @@ import styles from './Hendelse.module.css'
 import { Copy, FileContent } from '@navikt/ds-icons'
 import { Aktivitet } from './Aktivitet'
 import commonStyles from '../../Common.module.css'
-import {Hendelsekontekst} from '../../../state/model'
+import { Hendelsekontekst } from '../../../state/model'
 import { writeToClipboard } from '../../../utils'
-import { somNorskDato } from '../../i18n'
+import { somNorskDato, somNorskKlokkeslett } from '../../i18n'
 
 export const Hendelse = React.memo(({ kontekst }: { kontekst: Hendelsekontekst }) => {
     const aktiviteter = kontekst.aktiviteter
@@ -58,7 +58,12 @@ export const Hendelse = React.memo(({ kontekst }: { kontekst: Hendelsekontekst }
                     isError && commonStyles.Error
                 )}
             >
-                <div className={classNames(styles.DatoText, styles.SkriftMedNestenLikBredde)}>{somNorskDato(aktiviteter[0].tidsstempel)}</div>
+                <div
+                    title={'Kl. ' + somNorskKlokkeslett(aktiviteter[0].tidsstempel)}
+                    className={classNames(styles.DatoText, styles.SkriftMedNestenLikBredde, styles.FokusPåHover)}
+                >
+                    {somNorskDato(aktiviteter[0].tidsstempel)}
+                </div>
 
                 <button onClick={toggleSelected} className={styles.Hendelsetype}>
                     {kontekst.kontekstType}
