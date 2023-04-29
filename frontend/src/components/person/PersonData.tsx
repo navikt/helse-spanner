@@ -16,13 +16,11 @@ export const PersonData = (props: FetchPersonProps) => {
     try {
         const request = personRequestFactory(props.personId, backend)
         const { isLoading, isError, data, error } = useQuery(['person', props.personId, props.cacheBuster], request)
-        if (isLoading) {
-            return <Spinner />
-        }
-        if (isError) {
-            return <Feilmelding feil={error} />
-        }
-        return (
+        return isLoading ? (
+            <Spinner />
+        ) : isError ? (
+            <Feilmelding feil={error} />
+        ) : (
             <PersonContext.Provider value={data}>
                 <PersonView />
             </PersonContext.Provider>
