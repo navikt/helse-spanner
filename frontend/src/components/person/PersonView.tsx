@@ -9,7 +9,7 @@ import { useResetRecoilState } from 'recoil'
 import { åpneHendelseDokumentState } from '../../state/state'
 import { usePerson } from '../../state/contexts'
 
-export const PersonView = React.memo(() => {
+export const PersonView = () => {
     const resetÅpneHendelser = useResetRecoilState(åpneHendelseDokumentState)
     const person = usePerson()
     useEffect(() => {
@@ -27,5 +27,5 @@ export const PersonView = React.memo(() => {
             <Content />
         </div>
     )
-})
+}
 PersonView.displayName = 'PersonView'

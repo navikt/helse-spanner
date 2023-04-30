@@ -15,19 +15,19 @@ const _ingressView = (vedtaksperiodeId: string) => {
         </div>
     )
 }
-const Vedtaksperiode = React.memo(() => {
+const Vedtaksperiode = () => {
     const vedtaksperiode = useVedtak()
     return _ingressView(vedtaksperiode.id)
-})
+}
 Vedtaksperiode.displayName = 'IngressView.Vedtaksperiode'
 
-const ForkastetVedtaksperiode = React.memo(() => {
+const ForkastetVedtaksperiode = () => {
     const vedtaksperiode = useForkastetVedtaksperiode()
     return _ingressView(vedtaksperiode.id)
-})
+}
 ForkastetVedtaksperiode.displayName = 'IngressView.ForkastetVedtaksperiode'
 
-const Person = React.memo(() => {
+const Person = () => {
     const p = usePerson()
     return (
         <div>
@@ -36,13 +36,13 @@ const Person = React.memo(() => {
             </a>
         </div>
     )
-})
+}
 Person.displayName = 'IngressView.Person'
 
-export const IngressView = React.memo(() => {
+export const IngressView = () => {
     return (
         <ContentCategory displayName={ContentView.Ingress} {...{ Person, Vedtaksperiode, ForkastetVedtaksperiode }} />
     )
-})
+}
 
 IngressView.displayName = 'IngressView'

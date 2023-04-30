@@ -30,7 +30,7 @@ const SporingLenke: React.FC<{ url: string }> = ({ url }) => (
     </a>
 )
 
-export const PersonTree = React.memo(() => {
+export const PersonTree = () => {
     const person = usePerson()
 
     const setExpandedArbeidsgivere = useSetRecoilState(expandedArbeidsgivereState)
@@ -66,7 +66,7 @@ export const PersonTree = React.memo(() => {
             ))}
         </div>
     )
-})
+}
 PersonTree.displayName = 'PersonTree'
 
 const useSelect = () => {
@@ -94,7 +94,7 @@ interface SelectableTreeNodeProps extends React.HTMLAttributes<HTMLDivElement> {
     indent: number
 }
 
-const SelectableTreeNode = React.memo<SelectableTreeNodeProps>(({ className, indent = 0, children, ...rest }) => {
+const SelectableTreeNode = ({ className, indent = 0, children, ...rest }: SelectableTreeNodeProps) => {
     const selected = useIsSelected()
     const select = useSelect()
     return (
@@ -107,10 +107,10 @@ const SelectableTreeNode = React.memo<SelectableTreeNodeProps>(({ className, ind
             {children}
         </div>
     )
-})
+}
 SelectableTreeNode.displayName = 'SelectableTreeNode'
 
-const ArbeidsgiverNode = React.memo(() => {
+const ArbeidsgiverNode = () => {
     const arbeidsgiver = useArbeidsgiver()
 
     const [expandedArbeidsgivere, setExpandedArbeidsgivere] = useRecoilState(expandedArbeidsgivereState)
@@ -148,7 +148,7 @@ const ArbeidsgiverNode = React.memo(() => {
             )}
         </>
     )
-})
+}
 ArbeidsgiverNode.displayName = 'ArbeidsgiverNode'
 
 const ArbeidsgiverSummary = (): JSX.Element => {
@@ -170,7 +170,7 @@ const ArbeidsgiverSummary = (): JSX.Element => {
     )
 }
 
-const Vedtaksperioder = React.memo(() => {
+const Vedtaksperioder = () => {
     const arbeidsgiver = useArbeidsgiver()
     let vedtaksperioder: [JSX.Element, Date][] = arbeidsgiver.vedtaksperioder.map((vedtak) => [
         <VedtakContext.Provider value={vedtak} key={vedtak.id}>
@@ -188,19 +188,19 @@ const Vedtaksperioder = React.memo(() => {
         compareAsc(a, b)
     )
     return <>{sorterteVedtak.map(([vedtak]) => vedtak)}</>
-})
+}
 Vedtaksperioder.displayName = 'Vedtaksperioder'
 
-const ExpandToggle = React.memo<React.PropsWithoutRef<{ onClick: () => void; isExpanded: boolean }>>((props) => {
+const ExpandToggle = (props: React.PropsWithoutRef<{ onClick: () => void; isExpanded: boolean }>) => {
     return (
         <button onClick={props.onClick} className={styles.ExpandArbeidsgiverButton}>
             {props.isExpanded ? <Expand /> : <Next />}
         </button>
     )
-})
+}
 ExpandToggle.displayName = 'ExpandToggle'
 
-const VedtaksNode = React.memo(() => {
+const VedtaksNode = () => {
     const vedtak = useVedtak()
     const [fom, tom] = [vedtak.fom, vedtak.tom].map(somNorskDato)
     return (
@@ -214,10 +214,10 @@ const VedtaksNode = React.memo(() => {
             <span className={styles.TilstandText}>{vedtak.tilstand}</span>
         </SelectableTreeNode>
     )
-})
+}
 VedtaksNode.displayName = 'VedtaksNode'
 
-const ForkastetVedtaksNode = React.memo(() => {
+const ForkastetVedtaksNode = () => {
     const hideForkastedeVedtak = useRecoilValue(hideForkastedeVedtakState)
     if (hideForkastedeVedtak) {
         return null
@@ -232,10 +232,10 @@ const ForkastetVedtaksNode = React.memo(() => {
             <span className={styles.TilstandText}>{vedtak.tilstand}</span>
         </SelectableTreeNode>
     )
-})
+}
 ForkastetVedtaksNode.displayName = 'ForkastetVedtaksNode'
 
-const Utbetalinger = React.memo(() => {
+const Utbetalinger = () => {
     const arbeidsgiver = useArbeidsgiver()
     let utbetalinger: [JSX.Element, Date][] = arbeidsgiver.utbetalinger.map((utbetaling) => [
         <UtbetalingContext.Provider value={utbetaling} key={utbetaling.id}>
@@ -246,10 +246,10 @@ const Utbetalinger = React.memo(() => {
 
     const sorterteUtbetalinger = [...utbetalinger].sort(([_, a], [ignore, b]) => compareAsc(a, b))
     return <>{sorterteUtbetalinger.map(([utbetaling]) => utbetaling)}</>
-})
-Vedtaksperioder.displayName = 'Vedtaksperioder'
+}
+Utbetalinger.displayName = 'Utbetalinger'
 
-const UtbetalingsNode = React.memo(() => {
+const UtbetalingsNode = () => {
     const utbetaling = useUtbetaling()
     const [fom, tom] = [utbetaling.fom, utbetaling.tom].map(somNorskDato)
     return (
@@ -263,9 +263,9 @@ const UtbetalingsNode = React.memo(() => {
             <span className={styles.TilstandText}>{utbetaling.status}</span>
         </SelectableTreeNode>
     )
-})
+}
 
-const ForkastetUtbetalingNode = React.memo(() => {
+const ForkastetUtbetalingNode = () => {
     const utbetaling = useUtbetaling()
     const [fom, tom] = [utbetaling.fom, utbetaling.tom].map(somNorskDato)
     return (
@@ -279,4 +279,4 @@ const ForkastetUtbetalingNode = React.memo(() => {
             <span className={styles.TilstandText}>{utbetaling.status}</span>
         </SelectableTreeNode>
     )
-})
+}

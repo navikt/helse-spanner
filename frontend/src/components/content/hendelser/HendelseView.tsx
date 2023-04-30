@@ -11,20 +11,20 @@ import {
 import { ContentView } from '../../../state/state'
 import { Hendelser } from './Hendelser'
 import { ContentCategory } from '../ContentCategory'
-import {AktivitetsloggV2, Hendelsekontekst} from '../../../state/model'
-import {KonteksterDto, KontekstMapV2Dto, PersonDto} from '../../../state/dto'
+import { AktivitetsloggV2, Hendelsekontekst } from '../../../state/model'
+import { KontekstMapV2Dto, PersonDto } from '../../../state/dto'
 import parseISO from 'date-fns/parseISO'
 import compareAsc from 'date-fns/compareAsc'
 import { hasValue } from '../../../utils'
 
-const Person = React.memo(() => {
+const Person = () => {
     const aktivitetslogg = useAktivitetslogg()
     const hendelser = hendelserAssosiertMedKontekst(aktivitetslogg, () => true)
     return <Hendelser hendelser={hendelser} />
-})
+}
 Person.displayName = 'HendelseView.Person'
 
-const Arbeidsgiver = React.memo(() => {
+const Arbeidsgiver = () => {
     const aktivitetslogg = useAktivitetslogg()
     const arbeidsgiver = useArbeidsgiver()
     const hendelser = hendelserAssosiertMedKontekst(aktivitetslogg, (kontekstType, kontekst) =>
@@ -33,10 +33,10 @@ const Arbeidsgiver = React.memo(() => {
         false
     )
     return <Hendelser hendelser={hendelser} />
-})
+}
 Arbeidsgiver.displayName = 'HendelseView.Arbeidsgiver'
 
-const Vedtaksperiode = React.memo(() => {
+const Vedtaksperiode = () => {
     const vedtaksperiode = useVedtak()
     const aktivitetslogg = useAktivitetslogg()
     const hendelser = hendelserAssosiertMedKontekst(
@@ -47,10 +47,10 @@ const Vedtaksperiode = React.memo(() => {
     )
 
     return <Hendelser hendelser={hendelser} />
-})
+}
 Vedtaksperiode.displayName = 'HendelseView.Vedtaksperiode'
 
-const ForkastetVedtaksperiode = React.memo(() => {
+const ForkastetVedtaksperiode = () => {
     const vedtaksperiode = useForkastetVedtaksperiode()
     const aktivitetslogg = useAktivitetslogg()
 
@@ -62,10 +62,10 @@ const ForkastetVedtaksperiode = React.memo(() => {
     )
 
     return <Hendelser hendelser={hendelser} />
-})
-Vedtaksperiode.displayName = 'HendelseView.ForkastetVedtaksperiode'
+}
+ForkastetVedtaksperiode.displayName = 'HendelseView.ForkastetVedtaksperiode'
 
-const Utbetaling = React.memo(() => {
+const Utbetaling = () => {
     const utbetaling = useUtbetaling()
     const aktivitetslogg = useAktivitetslogg()
 
@@ -76,10 +76,10 @@ const Utbetaling = React.memo(() => {
     )
 
     return <Hendelser hendelser={hendelser} />
-})
-Vedtaksperiode.displayName = 'HendelseView.Utbetaling'
+}
+Utbetaling.displayName = 'HendelseView.Utbetaling'
 
-export const HendelseView = React.memo(() => {
+export const HendelseView = () => {
     const person = usePerson()
     const aktivitetslogg: AktivitetsloggV2 = React.useMemo(() => aktivitetsloggFraPerson(person), [person])
     return (
@@ -90,9 +90,8 @@ export const HendelseView = React.memo(() => {
             />
         </AktivitetsloggContext.Provider>
     )
-})
-
-Hendelser.displayName = 'HendelseView'
+}
+HendelseView.displayName = 'HendelseView'
 
 function aktivitetsloggFraPerson(person: PersonDto): AktivitetsloggV2 {
     let alleAktiviteter = person.aktivitetsloggV2?.aktiviteter ?? [];

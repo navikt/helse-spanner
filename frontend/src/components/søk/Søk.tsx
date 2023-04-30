@@ -6,7 +6,7 @@ export type SøkProps = {
     onSearch: (personId: string | undefined) => void
 }
 
-export const Søk = React.memo((props: SøkProps) => {
+export const Søk = (props: SøkProps) => {
     const [søketekst, setSøketekst] = React.useState('')
     const sendSøk = () => {
         if (søketekst.trim() === '') {
@@ -32,5 +32,5 @@ export const Søk = React.memo((props: SøkProps) => {
             </button>
         </div>
     )
-})
+}
 Søk.displayName = 'Søk'

@@ -10,7 +10,7 @@ import { Hendelsekontekst } from '../../../state/model'
 import { writeToClipboard } from '../../../utils'
 import { somNorskDato, somNorskKlokkeslett } from '../../i18n'
 
-export const Hendelse = React.memo(({ kontekst }: { kontekst: Hendelsekontekst }) => {
+export const Hendelse = ({ kontekst }: { kontekst: Hendelsekontekst }) => {
     const aktiviteter = kontekst.aktiviteter
     let meldingsReferanseId = ''
     if (kontekst.kontekstMap.meldingsreferanseId != undefined) {
@@ -93,6 +93,6 @@ export const Hendelse = React.memo(({ kontekst }: { kontekst: Hendelsekontekst }
             )}
         </>
     )
-})
+}
 
 Hendelse.displayName = 'Hendelse'

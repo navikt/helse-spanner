@@ -4,7 +4,7 @@ import styles from './PersonHeader.module.css'
 import { usePerson } from '../../state/contexts'
 import { speilUrl } from '../tree/links'
 
-export const PersonHeader = React.memo(() => {
+export const PersonHeader = () => {
     const person = usePerson()
     return (
         <div className={styles.Header}>
@@ -30,5 +30,5 @@ export const PersonHeader = React.memo(() => {
             </dl>
         </div>
     )
-})
+}
 PersonHeader.displayName = 'PersonHeader'

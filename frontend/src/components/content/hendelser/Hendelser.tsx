@@ -13,7 +13,7 @@ const erPåminnelse = (kontekst: Hendelsekontekst) =>
 
 const harFeil = (kontekst: Hendelsekontekst) => kontekst.harError || kontekst.harWarning
 
-export const Hendelser = React.memo(({ hendelser }: { hendelser: Hendelsekontekst[] }) => {
+export const Hendelser = ({ hendelser }: { hendelser: Hendelsekontekst[] }) => {
     const [visBareFeil, setVisBareFeil] = useRecoilState(visBareFeilState)
     const [skjulPåminnelser, setSkjulPåminnelser] = useRecoilState(skjulPåminnelserState)
     const toggleVisBareFeil = () => setVisBareFeil(!visBareFeil)
@@ -43,6 +43,5 @@ export const Hendelser = React.memo(({ hendelser }: { hendelser: Hendelsekonteks
             })}
         </>
     )
-})
-
+}
 Hendelser.displayName = 'Hendelser'

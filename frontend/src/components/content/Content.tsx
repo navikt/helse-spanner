@@ -11,7 +11,7 @@ import { Card } from '../Card'
 import { HendelseDokumentView } from './hendelseDokument/HendelseDokumentView'
 import { IngressView } from './IngressView'
 
-export const Content = React.memo(() => {
+export const Content = () => {
     return (
         <div style={{ gridArea: 'content' }}>
             <div style={{ marginLeft: '0.6rem' }}>
@@ -27,10 +27,10 @@ export const Content = React.memo(() => {
             </div>
         </div>
     )
-})
+}
 Content.displayName = 'Content'
 
-const ViewButton: React.FC<{ view: ContentView }> = React.memo(({ view }) => {
+const ViewButton: React.FC<{ view: ContentView }> = ({ view }) => {
     const [displayViews, setDisplayViews] = useRecoilState(displayViewState)
     const isSelected = displayViews.includes(view)
 
@@ -59,9 +59,9 @@ const ViewButton: React.FC<{ view: ContentView }> = React.memo(({ view }) => {
             {view}
         </button>
     )
-})
+}
 ViewButton.displayName = 'ViewButton'
-export const ShowIfSelected: React.FC<PropsWithChildren<any>> = React.memo(({ children }) => {
+export const ShowIfSelected: React.FC<PropsWithChildren<any>> = ({ children }) => {
     const selectedColor = useIsSelected()
     const onlySelected = useIsOnlySelected()
     if (!selectedColor) return null
@@ -70,5 +70,5 @@ export const ShowIfSelected: React.FC<PropsWithChildren<any>> = React.memo(({ ch
             {children}
         </Card>
     )
-})
+}
 ShowIfSelected.displayName = 'ShowIfSelected'
