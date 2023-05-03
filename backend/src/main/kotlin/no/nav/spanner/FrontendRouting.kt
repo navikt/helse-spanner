@@ -13,6 +13,12 @@ internal fun Route.frontendRouting() {
             ContentType.Text.Html
         )
     }
+    get("/person/*") {
+        call.respondText(
+            this::class.java.classLoader.getResource("static/index.html")!!.readText(),
+            ContentType.Text.Html
+        )
+    }
     static("/") {
         resources("static/")
     }

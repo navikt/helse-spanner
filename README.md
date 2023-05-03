@@ -10,7 +10,7 @@ Spørsmål knyttet til koden eller prosjektet kan stilles som issues her på Git
 Interne henvendelser kan sendes via Slack i kanalen #område-helse.
 
 ## Lokal utvikling
-For å teste lokalt med OAuth, audit-logging og ekte kall til backend
+Det er mulig å teste lokalt med OAuth, audit-logging og ekte kall til backend.
 
 #### Hva trenger du?
 - docker, docker compose
@@ -18,4 +18,8 @@ For å teste lokalt med OAuth, audit-logging og ekte kall til backend
 1. `./gradlew build`
 2. `docker compose up` (eller `docker-compose up`)
 
-Da når du spanner på http://localhost:8080/spanner
+Da når du spanner på http://localhost:8080.
+
+Hvis du har gjort endringer i backend-koden må du selv sørge for bygging av nytt image, enten eksplisitt med
+`docker build .` eller ved å slette det forrige imaget med
+`docker image rm --force helse-spanner-spanner`.
