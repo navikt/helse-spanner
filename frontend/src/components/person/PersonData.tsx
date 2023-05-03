@@ -5,17 +5,15 @@ import { PersonView } from './PersonView'
 import { PersonContext } from '../../state/contexts'
 import { Spinner } from '../Spinner'
 import { Feilmelding } from '../Feilmelding'
+import { useParams } from 'react-router-dom'
 
-export type FetchPersonProps = {
-    personId: string
-    cacheBuster: number
-}
-
-export const PersonData = (props: FetchPersonProps) => {
+export const PersonData = () => {
+    const { personId } = useParams<string>()
+    if (personId === undefined) return null
     const backend = useBackend()
     try {
-        const request = personRequestFactory(props.personId, backend)
-        const { isLoading, isError, data, error } = useQuery(['person', props.personId, props.cacheBuster], request)
+        const request = personRequestFactory(personId, backend)
+        const { isLoading, isError, data, error } = useQuery(['person', personId], request)
         return isLoading ? (
             <Spinner />
         ) : isError ? (

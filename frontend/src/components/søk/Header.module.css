@@ -8,6 +8,10 @@
     align-content: center;
 }
 
+.Header a {
+    text-decoration: none
+}
+
 .SpannSpan {
     font-size: xxx-large;
 }

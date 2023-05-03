@@ -4,24 +4,23 @@ import { PersonData } from './person/PersonData'
 import { Header } from './søk/Header'
 import styles from './App.module.css'
 import classNames from 'classnames'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+
+const EmptyState = () => <></>
 
 export const App = () => {
-    const [searchData, setSearchData] = React.useState<{ searchTerm: string | undefined; cacheBuster: number }>({
-        searchTerm: undefined,
-        cacheBuster: 0,
-    })
-    const updateSearchTerms = (searchTerm: string | undefined) => setSearchData({ searchTerm, cacheBuster: Date.now() })
     return (
-        <div className="App">
+        <BrowserRouter>
             <Header>
-                <Søk onSearch={updateSearchTerms} />
+                <Søk />
             </Header>
             <div className={classNames(styles.App)}>
-                {searchData.searchTerm && (
-                    <PersonData personId={searchData.searchTerm} cacheBuster={searchData.cacheBuster} />
-                )}
+                <Routes>
+                    <Route path="/person/:personId" element={<PersonData />} />
+                    <Route index path="/" element={<EmptyState />} />
+                </Routes>
             </div>
-        </div>
+        </BrowserRouter>
     )
 }
 
