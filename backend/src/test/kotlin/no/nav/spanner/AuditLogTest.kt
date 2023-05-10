@@ -10,10 +10,10 @@ class AuditLogTest {
 
     @Test
     fun auditLogVerifiedFnr() {
-        // denne testen kan feile om klokken tikker ett sekund fremover i løpet av eksekveringen...
-        val end = now().toEpochSecond()
+        val nå = now()
+        val end = nå.toInstant().toEpochMilli()
         val expected = "CEF:0|Spanner|auditLog|1.0|audit:access|Sporingslogg|INFO|end=$end duid=01010012345 suid=X000000 request=/api/person"
-        val actual = AuditLogger("X000000").lagMelding(AuditLogger.Operasjon.LES, 1010012345L, null, "/api/person")
+        val actual = AuditLogger("X000000").lagMelding(AuditLogger.Operasjon.LES, 1010012345L, null, "/api/person", nå)
 
         Assertions.assertEquals(expected, actual)
     }
@@ -21,19 +21,19 @@ class AuditLogTest {
     @Test
     fun auditLogVerifiedAktørId() {
         val meldingsreferanse = UUID.randomUUID().toString()
-        // denne testen kan feile om klokken tikker ett sekund fremover i løpet av eksekveringen...
-        val end = now().toEpochSecond()
+        val nå = now()
+        val end = nå.toInstant().toEpochMilli()
         val expected = "CEF:0|Spanner|auditLog|1.0|audit:update|Sporingslogg|INFO|end=$end duid=1000000000000 suid=X000000 request=/api/hendelse/$meldingsreferanse"
-        val actual = AuditLogger("X000000").lagMelding(AuditLogger.Operasjon.SKRIV, null, 1000000000000L, "/api/hendelse/$meldingsreferanse")
+        val actual = AuditLogger("X000000").lagMelding(AuditLogger.Operasjon.SKRIV, null, 1000000000000L, "/api/hendelse/$meldingsreferanse", nå)
 
         Assertions.assertEquals(expected, actual)
     }
     @Test
     fun `om både fnr og aktørId er oppgitt, logger vi fnr`() {
-        // denne testen kan feile om klokken tikker ett sekund fremover i løpet av eksekveringen...
-        val end = now().toEpochSecond()
+        val nå = now()
+        val end = nå.toInstant().toEpochMilli()
         val expected = "CEF:0|Spanner|auditLog|1.0|audit:access|Sporingslogg|INFO|end=$end duid=01010012345 suid=X000000 request=/api/person"
-        val actual = AuditLogger("X000000").lagMelding(AuditLogger.Operasjon.LES, 1010012345L, 1000000000000L, "/api/person")
+        val actual = AuditLogger("X000000").lagMelding(AuditLogger.Operasjon.LES, 1010012345L, 1000000000000L, "/api/person", nå)
 
         Assertions.assertEquals(expected, actual)
     }

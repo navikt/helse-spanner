@@ -7,6 +7,7 @@ import io.ktor.http.HttpMethod.Companion.Put
 import io.ktor.request.*
 import no.nav.spanner.AuditLogger.Operasjon.*
 import org.slf4j.LoggerFactory
+import java.time.ZonedDateTime
 import java.time.ZonedDateTime.now
 
 internal class AuditLogger(private val brukerIdent: String) {
@@ -20,15 +21,17 @@ internal class AuditLogger(private val brukerIdent: String) {
         val message = call.request.path()
         val fnr = call.request.headers[IdType.FNR.header]
         val aktorId = call.request.headers[IdType.AKTORID.header]
-        val melding = lagMelding(operasjon, fnr?.toLong(), aktorId?.toLong(), message)
+        val melding = lagMelding(operasjon, fnr?.toLong(), aktorId?.toLong(), message, now())
         logger.info(melding)
     }
 
     internal fun lagMelding(operasjon: Operasjon = LES,
                             fnr: Long?,
                             aktorId: Long?,
-                            path: String): String {
-        val now = now().toEpochSecond()
+                            path: String,
+                            tidspunkt: ZonedDateTime
+    ): String {
+        val now = tidspunkt.toInstant().toEpochMilli()
         val subject = fnr?.toString()?.padStart(11, '0') ?: aktorId
         val duidStr = subject?.let { " duid=$it" } ?: ""
         return "CEF:0|Spanner|auditLog|1.0|${operasjon.logString}|Sporingslogg|INFO|end=$now$duidStr suid=$brukerIdent request=$path"
