@@ -2,7 +2,7 @@ import java.nio.file.Paths
 
 val jacksonVersion = "2.12.5"
 val junitJupiterVersion = "5.7.2"
-val ktorVersion = "1.6.8"
+val ktorVersion = "2.0.0"
 val tokenValidatorVersion = "1.3.8"
 
 plugins {
@@ -15,15 +15,25 @@ repositories {
 
 dependencies {
     implementation("io.ktor:ktor-server-core:$ktorVersion")
+    implementation("io.ktor:ktor-server-call-id:$ktorVersion")
+    implementation("io.ktor:ktor-server-forwarded-header:$ktorVersion")
+    implementation("io.ktor:ktor-server-status-pages:$ktorVersion")
     implementation("io.ktor:ktor-server-cio:$ktorVersion")
+    implementation("io.ktor:ktor-server-cors:$ktorVersion")
+    implementation("io.ktor:ktor-server-sessions:$ktorVersion")
+    implementation("io.ktor:ktor-server-content-negotiation:$ktorVersion")
+    implementation("io.ktor:ktor-server-auth:$ktorVersion")
+    implementation("io.ktor:ktor-server-auth-jwt:$ktorVersion")
+
     implementation("io.ktor:ktor-client-cio:$ktorVersion")
     implementation("io.ktor:ktor-client-apache:$ktorVersion")
-    implementation("io.ktor:ktor-client-jackson:$ktorVersion")
-    implementation("io.ktor:ktor-jackson:$ktorVersion")
+    implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
+
+    implementation("io.ktor:ktor-serialization-jackson:$ktorVersion")
+    implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
+
     implementation("no.nav.security:token-validation-ktor:$tokenValidatorVersion")
-    implementation("io.ktor:ktor-server-sessions:$ktorVersion")
-    implementation("io.ktor:ktor-auth:$ktorVersion")
-    implementation("io.ktor:ktor-auth-jwt:$ktorVersion")
+
     implementation("com.papertrailapp:logback-syslog4j:1.0.0")
     implementation("com.natpryce:konfig:1.6.10.0")
 

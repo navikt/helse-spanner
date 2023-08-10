@@ -6,12 +6,15 @@ import com.fasterxml.jackson.databind.util.RawValue
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import io.ktor.client.*
 import io.ktor.client.engine.cio.*
-import io.ktor.client.features.*
-import io.ktor.client.features.json.*
+import io.ktor.client.plugins.*
+import io.ktor.client.plugins.contentnegotiation.*
+import io.ktor.serialization.kotlinx.json.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
-import io.ktor.features.*
+import io.ktor.server.plugins.*
 import io.ktor.http.*
+import io.ktor.serialization.jackson.*
+import io.ktor.util.*
 import kotlinx.coroutines.*
 import org.slf4j.LoggerFactory
 
@@ -35,8 +38,8 @@ class Spleis(
         engine {
             requestTimeout = 60000
         }
-        install(JsonFeature) {
-            serializer = JacksonSerializer {
+        install(ContentNegotiation) {
+            jackson {
                 registerModule(JavaTimeModule())
             }
         }
@@ -53,7 +56,8 @@ class Spleis(
     }
 
     override suspend fun person(id: String, idType: IdType, accessToken: String): String {
-        val url = URLBuilder(baseUrl).path("api", "person-json").build()
+        val url = URLBuilder(baseUrl).apply { path("api", "person-json") }.build()
+
         val oboToken = token(accessToken, spleisClientId)
         val log = Log.logger(Personer::class.java)
 
@@ -67,7 +71,7 @@ class Spleis(
                 .info("OBO token length")
             val response =
                 try {
-                    httpClient.get<HttpResponse>(url) {
+                    httpClient.get(url) {
                         header("Authorization", "Bearer $oboToken")
                         header(idType.header, id)
                         accept(ContentType.Application.Json)
@@ -82,14 +86,15 @@ class Spleis(
             log
                 .response(response)
                 .info("Response from spleis")
-            val node = objectMapper.readTree(response.readText()) as ObjectNode
+            val node = objectMapper.readTree(response.bodyAsText()) as ObjectNode
             node.putRawValue("aktivitetsloggV2", RawValue(aktivitetslogg.await()))
             node.toString()
         }
     }
 
+    @OptIn(InternalAPI::class)
     override suspend fun speilperson(fnr: String, accessToken: String): String {
-        val url = URLBuilder(baseUrl).path("graphql").build()
+        val url = URLBuilder(baseUrl).apply { path("graphql") }.build()
         val oboToken = token(accessToken, spleisClientId)
         val log = Log.logger(Personer::class.java)
 
@@ -98,7 +103,7 @@ class Spleis(
             .info("OBO token length")
         val response =
             try {
-                httpClient.post<HttpResponse>(url) {
+                httpClient.post(url) {
                     header("Authorization", "Bearer $oboToken")
                     accept(ContentType.Application.Json)
                     body = """{
@@ -119,12 +124,13 @@ class Spleis(
         log
             .response(response)
             .info("Response from spleis")
-        val node = objectMapper.readTree(response.readText()) as ObjectNode
+        val node = objectMapper.readTree(response.bodyAsText()) as ObjectNode
         return node.toString()
     }
 
     private suspend fun aktivitetslogg(accessToken: String, ident: String): String? {
-        val url = URLBuilder(sparsomBaseUrl).path("api", "aktiviteter").apply {
+        val url = URLBuilder(sparsomBaseUrl).apply {
+            path("api", "aktiviteter")
             parameters.append("ident", ident)
         }.build()
         val oboToken = token(accessToken, sparsomClientId)
@@ -133,28 +139,28 @@ class Spleis(
             .sensitivt("oboTokenLength", oboToken.length)
             .info("OBO token length")
         try {
-            val response = httpClient.get<HttpResponse>(url) {
+            val response = httpClient.get(url) {
                 header("Authorization", "Bearer $oboToken")
                 accept(ContentType.Application.Json)
             }
             log
                 .response(response)
                 .info("Response from sparsom")
-            return response.readText()
+            return response.bodyAsText()
         } catch (e : ClientRequestException) {
             return null
         }
     }
 
     override suspend fun hendelse(meldingsreferanse: String, accessToken: String): String {
-     val url = URLBuilder(baseUrl).path("api", "hendelse-json", meldingsreferanse).build()
+     val url = URLBuilder(baseUrl).apply { path("api", "hendelse-json", meldingsreferanse) }.build()
         val oboToken = token(accessToken, spleisClientId)
         val log = Log.logger(Personer::class.java)
         log
             .sensitivt("oboTokenLength", oboToken.length)
             .info("Retreiving on behalf of token")
         val response = try {
-        httpClient.get<HttpResponse>(url) {
+        httpClient.get(url) {
             header("Authorization", "Bearer $oboToken")
             accept(ContentType.Application.Json)
         }
@@ -167,7 +173,7 @@ class Spleis(
         log
             .response(response)
             .info("Response from spleis")
-        return response.readText()
+        return response.bodyAsText()
     }
 
 

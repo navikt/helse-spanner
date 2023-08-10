@@ -4,10 +4,12 @@ import com.fasterxml.jackson.module.kotlin.readValue
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.engine.apache.*
-import io.ktor.client.features.json.*
+import io.ktor.client.plugins.contentnegotiation.*
+import io.ktor.serialization.kotlinx.json.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
+import io.ktor.serialization.jackson.*
 import io.ktor.server.testing.*
 import kotlinx.coroutines.runBlocking
 import no.nav.security.mock.oauth2.MockOAuth2Server
@@ -33,11 +35,11 @@ class E2ETest {
         val httpClient = HttpClient(Apache) {
             followRedirects = false
             this.expectSuccess = false
-            install(JsonFeature) {
-                serializer = JacksonSerializer()
+            install(ContentNegotiation) {
+                jackson()
             }
         }
-        val authResponse = runBlocking { httpClient.get<HttpResponse>(loginLocation).receive<HttpResponse>() }
+        val authResponse = runBlocking { httpClient.get(loginLocation).body<HttpResponse>() }
         assertEquals(HttpStatusCode.Found, authResponse.status)
         val authLocation = authResponse.headers["location"]!!
         handleRequest(HttpMethod.Get, authLocation.removePrefix("http://localhost")).response

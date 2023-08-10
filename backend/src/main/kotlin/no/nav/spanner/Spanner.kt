@@ -1,18 +1,23 @@
 package no.nav.spanner
 
 import com.fasterxml.jackson.module.kotlin.readValue
-import io.ktor.application.*
-import io.ktor.auth.*
+import io.ktor.http.*
+import io.ktor.serialization.jackson.*
 import io.ktor.client.*
 import io.ktor.client.engine.cio.*
-import io.ktor.client.features.json.*
-import io.ktor.features.*
-import io.ktor.http.*
-import io.ktor.jackson.*
-import io.ktor.request.*
-import io.ktor.response.*
-import io.ktor.routing.*
-import io.ktor.sessions.*
+import io.ktor.server.auth.*
+import io.ktor.server.auth.Authentication
+import io.ktor.server.application.*
+import io.ktor.server.plugins.callid.*
+import io.ktor.server.plugins.callloging.*
+import io.ktor.server.plugins.*
+import io.ktor.server.plugins.contentnegotiation.*
+import io.ktor.server.plugins.forwardedheaders.*
+import io.ktor.server.plugins.statuspages.*
+import io.ktor.server.request.*
+import io.ktor.server.response.*
+import io.ktor.server.routing.*
+import io.ktor.server.sessions.*
 import no.nav.spanner.AuditLogger.Companion.audit
 import no.nav.spanner.Log.Companion.LogLevel
 import no.nav.spanner.Log.Companion.LogLevel.ERROR
@@ -38,7 +43,7 @@ fun Application.spanner(spleis: Personer, config: AzureADConfig, development: Bo
         level = Level.INFO
         filter { call -> !call.request.path().startsWith("/internal") }
     }
-    install(XForwardedHeaderSupport)
+    install(XForwardedHeaders)
 
     install(StatusPages) {
         suspend fun respondToException(
@@ -56,17 +61,17 @@ fun Application.spanner(spleis: Personer, config: AzureADConfig, development: Bo
                 .log(level)
             call.respond(status, FeilRespons(errorId.toString(), cause.message))
         }
-        exception<NotFoundException> { cause ->
+        exception<NotFoundException> { call, cause ->
             respondToException(HttpStatusCode.NotFound, call, cause, INFO)
         }
-        exception<BadRequestException> { cause ->
+        exception<BadRequestException> { call, cause ->
             respondToException(HttpStatusCode.BadRequest, call, cause, INFO)
         }
-        exception<InvalidSession> { cause ->
+        exception<InvalidSession> { call, cause ->
             call.sessions.clear<SpannerSession>()
             respondToException(HttpStatusCode.Unauthorized, call, cause, INFO)
         }
-        exception<Throwable> { cause ->
+        exception<Throwable> { call, cause ->
             respondToException(HttpStatusCode.InternalServerError, call, cause, ERROR)
         }
     }
@@ -84,8 +89,8 @@ fun Application.spanner(spleis: Personer, config: AzureADConfig, development: Bo
     }
 
     val httpClient = HttpClient(CIO) {
-        install(JsonFeature) {
-            serializer = JacksonSerializer()
+        install(io.ktor.client.plugins.contentnegotiation.ContentNegotiation) {
+            jackson()
         }
     }
     val azureAd = AzureAD(config)

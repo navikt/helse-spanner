@@ -1,11 +1,15 @@
 package no.nav.spanner
 
-import io.ktor.application.*
+import io.ktor.server.application.*
 import io.ktor.auth.*
+import io.ktor.auth.OAuthAccessTokenResponse
 import io.ktor.http.*
-import io.ktor.response.*
-import io.ktor.routing.*
-import io.ktor.sessions.*
+import io.ktor.server.auth.*
+import io.ktor.server.auth.OAuthAccessTokenResponse.*
+import io.ktor.server.auth.Principal
+import io.ktor.server.response.*
+import io.ktor.server.routing.*
+import io.ktor.server.sessions.*
 import no.nav.spanner.Log.Companion.logger
 import org.intellij.lang.annotations.Language
 
@@ -15,7 +19,7 @@ fun Route.oidc() {
     get("/login") { /* Redirects to 'authorizeUrl' automatically*/ }
 
     get("/oauth2/callback") {
-        val principal: OAuthAccessTokenResponse.OAuth2 = call.principal() ?: return@get call.respondRedirect("/").also {
+        val principal: OAuth2 = call.principal() ?: return@get call.respondRedirect("/").also {
             logg.info("principal var visst null, vi redirecter til '/'!")
         }
 
