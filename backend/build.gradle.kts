@@ -6,7 +6,7 @@ val ktorVersion = "1.6.8"
 val tokenValidatorVersion = "1.3.8"
 
 plugins {
-    kotlin("jvm") version "1.6.10"
+    kotlin("jvm") version "1.9.0"
 }
 
 repositories {
