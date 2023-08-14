@@ -2,7 +2,7 @@ import java.nio.file.Paths
 
 val jacksonVersion = "2.12.5"
 val junitJupiterVersion = "5.7.2"
-val ktorVersion = "2.0.0"
+val ktorVersion = "2.3.3"
 val tokenValidatorVersion = "1.3.8"
 
 plugins {
