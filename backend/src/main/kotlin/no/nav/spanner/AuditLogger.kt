@@ -34,7 +34,7 @@ internal class AuditLogger(private val brukerIdent: String) {
         val now = tidspunkt.toInstant().toEpochMilli()
         val subject = fnr?.toString()?.padStart(11, '0') ?: aktorId
         val duidStr = subject?.let { " duid=$it" } ?: ""
-        return "CEF:0|Vedtaksløsning for sykepenger|Spanner|auditLog|1.0|${operasjon.logString}|Sporingslogg|INFO|end=$now$duidStr suid=$brukerIdent request=$path"
+        return "CEF:0|Vedtaksløsning for sykepenger|Spanner|1.0|${operasjon.logString}|Sporingslogg|INFO|end=$now$duidStr suid=$brukerIdent request=$path"
     }
 
     enum class Operasjon(val logString: String) {
