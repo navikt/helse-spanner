@@ -1,12 +1,12 @@
 import java.nio.file.Paths
 
-val jacksonVersion = "2.12.5"
-val junitJupiterVersion = "5.7.2"
-val ktorVersion = "2.3.3"
+val jacksonVersion = "2.15.2"
+val junitJupiterVersion = "5.10.0"
+val ktorVersion = "2.3.4"
 val tokenValidatorVersion = "1.3.8"
 
 plugins {
-    kotlin("jvm") version "1.9.0"
+    kotlin("jvm") version "1.9.10"
 }
 
 repositories {
@@ -40,8 +40,8 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion")
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonVersion")
 
-    implementation("ch.qos.logback:logback-classic:1.2.5")
-    implementation("net.logstash.logback:logstash-logback-encoder:6.6") {
+    implementation("ch.qos.logback:logback-classic:1.4.11")
+    implementation("net.logstash.logback:logstash-logback-encoder:7.4") {
         exclude("com.fasterxml.jackson.core")
         exclude("com.fasterxml.jackson.dataformat")
     }
@@ -88,7 +88,7 @@ tasks {
         }
 
 
-        from({ Paths.get(project(":frontend").buildDir.path) }) {
+        from({ Paths.get(project(":frontend").layout.buildDirectory.get().toString()) }) {
             into("static")
         }
 
@@ -96,9 +96,8 @@ tasks {
             configurations.runtimeClasspath.get()
                 .filter { it.name != "app.jar" }
                 .forEach {
-                    val file = File("$buildDir/libs/${it.name}")
-                    if (!file.exists())
-                        it.copyTo(file)
+                    val file = File("${layout.buildDirectory.get()}/libs/${it.name}")
+                    if (!file.exists()) it.copyTo(file)
                 }
         }
     }
