@@ -45,7 +45,9 @@ internal class AuditLogger(private val brukerIdent: String) {
 
     companion object {
         private val logger = LoggerFactory.getLogger("auditLogger")
-        fun SpannerSession.audit() =
-            AuditLogger(idToken.asJwt().getClaim("NAVident").asString())
+        fun SpannerSession.audit(): AuditLogger {
+            val ident = requireNotNull(idToken.asJwt().getClaim("NAVident").asString()) { "NAVident mangler i tokenet" }
+            return AuditLogger(ident)
+        }
     }
 }

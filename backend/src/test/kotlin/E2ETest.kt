@@ -5,7 +5,6 @@ import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.engine.apache.*
 import io.ktor.client.plugins.contentnegotiation.*
-import io.ktor.serialization.kotlinx.json.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
@@ -167,7 +166,7 @@ class E2ETest {
         }) {
             cookiesSession {
                 login()
-                handleRequest(HttpMethod.Get, "/api/person/") { }
+                handleRequest(HttpMethod.Get, "/api/person/") { /* ingen ident i header */ }
                     .apply {
                         assertEquals(HttpStatusCode.InternalServerError, response.status())
                         val feil = objectMapper.readValue<FeilRespons>(response.content!!)
