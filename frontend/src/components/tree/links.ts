@@ -7,4 +7,4 @@ export const personSporingUrl = (aktørId: string) => `https://${sporingHostname
 const speilHostname = window.location.origin.includes('dev')
     ? 'speil.intern.dev.nav.no'
     : 'speil.intern.nav.no'
-export const speilUrl = (aktørId: string) => `https://${speilHostname}/person/${aktørId}/utbetaling`
+export const speilUrl = (aktørId: string) => `https://${speilHostname}/person/${aktørId}/dagoversikt`
