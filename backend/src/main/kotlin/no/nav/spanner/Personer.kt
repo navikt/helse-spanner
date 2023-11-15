@@ -84,7 +84,7 @@ class Spleis(
 
             log.response(response).info("Response from spleis")
 
-            if (response.status === HttpStatusCode.NotFound) throw NotFoundException("Fant ikke person")
+            if (response.status == HttpStatusCode.NotFound) throw NotFoundException("Fant ikke person")
 
             val node = objectMapper.readTree(response.bodyAsText()) as ObjectNode
             node.putRawValue("aktivitetsloggV2", RawValue(aktivitetslogg.await()))
