@@ -8,7 +8,6 @@ import io.ktor.client.*
 import io.ktor.client.engine.cio.*
 import io.ktor.client.plugins.*
 import io.ktor.client.plugins.contentnegotiation.*
-import io.ktor.serialization.kotlinx.json.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.server.plugins.*
@@ -83,9 +82,10 @@ class Spleis(
                     throw e
                 }
 
-            log
-                .response(response)
-                .info("Response from spleis")
+            log.response(response).info("Response from spleis")
+
+            if (response.status === HttpStatusCode.NotFound) throw NotFoundException("Fant ikke person")
+
             val node = objectMapper.readTree(response.bodyAsText()) as ObjectNode
             node.putRawValue("aktivitetsloggV2", RawValue(aktivitetslogg.await()))
             node.toString()
@@ -138,7 +138,7 @@ class Spleis(
         log
             .sensitivt("oboTokenLength", oboToken.length)
             .info("OBO token length")
-        try {
+        return try {
             val response = httpClient.get(url) {
                 header("Authorization", "Bearer $oboToken")
                 accept(ContentType.Application.Json)
@@ -146,9 +146,9 @@ class Spleis(
             log
                 .response(response)
                 .info("Response from sparsom")
-            return response.bodyAsText()
+            response.bodyAsText()
         } catch (e : ClientRequestException) {
-            return null
+            null
         }
     }
 
