@@ -16,10 +16,12 @@ Det er mulig å teste lokalt med OAuth, audit-logging og ekte kall til backend.
 - docker, docker compose
 
 1. `./gradlew build`
-2. `docker compose up` (eller `docker-compose up`)
+2. `docker compose up` (eller `docker-compose up`), legg på `-d` hvis du vil at den skal kjøre detached
 
 Da når du spanner på http://localhost:8080.
 
 Hvis du har gjort endringer i backend-koden må du selv sørge for bygging av nytt image, enten eksplisitt med
-`docker build .` eller ved å slette det forrige imaget med
+`docker build -t helse-spanner-spanner .`, eller ved å slette det forrige imaget med
 `docker image rm --force helse-spanner-spanner`.
+
+Hele runden: `./gradlew build && docker build -t helse-spanner-spanner . && docker-compose up -d`
