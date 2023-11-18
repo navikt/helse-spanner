@@ -23,11 +23,29 @@ import parseISO from 'date-fns/parseISO'
 import compareAsc from 'date-fns/compareAsc'
 import { somNorskDato } from '../i18n'
 import { personSporingUrl, tilstandsmaskinSporingUrl } from './links'
+import {ArbeidsgiverDto, PersonDto, VedtakDto} from "../../state/dto";
 
 const SporingLenke: React.FC<{ url: string }> = ({ url }) => (
     <a href={url} target="_blank">
         🔎
     </a>
+)
+const KopierPåminnelseJson: React.FC<{ person: PersonDto, arbeidsgiver: ArbeidsgiverDto, vedtak: VedtakDto }> = ({ person, arbeidsgiver, vedtak }) => (
+    <span onClick={() => { navigator.clipboard.writeText(`{ 
+    "@event_name": "påminnelse",
+    "fødselsnummer": "${person.fødselsnummer}",
+    "aktørId": "${person.aktørId}",
+    "organisasjonsnummer": "${arbeidsgiver.organisasjonsnummer}",
+    "vedtaksperiodeId": "${vedtak.id}",
+    "tilstand": "${vedtak.tilstand}",
+    "påminnelsestidspunkt": "{{now}}",
+    "nestePåminnelsestidspunkt": "{{now+1h}}",
+    "tilstandsendringstidspunkt": "{{now-1h}}",
+    "antallGangerPåminnet": 1,
+    "ønskerReberegning": false
+}`) }}>
+        ⏰
+    </span>
 )
 
 export const PersonTree = () => {
@@ -210,6 +228,7 @@ const VedtaksNode = () => {
                     {fom} - {tom}
                 </span>
                 <SporingLenke url={tilstandsmaskinSporingUrl(vedtak.id)} />
+                <KopierPåminnelseJson person={usePerson()} arbeidsgiver={useArbeidsgiver()} vedtak={vedtak} />
             </div>
             <span className={styles.TilstandText}>{vedtak.tilstand}</span>
         </SelectableTreeNode>
