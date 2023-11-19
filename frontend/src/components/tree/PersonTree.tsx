@@ -30,7 +30,16 @@ const SporingLenke: React.FC<{ url: string }> = ({ url }) => (
         🔎
     </a>
 )
-const KopierPåminnelseJson: React.FC<{ person: PersonDto, arbeidsgiver: ArbeidsgiverDto, vedtak: VedtakDto }> = ({ person, arbeidsgiver, vedtak }) => (
+const KopierPersonPåminnelseJson: React.FC<{ person: PersonDto }> = ({ person }) => (
+    <span onClick={() => { navigator.clipboard.writeText(`{ 
+    "@event_name": "person_påminnelse",
+    "fødselsnummer": "${person.fødselsnummer}",
+    "aktørId": "${person.aktørId}"
+}`) }}>
+        ⏰
+    </span>
+)
+const KopierVedtaksperiodePåminnelseJson: React.FC<{ person: PersonDto, arbeidsgiver: ArbeidsgiverDto, vedtak: VedtakDto }> = ({ person, arbeidsgiver, vedtak }) => (
     <span onClick={() => { navigator.clipboard.writeText(`{ 
     "@event_name": "påminnelse",
     "fødselsnummer": "${person.fødselsnummer}",
@@ -74,7 +83,10 @@ export const PersonTree = () => {
             <SelectableTreeNode indent={0} className={styles.PersonNode}>
                 <div>
                     <span>{person.aktørId}</span>
-                    <SporingLenke url={personSporingUrl(person.aktørId)} />
+                    <div>
+                        <SporingLenke url={personSporingUrl(person.aktørId)} />
+                        <KopierPersonPåminnelseJson person={person} />
+                    </div>
                 </div>
             </SelectableTreeNode>
             {person.arbeidsgivere.map((arbeidsgiver) => (
@@ -228,7 +240,7 @@ const VedtaksNode = () => {
                     {fom} - {tom}
                 </span>
                 <SporingLenke url={tilstandsmaskinSporingUrl(vedtak.id)} />
-                <KopierPåminnelseJson person={usePerson()} arbeidsgiver={useArbeidsgiver()} vedtak={vedtak} />
+                <KopierVedtaksperiodePåminnelseJson person={usePerson()} arbeidsgiver={useArbeidsgiver()} vedtak={vedtak} />
             </div>
             <span className={styles.TilstandText}>{vedtak.tilstand}</span>
         </SelectableTreeNode>

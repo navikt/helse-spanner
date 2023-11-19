@@ -29,6 +29,12 @@
     display: flex;
     justify-content: space-between;
 }
+.PersonNode > div > div {
+    min-width: 3.5em;
+    justify-content: space-between;
+    display: flex;
+    flex-direction: row;
+}
 .PersonNode a {
     text-decoration: none;
 }
