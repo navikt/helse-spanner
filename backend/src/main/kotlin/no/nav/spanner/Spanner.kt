@@ -23,6 +23,7 @@ import no.nav.spanner.Log.Companion.LogLevel
 import no.nav.spanner.Log.Companion.LogLevel.ERROR
 import no.nav.spanner.Log.Companion.LogLevel.INFO
 import no.nav.spanner.Log.Companion.LogLevel.WARN
+import org.slf4j.LoggerFactory
 import org.slf4j.event.Level
 import java.io.IOException
 import java.time.LocalDateTime
@@ -43,6 +44,7 @@ fun Application.spanner(spleis: Personer, config: AzureADConfig, development: Bo
     }
     install(CallLogging) {
         disableDefaultColors()
+        logger = LoggerFactory.getLogger("CallLogging")
         level = Level.INFO
         filter { call -> !call.request.path().startsWith("/internal") }
     }
