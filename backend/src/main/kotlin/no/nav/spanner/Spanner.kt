@@ -22,7 +22,9 @@ import no.nav.spanner.AuditLogger.Companion.audit
 import no.nav.spanner.Log.Companion.LogLevel
 import no.nav.spanner.Log.Companion.LogLevel.ERROR
 import no.nav.spanner.Log.Companion.LogLevel.INFO
+import no.nav.spanner.Log.Companion.LogLevel.WARN
 import org.slf4j.event.Level
+import java.io.IOException
 import java.time.LocalDateTime
 import java.util.*
 
@@ -40,6 +42,7 @@ fun Application.spanner(spleis: Personer, config: AzureADConfig, development: Bo
         }
     }
     install(CallLogging) {
+        disableDefaultColors()
         level = Level.INFO
         filter { call -> !call.request.path().startsWith("/internal") }
     }
@@ -70,6 +73,10 @@ fun Application.spanner(spleis: Personer, config: AzureADConfig, development: Bo
         exception<InvalidSession> { call, cause ->
             call.sessions.clear<SpannerSession>()
             respondToException(HttpStatusCode.Unauthorized, call, cause, INFO)
+        }
+        exception<IOException> { call, cause ->
+            if (cause.message == "Broken pip") respondToException(HttpStatusCode.ServiceUnavailable, call, cause, WARN)
+            else respondToException(HttpStatusCode.InternalServerError, call, cause, ERROR)
         }
         exception<Throwable> { call, cause ->
             respondToException(HttpStatusCode.InternalServerError, call, cause, ERROR)
