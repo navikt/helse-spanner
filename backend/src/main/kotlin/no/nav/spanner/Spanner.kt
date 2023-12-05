@@ -77,7 +77,7 @@ fun Application.spanner(spleis: Personer, config: AzureADConfig, development: Bo
             respondToException(HttpStatusCode.Unauthorized, call, cause, INFO)
         }
         exception<IOException> { call, cause ->
-            if (cause.message == "Broken pip") respondToException(HttpStatusCode.ServiceUnavailable, call, cause, WARN)
+            if (cause.message == "Broken pipe") respondToException(HttpStatusCode.ServiceUnavailable, call, cause, WARN)
             else respondToException(HttpStatusCode.InternalServerError, call, cause, ERROR)
         }
         exception<Throwable> { call, cause ->
