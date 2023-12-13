@@ -30,7 +30,7 @@ import java.time.LocalDateTime
 import java.util.*
 
 enum class IdType(val header: String) {
-    FNR("fnr"), AKTORID("aktorId")
+    FNR("fnr"), AKTORID("aktorId"), MASKERT_ID("maskertId")
 }
 
 private val logg = Log.logger("Spanner")
@@ -218,8 +218,10 @@ fun Application.spanner(spleis: Personer, config: AzureADConfig, development: Bo
 }
 
 private fun ApplicationCall.personId() =
-    request.headers[IdType.FNR.header]?.let {
-        Pair(IdType.FNR, request.header(IdType.FNR.header))
+    request.headers[IdType.MASKERT_ID.header]?.let {
+        Pair(IdType.MASKERT_ID, it)
+    } ?: request.headers[IdType.FNR.header]?.let {
+        Pair(IdType.FNR, it)
     } ?: Pair(IdType.AKTORID, request.header(IdType.AKTORID.header))
 
 

@@ -55,7 +55,10 @@ class Spleis(
     }
 
     override suspend fun person(id: String, idType: IdType, accessToken: String): String {
-        val url = URLBuilder(baseUrl).apply { path("api", "person-json") }.build()
+        val url = URLBuilder(baseUrl).apply {
+            if (idType == IdType.MASKERT_ID) path("api", "person-json", id)
+            else path("api", "person-json")
+        }.build()
 
         val oboToken = token(accessToken, spleisClientId)
         val log = Log.logger(Personer::class.java)

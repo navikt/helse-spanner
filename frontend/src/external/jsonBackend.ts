@@ -14,6 +14,9 @@ export let hardCodedBackend: Backend = {
     personForFnr(ignore: string): Promise<PersonDto> {
         return Promise.resolve(jsonPerson)
     },
+    personForUUID(ignore: string): Promise<PersonDto> {
+        return Promise.reject(lagfinnesIkkeFeil())
+    },
     hendelseForRef: function (_: string): Promise<MeldingDto> {
         return Promise.resolve(jsonHendelse)
     },

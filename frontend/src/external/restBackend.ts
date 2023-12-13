@@ -17,6 +17,18 @@ export const restBackend = (development: boolean): Backend => {
                 .then(feilVedDårligRespons)
                 .then((response) => response.json())
         },
+        personForUUID(maskertId: string): Promise<PersonDto> {
+            return fetch(`${baseUrl}/api/person/`, {
+                method: 'get',
+                headers: {
+                    Accept: 'application/json',
+                    maskertId: `${maskertId}`,
+                },
+            })
+                .catch(wrapNnettverksFeil)
+                .then(feilVedDårligRespons)
+                .then((response) => response.json())
+        },
         personForFnr(fnr: string): Promise<PersonDto> {
             return fetch(`${baseUrl}/api/person/`, {
                 method: 'get',
