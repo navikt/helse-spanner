@@ -153,6 +153,29 @@ fun Application.spanner(spleis: Personer, config: AzureADConfig, development: Bo
                     call.respondText(person, ContentType.Application.Json, HttpStatusCode.OK)
                 }
             }
+            post("/api/uuid/") {
+                if (sesjon().validUntil < LocalDateTime.now()) {
+                    val spannerSession = azureAd.refreshToken(sesjon().refreshToken)
+                    call.sessions.set(spannerSession)
+                }
+                sesjon().audit().log(call)
+                val (idType, idValue) = call.personId()
+                logg
+                    .åpent("idType", idType)
+                    .sensitivt("idValue", idValue)
+                    .call(this.call)
+                    .info()
+                if (idValue.isNullOrBlank()) {
+                    call.respond(
+                        HttpStatusCode.BadRequest,
+                        "${IdType.AKTORID.header} or ${IdType.FNR.header} must be set"
+                    )
+                } else {
+                    val accessToken = call.sessions.get<SpannerSession>()?.accessToken.toString()
+                    val person = spleis.maskerPerson(idValue, idType, accessToken)
+                    call.respondText(person, ContentType.Application.Json, HttpStatusCode.OK)
+                }
+            }
             /*
                 har ikke funksjonalitet fra frontend ennå, men kan kalles manuelt fra devtools feks:
 

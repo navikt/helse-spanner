@@ -31,7 +31,7 @@ fun startLocal() {
         "not is use",
         "not is use",
         "not is use",
-        "not is use",
+        "not is use"
     )
 
     val spleis = LokaleKjenninger

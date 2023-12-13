@@ -1,6 +1,6 @@
 import React from 'react'
 import { useQuery } from 'react-query'
-import { personRequestFactory, useBackend } from '../../external/backend'
+import { useBackend } from '../../external/backend'
 import { PersonView } from './PersonView'
 import { PersonContext } from '../../state/contexts'
 import { Spinner } from '../Spinner'
@@ -12,7 +12,7 @@ export const PersonData = () => {
     if (personId === undefined) return null
     const backend = useBackend()
     try {
-        const request = personRequestFactory(personId, backend)
+        const request = () => backend.personForUUID(personId)
         const { isLoading, isError, data, error } = useQuery(['person', personId], request)
         return isLoading ? (
             <Spinner />

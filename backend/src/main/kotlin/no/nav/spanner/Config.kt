@@ -9,7 +9,7 @@ data class Config (
     val spleisUrl: String,
     val spleisClientId: String,
     val sparsomUrl: String,
-    val sparsomClientId: String,
+    val sparsomClientId: String
 ) {
     companion object {
         fun from(configuration: Configuration) = Config(

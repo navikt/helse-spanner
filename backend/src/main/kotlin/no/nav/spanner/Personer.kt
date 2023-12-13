@@ -21,6 +21,7 @@ val logger = LoggerFactory.getLogger(Spleis::class.java)
 
 interface Personer {
     suspend fun person(id: String, idType: IdType, accessToken: String): String
+    suspend fun maskerPerson(id: String, idType: IdType, accessToken: String): String
     suspend fun speilperson(fnr: String, accessToken: String): String
     suspend fun hendelse(meldingsreferanse: String, accessToken: String): String
 }
@@ -30,7 +31,8 @@ class Spleis(
     private val baseUrl: String = "http://spleis-api.tbd.svc.cluster.local",
     private val spleisClientId: String,
     private val sparsomBaseUrl: String = "http://sparsom-api.tbd.svc.cluster.local",
-    private val sparsomClientId: String
+    private val sparsomClientId: String,
+    private val spurteDuClient: SpurteDuClient
 ) :
     Personer {
     private val httpClient = HttpClient(CIO) {
@@ -50,8 +52,14 @@ class Spleis(
             baseUrl = spannerConfig.spleisUrl,
             spleisClientId = spannerConfig.spleisClientId,
             sparsomBaseUrl = spannerConfig.sparsomUrl,
-            sparsomClientId = spannerConfig.sparsomClientId
+            sparsomClientId = spannerConfig.sparsomClientId,
+            spurteDuClient = SpurteDuClient(objectMapper)
         )
+    }
+
+    override suspend fun maskerPerson(id: String, idType: IdType, accessToken: String): String {
+        val maskertId = spurteDuClient.utveksle(id, idType) ?: throw BadRequestException("kunne ikke kontakte spurte du")
+        return """ { "id": "$maskertId" } """
     }
 
     override suspend fun person(id: String, idType: IdType, accessToken: String): String {
@@ -185,13 +193,22 @@ class Spleis(
 
 object LokaleKjenninger : Personer {
     override suspend fun person(id: String, idType: IdType, accessToken: String) = when (id) {
-        "42",
-        "12020052345" -> lesJson("12020052345")
-        "2392363031327" -> lesJson("2392363031327")
+        "113eb3df-102d-4a07-9270-2caa648c62f4" -> lesJson("12020052345")
+        "48bfef57-3080-4f19-98eb-5cc72d9d16c5" -> lesJson("2392363031327")
         else -> throw NotFoundException("no person with identifier: ${id}")
     }.also {
         logger.trace("person fetched = ${it}")
     }
+
+    override suspend fun maskerPerson(id: String, idType: IdType, accessToken: String) =
+        when (id) {
+            "42",
+            "12020052345" -> """ { "id": "113eb3df-102d-4a07-9270-2caa648c62f4" } """
+            "2392363031327" -> """ { "id": "48bfef57-3080-4f19-98eb-5cc72d9d16c5" } """
+            else -> throw NotFoundException("no person with identifier: ${id}")
+        }.also {
+            logger.trace("person fetched = ${it}")
+        }
 
     override suspend fun hendelse(meldingsreferanse: String, accessToken: String): String {
         return "{}"

@@ -53,6 +53,7 @@ spec:
         - application: sparsom-api
           namespace: tbd
           cluster: dev-gcp
+        - application: spurtedu
   secureLogs:
     enabled: true
   env:

@@ -8,6 +8,10 @@ export type PersonDto = {
     [x: string]: any
 }
 
+export type MaskertDto = {
+    id: string
+}
+
 export type FeilDto = {
     error_id: string
     description?: string
