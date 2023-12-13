@@ -58,5 +58,9 @@ export let testBackend = (
             }
             return Promise.resolve(person)
         },
+
+        personForUUID(fnr: string): Promise<PersonDto> {
+            return Promise.reject(fnr)
+        },
     }
 }
