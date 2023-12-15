@@ -35,6 +35,7 @@ class SpurteDuClient(
         val request = HttpRequest.newBuilder()
             .uri(URI("http://spurtedu/skjul_meg"))
             .timeout(Duration.ofSeconds(10))
+            .header("Accept", "application/json")
             .header("Content-Type", "application/json")
             .POST(HttpRequest.BodyPublishers.ofString(jsonInputString))
             .build()
