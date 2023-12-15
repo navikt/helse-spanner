@@ -22,7 +22,7 @@ class SpurteDuClient(
             .build()
 
         val jsonInputString = objectMapper.writeValueAsString(mapOf(
-            "text" to objectMapper.writeValueAsString(mapOf(
+            "tekst" to objectMapper.writeValueAsString(mapOf(
                 "ident" to ident,
                 "identtype" to when (identtype) {
                     IdType.FNR, IdType.AKTORID -> identtype.name
