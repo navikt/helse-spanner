@@ -96,8 +96,11 @@ class E2ETest {
         }) {
             cookiesSession {
                 login()
+                val uuid = objectMapper.readTree(handleRequest(HttpMethod.Post, "/api/uuid/") {
+                    addHeader(IdType.FNR.header, "42")
+                }.response.content).path("id").asText()
                 handleRequest(HttpMethod.Get, "/api/person/") {
-                    this.addHeader(IdType.FNR.header, "42")
+                    this.addHeader(IdType.MASKERT_ID.header, uuid)
                 }.apply {
                     assertEquals(HttpStatusCode.OK, response.status())
                     assertTrue(
@@ -146,8 +149,11 @@ class E2ETest {
         }) {
             cookiesSession {
                 login()
+                val uuid = objectMapper.readTree(handleRequest(HttpMethod.Post, "/api/uuid/") {
+                    addHeader(IdType.FNR.header, "42")
+                }.response.content).path("id").asText()
                 handleRequest(HttpMethod.Get, "/api/person/") {
-                    this.addHeader(IdType.FNR.header, "42")
+                    this.addHeader(IdType.MASKERT_ID.header, uuid)
                 }.apply {
                     assertEquals(HttpStatusCode.OK, response.status())
                     assertTrue(

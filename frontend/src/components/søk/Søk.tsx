@@ -1,13 +1,8 @@
 import React, {useCallback, useEffect, useRef} from 'react'
 import styles from './Header.module.css'
 import classNames from 'classnames'
-import { useLocation, useNavigate } from 'react-router-dom'
-import { maskertRequestFactory, useBackend} from "../../external/backend";
-import {Feilmelding} from "../Feilmelding";
-import {useQuery} from "react-query";
-import {Spinner} from "../Spinner";
-import {PersonContext} from "../../state/contexts";
-import {PersonView} from "../person/PersonView";
+import {useLocation, useNavigate} from 'react-router-dom'
+import {maskertRequestFactory, useBackend} from "../../external/backend";
 
 export const Søk = () => {
     const navigate = useNavigate()
@@ -17,6 +12,7 @@ export const Søk = () => {
 
     const updatePath = (uuid: string) => {
         const newPath = `/person/${uuid}`
+        console.log(`oppdaterer pathname med ${newPath}`)
         if (newPath === location.pathname) return
         setSøketekst('')
         navigate({ pathname: newPath })
