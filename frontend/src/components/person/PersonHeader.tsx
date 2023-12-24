@@ -1,13 +1,14 @@
 import React from 'react'
 import parseISO from 'date-fns/parseISO'
 import styles from './PersonHeader.module.css'
-import { usePerson } from '../../state/contexts'
-import { speilUrl } from '../tree/links'
+import {usePerson} from '../../state/contexts'
+import {speilUrl} from '../tree/links'
+import {Box} from "@navikt/ds-react";
 
 export const PersonHeader = () => {
     const person = usePerson()
     return (
-        <div className={styles.Header}>
+        <Box background="surface-default" borderRadius="large">
             <dl className={styles.Ingress}>
                 <dt>fnr</dt>
                 <dd>
@@ -28,7 +29,7 @@ export const PersonHeader = () => {
                     </a>
                 </dd>
             </dl>
-        </div>
+        </Box>
     )
 }
 PersonHeader.displayName = 'PersonHeader'

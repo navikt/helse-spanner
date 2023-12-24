@@ -1,32 +1,14 @@
-.Header {
-    background-color: #3289a8;
-    min-height: 50px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    transition: 0.3s;
-    display: grid;
-    grid-template-columns: max-content max-content min-content;
-    align-content: center;
-}
-
-.Header a {
-    text-decoration: none
-}
-
 .SpannSpan {
-    font-size: xxx-large;
+    font-size: var(--a-font-size-heading-2xlarge);
 }
 
-.SpannSpanText {
-    color: white;
-}
-
-.Søk {
-    margin-left: 1em;
-    align-self: center;
-}
-
-.Søk input[type='number']::-webkit-inner-spin-button,
-input[type='number']::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+[data-theme="spanner"] {
+    --ac-internalheader-bg: var(--a-deepblue-500);
+    --ac-internalheader-hover-bg: var(--a-deepblue-600);
+    --ac-internalheader-divider: var(--a-deepblue-900);
+    --ac-internalheader-text: var(--a-white);
+    --ac-button-primary-bg: var(--a-deepblue-100);
+    --ac-button-primary-hover-bg: var(--a-deepblue-200);
+    --ac-button-primary-focus-bg: var(--a-deepblue-300);
+    --ac-button-primary-text: #000;
 }

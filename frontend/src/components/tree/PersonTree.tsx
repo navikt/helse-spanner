@@ -1,6 +1,5 @@
 import classNames from 'classnames'
 import styles from './PersonTree.module.css'
-import commonStyles from '../Common.module.css'
 import React from 'react'
 import {
     ArbeidsgiverContext,
@@ -16,14 +15,15 @@ import {
     UtbetalingContext,
     VedtakContext,
 } from '../../state/contexts'
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
-import { expandedArbeidsgivereState, hideForkastedeVedtakState, selectedState } from '../../state/state'
-import { Next, Expand } from '@navikt/ds-icons'
+import {useRecoilState, useRecoilValue, useSetRecoilState} from 'recoil'
+import {expandedArbeidsgivereState, hideForkastedeVedtakState, selectedState} from '../../state/state'
+import {Expand, Next} from '@navikt/ds-icons'
 import parseISO from 'date-fns/parseISO'
 import compareAsc from 'date-fns/compareAsc'
-import { somNorskDato } from '../i18n'
-import { personSporingUrl, tilstandsmaskinSporingUrl } from './links'
+import {somNorskDato} from '../i18n'
+import {personSporingUrl, tilstandsmaskinSporingUrl} from './links'
 import {ArbeidsgiverDto, PersonDto, VedtakDto} from "../../state/dto";
+import {Box, HStack, Switch} from "@navikt/ds-react";
 
 const SporingLenke: React.FC<{ url: string }> = ({ url }) => (
     <a href={url} target="_blank">
@@ -59,42 +59,43 @@ const KopierVedtaksperiodePåminnelseJson: React.FC<{ person: PersonDto, arbeids
 
 export const PersonTree = () => {
     const person = usePerson()
-
     const setExpandedArbeidsgivere = useSetRecoilState(expandedArbeidsgivereState)
-    const expandAllArbeidsgivere = () =>
-        setExpandedArbeidsgivere((_) => person.arbeidsgivere.map((arb) => arb.organisasjonsnummer))
-    const closeAllArbeidsgivere = () => setExpandedArbeidsgivere((_) => [])
-
     const [hideForkastedeVedtak, setHideForkastedeVedtak] = useRecoilState(hideForkastedeVedtakState)
-    const toggleHideForkastedeVedtak = () => {
+    const toggleArbeidsgivere = (skjule: boolean) => {
+        setExpandedArbeidsgivere((tidligere) => {
+            if (tidligere.length > 0) return []
+            return person.arbeidsgivere.map((arb) => arb.organisasjonsnummer)
+        })
+    }
+    const toggleForkaastede = (skjule: boolean) => {
         setHideForkastedeVedtak((state) => !state)
     }
 
     return (
-        <div className={classNames(styles.PersonTree)}>
-            <button onClick={expandAllArbeidsgivere}>Åpne alle</button>
-            <button onClick={closeAllArbeidsgivere}>Lukk alle</button>
-            <button
-                className={classNames(hideForkastedeVedtak && commonStyles.AktivKnapp)}
-                onClick={toggleHideForkastedeVedtak}
-            >
-                Skjul forkastede
-            </button>
-            <SelectableTreeNode indent={0} className={styles.PersonNode}>
-                <div>
-                    <span>{person.aktørId}</span>
+        <Box background="surface-default">
+            <Box background="bg-subtle" paddingBlock="4 0">
+                <HStack gap="5">
+                    <Switch size="small" onChange={(e) => toggleArbeidsgivere(e.target.checked) }>Åpne alle</Switch>
+                    <Switch size="small" onChange={(e) => toggleForkaastede(e.target.checked) }>Skjul forkastede</Switch>
+                </HStack>
+            </Box>
+            <Box padding="0">
+                <SelectableTreeNode indent={0} className={styles.PersonNode}>
                     <div>
-                        <SporingLenke url={personSporingUrl(person.aktørId)} />
-                        <KopierPersonPåminnelseJson person={person} />
+                        <span>{person.aktørId}</span>
+                        <div>
+                            <SporingLenke url={personSporingUrl(person.aktørId)} />
+                            <KopierPersonPåminnelseJson person={person} />
+                        </div>
                     </div>
-                </div>
-            </SelectableTreeNode>
-            {person.arbeidsgivere.map((arbeidsgiver) => (
-                <ArbeidsgiverContext.Provider value={arbeidsgiver} key={arbeidsgiver.id}>
-                    <ArbeidsgiverNode />
-                </ArbeidsgiverContext.Provider>
-            ))}
-        </div>
+                </SelectableTreeNode>
+                {person.arbeidsgivere.map((arbeidsgiver) => (
+                    <ArbeidsgiverContext.Provider value={arbeidsgiver} key={arbeidsgiver.id}>
+                        <ArbeidsgiverNode />
+                    </ArbeidsgiverContext.Provider>
+                ))}
+            </Box>
+        </Box>
     )
 }
 PersonTree.displayName = 'PersonTree'

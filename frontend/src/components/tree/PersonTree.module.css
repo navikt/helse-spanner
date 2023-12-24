@@ -21,6 +21,11 @@
     overflow-y: hidden;
 }
 
+div > .PersonNode:first-child {
+    margin-top:0 !important;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
 .PersonNode {
     margin: 0.2rem 0 !important;
     padding: 0.3em !important;

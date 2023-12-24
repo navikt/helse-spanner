@@ -19,7 +19,9 @@
         ]
     },
     "dependencies": {
+        "@navikt/ds-css": "^5.12.2",
         "@navikt/ds-icons": "^0.5.2",
+        "@navikt/ds-react": "^5.12.2",
         "classnames": "^2.3.1",
         "date-fns": "^2.23.0",
         "react": "^17.0.0",

@@ -1,17 +1,16 @@
 import React from 'react'
+import {InternalHeader, Spacer} from "@navikt/ds-react";
 import styles from './Header.module.css'
-import classNames from 'classnames'
-import { Link } from 'react-router-dom'
+import classNames from "classnames";
 
 export const Header: React.FC<object> = ({ children }) => (
-    <header className={classNames(styles.Header)}>
-        <span>
-            <Link to={'/'}>
-                <span className={classNames(styles.SpannSpan)}>🪣</span>
-            </Link>
-            <span className={classNames(styles.SpannSpanText)}>er</span>
-        </span>
+    <InternalHeader data-theme="spanner">
+        <InternalHeader.Title href="/">
+            <span className={classNames(styles.SpannSpan)}>🪣</span>er
+        </InternalHeader.Title>
         {children}
-    </header>
+        <Spacer/>
+        <InternalHeader.User name="Ola Normann"/>
+    </InternalHeader>
 )
 Header.displayName = 'Header'

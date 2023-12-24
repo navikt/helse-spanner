@@ -1,16 +1,18 @@
-import React, {useCallback, useEffect, useRef} from 'react'
-import styles from './Header.module.css'
-import classNames from 'classnames'
+import React, {useEffect, useRef, useState} from 'react'
 import {useLocation, useNavigate} from 'react-router-dom'
 import {maskertRequestFactory, useBackend} from "../../external/backend";
+import {Alert, Box, HStack, Search} from "@navikt/ds-react";
 
 export const Søk = () => {
     const navigate = useNavigate()
     const location = useLocation()
-    const [søketekst, setSøketekst] = React.useState('')
+    const [søketekst, setSøketekst] = useState('')
+    const [isLoading, setIsLoading] = useState(false)
+    const [feilmelding, setFeilmelding] = useState('')
     const inputRef = useRef<HTMLInputElement>(null)
 
     const updatePath = (uuid: string) => {
+        setIsLoading(false)
         const newPath = `/person/${uuid}`
         console.log(`oppdaterer pathname med ${newPath}`)
         if (newPath === location.pathname) return
@@ -24,44 +26,55 @@ export const Søk = () => {
 
     const backend = useBackend()
 
-    const sendSøk = useCallback(() => {
-        console.log(`sendSøk1 ${søketekst}`)
+    const sendSøk = async () => {
         if (søketekst === '') return
-        console.log(`sendSøk2 ${søketekst}`)
         if (søketekst.length == 36) return updatePath(søketekst)
-        console.log(`sendSøk mot backend ${søketekst}`)
         try {
+            setIsLoading(true)
             maskertRequestFactory(søketekst, backend)
                 .catch((e: Error) => {
-                    // todo: hvordan får vi vist denne feilmeldingen i frontend?
-                    console.error(`Fikk feil ved søk: ${e}`)
+                    setIsLoading(false)
+                    setFeilmelding(e.message)
                 })
                 .then ((dto) => {
                     if (dto) updatePath(dto.id)
                 })
-        } catch (error) {
-            // todo: hvordan får vi vist denne feilmeldingen i frontend?
-            console.error(`Fikk feil ved søk: ${error}`)
+        } catch (error: unknown) {
+            setIsLoading(false)
+            if (error instanceof Error) setFeilmelding(error.message)
+            else if (typeof error === 'string') setFeilmelding(error)
         }
-
-    }, [backend, søketekst])
+    }
 
     return (
-        <div className={classNames(styles.Søk)}>
-            <input
-                ref={inputRef}
-                placeholder="fnr/aktør-id"
-                id="person-search"
-                type={'text'}
-                value={søketekst}
-                onChange={(e) => setSøketekst(e.target.value.trim())}
-                data-testid="søkefelt"
-                onKeyDown={(event) => event.key == 'Enter' && sendSøk()}
-            />
-            <button onClick={sendSøk} data-testid="søkeknapp">
-                Søk
-            </button>
-        </div>
+        <Box paddingBlock="4" paddingInline="2 0">
+            <HStack gap="5">
+                <form onSubmit={(e) => {
+                    e.preventDefault()
+                    sendSøk()
+                }}>
+                    <Search
+                        ref={inputRef}
+                        id="person-search"
+                        label="Personsøk"
+                        size="small"
+                        value={søketekst}
+                        variant="primary"
+                        placeholder="fnr/aktør-id"
+                        onChange={(value) => {
+                            setFeilmelding('')
+                            setSøketekst(value.trim())
+                        }}
+                        data-testid="søkefelt"
+                    >
+                        <Search.Button type="submit" loading={ isLoading } />
+                    </Search>
+                </form>
+                <div>
+                    { !!feilmelding && <Alert style={{ color: "var(--a-white)" }} inline variant="error">{ feilmelding }</Alert> }
+                </div>
+            </HStack>
+        </Box>
     )
 }
 Søk.displayName = 'Søk'

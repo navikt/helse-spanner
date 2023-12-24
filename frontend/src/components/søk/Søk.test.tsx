@@ -1,12 +1,9 @@
-import React from 'react'
 import UserEvent from '@testing-library/user-event'
-import { testApp } from '../../testApp'
-import { createTestPerson } from '../../state/testData'
-import { lagfinnesIkkeFeil } from '../../external/feil'
-import testingLibrary, { getByTestId } from '@testing-library/react'
+import {testApp} from '../../testApp'
+import {createTestPerson} from '../../state/testData'
+import {lagfinnesIkkeFeil} from '../../external/feil'
+import testingLibrary, {getByTestId} from '@testing-library/react'
 import {act} from "react-dom/test-utils";
-import {util} from "prettier";
-import skip = util.skip;
 
 function søk(text: string = '42') {
     UserEvent.type(søkefelt(), text)
