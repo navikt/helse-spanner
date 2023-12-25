@@ -22,40 +22,10 @@ import parseISO from 'date-fns/parseISO'
 import compareAsc from 'date-fns/compareAsc'
 import {somNorskDato} from '../i18n'
 import {personSporingUrl, tilstandsmaskinSporingUrl} from './links'
-import {ArbeidsgiverDto, PersonDto, VedtakDto} from "../../state/dto";
 import {Box, HStack, Switch} from "@navikt/ds-react";
-
-const SporingLenke: React.FC<{ url: string }> = ({ url }) => (
-    <a href={url} target="_blank">
-        🔎
-    </a>
-)
-const KopierPersonPåminnelseJson: React.FC<{ person: PersonDto }> = ({ person }) => (
-    <span onClick={() => { navigator.clipboard.writeText(`{ 
-    "@event_name": "person_påminnelse",
-    "fødselsnummer": "${person.fødselsnummer}",
-    "aktørId": "${person.aktørId}"
-}`) }}>
-        ⏰
-    </span>
-)
-const KopierVedtaksperiodePåminnelseJson: React.FC<{ person: PersonDto, arbeidsgiver: ArbeidsgiverDto, vedtak: VedtakDto }> = ({ person, arbeidsgiver, vedtak }) => (
-    <span onClick={() => { navigator.clipboard.writeText(`{ 
-    "@event_name": "påminnelse",
-    "fødselsnummer": "${person.fødselsnummer}",
-    "aktørId": "${person.aktørId}",
-    "organisasjonsnummer": "${arbeidsgiver.organisasjonsnummer}",
-    "vedtaksperiodeId": "${vedtak.id}",
-    "tilstand": "${vedtak.tilstand}",
-    "påminnelsestidspunkt": "{{now}}",
-    "nestePåminnelsestidspunkt": "{{now+1h}}",
-    "tilstandsendringstidspunkt": "{{now-1h}}",
-    "antallGangerPåminnet": 1,
-    "ønskerReberegning": false
-}`) }}>
-        ⏰
-    </span>
-)
+import SporingLenke from "./SporingLenke";
+import KopierPersonPåminnelseJson from "./KopierPersonPåminnelseJson";
+import KopierVedtaksperiodePåminnelseJson from "./KopierVedtaksperiodePåminnelseJson";
 
 export const PersonTree = () => {
     const person = usePerson()
