@@ -1,6 +1,7 @@
 import {
     ForkastetVedtaksperiodeContext,
-    useArbeidsgiver, useForkastetVedtaksperiode,
+    useArbeidsgiver,
+    useForkastetVedtaksperiode,
     usePerson,
     useVedtak,
     VedtakContext
@@ -17,18 +18,25 @@ import KopierVedtaksperiodePåminnelseJson from "./KopierVedtaksperiodePåminnel
 import {useRecoilValue} from "recoil";
 import {hideForkastedeVedtakState} from "../../state/state";
 import classNames from "classnames";
+import {FokastetVedtaksperiodeDto, VedtakDto} from "../../state/dto";
 
-export const Vedtaksperioder = () => {
+
+interface VedtaksperioderProps {
+    valgteTing: string[],
+    toggleValgtTing: (e: React.MouseEvent, ting: string) => void
+}
+
+export const Vedtaksperioder = ({ valgteTing, toggleValgtTing } : VedtaksperioderProps) => {
     const arbeidsgiver = useArbeidsgiver()
     let vedtaksperioder: [JSX.Element, Date][] = arbeidsgiver.vedtaksperioder.map((vedtak) => [
         <VedtakContext.Provider value={vedtak} key={vedtak.id}>
-            <VedtaksNode/>
+            <VedtaksNode valgteTing={valgteTing} vedValg={ toggleValgtTing }/>
         </VedtakContext.Provider>,
         parseISO(vedtak.fom),
     ])
     let forkastedeVedtaksperioder: [JSX.Element, Date][] = arbeidsgiver.forkastede.map((forkastelse) => [
         <ForkastetVedtaksperiodeContext.Provider value={forkastelse.vedtaksperiode} key={forkastelse.vedtaksperiode.id}>
-            <ForkastetVedtaksNode/>
+            <ForkastetVedtaksNode valgteTing={valgteTing} vedValg={ toggleValgtTing }/>
         </ForkastetVedtaksperiodeContext.Provider>,
         parseISO(forkastelse.vedtaksperiode.fom),
     ])
@@ -40,11 +48,11 @@ export const Vedtaksperioder = () => {
 Vedtaksperioder.displayName = 'Vedtaksperioder'
 
 
-const VedtaksNode = () => {
+const VedtaksNode = ({ valgteTing, vedValg }: { valgteTing: string[], vedValg: (e: React.MouseEvent, ting: string) => void }) => {
     const vedtak = useVedtak()
     const [fom, tom] = [vedtak.fom, vedtak.tom].map(somNorskDato)
     return (
-        <SelectableTreeNode indent={1.2} className={styles.LøvNode}>
+        <SelectableTreeNode valgteTing={valgteTing} ting={vedtak.id} indent={1.2} className={styles.LøvNode} vedValg={vedValg}>
             <div className={styles.VedtakNodeHeader}>
                 <span>
                     {fom} - {tom}
@@ -58,7 +66,7 @@ const VedtaksNode = () => {
 }
 VedtaksNode.displayName = 'VedtaksNode'
 
-const ForkastetVedtaksNode = () => {
+const ForkastetVedtaksNode = ( { valgteTing, vedValg } : { valgteTing: string[], vedValg: (e: React.MouseEvent, ting: string) => void }) => {
     const hideForkastedeVedtak = useRecoilValue(hideForkastedeVedtakState)
     if (hideForkastedeVedtak) {
         return null
@@ -66,7 +74,7 @@ const ForkastetVedtaksNode = () => {
     const vedtak = useForkastetVedtaksperiode()
     const [fom, tom] = [vedtak.fom, vedtak.tom].map(somNorskDato)
     return (
-        <SelectableTreeNode className={classNames(styles.Forkastet, styles.LøvNode)} indent={1.2}>
+        <SelectableTreeNode className={classNames(styles.Forkastet, styles.LøvNode)} indent={1.2} valgteTing={valgteTing} ting={vedtak.id} vedValg={vedValg }>
             <div className={styles.ForkastetLabel}>
                 {fom} - {tom}
             </div>

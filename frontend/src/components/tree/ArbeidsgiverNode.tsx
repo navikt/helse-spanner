@@ -8,8 +8,14 @@ import {ExpandToggle} from "./ExpandToggle";
 import {ArbeidsgiverSummary} from "./ArbeidsgiverSummary";
 import {Vedtaksperioder} from "./Vedtaksperioder";
 import {Utbetalinger} from "./Utbetalinger";
+import {ArbeidsgiverDto, FokastetVedtaksperiodeDto, UtbetalingDto, VedtakDto} from "../../state/dto";
 
-export const ArbeidsgiverNode = () => {
+interface ArbeidsgiverNodeProps {
+    valgteTing: string[],
+    toggleValgtTing: (e: React.MouseEvent, ting: string) => void
+}
+
+export const ArbeidsgiverNode = ({valgteTing, toggleValgtTing} : ArbeidsgiverNodeProps) => {
     const arbeidsgiver = useArbeidsgiver()
 
     const [expandedArbeidsgivere, setExpandedArbeidsgivere] = useRecoilState(expandedArbeidsgivereState)
@@ -35,14 +41,20 @@ export const ArbeidsgiverNode = () => {
         <>
             <div className={styles.ArbeidsgiverNode}>
                 <ExpandToggle isExpanded={isExpanded} onClick={() => toggleExpandArbeidsgiver()}/>
-                <SelectableTreeNode indent={0}>
+                <SelectableTreeNode indent={0} valgteTing={valgteTing} ting={arbeidsgiver.id} vedValg={toggleValgtTing}>
                     <ArbeidsgiverSummary/>
                 </SelectableTreeNode>
             </div>
             {isExpanded && (
                 <>
-                    <Vedtaksperioder/>
-                    <Utbetalinger/>
+                    <Vedtaksperioder
+                        valgteTing={valgteTing}
+                        toggleValgtTing={toggleValgtTing}
+                    />
+                    <Utbetalinger
+                        valgteTing={valgteTing}
+                        toggleValgtTing={toggleValgtTing}
+                    />
                 </>
             )}
         </>

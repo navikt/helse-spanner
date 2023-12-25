@@ -9,8 +9,15 @@ import SporingLenke from "./SporingLenke";
 import KopierPersonPåminnelseJson from "./KopierPersonPåminnelseJson";
 import SelectableTreeNode from "./SelectableTreeNode";
 import {ArbeidsgiverNode} from "./ArbeidsgiverNode";
+import {ArbeidsgiverDto, FokastetVedtaksperiodeDto, PersonDto, UtbetalingDto, VedtakDto} from "../../state/dto";
 
-export const PersonTree = () => {
+
+interface PersonTreeProps {
+    valgteTing: string[],
+    toggleValgtTing: (e: React.MouseEvent, ting: string) => void
+}
+
+export const PersonTree = ({valgteTing, toggleValgtTing } : PersonTreeProps) => {
     const person = usePerson()
     const setExpandedArbeidsgivere = useSetRecoilState(expandedArbeidsgivereState)
     const [hideForkastedeVedtak, setHideForkastedeVedtak] = useRecoilState(hideForkastedeVedtakState)
@@ -33,7 +40,7 @@ export const PersonTree = () => {
                 </HStack>
             </Box>
             <Box padding="0">
-                <SelectableTreeNode indent={0} className={styles.PersonNode}>
+                <SelectableTreeNode indent={0} className={styles.PersonNode} valgteTing={valgteTing} ting={person.aktørId} vedValg={toggleValgtTing}>
                     <div>
                         <span>{person.aktørId}</span>
                         <div>
@@ -44,7 +51,10 @@ export const PersonTree = () => {
                 </SelectableTreeNode>
                 {person.arbeidsgivere.map((arbeidsgiver) => (
                     <ArbeidsgiverContext.Provider value={arbeidsgiver} key={arbeidsgiver.id}>
-                        <ArbeidsgiverNode />
+                        <ArbeidsgiverNode
+                            valgteTing={valgteTing}
+                            toggleValgtTing={toggleValgtTing}
+                        />
                     </ArbeidsgiverContext.Provider>
                 ))}
             </Box>

@@ -39,9 +39,9 @@ const Person = () => {
 }
 Person.displayName = 'IngressView.Person'
 
-export const IngressView = () => {
+export const IngressView = ({ valgteTing }: { valgteTing: string[] }) => {
     return (
-        <ContentCategory displayName={ContentView.Ingress} {...{ Person, Vedtaksperiode, ForkastetVedtaksperiode }} />
+        <ContentCategory displayName={ContentView.Ingress} valgteTing={valgteTing} {...{ Person, Vedtaksperiode, ForkastetVedtaksperiode }} />
     )
 }
 

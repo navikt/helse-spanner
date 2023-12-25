@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import {PersonHeader} from './PersonHeader'
 import {PersonTree} from '../tree/PersonTree'
 import {Content} from '../content/Content'
@@ -15,6 +15,18 @@ export const PersonView = () => {
     }, [person])
 
 
+    const [valgteTing, setValgteTing] = useState([person.aktørId])
+
+    const toggleValgtTing = (e: React.MouseEvent, id: string) => {
+        setValgteTing((previous) => {
+            // fjern fra settet hvis iden er der fra før
+            if (previous.includes(id)) return previous.filter((it) => it != id)
+            // legg til iden i settet hvis ctrl/meta-key holdes inne
+            if (e.ctrlKey || e.metaKey) return [...previous.filter((it) => it != id), id]
+            return [id]
+        })
+    }
+
     return (<>
         <Box background="surface-alt-3-moderate" paddingBlock="5" paddingInline="8" as="header">
             <Page.Block>
@@ -29,8 +41,11 @@ export const PersonView = () => {
         >
             <Page.Block>
                 <HGrid gap="6" columns="300px auto">
-                    <PersonTree />
-                    <Content />
+                    <PersonTree
+                        valgteTing={valgteTing}
+                        toggleValgtTing={toggleValgtTing}
+                    />
+                    <Content valgteTing={valgteTing} />
                 </HGrid>
             </Page.Block>
         </Box>

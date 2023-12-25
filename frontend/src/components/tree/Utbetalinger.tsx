@@ -6,12 +6,18 @@ import {somNorskDato} from "../i18n";
 import SelectableTreeNode from "./SelectableTreeNode";
 import classNames from "classnames";
 import styles from "./PersonTree.module.css";
+import {UtbetalingDto} from "../../state/dto";
 
-export const Utbetalinger = () => {
+interface UtbetalingerProps {
+    valgteTing: string[],
+    toggleValgtTing: (e: React.MouseEvent, ting: string) => void
+}
+
+export const Utbetalinger = ({ valgteTing, toggleValgtTing } : UtbetalingerProps) => {
     const arbeidsgiver = useArbeidsgiver()
     let utbetalinger: [JSX.Element, Date][] = arbeidsgiver.utbetalinger.map((utbetaling) => [
         <UtbetalingContext.Provider value={utbetaling} key={utbetaling.id}>
-            {utbetaling.status == 'FORKASTET' ? <ForkastetUtbetalingNode/> : <UtbetalingsNode/>}
+            {utbetaling.status == 'FORKASTET' ? <ForkastetUtbetalingNode valgteTing={valgteTing} vedValg={ toggleValgtTing } /> : <UtbetalingsNode valgteTing={valgteTing} vedValg={ toggleValgtTing }/>}
         </UtbetalingContext.Provider>,
         parseISO(utbetaling.fom),
     ])
@@ -22,11 +28,11 @@ export const Utbetalinger = () => {
 
 Utbetalinger.displayName = 'Utbetalinger'
 
-const UtbetalingsNode = () => {
+const UtbetalingsNode = ({ valgteTing, vedValg }: { valgteTing: string[], vedValg: (e: React.MouseEvent, ting: string) => void }) => {
     const utbetaling = useUtbetaling()
     const [fom, tom] = [utbetaling.fom, utbetaling.tom].map(somNorskDato)
     return (
-        <SelectableTreeNode className={classNames(styles.LøvNode, styles.Utbetaling)} indent={1.2}>
+        <SelectableTreeNode className={classNames(styles.LøvNode, styles.Utbetaling)} valgteTing={valgteTing} ting={utbetaling.id} indent={1.2} vedValg={vedValg }>
             <div>
                 <i>Utbetaling</i> 💰
             </div>
@@ -38,11 +44,11 @@ const UtbetalingsNode = () => {
     )
 }
 
-const ForkastetUtbetalingNode = () => {
+const ForkastetUtbetalingNode = ({ valgteTing, vedValg }: { valgteTing: string[], vedValg: (e: React.MouseEvent, ting: string) => void }) => {
     const utbetaling = useUtbetaling()
     const [fom, tom] = [utbetaling.fom, utbetaling.tom].map(somNorskDato)
     return (
-        <SelectableTreeNode className={classNames(styles.LøvNode, styles.ForkastetUtbetaling)} indent={1.2}>
+        <SelectableTreeNode className={classNames(styles.LøvNode, styles.ForkastetUtbetaling)} valgteTing={valgteTing} ting={utbetaling.id} indent={1.2} vedValg={vedValg}>
             <div className={styles.ForkastetLabel}>
                 <i>Utbetaling</i> 💰
             </div>

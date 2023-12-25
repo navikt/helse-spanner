@@ -73,10 +73,11 @@ const ReactJsonMedBedreKopiering = (props: { src: object }) => (
     />
 )
 
-export const JsonView = () => {
+export const JsonView = ({ valgteTing }: { valgteTing: string[] }) => {
     return (
         <ContentCategory
             displayName={ContentView.Json}
+            valgteTing={valgteTing}
             {...{ Person, Arbeidsgiver, Vedtaksperiode, ForkastetVedtaksperiode, Utbetaling }}
         />
     )

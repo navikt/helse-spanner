@@ -79,13 +79,14 @@ const Utbetaling = () => {
 }
 Utbetaling.displayName = 'HendelseView.Utbetaling'
 
-export const HendelseView = () => {
+export const HendelseView = ({ valgteTing }: { valgteTing: string[] }) => {
     const person = usePerson()
     const aktivitetslogg: AktivitetsloggV2 = React.useMemo(() => aktivitetsloggFraPerson(person), [person])
     return (
         <AktivitetsloggContext.Provider value={aktivitetslogg}>
             <ContentCategory
                 displayName={ContentView.Hendelser}
+                valgteTing={valgteTing}
                 {...{ Person, Arbeidsgiver, Vedtaksperiode, ForkastetVedtaksperiode, Utbetaling }}
             />
         </AktivitetsloggContext.Provider>
