@@ -5,10 +5,9 @@ import {
     UtbetalingContext,
     VedtakContext,
 } from '../../state/contexts'
-import { ShowIfSelected } from './Content'
+import {ShowIfSelected} from './Content'
 import React from 'react'
-import { useRecoilValue } from 'recoil'
-import { ContentView, displayViewState } from '../../state/state'
+import {ContentView} from '../../state/state'
 
 type ContentCategoryProperties = {
     displayName: ContentView
@@ -21,7 +20,6 @@ type ContentCategoryProperties = {
 
 export const ContentCategory = React.memo<ContentCategoryProperties>(
     ({
-        displayName,
         Person = undefined,
         Arbeidsgiver = undefined,
         Vedtaksperiode = undefined,
@@ -29,8 +27,6 @@ export const ContentCategory = React.memo<ContentCategoryProperties>(
         Utbetaling = undefined,
     }) => {
         const person = usePerson()
-        const useDisplayView = useRecoilValue(displayViewState)
-        if (!useDisplayView.includes(displayName)) return null
         return (
             <>
                 {Person && (

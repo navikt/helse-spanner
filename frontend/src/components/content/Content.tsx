@@ -1,8 +1,7 @@
 import React, {PropsWithChildren} from 'react'
 import {JsonView} from './JsonView'
 import {HendelseView} from './hendelser/HendelseView'
-import {useRecoilState} from 'recoil'
-import {ContentView, displayViewState} from '../../state/state'
+import {ContentView} from '../../state/state'
 import {useIsOnlySelected, useIsSelected} from '../../state/contexts'
 import {Card} from '../Card'
 import {HendelseDokumentView} from './hendelseDokument/HendelseDokumentView'
@@ -35,8 +34,7 @@ export const Content = () => {
 Content.displayName = 'Content'
 
 function ViewButton({ value }: { value: ContentView }) {
-    const [displayViews, setDisplayViews] = useRecoilState(displayViewState)
-    return <Tabs.Tab value={value} label={value} onClick={() => setDisplayViews([value]) } />
+    return <Tabs.Tab value={value} label={value} />
 }
 
 export const ShowIfSelected: React.FC<PropsWithChildren<any>> = ({ children }) => {

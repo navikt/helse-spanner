@@ -1,6 +1,6 @@
 import Recoil from 'recoil'
-import { Id } from './contexts'
-import { KontekstDto } from './dto'
+import {Id} from './contexts'
+import {KontekstDto} from './dto'
 
 export const selectedState = Recoil.atom<Id[]>({
     key: 'highligth',
@@ -11,11 +11,6 @@ export enum ContentView {
     Hendelser = 'Hendelser',
     Ingress = 'Ingress',
 }
-
-export const displayViewState = Recoil.atom<ContentView[]>({
-    key: 'displayView',
-    default: [ContentView.Json],
-})
 
 export const expandedHendelserState = Recoil.atom<number[]>({
     key: 'expandedHendelser',
