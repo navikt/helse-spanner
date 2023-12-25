@@ -6,18 +6,19 @@ import {PersonContext} from '../../state/contexts'
 import {Spinner} from '../Spinner'
 import {Feilmelding} from '../Feilmelding'
 import {useParams} from 'react-router-dom'
+import {Box, HGrid, Spacer, VStack} from "@navikt/ds-react";
 
 export const PersonData = () => {
-    const { personId } = useParams<string>()
+    const {personId} = useParams<string>()
     if (personId === undefined) return null
     const backend = useBackend()
     const request = () => backend.personForUUID(personId)
-    const { isLoading, isError, data, error } = useQuery(['person', personId], request)
-    if (isLoading) return <Spinner />
-    if (isError) return <Feilmelding feil={error} />
+    const {isLoading, isError, data, error} = useQuery(['person', personId], request)
+    if (isLoading) return <div style={{display: "grid", placeContent: "center"}}><Spinner/></div>
+    if (isError) return <Feilmelding feil={error}/>
     return (
         <PersonContext.Provider value={data}>
-            <PersonView />
+            <PersonView/>
         </PersonContext.Provider>
     )
 }
