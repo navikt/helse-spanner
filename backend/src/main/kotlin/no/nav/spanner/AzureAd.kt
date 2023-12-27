@@ -7,9 +7,7 @@ import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.engine.apache.*
 import io.ktor.client.plugins.contentnegotiation.*
-import io.ktor.serialization.kotlinx.json.*
 import io.ktor.client.request.*
-import io.ktor.client.statement.*
 import io.ktor.http.*
 import io.ktor.serialization.jackson.*
 import io.ktor.util.*
@@ -44,34 +42,6 @@ class AzureAD(private val config: AzureADConfig) {
             .path("access_token")
             .takeUnless(JsonNode::isMissingOrNull)
             ?.asText()!!
-    }
-
-    @OptIn(InternalAPI::class)
-    internal suspend fun refreshToken(refreshToken: String): SpannerSession {
-        val requestBody = listOf(
-            "tenant" to "nav.no",
-            "client_id" to config.clientId,
-            "grant_type" to "refresh_token",
-            "scope" to "openid offline_access ${config.clientId}/.default",
-            "refresh_token" to refreshToken,
-            "client_secret" to config.clientSecret,
-        ).formUrlEncode()
-        val response = httpClient.post(config.tokenEndpoint) {
-            accept(ContentType.Application.Json)
-            contentType(ContentType.Application.FormUrlEncoded)
-            body = requestBody
-        }
-        Log.logger(AzureAD::class.java)
-            .response(response)
-            .info("Refreshing session")
-
-        val jsonRespons = response.body<JsonNode>()
-        return SpannerSession(
-            accessToken = jsonRespons.path("access_token").asText()!!,
-            refreshToken = jsonRespons.path("refresh_token").asText()!!,
-            idToken = jsonRespons.path("id_token").asText()!!,
-            expiresIn = jsonRespons.path("expires_in").asLong()
-        )
     }
 
     private fun createOnBehalfOfRequestBody(clientId: String, list: List<Pair<String, String>>) =

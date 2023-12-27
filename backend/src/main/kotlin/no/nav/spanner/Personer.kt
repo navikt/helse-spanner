@@ -10,20 +10,30 @@ import io.ktor.client.plugins.*
 import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
-import io.ktor.server.plugins.*
 import io.ktor.http.*
+import io.ktor.http.ContentType.Application.Json
+import io.ktor.http.HttpStatusCode.Companion.OK
+import io.ktor.http.HttpStatusCode.Companion.Unauthorized
+import io.ktor.http.auth.*
 import io.ktor.serialization.jackson.*
+import io.ktor.server.application.*
+import io.ktor.server.auth.*
+import io.ktor.server.plugins.*
+import io.ktor.server.response.*
 import io.ktor.util.*
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
 import org.slf4j.LoggerFactory
 
 val logger = LoggerFactory.getLogger(Spleis::class.java)
 
 interface Personer {
-    suspend fun person(id: String, idType: IdType, accessToken: String): String
-    suspend fun maskerPerson(id: String, idType: IdType, accessToken: String): String
-    suspend fun speilperson(fnr: String, accessToken: String): String
-    suspend fun hendelse(meldingsreferanse: String, accessToken: String): String
+    suspend fun person(call: ApplicationCall, id: String, idType: IdType)
+    suspend fun maskerPerson(call: ApplicationCall, id: String, idType: IdType)
+    suspend fun speilperson(call: ApplicationCall, fnr: String)
+    suspend fun hendelse(call: ApplicationCall, meldingsreferanse: String)
 }
 
 class Spleis(
@@ -33,8 +43,7 @@ class Spleis(
     private val sparsomBaseUrl: String = "http://sparsom-api.tbd.svc.cluster.local",
     private val sparsomClientId: String,
     private val spurteDuClient: SpurteDuClient
-) :
-    Personer {
+) : Personer {
     private val httpClient = HttpClient(CIO) {
         engine {
             requestTimeout = 60000
@@ -55,14 +64,21 @@ class Spleis(
             sparsomClientId = spannerConfig.sparsomClientId,
             spurteDuClient = SpurteDuClient(objectMapper)
         )
+
+        private val ApplicationCall.bearerToken: String? get() {
+            val httpAuthHeader = request.parseAuthorizationHeader() ?: return null
+            if (httpAuthHeader !is HttpAuthHeader.Single) return null
+            return httpAuthHeader.blob
+        }
     }
 
-    override suspend fun maskerPerson(id: String, idType: IdType, accessToken: String): String {
+    override suspend fun maskerPerson(call: ApplicationCall, id: String, idType: IdType) {
         val maskertId = spurteDuClient.utveksle(id, idType) ?: throw BadRequestException("kunne ikke kontakte spurte du")
-        return """ { "id": "$maskertId" } """
+        call.respondText(""" { "id": "$maskertId" } """, Json, OK)
     }
 
-    override suspend fun person(id: String, idType: IdType, accessToken: String): String {
+    override suspend fun person(call: ApplicationCall, id: String, idType: IdType) {
+        val accessToken = call.bearerToken ?: return call.respond(HttpStatusCode.Unauthorized)
         val url = URLBuilder(baseUrl).apply {
             if (idType == IdType.MASKERT_ID) path("api", "person-json", id)
             else path("api", "person-json")
@@ -71,7 +87,7 @@ class Spleis(
         val oboToken = token(accessToken, spleisClientId)
         val log = Log.logger(Personer::class.java)
 
-        return coroutineScope {
+        val response = coroutineScope {
             val aktivitetslogg: Deferred<String?> = async(Dispatchers.IO) {
                 aktivitetslogg(accessToken, id)
             }
@@ -84,7 +100,7 @@ class Spleis(
                     httpClient.get(url) {
                         header("Authorization", "Bearer $oboToken")
                         header(idType.header, id)
-                        accept(ContentType.Application.Json)
+                        accept(Json)
                     }
                 } catch (e: ClientRequestException) {
                     if (e.response.status == HttpStatusCode.NotFound) {
@@ -101,10 +117,12 @@ class Spleis(
             node.putRawValue("aktivitetsloggV2", RawValue(aktivitetslogg.await()))
             node.toString()
         }
+        call.respondText(response, Json, OK)
     }
 
     @OptIn(InternalAPI::class)
-    override suspend fun speilperson(fnr: String, accessToken: String): String {
+    override suspend fun speilperson(call: ApplicationCall, fnr: String) {
+        val accessToken = call.bearerToken ?: return call.respond(Unauthorized)
         val url = URLBuilder(baseUrl).apply { path("graphql") }.build()
         val oboToken = token(accessToken, spleisClientId)
         val log = Log.logger(Personer::class.java)
@@ -116,7 +134,7 @@ class Spleis(
             try {
                 httpClient.post(url) {
                     header("Authorization", "Bearer $oboToken")
-                    accept(ContentType.Application.Json)
+                    accept(Json)
                     body = """{
             "query": "",
             "variables": {
@@ -136,7 +154,7 @@ class Spleis(
             .response(response)
             .info("Response from spleis")
         val node = objectMapper.readTree(response.bodyAsText()) as ObjectNode
-        return node.toString()
+        call.respondText(node.toString(), Json, OK)
     }
 
     private suspend fun aktivitetslogg(accessToken: String, ident: String): String? {
@@ -152,7 +170,7 @@ class Spleis(
         return try {
             val response = httpClient.get(url) {
                 header("Authorization", "Bearer $oboToken")
-                accept(ContentType.Application.Json)
+                accept(Json)
             }
             log
                 .response(response)
@@ -163,8 +181,9 @@ class Spleis(
         }
     }
 
-    override suspend fun hendelse(meldingsreferanse: String, accessToken: String): String {
-     val url = URLBuilder(baseUrl).apply { path("api", "hendelse-json", meldingsreferanse) }.build()
+    override suspend fun hendelse(call: ApplicationCall, meldingsreferanse: String) {
+        val accessToken = call.bearerToken ?: return call.respond(Unauthorized)
+        val url = URLBuilder(baseUrl).apply { path("api", "hendelse-json", meldingsreferanse) }.build()
         val oboToken = token(accessToken, spleisClientId)
         val log = Log.logger(Personer::class.java)
         log
@@ -173,7 +192,7 @@ class Spleis(
         val response = try {
         httpClient.get(url) {
             header("Authorization", "Bearer $oboToken")
-            accept(ContentType.Application.Json)
+            accept(Json)
         }
         } catch (e : ClientRequestException) {
             if (e.response.status == HttpStatusCode.NotFound) {
@@ -184,40 +203,9 @@ class Spleis(
         log
             .response(response)
             .info("Response from spleis")
-        return response.bodyAsText()
+        call.respondText(response.bodyAsText(), Json, OK)
     }
 
 
     private suspend fun token(accessToken: String, clientId: String) = (azureAD.hentOnBehalfOfToken(JWT.decode(accessToken), clientId))
-}
-
-object LokaleKjenninger : Personer {
-    override suspend fun person(id: String, idType: IdType, accessToken: String) = when (id) {
-        "113eb3df-102d-4a07-9270-2caa648c62f4" -> lesJson("12020052345")
-        "48bfef57-3080-4f19-98eb-5cc72d9d16c5" -> lesJson("2392363031327")
-        else -> throw NotFoundException("no person with identifier: ${id}")
-    }.also {
-        logger.trace("person fetched = ${it}")
-    }
-
-    override suspend fun maskerPerson(id: String, idType: IdType, accessToken: String) =
-        when (id) {
-            "42",
-            "12020052345" -> """ { "id": "113eb3df-102d-4a07-9270-2caa648c62f4" } """
-            "2392363031327" -> """ { "id": "48bfef57-3080-4f19-98eb-5cc72d9d16c5" } """
-            else -> throw NotFoundException("no person with identifier: ${id}")
-        }.also {
-            logger.trace("person fetched = ${it}")
-        }
-
-    override suspend fun hendelse(meldingsreferanse: String, accessToken: String): String {
-        return "{}"
-    }
-
-    override suspend fun speilperson(fnr: String, accessToken: String): String {
-        return "{}"
-    }
-
-    private fun lesJson(filnavn: String) =
-        Personer::class.java.getResource("/personer/$filnavn.json")?.readText()!!
 }

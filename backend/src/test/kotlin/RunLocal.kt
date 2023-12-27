@@ -1,5 +1,6 @@
 package no.nav.spanner
 
+import com.auth0.jwk.JwkProviderBuilder
 import io.ktor.server.application.*
 import io.ktor.server.cio.*
 import io.ktor.server.engine.*
@@ -7,6 +8,7 @@ import io.ktor.server.plugins.cors.*
 import no.nav.security.mock.oauth2.MockOAuth2Server
 import no.nav.security.mock.oauth2.OAuth2Config
 import no.nav.security.mock.oauth2.token.DefaultOAuth2TokenCallback
+import no.nav.spanner.no.nav.spanner.LokaleKjenninger
 import org.slf4j.LoggerFactory
 
 fun startLocal() {
@@ -20,7 +22,9 @@ fun startLocal() {
     mockAuth.start()
 
     val adConfig = AzureADConfig(
-        discoveryUrl = mockAuth.wellKnownUrl("default").toString(),
+        jwkProvider = JwkProviderBuilder(mockAuth.wellKnownUrl("default").toUrl()).build(),
+        issuer = "default",
+        tokenEndpoint = mockAuth.tokenEndpointUrl("default").toString(),
         clientId = "whatever",
         clientSecret = "supersecret"
     )

@@ -31,6 +31,11 @@ spec:
       cpu: 50m
       memory: 512Mi
   azure:
+    sidecar:
+      enabled: true
+      autoLogin: true
+      autoLoginIgnorePaths:
+        - /assets/**
     application:
       tenant: nav.no
       enabled: true
@@ -40,18 +45,12 @@ spec:
         groups:
           - id: "f787f900-6697-440d-a086-d5bb56e26a9c" # tbd
           - id: "382f42f4-f46b-40c1-849b-38d6b5a1f639" # sykepenger-spanner
-      replyURLs:
-        - "https://spanner.intern.nav.no/oauth2/callback"
       allowAllUsers: false
   accessPolicy:
     outbound:
       rules:
         - application: spleis-api
-          namespace: tbd
-          cluster: prod-gcp
         - application: sparsom-api
-          namespace: tbd
-          cluster: prod-gcp
         - application: spurtedu
   secureLogs:
     enabled: true

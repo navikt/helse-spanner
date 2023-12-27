@@ -1,5 +1,6 @@
 package no.nav.spanner
 
+import com.auth0.jwk.JwkProviderBuilder
 import com.fasterxml.jackson.module.kotlin.readValue
 import io.ktor.client.*
 import io.ktor.client.call.*
@@ -13,6 +14,7 @@ import io.ktor.server.testing.*
 import kotlinx.coroutines.runBlocking
 import no.nav.security.mock.oauth2.MockOAuth2Server
 import no.nav.security.mock.oauth2.token.DefaultOAuth2TokenCallback
+import no.nav.spanner.no.nav.spanner.LokaleKjenninger
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
@@ -22,7 +24,9 @@ import org.junit.jupiter.api.Test
 class E2ETest {
 
     private val azureADConfig = AzureADConfig(
-        discoveryUrl = mockAuth.wellKnownUrl("default").toString(),
+        jwkProvider = JwkProviderBuilder(mockAuth.wellKnownUrl("default").toUrl()).build(),
+        issuer = "default",
+        tokenEndpoint = mockAuth.tokenEndpointUrl("issuer").toString(),
         clientId = "whatever",
         clientSecret = "supersecret"
     )

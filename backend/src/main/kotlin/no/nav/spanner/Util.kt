@@ -7,9 +7,6 @@ import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import io.ktor.server.application.*
-import io.ktor.server.sessions.*
-import io.ktor.util.pipeline.*
 import java.time.ZoneId
 import java.util.*
 
@@ -28,9 +25,6 @@ internal val objectMapper = jacksonObjectMapper()
 internal fun Date.toLocalDateTime() = toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime()
 
 internal fun JsonNode.isMissingOrNull() = isMissingNode || isNull
-
-
-internal fun PipelineContext<Unit, ApplicationCall>.sesjon(): SpannerSession = call.sessions.get<SpannerSession>()!!
 
 fun String.asJwt() =
     JWT.decode(this)

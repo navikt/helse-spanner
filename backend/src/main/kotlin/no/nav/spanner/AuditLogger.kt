@@ -4,7 +4,10 @@ import io.ktor.server.application.*
 import io.ktor.http.HttpMethod.Companion.Get
 import io.ktor.http.HttpMethod.Companion.Post
 import io.ktor.http.HttpMethod.Companion.Put
+import io.ktor.server.auth.*
+import io.ktor.server.auth.jwt.*
 import io.ktor.server.request.*
+import io.ktor.util.pipeline.*
 import no.nav.spanner.AuditLogger.Operasjon.*
 import org.slf4j.LoggerFactory
 import java.time.ZonedDateTime
@@ -45,8 +48,11 @@ internal class AuditLogger(private val brukerIdent: String) {
 
     companion object {
         private val logger = LoggerFactory.getLogger("auditLogger")
-        fun SpannerSession.audit(): AuditLogger {
-            val ident = requireNotNull(idToken.asJwt().getClaim("NAVident").asString()) { "NAVident mangler i tokenet" }
+        fun PipelineContext<Unit, ApplicationCall>.audit() =
+            call.principal<JWTPrincipal>()?.audit()?.log(call)
+
+        fun JWTPrincipal.audit(): AuditLogger {
+            val ident = requireNotNull(this["NAVident"]) { "NAVident mangler i tokenet" }
             return AuditLogger(ident)
         }
     }
