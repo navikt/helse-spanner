@@ -1,6 +1,6 @@
 import styles from './PersonTree.module.css'
 import React from 'react'
-import {ArbeidsgiverContext, usePerson,} from '../../state/contexts'
+import {usePerson,} from '../../state/contexts'
 import {useRecoilState, useSetRecoilState} from 'recoil'
 import {expandedArbeidsgivereState, hideForkastedeVedtakState} from '../../state/state'
 import {personSporingUrl} from './links'
@@ -9,7 +9,6 @@ import SporingLenke from "./SporingLenke";
 import KopierPersonPåminnelseJson from "./KopierPersonPåminnelseJson";
 import SelectableTreeNode from "./SelectableTreeNode";
 import {ArbeidsgiverNode} from "./ArbeidsgiverNode";
-import {ArbeidsgiverDto, FokastetVedtaksperiodeDto, PersonDto, UtbetalingDto, VedtakDto} from "../../state/dto";
 
 
 interface PersonTreeProps {
@@ -50,12 +49,12 @@ export const PersonTree = ({valgteTing, toggleValgtTing } : PersonTreeProps) => 
                     </div>
                 </SelectableTreeNode>
                 {person.arbeidsgivere.map((arbeidsgiver) => (
-                    <ArbeidsgiverContext.Provider value={arbeidsgiver} key={arbeidsgiver.id}>
-                        <ArbeidsgiverNode
-                            valgteTing={valgteTing}
-                            toggleValgtTing={toggleValgtTing}
-                        />
-                    </ArbeidsgiverContext.Provider>
+                    <ArbeidsgiverNode
+                        key={arbeidsgiver.id}
+                        arbeidsgiver={arbeidsgiver}
+                        valgteTing={valgteTing}
+                        toggleValgtTing={toggleValgtTing}
+                    />
                 ))}
             </Box>
         </Box>

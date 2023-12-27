@@ -1,10 +1,8 @@
-import {useArbeidsgiver} from "../../state/contexts";
 import styles from "./PersonTree.module.css";
 import React from "react";
+import {ArbeidsgiverDto} from "../../state/dto";
 
-export const ArbeidsgiverSummary = (): JSX.Element => {
-    const arbeidsgiver = useArbeidsgiver()
-
+export const ArbeidsgiverSummary = ({ arbeidsgiver }: { arbeidsgiver: ArbeidsgiverDto }) => {
     const antallVedtaksperioder = arbeidsgiver.vedtaksperioder.length
     const antallForkastedeVedtaksperioder = arbeidsgiver.forkastede.length
     const antallUtbetalinger = arbeidsgiver.utbetalinger.length

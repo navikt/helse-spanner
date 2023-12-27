@@ -1,4 +1,3 @@
-import {useArbeidsgiver} from "../../state/contexts";
 import {useRecoilState} from "recoil";
 import {expandedArbeidsgivereState} from "../../state/state";
 import styles from "./PersonTree.module.css";
@@ -8,16 +7,15 @@ import {ExpandToggle} from "./ExpandToggle";
 import {ArbeidsgiverSummary} from "./ArbeidsgiverSummary";
 import {Vedtaksperioder} from "./Vedtaksperioder";
 import {Utbetalinger} from "./Utbetalinger";
-import {ArbeidsgiverDto, FokastetVedtaksperiodeDto, UtbetalingDto, VedtakDto} from "../../state/dto";
+import {ArbeidsgiverDto} from "../../state/dto";
 
 interface ArbeidsgiverNodeProps {
+    arbeidsgiver: ArbeidsgiverDto,
     valgteTing: string[],
     toggleValgtTing: (e: React.MouseEvent, ting: string) => void
 }
 
-export const ArbeidsgiverNode = ({valgteTing, toggleValgtTing} : ArbeidsgiverNodeProps) => {
-    const arbeidsgiver = useArbeidsgiver()
-
+export const ArbeidsgiverNode = ({ arbeidsgiver, valgteTing, toggleValgtTing } : ArbeidsgiverNodeProps) => {
     const [expandedArbeidsgivere, setExpandedArbeidsgivere] = useRecoilState(expandedArbeidsgivereState)
     const isExpanded = expandedArbeidsgivere.includes(arbeidsgiver.organisasjonsnummer)
 
@@ -42,16 +40,18 @@ export const ArbeidsgiverNode = ({valgteTing, toggleValgtTing} : ArbeidsgiverNod
             <div className={styles.ArbeidsgiverNode}>
                 <ExpandToggle isExpanded={isExpanded} onClick={() => toggleExpandArbeidsgiver()}/>
                 <SelectableTreeNode indent={0} valgteTing={valgteTing} ting={arbeidsgiver.id} vedValg={toggleValgtTing}>
-                    <ArbeidsgiverSummary/>
+                    <ArbeidsgiverSummary arbeidsgiver={arbeidsgiver}/>
                 </SelectableTreeNode>
             </div>
             {isExpanded && (
                 <>
                     <Vedtaksperioder
+                        arbeidsgiver={arbeidsgiver}
                         valgteTing={valgteTing}
                         toggleValgtTing={toggleValgtTing}
                     />
                     <Utbetalinger
+                        arbeidsgiver={arbeidsgiver}
                         valgteTing={valgteTing}
                         toggleValgtTing={toggleValgtTing}
                     />

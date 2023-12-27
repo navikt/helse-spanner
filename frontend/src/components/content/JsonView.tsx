@@ -1,12 +1,11 @@
-import React from 'react'
-import { useArbeidsgiver, useForkastetVedtaksperiode, usePerson, useUtbetaling, useVedtak } from '../../state/contexts'
+import React, {useMemo} from 'react'
 import ReactJson from 'react-json-view'
-import { ContentView } from '../../state/state'
-import { ContentCategory } from './ContentCategory'
-import { writeToClipboard } from '../../utils'
+import {ContentView} from '../../state/state'
+import {ContentCategory} from './ContentCategory'
+import {writeToClipboard} from '../../utils'
+import {ArbeidsgiverDto, FokastetVedtaksperiodeDto, PersonDto, UtbetalingDto, VedtakDto} from "../../state/dto";
 
-const Arbeidsgiver = () => {
-    const arbeidsgiver = useArbeidsgiver()
+const Arbeidsgiver = ({ arbeidsgiver }: { arbeidsgiver: ArbeidsgiverDto }) => {
     return (
         <div>
             <ReactJsonMedBedreKopiering src={arbeidsgiver} />
@@ -15,8 +14,7 @@ const Arbeidsgiver = () => {
 }
 Arbeidsgiver.displayName = 'JsonView.Arbeidsgiver'
 
-const Person = () => {
-    const person = usePerson()
+const Person = ({ person }: { person: PersonDto }) => {
     return (
         <div>
             <ReactJsonMedBedreKopiering src={person} />
@@ -25,8 +23,7 @@ const Person = () => {
 }
 Person.displayName = 'JsonView.Person'
 
-const Vedtaksperiode = () => {
-    const vedtaksperiode = useVedtak()
+const Vedtaksperiode = ({ vedtaksperiode }: { vedtaksperiode: VedtakDto }) => {
     return (
         <div>
             <ReactJsonMedBedreKopiering src={vedtaksperiode} />
@@ -35,8 +32,7 @@ const Vedtaksperiode = () => {
 }
 Vedtaksperiode.displayName = 'JsonView.Vedtaksperiode'
 
-const ForkastetVedtaksperiode = () => {
-    const vedtaksperiode = useForkastetVedtaksperiode()
+const ForkastetVedtaksperiode = ({ vedtaksperiode }: { vedtaksperiode: FokastetVedtaksperiodeDto }) => {
     return (
         <div>
             <ReactJsonMedBedreKopiering src={vedtaksperiode} />
@@ -45,8 +41,7 @@ const ForkastetVedtaksperiode = () => {
 }
 ForkastetVedtaksperiode.displayName = 'JsonView.ForkastetVedtaksperiode'
 
-const Utbetaling = () => {
-    const utbetaling = useUtbetaling()
+const Utbetaling = ({ utbetaling }: { utbetaling: UtbetalingDto }) => {
     return (
         <div>
             <ReactJsonMedBedreKopiering src={utbetaling} />
@@ -73,13 +68,14 @@ const ReactJsonMedBedreKopiering = (props: { src: object }) => (
     />
 )
 
-export const JsonView = ({ valgteTing }: { valgteTing: string[] }) => {
-    return (
-        <ContentCategory
+export const JsonView = ({ person, valgteTing }: { person: PersonDto, valgteTing: string[] }) => {
+    return useMemo(() => {
+        return <ContentCategory
             displayName={ContentView.Json}
+            person={person}
             valgteTing={valgteTing}
             {...{ Person, Arbeidsgiver, Vedtaksperiode, ForkastetVedtaksperiode, Utbetaling }}
         />
-    )
+    }, [valgteTing])
 }
 JsonView.displayName = 'JsonView'

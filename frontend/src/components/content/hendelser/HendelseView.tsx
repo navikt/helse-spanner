@@ -1,95 +1,94 @@
 import React from 'react'
+import {ContentView} from '../../../state/state'
+import {Hendelser} from './Hendelser'
+import {ContentCategory} from '../ContentCategory'
+import {AktivitetsloggV2, Hendelsekontekst} from '../../../state/model'
 import {
-    AktivitetsloggContext,
-    useAktivitetslogg,
-    useArbeidsgiver,
-    useForkastetVedtaksperiode,
-    usePerson,
-    useUtbetaling,
-    useVedtak,
-} from '../../../state/contexts'
-import { ContentView } from '../../../state/state'
-import { Hendelser } from './Hendelser'
-import { ContentCategory } from '../ContentCategory'
-import { AktivitetsloggV2, Hendelsekontekst } from '../../../state/model'
-import { KontekstMapV2Dto, PersonDto } from '../../../state/dto'
+    ArbeidsgiverDto,
+    FokastetVedtaksperiodeDto,
+    KontekstMapV2Dto,
+    PersonDto,
+    UtbetalingDto,
+    VedtakDto
+} from '../../../state/dto'
 import parseISO from 'date-fns/parseISO'
 import compareAsc from 'date-fns/compareAsc'
-import { hasValue } from '../../../utils'
+import {hasValue} from '../../../utils'
 
-const Person = () => {
-    const aktivitetslogg = useAktivitetslogg()
-    const hendelser = hendelserAssosiertMedKontekst(aktivitetslogg, () => true)
-    return <Hendelser hendelser={hendelser} />
+const Person = (aktivitetslogg: AktivitetsloggV2) => {
+    return ({ person }: { person: PersonDto}) => {
+        const hendelser = hendelserAssosiertMedKontekst(aktivitetslogg, () => true)
+        return <Hendelser hendelser={hendelser} />
+    }
 }
 Person.displayName = 'HendelseView.Person'
 
-const Arbeidsgiver = () => {
-    const aktivitetslogg = useAktivitetslogg()
-    const arbeidsgiver = useArbeidsgiver()
-    const hendelser = hendelserAssosiertMedKontekst(aktivitetslogg, (kontekstType, kontekst) =>
-        (!!kontekst.organisasjonsnummer &&
-            kontekst.organisasjonsnummer === arbeidsgiver.organisasjonsnummer) ??
-        false
-    )
-    return <Hendelser hendelser={hendelser} />
+const Arbeidsgiver = (aktivitetslogg: AktivitetsloggV2) => {
+    return ({ arbeidsgiver }: { arbeidsgiver: ArbeidsgiverDto }) => {
+        const hendelser = hendelserAssosiertMedKontekst(aktivitetslogg, (kontekstType, kontekst) =>
+            (!!kontekst.organisasjonsnummer &&
+                kontekst.organisasjonsnummer === arbeidsgiver.organisasjonsnummer) ??
+            false
+        )
+        return <Hendelser hendelser={hendelser} />
+    }
 }
 Arbeidsgiver.displayName = 'HendelseView.Arbeidsgiver'
 
-const Vedtaksperiode = () => {
-    const vedtaksperiode = useVedtak()
-    const aktivitetslogg = useAktivitetslogg()
-    const hendelser = hendelserAssosiertMedKontekst(
-        aktivitetslogg,
-        (kontekstType, kontekst) =>
-            (!!kontekst.vedtaksperiodeId && kontekst.vedtaksperiodeId === vedtaksperiode.id) ??
-            false
-    )
+const Vedtaksperiode = (aktivitetslogg: AktivitetsloggV2) => {
+    return ({ vedtaksperiode }: { vedtaksperiode: VedtakDto }) => {
+        const hendelser = hendelserAssosiertMedKontekst(
+            aktivitetslogg,
+            (kontekstType, kontekst) =>
+                (!!kontekst.vedtaksperiodeId && kontekst.vedtaksperiodeId === vedtaksperiode.id) ??
+                false
+        )
 
-    return <Hendelser hendelser={hendelser} />
+        return <Hendelser hendelser={hendelser}/>
+    }
 }
 Vedtaksperiode.displayName = 'HendelseView.Vedtaksperiode'
 
-const ForkastetVedtaksperiode = () => {
-    const vedtaksperiode = useForkastetVedtaksperiode()
-    const aktivitetslogg = useAktivitetslogg()
+const ForkastetVedtaksperiode = (aktivitetslogg: AktivitetsloggV2) => {
+    return ({ vedtaksperiode }: { vedtaksperiode: FokastetVedtaksperiodeDto }) => {
+        const hendelser = hendelserAssosiertMedKontekst(
+            aktivitetslogg,
+            (kontekstType, kontekst) =>
+                (!!kontekst.vedtaksperiodeId && kontekst.vedtaksperiodeId === vedtaksperiode.id) ??
+                false
+        )
 
-    const hendelser = hendelserAssosiertMedKontekst(
-        aktivitetslogg,
-        (kontekstType, kontekst) =>
-            (!!kontekst.vedtaksperiodeId && kontekst.vedtaksperiodeId === vedtaksperiode.id) ??
-            false
-    )
-
-    return <Hendelser hendelser={hendelser} />
+        return <Hendelser hendelser={hendelser} />
+    }
 }
 ForkastetVedtaksperiode.displayName = 'HendelseView.ForkastetVedtaksperiode'
 
-const Utbetaling = () => {
-    const utbetaling = useUtbetaling()
-    const aktivitetslogg = useAktivitetslogg()
+const Utbetaling = (aktivitetslogg: AktivitetsloggV2) => {
+    return ({ utbetaling }: { utbetaling: UtbetalingDto }) => {
+        const hendelser = hendelserAssosiertMedKontekst(
+            aktivitetslogg,
+            (kontekstType, kontekst) =>
+                (!!kontekst.utbetalingId && kontekst.utbetalingId === utbetaling.id) ?? false
+        )
 
-    const hendelser = hendelserAssosiertMedKontekst(
-        aktivitetslogg,
-        (kontekstType, kontekst) =>
-            (!!kontekst.utbetalingId && kontekst.utbetalingId === utbetaling.id) ?? false
-    )
-
-    return <Hendelser hendelser={hendelser} />
+        return <Hendelser hendelser={hendelser} />
+    }
 }
 Utbetaling.displayName = 'HendelseView.Utbetaling'
 
-export const HendelseView = ({ valgteTing }: { valgteTing: string[] }) => {
-    const person = usePerson()
+export const HendelseView = ({ person, valgteTing }: { person: PersonDto, valgteTing: string[] }) => {
     const aktivitetslogg: AktivitetsloggV2 = React.useMemo(() => aktivitetsloggFraPerson(person), [person])
     return (
-        <AktivitetsloggContext.Provider value={aktivitetslogg}>
-            <ContentCategory
-                displayName={ContentView.Hendelser}
-                valgteTing={valgteTing}
-                {...{ Person, Arbeidsgiver, Vedtaksperiode, ForkastetVedtaksperiode, Utbetaling }}
-            />
-        </AktivitetsloggContext.Provider>
+        <ContentCategory
+            displayName={ContentView.Hendelser}
+            valgteTing={valgteTing}
+            person={person}
+            Person = { Person(aktivitetslogg) }
+            Arbeidsgiver={ Arbeidsgiver(aktivitetslogg) }
+            Vedtaksperiode={ Vedtaksperiode(aktivitetslogg) }
+            ForkastetVedtaksperiode={ ForkastetVedtaksperiode(aktivitetslogg) }
+            Utbetaling={ Utbetaling(aktivitetslogg) }
+        />
     )
 }
 HendelseView.displayName = 'HendelseView'

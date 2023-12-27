@@ -45,7 +45,7 @@ export const PersonView = () => {
                         valgteTing={valgteTing}
                         toggleValgtTing={toggleValgtTing}
                     />
-                    <Content valgteTing={valgteTing} />
+                    <Content person={person} valgteTing={valgteTing} />
                 </HGrid>
             </Page.Block>
         </Box>

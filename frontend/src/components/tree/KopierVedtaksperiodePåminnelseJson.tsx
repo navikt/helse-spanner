@@ -1,9 +1,9 @@
 import React from "react";
 import {ArbeidsgiverDto, PersonDto, VedtakDto} from "../../state/dto";
 
-export default function KopierVedtaksperiodePåminnelseJson({ person, arbeidsgiver, vedtak } : {
+export default function KopierVedtaksperiodePåminnelseJson({ person, organisasjonsnummer, vedtak } : {
     person: PersonDto,
-    arbeidsgiver: ArbeidsgiverDto,
+    organisasjonsnummer: string,
     vedtak: VedtakDto
 }) {
     const håndterTrykk = () => {
@@ -11,7 +11,7 @@ export default function KopierVedtaksperiodePåminnelseJson({ person, arbeidsgiv
     "@event_name": "påminnelse",
     "fødselsnummer": "${person.fødselsnummer}",
     "aktørId": "${person.aktørId}",
-    "organisasjonsnummer": "${arbeidsgiver.organisasjonsnummer}",
+    "organisasjonsnummer": "${organisasjonsnummer}",
     "vedtaksperiodeId": "${vedtak.id}",
     "tilstand": "${vedtak.tilstand}",
     "påminnelsestidspunkt": "{{now}}",
@@ -22,5 +22,8 @@ export default function KopierVedtaksperiodePåminnelseJson({ person, arbeidsgiv
 }`)
 
     }
-    return <span onClick={håndterTrykk}>⏰</span>
+    return <span onClick={(e) => {
+        e.stopPropagation()
+        håndterTrykk()
+    }}>⏰</span>
 }

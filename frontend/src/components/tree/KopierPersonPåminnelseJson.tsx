@@ -10,5 +10,8 @@ export default function KopierPersonPåminnelseJson({ person }:  { person: Perso
 }`)
 
     }
-    return <span onClick={håndterTrykk}>⏰</span>
+    return <span onClick={(e) => {
+        e.stopPropagation()
+        håndterTrykk()
+    }}>⏰</span>
 }

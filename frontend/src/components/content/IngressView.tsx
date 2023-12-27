@@ -1,7 +1,7 @@
 import React from 'react'
-import { ContentCategory } from './ContentCategory'
-import { ContentView } from '../../state/state'
-import { useForkastetVedtaksperiode, usePerson, useVedtak } from '../../state/contexts'
+import {ContentCategory} from './ContentCategory'
+import {ContentView} from '../../state/state'
+import {FokastetVedtaksperiodeDto, PersonDto, VedtakDto} from "../../state/dto";
 
 const sporing = window.location.origin.includes('dev')
     ? 'https://sporing.intern.dev.nav.no'
@@ -15,23 +15,20 @@ const _ingressView = (vedtaksperiodeId: string) => {
         </div>
     )
 }
-const Vedtaksperiode = () => {
-    const vedtaksperiode = useVedtak()
+const Vedtaksperiode = ({ vedtaksperiode }: { vedtaksperiode: VedtakDto }) => {
     return _ingressView(vedtaksperiode.id)
 }
 Vedtaksperiode.displayName = 'IngressView.Vedtaksperiode'
 
-const ForkastetVedtaksperiode = () => {
-    const vedtaksperiode = useForkastetVedtaksperiode()
+const ForkastetVedtaksperiode = ({ vedtaksperiode }: { vedtaksperiode: FokastetVedtaksperiodeDto }) => {
     return _ingressView(vedtaksperiode.id)
 }
 ForkastetVedtaksperiode.displayName = 'IngressView.ForkastetVedtaksperiode'
 
-const Person = () => {
-    const p = usePerson()
+const Person = ({ person }: { person: PersonDto }) => {
     return (
         <div>
-            <a href={`${sporing}/person/${p.aktørId}`} target="_blank">
+            <a href={`${sporing}/person/${person.aktørId}`} target="_blank">
                 Sporing
             </a>
         </div>
@@ -39,9 +36,16 @@ const Person = () => {
 }
 Person.displayName = 'IngressView.Person'
 
-export const IngressView = ({ valgteTing }: { valgteTing: string[] }) => {
+export const IngressView = ({ person, valgteTing }: { person: PersonDto, valgteTing: string[] }) => {
     return (
-        <ContentCategory displayName={ContentView.Ingress} valgteTing={valgteTing} {...{ Person, Vedtaksperiode, ForkastetVedtaksperiode }} />
+        <ContentCategory
+            displayName={ContentView.Ingress}
+            valgteTing={valgteTing}
+            person={person}
+            Person={Person}
+            Vedtaksperiode={Vedtaksperiode}
+            ForkastetVedtaksperiode={ForkastetVedtaksperiode}
+        />
     )
 }
 

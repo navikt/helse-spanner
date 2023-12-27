@@ -1,4 +1,3 @@
-import {useArbeidsgiver, useUtbetaling, UtbetalingContext} from "../../state/contexts";
 import parseISO from "date-fns/parseISO";
 import compareAsc from "date-fns/compareAsc";
 import React from "react";
@@ -6,19 +5,19 @@ import {somNorskDato} from "../i18n";
 import SelectableTreeNode from "./SelectableTreeNode";
 import classNames from "classnames";
 import styles from "./PersonTree.module.css";
-import {UtbetalingDto} from "../../state/dto";
+import {ArbeidsgiverDto, UtbetalingDto} from "../../state/dto";
 
 interface UtbetalingerProps {
+    arbeidsgiver: ArbeidsgiverDto,
     valgteTing: string[],
     toggleValgtTing: (e: React.MouseEvent, ting: string) => void
 }
 
-export const Utbetalinger = ({ valgteTing, toggleValgtTing } : UtbetalingerProps) => {
-    const arbeidsgiver = useArbeidsgiver()
+export const Utbetalinger = ({ arbeidsgiver, valgteTing, toggleValgtTing } : UtbetalingerProps) => {
     let utbetalinger: [JSX.Element, Date][] = arbeidsgiver.utbetalinger.map((utbetaling) => [
-        <UtbetalingContext.Provider value={utbetaling} key={utbetaling.id}>
-            {utbetaling.status == 'FORKASTET' ? <ForkastetUtbetalingNode valgteTing={valgteTing} vedValg={ toggleValgtTing } /> : <UtbetalingsNode valgteTing={valgteTing} vedValg={ toggleValgtTing }/>}
-        </UtbetalingContext.Provider>,
+        <div key={utbetaling.id}>
+            {utbetaling.status == 'FORKASTET' ? <ForkastetUtbetalingNode utbetaling={utbetaling} valgteTing={valgteTing} vedValg={ toggleValgtTing } /> : <UtbetalingsNode utbetaling={utbetaling} valgteTing={valgteTing} vedValg={ toggleValgtTing }/>}
+        </div>,
         parseISO(utbetaling.fom),
     ])
 
@@ -28,8 +27,7 @@ export const Utbetalinger = ({ valgteTing, toggleValgtTing } : UtbetalingerProps
 
 Utbetalinger.displayName = 'Utbetalinger'
 
-const UtbetalingsNode = ({ valgteTing, vedValg }: { valgteTing: string[], vedValg: (e: React.MouseEvent, ting: string) => void }) => {
-    const utbetaling = useUtbetaling()
+const UtbetalingsNode = ({ utbetaling, valgteTing, vedValg }: { utbetaling: UtbetalingDto, valgteTing: string[], vedValg: (e: React.MouseEvent, ting: string) => void }) => {
     const [fom, tom] = [utbetaling.fom, utbetaling.tom].map(somNorskDato)
     return (
         <SelectableTreeNode className={classNames(styles.LøvNode, styles.Utbetaling)} valgteTing={valgteTing} ting={utbetaling.id} indent={1.2} vedValg={vedValg }>
@@ -44,8 +42,7 @@ const UtbetalingsNode = ({ valgteTing, vedValg }: { valgteTing: string[], vedVal
     )
 }
 
-const ForkastetUtbetalingNode = ({ valgteTing, vedValg }: { valgteTing: string[], vedValg: (e: React.MouseEvent, ting: string) => void }) => {
-    const utbetaling = useUtbetaling()
+const ForkastetUtbetalingNode = ({ utbetaling, valgteTing, vedValg }: { utbetaling: UtbetalingDto, valgteTing: string[], vedValg: (e: React.MouseEvent, ting: string) => void }) => {
     const [fom, tom] = [utbetaling.fom, utbetaling.tom].map(somNorskDato)
     return (
         <SelectableTreeNode className={classNames(styles.LøvNode, styles.ForkastetUtbetaling)} valgteTing={valgteTing} ting={utbetaling.id} indent={1.2} vedValg={vedValg}>

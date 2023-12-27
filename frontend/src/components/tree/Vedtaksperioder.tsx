@@ -1,11 +1,4 @@
-import {
-    ForkastetVedtaksperiodeContext,
-    useArbeidsgiver,
-    useForkastetVedtaksperiode,
-    usePerson,
-    useVedtak,
-    VedtakContext
-} from "../../state/contexts";
+import {usePerson} from "../../state/contexts";
 import parseISO from "date-fns/parseISO";
 import compareAsc from "date-fns/compareAsc";
 import React from "react";
@@ -18,26 +11,22 @@ import KopierVedtaksperiodePåminnelseJson from "./KopierVedtaksperiodePåminnel
 import {useRecoilValue} from "recoil";
 import {hideForkastedeVedtakState} from "../../state/state";
 import classNames from "classnames";
-import {FokastetVedtaksperiodeDto, VedtakDto} from "../../state/dto";
+import {ArbeidsgiverDto, FokastetVedtaksperiodeDto, VedtakDto} from "../../state/dto";
 
 
 interface VedtaksperioderProps {
+    arbeidsgiver: ArbeidsgiverDto,
     valgteTing: string[],
     toggleValgtTing: (e: React.MouseEvent, ting: string) => void
 }
 
-export const Vedtaksperioder = ({ valgteTing, toggleValgtTing } : VedtaksperioderProps) => {
-    const arbeidsgiver = useArbeidsgiver()
+export const Vedtaksperioder = ({ arbeidsgiver, valgteTing, toggleValgtTing } : VedtaksperioderProps) => {
     let vedtaksperioder: [JSX.Element, Date][] = arbeidsgiver.vedtaksperioder.map((vedtak) => [
-        <VedtakContext.Provider value={vedtak} key={vedtak.id}>
-            <VedtaksNode valgteTing={valgteTing} vedValg={ toggleValgtTing }/>
-        </VedtakContext.Provider>,
+        <VedtaksNode key={vedtak.id} vedtak={vedtak} organisasjonsnummer={arbeidsgiver.organisasjonsnummer} valgteTing={valgteTing} vedValg={ toggleValgtTing }/>,
         parseISO(vedtak.fom),
     ])
     let forkastedeVedtaksperioder: [JSX.Element, Date][] = arbeidsgiver.forkastede.map((forkastelse) => [
-        <ForkastetVedtaksperiodeContext.Provider value={forkastelse.vedtaksperiode} key={forkastelse.vedtaksperiode.id}>
-            <ForkastetVedtaksNode valgteTing={valgteTing} vedValg={ toggleValgtTing }/>
-        </ForkastetVedtaksperiodeContext.Provider>,
+        <ForkastetVedtaksNode key={forkastelse.vedtaksperiode.id} vedtak={forkastelse.vedtaksperiode} valgteTing={valgteTing} vedValg={ toggleValgtTing }/>,
         parseISO(forkastelse.vedtaksperiode.fom),
     ])
     const sorterteVedtak = [...vedtaksperioder, ...forkastedeVedtaksperioder].sort(([_, a], [ignore, b]) =>
@@ -48,8 +37,7 @@ export const Vedtaksperioder = ({ valgteTing, toggleValgtTing } : Vedtaksperiode
 Vedtaksperioder.displayName = 'Vedtaksperioder'
 
 
-const VedtaksNode = ({ valgteTing, vedValg }: { valgteTing: string[], vedValg: (e: React.MouseEvent, ting: string) => void }) => {
-    const vedtak = useVedtak()
+const VedtaksNode = ({ vedtak, organisasjonsnummer, valgteTing, vedValg }: { vedtak: VedtakDto, organisasjonsnummer: string, valgteTing: string[], vedValg: (e: React.MouseEvent, ting: string) => void }) => {
     const [fom, tom] = [vedtak.fom, vedtak.tom].map(somNorskDato)
     return (
         <SelectableTreeNode valgteTing={valgteTing} ting={vedtak.id} indent={1.2} className={styles.LøvNode} vedValg={vedValg}>
@@ -58,7 +46,7 @@ const VedtaksNode = ({ valgteTing, vedValg }: { valgteTing: string[], vedValg: (
                     {fom} - {tom}
                 </span>
                 <SporingLenke url={tilstandsmaskinSporingUrl(vedtak.id)} />
-                <KopierVedtaksperiodePåminnelseJson person={usePerson()} arbeidsgiver={useArbeidsgiver()} vedtak={vedtak} />
+                <KopierVedtaksperiodePåminnelseJson person={usePerson()} organisasjonsnummer={organisasjonsnummer} vedtak={vedtak} />
             </div>
             <span className={styles.TilstandText}>{vedtak.tilstand}</span>
         </SelectableTreeNode>
@@ -66,12 +54,11 @@ const VedtaksNode = ({ valgteTing, vedValg }: { valgteTing: string[], vedValg: (
 }
 VedtaksNode.displayName = 'VedtaksNode'
 
-const ForkastetVedtaksNode = ( { valgteTing, vedValg } : { valgteTing: string[], vedValg: (e: React.MouseEvent, ting: string) => void }) => {
+const ForkastetVedtaksNode = ( { vedtak, valgteTing, vedValg } : { vedtak: FokastetVedtaksperiodeDto, valgteTing: string[], vedValg: (e: React.MouseEvent, ting: string) => void }) => {
     const hideForkastedeVedtak = useRecoilValue(hideForkastedeVedtakState)
     if (hideForkastedeVedtak) {
         return null
     }
-    const vedtak = useForkastetVedtaksperiode()
     const [fom, tom] = [vedtak.fom, vedtak.tom].map(somNorskDato)
     return (
         <SelectableTreeNode className={classNames(styles.Forkastet, styles.LøvNode)} indent={1.2} valgteTing={valgteTing} ting={vedtak.id} vedValg={vedValg }>
