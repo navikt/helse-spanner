@@ -1,7 +1,6 @@
 package no.nav.spanner
 
 import io.ktor.http.*
-import io.ktor.http.auth.*
 import io.ktor.serialization.jackson.*
 import io.ktor.server.application.*
 import io.ktor.server.auth.*
@@ -94,7 +93,7 @@ fun Application.spanner(spleis: Personer, config: AzureADConfig, development: Bo
                     .call(this.call)
                     .info()
                 if (idValue.isNullOrBlank())
-                    return@get call.respond(HttpStatusCode.BadRequest, "${IdType.AKTORID.header} or ${IdType.FNR.header} must be set")
+                    return@get call.respond(HttpStatusCode.BadRequest, FeilRespons("bad_request", "${IdType.AKTORID.header} or ${IdType.FNR.header} must be set"))
                 spleis.person(call, idValue, idType)
             }
             post("/api/uuid/") {
@@ -106,7 +105,7 @@ fun Application.spanner(spleis: Personer, config: AzureADConfig, development: Bo
                     .call(this.call)
                     .info()
                 if (idValue.isNullOrBlank())
-                    return@post call.respond(HttpStatusCode.BadRequest, "${IdType.AKTORID.header} or ${IdType.FNR.header} must be set")
+                    return@post call.respond(HttpStatusCode.BadRequest, FeilRespons("bad_request", "${IdType.AKTORID.header} or ${IdType.FNR.header} must be set"))
                 spleis.maskerPerson(call, idValue, idType)
             }
             /*
@@ -135,7 +134,7 @@ fun Application.spanner(spleis: Personer, config: AzureADConfig, development: Bo
                     .call(this.call)
                     .info()
                 if (idValue.isNullOrBlank())
-                    return@get call.respond(HttpStatusCode.BadRequest, "${IdType.FNR.header} must be set")
+                    return@get call.respond(HttpStatusCode.BadRequest, FeilRespons("bad_request", "${IdType.FNR.header} must be set"))
                 spleis.speilperson(call, idValue)
             }
 

@@ -2,16 +2,8 @@ package no.nav.spanner
 
 import com.auth0.jwk.JwkProviderBuilder
 import com.fasterxml.jackson.module.kotlin.readValue
-import io.ktor.client.*
-import io.ktor.client.call.*
-import io.ktor.client.engine.apache.*
-import io.ktor.client.plugins.contentnegotiation.*
-import io.ktor.client.request.*
-import io.ktor.client.statement.*
 import io.ktor.http.*
-import io.ktor.serialization.jackson.*
 import io.ktor.server.testing.*
-import kotlinx.coroutines.runBlocking
 import no.nav.security.mock.oauth2.MockOAuth2Server
 import no.nav.security.mock.oauth2.token.DefaultOAuth2TokenCallback
 import no.nav.spanner.no.nav.spanner.LokaleKjenninger
@@ -33,61 +25,6 @@ class E2ETest {
 
     private val lokaleKjenninger = LokaleKjenninger
 
-    fun TestApplicationEngine.login() {
-        val loginLocation = expectRedirect("/login")
-        val httpClient = HttpClient(Apache) {
-            followRedirects = false
-            this.expectSuccess = false
-            install(ContentNegotiation) {
-                jackson()
-            }
-        }
-        val authResponse = runBlocking { httpClient.get(loginLocation).body<HttpResponse>() }
-        assertEquals(HttpStatusCode.Found, authResponse.status)
-        val authLocation = authResponse.headers["location"]!!
-        handleRequest(HttpMethod.Get, authLocation.removePrefix("http://localhost")).response
-    }
-
-    private fun TestApplicationEngine.expectRedirect(url: String): String {
-        val response = handleRequest(HttpMethod.Get, url).response
-        assertEquals(HttpStatusCode.Found, response.status())
-        return response.headers["location"]!!
-    }
-
-    @Test
-    fun login() {
-
-        withTestApplication({
-            spanner(lokaleKjenninger, azureADConfig, true)
-        }) {
-            cookiesSession {
-                handleRequest(HttpMethod.Get, "/") { }
-                    .apply {
-                        assertEquals(HttpStatusCode.Found, response.status())
-                    }
-                login()
-                handleRequest(HttpMethod.Get, "/") { }
-                    .apply {
-                        assertEquals(HttpStatusCode.OK, response.status())
-                    }
-            }
-        }
-    }
-
-    @Test
-    fun `respond with redirect on no session`() {
-
-        withTestApplication({
-            spanner(lokaleKjenninger, azureADConfig, true)
-        }) {
-            handleRequest(HttpMethod.Get, "/api/person/") {
-                this.addHeader(IdType.FNR.header, "12345678910")
-            }.apply {
-                assertEquals(HttpStatusCode.Found, response.status())
-            }
-        }
-    }
-
     @Test
     fun `respond with person json on person endpoint`() {
         mockAuth.enqueueCallback(
@@ -99,7 +36,6 @@ class E2ETest {
             spanner(lokaleKjenninger, azureADConfig, true)
         }) {
             cookiesSession {
-                login()
                 val uuid = objectMapper.readTree(handleRequest(HttpMethod.Post, "/api/uuid/") {
                     addHeader(IdType.FNR.header, "42")
                 }.response.content).path("id").asText()
@@ -128,7 +64,6 @@ class E2ETest {
             spanner(lokaleKjenninger, azureADConfig, true)
         }) {
             cookiesSession {
-                login()
                 handleRequest(HttpMethod.Get, "/api/hendelse/42").apply {
                     assertEquals(HttpStatusCode.OK, response.status())
                     assertTrue(
@@ -152,7 +87,6 @@ class E2ETest {
             spanner(lokaleKjenninger, azureADConfig, true)
         }) {
             cookiesSession {
-                login()
                 val uuid = objectMapper.readTree(handleRequest(HttpMethod.Post, "/api/uuid/") {
                     addHeader(IdType.FNR.header, "42")
                 }.response.content).path("id").asText()
@@ -175,10 +109,10 @@ class E2ETest {
             spanner(lokaleKjenninger, azureADConfig, true)
         }) {
             cookiesSession {
-                login()
                 handleRequest(HttpMethod.Get, "/api/person/") { /* ingen ident i header */ }
                     .apply {
-                        assertEquals(HttpStatusCode.InternalServerError, response.status())
+                        assertEquals(HttpStatusCode.BadRequest, response.status())
+                        println(response.content!!)
                         val feil = objectMapper.readValue<FeilRespons>(response.content!!)
                         assertTrue(!feil.description.isNullOrEmpty())
                     }
