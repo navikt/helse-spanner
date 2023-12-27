@@ -4,6 +4,7 @@ import io.ktor.http.*
 import io.ktor.serialization.jackson.*
 import io.ktor.server.application.*
 import io.ktor.server.auth.*
+import io.ktor.server.auth.jwt.*
 import io.ktor.server.plugins.*
 import io.ktor.server.plugins.callid.*
 import io.ktor.server.plugins.callloging.*
@@ -84,6 +85,12 @@ fun Application.spanner(spleis: Personer, config: AzureADConfig, development: Bo
     routing {
         authenticate(optional = development) {
             frontendRouting()
+            get("/api/meg") {
+                val principal = call.principal<JWTPrincipal>() ?: return@get call.respond(HttpStatusCode.Unauthorized)
+                val navn = principal["name"]
+                val ident = principal["NAVident"]
+                call.respondText("""{ "navn": "$navn", "ident": "$ident" } """, ContentType.Application.Json, HttpStatusCode.OK)
+            }
             get("/api/person/") {
                 audit()
                 val (idType, idValue) = call.personId()
