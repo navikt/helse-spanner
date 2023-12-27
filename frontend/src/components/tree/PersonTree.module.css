@@ -88,6 +88,7 @@ div > .PersonNode:first-child {
     outline: 1px solid rgba(189, 195, 199, 0.8);
 }
 
+.FremhevetUtbetaling .TreeNode,
 .Highlighted {
     background: rgba(144, 202, 249, 0.2);
     box-shadow: 0 0 0 1px rgba(144, 202, 249, 0.5);

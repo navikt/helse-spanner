@@ -39,6 +39,9 @@ export function ContentCategory({
         {Utbetaling && tingene.utbetalinger.map((it) =>
             <Ramme key={it.id}  valgteTing={valgteTing} ting={it.id}><Utbetaling utbetaling={it} /></Ramme>
         )}
+        {Utbetaling && tingene.grupperteUtbetalinger.map((it) =>
+            <Ramme key={it.id}  valgteTing={valgteTing} ting={it.korrelasjonsId}><Utbetaling utbetaling={it} /></Ramme>
+        )}
     </>
 }
 
@@ -58,6 +61,9 @@ function HentVisning(person: PersonDto, valgteTing: string[]) {
             .map((forkastede) => forkastede.vedtaksperiode),
         utbetalinger: person.arbeidsgivere.flatMap((it) =>
             it.utbetalinger.filter((utbetaling) => valgteTing.includes(utbetaling.id))
+        ),
+        grupperteUtbetalinger: person.arbeidsgivere.flatMap((it) =>
+            it.utbetalinger.filter((utbetaling) => valgteTing.includes(utbetaling.korrelasjonsId))
         )
     }
 }

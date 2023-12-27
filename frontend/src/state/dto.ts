@@ -54,7 +54,9 @@ export type UtbetalingDto = {
     status: string
     fom: string
     tom: string
+    type: string
     id: string
+    korrelasjonsId: string
     [x: string]: any
 }
 
