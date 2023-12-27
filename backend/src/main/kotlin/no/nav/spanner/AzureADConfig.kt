@@ -38,7 +38,7 @@ class AzureADConfig(
 
     companion object {
         fun fromEnv(config: Configuration) = AzureADConfig(
-            jwkProvider = JwkProviderBuilder(URI(config[Key("AZURE_APP_WELL_KNOWN_URL", stringType)]).toURL()).build(),
+            jwkProvider = JwkProviderBuilder(URI(config[Key("AZURE_OPENID_CONFIG_JWKS_URI", stringType)]).toURL()).build(),
             issuer = config[Key("AZURE_OPENID_CONFIG_ISSUER", stringType)],
             tokenEndpoint = config[Key("AZURE_OPENID_CONFIG_TOKEN_ENDPOINT", stringType)],
             clientId = config[Key("AZURE_APP_CLIENT_ID", stringType)],
