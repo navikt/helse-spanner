@@ -1,13 +1,11 @@
 import parseISO from "date-fns/parseISO";
-import compareAsc from "date-fns/compareAsc";
-import React, {useMemo, useState} from "react";
+import React, {useState} from "react";
 import {somNorskDato} from "../i18n";
 import SelectableTreeNode from "./SelectableTreeNode";
 import classNames from "classnames";
 import styles from "./PersonTree.module.css";
 import {ArbeidsgiverDto, UtbetalingDto} from "../../state/dto";
 import {ExpandToggle} from "./ExpandToggle";
-import {ArbeidsgiverSummary} from "./ArbeidsgiverSummary";
 
 interface UtbetalingerProps {
     arbeidsgiver: ArbeidsgiverDto,
