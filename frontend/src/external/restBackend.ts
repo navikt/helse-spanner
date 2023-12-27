@@ -1,6 +1,7 @@
 import {Backend} from './backend'
 import {MaskertDto, MeldingDto, PersonDto} from '../state/dto'
 import {feilVedDårligRespons, wrapNnettverksFeil} from './feil'
+import {head} from "fetch-mock";
 
 export const restBackend = (development: boolean): Backend => {
     const baseUrl: string = development ? 'http://localhost:8080' : ''
@@ -12,12 +13,20 @@ export const restBackend = (development: boolean): Backend => {
             return fetchUUID(baseUrl, { fnr: `${fnr}` })
         },
         personForUUID(maskertId: string): Promise<PersonDto> {
+            let headers: { [key: string]: string } = {
+                Accept: 'application/json',
+            }
+            if (maskertId.length == 11) {
+                headers = {...headers, fnr: maskertId }
+            } else if (maskertId.length == 13) {
+                headers = {...headers, aktorId: maskertId }
+            } else {
+                headers = {...headers, maskertId: maskertId }
+            }
+
             return fetch(`${baseUrl}/api/person/`, {
                 method: 'get',
-                headers: {
-                    Accept: 'application/json',
-                    maskertId: `${maskertId}`,
-                },
+                headers: headers,
             })
                 .catch(wrapNnettverksFeil)
                 .then(feilVedDårligRespons)
