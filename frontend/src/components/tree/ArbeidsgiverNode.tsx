@@ -1,5 +1,3 @@
-import {useRecoilState} from "recoil";
-import {expandedArbeidsgivereState} from "../../state/state";
 import styles from "./PersonTree.module.css";
 import SelectableTreeNode from "./SelectableTreeNode";
 import React from "react";
@@ -13,41 +11,26 @@ interface ArbeidsgiverNodeProps {
     arbeidsgiver: ArbeidsgiverDto,
     valgteTing: string[],
     toggleValgtTing: (e: React.MouseEvent, ting: string) => void
+    toggleUtvidet: () => void
+    erUtvidet: boolean
+    visForkastede: boolean
 }
 
-export const ArbeidsgiverNode = ({ arbeidsgiver, valgteTing, toggleValgtTing } : ArbeidsgiverNodeProps) => {
-    const [expandedArbeidsgivere, setExpandedArbeidsgivere] = useRecoilState(expandedArbeidsgivereState)
-    const isExpanded = expandedArbeidsgivere.includes(arbeidsgiver.organisasjonsnummer)
-
-    const toggleExpandArbeidsgiver = () => {
-        const isExpanded = expandedArbeidsgivere.includes(arbeidsgiver.organisasjonsnummer)
-        if (isExpanded) {
-            setExpandedArbeidsgivere((expandedArbeidsgivere) =>
-                expandedArbeidsgivere.filter(
-                    (expandedOrgnummer) => expandedOrgnummer != arbeidsgiver.organisasjonsnummer
-                )
-            )
-        } else {
-            setExpandedArbeidsgivere((expandedArbeidsgivere) => [
-                ...expandedArbeidsgivere,
-                arbeidsgiver.organisasjonsnummer,
-            ])
-        }
-    }
-
+export const ArbeidsgiverNode = ({ arbeidsgiver, erUtvidet, toggleUtvidet, visForkastede, valgteTing, toggleValgtTing } : ArbeidsgiverNodeProps) => {
     return (
         <>
             <div className={styles.ArbeidsgiverNode}>
-                <ExpandToggle isExpanded={isExpanded} onClick={() => toggleExpandArbeidsgiver()}/>
+                <ExpandToggle isExpanded={erUtvidet} onClick={toggleUtvidet}/>
                 <SelectableTreeNode indent={0} valgteTing={valgteTing} ting={arbeidsgiver.id} vedValg={toggleValgtTing}>
                     <ArbeidsgiverSummary arbeidsgiver={arbeidsgiver}/>
                 </SelectableTreeNode>
             </div>
-            {isExpanded && (
+            {erUtvidet && (
                 <>
                     <Vedtaksperioder
                         arbeidsgiver={arbeidsgiver}
                         valgteTing={valgteTing}
+                        visForkastede={visForkastede}
                         toggleValgtTing={toggleValgtTing}
                     />
                     <Utbetalinger

@@ -12,11 +12,6 @@ export const expandedHendelserState = Recoil.atom<number[]>({
     default: [],
 })
 
-export const expandedArbeidsgivereState = Recoil.atom<string[]>({
-    key: 'expandedArbeidsgiver',
-    default: [],
-})
-
 export const visBareFeilState = Recoil.atom({
     key: 'visBareFeil',
     default: false,
@@ -24,11 +19,6 @@ export const visBareFeilState = Recoil.atom({
 export const skjulPåminnelserState = Recoil.atom({
     key: 'skjulPåminnelser',
     default: true,
-})
-
-export const hideForkastedeVedtakState = Recoil.atom({
-    key: 'skjulForkastedeVedtak',
-    default: false,
 })
 
 export const åpneHendelseDokumentState = Recoil.atom<KontekstDto[]>({
