@@ -2,11 +2,11 @@ import java.nio.file.Paths
 
 val jacksonVersion = "2.15.2"
 val junitJupiterVersion = "5.10.0"
-val ktorVersion = "2.3.4"
+val ktorVersion = "2.3.7"
 val tokenValidatorVersion = "1.3.8"
 
 plugins {
-    kotlin("jvm") version "1.9.10"
+    kotlin("jvm") version "1.9.22"
 }
 
 repositories {
@@ -50,24 +50,20 @@ dependencies {
     runtimeOnly("io.jsonwebtoken:jjwt-impl:0.11.2")
     runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.11.2")
 
-    testImplementation("org.junit.jupiter:junit-jupiter-api:$junitJupiterVersion")
-    testImplementation("org.junit.jupiter:junit-jupiter-params:$junitJupiterVersion")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junitJupiterVersion")
+    testImplementation("org.junit.jupiter:junit-jupiter:$junitJupiterVersion")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
     testImplementation("no.nav.security:mock-oauth2-server:0.3.4")
     testImplementation("io.ktor:ktor-server-test-host:$ktorVersion")
 }
 
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
 tasks {
-    compileKotlin {
-        kotlinOptions.jvmTarget = "17"
-    }
-
-    compileTestKotlin {
-        kotlinOptions.jvmTarget = "17"
-    }
-
-
     test {
         useJUnitPlatform()
         testLogging {
