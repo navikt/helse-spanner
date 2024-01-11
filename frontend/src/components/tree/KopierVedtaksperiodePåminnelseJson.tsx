@@ -22,8 +22,8 @@ export default function KopierVedtaksperiodePåminnelseJson({ person, organisasj
 }`)
 
     }
-    return <span onClick={(e) => {
+    return <button title={"Putt vedtaksperiodepåminnelse på clipboardet"} type={"button"} style={{background:"#00000000", border: "0"}} onClick={(e) => {
         e.stopPropagation()
         håndterTrykk()
-    }}>⏰</span>
+    }}>⏰</button>
 }

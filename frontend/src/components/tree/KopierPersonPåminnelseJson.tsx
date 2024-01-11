@@ -10,8 +10,8 @@ export default function KopierPersonPåminnelseJson({ person }:  { person: Perso
 }`)
 
     }
-    return <span onClick={(e) => {
+    return <button title={"Putt personpåminnelse på clipboardet"} type={"button"} style={{background:"#00000000", border: "0"}} onClick={(e) => {
         e.stopPropagation()
         håndterTrykk()
-    }}>⏰</span>
+    }}>⏰</button>
 }
