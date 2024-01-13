@@ -141,3 +141,16 @@ div > .PersonNode:first-child {
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+
+.PåminnelseKnapp {
+    border: 0;
+    background-color: transparent;
+    padding-top: 0.2em;
+    margin-top: -0.2em;
+}
+.PåminnelseKnapp:hover {
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.3);
+    outline: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 0.1rem;
+}

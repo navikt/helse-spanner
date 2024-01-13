@@ -1,5 +1,6 @@
 import React from "react";
-import {ArbeidsgiverDto, PersonDto, VedtakDto} from "../../state/dto";
+import {PersonDto, VedtakDto} from "../../state/dto";
+import styles from "./PersonTree.module.css";
 
 export default function KopierVedtaksperiodePåminnelseJson({ person, organisasjonsnummer, vedtak } : {
     person: PersonDto,
@@ -7,7 +8,7 @@ export default function KopierVedtaksperiodePåminnelseJson({ person, organisasj
     vedtak: VedtakDto
 }) {
     const håndterTrykk = () => {
-        navigator.clipboard.writeText(`{ 
+        void navigator.clipboard.writeText(`{ 
     "@event_name": "påminnelse",
     "fødselsnummer": "${person.fødselsnummer}",
     "aktørId": "${person.aktørId}",
@@ -22,7 +23,7 @@ export default function KopierVedtaksperiodePåminnelseJson({ person, organisasj
 }`)
 
     }
-    return <button title={"Putt vedtaksperiodepåminnelse på clipboardet"} type={"button"} style={{background:"#00000000", border: "0"}} onClick={(e) => {
+    return <button title="Putt vedtaksperiodepåminnelse på clipboardet" type="button" className={styles.PåminnelseKnapp} onClick={(e) => {
         e.stopPropagation()
         håndterTrykk()
     }}>⏰</button>
