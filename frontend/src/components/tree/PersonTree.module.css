@@ -30,19 +30,6 @@ div > .PersonNode:first-child {
     margin: 0.2rem 0 !important;
     padding: 0.3em !important;
 }
-.PersonNode > div {
-    display: flex;
-    justify-content: space-between;
-}
-.PersonNode > div > div {
-    min-width: 3.5em;
-    justify-content: space-between;
-    display: flex;
-    flex-direction: row;
-}
-.PersonNode a {
-    text-decoration: none;
-}
 
 .ArbeidsgiverNode {
     display: grid;
@@ -142,15 +129,47 @@ div > .PersonNode:first-child {
     white-space: nowrap;
 }
 
+.PersonNode {
+    display: flex;
+    justify-content: space-between;
+}
+.Knapper {
+    min-width: 3.2em;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+.PersonNode > .Knapper {
+    margin-right: -0.1em;
+}
+.VedtakNodeHeader > .Knapper {
+    margin-right: -0.3em;
+}
+
+.Knapp {
+    width: 1.6em;
+    height: 1.6em;
+}
+.HoverForKnapp:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    outline: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 0.1rem;
+}
+
 .PåminnelseKnapp {
+    composes: Knapp;
+    composes: HoverForKnapp;
+    cursor: pointer;
     border: 0;
     background-color: transparent;
     padding-top: 0.2em;
     margin-top: -0.2em;
 }
-.PåminnelseKnapp:hover {
-    cursor: pointer;
-    background-color: rgba(255, 255, 255, 0.3);
-    outline: 1px solid rgba(0, 0, 0, 0.2);
-    border-radius: 0.1rem;
+
+.SporingLenkeKnapp {
+    composes: Knapp;
+    composes: HoverForKnapp;
+    margin: -0.2em;
+    padding: 0.2em 0.35em;
+    text-decoration: none;
 }

@@ -34,17 +34,15 @@ export const PersonTree = ({valgteTing, toggleValgtTing } : PersonTreeProps) => 
             <Box background="bg-subtle" paddingBlock="4 0">
                 <HStack gap="5">
                     <Switch size="small" onChange={(e) => toggleArbeidsgivere(e.target.checked) }>Åpne alle</Switch>
-                    <Switch size="small" onChange={(e) => setVisForkastede((forrige) => !forrige) }>Skjul forkastede</Switch>
+                    <Switch size="small" onChange={() => setVisForkastede((forrige) => !forrige) }>Skjul forkastede</Switch>
                 </HStack>
             </Box>
             <Box padding="0">
                 <SelectableTreeNode indent={0} className={styles.PersonNode} valgteTing={valgteTing} ting={person.aktørId} vedValg={toggleValgtTing}>
-                    <div>
-                        <span>{person.aktørId}</span>
-                        <div>
-                            <SporingLenke url={personSporingUrl(person.aktørId)} />
-                            <KopierPersonPåminnelseJson person={person} />
-                        </div>
+                    <span>{person.aktørId}</span>
+                    <div className={styles.Knapper}>
+                        <SporingLenke url={personSporingUrl(person.aktørId)} />
+                        <KopierPersonPåminnelseJson person={person} />
                     </div>
                 </SelectableTreeNode>
                 {person.arbeidsgivere.map((arbeidsgiver) => (

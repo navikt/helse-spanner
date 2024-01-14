@@ -47,8 +47,10 @@ const VedtaksNode = ({ vedtak, organisasjonsnummer, valgteTing, vedValg }: { ved
                 <span>
                     {fom} - {tom}
                 </span>
-                <SporingLenke url={tilstandsmaskinSporingUrl(vedtak.id)} />
-                <KopierVedtaksperiodePåminnelseJson person={usePerson()} organisasjonsnummer={organisasjonsnummer} vedtak={vedtak} />
+                <div className={styles.Knapper}>
+                    <SporingLenke url={tilstandsmaskinSporingUrl(vedtak.id)} />
+                    <KopierVedtaksperiodePåminnelseJson person={usePerson()} organisasjonsnummer={organisasjonsnummer} vedtak={vedtak} />
+                </div>
             </div>
             <span className={styles.TilstandText}>{vedtak.tilstand}</span>
         </SelectableTreeNode>
