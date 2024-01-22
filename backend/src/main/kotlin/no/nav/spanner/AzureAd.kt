@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import io.ktor.client.*
 import io.ktor.client.call.*
-import io.ktor.client.engine.apache.*
+import io.ktor.client.engine.cio.*
 import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.client.request.*
 import io.ktor.http.*
@@ -13,7 +13,7 @@ import io.ktor.serialization.jackson.*
 import io.ktor.util.*
 
 class AzureAD(private val config: AzureADConfig) {
-    private val httpClient = HttpClient(Apache) {
+    private val httpClient = HttpClient(CIO) {
         install(ContentNegotiation) {
             jackson {
                 registerModule(JavaTimeModule())
