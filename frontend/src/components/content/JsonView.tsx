@@ -1,76 +1,81 @@
-import React from 'react'
-import { useArbeidsgiver, useForkastetVedtaksperiode, usePerson, useUtbetaling, useVedtak } from '../../state/contexts'
+import React, {useMemo} from 'react'
 import ReactJson from 'react-json-view'
-import { ContentView } from '../../state/state'
-import { ContentCategory } from './ContentCategory'
-import { writeToClipboard } from '../../utils'
+import {ContentView} from '../../state/state'
+import {ContentCategory} from './ContentCategory'
+import {writeToClipboard} from '../../utils'
+import {ArbeidsgiverDto, FokastetVedtaksperiodeDto, PersonDto, UtbetalingDto, VedtakDto} from "../../state/dto";
 
-const Arbeidsgiver = React.memo(() => {
-    const arbeidsgiver = useArbeidsgiver()
+const Arbeidsgiver = ({ arbeidsgiver }: { arbeidsgiver: ArbeidsgiverDto }) => {
     return (
         <div>
             <ReactJsonMedBedreKopiering src={arbeidsgiver} />
         </div>
     )
-})
+}
 Arbeidsgiver.displayName = 'JsonView.Arbeidsgiver'
 
-const Person = React.memo(() => {
-    const person = usePerson()
+const Person = ({ person }: { person: PersonDto }) => {
     return (
         <div>
             <ReactJsonMedBedreKopiering src={person} />
         </div>
     )
-})
+}
 Person.displayName = 'JsonView.Person'
 
-const Vedtaksperiode = React.memo(() => {
-    const vedtaksperiode = useVedtak()
+const Vedtaksperiode = ({ vedtaksperiode }: { vedtaksperiode: VedtakDto }) => {
     return (
         <div>
             <ReactJsonMedBedreKopiering src={vedtaksperiode} />
         </div>
     )
-})
+}
 Vedtaksperiode.displayName = 'JsonView.Vedtaksperiode'
 
-const ForkastetVedtaksperiode = React.memo(() => {
-    const vedtaksperiode = useForkastetVedtaksperiode()
+const ForkastetVedtaksperiode = ({ vedtaksperiode }: { vedtaksperiode: FokastetVedtaksperiodeDto }) => {
     return (
         <div>
             <ReactJsonMedBedreKopiering src={vedtaksperiode} />
         </div>
     )
-})
-Vedtaksperiode.displayName = 'JsonView.Vedtaksperiode'
+}
+ForkastetVedtaksperiode.displayName = 'JsonView.ForkastetVedtaksperiode'
 
-const Utbetaling = React.memo(() => {
-    const utbetaling = useUtbetaling()
+const Utbetaling = ({ utbetaling }: { utbetaling: UtbetalingDto }) => {
     return (
         <div>
             <ReactJsonMedBedreKopiering src={utbetaling} />
         </div>
     )
-})
-Vedtaksperiode.displayName = 'JsonView.Utbetaling'
+}
+Utbetaling.displayName = 'JsonView.Utbetaling'
 
+// Vi kan velge mellom to implementasjoner:
 // Stripper vekk anførselstegn fra innholder den kopierer ut fra JSON-en
+// eller
+// Kopierer hele json-strukturen
+// begge er nyttige, og det er vanskelig å vite hvem som er best
+// idéelt lager vi en funksjon "kopierLurtOgSmart" og som ser på `data.scr`
+// og kjører JSON.stringify(src.data) om det er en json-struktur eller String(data.src) om det er et verdi-felt.
+//
+// Jeg tar en råsjans og bruker JSON.stringify nå, siden det er sykt mye vanskeligere å få ut en fornuftig json enn å fjerne fnutter.
 const ReactJsonMedBedreKopiering = (props: { src: object }) => (
     <ReactJson
         src={props.src}
         name={null}
         collapsed={1}
-        enableClipboard={(data) => writeToClipboard(String(data.src))}
+        enableClipboard={(data) => writeToClipboard(JSON.stringify(data.src))}
     />
 )
 
-export const JsonView = React.memo(() => {
-    return (
-        <ContentCategory
+export const JsonView = ({ person, valgteTing }: { person: PersonDto, valgteTing: string[] }) => {
+    return useMemo(() => {
+        return <ContentCategory
             displayName={ContentView.Json}
+            person={person}
+            valgteTing={valgteTing}
             {...{ Person, Arbeidsgiver, Vedtaksperiode, ForkastetVedtaksperiode, Utbetaling }}
         />
-    )
-})
+    }, [valgteTing])
+}
 JsonView.displayName = 'JsonView'

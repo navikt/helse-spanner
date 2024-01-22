@@ -6,11 +6,11 @@ import styles from './Hendelse.module.css'
 import { Copy, FileContent } from '@navikt/ds-icons'
 import { Aktivitet } from './Aktivitet'
 import commonStyles from '../../Common.module.css'
-import { Kontekst } from '../../../state/model'
+import { Hendelsekontekst } from '../../../state/model'
 import { writeToClipboard } from '../../../utils'
-import { somNorskDato } from '../../i18n'
+import { somNorskDato, somNorskKlokkeslett } from '../../i18n'
 
-export const Hendelse = React.memo(({ kontekst }: { kontekst: Kontekst }) => {
+export const Hendelse = ({ kontekst }: { kontekst: Hendelsekontekst }) => {
     const aktiviteter = kontekst.aktiviteter
     let meldingsReferanseId = ''
     if (kontekst.kontekstMap.meldingsreferanseId != undefined) {
@@ -45,9 +45,9 @@ export const Hendelse = React.memo(({ kontekst }: { kontekst: Kontekst }) => {
         [åpneHendelser, setÅpneHendelser]
     )
 
-    const isError = aktiviteter.find((it) => it.alvorlighetsgrad == 'ERROR')
+    const isError = aktiviteter.find((it) => it.nivå == 'FUNKSJONELL_FEIL')
 
-    const isWarning = aktiviteter.find((it) => it.alvorlighetsgrad == 'WARN')
+    const isWarning = aktiviteter.find((it) => it.nivå == 'VARSEL')
 
     return (
         <>
@@ -58,12 +58,17 @@ export const Hendelse = React.memo(({ kontekst }: { kontekst: Kontekst }) => {
                     isError && commonStyles.Error
                 )}
             >
-                <div className={classNames(styles.DatoText)}>{somNorskDato(aktiviteter[0].tidsstempel)}</div>
+                <div
+                    title={'Kl. ' + somNorskKlokkeslett(aktiviteter[0].tidsstempel)}
+                    className={classNames(styles.DatoText, styles.SkriftMedNestenLikBredde, styles.FokusPåHover)}
+                >
+                    {somNorskDato(aktiviteter[0].tidsstempel)}
+                </div>
 
                 <button onClick={toggleSelected} className={styles.Hendelsetype}>
                     {kontekst.kontekstType}
                 </button>
-                <div className={classNames(styles.Meldingsreferanse)}>{kontekst.kontekstMap.meldingsreferanseId}</div>
+                <div className={classNames(styles.Meldingsreferanse, styles.SkriftMedNestenLikBredde)}>{kontekst.kontekstMap.meldingsreferanseId}</div>
                 <button
                     className={classNames(styles.KopierMeldingsreferanse)}
                     aria-label={'Kopier melding-id'}
@@ -88,6 +93,6 @@ export const Hendelse = React.memo(({ kontekst }: { kontekst: Kontekst }) => {
             )}
         </>
     )
-})
+}
 
 Hendelse.displayName = 'Hendelse'

@@ -1,5 +1,5 @@
-import { MeldingDto, PersonDto } from '../state/dto'
-import { Backend } from './backend'
+import {MaskertDto, MeldingDto, PersonDto} from '../state/dto'
+import {Backend} from './backend'
 
 export let testBackend = (
     testPersoner: PersonDto[] = [],
@@ -35,28 +35,24 @@ export let testBackend = (
             }
             return Promise.resolve(melding)
         },
-        personForAktørId(aktørId: string): Promise<PersonDto> {
-            let person = aktorPersoner[aktørId]
-            if (!person) {
-                let testError = errorPersoner[aktørId]
-                if (!testError) {
-                    throw Error(`No test fixture with ${aktørId}`)
-                }
-                return Promise.reject(testError)
-            }
-            return Promise.resolve(person)
+        uuidForAktørId(aktørId: string): Promise<MaskertDto> {
+            return Promise.resolve({ id: aktørId })
         },
 
-        personForFnr(fnr: string): Promise<PersonDto> {
-            let person = fnrPersoner[fnr]
-            if (!person) {
-                let testError = errorPersoner[fnr]
-                if (!testError) {
-                    throw Error(`No test fixture with ${fnr}`)
-                }
-                return Promise.reject(person)
+        uuidForFnr(fnr: string): Promise<MaskertDto> {
+            return Promise.resolve({ id: fnr })
+        },
+
+        personForUUID(uuid: string): Promise<PersonDto> {
+            let person = aktorPersoner[uuid]
+            if (person) return Promise.resolve(person)
+            let fnrperson = fnrPersoner[uuid]
+            if (fnrperson) return Promise.resolve(fnrperson)
+            let testError = errorPersoner[uuid]
+            if (!testError) {
+                throw Error(`No test fixture with ${uuid}`)
             }
-            return Promise.resolve(person)
+            return Promise.reject(testError)
         },
     }
 }

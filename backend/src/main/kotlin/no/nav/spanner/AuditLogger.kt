@@ -1,27 +1,19 @@
 package no.nav.spanner
 
-import io.ktor.application.*
+import io.ktor.server.application.*
 import io.ktor.http.HttpMethod.Companion.Get
 import io.ktor.http.HttpMethod.Companion.Post
 import io.ktor.http.HttpMethod.Companion.Put
-import io.ktor.request.*
+import io.ktor.server.auth.*
+import io.ktor.server.auth.jwt.*
+import io.ktor.server.request.*
+import io.ktor.util.pipeline.*
 import no.nav.spanner.AuditLogger.Operasjon.*
 import org.slf4j.LoggerFactory
+import java.time.ZonedDateTime
 import java.time.ZonedDateTime.now
 
 internal class AuditLogger(private val brukerIdent: String) {
-
-    fun log(
-        operasjon: Operasjon = LES,
-        fnr: Long?,
-        aktorId: Long?,
-        message: String = "Sporingslogg"
-    ) {
-        val nå = now().toEpochSecond()
-        val subject = fnr?.toString()?.padStart(9, '0') ?: aktorId
-        val duidStr = subject?.let { " duid=$it" } ?: ""
-        logger.info("CEF:0|Spanner|auditLog|1.0|${operasjon.logString}|$message|INFO|end=$nå suid=$brukerIdent$duidStr")
-    }
 
     fun log(call: ApplicationCall) {
         val operasjon = when (call.request.httpMethod) {
@@ -32,7 +24,20 @@ internal class AuditLogger(private val brukerIdent: String) {
         val message = call.request.path()
         val fnr = call.request.headers[IdType.FNR.header]
         val aktorId = call.request.headers[IdType.AKTORID.header]
-        log(operasjon, fnr?.toLong(), aktorId?.toLong(), message)
+        val melding = lagMelding(operasjon, fnr?.toLong(), aktorId?.toLong(), message, now())
+        logger.info(melding)
+    }
+
+    internal fun lagMelding(operasjon: Operasjon = LES,
+                            fnr: Long?,
+                            aktorId: Long?,
+                            path: String,
+                            tidspunkt: ZonedDateTime
+    ): String {
+        val now = tidspunkt.toInstant().toEpochMilli()
+        val subject = fnr?.toString()?.padStart(11, '0') ?: aktorId
+        val duidStr = subject?.let { " duid=$it" } ?: ""
+        return "CEF:0|Vedtaksløsning for sykepenger|Spanner|1.0|${operasjon.logString}|Sporingslogg|INFO|end=$now$duidStr suid=$brukerIdent request=$path"
     }
 
     enum class Operasjon(val logString: String) {
@@ -42,8 +47,13 @@ internal class AuditLogger(private val brukerIdent: String) {
     }
 
     companion object {
-        private val logger = LoggerFactory.getLogger("auditLog")
-        fun SpannerSession.audit() =
-            AuditLogger(idToken.asJwt().getClaim("NAVident").asString())
+        private val logger = LoggerFactory.getLogger("auditLogger")
+        fun PipelineContext<Unit, ApplicationCall>.audit() =
+            call.principal<JWTPrincipal>()?.audit()?.log(call)
+
+        fun JWTPrincipal.audit(): AuditLogger {
+            val ident = requireNotNull(this["NAVident"]) { "NAVident mangler i tokenet" }
+            return AuditLogger(ident)
+        }
     }
 }

@@ -1,9 +1,7 @@
 import React from 'react'
-import styles from './person/Person.module.css'
+import {Loader} from "@navikt/ds-react";
 
-export const Spinner = React.memo(() => (
-    <div style={{ padding: '10em' }}>
-        <div className={styles.Spinner} data-testid="spinner" />️
-    </div>
-))
+export const Spinner = () => (
+    <Loader size="3xlarge" title="Venter..." />
+)
 Spinner.displayName = 'Spinner'

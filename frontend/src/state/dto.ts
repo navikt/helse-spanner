@@ -4,7 +4,12 @@ export type PersonDto = {
     fødselsnummer: string
     opprettet: string
     aktivitetslogg: AktivitetsloggDto
+    aktivitetsloggV2?: AktivitetsloggV2Dto
     [x: string]: any
+}
+
+export type MaskertDto = {
+    id: string
 }
 
 export type FeilDto = {
@@ -49,7 +54,9 @@ export type UtbetalingDto = {
     status: string
     fom: string
     tom: string
+    type: string
     id: string
+    korrelasjonsId: string
     [x: string]: any
 }
 
@@ -83,6 +90,33 @@ export type KontekstMapDto = {
 export type AktivitetsloggDto = {
     aktiviteter: AktivitetDto[]
     kontekster: KontekstDto[]
+}
+
+export type AktivitetsloggV2Dto = {
+    aktiviteter: AktivitetV2Dto[]
+}
+export interface AktivitetV2Dto {
+    id: number
+    nivå: string
+    tekst: string
+    tidsstempel: string
+    kontekster: KonteksterDto
+    interessant?: boolean
+}
+
+export type KonteksterDto = {
+    [x: string]: KontekstMapV2Dto
+}
+
+export type KontekstMapV2Dto = {
+    meldingsreferanseId?: string
+    vedtaksperiodeId?: string
+    aktørId?: string
+    fødselsnummer?: string
+    organisasjonsnummer?: string
+    tilstand?: string
+    utbetalingId?: string
+    [x: string]: any
 }
 
 export type MeldingDto = {

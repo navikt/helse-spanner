@@ -1,9 +1,0 @@
-.PersonView {
-    margin: 1em;
-    display: grid;
-    padding: 2px;
-    grid-template-columns: min-content auto;
-    grid-template-areas:
-        'header header'
-        'nav content';
-}

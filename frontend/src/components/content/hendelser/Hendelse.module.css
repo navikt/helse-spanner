@@ -13,13 +13,14 @@
 .Hendelsetype {
     width: 12em;
     text-align: left;
-    margin-left: 0.5em;
 }
 
 .DatoText {
     font-size: small;
     color: grey;
     min-width: 5.2em;
+    margin-right: 0.5em;
+    margin-left: 0.2em;
 }
 
 .Meldingsreferanse {
@@ -28,6 +29,19 @@
     margin-left: 0.5rem;
     display: inline-block;
     width: 18rem;
+}
+
+.SkriftMedNestenLikBredde {
+    font-family: verdana, sans-serif;
+}
+
+.FokusPåHover:hover {
+    color: rgba(78, 78, 78, 1);
+    background-color: rgba(228, 220, 214, 0.29);
+    margin: 0 0.2em 0 0;
+    padding: 0.2em 0.3em 0.2em 0.2em;
+    border-radius: 0.2em;
+    transition: all 0.5s ease;
 }
 
 .KopierMeldingsreferanse {

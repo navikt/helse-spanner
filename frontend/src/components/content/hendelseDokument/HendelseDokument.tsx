@@ -41,7 +41,7 @@ export type FetchHendelseProps = {
     meldingsReferanse: string
 }
 
-const HendelseJson = React.memo((props: FetchHendelseProps) => {
+const HendelseJson = (props: FetchHendelseProps) => {
     const backend = useBackend()
     try {
         const { isLoading, isError, data, error } = useQuery(['melding', props.meldingsReferanse], () => {
@@ -60,6 +60,5 @@ const HendelseJson = React.memo((props: FetchHendelseProps) => {
     } catch (error) {
         return <Feilmelding feil={error} />
     }
-})
-
+}
 HendelseJson.displayName = 'HendelseJson'

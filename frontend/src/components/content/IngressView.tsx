@@ -1,11 +1,10 @@
 import React from 'react'
-import { ContentCategory } from './ContentCategory'
-import { ContentView } from '../../state/state'
-import { Hendelser } from './hendelser/Hendelser'
-import { useForkastetVedtaksperiode, usePerson, useVedtak } from '../../state/contexts'
+import {ContentCategory} from './ContentCategory'
+import {ContentView} from '../../state/state'
+import {FokastetVedtaksperiodeDto, PersonDto, VedtakDto} from "../../state/dto";
 
 const sporing = window.location.origin.includes('dev')
-    ? 'https://sporing.dev.intern.nav.no'
+    ? 'https://sporing.intern.dev.nav.no'
     : 'https://sporing.intern.nav.no'
 const _ingressView = (vedtaksperiodeId: string) => {
     return (
@@ -16,34 +15,38 @@ const _ingressView = (vedtaksperiodeId: string) => {
         </div>
     )
 }
-const Vedtaksperiode = React.memo(() => {
-    const vedtaksperiode = useVedtak()
+const Vedtaksperiode = ({ vedtaksperiode }: { vedtaksperiode: VedtakDto }) => {
     return _ingressView(vedtaksperiode.id)
-})
+}
 Vedtaksperiode.displayName = 'IngressView.Vedtaksperiode'
 
-const ForkastetVedtaksperiode = React.memo(() => {
-    const vedtaksperiode = useForkastetVedtaksperiode()
+const ForkastetVedtaksperiode = ({ vedtaksperiode }: { vedtaksperiode: FokastetVedtaksperiodeDto }) => {
     return _ingressView(vedtaksperiode.id)
-})
+}
 ForkastetVedtaksperiode.displayName = 'IngressView.ForkastetVedtaksperiode'
 
-const Person = React.memo(() => {
-    const p = usePerson()
+const Person = ({ person }: { person: PersonDto }) => {
     return (
         <div>
-            <a href={`${sporing}/person/${p.aktørId}`} target="_blank">
+            <a href={`${sporing}/person/${person.aktørId}`} target="_blank">
                 Sporing
             </a>
         </div>
     )
-})
+}
 Person.displayName = 'IngressView.Person'
 
-export const IngressView = React.memo(() => {
+export const IngressView = ({ person, valgteTing }: { person: PersonDto, valgteTing: string[] }) => {
     return (
-        <ContentCategory displayName={ContentView.Ingress} {...{ Person, Vedtaksperiode, ForkastetVedtaksperiode }} />
+        <ContentCategory
+            displayName={ContentView.Ingress}
+            valgteTing={valgteTing}
+            person={person}
+            Person={Person}
+            Vedtaksperiode={Vedtaksperiode}
+            ForkastetVedtaksperiode={ForkastetVedtaksperiode}
+        />
     )
-})
+}
 
-Hendelser.displayName = 'IngressView'
+IngressView.displayName = 'IngressView'

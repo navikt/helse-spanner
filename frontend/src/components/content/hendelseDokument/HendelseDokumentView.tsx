@@ -3,7 +3,7 @@ import { useRecoilValue } from 'recoil'
 import { åpneHendelseDokumentState } from '../../../state/state'
 import { HendelseDokument } from './HendelseDokument'
 
-export const HendelseDokumentView = React.memo(({}) => {
+export const HendelseDokumentView = ({}) => {
     const åpneHendelser = useRecoilValue(åpneHendelseDokumentState)
 
     return (
@@ -13,4 +13,4 @@ export const HendelseDokumentView = React.memo(({}) => {
             ))}
         </>
     )
-})
+}

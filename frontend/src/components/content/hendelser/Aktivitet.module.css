@@ -9,6 +9,11 @@
     display: flex;
 }
 
+.IkkeInteressant {
+    color:#aaa;
+    font-style:italic;
+}
+
 .Icon {
     height: 1rem;
     transition: filter 0.2s ease;

@@ -8,11 +8,24 @@
     padding: 0.5em !important;
 }
 
+.VedtakNodeHeader {
+    display: flex;
+    justify-content: space-between;
+}
+.VedtakNodeHeader a {
+    text-decoration: none;
+}
+
 .PersonTree .node-motion {
     transition: all 0.3s;
     overflow-y: hidden;
 }
 
+div > .PersonNode:first-child {
+    margin-top:0 !important;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
 .PersonNode {
     margin: 0.2rem 0 !important;
     padding: 0.3em !important;
@@ -62,6 +75,7 @@
     outline: 1px solid rgba(189, 195, 199, 0.8);
 }
 
+.FremhevetUtbetaling .TreeNode,
 .Highlighted {
     background: rgba(144, 202, 249, 0.2);
     box-shadow: 0 0 0 1px rgba(144, 202, 249, 0.5);
@@ -78,10 +92,6 @@
     margin: 0 0 0.5em;
     padding: 3px;
     border-radius: 0.3em;
-}
-
-.Indentation2 {
-    padding-left: 2rem;
 }
 
 .Forkastet {
@@ -117,4 +127,49 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+
+.PersonNode {
+    display: flex;
+    justify-content: space-between;
+}
+.Knapper {
+    min-width: 3.2em;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+.PersonNode > .Knapper {
+    margin-right: -0.1em;
+}
+.VedtakNodeHeader > .Knapper {
+    margin-right: -0.3em;
+}
+
+.Knapp {
+    width: 1.6em;
+    height: 1.6em;
+}
+.HoverForKnapp:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    outline: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 0.1rem;
+}
+
+.PåminnelseKnapp {
+    composes: Knapp;
+    composes: HoverForKnapp;
+    cursor: pointer;
+    border: 0;
+    background-color: transparent;
+    padding-top: 0.2em;
+    margin-top: -0.2em;
+}
+
+.SporingLenkeKnapp {
+    composes: Knapp;
+    composes: HoverForKnapp;
+    margin: -0.2em;
+    padding: 0.2em 0.35em;
+    text-decoration: none;
 }

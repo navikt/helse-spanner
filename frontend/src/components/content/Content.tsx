@@ -1,74 +1,37 @@
-import React, { PropsWithChildren } from 'react'
-import { JsonView } from './JsonView'
-import { HendelseView } from './hendelser/HendelseView'
-import { useRecoilState } from 'recoil'
-import { ContentView, displayViewState } from '../../state/state'
-import classNames from 'classnames'
-import styles from './Content.module.css'
-import commonStyles from '../Common.module.css'
-import { useIsOnlySelected, useIsSelected } from '../../state/contexts'
-import { Card } from '../Card'
-import { HendelseDokumentView } from './hendelseDokument/HendelseDokumentView'
-import { IngressView } from './IngressView'
+import React, {useMemo} from 'react'
+import {JsonView} from './JsonView'
+import {HendelseView} from './hendelser/HendelseView'
+import {ContentView} from '../../state/state'
+import {HendelseDokumentView} from './hendelseDokument/HendelseDokumentView'
+import {IngressView} from './IngressView'
+import {Box, Tabs} from "@navikt/ds-react";
+import {PersonDto} from "../../state/dto";
 
-export const Content = React.memo(() => {
+export const Content = ({ person, valgteTing }: { person: PersonDto, valgteTing: string[] }) => {
     return (
-        <div style={{ gridArea: 'content' }}>
-            <div style={{ marginLeft: '0.6rem' }}>
-                <ViewButton view={ContentView.Json} />
-                <ViewButton view={ContentView.Hendelser} />
-                <ViewButton view={ContentView.Ingress} />
-            </div>
-            <div className={classNames(styles.ContentCards)}>
-                <JsonView />
-                <HendelseView />
-                <IngressView />
-                <HendelseDokumentView />
-            </div>
-        </div>
+        <Box>
+            <Tabs defaultValue={ ContentView.Json }>
+                <Tabs.List>
+                    <ViewButton value={ ContentView.Json } />
+                    <ViewButton value={ ContentView.Hendelser } />
+                    <ViewButton value={ ContentView.Ingress } />
+                </Tabs.List>
+                <Tabs.Panel value={ ContentView.Json }>
+                    <JsonView person={person} valgteTing={valgteTing} />
+                </Tabs.Panel>
+                <Tabs.Panel value={ ContentView.Hendelser }>
+                    <HendelseView person={person} valgteTing={valgteTing} />
+                </Tabs.Panel>
+                <Tabs.Panel value={ ContentView.Ingress }>
+                    <IngressView person={person} valgteTing={valgteTing} />
+                </Tabs.Panel>
+            </Tabs>
+            <HendelseDokumentView />
+        </Box>
     )
-})
+}
 Content.displayName = 'Content'
 
-const ViewButton: React.FC<{ view: ContentView }> = React.memo(({ view }) => {
-    const [displayViews, setDisplayViews] = useRecoilState(displayViewState)
-    const isSelected = displayViews.includes(view)
-
-    const selectCategory = React.useMemo(
-        () => (e: React.MouseEvent) => {
-            const toggleSelect = () => {
-                if (displayViews.includes(view)) {
-                    setDisplayViews(displayViews.filter((it) => it !== view))
-                } else {
-                    setDisplayViews([...displayViews, view])
-                }
-            }
-            const setOnlySelected = () => {
-                setDisplayViews([view])
-            }
-
-            if (e.ctrlKey || e.metaKey) toggleSelect()
-            else setOnlySelected()
-            e.stopPropagation()
-        },
-        [displayViews, setDisplayViews]
-    )
-
-    return (
-        <button className={classNames(isSelected && commonStyles.AktivKnapp)} onClick={selectCategory}>
-            {view}
-        </button>
-    )
-})
-ViewButton.displayName = 'ViewButton'
-export const ShowIfSelected: React.FC<PropsWithChildren<any>> = React.memo(({ children }) => {
-    const selectedColor = useIsSelected()
-    const onlySelected = useIsOnlySelected()
-    if (!selectedColor) return null
-    return (
-        <Card style={{ borderStyle: onlySelected ? `solid` : 'none', borderWidth: '7px', borderColor: selectedColor }}>
-            {children}
-        </Card>
-    )
-})
-ShowIfSelected.displayName = 'ShowIfSelected'
+function ViewButton({ value }: { value: ContentView }) {
+    return <Tabs.Tab value={value} label={value} />
+}

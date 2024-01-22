@@ -987,7 +987,7 @@ export let jsonPerson: PersonDto = {
                             {
                                 kontekstType: 'Vedtaksperiode',
                                 kontekstMap: {
-                                    vedtaksperiodeId: '311c6035-10e5-414f-b775-996dd60b444b',
+                                    vedtaksperiodeId: '79343398-04ca-4a49-91b2-8757caa29bba',
                                 },
                             },
                             {
@@ -1001,7 +1001,7 @@ export let jsonPerson: PersonDto = {
                     aktiveVedtaksperioder: [
                         {
                             orgnummer: '999888777',
-                            vedtaksperiodeId: '311c6035-10e5-414f-b775-996dd60b444b',
+                            vedtaksperiodeId: '79343398-04ca-4a49-91b2-8757caa29bba',
                             periodetype: 'OVERGANG_FRA_IT',
                         },
                         {
@@ -1905,7 +1905,7 @@ export let jsonPerson: PersonDto = {
                             {
                                 kontekstType: 'Vedtaksperiode',
                                 kontekstMap: {
-                                    vedtaksperiodeId: '8b9e808a-255e-4e59-ac5a-27e931ce4e49',
+                                    vedtaksperiodeId: 'e005b52c-986f-471c-a311-16d97efbe937',
                                 },
                             },
                             {
@@ -1919,7 +1919,7 @@ export let jsonPerson: PersonDto = {
                     aktiveVedtaksperioder: [
                         {
                             orgnummer: '999888777',
-                            vedtaksperiodeId: '8b9e808a-255e-4e59-ac5a-27e931ce4e49',
+                            vedtaksperiodeId: 'e005b52c-986f-471c-a311-16d97efbe937',
                             periodetype: 'INFOTRYGDFORLENGELSE',
                         },
                     ],
@@ -3490,7 +3490,7 @@ export let jsonPerson: PersonDto = {
             {
                 kontekstType: 'Vedtaksperiode',
                 kontekstMap: {
-                    vedtaksperiodeId: '311c6035-10e5-414f-b775-996dd60b444b',
+                    vedtaksperiodeId: '79343398-04ca-4a49-91b2-8757caa29bba',
                 },
             },
             {
@@ -3784,7 +3784,7 @@ export let jsonPerson: PersonDto = {
             {
                 kontekstType: 'Vedtaksperiode',
                 kontekstMap: {
-                    vedtaksperiodeId: '8b9e808a-255e-4e59-ac5a-27e931ce4e49',
+                    vedtaksperiodeId: 'e005b52c-986f-471c-a311-16d97efbe937',
                 },
             },
             {
@@ -12606,6 +12606,7 @@ export let jsonPerson: PersonDto = {
             utbetalinger: [
                 {
                     id: 'a75ff58e-245f-4191-a7cd-7032f81e906b',
+                    korrelasjonsId: '520a2a91-05ec-4ee9-8595-d1d62009ee00',
                     beregningId: '12eb4dbf-f501-40e4-bb00-da2b63bce81e',
                     utbetalingstidslinje: {
                         dager: [
@@ -12805,6 +12806,7 @@ export let jsonPerson: PersonDto = {
                 },
                 {
                     id: 'adf68e5e-7259-4052-a865-aeb39d8c649f',
+                    korrelasjonsId: 'f74b7d21-b868-4abb-88fa-b09a786bb0b0',
                     beregningId: '4ca8ea6e-3040-42f8-8165-68de02c6fb24',
                     utbetalingstidslinje: {
                         dager: [
@@ -13146,6 +13148,350 @@ export let jsonPerson: PersonDto = {
                     avsluttet: '2021-07-23T15:51:24.820254714',
                     oppdatert: '2021-07-23T15:51:24.801612148',
                 },
+                {
+                    id: '0c2223e1-e8df-4fa9-91d7-617d790055d4',
+                    korrelasjonsId: 'f74b7d21-b868-4abb-88fa-b09a786bb0b0',
+                    beregningId: '4ca8ea6e-3040-42f8-8165-68de02c6fb24',
+                    utbetalingstidslinje: {
+                        dager: [
+                            {
+                                type: 'NavDag',
+                                grad: 100.0,
+                                arbeidsgiverBetalingProsent: 100.0,
+                                skjæringstidspunkt: '2017-12-01',
+                                totalGrad: 100.0,
+                                dekningsgrunnlag: 692.3076923076923,
+                                aktuellDagsinntekt: 692.3076923076923,
+                                arbeidsgiverbeløp: 693.0,
+                                personbeløp: 0.0,
+                                er6GBegrenset: false,
+                                fom: '2018-01-01',
+                                tom: '2018-01-05',
+                            },
+                            {
+                                type: 'NavHelgDag',
+                                grad: 100.0,
+                                arbeidsgiverBetalingProsent: 100.0,
+                                skjæringstidspunkt: '2017-12-01',
+                                totalGrad: 100.0,
+                                dekningsgrunnlag: 0.0,
+                                aktuellDagsinntekt: 0.0,
+                                arbeidsgiverbeløp: 0.0,
+                                personbeløp: 0.0,
+                                er6GBegrenset: false,
+                                fom: '2018-01-06',
+                                tom: '2018-01-07',
+                            },
+                            {
+                                type: 'NavDag',
+                                grad: 100.0,
+                                arbeidsgiverBetalingProsent: 100.0,
+                                skjæringstidspunkt: '2017-12-01',
+                                totalGrad: 100.0,
+                                dekningsgrunnlag: 692.3076923076923,
+                                aktuellDagsinntekt: 692.3076923076923,
+                                arbeidsgiverbeløp: 693.0,
+                                personbeløp: 0.0,
+                                er6GBegrenset: false,
+                                fom: '2018-01-08',
+                                tom: '2018-01-12',
+                            },
+                            {
+                                type: 'NavHelgDag',
+                                grad: 100.0,
+                                arbeidsgiverBetalingProsent: 100.0,
+                                skjæringstidspunkt: '2017-12-01',
+                                totalGrad: 100.0,
+                                dekningsgrunnlag: 0.0,
+                                aktuellDagsinntekt: 0.0,
+                                arbeidsgiverbeløp: 0.0,
+                                personbeløp: 0.0,
+                                er6GBegrenset: false,
+                                fom: '2018-01-13',
+                                tom: '2018-01-14',
+                            },
+                            {
+                                type: 'NavDag',
+                                grad: 100.0,
+                                arbeidsgiverBetalingProsent: 100.0,
+                                skjæringstidspunkt: '2017-12-01',
+                                totalGrad: 100.0,
+                                dekningsgrunnlag: 692.3076923076923,
+                                aktuellDagsinntekt: 692.3076923076923,
+                                arbeidsgiverbeløp: 693.0,
+                                personbeløp: 0.0,
+                                er6GBegrenset: false,
+                                fom: '2018-01-15',
+                                tom: '2018-01-19',
+                            },
+                            {
+                                type: 'NavHelgDag',
+                                grad: 100.0,
+                                arbeidsgiverBetalingProsent: 100.0,
+                                skjæringstidspunkt: '2017-12-01',
+                                totalGrad: 100.0,
+                                dekningsgrunnlag: 0.0,
+                                aktuellDagsinntekt: 0.0,
+                                arbeidsgiverbeløp: 0.0,
+                                personbeløp: 0.0,
+                                er6GBegrenset: false,
+                                fom: '2018-01-20',
+                                tom: '2018-01-21',
+                            },
+                            {
+                                type: 'NavDag',
+                                grad: 100.0,
+                                arbeidsgiverBetalingProsent: 100.0,
+                                skjæringstidspunkt: '2017-12-01',
+                                totalGrad: 100.0,
+                                dekningsgrunnlag: 692.3076923076923,
+                                aktuellDagsinntekt: 692.3076923076923,
+                                arbeidsgiverbeløp: 693.0,
+                                personbeløp: 0.0,
+                                er6GBegrenset: false,
+                                fom: '2018-01-22',
+                                tom: '2018-01-26',
+                            },
+                            {
+                                type: 'NavHelgDag',
+                                grad: 100.0,
+                                arbeidsgiverBetalingProsent: 100.0,
+                                skjæringstidspunkt: '2017-12-01',
+                                totalGrad: 100.0,
+                                dekningsgrunnlag: 0.0,
+                                aktuellDagsinntekt: 0.0,
+                                arbeidsgiverbeløp: 0.0,
+                                personbeløp: 0.0,
+                                er6GBegrenset: false,
+                                fom: '2018-01-27',
+                                tom: '2018-01-28',
+                            },
+                            {
+                                type: 'NavDag',
+                                grad: 100.0,
+                                arbeidsgiverBetalingProsent: 100.0,
+                                skjæringstidspunkt: '2017-12-01',
+                                totalGrad: 100.0,
+                                dekningsgrunnlag: 692.3076923076923,
+                                aktuellDagsinntekt: 692.3076923076923,
+                                arbeidsgiverbeløp: 693.0,
+                                personbeløp: 0.0,
+                                er6GBegrenset: false,
+                                fom: '2018-01-29',
+                                tom: '2018-01-31',
+                            },
+                            {
+                                type: 'NavDag',
+                                grad: 100.0,
+                                arbeidsgiverBetalingProsent: 100.0,
+                                skjæringstidspunkt: '2017-12-01',
+                                totalGrad: 50.0,
+                                dekningsgrunnlag: 692.3076923076923,
+                                aktuellDagsinntekt: 692.3076923076923,
+                                arbeidsgiverbeløp: 692.0,
+                                personbeløp: 0.0,
+                                er6GBegrenset: false,
+                                fom: '2018-02-01',
+                                tom: '2018-02-02',
+                            },
+                            {
+                                type: 'NavHelgDag',
+                                grad: 100.0,
+                                arbeidsgiverBetalingProsent: 100.0,
+                                skjæringstidspunkt: '2017-12-01',
+                                totalGrad: 0.0,
+                                dekningsgrunnlag: 0.0,
+                                aktuellDagsinntekt: 0.0,
+                                arbeidsgiverbeløp: 0.0,
+                                personbeløp: 0.0,
+                                er6GBegrenset: false,
+                                fom: '2018-02-03',
+                                tom: '2018-02-04',
+                            },
+                            {
+                                type: 'NavDag',
+                                grad: 100.0,
+                                arbeidsgiverBetalingProsent: 100.0,
+                                skjæringstidspunkt: '2017-12-01',
+                                totalGrad: 50.0,
+                                dekningsgrunnlag: 692.3076923076923,
+                                aktuellDagsinntekt: 692.3076923076923,
+                                arbeidsgiverbeløp: 692.0,
+                                personbeløp: 0.0,
+                                er6GBegrenset: false,
+                                fom: '2018-02-05',
+                                tom: '2018-02-09',
+                            },
+                            {
+                                type: 'NavHelgDag',
+                                grad: 100.0,
+                                arbeidsgiverBetalingProsent: 100.0,
+                                skjæringstidspunkt: '2017-12-01',
+                                totalGrad: 0.0,
+                                dekningsgrunnlag: 0.0,
+                                aktuellDagsinntekt: 0.0,
+                                arbeidsgiverbeløp: 0.0,
+                                personbeløp: 0.0,
+                                er6GBegrenset: false,
+                                fom: '2018-02-10',
+                                tom: '2018-02-11',
+                            },
+                            {
+                                type: 'NavDag',
+                                grad: 100.0,
+                                arbeidsgiverBetalingProsent: 100.0,
+                                skjæringstidspunkt: '2017-12-01',
+                                totalGrad: 50.0,
+                                dekningsgrunnlag: 692.3076923076923,
+                                aktuellDagsinntekt: 692.3076923076923,
+                                arbeidsgiverbeløp: 692.0,
+                                personbeløp: 0.0,
+                                er6GBegrenset: false,
+                                fom: '2018-02-12',
+                                tom: '2018-02-16',
+                            },
+                            {
+                                type: 'NavHelgDag',
+                                grad: 100.0,
+                                arbeidsgiverBetalingProsent: 100.0,
+                                skjæringstidspunkt: '2017-12-01',
+                                totalGrad: 0.0,
+                                dekningsgrunnlag: 0.0,
+                                aktuellDagsinntekt: 0.0,
+                                arbeidsgiverbeløp: 0.0,
+                                personbeløp: 0.0,
+                                er6GBegrenset: false,
+                                fom: '2018-02-17',
+                                tom: '2018-02-18',
+                            },
+                            {
+                                type: 'NavDag',
+                                grad: 100.0,
+                                arbeidsgiverBetalingProsent: 100.0,
+                                skjæringstidspunkt: '2017-12-01',
+                                totalGrad: 50.0,
+                                dekningsgrunnlag: 692.3076923076923,
+                                aktuellDagsinntekt: 692.3076923076923,
+                                arbeidsgiverbeløp: 692.0,
+                                personbeløp: 0.0,
+                                er6GBegrenset: false,
+                                fom: '2018-02-19',
+                                tom: '2018-02-23',
+                            },
+                            {
+                                type: 'NavHelgDag',
+                                grad: 100.0,
+                                arbeidsgiverBetalingProsent: 100.0,
+                                skjæringstidspunkt: '2017-12-01',
+                                totalGrad: 0.0,
+                                dekningsgrunnlag: 0.0,
+                                aktuellDagsinntekt: 0.0,
+                                arbeidsgiverbeløp: 0.0,
+                                personbeløp: 0.0,
+                                er6GBegrenset: false,
+                                fom: '2018-02-24',
+                                tom: '2018-02-25',
+                            },
+                            {
+                                type: 'NavDag',
+                                grad: 100.0,
+                                arbeidsgiverBetalingProsent: 100.0,
+                                skjæringstidspunkt: '2017-12-01',
+                                totalGrad: 50.0,
+                                dekningsgrunnlag: 692.3076923076923,
+                                aktuellDagsinntekt: 692.3076923076923,
+                                arbeidsgiverbeløp: 692.0,
+                                personbeløp: 0.0,
+                                er6GBegrenset: false,
+                                fom: '2018-02-26',
+                                tom: '2018-02-28',
+                            },
+                        ],
+                    },
+                    arbeidsgiverOppdrag: {
+                        mottaker: '999888777',
+                        fagområde: 'SPREF',
+                        linjer: [
+                            {
+                                fom: '2018-01-01',
+                                tom: '2018-01-31',
+                                satstype: 'DAG',
+                                sats: 693,
+                                dagsats: 693,
+                                lønn: 692,
+                                grad: 100.0,
+                                stønadsdager: 23,
+                                totalbeløp: 15939,
+                                endringskode: 'UEND',
+                                delytelseId: 1,
+                                refDelytelseId: null,
+                                refFagsystemId: null,
+                                statuskode: null,
+                                datoStatusFom: null,
+                                klassekode: 'SPREFAG-IOP',
+                            },
+                            {
+                                fom: '2018-02-01',
+                                tom: '2018-02-28',
+                                satstype: 'DAG',
+                                sats: 692,
+                                dagsats: 692,
+                                lønn: 692,
+                                grad: 100.0,
+                                stønadsdager: 20,
+                                totalbeløp: 13840,
+                                endringskode: 'NY',
+                                delytelseId: 2,
+                                refDelytelseId: 1,
+                                refFagsystemId: 'J6RHZOXMFZCQVOIA5TY57XNHLI',
+                                statuskode: null,
+                                datoStatusFom: null,
+                                klassekode: 'SPREFAG-IOP',
+                            },
+                        ],
+                        fagsystemId: 'J6RHZOXMFZCQVOIA5TY57XNHLI',
+                        endringskode: 'ENDR',
+                        sisteArbeidsgiverdag: null,
+                        tidsstempel: '2021-07-23T15:51:24.677223641',
+                        nettoBeløp: 13840,
+                        stønadsdager: 43,
+                        fom: '2018-01-01',
+                        tom: '2018-02-28',
+                    },
+                    personOppdrag: {
+                        mottaker: '12020052345',
+                        fagområde: 'SP',
+                        linjer: [],
+                        fagsystemId: '6ZMXLUNRSZGUZEAZVCDETVIXJE',
+                        endringskode: 'NY',
+                        sisteArbeidsgiverdag: null,
+                        tidsstempel: '2021-07-23T15:51:24.677811292',
+                        nettoBeløp: 0,
+                        stønadsdager: 0,
+                        fom: '-999999999-01-01',
+                        tom: '-999999999-01-01',
+                    },
+                    fom: '2018-01-01',
+                    tom: '2018-03-31',
+                    stønadsdager: 43,
+                    tidsstempel: '2021-10-23T15:51:24.67786752',
+                    status: 'UTBETALT',
+                    type: 'UTBETALING',
+                    maksdato: '2018-11-13',
+                    forbrukteSykedager: 64,
+                    gjenståendeSykedager: 184,
+                    vurdering: {
+                        godkjent: true,
+                        ident: 'Ola Nordmann',
+                        epost: 'ola.nordmann@nav.no',
+                        tidspunkt: '2021-07-23T15:51:24.706776591',
+                        automatiskBehandling: false,
+                    },
+                    overføringstidspunkt: '2021-07-23T15:51:24.775951099',
+                    avstemmingsnøkkel: 123456,
+                    avsluttet: '2021-07-23T15:51:24.820254714',
+                    oppdatert: '2021-07-23T15:51:24.801612148',
+                },
             ],
             vedtaksperioder: [
                 {
@@ -13155,7 +13501,7 @@ export let jsonPerson: PersonDto = {
                     sykmeldingTom: '2018-01-31',
                     hendelseIder: ['63551019-688a-47e7-ab03-cdbadc9121aa', '2d648189-49f1-4532-b2b3-1e4955c8fe41'],
                     inntektskilde: 'FLERE_ARBEIDSGIVERE',
-                    id: '311c6035-10e5-414f-b775-996dd60b444b',
+                    id: '79343398-04ca-4a49-91b2-8757caa29bba',
                     tilstand: 'AVSLUTTET',
                     skjæringstidspunktFraInfotrygd: '2017-12-01',
                     inntektsmeldingInfo: null,
@@ -13363,7 +13709,7 @@ export let jsonPerson: PersonDto = {
                     sykmeldingTom: '2018-02-28',
                     hendelseIder: ['e553c3cd-7fef-4b93-b8e4-d13a1c5f4838', '8e4d7dbf-bc83-4c8c-a5f8-758cdca521e8'],
                     inntektskilde: 'EN_ARBEIDSGIVER',
-                    id: '8b9e808a-255e-4e59-ac5a-27e931ce4e49',
+                    id: 'e005b52c-986f-471c-a311-16d97efbe937',
                     tilstand: 'AVSLUTTET',
                     skjæringstidspunktFraInfotrygd: '2017-12-01',
                     inntektsmeldingInfo: null,
@@ -22124,6 +22470,7 @@ export let jsonPerson: PersonDto = {
             utbetalinger: [
                 {
                     id: 'c53656a0-d7aa-404a-8e7b-a696bccce061',
+                    korrelasjonsId: '6b378465-ee6c-4238-8549-4dddca7ce9d0',
                     beregningId: 'f8556081-769e-4fe1-bb2d-2902fd4076b0',
                     utbetalingstidslinje: {
                         dager: [
@@ -22317,6 +22664,7 @@ export let jsonPerson: PersonDto = {
                 },
                 {
                     id: '27446666-4684-4108-9433-4561161bd910',
+                    korrelasjonsId: '6b378465-ee6c-4238-8549-4dddca7ce9d0',
                     beregningId: 'dcda46c4-95b2-423d-ab1f-023f7402003b',
                     utbetalingstidslinje: {
                         dager: [
@@ -23546,6 +23894,7 @@ export let jsonPerson: PersonDto = {
             utbetalinger: [
                 {
                     id: 'cfc54f5a-f065-4cfe-980f-8fca689dd9df',
+                    korrelasjonsId: 'c0bc5195-d919-493f-a1d1-3464acd773b8',
                     beregningId: 'f8fe3840-2130-4616-9381-f94a63246ad1',
                     utbetalingstidslinje: {
                         dager: [
@@ -24842,6 +25191,7 @@ export let jsonPerson: PersonDto = {
             utbetalinger: [
                 {
                     id: '67ef65a6-6012-474f-a68c-341f415458c3',
+                    korrelasjonsId: '3dfd21cf-6b7f-471f-91ed-a21150b9ffc3',
                     beregningId: '055508d6-6af4-48f1-ad55-2396d0c00078',
                     utbetalingstidslinje: {
                         dager: [
@@ -24992,6 +25342,7 @@ export let jsonPerson: PersonDto = {
                 },
                 {
                     id: 'ad9d186d-37e4-43cc-b3e1-557e64b8da79',
+                    korrelasjonsId: '3dfd21cf-6b7f-471f-91ed-a21150b9ffc3',
                     beregningId: 'e215d357-03de-4e00-aeb6-3dda30854310',
                     utbetalingstidslinje: {
                         dager: [
@@ -25478,5 +25829,9237 @@ export let jsonPerson: PersonDto = {
             ],
         },
     ],
+    aktivitetsloggV2: {
+        aktiviteter: [
+            {
+                id: 581464,
+                tidsstempel: "2022-09-06T13:29:13.438",
+                nivå: "INFO",
+                tekst: "Ny arbeidsgiver med organisasjonsnummer 999888777 for denne personen",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Sykmelding: {
+                        meldingsreferanseId: "4f4cd4be-7b35-4ae6-a9af-2287a6fc639d",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581463,
+                tidsstempel: "2022-09-06T13:29:13.438",
+                nivå: "INFO",
+                tekst: "Behandler sykmelding",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Sykmelding: {
+                        meldingsreferanseId: "4f4cd4be-7b35-4ae6-a9af-2287a6fc639d",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581465,
+                tidsstempel: "2022-09-06T13:29:13.438",
+                nivå: "INFO",
+                tekst: "Legger til ny periode 01-06-2022 til 30-06-2022 i sykmeldingsperioder",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Sykmelding: {
+                        meldingsreferanseId: "4f4cd4be-7b35-4ae6-a9af-2287a6fc639d",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581466,
+                tidsstempel: "2022-09-06T13:29:13.486",
+                nivå: "INFO",
+                tekst: "Behandler søknad",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Søknad: {
+                        meldingsreferanseId: "8e8223de-8fbf-4391-b2fe-08ccef302290",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581467,
+                tidsstempel: "2022-09-06T13:29:13.492",
+                nivå: "INFO",
+                tekst: "Fullført behandling av søknad",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "e005b52c-986f-471c-a311-16d97efbe937"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_INNTEKTSMELDING_ELLER_HISTORIKK"
+                    },
+                    Søknad: {
+                        meldingsreferanseId: "8e8223de-8fbf-4391-b2fe-08ccef302290",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581469,
+                tidsstempel: "2022-09-06T13:29:13.492",
+                nivå: "INFO",
+                tekst: "Må oppfriske Infotrygdhistorikken",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "e005b52c-986f-471c-a311-16d97efbe937"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_INNTEKTSMELDING_ELLER_HISTORIKK"
+                    },
+                    Søknad: {
+                        meldingsreferanseId: "8e8223de-8fbf-4391-b2fe-08ccef302290",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581468,
+                tidsstempel: "2022-09-06T13:29:13.492",
+                nivå: "INFO",
+                tekst: "Forsøker å gjenoppta 2022-06-01 - 2022-06-30 (AvventerInntektsmeldingEllerHistorikk)",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "e005b52c-986f-471c-a311-16d97efbe937"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_INNTEKTSMELDING_ELLER_HISTORIKK"
+                    },
+                    Søknad: {
+                        meldingsreferanseId: "8e8223de-8fbf-4391-b2fe-08ccef302290",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581473,
+                tidsstempel: "2022-09-06T13:29:13.623",
+                nivå: "INFO",
+                tekst: "Sjekker utbetalte perioder",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "e005b52c-986f-471c-a311-16d97efbe937"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_INNTEKTSMELDING_ELLER_HISTORIKK"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "d72c340f-bada-4347-b276-2b2975a35d8a",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581475,
+                tidsstempel: "2022-09-06T13:29:13.623",
+                nivå: "INFO",
+                tekst: "Sjekker at alle utbetalte perioder har inntektsopplysninger",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "e005b52c-986f-471c-a311-16d97efbe937"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_INNTEKTSMELDING_ELLER_HISTORIKK"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "d72c340f-bada-4347-b276-2b2975a35d8a",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581471,
+                tidsstempel: "2022-09-06T13:29:13.623",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk ble lagret",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "d72c340f-bada-4347-b276-2b2975a35d8a",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581474,
+                tidsstempel: "2022-09-06T13:29:13.623",
+                nivå: "INFO",
+                tekst: "Sjekker inntektsopplysninger",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "e005b52c-986f-471c-a311-16d97efbe937"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_INNTEKTSMELDING_ELLER_HISTORIKK"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "d72c340f-bada-4347-b276-2b2975a35d8a",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581470,
+                tidsstempel: "2022-09-06T13:29:13.623",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "d72c340f-bada-4347-b276-2b2975a35d8a",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581472,
+                tidsstempel: "2022-09-06T13:29:13.623",
+                nivå: "INFO",
+                tekst: "Sjekker utbetalte perioder for overlapp mot 01-06-2022 til 30-06-2022",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "e005b52c-986f-471c-a311-16d97efbe937"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_INNTEKTSMELDING_ELLER_HISTORIKK"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "d72c340f-bada-4347-b276-2b2975a35d8a",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581476,
+                tidsstempel: "2022-09-06T13:29:13.624",
+                nivå: "INFO",
+                tekst: "Sjekker arbeidskategorikoder",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "e005b52c-986f-471c-a311-16d97efbe937"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_INNTEKTSMELDING_ELLER_HISTORIKK"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "d72c340f-bada-4347-b276-2b2975a35d8a",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581480,
+                tidsstempel: "2022-09-06T13:29:13.683",
+                nivå: "INFO",
+                tekst: "Sjekker utbetalte perioder",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "e005b52c-986f-471c-a311-16d97efbe937"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_INNTEKTSMELDING_ELLER_HISTORIKK"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "7a1771ff-f038-481e-9beb-3ff2aac70c1e",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581482,
+                tidsstempel: "2022-09-06T13:29:13.683",
+                nivå: "INFO",
+                tekst: "Sjekker at alle utbetalte perioder har inntektsopplysninger",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "e005b52c-986f-471c-a311-16d97efbe937"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_INNTEKTSMELDING_ELLER_HISTORIKK"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "7a1771ff-f038-481e-9beb-3ff2aac70c1e",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581481,
+                tidsstempel: "2022-09-06T13:29:13.683",
+                nivå: "INFO",
+                tekst: "Sjekker inntektsopplysninger",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "e005b52c-986f-471c-a311-16d97efbe937"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_INNTEKTSMELDING_ELLER_HISTORIKK"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "7a1771ff-f038-481e-9beb-3ff2aac70c1e",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581478,
+                tidsstempel: "2022-09-06T13:29:13.683",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "7a1771ff-f038-481e-9beb-3ff2aac70c1e",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581477,
+                tidsstempel: "2022-09-06T13:29:13.683",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "7a1771ff-f038-481e-9beb-3ff2aac70c1e",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581479,
+                tidsstempel: "2022-09-06T13:29:13.683",
+                nivå: "INFO",
+                tekst: "Sjekker utbetalte perioder for overlapp mot 01-06-2022 til 30-06-2022",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "e005b52c-986f-471c-a311-16d97efbe937"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_INNTEKTSMELDING_ELLER_HISTORIKK"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "7a1771ff-f038-481e-9beb-3ff2aac70c1e",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581483,
+                tidsstempel: "2022-09-06T13:29:13.683",
+                nivå: "INFO",
+                tekst: "Sjekker arbeidskategorikoder",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "e005b52c-986f-471c-a311-16d97efbe937"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_INNTEKTSMELDING_ELLER_HISTORIKK"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "7a1771ff-f038-481e-9beb-3ff2aac70c1e",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581486,
+                tidsstempel: "2022-09-06T13:29:51.971",
+                nivå: "INFO",
+                tekst: "Legger til ny periode 15-06-2022 til 15-07-2022 i sykmeldingsperioder",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Sykmelding: {
+                        meldingsreferanseId: "cedb95a5-38e3-4fe5-8e81-9af600b3d6b0",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581484,
+                tidsstempel: "2022-09-06T13:29:51.971",
+                nivå: "INFO",
+                tekst: "Behandler sykmelding",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Sykmelding: {
+                        meldingsreferanseId: "cedb95a5-38e3-4fe5-8e81-9af600b3d6b0",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581485,
+                tidsstempel: "2022-09-06T13:29:51.971",
+                nivå: "INFO",
+                tekst: "Ny arbeidsgiver med organisasjonsnummer 805824352 for denne personen",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Sykmelding: {
+                        meldingsreferanseId: "cedb95a5-38e3-4fe5-8e81-9af600b3d6b0",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581487,
+                tidsstempel: "2022-09-06T13:29:52.047",
+                nivå: "INFO",
+                tekst: "Behandler søknad",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Søknad: {
+                        meldingsreferanseId: "a6687b4d-fe45-42ad-bc76-daaa21fc93a8",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581488,
+                tidsstempel: "2022-09-06T13:29:52.054",
+                nivå: "INFO",
+                tekst: "Fullført behandling av søknad",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_INNTEKTSMELDING_ELLER_HISTORIKK"
+                    },
+                    Søknad: {
+                        meldingsreferanseId: "a6687b4d-fe45-42ad-bc76-daaa21fc93a8",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581495,
+                tidsstempel: "2022-09-06T13:29:52.055",
+                nivå: "INFO",
+                tekst: "Sjekker arbeidskategorikoder",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "e005b52c-986f-471c-a311-16d97efbe937"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_INNTEKTSMELDING_ELLER_HISTORIKK"
+                    },
+                    Søknad: {
+                        meldingsreferanseId: "a6687b4d-fe45-42ad-bc76-daaa21fc93a8",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581490,
+                tidsstempel: "2022-09-06T13:29:52.055",
+                nivå: "INFO",
+                tekst: "Trenger ikke oppfriske Infotrygdhistorikken, bruker lagret historikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "e005b52c-986f-471c-a311-16d97efbe937"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_INNTEKTSMELDING_ELLER_HISTORIKK"
+                    },
+                    Søknad: {
+                        meldingsreferanseId: "a6687b4d-fe45-42ad-bc76-daaa21fc93a8",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581491,
+                tidsstempel: "2022-09-06T13:29:52.055",
+                nivå: "INFO",
+                tekst: "Sjekker utbetalte perioder for overlapp mot 01-06-2022 til 30-06-2022",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "e005b52c-986f-471c-a311-16d97efbe937"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_INNTEKTSMELDING_ELLER_HISTORIKK"
+                    },
+                    Søknad: {
+                        meldingsreferanseId: "a6687b4d-fe45-42ad-bc76-daaa21fc93a8",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581489,
+                tidsstempel: "2022-09-06T13:29:52.055",
+                nivå: "INFO",
+                tekst: "Forsøker å gjenoppta 2022-06-01 - 2022-06-30 (AvventerInntektsmeldingEllerHistorikk)",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "e005b52c-986f-471c-a311-16d97efbe937"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_INNTEKTSMELDING_ELLER_HISTORIKK"
+                    },
+                    Søknad: {
+                        meldingsreferanseId: "a6687b4d-fe45-42ad-bc76-daaa21fc93a8",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581493,
+                tidsstempel: "2022-09-06T13:29:52.055",
+                nivå: "INFO",
+                tekst: "Sjekker inntektsopplysninger",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "e005b52c-986f-471c-a311-16d97efbe937"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_INNTEKTSMELDING_ELLER_HISTORIKK"
+                    },
+                    Søknad: {
+                        meldingsreferanseId: "a6687b4d-fe45-42ad-bc76-daaa21fc93a8",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581492,
+                tidsstempel: "2022-09-06T13:29:52.055",
+                nivå: "INFO",
+                tekst: "Sjekker utbetalte perioder",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "e005b52c-986f-471c-a311-16d97efbe937"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_INNTEKTSMELDING_ELLER_HISTORIKK"
+                    },
+                    Søknad: {
+                        meldingsreferanseId: "a6687b4d-fe45-42ad-bc76-daaa21fc93a8",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581494,
+                tidsstempel: "2022-09-06T13:29:52.055",
+                nivå: "INFO",
+                tekst: "Sjekker at alle utbetalte perioder har inntektsopplysninger",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "e005b52c-986f-471c-a311-16d97efbe937"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_INNTEKTSMELDING_ELLER_HISTORIKK"
+                    },
+                    Søknad: {
+                        meldingsreferanseId: "a6687b4d-fe45-42ad-bc76-daaa21fc93a8",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581496,
+                tidsstempel: "2022-09-06T13:30:30.724",
+                nivå: "INFO",
+                tekst: "Behandler inntektsmelding",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Inntektsmelding: {
+                        meldingsreferanseId: "d57fa227-b49c-4bf0-b421-c1bb180400b6",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581497,
+                tidsstempel: "2022-09-06T13:30:30.725",
+                nivå: "INFO",
+                tekst: "Fullført behandling av inntektsmelding",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "e005b52c-986f-471c-a311-16d97efbe937"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_INNTEKTSMELDING_ELLER_HISTORIKK"
+                    },
+                    Inntektsmelding: {
+                        meldingsreferanseId: "d57fa227-b49c-4bf0-b421-c1bb180400b6",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581498,
+                tidsstempel: "2022-09-06T13:30:30.726",
+                nivå: "INFO",
+                tekst: "Forsøker å gjenoppta 2022-06-01 - 2022-06-30 (AvventerBlokkerendePeriode)",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "e005b52c-986f-471c-a311-16d97efbe937"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_BLOKKERENDE_PERIODE"
+                    },
+                    Inntektsmelding: {
+                        meldingsreferanseId: "d57fa227-b49c-4bf0-b421-c1bb180400b6",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581499,
+                tidsstempel: "2022-09-06T13:30:30.726",
+                nivå: "INFO",
+                tekst: "Fant refusjon ved å sjekke om første fraværsdag er i sammenhengende utbetaling",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "e005b52c-986f-471c-a311-16d97efbe937"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_BLOKKERENDE_PERIODE"
+                    },
+                    Inntektsmelding: {
+                        meldingsreferanseId: "d57fa227-b49c-4bf0-b421-c1bb180400b6",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581500,
+                tidsstempel: "2022-09-06T13:30:30.727",
+                nivå: "INFO",
+                tekst: "Gjenopptar ikke behandling fordi minst én arbeidsgiver ikke har tilstrekkelig inntekt for skjæringstidspunktet",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "e005b52c-986f-471c-a311-16d97efbe937"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_BLOKKERENDE_PERIODE"
+                    },
+                    Inntektsmelding: {
+                        meldingsreferanseId: "d57fa227-b49c-4bf0-b421-c1bb180400b6",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581501,
+                tidsstempel: "2022-09-06T13:30:54.518",
+                nivå: "INFO",
+                tekst: "Behandler inntektsmelding",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Inntektsmelding: {
+                        meldingsreferanseId: "965741cd-b44c-45f9-91a3-74f360b7d6b8",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581502,
+                tidsstempel: "2022-09-06T13:30:54.519",
+                nivå: "INFO",
+                tekst: "Fullført behandling av inntektsmelding",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_INNTEKTSMELDING_ELLER_HISTORIKK"
+                    },
+                    Inntektsmelding: {
+                        meldingsreferanseId: "965741cd-b44c-45f9-91a3-74f360b7d6b8",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581503,
+                tidsstempel: "2022-09-06T13:30:54.519",
+                nivå: "INFO",
+                tekst: "Forsøker å gjenoppta 2022-06-01 - 2022-06-30 (AvventerBlokkerendePeriode)",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "e005b52c-986f-471c-a311-16d97efbe937"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_BLOKKERENDE_PERIODE"
+                    },
+                    Inntektsmelding: {
+                        meldingsreferanseId: "965741cd-b44c-45f9-91a3-74f360b7d6b8",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581504,
+                tidsstempel: "2022-09-06T13:30:54.521",
+                nivå: "INFO",
+                tekst: "Forespør sykdoms- og inntektshistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "e005b52c-986f-471c-a311-16d97efbe937"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Inntektsmelding: {
+                        meldingsreferanseId: "965741cd-b44c-45f9-91a3-74f360b7d6b8",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581505,
+                tidsstempel: "2022-09-06T13:30:56.183",
+                nivå: "INFO",
+                tekst: "Behandler historiske utbetalinger og inntekter",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "419a7dc1-9977-4c61-8c57-c827142620de",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581508,
+                tidsstempel: "2022-09-06T13:30:56.184",
+                nivå: "INFO",
+                tekst: "Sjekker at alle utbetalte perioder har inntektsopplysninger",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "e005b52c-986f-471c-a311-16d97efbe937"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "419a7dc1-9977-4c61-8c57-c827142620de",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581514,
+                tidsstempel: "2022-09-06T13:30:56.184",
+                nivå: "INFO",
+                tekst: "Bruker har ingen institusjonsoppholdsperioder",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "e005b52c-986f-471c-a311-16d97efbe937"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "419a7dc1-9977-4c61-8c57-c827142620de",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581507,
+                tidsstempel: "2022-09-06T13:30:56.184",
+                nivå: "INFO",
+                tekst: "Sjekker inntektsopplysninger",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "e005b52c-986f-471c-a311-16d97efbe937"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "419a7dc1-9977-4c61-8c57-c827142620de",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581511,
+                tidsstempel: "2022-09-06T13:30:56.184",
+                nivå: "INFO",
+                tekst: "Bruker har ingen pleiepengeytelser",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "e005b52c-986f-471c-a311-16d97efbe937"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "419a7dc1-9977-4c61-8c57-c827142620de",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581506,
+                tidsstempel: "2022-09-06T13:30:56.184",
+                nivå: "INFO",
+                tekst: "Sjekker utbetalte perioder",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "e005b52c-986f-471c-a311-16d97efbe937"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "419a7dc1-9977-4c61-8c57-c827142620de",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581513,
+                tidsstempel: "2022-09-06T13:30:56.184",
+                nivå: "INFO",
+                tekst: "Bruker har ingen opplæringspengeytelser",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "e005b52c-986f-471c-a311-16d97efbe937"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "419a7dc1-9977-4c61-8c57-c827142620de",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581512,
+                tidsstempel: "2022-09-06T13:30:56.184",
+                nivå: "INFO",
+                tekst: "Bruker har ingen omsorgspengeytelser",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "e005b52c-986f-471c-a311-16d97efbe937"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "419a7dc1-9977-4c61-8c57-c827142620de",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581515,
+                tidsstempel: "2022-09-06T13:30:56.184",
+                nivå: "INFO",
+                tekst: "Mangler vilkårsgrunnlag for 2022-06-01",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "e005b52c-986f-471c-a311-16d97efbe937"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "419a7dc1-9977-4c61-8c57-c827142620de",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581510,
+                tidsstempel: "2022-09-06T13:30:56.184",
+                nivå: "INFO",
+                tekst: "Bruker har ingen foreldrepenge- eller svangerskapsytelser",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "e005b52c-986f-471c-a311-16d97efbe937"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "419a7dc1-9977-4c61-8c57-c827142620de",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581509,
+                tidsstempel: "2022-09-06T13:30:56.184",
+                nivå: "INFO",
+                tekst: "Sjekker arbeidskategorikoder",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "e005b52c-986f-471c-a311-16d97efbe937"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "419a7dc1-9977-4c61-8c57-c827142620de",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581516,
+                tidsstempel: "2022-09-06T13:30:57.15",
+                nivå: "INFO",
+                tekst: "Behandler vilkårsgrunnlag",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Vilkårsgrunnlag: {
+                        meldingsreferanseId: "0901df80-386a-480e-8c45-17064bc059b6",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581517,
+                tidsstempel: "2022-09-06T13:30:57.151",
+                nivå: "INFO",
+                tekst: "Krav til minste sykepengegrunnlag er oppfylt",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "e005b52c-986f-471c-a311-16d97efbe937"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_VILKÅRSPRØVING"
+                    },
+                    Vilkårsgrunnlag: {
+                        meldingsreferanseId: "0901df80-386a-480e-8c45-17064bc059b6",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581518,
+                tidsstempel: "2022-09-06T13:30:57.152",
+                nivå: "INFO",
+                tekst: "Har 25 % eller mindre avvik i inntekt (11,07 %)",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "e005b52c-986f-471c-a311-16d97efbe937"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_VILKÅRSPRØVING"
+                    },
+                    Vilkårsgrunnlag: {
+                        meldingsreferanseId: "0901df80-386a-480e-8c45-17064bc059b6",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581520,
+                tidsstempel: "2022-09-06T13:30:57.152",
+                nivå: "INFO",
+                tekst: "Vilkårsgrunnlag vurdert",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "e005b52c-986f-471c-a311-16d97efbe937"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_VILKÅRSPRØVING"
+                    },
+                    Vilkårsgrunnlag: {
+                        meldingsreferanseId: "0901df80-386a-480e-8c45-17064bc059b6",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581519,
+                tidsstempel: "2022-09-06T13:30:57.152",
+                nivå: "INFO",
+                tekst: "Bruker er medlem av Folketrygden",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "e005b52c-986f-471c-a311-16d97efbe937"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_VILKÅRSPRØVING"
+                    },
+                    Vilkårsgrunnlag: {
+                        meldingsreferanseId: "0901df80-386a-480e-8c45-17064bc059b6",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581521,
+                tidsstempel: "2022-09-06T13:30:57.153",
+                nivå: "INFO",
+                tekst: "Forespør sykdoms- og inntektshistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "e005b52c-986f-471c-a311-16d97efbe937"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Vilkårsgrunnlag: {
+                        meldingsreferanseId: "0901df80-386a-480e-8c45-17064bc059b6",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581522,
+                tidsstempel: "2022-09-06T13:30:57.657",
+                nivå: "INFO",
+                tekst: "Behandler historiske utbetalinger og inntekter",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "0adaa17f-038f-4957-83cd-da3f2de91824",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581527,
+                tidsstempel: "2022-09-06T13:30:57.658",
+                nivå: "INFO",
+                tekst: "Bruker har ingen foreldrepenge- eller svangerskapsytelser",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "e005b52c-986f-471c-a311-16d97efbe937"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "0adaa17f-038f-4957-83cd-da3f2de91824",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581523,
+                tidsstempel: "2022-09-06T13:30:57.658",
+                nivå: "INFO",
+                tekst: "Sjekker utbetalte perioder",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "e005b52c-986f-471c-a311-16d97efbe937"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "0adaa17f-038f-4957-83cd-da3f2de91824",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581525,
+                tidsstempel: "2022-09-06T13:30:57.658",
+                nivå: "INFO",
+                tekst: "Sjekker at alle utbetalte perioder har inntektsopplysninger",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "e005b52c-986f-471c-a311-16d97efbe937"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "0adaa17f-038f-4957-83cd-da3f2de91824",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581529,
+                tidsstempel: "2022-09-06T13:30:57.658",
+                nivå: "INFO",
+                tekst: "Bruker har ingen omsorgspengeytelser",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "e005b52c-986f-471c-a311-16d97efbe937"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "0adaa17f-038f-4957-83cd-da3f2de91824",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581530,
+                tidsstempel: "2022-09-06T13:30:57.658",
+                nivå: "INFO",
+                tekst: "Bruker har ingen opplæringspengeytelser",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "e005b52c-986f-471c-a311-16d97efbe937"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "0adaa17f-038f-4957-83cd-da3f2de91824",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581528,
+                tidsstempel: "2022-09-06T13:30:57.658",
+                nivå: "INFO",
+                tekst: "Bruker har ingen pleiepengeytelser",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "e005b52c-986f-471c-a311-16d97efbe937"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "0adaa17f-038f-4957-83cd-da3f2de91824",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581532,
+                tidsstempel: "2022-09-06T13:30:57.658",
+                nivå: "INFO",
+                tekst: "Har 25 % eller mindre avvik i inntekt (11,07 %)",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "e005b52c-986f-471c-a311-16d97efbe937"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "0adaa17f-038f-4957-83cd-da3f2de91824",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    },
+                    vilkårsgrunnlag: {
+                        vilkårsgrunnlagId: "21dd055f-4401-44f8-81bd-8257251c1d40",
+                        skjæringstidspunkt: "2022-06-01",
+                        vilkårsgrunnlagtype: "Spleis"
+                    }
+                }
+            },
+            {
+                id: 581524,
+                tidsstempel: "2022-09-06T13:30:57.658",
+                nivå: "INFO",
+                tekst: "Sjekker inntektsopplysninger",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "e005b52c-986f-471c-a311-16d97efbe937"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "0adaa17f-038f-4957-83cd-da3f2de91824",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581531,
+                tidsstempel: "2022-09-06T13:30:57.658",
+                nivå: "INFO",
+                tekst: "Bruker har ingen institusjonsoppholdsperioder",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "e005b52c-986f-471c-a311-16d97efbe937"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "0adaa17f-038f-4957-83cd-da3f2de91824",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581526,
+                tidsstempel: "2022-09-06T13:30:57.658",
+                nivå: "INFO",
+                tekst: "Sjekker arbeidskategorikoder",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "e005b52c-986f-471c-a311-16d97efbe937"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "0adaa17f-038f-4957-83cd-da3f2de91824",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581533,
+                tidsstempel: "2022-09-06T13:30:57.663",
+                nivå: "INFO",
+                tekst: "Fant refusjon ved å sjekke om første fraværsdag er i sammenhengende utbetaling",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "e005b52c-986f-471c-a311-16d97efbe937"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "0adaa17f-038f-4957-83cd-da3f2de91824",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    },
+                    vilkårsgrunnlag: {
+                        vilkårsgrunnlagId: "21dd055f-4401-44f8-81bd-8257251c1d40",
+                        skjæringstidspunkt: "2022-06-01",
+                        vilkårsgrunnlagtype: "Spleis"
+                    }
+                }
+            },
+            {
+                id: 581534,
+                tidsstempel: "2022-09-06T13:30:57.666",
+                nivå: "INFO",
+                tekst: "Ingen avviste dager på grunn av 20 % samlet sykdomsgrad-regel for denne perioden",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "e005b52c-986f-471c-a311-16d97efbe937"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "0adaa17f-038f-4957-83cd-da3f2de91824",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    },
+                    vilkårsgrunnlag: {
+                        vilkårsgrunnlagId: "21dd055f-4401-44f8-81bd-8257251c1d40",
+                        skjæringstidspunkt: "2022-06-01",
+                        vilkårsgrunnlagtype: "Spleis"
+                    }
+                }
+            },
+            {
+                id: 581535,
+                tidsstempel: "2022-09-06T13:30:57.667",
+                nivå: "INFO",
+                tekst: "Maksimalt antall sykedager overskrides ikke i perioden",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "e005b52c-986f-471c-a311-16d97efbe937"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "0adaa17f-038f-4957-83cd-da3f2de91824",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    },
+                    vilkårsgrunnlag: {
+                        vilkårsgrunnlagId: "21dd055f-4401-44f8-81bd-8257251c1d40",
+                        skjæringstidspunkt: "2022-06-01",
+                        vilkårsgrunnlagtype: "Spleis"
+                    }
+                }
+            },
+            {
+                id: 581536,
+                tidsstempel: "2022-09-06T13:30:57.668",
+                nivå: "INFO",
+                tekst: "Redusert utbetaling minst én dag på grunn av inntekt over 6G",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "e005b52c-986f-471c-a311-16d97efbe937"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "0adaa17f-038f-4957-83cd-da3f2de91824",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    },
+                    vilkårsgrunnlag: {
+                        vilkårsgrunnlagId: "21dd055f-4401-44f8-81bd-8257251c1d40",
+                        skjæringstidspunkt: "2022-06-01",
+                        vilkårsgrunnlagtype: "Spleis"
+                    }
+                }
+            },
+            {
+                id: 581539,
+                tidsstempel: "2022-09-06T13:30:57.669",
+                nivå: "INFO",
+                tekst: "Ingen utbetalingslinjer bygget",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "e005b52c-986f-471c-a311-16d97efbe937"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "0adaa17f-038f-4957-83cd-da3f2de91824",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    },
+                    vilkårsgrunnlag: {
+                        vilkårsgrunnlagId: "21dd055f-4401-44f8-81bd-8257251c1d40",
+                        skjæringstidspunkt: "2022-06-01",
+                        vilkårsgrunnlagtype: "Spleis"
+                    }
+                }
+            },
+            {
+                id: 581538,
+                tidsstempel: "2022-09-06T13:30:57.669",
+                nivå: "INFO",
+                tekst: "Ingen utbetalingslinjer bygget",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "e005b52c-986f-471c-a311-16d97efbe937"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "0adaa17f-038f-4957-83cd-da3f2de91824",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    },
+                    vilkårsgrunnlag: {
+                        vilkårsgrunnlagId: "21dd055f-4401-44f8-81bd-8257251c1d40",
+                        skjæringstidspunkt: "2022-06-01",
+                        vilkårsgrunnlagtype: "Spleis"
+                    }
+                }
+            },
+            {
+                id: 581540,
+                tidsstempel: "2022-09-06T13:30:57.669",
+                nivå: "INFO",
+                tekst: "Ingen utbetalingslinjer bygget",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "e005b52c-986f-471c-a311-16d97efbe937"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "0adaa17f-038f-4957-83cd-da3f2de91824",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    },
+                    vilkårsgrunnlag: {
+                        vilkårsgrunnlagId: "21dd055f-4401-44f8-81bd-8257251c1d40",
+                        skjæringstidspunkt: "2022-06-01",
+                        vilkårsgrunnlagtype: "Spleis"
+                    }
+                }
+            },
+            {
+                id: 581537,
+                tidsstempel: "2022-09-06T13:30:57.669",
+                nivå: "INFO",
+                tekst: "Utbetalingslinjer bygget vellykket",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "e005b52c-986f-471c-a311-16d97efbe937"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "0adaa17f-038f-4957-83cd-da3f2de91824",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    },
+                    vilkårsgrunnlag: {
+                        vilkårsgrunnlagId: "21dd055f-4401-44f8-81bd-8257251c1d40",
+                        skjæringstidspunkt: "2022-06-01",
+                        vilkårsgrunnlagtype: "Spleis"
+                    }
+                }
+            },
+            {
+                id: 581542,
+                tidsstempel: "2022-09-06T13:30:57.67",
+                nivå: "INFO",
+                tekst: "Simulerer ikke oppdrag uten endring fagområde=SP med fagsystemId=VZ3KVT2N4RAMNF4TEBVIEIHUKI",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Utbetaling: {
+                        utbetalingId: "30154efa-33b4-44b5-a5d1-6fb8c4e61064"
+                    },
+                    Oppdrag: {
+                        fagsystemId: "Q265AUMB35CYRKWRZYVVSKQTFA"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "e005b52c-986f-471c-a311-16d97efbe937"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_SIMULERING"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "0adaa17f-038f-4957-83cd-da3f2de91824",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581541,
+                tidsstempel: "2022-09-06T13:30:57.67",
+                nivå: "INFO",
+                tekst: "Saken oppfyller krav for behandling, settes til \"Avventer simulering\"",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "e005b52c-986f-471c-a311-16d97efbe937"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "0adaa17f-038f-4957-83cd-da3f2de91824",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    },
+                    vilkårsgrunnlag: {
+                        vilkårsgrunnlagId: "21dd055f-4401-44f8-81bd-8257251c1d40",
+                        skjæringstidspunkt: "2022-06-01",
+                        vilkårsgrunnlagtype: "Spleis"
+                    }
+                }
+            },
+            {
+                id: 581543,
+                tidsstempel: "2022-09-06T13:30:58.447",
+                nivå: "INFO",
+                tekst: "Behandler simulering",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Simulering: {
+                        meldingsreferanseId: "42f32fb9-d69c-4292-bda4-599e9dff3551",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581544,
+                tidsstempel: "2022-09-06T13:31:08.758",
+                nivå: "INFO",
+                tekst: "Behandler utbetalingsgodkjenning",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingsgodkjenning: {
+                        meldingsreferanseId: "b91318c4-7ed2-4210-b327-c6f1028f865e",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581545,
+                tidsstempel: "2022-09-06T13:31:08.758",
+                nivå: "INFO",
+                tekst: "Utbetaling markert som godkjent av saksbehandler A164311 2022-09-06T13:31:08.552978361",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Utbetalingsgodkjenning: {
+                        meldingsreferanseId: "b91318c4-7ed2-4210-b327-c6f1028f865e",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581546,
+                tidsstempel: "2022-09-06T13:31:08.759",
+                nivå: "INFO",
+                tekst: "Overfører ikke oppdrag uten endring for fagområde=SP med fagsystemId=VZ3KVT2N4RAMNF4TEBVIEIHUKI",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Utbetaling: {
+                        utbetalingId: "30154efa-33b4-44b5-a5d1-6fb8c4e61064"
+                    },
+                    Oppdrag: {
+                        fagsystemId: "Q265AUMB35CYRKWRZYVVSKQTFA"
+                    },
+                    Utbetalingsgodkjenning: {
+                        meldingsreferanseId: "b91318c4-7ed2-4210-b327-c6f1028f865e",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581547,
+                tidsstempel: "2022-09-06T13:31:08.927",
+                nivå: "INFO",
+                tekst: "Behandler utbetaling overført",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    UtbetalingOverført: {
+                        meldingsreferanseId: "414f0269-4092-44c8-96c7-a2ea472e90c1",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581548,
+                tidsstempel: "2022-09-06T13:31:08.927",
+                nivå: "INFO",
+                tekst: "Utbetalingen ble overført til Oppdrag/UR 2022-09-06T13:31:08.848494152, og har fått avstemmingsnøkkel 1662463868848494152.\n",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Utbetaling: {
+                        utbetalingId: "30154efa-33b4-44b5-a5d1-6fb8c4e61064"
+                    },
+                    UtbetalingOverført: {
+                        meldingsreferanseId: "414f0269-4092-44c8-96c7-a2ea472e90c1",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581550,
+                tidsstempel: "2022-09-06T13:31:09.199",
+                nivå: "INFO",
+                tekst: "Utbetalingen ble overført til Oppdrag/UR 2022-09-06T13:31:09.080646269, og har fått avstemmingsnøkkel 1662463868848494152.\n",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Utbetaling: {
+                        utbetalingId: "30154efa-33b4-44b5-a5d1-6fb8c4e61064"
+                    },
+                    UtbetalingHendelse: {
+                        meldingsreferanseId: "9f21d2b0-1720-4e37-bae0-6e634a0f2df0",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581549,
+                tidsstempel: "2022-09-06T13:31:09.199",
+                nivå: "INFO",
+                tekst: "Behandler utbetaling",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    UtbetalingHendelse: {
+                        meldingsreferanseId: "9f21d2b0-1720-4e37-bae0-6e634a0f2df0",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581551,
+                tidsstempel: "2022-09-06T13:31:09.2",
+                nivå: "INFO",
+                tekst: "OK fra Oppdragssystemet",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "e005b52c-986f-471c-a311-16d97efbe937"
+                    },
+                    Tilstand: {
+                        tilstand: "TIL_UTBETALING"
+                    },
+                    UtbetalingHendelse: {
+                        meldingsreferanseId: "9f21d2b0-1720-4e37-bae0-6e634a0f2df0",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581552,
+                tidsstempel: "2022-09-06T13:31:09.201",
+                nivå: "INFO",
+                tekst: "Forsøker å gjenoppta 2022-06-15 - 2022-07-15 (AvventerBlokkerendePeriode)",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_BLOKKERENDE_PERIODE"
+                    },
+                    UtbetalingHendelse: {
+                        meldingsreferanseId: "9f21d2b0-1720-4e37-bae0-6e634a0f2df0",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581553,
+                tidsstempel: "2022-09-06T13:31:09.204",
+                nivå: "INFO",
+                tekst: "Forkaster utbetaling",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Utbetaling: {
+                        utbetalingId: "c1795b8b-8687-4ab8-a960-f71f3fe7d8cf"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    UtbetalingHendelse: {
+                        meldingsreferanseId: "9f21d2b0-1720-4e37-bae0-6e634a0f2df0",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581554,
+                tidsstempel: "2022-09-06T13:31:09.204",
+                nivå: "INFO",
+                tekst: "Forespør sykdoms- og inntektshistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Utbetaling: {
+                        utbetalingId: "c1795b8b-8687-4ab8-a960-f71f3fe7d8cf"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    UtbetalingHendelse: {
+                        meldingsreferanseId: "9f21d2b0-1720-4e37-bae0-6e634a0f2df0",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581555,
+                tidsstempel: "2022-09-06T13:31:09.574",
+                nivå: "INFO",
+                tekst: "Behandler historiske utbetalinger og inntekter",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "090dc57a-c2eb-4f84-8780-7893bdb9659d",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581564,
+                tidsstempel: "2022-09-06T13:31:09.575",
+                nivå: "INFO",
+                tekst: "Bruker har ingen institusjonsoppholdsperioder",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "090dc57a-c2eb-4f84-8780-7893bdb9659d",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581562,
+                tidsstempel: "2022-09-06T13:31:09.575",
+                nivå: "INFO",
+                tekst: "Bruker har ingen omsorgspengeytelser",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "090dc57a-c2eb-4f84-8780-7893bdb9659d",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581561,
+                tidsstempel: "2022-09-06T13:31:09.575",
+                nivå: "INFO",
+                tekst: "Bruker har ingen pleiepengeytelser",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "090dc57a-c2eb-4f84-8780-7893bdb9659d",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581563,
+                tidsstempel: "2022-09-06T13:31:09.575",
+                nivå: "INFO",
+                tekst: "Bruker har ingen opplæringspengeytelser",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "090dc57a-c2eb-4f84-8780-7893bdb9659d",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581558,
+                tidsstempel: "2022-09-06T13:31:09.575",
+                nivå: "INFO",
+                tekst: "Sjekker at alle utbetalte perioder har inntektsopplysninger",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "090dc57a-c2eb-4f84-8780-7893bdb9659d",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581559,
+                tidsstempel: "2022-09-06T13:31:09.575",
+                nivå: "INFO",
+                tekst: "Sjekker arbeidskategorikoder",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "090dc57a-c2eb-4f84-8780-7893bdb9659d",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581556,
+                tidsstempel: "2022-09-06T13:31:09.575",
+                nivå: "INFO",
+                tekst: "Sjekker utbetalte perioder",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "090dc57a-c2eb-4f84-8780-7893bdb9659d",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581557,
+                tidsstempel: "2022-09-06T13:31:09.575",
+                nivå: "INFO",
+                tekst: "Sjekker inntektsopplysninger",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "090dc57a-c2eb-4f84-8780-7893bdb9659d",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581560,
+                tidsstempel: "2022-09-06T13:31:09.575",
+                nivå: "INFO",
+                tekst: "Bruker har ingen foreldrepenge- eller svangerskapsytelser",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "090dc57a-c2eb-4f84-8780-7893bdb9659d",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581565,
+                tidsstempel: "2022-09-06T13:31:09.576",
+                nivå: "INFO",
+                tekst: "Har 25 % eller mindre avvik i inntekt (11,07 %)",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "090dc57a-c2eb-4f84-8780-7893bdb9659d",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    },
+                    vilkårsgrunnlag: {
+                        vilkårsgrunnlagId: "21dd055f-4401-44f8-81bd-8257251c1d40",
+                        skjæringstidspunkt: "2022-06-01",
+                        vilkårsgrunnlagtype: "Spleis"
+                    }
+                }
+            },
+            {
+                id: 581566,
+                tidsstempel: "2022-09-06T13:31:09.587",
+                nivå: "INFO",
+                tekst: "Fant refusjon ved å sjekke om første fraværsdag er i sammenhengende utbetaling",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "090dc57a-c2eb-4f84-8780-7893bdb9659d",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    },
+                    vilkårsgrunnlag: {
+                        vilkårsgrunnlagId: "21dd055f-4401-44f8-81bd-8257251c1d40",
+                        skjæringstidspunkt: "2022-06-01",
+                        vilkårsgrunnlagtype: "Spleis"
+                    }
+                }
+            },
+            {
+                id: 581567,
+                tidsstempel: "2022-09-06T13:31:09.588",
+                nivå: "INFO",
+                tekst: "Fant refusjon ved å sjekke om første fraværsdag er i sammenhengende utbetaling",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "090dc57a-c2eb-4f84-8780-7893bdb9659d",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    },
+                    vilkårsgrunnlag: {
+                        vilkårsgrunnlagId: "21dd055f-4401-44f8-81bd-8257251c1d40",
+                        skjæringstidspunkt: "2022-06-01",
+                        vilkårsgrunnlagtype: "Spleis"
+                    }
+                }
+            },
+            {
+                id: 581568,
+                tidsstempel: "2022-09-06T13:31:09.592",
+                nivå: "INFO",
+                tekst: "Maksimalt antall sykedager overskrides ikke i perioden",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "090dc57a-c2eb-4f84-8780-7893bdb9659d",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    },
+                    vilkårsgrunnlag: {
+                        vilkårsgrunnlagId: "21dd055f-4401-44f8-81bd-8257251c1d40",
+                        skjæringstidspunkt: "2022-06-01",
+                        vilkårsgrunnlagtype: "Spleis"
+                    }
+                }
+            },
+            {
+                id: 581569,
+                tidsstempel: "2022-09-06T13:31:09.593",
+                nivå: "INFO",
+                tekst: "Redusert utbetaling minst én dag på grunn av inntekt over 6G",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "090dc57a-c2eb-4f84-8780-7893bdb9659d",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    },
+                    vilkårsgrunnlag: {
+                        vilkårsgrunnlagId: "21dd055f-4401-44f8-81bd-8257251c1d40",
+                        skjæringstidspunkt: "2022-06-01",
+                        vilkårsgrunnlagtype: "Spleis"
+                    }
+                }
+            },
+            {
+                id: 581572,
+                tidsstempel: "2022-09-06T13:31:09.594",
+                nivå: "INFO",
+                tekst: "Forkaster ikke utbetaling=c1795b8b-8687-4ab8-a960-f71f3fe7d8cf i tilstand=Forkastet",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Utbetaling: {
+                        utbetalingId: "c1795b8b-8687-4ab8-a960-f71f3fe7d8cf"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "090dc57a-c2eb-4f84-8780-7893bdb9659d",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    },
+                    vilkårsgrunnlag: {
+                        vilkårsgrunnlagId: "21dd055f-4401-44f8-81bd-8257251c1d40",
+                        skjæringstidspunkt: "2022-06-01",
+                        vilkårsgrunnlagtype: "Spleis"
+                    }
+                }
+            },
+            {
+                id: 581570,
+                tidsstempel: "2022-09-06T13:31:09.594",
+                nivå: "INFO",
+                tekst: "Ingen utbetalingslinjer bygget",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "090dc57a-c2eb-4f84-8780-7893bdb9659d",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    },
+                    vilkårsgrunnlag: {
+                        vilkårsgrunnlagId: "21dd055f-4401-44f8-81bd-8257251c1d40",
+                        skjæringstidspunkt: "2022-06-01",
+                        vilkårsgrunnlagtype: "Spleis"
+                    }
+                }
+            },
+            {
+                id: 581571,
+                tidsstempel: "2022-09-06T13:31:09.594",
+                nivå: "INFO",
+                tekst: "Ingen utbetalingslinjer bygget",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "090dc57a-c2eb-4f84-8780-7893bdb9659d",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    },
+                    vilkårsgrunnlag: {
+                        vilkårsgrunnlagId: "21dd055f-4401-44f8-81bd-8257251c1d40",
+                        skjæringstidspunkt: "2022-06-01",
+                        vilkårsgrunnlagtype: "Spleis"
+                    }
+                }
+            },
+            {
+                id: 581573,
+                tidsstempel: "2022-09-06T13:31:09.595",
+                nivå: "INFO",
+                tekst: "Saken oppfyller krav for behandling, settes til \"Avventer godkjenning\" fordi ingenting skal utbetales",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Utbetaling: {
+                        utbetalingId: "c1795b8b-8687-4ab8-a960-f71f3fe7d8cf"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "090dc57a-c2eb-4f84-8780-7893bdb9659d",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    },
+                    vilkårsgrunnlag: {
+                        vilkårsgrunnlagId: "21dd055f-4401-44f8-81bd-8257251c1d40",
+                        skjæringstidspunkt: "2022-06-01",
+                        vilkårsgrunnlagtype: "Spleis"
+                    }
+                }
+            },
+            {
+                id: 581574,
+                tidsstempel: "2022-09-07T00:06:19.268",
+                nivå: "INFO",
+                tekst: "Må oppfriske Infotrygdhistorikken",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "e9176ba6-d092-4dfb-a892-3df42340091b",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 581575,
+                tidsstempel: "2022-09-07T00:06:19.452",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "1b697af4-79ac-4b83-9756-f9821fec8a67",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581576,
+                tidsstempel: "2022-09-07T00:06:19.452",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "1b697af4-79ac-4b83-9756-f9821fec8a67",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581577,
+                tidsstempel: "2022-09-07T00:06:19.516",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "0699c0e8-04ce-4c45-a0a7-ba63716ec53b",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581578,
+                tidsstempel: "2022-09-07T00:06:19.516",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "0699c0e8-04ce-4c45-a0a7-ba63716ec53b",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581579,
+                tidsstempel: "2022-09-07T09:31:47.384",
+                nivå: "INFO",
+                tekst: "Må oppfriske Infotrygdhistorikken",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "05921353-0438-4edb-899d-1e585d6d7311",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 581580,
+                tidsstempel: "2022-09-07T09:31:47.569",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "9e30d2d4-634d-4d38-bd1b-2e3e83af1767",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581581,
+                tidsstempel: "2022-09-07T09:31:47.569",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "9e30d2d4-634d-4d38-bd1b-2e3e83af1767",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581582,
+                tidsstempel: "2022-09-07T09:31:47.634",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "9bffdd19-bb2c-48fc-9f32-dc63cc5d1998",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581583,
+                tidsstempel: "2022-09-07T09:31:47.634",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "9bffdd19-bb2c-48fc-9f32-dc63cc5d1998",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581584,
+                tidsstempel: "2022-09-07T16:25:47.236",
+                nivå: "INFO",
+                tekst: "Behandler sykmelding",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Sykmelding: {
+                        meldingsreferanseId: "17988694-d0ba-4b61-850b-b3ca47e51646",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581585,
+                tidsstempel: "2022-09-07T16:25:47.239",
+                nivå: "INFO",
+                tekst: "Trimmer sykmelding som overlapper med vedtaksperiode. Før trimming 01-07-2022 til 25-07-2022, etter trimming 01-07-2022 til 25-07-2022",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "e005b52c-986f-471c-a311-16d97efbe937"
+                    },
+                    Tilstand: {
+                        tilstand: "AVSLUTTET"
+                    },
+                    Sykmelding: {
+                        meldingsreferanseId: "17988694-d0ba-4b61-850b-b3ca47e51646",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581586,
+                tidsstempel: "2022-09-07T16:25:47.239",
+                nivå: "INFO",
+                tekst: "Legger til ny periode 01-07-2022 til 25-07-2022 i sykmeldingsperioder",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "e005b52c-986f-471c-a311-16d97efbe937"
+                    },
+                    Tilstand: {
+                        tilstand: "AVSLUTTET"
+                    },
+                    Sykmelding: {
+                        meldingsreferanseId: "17988694-d0ba-4b61-850b-b3ca47e51646",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581587,
+                tidsstempel: "2022-09-07T16:25:48.082",
+                nivå: "INFO",
+                tekst: "Behandler søknad",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Søknad: {
+                        meldingsreferanseId: "7d8cbf3c-0b7a-4220-9337-5eadfae57596",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581588,
+                tidsstempel: "2022-09-07T16:25:48.106",
+                nivå: "INFO",
+                tekst: "Fullført behandling av søknad",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "51afa16d-230e-48f0-876d-0697cc858d3a"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_BLOKKERENDE_PERIODE"
+                    },
+                    Søknad: {
+                        meldingsreferanseId: "7d8cbf3c-0b7a-4220-9337-5eadfae57596",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581589,
+                tidsstempel: "2022-09-07T16:25:48.107",
+                nivå: "INFO",
+                tekst: "Forsøker å gjenoppta 2022-06-15 - 2022-07-15 (AvventerBlokkerendePeriode)",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_BLOKKERENDE_PERIODE"
+                    },
+                    Søknad: {
+                        meldingsreferanseId: "7d8cbf3c-0b7a-4220-9337-5eadfae57596",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581590,
+                tidsstempel: "2022-09-07T16:25:48.117",
+                nivå: "INFO",
+                tekst: "Forkaster utbetaling",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Utbetaling: {
+                        utbetalingId: "4c84131c-89a5-405a-bf3f-a4ef48c72945"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Søknad: {
+                        meldingsreferanseId: "7d8cbf3c-0b7a-4220-9337-5eadfae57596",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581591,
+                tidsstempel: "2022-09-07T16:25:48.119",
+                nivå: "INFO",
+                tekst: "Forespør sykdoms- og inntektshistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Utbetaling: {
+                        utbetalingId: "4c84131c-89a5-405a-bf3f-a4ef48c72945"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Søknad: {
+                        meldingsreferanseId: "7d8cbf3c-0b7a-4220-9337-5eadfae57596",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 581594,
+                tidsstempel: "2022-09-07T16:25:49.282",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "98db5760-96b2-42ef-a4fe-0067f1ca2aed",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581592,
+                tidsstempel: "2022-09-07T16:25:49.282",
+                nivå: "INFO",
+                tekst: "Behandler historiske utbetalinger og inntekter",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "98db5760-96b2-42ef-a4fe-0067f1ca2aed",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581593,
+                tidsstempel: "2022-09-07T16:25:49.282",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "98db5760-96b2-42ef-a4fe-0067f1ca2aed",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581596,
+                tidsstempel: "2022-09-07T16:25:49.286",
+                nivå: "INFO",
+                tekst: "Sjekker inntektsopplysninger",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "98db5760-96b2-42ef-a4fe-0067f1ca2aed",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581598,
+                tidsstempel: "2022-09-07T16:25:49.286",
+                nivå: "INFO",
+                tekst: "Sjekker arbeidskategorikoder",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "98db5760-96b2-42ef-a4fe-0067f1ca2aed",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581595,
+                tidsstempel: "2022-09-07T16:25:49.286",
+                nivå: "INFO",
+                tekst: "Sjekker utbetalte perioder",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "98db5760-96b2-42ef-a4fe-0067f1ca2aed",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581597,
+                tidsstempel: "2022-09-07T16:25:49.286",
+                nivå: "INFO",
+                tekst: "Sjekker at alle utbetalte perioder har inntektsopplysninger",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "98db5760-96b2-42ef-a4fe-0067f1ca2aed",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581599,
+                tidsstempel: "2022-09-07T16:25:49.287",
+                nivå: "INFO",
+                tekst: "Bruker har ingen foreldrepenge- eller svangerskapsytelser",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "98db5760-96b2-42ef-a4fe-0067f1ca2aed",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581600,
+                tidsstempel: "2022-09-07T16:25:49.287",
+                nivå: "INFO",
+                tekst: "Bruker har ingen pleiepengeytelser",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "98db5760-96b2-42ef-a4fe-0067f1ca2aed",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581603,
+                tidsstempel: "2022-09-07T16:25:49.287",
+                nivå: "INFO",
+                tekst: "Bruker har ingen institusjonsoppholdsperioder",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "98db5760-96b2-42ef-a4fe-0067f1ca2aed",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581601,
+                tidsstempel: "2022-09-07T16:25:49.287",
+                nivå: "INFO",
+                tekst: "Bruker har ingen omsorgspengeytelser",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "98db5760-96b2-42ef-a4fe-0067f1ca2aed",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581602,
+                tidsstempel: "2022-09-07T16:25:49.287",
+                nivå: "INFO",
+                tekst: "Bruker har ingen opplæringspengeytelser",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "98db5760-96b2-42ef-a4fe-0067f1ca2aed",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581604,
+                tidsstempel: "2022-09-07T16:25:49.294",
+                nivå: "INFO",
+                tekst: "Har 25 % eller mindre avvik i inntekt (11,07 %)",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "98db5760-96b2-42ef-a4fe-0067f1ca2aed",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    },
+                    vilkårsgrunnlag: {
+                        vilkårsgrunnlagId: "21dd055f-4401-44f8-81bd-8257251c1d40",
+                        skjæringstidspunkt: "2022-06-01",
+                        vilkårsgrunnlagtype: "Spleis"
+                    }
+                }
+            },
+            {
+                id: 581605,
+                tidsstempel: "2022-09-07T16:25:49.341",
+                nivå: "INFO",
+                tekst: "Fant refusjon ved å sjekke om første fraværsdag er i sammenhengende utbetaling",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "98db5760-96b2-42ef-a4fe-0067f1ca2aed",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    },
+                    vilkårsgrunnlag: {
+                        vilkårsgrunnlagId: "21dd055f-4401-44f8-81bd-8257251c1d40",
+                        skjæringstidspunkt: "2022-06-01",
+                        vilkårsgrunnlagtype: "Spleis"
+                    }
+                }
+            },
+            {
+                id: 581606,
+                tidsstempel: "2022-09-07T16:25:49.342",
+                nivå: "INFO",
+                tekst: "Fant refusjon ved å sjekke om første fraværsdag er i sammenhengende utbetaling",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "98db5760-96b2-42ef-a4fe-0067f1ca2aed",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    },
+                    vilkårsgrunnlag: {
+                        vilkårsgrunnlagId: "21dd055f-4401-44f8-81bd-8257251c1d40",
+                        skjæringstidspunkt: "2022-06-01",
+                        vilkårsgrunnlagtype: "Spleis"
+                    }
+                }
+            },
+            {
+                id: 581607,
+                tidsstempel: "2022-09-07T16:25:49.373",
+                nivå: "INFO",
+                tekst: "Ingen avviste dager på grunn av 20 % samlet sykdomsgrad-regel for denne perioden",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "98db5760-96b2-42ef-a4fe-0067f1ca2aed",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    },
+                    vilkårsgrunnlag: {
+                        vilkårsgrunnlagId: "21dd055f-4401-44f8-81bd-8257251c1d40",
+                        skjæringstidspunkt: "2022-06-01",
+                        vilkårsgrunnlagtype: "Spleis"
+                    }
+                }
+            },
+            {
+                id: 581608,
+                tidsstempel: "2022-09-07T16:25:49.382",
+                nivå: "INFO",
+                tekst: "Maksimalt antall sykedager overskrides ikke i perioden",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "98db5760-96b2-42ef-a4fe-0067f1ca2aed",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    },
+                    vilkårsgrunnlag: {
+                        vilkårsgrunnlagId: "21dd055f-4401-44f8-81bd-8257251c1d40",
+                        skjæringstidspunkt: "2022-06-01",
+                        vilkårsgrunnlagtype: "Spleis"
+                    }
+                }
+            },
+            {
+                id: 581609,
+                tidsstempel: "2022-09-07T16:25:49.389",
+                nivå: "INFO",
+                tekst: "Redusert utbetaling minst én dag på grunn av inntekt over 6G",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "98db5760-96b2-42ef-a4fe-0067f1ca2aed",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    },
+                    vilkårsgrunnlag: {
+                        vilkårsgrunnlagId: "21dd055f-4401-44f8-81bd-8257251c1d40",
+                        skjæringstidspunkt: "2022-06-01",
+                        vilkårsgrunnlagtype: "Spleis"
+                    }
+                }
+            },
+            {
+                id: 581610,
+                tidsstempel: "2022-09-07T16:25:49.4",
+                nivå: "INFO",
+                tekst: "Utbetalingslinjer bygget vellykket",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "98db5760-96b2-42ef-a4fe-0067f1ca2aed",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    },
+                    vilkårsgrunnlag: {
+                        vilkårsgrunnlagId: "21dd055f-4401-44f8-81bd-8257251c1d40",
+                        skjæringstidspunkt: "2022-06-01",
+                        vilkårsgrunnlagtype: "Spleis"
+                    }
+                }
+            },
+            {
+                id: 581612,
+                tidsstempel: "2022-09-07T16:25:49.401",
+                nivå: "INFO",
+                tekst: "Forkaster ikke utbetaling=4c84131c-89a5-405a-bf3f-a4ef48c72945 i tilstand=Forkastet",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Utbetaling: {
+                        utbetalingId: "4c84131c-89a5-405a-bf3f-a4ef48c72945"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "98db5760-96b2-42ef-a4fe-0067f1ca2aed",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    },
+                    vilkårsgrunnlag: {
+                        vilkårsgrunnlagId: "21dd055f-4401-44f8-81bd-8257251c1d40",
+                        skjæringstidspunkt: "2022-06-01",
+                        vilkårsgrunnlagtype: "Spleis"
+                    }
+                }
+            },
+            {
+                id: 581611,
+                tidsstempel: "2022-09-07T16:25:49.401",
+                nivå: "INFO",
+                tekst: "Ingen utbetalingslinjer bygget",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "98db5760-96b2-42ef-a4fe-0067f1ca2aed",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    },
+                    vilkårsgrunnlag: {
+                        vilkårsgrunnlagId: "21dd055f-4401-44f8-81bd-8257251c1d40",
+                        skjæringstidspunkt: "2022-06-01",
+                        vilkårsgrunnlagtype: "Spleis"
+                    }
+                }
+            },
+            {
+                id: 581613,
+                tidsstempel: "2022-09-07T16:25:49.405",
+                nivå: "INFO",
+                tekst: "Utbetalingslinjer bygget vellykket",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Utbetaling: {
+                        utbetalingId: "4c84131c-89a5-405a-bf3f-a4ef48c72945"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "98db5760-96b2-42ef-a4fe-0067f1ca2aed",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    },
+                    vilkårsgrunnlag: {
+                        vilkårsgrunnlagId: "21dd055f-4401-44f8-81bd-8257251c1d40",
+                        skjæringstidspunkt: "2022-06-01",
+                        vilkårsgrunnlagtype: "Spleis"
+                    }
+                }
+            },
+            {
+                id: 581615,
+                tidsstempel: "2022-09-07T16:25:49.406",
+                nivå: "INFO",
+                tekst: "Forkaster ikke utbetaling=30154efa-33b4-44b5-a5d1-6fb8c4e61064 i tilstand=Utbetalt",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Utbetaling: {
+                        utbetalingId: "30154efa-33b4-44b5-a5d1-6fb8c4e61064"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "98db5760-96b2-42ef-a4fe-0067f1ca2aed",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    },
+                    vilkårsgrunnlag: {
+                        vilkårsgrunnlagId: "21dd055f-4401-44f8-81bd-8257251c1d40",
+                        skjæringstidspunkt: "2022-06-01",
+                        vilkårsgrunnlagtype: "Spleis"
+                    }
+                }
+            },
+            {
+                id: 581614,
+                tidsstempel: "2022-09-07T16:25:49.406",
+                nivå: "INFO",
+                tekst: "Ingen utbetalingslinjer bygget",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Utbetaling: {
+                        utbetalingId: "4c84131c-89a5-405a-bf3f-a4ef48c72945"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "98db5760-96b2-42ef-a4fe-0067f1ca2aed",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    },
+                    vilkårsgrunnlag: {
+                        vilkårsgrunnlagId: "21dd055f-4401-44f8-81bd-8257251c1d40",
+                        skjæringstidspunkt: "2022-06-01",
+                        vilkårsgrunnlagtype: "Spleis"
+                    }
+                }
+            },
+            {
+                id: 581616,
+                tidsstempel: "2022-09-07T16:25:49.408",
+                nivå: "INFO",
+                tekst: "Saken oppfyller krav for behandling, settes til \"Avventer simulering\"",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Utbetaling: {
+                        utbetalingId: "30154efa-33b4-44b5-a5d1-6fb8c4e61064"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_HISTORIKK"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "98db5760-96b2-42ef-a4fe-0067f1ca2aed",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    },
+                    vilkårsgrunnlag: {
+                        vilkårsgrunnlagId: "21dd055f-4401-44f8-81bd-8257251c1d40",
+                        skjæringstidspunkt: "2022-06-01",
+                        vilkårsgrunnlagtype: "Spleis"
+                    }
+                }
+            },
+            {
+                id: 581617,
+                tidsstempel: "2022-09-07T16:25:49.41",
+                nivå: "INFO",
+                tekst: "Simulerer ikke oppdrag uten endring fagområde=SP med fagsystemId=VYHKFUJRDZD63CPZUOOFI2OLOA",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Utbetaling: {
+                        utbetalingId: "85694799-7d6e-4e4e-8a22-04db3e9d7437"
+                    },
+                    Oppdrag: {
+                        fagsystemId: "VOMTBZYTTNFDVG3UR2C7FOG7WQ"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_SIMULERING"
+                    },
+                    Ytelser: {
+                        meldingsreferanseId: "98db5760-96b2-42ef-a4fe-0067f1ca2aed",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581618,
+                tidsstempel: "2022-09-07T16:25:50.476",
+                nivå: "INFO",
+                tekst: "Behandler simulering",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Simulering: {
+                        meldingsreferanseId: "9f7f1c07-6781-4beb-b5aa-d6407f004b1b",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581619,
+                tidsstempel: "2022-09-08T01:22:06.28",
+                nivå: "INFO",
+                tekst: "Må oppfriske Infotrygdhistorikken",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "68220d14-6705-4ce8-b1f2-26f7f9b69c17",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 581620,
+                tidsstempel: "2022-09-08T01:22:06.595",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "1e07ec79-dbef-4fa4-9c3f-a11300837531",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581621,
+                tidsstempel: "2022-09-08T01:22:06.595",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "1e07ec79-dbef-4fa4-9c3f-a11300837531",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581622,
+                tidsstempel: "2022-09-08T01:22:06.693",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "20743ced-daff-46db-9030-34896567c538",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581623,
+                tidsstempel: "2022-09-08T01:22:06.693",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "20743ced-daff-46db-9030-34896567c538",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581624,
+                tidsstempel: "2022-09-08T10:10:35.884",
+                nivå: "INFO",
+                tekst: "Må oppfriske Infotrygdhistorikken",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "13c91459-dd91-4e17-99b8-f488f7c35632",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 581626,
+                tidsstempel: "2022-09-08T10:10:36.097",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "0270559b-51ba-4b96-933f-ec7188b12dd0",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581625,
+                tidsstempel: "2022-09-08T10:10:36.097",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "0270559b-51ba-4b96-933f-ec7188b12dd0",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581628,
+                tidsstempel: "2022-09-08T10:10:36.22",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "368d4497-4132-435a-9261-5cac200fbe8b",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581627,
+                tidsstempel: "2022-09-08T10:10:36.22",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "368d4497-4132-435a-9261-5cac200fbe8b",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581629,
+                tidsstempel: "2022-09-08T21:16:54.958",
+                nivå: "INFO",
+                tekst: "Må oppfriske Infotrygdhistorikken",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "06dbff3a-7304-40ac-b81d-7a901889b7a7",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 581630,
+                tidsstempel: "2022-09-08T21:16:55.298",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "ebca757f-4028-4c82-ba74-84475be40077",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581631,
+                tidsstempel: "2022-09-08T21:16:55.298",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "ebca757f-4028-4c82-ba74-84475be40077",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581633,
+                tidsstempel: "2022-09-08T21:16:55.59",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "0df0a0f8-ef10-4db2-8347-8d75117b0b67",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581632,
+                tidsstempel: "2022-09-08T21:16:55.59",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "0df0a0f8-ef10-4db2-8347-8d75117b0b67",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581635,
+                tidsstempel: "2022-09-08T22:33:58.034",
+                nivå: "INFO",
+                tekst: "Tidligere periode ferdigbehandlet, men gjør ingen tilstandsendring.",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "9045b00c-a72c-4a2e-bab2-ce0f6179ce60",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 581634,
+                tidsstempel: "2022-09-08T22:33:58.034",
+                nivå: "INFO",
+                tekst: "Forsøker å gjenoppta 2022-06-15 - 2022-07-15 (AvventerGodkjenning)",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "9045b00c-a72c-4a2e-bab2-ce0f6179ce60",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 581636,
+                tidsstempel: "2022-09-09T05:21:48.344",
+                nivå: "INFO",
+                tekst: "Må oppfriske Infotrygdhistorikken",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "32baf27f-42b3-4ba6-8c98-1d27b2764701",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 581637,
+                tidsstempel: "2022-09-09T05:21:48.537",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "3df21b16-f470-4d61-acad-dd06d8db824f",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581638,
+                tidsstempel: "2022-09-09T05:21:48.538",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "3df21b16-f470-4d61-acad-dd06d8db824f",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581639,
+                tidsstempel: "2022-09-09T05:21:48.665",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "b7e5c5e9-aef2-4eee-8d48-916a248e8051",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581640,
+                tidsstempel: "2022-09-09T05:21:48.665",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "b7e5c5e9-aef2-4eee-8d48-916a248e8051",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581641,
+                tidsstempel: "2022-09-09T14:58:25.892",
+                nivå: "INFO",
+                tekst: "Må oppfriske Infotrygdhistorikken",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "2627d980-6992-4c2c-a008-272193a94220",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 581642,
+                tidsstempel: "2022-09-09T14:58:26.182",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "083b13ea-1877-4fb7-ab03-5d4b3b8f24a1",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581643,
+                tidsstempel: "2022-09-09T14:58:26.182",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "083b13ea-1877-4fb7-ab03-5d4b3b8f24a1",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581644,
+                tidsstempel: "2022-09-09T14:58:26.317",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "ac2ebb6f-79cf-4884-a21a-c147ea66b95a",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581645,
+                tidsstempel: "2022-09-09T14:58:26.317",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "ac2ebb6f-79cf-4884-a21a-c147ea66b95a",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581646,
+                tidsstempel: "2022-09-09T23:34:26.86",
+                nivå: "INFO",
+                tekst: "Må oppfriske Infotrygdhistorikken",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "c07be8c3-059f-47fc-8415-93c1171a3f80",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 581648,
+                tidsstempel: "2022-09-09T23:34:27.099",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "93620ac2-f373-4b91-b1eb-d0d41b3447fc",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581647,
+                tidsstempel: "2022-09-09T23:34:27.099",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "93620ac2-f373-4b91-b1eb-d0d41b3447fc",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581649,
+                tidsstempel: "2022-09-09T23:34:27.243",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "c13bea25-ecc1-45ed-98d2-d75bbf5881ac",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581650,
+                tidsstempel: "2022-09-09T23:34:27.243",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "c13bea25-ecc1-45ed-98d2-d75bbf5881ac",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581651,
+                tidsstempel: "2022-09-10T00:44:29.503",
+                nivå: "INFO",
+                tekst: "Forsøker å gjenoppta 2022-06-15 - 2022-07-15 (AvventerGodkjenning)",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "963265db-24d0-4593-92fe-b59a1d932387",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 581652,
+                tidsstempel: "2022-09-10T00:44:29.503",
+                nivå: "INFO",
+                tekst: "Tidligere periode ferdigbehandlet, men gjør ingen tilstandsendring.",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "963265db-24d0-4593-92fe-b59a1d932387",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 581653,
+                tidsstempel: "2022-09-10T10:15:58.598",
+                nivå: "INFO",
+                tekst: "Må oppfriske Infotrygdhistorikken",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "e4c304a6-d442-416c-9988-a120a3f81520",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 581654,
+                tidsstempel: "2022-09-10T10:15:59.596",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "5924247c-08fe-4bdd-bf3c-b490aa22ac98",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581655,
+                tidsstempel: "2022-09-10T10:15:59.597",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "5924247c-08fe-4bdd-bf3c-b490aa22ac98",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581656,
+                tidsstempel: "2022-09-10T10:15:59.86",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "5b1c8d98-7ed1-44e0-913a-c0c86be7bc8f",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581657,
+                tidsstempel: "2022-09-10T10:15:59.861",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "5b1c8d98-7ed1-44e0-913a-c0c86be7bc8f",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581658,
+                tidsstempel: "2022-09-10T20:46:57.577",
+                nivå: "INFO",
+                tekst: "Må oppfriske Infotrygdhistorikken",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "96c39948-b95a-4d1c-835e-a6ca620e2fc8",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 581659,
+                tidsstempel: "2022-09-10T20:46:57.779",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "f4efdbe1-5338-4e40-a16c-8a0d4a37d6cc",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581660,
+                tidsstempel: "2022-09-10T20:46:57.78",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "f4efdbe1-5338-4e40-a16c-8a0d4a37d6cc",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581661,
+                tidsstempel: "2022-09-10T20:46:57.903",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "f1b5fdaa-9870-4bd6-b0f1-e3829332c33e",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581662,
+                tidsstempel: "2022-09-10T20:46:57.904",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "f1b5fdaa-9870-4bd6-b0f1-e3829332c33e",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581663,
+                tidsstempel: "2022-09-10T23:52:06.465",
+                nivå: "INFO",
+                tekst: "Forsøker å gjenoppta 2022-06-15 - 2022-07-15 (AvventerGodkjenning)",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "a36dc2a8-d3cd-4508-9d83-7b892c901b69",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 581664,
+                tidsstempel: "2022-09-10T23:52:06.465",
+                nivå: "INFO",
+                tekst: "Tidligere periode ferdigbehandlet, men gjør ingen tilstandsendring.",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "a36dc2a8-d3cd-4508-9d83-7b892c901b69",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 581665,
+                tidsstempel: "2022-09-11T06:04:25.038",
+                nivå: "INFO",
+                tekst: "Må oppfriske Infotrygdhistorikken",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "fd292aa5-e691-4b8b-906f-72bf3537af7f",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 581667,
+                tidsstempel: "2022-09-11T06:04:26.197",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "b5bfa325-4947-44fc-bd66-8d37a32401ae",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581666,
+                tidsstempel: "2022-09-11T06:04:26.197",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "b5bfa325-4947-44fc-bd66-8d37a32401ae",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581669,
+                tidsstempel: "2022-09-11T06:04:26.323",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "8db82885-dd47-495f-8562-325b6a68679f",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581668,
+                tidsstempel: "2022-09-11T06:04:26.323",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "8db82885-dd47-495f-8562-325b6a68679f",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581670,
+                tidsstempel: "2022-09-11T15:13:51.482",
+                nivå: "INFO",
+                tekst: "Må oppfriske Infotrygdhistorikken",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "9e44b019-6f09-4a42-b47f-e335c2338137",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 581672,
+                tidsstempel: "2022-09-11T15:13:51.748",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "5d4a402d-047f-439b-a409-019d69c4ec29",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581671,
+                tidsstempel: "2022-09-11T15:13:51.748",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "5d4a402d-047f-439b-a409-019d69c4ec29",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581674,
+                tidsstempel: "2022-09-11T15:13:51.858",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "c065701c-2699-479e-b124-b66bd552fddf",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581673,
+                tidsstempel: "2022-09-11T15:13:51.858",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "c065701c-2699-479e-b124-b66bd552fddf",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581675,
+                tidsstempel: "2022-09-12T00:51:21.217",
+                nivå: "INFO",
+                tekst: "Må oppfriske Infotrygdhistorikken",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "1c3d5fbf-d15d-40d4-989b-187f52639683",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 581676,
+                tidsstempel: "2022-09-12T00:51:21.417",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "aa50f6aa-b739-45f6-8616-5066c971de50",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581677,
+                tidsstempel: "2022-09-12T00:51:21.417",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "aa50f6aa-b739-45f6-8616-5066c971de50",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581678,
+                tidsstempel: "2022-09-12T00:51:21.525",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "b02da476-5860-4f67-be2b-3d1b9008a0db",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581679,
+                tidsstempel: "2022-09-12T00:51:21.525",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "b02da476-5860-4f67-be2b-3d1b9008a0db",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581680,
+                tidsstempel: "2022-09-12T02:19:24.664",
+                nivå: "INFO",
+                tekst: "Forsøker å gjenoppta 2022-06-15 - 2022-07-15 (AvventerGodkjenning)",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "259c0b39-5257-48bb-af47-b33033290ddd",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 581681,
+                tidsstempel: "2022-09-12T02:19:24.664",
+                nivå: "INFO",
+                tekst: "Tidligere periode ferdigbehandlet, men gjør ingen tilstandsendring.",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "259c0b39-5257-48bb-af47-b33033290ddd",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 581682,
+                tidsstempel: "2022-09-12T04:00:25.954",
+                nivå: "INFO",
+                tekst: "Avstemmer utbetalinger og vedtaksperioder",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Avstemming: {
+                        meldingsreferanseId: "44db7a90-ab1a-4a69-aa60-87cda85c6cb4",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    }
+                }
+            },
+            {
+                id: 581683,
+                tidsstempel: "2022-09-12T08:46:49.186",
+                nivå: "INFO",
+                tekst: "Må oppfriske Infotrygdhistorikken",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "05275f64-0e30-405b-8c63-3ee540778b63",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 581685,
+                tidsstempel: "2022-09-12T08:46:49.586",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "6a9472e5-a2a4-443d-8b07-3ff45e0bd888",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581684,
+                tidsstempel: "2022-09-12T08:46:49.586",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "6a9472e5-a2a4-443d-8b07-3ff45e0bd888",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581686,
+                tidsstempel: "2022-09-12T08:46:49.721",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "04da3683-20c3-4063-b7cc-5d7f6aceb556",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581687,
+                tidsstempel: "2022-09-12T08:46:49.721",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "04da3683-20c3-4063-b7cc-5d7f6aceb556",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581688,
+                tidsstempel: "2022-09-12T17:17:39.719",
+                nivå: "INFO",
+                tekst: "Må oppfriske Infotrygdhistorikken",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "9c020a2b-398d-4026-97f4-f52bb670a4a8",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 581689,
+                tidsstempel: "2022-09-12T17:17:40.811",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "4390eb92-ecc0-4d0b-ad23-189ba5df5732",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581690,
+                tidsstempel: "2022-09-12T17:17:40.811",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "4390eb92-ecc0-4d0b-ad23-189ba5df5732",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581691,
+                tidsstempel: "2022-09-12T17:17:41.046",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "1055cdae-bcdc-4911-bdb7-090188d10fb2",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 581692,
+                tidsstempel: "2022-09-12T17:17:41.047",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "1055cdae-bcdc-4911-bdb7-090188d10fb2",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 583104,
+                tidsstempel: "2022-09-13T04:10:50.154",
+                nivå: "INFO",
+                tekst: "Må oppfriske Infotrygdhistorikken",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "f00f6b83-f429-447a-808b-2cf0cbcb27fb",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 583106,
+                tidsstempel: "2022-09-13T04:10:50.425",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "32ce2813-1485-4808-9a1e-5b0ef67f6d61",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 583105,
+                tidsstempel: "2022-09-13T04:10:50.425",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "32ce2813-1485-4808-9a1e-5b0ef67f6d61",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 583107,
+                tidsstempel: "2022-09-13T04:10:50.56",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "7d10ca75-c768-4539-a77f-9a0af392298b",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 583108,
+                tidsstempel: "2022-09-13T04:10:50.56",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "7d10ca75-c768-4539-a77f-9a0af392298b",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 583114,
+                tidsstempel: "2022-09-13T04:21:50.385",
+                nivå: "FUNKSJONELL_FEIL",
+                tekst: "Forsøker å gjenoppta 2022-06-15 - 2022-07-15 (AvventerGodkjenning)",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "68697d23-613b-403b-83b8-40eb31c8a4af",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 583115,
+                tidsstempel: "2022-09-13T04:21:50.385",
+                nivå: "INFO",
+                tekst: "Tidligere periode ferdigbehandlet, men gjør ingen tilstandsendring.",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "68697d23-613b-403b-83b8-40eb31c8a4af",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 583571,
+                tidsstempel: "2022-09-13T18:54:31.442",
+                nivå: "INFO",
+                tekst: "Forsøker å gjenoppta 2022-06-15 - 2022-07-15 (AvventerGodkjenning)",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "9bd36ca9-b743-4c0c-9f7e-ccb043e6df83",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 583572,
+                tidsstempel: "2022-09-13T18:54:31.443",
+                nivå: "INFO",
+                tekst: "Tidligere periode ferdigbehandlet, men gjør ingen tilstandsendring.",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "9bd36ca9-b743-4c0c-9f7e-ccb043e6df83",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 583888,
+                tidsstempel: "2022-09-13T22:30:50.268",
+                nivå: "INFO",
+                tekst: "Må oppfriske Infotrygdhistorikken",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "f93bdf10-85f2-4e65-854a-b473a9f17136",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 583890,
+                tidsstempel: "2022-09-13T22:30:50.506",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "76b6fd83-3354-4390-85f6-1381755aa2e7",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 583889,
+                tidsstempel: "2022-09-13T22:30:50.506",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "76b6fd83-3354-4390-85f6-1381755aa2e7",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 583891,
+                tidsstempel: "2022-09-13T22:30:50.761",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "e434c702-e0d6-45c6-957d-a51dc82b6c09",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 583892,
+                tidsstempel: "2022-09-13T22:30:50.761",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "e434c702-e0d6-45c6-957d-a51dc82b6c09",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 584192,
+                tidsstempel: "2022-09-14T07:45:26.69",
+                nivå: "INFO",
+                tekst: "Behandler sykmelding",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Sykmelding: {
+                        meldingsreferanseId: "45add479-16d9-4a56-82a9-1df79763bffb",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 584193,
+                tidsstempel: "2022-09-14T07:45:26.696",
+                nivå: "INFO",
+                tekst: "Trimmer sykmelding som overlapper med vedtaksperiode. Før trimming 01-08-2022 til 31-08-2022, etter trimming 01-08-2022 til 31-08-2022",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "e005b52c-986f-471c-a311-16d97efbe937"
+                    },
+                    Tilstand: {
+                        tilstand: "AVSLUTTET"
+                    },
+                    Sykmelding: {
+                        meldingsreferanseId: "45add479-16d9-4a56-82a9-1df79763bffb",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 584194,
+                tidsstempel: "2022-09-14T07:45:26.696",
+                nivå: "INFO",
+                tekst: "Trimmer sykmelding som overlapper med vedtaksperiode. Før trimming 01-08-2022 til 31-08-2022, etter trimming 01-08-2022 til 31-08-2022",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "51afa16d-230e-48f0-876d-0697cc858d3a"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_BLOKKERENDE_PERIODE"
+                    },
+                    Sykmelding: {
+                        meldingsreferanseId: "45add479-16d9-4a56-82a9-1df79763bffb",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 584195,
+                tidsstempel: "2022-09-14T07:45:26.697",
+                nivå: "INFO",
+                tekst: "Legger til ny periode 01-08-2022 til 31-08-2022 i sykmeldingsperioder",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "51afa16d-230e-48f0-876d-0697cc858d3a"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_BLOKKERENDE_PERIODE"
+                    },
+                    Sykmelding: {
+                        meldingsreferanseId: "45add479-16d9-4a56-82a9-1df79763bffb",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 584196,
+                tidsstempel: "2022-09-14T07:45:26.918",
+                nivå: "INFO",
+                tekst: "Behandler søknad",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Søknad: {
+                        meldingsreferanseId: "a0c0a401-8430-4ea6-af38-fe5d656e60d0",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 584197,
+                tidsstempel: "2022-09-14T07:45:26.978",
+                nivå: "INFO",
+                tekst: "Fullført behandling av søknad",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "1b6b06e2-6b77-48f3-b50f-34d2edb8d09d"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_INNTEKTSMELDING_ELLER_HISTORIKK"
+                    },
+                    Søknad: {
+                        meldingsreferanseId: "a0c0a401-8430-4ea6-af38-fe5d656e60d0",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 584199,
+                tidsstempel: "2022-09-14T07:45:26.979",
+                nivå: "INFO",
+                tekst: "Tidligere periode ferdigbehandlet, men gjør ingen tilstandsendring.",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    },
+                    Søknad: {
+                        meldingsreferanseId: "a0c0a401-8430-4ea6-af38-fe5d656e60d0",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 584198,
+                tidsstempel: "2022-09-14T07:45:26.979",
+                nivå: "INFO",
+                tekst: "Forsøker å gjenoppta 2022-06-15 - 2022-07-15 (AvventerGodkjenning)",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    },
+                    Søknad: {
+                        meldingsreferanseId: "a0c0a401-8430-4ea6-af38-fe5d656e60d0",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 584201,
+                tidsstempel: "2022-09-14T07:45:27.198",
+                nivå: "INFO",
+                tekst: "Replayer inntektsmelding for vedtaksperiode 1b6b06e2-6b77-48f3-b50f-34d2edb8d09d og påfølgende som overlapper",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Inntektsmelding: {
+                        meldingsreferanseId: "d57fa227-b49c-4bf0-b421-c1bb180400b6",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    },
+                    InntektsmeldingReplay: {
+                        meldingsreferanseId: "d57fa227-b49c-4bf0-b421-c1bb180400b6",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 584200,
+                tidsstempel: "2022-09-14T07:45:27.198",
+                nivå: "INFO",
+                tekst: "Behandler replay av inntektsmelding",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Inntektsmelding: {
+                        meldingsreferanseId: "d57fa227-b49c-4bf0-b421-c1bb180400b6",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    },
+                    InntektsmeldingReplay: {
+                        meldingsreferanseId: "d57fa227-b49c-4bf0-b421-c1bb180400b6",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 584202,
+                tidsstempel: "2022-09-14T07:45:27.199",
+                nivå: "INFO",
+                tekst: "Replayer inntektsmelding til påfølgende perioder som overlapper.",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Inntektsmelding: {
+                        meldingsreferanseId: "d57fa227-b49c-4bf0-b421-c1bb180400b6",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    },
+                    InntektsmeldingReplay: {
+                        meldingsreferanseId: "d57fa227-b49c-4bf0-b421-c1bb180400b6",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 584203,
+                tidsstempel: "2022-09-14T07:45:27.201",
+                nivå: "INFO",
+                tekst: "Vedtaksperiode overlapper ikke med replayet Inntektsmelding",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Inntektsmelding: {
+                        meldingsreferanseId: "d57fa227-b49c-4bf0-b421-c1bb180400b6",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    },
+                    InntektsmeldingReplay: {
+                        meldingsreferanseId: "d57fa227-b49c-4bf0-b421-c1bb180400b6",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 584206,
+                tidsstempel: "2022-09-14T07:45:27.348",
+                nivå: "INFO",
+                tekst: "Replayer inntektsmelding til påfølgende perioder som overlapper.",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Inntektsmelding: {
+                        meldingsreferanseId: "965741cd-b44c-45f9-91a3-74f360b7d6b8",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    },
+                    InntektsmeldingReplay: {
+                        meldingsreferanseId: "965741cd-b44c-45f9-91a3-74f360b7d6b8",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 584205,
+                tidsstempel: "2022-09-14T07:45:27.348",
+                nivå: "INFO",
+                tekst: "Replayer inntektsmelding for vedtaksperiode 1b6b06e2-6b77-48f3-b50f-34d2edb8d09d og påfølgende som overlapper",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Inntektsmelding: {
+                        meldingsreferanseId: "965741cd-b44c-45f9-91a3-74f360b7d6b8",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    },
+                    InntektsmeldingReplay: {
+                        meldingsreferanseId: "965741cd-b44c-45f9-91a3-74f360b7d6b8",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 584204,
+                tidsstempel: "2022-09-14T07:45:27.348",
+                nivå: "INFO",
+                tekst: "Behandler replay av inntektsmelding",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Inntektsmelding: {
+                        meldingsreferanseId: "965741cd-b44c-45f9-91a3-74f360b7d6b8",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    },
+                    InntektsmeldingReplay: {
+                        meldingsreferanseId: "965741cd-b44c-45f9-91a3-74f360b7d6b8",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 584207,
+                tidsstempel: "2022-09-14T07:45:27.349",
+                nivå: "INFO",
+                tekst: "Vedtaksperiode overlapper ikke med replayet Inntektsmelding",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Inntektsmelding: {
+                        meldingsreferanseId: "965741cd-b44c-45f9-91a3-74f360b7d6b8",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    },
+                    InntektsmeldingReplay: {
+                        meldingsreferanseId: "965741cd-b44c-45f9-91a3-74f360b7d6b8",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 584208,
+                tidsstempel: "2022-09-14T07:45:27.526",
+                nivå: "INFO",
+                tekst: "Behandler inntektsmelding",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Inntektsmelding: {
+                        meldingsreferanseId: "ba6fb25f-ccf9-4ade-b7c0-553c9d250569",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 584209,
+                tidsstempel: "2022-09-14T07:45:27.59",
+                nivå: "INFO",
+                tekst: "Fullført behandling av inntektsmelding",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "1b6b06e2-6b77-48f3-b50f-34d2edb8d09d"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_INNTEKTSMELDING_ELLER_HISTORIKK"
+                    },
+                    Inntektsmelding: {
+                        meldingsreferanseId: "ba6fb25f-ccf9-4ade-b7c0-553c9d250569",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 584210,
+                tidsstempel: "2022-09-14T07:45:27.593",
+                nivå: "INFO",
+                tekst: "Forsøker å gjenoppta 2022-06-15 - 2022-07-15 (AvventerGodkjenning)",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    },
+                    Inntektsmelding: {
+                        meldingsreferanseId: "ba6fb25f-ccf9-4ade-b7c0-553c9d250569",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 584211,
+                tidsstempel: "2022-09-14T07:45:27.593",
+                nivå: "INFO",
+                tekst: "Tidligere periode ferdigbehandlet, men gjør ingen tilstandsendring.",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    },
+                    Inntektsmelding: {
+                        meldingsreferanseId: "ba6fb25f-ccf9-4ade-b7c0-553c9d250569",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    }
+                }
+            },
+            {
+                id: 584257,
+                tidsstempel: "2022-09-14T09:44:39.47",
+                nivå: "INFO",
+                tekst: "Må oppfriske Infotrygdhistorikken",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "63ce1026-f2d6-4b3b-8a07-c0c1e3f433ad",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 584259,
+                tidsstempel: "2022-09-14T09:44:39.826",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "56409488-2466-460a-85a3-2f0b34c5819b",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 584258,
+                tidsstempel: "2022-09-14T09:44:39.826",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "56409488-2466-460a-85a3-2f0b34c5819b",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 584261,
+                tidsstempel: "2022-09-14T09:44:40.066",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "9642c824-27ae-4de2-a016-6a43e7aea52b",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 584260,
+                tidsstempel: "2022-09-14T09:44:40.066",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "9642c824-27ae-4de2-a016-6a43e7aea52b",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 586255,
+                tidsstempel: "2022-09-14T21:37:51.765",
+                nivå: "INFO",
+                tekst: "Må oppfriske Infotrygdhistorikken",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "bd95fe98-1aea-4854-ab5c-a2bfee462bb4",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 586256,
+                tidsstempel: "2022-09-14T21:37:52.165",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "901a2638-01a8-4fe1-b34b-66bed565bec5",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 586257,
+                tidsstempel: "2022-09-14T21:37:52.165",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "901a2638-01a8-4fe1-b34b-66bed565bec5",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 586259,
+                tidsstempel: "2022-09-14T21:37:52.373",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "9a34e44d-1928-4b4c-9e95-1ec80ff671da",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 586258,
+                tidsstempel: "2022-09-14T21:37:52.373",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "9a34e44d-1928-4b4c-9e95-1ec80ff671da",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 586271,
+                tidsstempel: "2022-09-14T21:52:55.628",
+                nivå: "INFO",
+                tekst: "Tidligere periode ferdigbehandlet, men gjør ingen tilstandsendring.",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "d24167ac-44e2-4568-bcd9-9ef636a7d3f4",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 586270,
+                tidsstempel: "2022-09-14T21:52:55.628",
+                nivå: "INFO",
+                tekst: "Forsøker å gjenoppta 2022-06-15 - 2022-07-15 (AvventerGodkjenning)",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "d24167ac-44e2-4568-bcd9-9ef636a7d3f4",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 586339,
+                tidsstempel: "2022-09-15T00:11:00.031",
+                nivå: "INFO",
+                tekst: "Tidligere periode ferdigbehandlet, men gjør ingen tilstandsendring.",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "e2d36e35-a9e1-47db-9d7a-39a0135d4ff4",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 586338,
+                tidsstempel: "2022-09-15T00:11:00.031",
+                nivå: "INFO",
+                tekst: "Forsøker å gjenoppta 2022-06-15 - 2022-07-15 (AvventerGodkjenning)",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "e2d36e35-a9e1-47db-9d7a-39a0135d4ff4",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 586708,
+                tidsstempel: "2022-09-15T09:58:42.388",
+                nivå: "INFO",
+                tekst: "Må oppfriske Infotrygdhistorikken",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "94d6777e-2833-4453-90bd-1fde501ad2c1",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 586710,
+                tidsstempel: "2022-09-15T09:58:42.865",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "eda1667d-82ac-4df2-84bc-dbabfede3849",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 586709,
+                tidsstempel: "2022-09-15T09:58:42.865",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "eda1667d-82ac-4df2-84bc-dbabfede3849",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 586712,
+                tidsstempel: "2022-09-15T09:58:43.075",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "daff0e88-d5b6-4c44-acb7-7fb84209a947",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 586711,
+                tidsstempel: "2022-09-15T09:58:43.075",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "daff0e88-d5b6-4c44-acb7-7fb84209a947",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 588187,
+                tidsstempel: "2022-09-15T19:06:25.86",
+                nivå: "INFO",
+                tekst: "Tidligere periode ferdigbehandlet, men gjør ingen tilstandsendring.",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "70bc11c8-91b5-4bcf-97b3-e51accfac439",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 588186,
+                tidsstempel: "2022-09-15T19:06:25.86",
+                nivå: "INFO",
+                tekst: "Forsøker å gjenoppta 2022-06-15 - 2022-07-15 (AvventerGodkjenning)",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "70bc11c8-91b5-4bcf-97b3-e51accfac439",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 588208,
+                tidsstempel: "2022-09-15T20:16:29.203",
+                nivå: "INFO",
+                tekst: "Må oppfriske Infotrygdhistorikken",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "950f40e2-8a72-42a5-9086-4d586c349e4e",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 588210,
+                tidsstempel: "2022-09-15T20:16:29.428",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "d4cf1447-d220-483b-8b8f-d86085f39f1d",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 588209,
+                tidsstempel: "2022-09-15T20:16:29.428",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "d4cf1447-d220-483b-8b8f-d86085f39f1d",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 588211,
+                tidsstempel: "2022-09-15T20:16:29.55",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "2a5e22b3-44b6-4f6e-8fb1-da5cedfc5bd3",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 588212,
+                tidsstempel: "2022-09-15T20:16:29.551",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "2a5e22b3-44b6-4f6e-8fb1-da5cedfc5bd3",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 588370,
+                tidsstempel: "2022-09-16T01:04:45.812",
+                nivå: "INFO",
+                tekst: "Tidligere periode ferdigbehandlet, men gjør ingen tilstandsendring.",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "10db4f16-ed45-44cb-89dd-2ba9a96ec171",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 588369,
+                tidsstempel: "2022-09-16T01:04:45.812",
+                nivå: "INFO",
+                tekst: "Forsøker å gjenoppta 2022-06-15 - 2022-07-15 (AvventerGodkjenning)",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "10db4f16-ed45-44cb-89dd-2ba9a96ec171",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 588591,
+                tidsstempel: "2022-09-16T08:04:03.942",
+                nivå: "INFO",
+                tekst: "Må oppfriske Infotrygdhistorikken",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "957e4387-8f21-44bb-a9b4-51e2b70a9d37",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 588592,
+                tidsstempel: "2022-09-16T08:04:04.154",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "ec8720fb-4ff2-4bfe-9003-6c3519508281",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 588593,
+                tidsstempel: "2022-09-16T08:04:04.154",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "ec8720fb-4ff2-4bfe-9003-6c3519508281",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 588594,
+                tidsstempel: "2022-09-16T08:04:04.293",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "01644eef-510d-4b01-bf9e-84b6318ba249",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 588595,
+                tidsstempel: "2022-09-16T08:04:04.293",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "01644eef-510d-4b01-bf9e-84b6318ba249",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 590049,
+                tidsstempel: "2022-09-16T19:05:53.743",
+                nivå: "INFO",
+                tekst: "Må oppfriske Infotrygdhistorikken",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "2adab42d-8bd1-4d3d-a475-ccd8f6acb6ce",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 590051,
+                tidsstempel: "2022-09-16T19:05:54.077",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "a3b78c53-987d-49f2-be27-156f0201312e",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 590050,
+                tidsstempel: "2022-09-16T19:05:54.077",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "a3b78c53-987d-49f2-be27-156f0201312e",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 590052,
+                tidsstempel: "2022-09-16T19:05:54.21",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "fa6cc639-a08f-4ff0-a738-4d666048e291",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 590053,
+                tidsstempel: "2022-09-16T19:05:54.21",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "fa6cc639-a08f-4ff0-a738-4d666048e291",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 590249,
+                tidsstempel: "2022-09-17T01:36:48.388",
+                nivå: "INFO",
+                tekst: "Tidligere periode ferdigbehandlet, men gjør ingen tilstandsendring.",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "fde42c81-108b-409a-92b3-98738c0c88a8",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 590248,
+                tidsstempel: "2022-09-17T01:36:48.388",
+                nivå: "INFO",
+                tekst: "Forsøker å gjenoppta 2022-06-15 - 2022-07-15 (AvventerGodkjenning)",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "fde42c81-108b-409a-92b3-98738c0c88a8",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 590302,
+                tidsstempel: "2022-09-17T03:47:53.129",
+                nivå: "INFO",
+                tekst: "Forsøker å gjenoppta 2022-06-15 - 2022-07-15 (AvventerGodkjenning)",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "c0a5437e-0e35-4b54-937f-d301cb6c6ab3",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 590303,
+                tidsstempel: "2022-09-17T03:47:53.129",
+                nivå: "INFO",
+                tekst: "Tidligere periode ferdigbehandlet, men gjør ingen tilstandsendring.",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "c0a5437e-0e35-4b54-937f-d301cb6c6ab3",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 590429,
+                tidsstempel: "2022-09-17T07:38:03.253",
+                nivå: "INFO",
+                tekst: "Må oppfriske Infotrygdhistorikken",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "046aaf10-a52a-48a6-a427-450a2c9fcc5e",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 590430,
+                tidsstempel: "2022-09-17T07:38:03.5",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "1196ffc0-e808-4b29-8a31-994f7a479fb0",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 590431,
+                tidsstempel: "2022-09-17T07:38:03.501",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "1196ffc0-e808-4b29-8a31-994f7a479fb0",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 590432,
+                tidsstempel: "2022-09-17T07:38:03.606",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "1120e024-d6f8-43c5-8a5f-b0f0e2c3787a",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 590433,
+                tidsstempel: "2022-09-17T07:38:03.606",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "1120e024-d6f8-43c5-8a5f-b0f0e2c3787a",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 590701,
+                tidsstempel: "2022-09-17T18:39:40.991",
+                nivå: "INFO",
+                tekst: "Forsøker å gjenoppta 2022-06-15 - 2022-07-15 (AvventerGodkjenning)",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "8fa2da71-a82b-4bc5-a8a8-4d3bd9db0bff",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 590702,
+                tidsstempel: "2022-09-17T18:39:40.991",
+                nivå: "INFO",
+                tekst: "Tidligere periode ferdigbehandlet, men gjør ingen tilstandsendring.",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "8fa2da71-a82b-4bc5-a8a8-4d3bd9db0bff",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 590728,
+                tidsstempel: "2022-09-17T19:44:45.634",
+                nivå: "INFO",
+                tekst: "Må oppfriske Infotrygdhistorikken",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "ce1f15a9-9c50-410f-9b89-26b674c23c73",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 590730,
+                tidsstempel: "2022-09-17T19:44:45.838",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "9e0a8c6e-dd94-43e5-9f52-9fa37ffc279b",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 590729,
+                tidsstempel: "2022-09-17T19:44:45.838",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "9e0a8c6e-dd94-43e5-9f52-9fa37ffc279b",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 590731,
+                tidsstempel: "2022-09-17T19:44:45.963",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "faf3ffdf-9bf8-4bb7-8f73-a9f7914f9b83",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 590732,
+                tidsstempel: "2022-09-17T19:44:45.963",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "faf3ffdf-9bf8-4bb7-8f73-a9f7914f9b83",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 590841,
+                tidsstempel: "2022-09-17T22:15:24.355",
+                nivå: "INFO",
+                tekst: "Forsøker å gjenoppta 2022-06-15 - 2022-07-15 (AvventerGodkjenning)",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "1c35a105-4b96-4fc6-84c8-9992fba07ed3",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 590842,
+                tidsstempel: "2022-09-17T22:15:24.355",
+                nivå: "INFO",
+                tekst: "Tidligere periode ferdigbehandlet, men gjør ingen tilstandsendring.",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "1c35a105-4b96-4fc6-84c8-9992fba07ed3",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 591128,
+                tidsstempel: "2022-09-18T07:00:55.416",
+                nivå: "INFO",
+                tekst: "Må oppfriske Infotrygdhistorikken",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "767ea522-469f-4504-b15f-a182d7f6ec91",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 591130,
+                tidsstempel: "2022-09-18T07:00:55.679",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "a31fe992-83ba-4314-af5e-c7c2df13b4c1",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 591129,
+                tidsstempel: "2022-09-18T07:00:55.679",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "a31fe992-83ba-4314-af5e-c7c2df13b4c1",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 591131,
+                tidsstempel: "2022-09-18T07:00:55.797",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "2dae44de-a7a5-451f-937e-db2f4d8ee414",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 591132,
+                tidsstempel: "2022-09-18T07:00:55.797",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "2dae44de-a7a5-451f-937e-db2f4d8ee414",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 591456,
+                tidsstempel: "2022-09-18T19:19:44.733",
+                nivå: "INFO",
+                tekst: "Må oppfriske Infotrygdhistorikken",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "d8920515-b64e-425b-971d-a77b6e6d4f1a",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 591457,
+                tidsstempel: "2022-09-18T19:19:44.922",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "46af8242-eed7-420b-884e-aa12141a5a2b",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 591458,
+                tidsstempel: "2022-09-18T19:19:44.922",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "46af8242-eed7-420b-884e-aa12141a5a2b",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 591459,
+                tidsstempel: "2022-09-18T19:19:45.091",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "c164777a-78aa-49d9-8ca9-4a3ba8fb6e5b",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 591460,
+                tidsstempel: "2022-09-18T19:19:45.092",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "c164777a-78aa-49d9-8ca9-4a3ba8fb6e5b",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 591532,
+                tidsstempel: "2022-09-18T22:05:30.2",
+                nivå: "INFO",
+                tekst: "Forsøker å gjenoppta 2022-06-15 - 2022-07-15 (AvventerGodkjenning)",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "c3acdd1a-3401-40ac-bba3-3c567d4e75c0",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 591533,
+                tidsstempel: "2022-09-18T22:05:30.2",
+                nivå: "INFO",
+                tekst: "Tidligere periode ferdigbehandlet, men gjør ingen tilstandsendring.",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "c3acdd1a-3401-40ac-bba3-3c567d4e75c0",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 591800,
+                tidsstempel: "2022-09-19T05:54:53.095",
+                nivå: "INFO",
+                tekst: "Forsøker å gjenoppta 2022-06-15 - 2022-07-15 (AvventerGodkjenning)",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "40075ce9-7de7-43cf-8154-e08d974cddf7",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 591801,
+                tidsstempel: "2022-09-19T05:54:53.095",
+                nivå: "INFO",
+                tekst: "Tidligere periode ferdigbehandlet, men gjør ingen tilstandsendring.",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "40075ce9-7de7-43cf-8154-e08d974cddf7",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 591802,
+                tidsstempel: "2022-09-19T05:59:53.221",
+                nivå: "INFO",
+                tekst: "Må oppfriske Infotrygdhistorikken",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "0d6faf3d-961e-4b5f-8d0e-12b378067b8c",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 591804,
+                tidsstempel: "2022-09-19T05:59:53.445",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "7b03ac91-6eab-4541-b3a1-ae07020a6ea6",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 591803,
+                tidsstempel: "2022-09-19T05:59:53.445",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "7b03ac91-6eab-4541-b3a1-ae07020a6ea6",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 591805,
+                tidsstempel: "2022-09-19T05:59:53.56",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "215f150e-9d4a-4b15-b6cb-11e124969604",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 591806,
+                tidsstempel: "2022-09-19T05:59:53.56",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "215f150e-9d4a-4b15-b6cb-11e124969604",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 594068,
+                tidsstempel: "2022-09-19T17:39:27.003",
+                nivå: "INFO",
+                tekst: "Må oppfriske Infotrygdhistorikken",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "268bd5ab-d05a-4adb-8e96-67652cdb10d1",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 594069,
+                tidsstempel: "2022-09-19T17:39:27.331",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "0c6270b7-ade0-4e2b-b2d8-d1414b7c5e46",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 594070,
+                tidsstempel: "2022-09-19T17:39:27.331",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "0c6270b7-ade0-4e2b-b2d8-d1414b7c5e46",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 594072,
+                tidsstempel: "2022-09-19T17:39:27.523",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "2736a52b-65d2-4d26-afb9-aa31925181e6",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 594071,
+                tidsstempel: "2022-09-19T17:39:27.523",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "2736a52b-65d2-4d26-afb9-aa31925181e6",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 594118,
+                tidsstempel: "2022-09-19T19:20:06.469",
+                nivå: "INFO",
+                tekst: "Forsøker å gjenoppta 2022-06-15 - 2022-07-15 (AvventerGodkjenning)",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "3307837b-fe78-4949-82f9-1fce62f7f6a1",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 594119,
+                tidsstempel: "2022-09-19T19:20:06.469",
+                nivå: "INFO",
+                tekst: "Tidligere periode ferdigbehandlet, men gjør ingen tilstandsendring.",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "3307837b-fe78-4949-82f9-1fce62f7f6a1",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 594182,
+                tidsstempel: "2022-09-19T21:35:18.888",
+                nivå: "INFO",
+                tekst: "Forsøker å gjenoppta 2022-06-15 - 2022-07-15 (AvventerGodkjenning)",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "e092f57c-6121-41ac-a906-3c38c7ae5269",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 594183,
+                tidsstempel: "2022-09-19T21:35:18.888",
+                nivå: "INFO",
+                tekst: "Tidligere periode ferdigbehandlet, men gjør ingen tilstandsendring.",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "e092f57c-6121-41ac-a906-3c38c7ae5269",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 594479,
+                tidsstempel: "2022-09-20T05:55:55.137",
+                nivå: "INFO",
+                tekst: "Må oppfriske Infotrygdhistorikken",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "7eabf5d3-5df2-4bb9-a497-9cb4f5443967",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 594481,
+                tidsstempel: "2022-09-20T05:55:55.404",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "420eae13-21c4-4eb6-9777-616a057d89d6",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 594480,
+                tidsstempel: "2022-09-20T05:55:55.404",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "420eae13-21c4-4eb6-9777-616a057d89d6",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 594482,
+                tidsstempel: "2022-09-20T05:55:55.524",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "170139e1-0c90-406f-aa89-279cb435218f",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 594483,
+                tidsstempel: "2022-09-20T05:55:55.524",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "170139e1-0c90-406f-aa89-279cb435218f",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 595256,
+                tidsstempel: "2022-09-20T17:01:48.57",
+                nivå: "INFO",
+                tekst: "Må oppfriske Infotrygdhistorikken",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "c5b21e77-5f77-4ae5-bb99-e6ce7cbdb3fb",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 595257,
+                tidsstempel: "2022-09-20T17:01:49.114",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "696e65a9-45a5-4fd2-9b68-e1c32f4e3cee",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 595258,
+                tidsstempel: "2022-09-20T17:01:49.115",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "696e65a9-45a5-4fd2-9b68-e1c32f4e3cee",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 595259,
+                tidsstempel: "2022-09-20T17:01:49.397",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "9e0eef62-ec6d-4c69-98a5-3789da595e5d",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 595260,
+                tidsstempel: "2022-09-20T17:01:49.398",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "9e0eef62-ec6d-4c69-98a5-3789da595e5d",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 595574,
+                tidsstempel: "2022-09-21T02:25:29.049",
+                nivå: "INFO",
+                tekst: "Forsøker å gjenoppta 2022-06-15 - 2022-07-15 (AvventerGodkjenning)",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "10798bcc-3796-4b50-aff3-336ce3d90fc6",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 595575,
+                tidsstempel: "2022-09-21T02:25:29.049",
+                nivå: "INFO",
+                tekst: "Tidligere periode ferdigbehandlet, men gjør ingen tilstandsendring.",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "10798bcc-3796-4b50-aff3-336ce3d90fc6",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 595581,
+                tidsstempel: "2022-09-21T02:56:30.905",
+                nivå: "INFO",
+                tekst: "Forsøker å gjenoppta 2022-06-15 - 2022-07-15 (AvventerGodkjenning)",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "ec679399-3386-4801-a4ed-96b8c6f00496",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 595582,
+                tidsstempel: "2022-09-21T02:56:30.905",
+                nivå: "INFO",
+                tekst: "Tidligere periode ferdigbehandlet, men gjør ingen tilstandsendring.",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "ec679399-3386-4801-a4ed-96b8c6f00496",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 595688,
+                tidsstempel: "2022-09-21T04:27:05.078",
+                nivå: "INFO",
+                tekst: "Må oppfriske Infotrygdhistorikken",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "4ee03dc8-02f6-4074-83b5-ee8af4ab43a5",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 595689,
+                tidsstempel: "2022-09-21T04:27:05.337",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "1a7809ba-2714-438b-adaf-24183ab7b73e",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 595690,
+                tidsstempel: "2022-09-21T04:27:05.337",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "1a7809ba-2714-438b-adaf-24183ab7b73e",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 595691,
+                tidsstempel: "2022-09-21T04:27:05.464",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "9dfc8305-3a4a-4d9d-a5d1-5aad886970cb",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 595692,
+                tidsstempel: "2022-09-21T04:27:05.464",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "9dfc8305-3a4a-4d9d-a5d1-5aad886970cb",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 596393,
+                tidsstempel: "2022-09-21T12:35:50.265",
+                nivå: "INFO",
+                tekst: "Må oppfriske Infotrygdhistorikken",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "86dec4d2-3595-42d6-8e2a-f23a72a55eb0",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 596394,
+                tidsstempel: "2022-09-21T12:35:50.682",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "abbf4cc8-5937-4f6c-9919-198734f7c21a",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 596395,
+                tidsstempel: "2022-09-21T12:35:50.682",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "abbf4cc8-5937-4f6c-9919-198734f7c21a",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 596397,
+                tidsstempel: "2022-09-21T12:35:50.883",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "4227f9e5-d7fe-40ed-80e2-7091732debf0",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 596396,
+                tidsstempel: "2022-09-21T12:35:50.883",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "4227f9e5-d7fe-40ed-80e2-7091732debf0",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 598479,
+                tidsstempel: "2022-09-22T00:40:37.638",
+                nivå: "BEHOV",
+                tekst: "Trenger sykepengehistorikk fra Infotrygd",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "6d73b1fe-998b-4504-ab47-95ab6ccd57d1",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 598480,
+                tidsstempel: "2022-09-22T00:40:37.638",
+                nivå: "INFO",
+                tekst: "Må oppfriske Infotrygdhistorikken",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "6d73b1fe-998b-4504-ab47-95ab6ccd57d1",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 598482,
+                tidsstempel: "2022-09-22T00:40:37.871",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "2d1f75ec-2781-4817-bff2-563c0e7df44d",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 598481,
+                tidsstempel: "2022-09-22T00:40:37.871",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "2d1f75ec-2781-4817-bff2-563c0e7df44d",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 598483,
+                tidsstempel: "2022-09-22T00:40:37.872",
+                nivå: "BEHOV",
+                tekst: "Forespør godkjenning fra saksbehandler",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Utbetaling: {
+                        utbetalingId: "85694799-7d6e-4e4e-8a22-04db3e9d7437"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "2d1f75ec-2781-4817-bff2-563c0e7df44d",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 598484,
+                tidsstempel: "2022-09-22T00:40:38.053",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "d9d0d1ef-52df-4421-bcac-564f02672e37",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 598485,
+                tidsstempel: "2022-09-22T00:40:38.053",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "d9d0d1ef-52df-4421-bcac-564f02672e37",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 598486,
+                tidsstempel: "2022-09-22T00:40:38.054",
+                nivå: "BEHOV",
+                tekst: "Forespør godkjenning fra saksbehandler",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Utbetaling: {
+                        utbetalingId: "85694799-7d6e-4e4e-8a22-04db3e9d7437"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "d9d0d1ef-52df-4421-bcac-564f02672e37",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 598536,
+                tidsstempel: "2022-09-22T01:57:41.506",
+                nivå: "INFO",
+                tekst: "Tidligere periode ferdigbehandlet, men gjør ingen tilstandsendring.",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "26ad51ae-7ef6-4b10-ad11-cd503964c0cf",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 598535,
+                tidsstempel: "2022-09-22T01:57:41.506",
+                nivå: "INFO",
+                tekst: "Forsøker å gjenoppta 2022-06-15 - 2022-07-15 (AvventerGodkjenning)",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "26ad51ae-7ef6-4b10-ad11-cd503964c0cf",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 598561,
+                tidsstempel: "2022-09-22T02:58:44.81",
+                nivå: "INFO",
+                tekst: "Forsøker å gjenoppta 2022-06-15 - 2022-07-15 (AvventerGodkjenning)",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "353db729-3bef-4a7b-b916-daa1733b4804",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 598562,
+                tidsstempel: "2022-09-22T02:58:44.81",
+                nivå: "INFO",
+                tekst: "Tidligere periode ferdigbehandlet, men gjør ingen tilstandsendring.",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "353db729-3bef-4a7b-b916-daa1733b4804",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 598753,
+                tidsstempel: "2022-09-22T08:16:33.001",
+                nivå: "BEHOV",
+                tekst: "Trenger sykepengehistorikk fra Infotrygd",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "d9344a6f-b33e-4a55-a2bc-1b495f6e28dd",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 598754,
+                tidsstempel: "2022-09-22T08:16:33.001",
+                nivå: "INFO",
+                tekst: "Må oppfriske Infotrygdhistorikken",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "d9344a6f-b33e-4a55-a2bc-1b495f6e28dd",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
+                id: 598756,
+                tidsstempel: "2022-09-22T08:16:33.261",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "e725432c-a67a-4b5a-b376-6a20d1c9ccaa",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 598757,
+                tidsstempel: "2022-09-22T08:16:33.261",
+                nivå: "BEHOV",
+                tekst: "Forespør godkjenning fra saksbehandler",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Utbetaling: {
+                        utbetalingId: "85694799-7d6e-4e4e-8a22-04db3e9d7437"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "e725432c-a67a-4b5a-b376-6a20d1c9ccaa",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 598755,
+                tidsstempel: "2022-09-22T08:16:33.261",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "e725432c-a67a-4b5a-b376-6a20d1c9ccaa",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 598758,
+                tidsstempel: "2022-09-22T08:16:33.455",
+                nivå: "INFO",
+                tekst: "Oppdaterer Infotrygdhistorikk",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "a34362f4-280f-4fdc-9fb3-85ff788c3fb6",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 598759,
+                tidsstempel: "2022-09-22T08:16:33.455",
+                nivå: "INFO",
+                tekst: "Oppfrisket Infotrygdhistorikk medførte ingen endringer",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "a34362f4-280f-4fdc-9fb3-85ff788c3fb6",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            },
+            {
+                id: 598760,
+                tidsstempel: "2022-09-22T08:16:33.456",
+                nivå: "BEHOV",
+                tekst: "Forespør godkjenning fra saksbehandler",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Utbetaling: {
+                        utbetalingId: "85694799-7d6e-4e4e-8a22-04db3e9d7437"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    },
+                    Utbetalingshistorikk: {
+                        meldingsreferanseId: "a34362f4-280f-4fdc-9fb3-85ff788c3fb6",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "805824352"
+                    }
+                }
+            }
+        ]
+    },
     skjemaVersjon: 111,
 }

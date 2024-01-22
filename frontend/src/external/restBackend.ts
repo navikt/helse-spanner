@@ -1,29 +1,32 @@
-import { Backend } from './backend'
-import { MeldingDto, PersonDto } from '../state/dto'
-import { feilVedDårligRespons, wrapNnettverksFeil } from './feil'
+import {Backend} from './backend'
+import {MaskertDto, MeldingDto, PersonDto} from '../state/dto'
+import {feilVedDårligRespons, wrapNnettverksFeil} from './feil'
+import {head} from "fetch-mock";
 
 export const restBackend = (development: boolean): Backend => {
     const baseUrl: string = development ? 'http://localhost:8080' : ''
     return {
-        personForAktørId(aktørId: string): Promise<PersonDto> {
-            return fetch(`${baseUrl}/api/person/`, {
-                method: 'get',
-                headers: {
-                    Accept: 'application/json',
-                    aktorId: `${aktørId}`,
-                },
-            })
-                .catch(wrapNnettverksFeil)
-                .then(feilVedDårligRespons)
-                .then((response) => response.json())
+        uuidForAktørId(aktørId: string): Promise<MaskertDto> {
+            return fetchUUID(baseUrl, {aktorId: `${aktørId}` })
         },
-        personForFnr(fnr: string): Promise<PersonDto> {
+        uuidForFnr(fnr: string): Promise<MaskertDto> {
+            return fetchUUID(baseUrl, { fnr: `${fnr}` })
+        },
+        personForUUID(maskertId: string): Promise<PersonDto> {
+            let headers: { [key: string]: string } = {
+                Accept: 'application/json',
+            }
+            if (maskertId.length == 11) {
+                headers = {...headers, fnr: maskertId }
+            } else if (maskertId.length == 13) {
+                headers = {...headers, aktorId: maskertId }
+            } else {
+                headers = {...headers, maskertId: maskertId }
+            }
+
             return fetch(`${baseUrl}/api/person/`, {
                 method: 'get',
-                headers: {
-                    Accept: 'application/json',
-                    fnr: `${fnr}`,
-                },
+                headers: headers,
             })
                 .catch(wrapNnettverksFeil)
                 .then(feilVedDårligRespons)
@@ -41,4 +44,17 @@ export const restBackend = (development: boolean): Backend => {
                 .then((response) => response.json())
         },
     }
+}
+
+const fetchUUID = (baseUrl: string, headervalue: Record<string,string>): Promise<MaskertDto> => {
+    return fetch(`${baseUrl}/api/uuid/`, {
+        method: 'post',
+        headers: {
+            Accept: 'application/json',
+            ...headervalue
+        },
+    })
+        .catch(wrapNnettverksFeil)
+        .then(feilVedDårligRespons)
+        .then((response) => response.json())
 }

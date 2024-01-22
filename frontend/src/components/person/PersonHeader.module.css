@@ -1,10 +1,3 @@
-.Header {
-    display: inline-block;
-}
-
-.Header dl div {
-    display: inline-block;
-}
 .Ingress {
     display: inline-block;
 }
@@ -30,4 +23,8 @@
 .Ingress dd p {
     margin: 0;
     padding: 0;
+}
+
+.SpeilLink:visited {
+    color: blue;
 }

@@ -16,7 +16,7 @@ const queryClient = new query.QueryClient({
     defaultOptions: {
         queries: {
             retryDelay: 500,
-            retry: 1,
+            retry: (failureCount: number, error: any) => error.status != 404 && failureCount < 1,
             refetchOnWindowFocus: false,
             cacheTime: 0,
         },

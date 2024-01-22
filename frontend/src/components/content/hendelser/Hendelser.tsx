@@ -6,14 +6,15 @@ import compareAsc from 'date-fns/compareAsc'
 import classNames from 'classnames'
 import { useRecoilState } from 'recoil'
 import { skjulPåminnelserState, visBareFeilState } from '../../../state/state'
-import { Kontekst } from '../../../state/model'
+import {Hendelsekontekst} from '../../../state/model'
+import {HStack, Switch} from "@navikt/ds-react";
 
-const erPåminnelse = (kontekst: Kontekst) =>
+const erPåminnelse = (kontekst: Hendelsekontekst) =>
     kontekst.kontekstType == 'Påminnelse' || kontekst.kontekstType == 'Utbetalingshistorikk'
 
-const harFeil = (kontekst: Kontekst) => kontekst.harError || kontekst.harWarning
+const harFeil = (kontekst: Hendelsekontekst) => kontekst.harError || kontekst.harWarning
 
-export const Hendelser = React.memo(({ hendelser }: { hendelser: Kontekst[] }) => {
+export const Hendelser = ({ hendelser }: { hendelser: Hendelsekontekst[] }) => {
     const [visBareFeil, setVisBareFeil] = useRecoilState(visBareFeilState)
     const [skjulPåminnelser, setSkjulPåminnelser] = useRecoilState(skjulPåminnelserState)
     const toggleVisBareFeil = () => setVisBareFeil(!visBareFeil)
@@ -27,22 +28,14 @@ export const Hendelser = React.memo(({ hendelser }: { hendelser: Kontekst[] }) =
 
     return (
         <>
-            <div className={styles.Header}>
-                <button onClick={toggleVisBareFeil} className={classNames(visBareFeil && commonStyles.AktivKnapp)}>
-                    Vis bare feil
-                </button>
-                <button
-                    onClick={toggleVisPåminnelser}
-                    className={classNames(skjulPåminnelser && commonStyles.AktivKnapp)}
-                >
-                    Skjul påminnelser og utbetalingshistorikk
-                </button>
-            </div>
+            <HStack gap="5">
+                <Switch size="small" onChange={(e) => toggleVisBareFeil() }>Bare feil</Switch>
+                <Switch size="small" checked={skjulPåminnelser} onChange={(e) => toggleVisPåminnelser() }>Skjul påminnelser og utbetalingshistorikk</Switch>
+            </HStack>
             {sorterteHendelser.map((it) => {
                 return (!visBareFeil || it.harError || it.harWarning) && <Hendelse kontekst={it} key={it.id} />
             })}
         </>
     )
-})
-
+}
 Hendelser.displayName = 'Hendelser'

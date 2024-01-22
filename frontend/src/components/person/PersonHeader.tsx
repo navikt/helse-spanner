@@ -1,14 +1,15 @@
 import React from 'react'
 import parseISO from 'date-fns/parseISO'
-import classNames from 'classnames'
 import styles from './PersonHeader.module.css'
-import { usePerson } from '../../state/contexts'
+import {usePerson} from '../../state/contexts'
+import {speilUrl} from '../tree/links'
+import {Box} from "@navikt/ds-react";
 
-export const PersonHeader = React.memo(() => {
+export const PersonHeader = () => {
     const person = usePerson()
     return (
-        <div className={classNames(styles.Header)}>
-            <dl className={classNames(styles.Ingress)}>
+        <Box background="surface-default" borderRadius="large">
+            <dl className={styles.Ingress}>
                 <dt>fnr</dt>
                 <dd>
                     <p data-testid={'person-header-fnr'}>{person.fødselsnummer}</p>
@@ -21,8 +22,14 @@ export const PersonHeader = React.memo(() => {
                 <dd>
                     <p>{parseISO(person.opprettet).toDateString()}</p>
                 </dd>
+                <dt>🪞</dt>
+                <dd>
+                    <a href={speilUrl(person.aktørId)} target="_blank" className={styles.SpeilLink}>
+                        trykk her
+                    </a>
+                </dd>
             </dl>
-        </div>
+        </Box>
     )
-})
+}
 PersonHeader.displayName = 'PersonHeader'

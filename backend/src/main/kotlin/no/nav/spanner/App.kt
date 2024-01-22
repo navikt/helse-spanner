@@ -23,7 +23,7 @@ fun main() {
         .info("Spanner startet")
 
     val adConfig = AzureADConfig.fromEnv(configProps)
-    val spleis = if (spannerConfig.development) LokaleKjenninger else Spleis.from(spannerConfig, AzureAD(adConfig))
+    val spleis = Spleis.from(spannerConfig, AzureAD(adConfig))
 
     embeddedServer(CIO, environment = applicationEngineEnvironment {
         log = LoggerFactory.getLogger("Spanner")
