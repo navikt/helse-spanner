@@ -3,7 +3,7 @@ import java.nio.file.Paths
 val jacksonVersion = "2.15.2"
 val junitJupiterVersion = "5.10.0"
 val ktorVersion = "2.3.7"
-val tokenValidatorVersion = "1.3.8"
+val tokenValidatorVersion = "1.3.10"
 
 plugins {
     kotlin("jvm") version "1.9.22"
@@ -40,7 +40,7 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion")
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonVersion")
 
-    implementation("ch.qos.logback:logback-classic:1.4.11")
+    implementation("ch.qos.logback:logback-classic:1.4.12")
     implementation("net.logstash.logback:logstash-logback-encoder:7.4") {
         exclude("com.fasterxml.jackson.core")
         exclude("com.fasterxml.jackson.dataformat")
@@ -53,7 +53,7 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter:$junitJupiterVersion")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
-    testImplementation("no.nav.security:mock-oauth2-server:0.3.4")
+    testImplementation("no.nav.security:mock-oauth2-server:2.1.1")
     testImplementation("io.ktor:ktor-server-test-host:$ktorVersion")
 }
 
