@@ -24,7 +24,7 @@ export const PersonHeader = () => {
                 </dd>
                 <dt>🪞</dt>
                 <dd>
-                    <a href={speilUrl(person.aktørId)} target="_blank" className={styles.SpeilLink}>
+                    <a href={speilUrl(person.aktørId)} target="_blank" rel="noreferrer" className={styles.SpeilLink}>
                         trykk her
                     </a>
                 </dd>

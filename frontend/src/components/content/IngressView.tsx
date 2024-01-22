@@ -9,7 +9,7 @@ const sporing = window.location.origin.includes('dev')
 const _ingressView = (vedtaksperiodeId: string) => {
     return (
         <div>
-            <a href={`${sporing}/tilstandsmaskin/${vedtaksperiodeId}`} target="_blank">
+            <a href={`${sporing}/tilstandsmaskin/${vedtaksperiodeId}`} target="_blank" rel="noreferrer">
                 Sporing
             </a>
         </div>
@@ -28,7 +28,7 @@ ForkastetVedtaksperiode.displayName = 'IngressView.ForkastetVedtaksperiode'
 const Person = ({ person }: { person: PersonDto }) => {
     return (
         <div>
-            <a href={`${sporing}/person/${person.aktørId}`} target="_blank">
+            <a href={`${sporing}/person/${person.aktørId}`} target="_blank" rel="noreferrer">
                 Sporing
             </a>
         </div>
