@@ -39,6 +39,7 @@ fun Application.spanner(spleis: Personer, config: AzureADConfig, development: Bo
         disableDefaultColors()
         logger = LoggerFactory.getLogger("CallLogging")
         level = Level.INFO
+        callIdMdc("callId")
         filter { call -> !call.request.path().startsWith("/internal") }
     }
     install(XForwardedHeaders)

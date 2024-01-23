@@ -78,13 +78,12 @@ class Spleis(
     }
 
     override suspend fun person(call: ApplicationCall, id: String, idType: IdType) {
-        val accessToken = call.bearerToken ?: return call.respond(HttpStatusCode.Unauthorized)
+        val accessToken = call.bearerToken ?: return call.respond(Unauthorized)
         val url = URLBuilder(baseUrl).apply {
             if (idType == IdType.MASKERT_ID) path("api", "person-json", id)
             else path("api", "person-json")
         }.build()
 
-        val oboToken = token(accessToken, spleisClientId)
         val log = Log.logger(Personer::class.java)
 
         val response = coroutineScope {
@@ -92,9 +91,10 @@ class Spleis(
                 aktivitetslogg(accessToken, id)
             }
 
-            log
-                .sensitivt("oboTokenLength", oboToken.length)
-                .info("OBO token length")
+            log.info("Retrieving OBO token for spleis")
+            val oboToken = token(accessToken, spleisClientId)
+            log.info("OBO token for spleis retrieved")
+
             val response =
                 try {
                     httpClient.get(url) {
@@ -158,15 +158,15 @@ class Spleis(
     }
 
     private suspend fun aktivitetslogg(accessToken: String, ident: String): String? {
+        val log = Log.logger(Personer::class.java)
+        log.info("Retrieving OBO token for sparsom")
+        val oboToken = token(accessToken, sparsomClientId)
+        log.info("OBO token for sparsom retrieved")
+
         val url = URLBuilder(sparsomBaseUrl).apply {
             path("api", "aktiviteter")
             parameters.append("ident", ident)
         }.build()
-        val oboToken = token(accessToken, sparsomClientId)
-        val log = Log.logger(Personer::class.java)
-        log
-            .sensitivt("oboTokenLength", oboToken.length)
-            .info("OBO token length")
         return try {
             val response = httpClient.get(url) {
                 header("Authorization", "Bearer $oboToken")
