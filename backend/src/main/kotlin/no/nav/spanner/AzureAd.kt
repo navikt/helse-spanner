@@ -34,9 +34,6 @@ class AzureAD(private val config: AzureADConfig) {
             contentType(ContentType.Application.FormUrlEncoded)
             body = requestBody
         }
-        Log.logger(AzureAD::class.java)
-            .response(response)
-            .info("OBO token retrieved")
         return response
             .body<JsonNode>()
             .path("access_token")

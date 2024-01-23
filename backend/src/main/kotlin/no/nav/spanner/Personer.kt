@@ -39,11 +39,13 @@ interface Personer {
 class Spleis(
     private val azureAD: AzureAD,
     private val baseUrl: String = "http://spleis-api.tbd.svc.cluster.local",
-    private val spleisClientId: String,
+    spleisClientId: String,
     private val sparsomBaseUrl: String = "http://sparsom-api.tbd.svc.cluster.local",
-    private val sparsomClientId: String,
+    sparsomClientId: String,
     private val spurteDuClient: SpurteDuClient
 ) : Personer {
+    private val spleis = ClientIdWithName(spleisClientId, "spleis")
+    private val sparsom = ClientIdWithName(sparsomClientId, "sparsom")
     private val httpClient = HttpClient(CIO) {
         engine {
             requestTimeout = 60000
@@ -91,9 +93,7 @@ class Spleis(
                 aktivitetslogg(accessToken, id)
             }
 
-            log.info("Retrieving OBO token for spleis")
-            val oboToken = token(accessToken, spleisClientId)
-            log.info("OBO token for spleis retrieved")
+            val oboToken = getToken(accessToken, spleis)
 
             val response =
                 try {
@@ -124,12 +124,9 @@ class Spleis(
     override suspend fun speilperson(call: ApplicationCall, fnr: String) {
         val accessToken = call.bearerToken ?: return call.respond(Unauthorized)
         val url = URLBuilder(baseUrl).apply { path("graphql") }.build()
-        val oboToken = token(accessToken, spleisClientId)
+        val oboToken = getToken(accessToken, spleis)
         val log = Log.logger(Personer::class.java)
 
-        log
-            .sensitivt("oboTokenLength", oboToken.length)
-            .info("OBO token length")
         val response =
             try {
                 httpClient.post(url) {
@@ -159,9 +156,7 @@ class Spleis(
 
     private suspend fun aktivitetslogg(accessToken: String, ident: String): String? {
         val log = Log.logger(Personer::class.java)
-        log.info("Retrieving OBO token for sparsom")
-        val oboToken = token(accessToken, sparsomClientId)
-        log.info("OBO token for sparsom retrieved")
+        val oboToken = getToken(accessToken, sparsom)
 
         val url = URLBuilder(sparsomBaseUrl).apply {
             path("api", "aktiviteter")
@@ -184,11 +179,8 @@ class Spleis(
     override suspend fun hendelse(call: ApplicationCall, meldingsreferanse: String) {
         val accessToken = call.bearerToken ?: return call.respond(Unauthorized)
         val url = URLBuilder(baseUrl).apply { path("api", "hendelse-json", meldingsreferanse) }.build()
-        val oboToken = token(accessToken, spleisClientId)
         val log = Log.logger(Personer::class.java)
-        log
-            .sensitivt("oboTokenLength", oboToken.length)
-            .info("Retreiving on behalf of token")
+        val oboToken = getToken(accessToken, spleis)
         val response = try {
         httpClient.get(url) {
             header("Authorization", "Bearer $oboToken")
@@ -206,6 +198,15 @@ class Spleis(
         call.respondText(response.bodyAsText(), Json, OK)
     }
 
+    private suspend fun Spleis.getToken(accessToken: String, clientIdWithName: ClientIdWithName): String {
+        val (clientId, displayName) = clientIdWithName
+        val log = Log.logger(Personer::class.java)
+        log.info("Retrieving OBO token for $displayName")
+        return azureAD.hentOnBehalfOfToken(JWT.decode(accessToken), clientId).also {
+            log.info("OBO token for $displayName retrieved")
+        }
+    }
 
-    private suspend fun token(accessToken: String, clientId: String) = (azureAD.hentOnBehalfOfToken(JWT.decode(accessToken), clientId))
 }
+
+data class ClientIdWithName(val clientId: String, val displayName: String)
