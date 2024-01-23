@@ -19,6 +19,7 @@ import io.ktor.serialization.jackson.*
 import io.ktor.server.application.*
 import io.ktor.server.auth.*
 import io.ktor.server.plugins.*
+import io.ktor.server.plugins.callid.*
 import io.ktor.server.response.*
 import io.ktor.util.*
 import kotlinx.coroutines.Deferred
@@ -26,6 +27,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import org.slf4j.LoggerFactory
+import java.util.UUID
 
 val logger = LoggerFactory.getLogger(Spleis::class.java)
 
@@ -90,7 +92,7 @@ class Spleis(
 
         val response = coroutineScope {
             val aktivitetslogg: Deferred<String?> = async(Dispatchers.IO) {
-                aktivitetslogg(accessToken, id)
+                aktivitetslogg(accessToken, id, call.callId ?: UUID.randomUUID().toString())
             }
 
             val oboToken = getToken(accessToken, spleis)
@@ -154,7 +156,7 @@ class Spleis(
         call.respondText(node.toString(), Json, OK)
     }
 
-    private suspend fun aktivitetslogg(accessToken: String, ident: String): String? {
+    private suspend fun aktivitetslogg(accessToken: String, ident: String, callId: String): String? {
         val log = Log.logger(Personer::class.java)
         val oboToken = getToken(accessToken, sparsom)
 
@@ -165,6 +167,7 @@ class Spleis(
         return try {
             val response = httpClient.get(url) {
                 header("Authorization", "Bearer $oboToken")
+                header("callId", callId)
                 accept(Json)
             }
             log
