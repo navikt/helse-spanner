@@ -24,9 +24,7 @@ fun startLocal() {
     val adConfig = AzureADConfig(
         jwkProvider = JwkProviderBuilder(mockAuth.wellKnownUrl("default").toUrl()).build(),
         issuer = "default",
-        tokenEndpoint = mockAuth.tokenEndpointUrl("default").toString(),
-        clientId = "whatever",
-        clientSecret = "supersecret"
+        clientId = "whatever"
     )
     val spannerConfig = Config(
         true,

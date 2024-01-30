@@ -1,6 +1,7 @@
 package no.nav.spanner
 
 
+import com.github.navikt.tbd_libs.azure.createAzureTokenClientFromEnvironment
 import com.natpryce.konfig.ConfigurationProperties
 import com.natpryce.konfig.EnvironmentVariables
 import com.natpryce.konfig.overriding
@@ -23,7 +24,8 @@ fun main() {
         .info("Spanner startet")
 
     val adConfig = AzureADConfig.fromEnv(configProps)
-    val spleis = Spleis.from(spannerConfig, AzureAD(adConfig))
+    val tokenProvider = createAzureTokenClientFromEnvironment()
+    val spleis = Spleis.from(spannerConfig, tokenProvider)
 
     embeddedServer(CIO, environment = applicationEngineEnvironment {
         log = LoggerFactory.getLogger("Spanner")

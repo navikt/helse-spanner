@@ -1,19 +1,34 @@
 import java.nio.file.Paths
 
-val jacksonVersion = "2.15.2"
 val junitJupiterVersion = "5.10.0"
 val ktorVersion = "2.3.7"
 val tokenValidatorVersion = "1.3.10"
+val tbdLibsVersion = "2024.01.26-10.10-af0ac44d"
 
 plugins {
     kotlin("jvm") version "1.9.22"
 }
 
 repositories {
+    val githubPassword: String? by project
     mavenCentral()
+    /* ihht. https://github.com/navikt/utvikling/blob/main/docs/teknisk/Konsumere%20biblioteker%20fra%20Github%20Package%20Registry.md
+        så plasseres github-maven-repo (med autentisering) før nav-mirror slik at github actions kan anvende førstnevnte.
+        Det er fordi nav-mirroret kjører i Google Cloud og da ville man ellers fått unødvendige utgifter til datatrafikk mellom Google Cloud og GitHub
+     */
+    maven {
+        url = uri("https://maven.pkg.github.com/navikt/maven-release")
+        credentials {
+            username = "x-access-token"
+            password = githubPassword
+        }
+    }
+    maven("https://github-package-registry-mirror.gc.nav.no/cached/maven-release")
 }
 
 dependencies {
+    implementation("com.github.navikt.tbd-libs:azure-token-client-default:$tbdLibsVersion")
+
     implementation("io.ktor:ktor-server-core:$ktorVersion")
     implementation("io.ktor:ktor-server-call-id:$ktorVersion")
     implementation("io.ktor:ktor-server-forwarded-header:$ktorVersion")
@@ -31,13 +46,8 @@ dependencies {
     implementation("io.ktor:ktor-serialization-jackson:$ktorVersion")
     implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
 
-    implementation("no.nav.security:token-validation-ktor:$tokenValidatorVersion")
-
     implementation("com.papertrailapp:logback-syslog4j:1.0.0")
     implementation("com.natpryce:konfig:1.6.10.0")
-
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion")
-    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonVersion")
 
     implementation("ch.qos.logback:logback-classic:1.4.12")
     implementation("net.logstash.logback:logstash-logback-encoder:7.4") {

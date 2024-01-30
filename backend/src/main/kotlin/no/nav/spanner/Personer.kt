@@ -1,9 +1,9 @@
 package no.nav.spanner
 
-import com.auth0.jwt.JWT
 import com.fasterxml.jackson.databind.node.ObjectNode
 import com.fasterxml.jackson.databind.util.RawValue
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
+import com.github.navikt.tbd_libs.azure.AzureTokenProvider
 import io.ktor.client.*
 import io.ktor.client.engine.cio.*
 import io.ktor.client.plugins.*
@@ -27,7 +27,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import org.slf4j.LoggerFactory
-import java.util.UUID
+import java.util.*
 
 val logger = LoggerFactory.getLogger(Spleis::class.java)
 
@@ -39,15 +39,15 @@ interface Personer {
 }
 
 class Spleis(
-    private val azureAD: AzureAD,
+    private val azureAD: AzureTokenProvider,
     private val baseUrl: String = "http://spleis-api.tbd.svc.cluster.local",
-    spleisClientId: String,
+    spleisScope: String,
     private val sparsomBaseUrl: String = "http://sparsom-api.tbd.svc.cluster.local",
-    sparsomClientId: String,
+    sparsomScope: String,
     private val spurteDuClient: SpurteDuClient
 ) : Personer {
-    private val spleis = ClientIdWithName(spleisClientId, "spleis")
-    private val sparsom = ClientIdWithName(sparsomClientId, "sparsom")
+    private val spleis = ClientIdWithName(spleisScope, "spleis")
+    private val sparsom = ClientIdWithName(sparsomScope, "sparsom")
     private val httpClient = HttpClient(CIO) {
         engine {
             requestTimeout = 60000
@@ -60,12 +60,12 @@ class Spleis(
     }
 
     companion object {
-        fun from(spannerConfig: Config, azureAD: AzureAD) = Spleis(
+        fun from(spannerConfig: Config, azureAD: AzureTokenProvider) = Spleis(
             azureAD = azureAD,
             baseUrl = spannerConfig.spleisUrl,
-            spleisClientId = spannerConfig.spleisClientId,
+            spleisScope = spannerConfig.spleisScope,
             sparsomBaseUrl = spannerConfig.sparsomUrl,
-            sparsomClientId = spannerConfig.sparsomClientId,
+            sparsomScope = spannerConfig.sparsomScope,
             spurteDuClient = SpurteDuClient(objectMapper)
         )
 
@@ -95,7 +95,7 @@ class Spleis(
                 aktivitetslogg(accessToken, id, call.callId ?: UUID.randomUUID().toString())
             }
 
-            val oboToken = getToken(accessToken, spleis)
+            val oboToken = spleis.token(azureAD, accessToken)
 
             val response =
                 try {
@@ -126,7 +126,7 @@ class Spleis(
     override suspend fun speilperson(call: ApplicationCall, fnr: String) {
         val accessToken = call.bearerToken ?: return call.respond(Unauthorized)
         val url = URLBuilder(baseUrl).apply { path("graphql") }.build()
-        val oboToken = getToken(accessToken, spleis)
+        val oboToken = spleis.token(azureAD, accessToken)
         val log = Log.logger(Personer::class.java)
 
         val response =
@@ -158,7 +158,7 @@ class Spleis(
 
     private suspend fun aktivitetslogg(accessToken: String, ident: String, callId: String): String? {
         val log = Log.logger(Personer::class.java)
-        val oboToken = getToken(accessToken, sparsom)
+        val oboToken = sparsom.token(azureAD, accessToken)
 
         val url = URLBuilder(sparsomBaseUrl).apply {
             path("api", "aktiviteter")
@@ -183,7 +183,7 @@ class Spleis(
         val accessToken = call.bearerToken ?: return call.respond(Unauthorized)
         val url = URLBuilder(baseUrl).apply { path("api", "hendelse-json", meldingsreferanse) }.build()
         val log = Log.logger(Personer::class.java)
-        val oboToken = getToken(accessToken, spleis)
+        val oboToken = spleis.token(azureAD, accessToken)
         val response = try {
         httpClient.get(url) {
             header("Authorization", "Bearer $oboToken")
@@ -200,16 +200,16 @@ class Spleis(
             .info("Response from spleis")
         call.respondText(response.bodyAsText(), Json, OK)
     }
-
-    private suspend fun Spleis.getToken(accessToken: String, clientIdWithName: ClientIdWithName): String {
-        val (clientId, displayName) = clientIdWithName
-        val log = Log.logger(Personer::class.java)
-        log.info("Retrieving OBO token for $displayName")
-        return azureAD.hentOnBehalfOfToken(JWT.decode(accessToken), clientId).also {
-            log.info("OBO token for $displayName retrieved")
-        }
-    }
-
 }
 
-data class ClientIdWithName(val clientId: String, val displayName: String)
+data class ClientIdWithName(val scope: String, val displayName: String) {
+    private  companion object {
+        val log = Log.logger(this::class.java)
+    }
+    fun token(azureAD: AzureTokenProvider, accessToken: String): String {
+        log.info("Retrieving OBO token for $displayName")
+        return azureAD.onBehalfOfToken(scope, accessToken).also {
+            log.info("OBO token for $displayName retrieved")
+        }.token
+    }
+}

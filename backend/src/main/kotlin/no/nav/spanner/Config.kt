@@ -7,19 +7,19 @@ data class Config (
     val port: Int,
     val host: String,
     val spleisUrl: String,
-    val spleisClientId: String,
+    val spleisScope: String,
     val sparsomUrl: String,
-    val sparsomClientId: String
+    val sparsomScope: String
 ) {
     companion object {
         fun from(configuration: Configuration) = Config(
-            configuration.getOrElse(Key("DEVELOPMENT", booleanType), false),
-            configuration.getOrElse(Key("HTTP_PORT", intType), 8080),
-            configuration.getOrElse(Key("HTTP_HOST", stringType), "0.0.0.0"),
-            configuration[Key("SPLEIS_API_URL", stringType)],
-            configuration[Key("SPLEIS_CLIENT_ID", stringType)],
-            configuration[Key("SPARSOM_API_URL", stringType)],
-            configuration[Key("SPARSOM_CLIENT_ID", stringType)]
+            development = configuration.getOrElse(Key("DEVELOPMENT", booleanType), false),
+            port = configuration.getOrElse(Key("HTTP_PORT", intType), 8080),
+            host = configuration.getOrElse(Key("HTTP_HOST", stringType), "0.0.0.0"),
+            spleisUrl = configuration[Key("SPLEIS_API_URL", stringType)],
+            spleisScope = configuration[Key("SPLEIS_SCOPE", stringType)],
+            sparsomUrl = configuration[Key("SPARSOM_API_URL", stringType)],
+            sparsomScope = configuration[Key("SPARSOM_SCOPE", stringType)]
         )
     }
 }

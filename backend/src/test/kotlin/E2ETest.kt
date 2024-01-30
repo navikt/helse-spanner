@@ -18,9 +18,7 @@ class E2ETest {
     private val azureADConfig = AzureADConfig(
         jwkProvider = JwkProviderBuilder(mockAuth.wellKnownUrl("default").toUrl()).build(),
         issuer = "default",
-        tokenEndpoint = mockAuth.tokenEndpointUrl("issuer").toString(),
-        clientId = "whatever",
-        clientSecret = "supersecret"
+        clientId = "whatever"
     )
 
     private val lokaleKjenninger = LokaleKjenninger
