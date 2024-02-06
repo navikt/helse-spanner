@@ -11,11 +11,9 @@ import java.time.Duration
 
 
 class SpurteDuClient(
-    private val objectMapper: ObjectMapper
+    private val objectMapper: ObjectMapper,
+    private val påkrevdTilgang: String = System.getenv("SPURTE_DU_TILGANG")
 ) {
-    private companion object {
-        private const val tbdgruppeProd = "f787f900-6697-440d-a086-d5bb56e26a9c"
-    }
     fun utveksle(ident: String, identtype: IdType): String? {
         val httpClient = HttpClient.newBuilder()
             .connectTimeout(Duration.ofSeconds(10))
@@ -29,7 +27,7 @@ class SpurteDuClient(
                     else -> throw BadRequestException("støtter kun fnr og aktorid")
                 }
             )),
-            "påkrevdTilgang" to tbdgruppeProd
+            "påkrevdTilgang" to påkrevdTilgang
         ))
 
         val request = HttpRequest.newBuilder()
