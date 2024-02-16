@@ -65,6 +65,7 @@ const ReactJsonMedBedreKopiering = (props: { src: object }) => (
         name={null}
         collapsed={1}
         enableClipboard={(data) => writeToClipboard(JSON.stringify(data.src))}
+        sortKeys={true}
     />
 )
 
