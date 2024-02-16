@@ -56,7 +56,7 @@ const HendelseJson = (props: FetchHendelseProps) => {
         if (data === undefined) {
             return <Spinner />
         }
-        return <ReactJson src={data} name={null} collapsed={1} />
+        return <ReactJson src={data} name={null} collapsed={1} sortKeys={true} />
     } catch (error) {
         return <Feilmelding feil={error} />
     }
