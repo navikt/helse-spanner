@@ -72,6 +72,8 @@ const Tidslinjer = ({ toggleValgtTing }: { toggleValgtTing: (e: React.MouseEvent
         startDate: sub(nå, { months: 11 }),
         currentZoom: 12
     })
+    const [skalViseInfotrygdUtvalg, setSkalViseInfotrygdUtvalg] = useState(false)
+    const [infotrygdhistorikkElementIndex, setInfotrygdhistorikkElementIndex] = useState(0)
 
     const scroll = (tidslinjeperiode : { currentZoom: number }) => Math.max(1, Math.round(tidslinjeperiode.currentZoom / 3))
 
@@ -96,17 +98,17 @@ const Tidslinjer = ({ toggleValgtTing }: { toggleValgtTing: (e: React.MouseEvent
                     }) }
                 </Timeline.Row>
             })}
-            <Timeline.Row label="Infotrygd" icon={<PackageIcon aria-hidden />} className={styles.tidslijerad}>
+            <Timeline.Row onClick={() => { setSkalViseInfotrygdUtvalg((førverdi) => !førverdi) } } label="Infotrygd" icon={<PackageIcon aria-hidden />} className={styles.tidslijerad}>
                 { person.infotrygdhistorikk.length > 0 ? (
-                    [...person.infotrygdhistorikk[0].ferieperioder.map((it) => {
+                    [...person.infotrygdhistorikk[infotrygdhistorikkElementIndex].ferieperioder.map((it) => {
                         return <Timeline.Period start={new Date(it.fom)} end={new Date(it.tom)} status="neutral" icon={<ParasolBeachIcon aria-hidden/>}>
                             <div>{it.fom} - {it.tom}</div>
                         </Timeline.Period>
-                    }), ...person.infotrygdhistorikk[0].personutbetalingsperioder.map((it) => {
+                    }), ...person.infotrygdhistorikk[infotrygdhistorikkElementIndex].personutbetalingsperioder.map((it) => {
                         return <Timeline.Period start={new Date(it.fom)} end={new Date(it.tom)} status="success" icon={<PiggybankIcon aria-hidden />}>
                             <div>{it.fom} - {it.tom} - brukerutbetaling</div>
                         </Timeline.Period>
-                    }), ...person.infotrygdhistorikk[0].arbeidsgiverutbetalingsperioder.map((it) => {
+                    }), ...person.infotrygdhistorikk[infotrygdhistorikkElementIndex].arbeidsgiverutbetalingsperioder.map((it) => {
                         return <Timeline.Period start={new Date(it.fom)} end={new Date(it.tom)} status="success" icon={<Buldings3Icon aria-hidden />}>
                             <div>{it.fom} - {it.tom} - refusjon til { it.hasOwnProperty("orgnr") ? it.orgnr : "N/A" }</div>
                         </Timeline.Period>
@@ -161,6 +163,14 @@ const Tidslinjer = ({ toggleValgtTing }: { toggleValgtTing: (e: React.MouseEvent
                 }}>tilbake { scroll(tidslinjeperiode) } mnd »</button>
             </Timeline.Zoom>
         </Timeline>
+        { skalViseInfotrygdUtvalg && (<>
+            <p>Hvilken Infotrygdhistorikk vil du basere visningen på?</p>
+            <select onChange={(e) => {
+                setInfotrygdhistorikkElementIndex(e.target.selectedIndex)
+                setSkalViseInfotrygdUtvalg(false)
+            }}>{person.infotrygdhistorikk.map((a, i) => <option value={i} selected={i == infotrygdhistorikkElementIndex }>index {i}</option>)}</select>
+        </>)
+        }
     </div>);
 }
 
