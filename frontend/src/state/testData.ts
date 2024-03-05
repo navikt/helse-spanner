@@ -18,6 +18,7 @@ export const createTestPerson = (
         aktiviteter: [],
         kontekster: [],
     },
+    infotrygdhistorikk: []
 })
 
 export const createTestArbeidsgiver = (
