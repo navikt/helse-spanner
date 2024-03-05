@@ -7,7 +7,6 @@ import {åpneHendelseDokumentState} from '../../state/state'
 import {usePerson} from '../../state/contexts'
 import {Box, HGrid, Page, Timeline} from "@navikt/ds-react";
 import {BriefcaseIcon, Buldings3Icon, PackageIcon, ParasolBeachIcon, PiggybankIcon,} from "@navikt/aksel-icons";
-import {InfotrygdhistorikkDto} from "../../state/dto";
 import {add, sub} from "date-fns";
 
 export const PersonView = () => {
@@ -73,7 +72,7 @@ const Tidslinjer = () => {
     })
 
     console.log(`current zoom is: `, tidslinjeperiode)
-
+    console.log(person.infotrygdhistorikk)
     return (<div className="min-w-[800px]">
         <Timeline direction={"right"} startDate={tidslinjeperiode.startDate} endDate={tidslinjeperiode.endDate} >
             {person.arbeidsgivere.map((arbeidsgiver) => {
@@ -92,7 +91,21 @@ const Tidslinjer = () => {
                 </Timeline.Row>
             })}
             <Timeline.Row label="Infotrygd" icon={<PackageIcon aria-hidden />}>
-                <Infotrygdperioder historikk={person.infotrygdhistorikk} />
+                { person.infotrygdhistorikk.length > 0 ? (
+                    [...person.infotrygdhistorikk[0].ferieperioder.map((it) => {
+                        return <Timeline.Period start={new Date(it.fom)} end={new Date(it.tom)} status="neutral" icon={<ParasolBeachIcon aria-hidden/>}>
+                            <div>{it.fom} - {it.tom}</div>
+                        </Timeline.Period>
+                    }), ...person.infotrygdhistorikk[0].personutbetalingsperioder.map((it) => {
+                        return <Timeline.Period start={new Date(it.fom)} end={new Date(it.tom)} status="success" icon={<PiggybankIcon aria-hidden />}>
+                            <div>{it.fom} - {it.tom} - brukerutbetaling</div>
+                        </Timeline.Period>
+                    }), ...person.infotrygdhistorikk[0].arbeidsgiverutbetalingsperioder.map((it) => {
+                        return <Timeline.Period start={new Date(it.fom)} end={new Date(it.tom)} status="success" icon={<Buldings3Icon aria-hidden />}>
+                            <div>{it.fom} - {it.tom} - refusjon til { it.hasOwnProperty("orgnr") ? it.orgnr : "N/A" }</div>
+                        </Timeline.Period>
+                    }) ]
+                ) : null}
             </Timeline.Row>
             <Timeline.Zoom>
                 <button onClick={() => {
@@ -114,29 +127,6 @@ const Tidslinjer = () => {
             </Timeline.Zoom>
         </Timeline>
     </div>);
-}
-
-const Infotrygdperioder = ({historikk}: { historikk: InfotrygdhistorikkDto[] }) => {
-    if (historikk.length == 0) return <></>
-    const siste = historikk[0]
-    const ferie = siste.ferieperioder.map((it) => {
-        return <Timeline.Period start={new Date(it.fom)} end={new Date(it.tom)} status="neutral" icon={<ParasolBeachIcon aria-hidden/>}>
-            <div>{it.fom} - {it.tom}</div>
-        </Timeline.Period>
-    })
-    const refusjon = siste.arbeidsgiverutbetalingsperioder.map((it) => {
-        return <Timeline.Period start={new Date(it.fom)} end={new Date(it.tom)} status="neutral" icon={<Buldings3Icon aria-hidden />}>
-            <div>{it.fom} - {it.tom}</div>
-        </Timeline.Period>
-    })
-    const bruker = siste.personutbetalingsperioder.map((it) => {
-        return <Timeline.Period start={new Date(it.fom)} end={new Date(it.tom)} status="neutral" icon={<PiggybankIcon aria-hidden />}>
-            <div>{it.fom} - {it.tom}</div>
-        </Timeline.Period>
-    })
-    return (<>
-        { [...ferie, ...refusjon, ...bruker].map((it) => it) }
-    </>)
 }
 
 PersonView.displayName = 'PersonView'

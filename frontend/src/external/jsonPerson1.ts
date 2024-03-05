@@ -25734,9 +25734,27 @@ export let jsonPerson: PersonDto = {
             id: '92734f90-e4f5-48e3-963e-55c80fd00bab',
             tidsstempel: '2021-07-23T15:51:25.883829593',
             hendelseId: null,
-            ferieperioder: [],
-            arbeidsgiverutbetalingsperioder: [],
-            personutbetalingsperioder: [],
+            ferieperioder: [
+                {
+                    "fom": "2020-01-01",
+                    "tom": "2020-01-31"
+                }
+            ],
+            arbeidsgiverutbetalingsperioder: [
+                {
+                    orgnr: '999888777',
+                    fom: '2019-12-01',
+                    tom: '2019-12-10',
+                    grad: 100,
+                    inntekt: 14993.333333333334,
+                },
+            ],
+            personutbetalingsperioder: [
+                {
+                    fom: '2019-12-11',
+                    tom: '2019-12-20'
+                },
+            ],
             ukjenteperioder: [],
             inntekter: [],
             arbeidskategorikoder: {},
