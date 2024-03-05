@@ -5,16 +5,8 @@ import {Content} from '../content/Content'
 import {useResetRecoilState} from 'recoil'
 import {åpneHendelseDokumentState} from '../../state/state'
 import {usePerson} from '../../state/contexts'
-import {Box, HGrid, Page, Timeline, TimelinePeriodProps} from "@navikt/ds-react";
-import {
-    BriefcaseIcon,
-    Buldings3Icon,
-    PackageIcon,
-    ParasolBeachIcon,
-    PencilIcon,
-    PiggybankIcon,
-    VirusIcon,
-} from "@navikt/aksel-icons";
+import {Box, HGrid, Page, Timeline} from "@navikt/ds-react";
+import {BriefcaseIcon, Buldings3Icon, PackageIcon, ParasolBeachIcon, PiggybankIcon,} from "@navikt/aksel-icons";
 import {InfotrygdhistorikkDto} from "../../state/dto";
 
 export const PersonView = () => {
@@ -62,13 +54,6 @@ export const PersonView = () => {
         </Box>
     </>)
 }
-
-/*
-arbeidsgiverikon: <BriefcaseIcon aria-hidden />
-ferieikon IT: <ParasolBeachIcon aria-hidden/>
-arbeidsgiverutbetalingsperiode IT: <Buildings3Icon aria-hidden />
-personutbetalingsperiode IT: <PiggybankIcon aria-hidden />
- */
 
 const Tidslinjer = () => {
     const person = usePerson()
@@ -125,32 +110,5 @@ const Infotrygdperioder = ({ historikk }: { historikk: InfotrygdhistorikkDto[] }
         { [...ferie, ...refusjon, ...bruker].map((it) => it) }
     </>)
 }
-
-const person1: TimelinePeriodProps[] = [{
-    start: new Date("Jan 1 2022"),
-    end: new Date("Jan 31 2022"),
-    status: "warning",
-    icon: <PencilIcon aria-hidden/>,
-    statusLabel: "Sykemeldt",
-    children: <div>AVVENTER_GODKJENNING</div>,
-}, {
-    start: new Date("Apr 1 2022"),
-    end: new Date("Apr 30 2022"),
-    status: "neutral",
-    icon: <ParasolBeachIcon aria-hidden/>,
-    statusLabel: "Ferie",
-}, {
-    start: new Date("Jul 1 2022"),
-    end: new Date("Jul 31 2022"),
-    status: "success",
-    icon: <PencilIcon aria-hidden/>,
-    statusLabel: "Utbetaling",
-}, {
-    start: new Date("Aug 1 2022"),
-    end: new Date("Aug 30 2022"),
-    status: "warning",
-    icon: <VirusIcon aria-hidden/>,
-    statusLabel: "Stønad korona",
-},];
 
 PersonView.displayName = 'PersonView'
