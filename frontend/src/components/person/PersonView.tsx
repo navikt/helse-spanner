@@ -34,7 +34,10 @@ export const PersonView = () => {
         <Box background="surface-alt-3-moderate" paddingBlock="5" paddingInline="8" as="header">
             <Page.Block>
                 <PersonHeader />
-                <Tidslinjer toggleValgtTing={toggleValgtTing} />
+                <Tidslinjer
+                    valgteTing={valgteTing}
+                    toggleValgtTing={toggleValgtTing}
+                />
             </Page.Block>
         </Box>
         <Box
@@ -56,7 +59,13 @@ export const PersonView = () => {
     </>)
 }
 
-const Tidslinjer = ({ toggleValgtTing }: { toggleValgtTing: (e: React.MouseEvent, ting: string) => void }) => {
+type TidslinjeState = {
+    endDate: Date,
+    startDate: Date,
+    currentZoom: number
+}
+
+const Tidslinjer = ({ valgteTing, toggleValgtTing }: { valgteTing: string[], toggleValgtTing: (e: React.MouseEvent, ting: string) => void }) => {
     const person = usePerson()
     const nyestePeriode = person.arbeidsgivere
         .filter((it) => it.vedtaksperioder.length > 0)
@@ -71,11 +80,26 @@ const Tidslinjer = ({ toggleValgtTing }: { toggleValgtTing: (e: React.MouseEvent
         endDate: add(nå, { months: 1 }),
         startDate: sub(nå, { months: 11 }),
         currentZoom: 12
-    })
+    } as TidslinjeState)
     const [skalViseInfotrygdUtvalg, setSkalViseInfotrygdUtvalg] = useState(false)
     const [infotrygdhistorikkElementIndex, setInfotrygdhistorikkElementIndex] = useState(0)
 
-    const scroll = (tidslinjeperiode : { currentZoom: number }) => Math.max(1, Math.round(tidslinjeperiode.currentZoom / 3))
+    const scrollStep = (tidslinjeperiode : TidslinjeState) => Math.max(1, Math.round(tidslinjeperiode.currentZoom / 3))
+    const scroll = (tidslinjeperiode : TidslinjeState, strategy: (d: Date, dd: Duration) => Date): TidslinjeState => {
+        return {
+            endDate: strategy(tidslinjeperiode.endDate, { months: scrollStep(tidslinjeperiode) }),
+            startDate: strategy(tidslinjeperiode.startDate, { months: scrollStep(tidslinjeperiode) }),
+            currentZoom: tidslinjeperiode.currentZoom
+        }
+    }
+
+    const oppdaterZoom = (step: number) => {
+        setTidslinjeperiode((current) => ({
+            endDate: current.endDate,
+            startDate: sub(current.endDate, {months: step}),
+            currentZoom: step
+        } as TidslinjeState))
+    }
 
     console.log(`current zoom is: `, tidslinjeperiode)
     console.log(person.infotrygdhistorikk)
@@ -116,51 +140,16 @@ const Tidslinjer = ({ toggleValgtTing }: { toggleValgtTing: (e: React.MouseEvent
                 ) : null}
             </Timeline.Row>
             <Timeline.Zoom>
+                <Zoom step={12} onClick={ oppdaterZoom } />
+                <Zoom step={6} onClick={ oppdaterZoom } />
+                <Zoom step={2} onClick={ oppdaterZoom } />
+
                 <button onClick={() => {
-                    setTidslinjeperiode((current) => {
-                        return {
-                            endDate: current.endDate,
-                            startDate: sub(current.endDate, { months: 12 }),
-                            currentZoom: 12
-                        }
-                    })
-                }}>Zoom 12 mnd</button>
+                    setTidslinjeperiode((current) => scroll(current, add))
+                }}>« fremover { scrollStep(tidslinjeperiode) } mnd</button>
                 <button onClick={() => {
-                    setTidslinjeperiode((current) => {
-                        return {
-                            endDate: current.endDate,
-                            startDate: sub(current.endDate, { months: 6 }),
-                            currentZoom: 6
-                        }
-                    })
-                }}>Zoom 6 mnd</button>
-                <button onClick={() => {
-                    setTidslinjeperiode((current) => {
-                        return {
-                            endDate: current.endDate,
-                            startDate: sub(current.endDate, { months: 2 }),
-                            currentZoom: 2
-                        }
-                    })
-                }}>Zoom 2 mnd</button>
-                <button onClick={() => {
-                    setTidslinjeperiode((current) => {
-                        return {
-                            endDate: add(current.endDate, { months: scroll(current) }),
-                            startDate: add(current.startDate, { months: scroll(current) }),
-                            currentZoom: current.currentZoom
-                        }
-                    })
-                }}>« fremover { scroll(tidslinjeperiode) } mnd</button>
-                <button onClick={() => {
-                    setTidslinjeperiode((current) => {
-                        return {
-                            endDate: sub(current.endDate, { months: scroll(current) }),
-                            startDate: sub(current.startDate, { months: scroll(current) }),
-                            currentZoom: current.currentZoom
-                        }
-                    })
-                }}>tilbake { scroll(tidslinjeperiode) } mnd »</button>
+                    setTidslinjeperiode((current) => scroll(current, sub))
+                }}>tilbake { scrollStep(tidslinjeperiode) } mnd »</button>
             </Timeline.Zoom>
         </Timeline>
         { skalViseInfotrygdUtvalg && (<>
@@ -172,6 +161,10 @@ const Tidslinjer = ({ toggleValgtTing }: { toggleValgtTing: (e: React.MouseEvent
         </>)
         }
     </div>);
+}
+
+const Zoom = ({ step, onClick }: { step: number, onClick: (step: number) => void }) => {
+    return <button onClick={() => { onClick(step) }}>Zoom {step} mnd</button>
 }
 
 PersonView.displayName = 'PersonView'
