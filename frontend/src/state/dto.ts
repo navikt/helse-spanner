@@ -5,7 +5,19 @@ export type PersonDto = {
     opprettet: string
     aktivitetslogg: AktivitetsloggDto
     aktivitetsloggV2?: AktivitetsloggV2Dto
+    infotrygdhistorikk: InfotrygdhistorikkDto[]
     [x: string]: any
+}
+
+export type InfotrygdhistorikkDto = {
+    arbeidsgiverutbetalingsperioder: InfotrygdperiodeDto[],
+    ferieperioder: InfotrygdperiodeDto[],
+    personutbetalingsperioder: InfotrygdperiodeDto[]
+}
+
+export type InfotrygdperiodeDto = {
+    fom: string,
+    tom: string
 }
 
 export type MaskertDto = {
