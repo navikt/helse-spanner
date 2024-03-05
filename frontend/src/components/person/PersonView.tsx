@@ -141,6 +141,7 @@ const Tidslinjer = ({ valgteTing, toggleValgtTing }: { valgteTing: string[], tog
             </Timeline.Row>
             <Timeline.Zoom>
                 <Zoom step={48} onClick={ oppdaterZoom } />
+                <Zoom step={24} onClick={ oppdaterZoom } />
                 <Zoom step={12} onClick={ oppdaterZoom } />
                 <Zoom step={6} onClick={ oppdaterZoom } />
                 <Zoom step={2} onClick={ oppdaterZoom } />
