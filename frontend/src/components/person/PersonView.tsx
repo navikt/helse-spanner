@@ -101,10 +101,19 @@ const Tidslinjer = ({ valgteTing, toggleValgtTing }: { valgteTing: string[], tog
         } as TidslinjeState))
     }
 
-    console.log(`current zoom is: `, tidslinjeperiode)
-    console.log(person.infotrygdhistorikk)
+    const skjæringstidspunkter = Array.from(new Set(person.arbeidsgivere
+        .flatMap((it) => it.vedtaksperioder.map((it) => it.skjæringstidspunkt))
+        .filter((it) => typeof it === 'string')
+        .map((it) => it as string)
+    ))
+
+
     return (<div className="min-w-[800px]">
         <Timeline className={styles.tidslinje} direction={"right"} startDate={tidslinjeperiode.startDate} endDate={tidslinjeperiode.endDate} >
+            {skjæringstidspunkter.map((it) => <Timeline.Pin date={new Date(it)}>
+                <p>Skjæringstidspunkt: { it }</p>
+            </Timeline.Pin> )}
+
             {person.arbeidsgivere.map((arbeidsgiver) => {
                 return <Timeline.Row label={ arbeidsgiver.organisasjonsnummer } icon={<BriefcaseIcon aria-hidden />} className={styles.tidslijerad}>
                     { arbeidsgiver.vedtaksperioder.map((vedtaksperiode) => {

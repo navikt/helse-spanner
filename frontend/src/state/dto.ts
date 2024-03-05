@@ -46,6 +46,7 @@ export type VedtakDto = {
     fom: string
     tom: string
     id: string
+    skjæringstidspunkt?: string
     [x: string]: any
 }
 
