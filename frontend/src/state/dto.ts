@@ -12,12 +12,14 @@ export type PersonDto = {
 export type InfotrygdhistorikkDto = {
     arbeidsgiverutbetalingsperioder: InfotrygdperiodeDto[],
     ferieperioder: InfotrygdperiodeDto[],
-    personutbetalingsperioder: InfotrygdperiodeDto[]
+    personutbetalingsperioder: InfotrygdperiodeDto[],
+    [x: string]: any
 }
 
 export type InfotrygdperiodeDto = {
     fom: string,
-    tom: string
+    tom: string,
+    [x: string]: any
 }
 
 export type MaskertDto = {
