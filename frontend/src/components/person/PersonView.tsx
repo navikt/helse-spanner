@@ -8,6 +8,7 @@ import {usePerson} from '../../state/contexts'
 import {Box, HGrid, Page, Timeline} from "@navikt/ds-react";
 import {BriefcaseIcon, Buldings3Icon, PackageIcon, ParasolBeachIcon, PiggybankIcon,} from "@navikt/aksel-icons";
 import {InfotrygdhistorikkDto} from "../../state/dto";
+import {add, sub} from "date-fns";
 
 export const PersonView = () => {
     const resetÅpneHendelser = useResetRecoilState(åpneHendelseDokumentState)
@@ -57,9 +58,24 @@ export const PersonView = () => {
 
 const Tidslinjer = () => {
     const person = usePerson()
+    const nyestePeriode = person.arbeidsgivere
+        .filter((it) => it.vedtaksperioder.length > 0)
+        .map((it) => {
+            const sorterte = it.vedtaksperioder.sort((a, b) => (new Date(b.tom).getTime() - new Date(a.tom).getTime()) )
+            return sorterte[0]
+        })
+        .sort((a, b) => (new Date(b.tom).getTime() - new Date(a.tom).getTime()) )
+
+    const nå = nyestePeriode.length > 0 ? new Date(nyestePeriode[0].tom) : new Date()
+    const [tidslinjeperiode, setTidslinjeperiode] = useState({
+        endDate: add(nå, { months: 1 }),
+        startDate: sub(nå, { months: 11 })
+    })
+
+    console.log(`current zoom is: `, tidslinjeperiode)
 
     return (<div className="min-w-[800px]">
-        <Timeline>
+        <Timeline direction={"right"} startDate={tidslinjeperiode.startDate} endDate={tidslinjeperiode.endDate} >
             {person.arbeidsgivere.map((arbeidsgiver) => {
                 return <Timeline.Row label={ arbeidsgiver.organisasjonsnummer } icon={<BriefcaseIcon aria-hidden />}>
                     { arbeidsgiver.vedtaksperioder.map((vedtaksperiode) => {
@@ -79,16 +95,28 @@ const Tidslinjer = () => {
                 <Infotrygdperioder historikk={person.infotrygdhistorikk} />
             </Timeline.Row>
             <Timeline.Zoom>
-                <Timeline.Zoom.Button label="3 mnd" interval="month" count={3} />
-                <Timeline.Zoom.Button label="7 mnd" interval="month" count={7} />
-                <Timeline.Zoom.Button label="9 mnd" interval="month" count={9} />
-                <Timeline.Zoom.Button label="1.5 år" interval="year" count={1.5} />
+                <button onClick={() => {
+                    setTidslinjeperiode((current) => {
+                        return {
+                            endDate: add(current.endDate, { months: 6 }),
+                            startDate: add(current.startDate, { months: 6 })
+                        }
+                    })
+                }}>« fremover 6 mnd</button>
+                <button onClick={() => {
+                    setTidslinjeperiode((current) => {
+                        return {
+                            endDate: sub(current.endDate, { months: 6 }),
+                            startDate: sub(current.startDate, { months: 6 })
+                        }
+                    })
+                }}>tilbake 6 mnd »</button>
             </Timeline.Zoom>
         </Timeline>
     </div>);
 }
 
-const Infotrygdperioder = ({ historikk }: { historikk: InfotrygdhistorikkDto[] }) => {
+const Infotrygdperioder = ({historikk}: { historikk: InfotrygdhistorikkDto[] }) => {
     if (historikk.length == 0) return <></>
     const siste = historikk[0]
     const ferie = siste.ferieperioder.map((it) => {
