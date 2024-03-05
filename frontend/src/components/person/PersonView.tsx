@@ -75,7 +75,7 @@ const Tidslinjer = () => {
     console.log(`current zoom is: `, tidslinjeperiode)
     console.log(person.infotrygdhistorikk)
     return (<div className="min-w-[800px]">
-        <Timeline direction={"right"} startDate={tidslinjeperiode.startDate} endDate={tidslinjeperiode.endDate} >
+        <Timeline className={styles.tidslinje} direction={"right"} startDate={tidslinjeperiode.startDate} endDate={tidslinjeperiode.endDate} >
             {person.arbeidsgivere.map((arbeidsgiver) => {
                 return <Timeline.Row label={ arbeidsgiver.organisasjonsnummer } icon={<BriefcaseIcon aria-hidden />} className={styles.tidslijerad}>
                     { arbeidsgiver.vedtaksperioder.map((vedtaksperiode) => {
