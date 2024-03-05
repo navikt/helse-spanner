@@ -8,6 +8,7 @@ import {usePerson} from '../../state/contexts'
 import {Box, HGrid, Page, Timeline} from "@navikt/ds-react";
 import {BriefcaseIcon, Buldings3Icon, PackageIcon, ParasolBeachIcon, PiggybankIcon,} from "@navikt/aksel-icons";
 import {add, sub} from "date-fns";
+import styles from "./PersonView.module.css"
 
 export const PersonView = () => {
     const resetÅpneHendelser = useResetRecoilState(åpneHendelseDokumentState)
@@ -76,7 +77,7 @@ const Tidslinjer = () => {
     return (<div className="min-w-[800px]">
         <Timeline direction={"right"} startDate={tidslinjeperiode.startDate} endDate={tidslinjeperiode.endDate} >
             {person.arbeidsgivere.map((arbeidsgiver) => {
-                return <Timeline.Row label={ arbeidsgiver.organisasjonsnummer } icon={<BriefcaseIcon aria-hidden />}>
+                return <Timeline.Row label={ arbeidsgiver.organisasjonsnummer } icon={<BriefcaseIcon aria-hidden />} className={styles.tidslijerad}>
                     { arbeidsgiver.vedtaksperioder.map((vedtaksperiode) => {
                         let status = "info"
                         if (vedtaksperiode.tilstand == "AVSLUTTET") status = "success"
@@ -90,7 +91,7 @@ const Tidslinjer = () => {
                     }) }
                 </Timeline.Row>
             })}
-            <Timeline.Row label="Infotrygd" icon={<PackageIcon aria-hidden />}>
+            <Timeline.Row label="Infotrygd" icon={<PackageIcon aria-hidden />} className={styles.tidslijerad}>
                 { person.infotrygdhistorikk.length > 0 ? (
                     [...person.infotrygdhistorikk[0].ferieperioder.map((it) => {
                         return <Timeline.Period start={new Date(it.fom)} end={new Date(it.tom)} status="neutral" icon={<ParasolBeachIcon aria-hidden/>}>
