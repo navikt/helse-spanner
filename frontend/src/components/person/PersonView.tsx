@@ -34,7 +34,7 @@ export const PersonView = () => {
         <Box background="surface-alt-3-moderate" paddingBlock="5" paddingInline="8" as="header">
             <Page.Block>
                 <PersonHeader />
-                <Tidslinjer />
+                <Tidslinjer toggleValgtTing={toggleValgtTing} />
             </Page.Block>
         </Box>
         <Box
@@ -56,7 +56,7 @@ export const PersonView = () => {
     </>)
 }
 
-const Tidslinjer = () => {
+const Tidslinjer = ({ toggleValgtTing }: { toggleValgtTing: (e: React.MouseEvent, ting: string) => void }) => {
     const person = usePerson()
     const nyestePeriode = person.arbeidsgivere
         .filter((it) => it.vedtaksperioder.length > 0)
@@ -85,7 +85,9 @@ const Tidslinjer = () => {
                         else if (vedtaksperiode.tilstand in ["AVVENTER_GODKJENNING", "AVVENTER_GODKJENNING_REVURDERING"]) status = "warning"
 
                         // @ts-ignore
-                        return <Timeline.Period key={vedtaksperiode.id} start={new Date(vedtaksperiode.fom)} end={new Date(vedtaksperiode.tom)} status={status}>
+                        return <Timeline.Period key={vedtaksperiode.id} start={new Date(vedtaksperiode.fom)} end={new Date(vedtaksperiode.tom)} status={status} onSelectPeriod={(e) => {
+                            toggleValgtTing(e, vedtaksperiode.id)
+                        }}>
                             <div>{vedtaksperiode.fom} - {vedtaksperiode.tom} : { vedtaksperiode.tilstand}</div>
                         </Timeline.Period>
                     }) }
