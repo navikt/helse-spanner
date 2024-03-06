@@ -73,8 +73,11 @@ export const Tidslinjer = ({valgteTing, toggleValgtTing}: {
                 return <Timeline.Row label={arbeidsgiver.organisasjonsnummer} icon={<BriefcaseIcon aria-hidden/>}
                                      className={styles.tidslijerad}>
                     {arbeidsgiver.vedtaksperioder.map((vedtaksperiode) => {
+                        const erValgt = typeof valgteTing.find((it) => it == vedtaksperiode.id) !== 'undefined'
+                        const klassenavn = erValgt ? styles.aktiv : undefined
                         return <Timeline.Period key={vedtaksperiode.id} start={new Date(vedtaksperiode.fom)}
                                                 end={new Date(vedtaksperiode.tom)} status={statusForVedtaksperiode(vedtaksperiode.tilstand)}
+                                                className={ klassenavn }
                                                 onSelectPeriod={(e) => {
                                                     toggleValgtTing(e, vedtaksperiode.id)
                                                 }}>

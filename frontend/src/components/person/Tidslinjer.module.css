@@ -5,3 +5,7 @@
 .tidslijerad {
     background-color: var(--a-surface-alt-3-subtle);
 }
+
+.aktiv {
+    border: 1px solid red !important;
+}
