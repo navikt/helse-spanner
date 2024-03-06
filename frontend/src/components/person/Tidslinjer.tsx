@@ -1,9 +1,10 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {usePerson} from "../../state/contexts";
-import {add, sub} from "date-fns";
+import {add, differenceInMonths, sub} from "date-fns";
 import {Timeline} from "@navikt/ds-react";
 import styles from "./Tidslinjer.module.css";
 import {BriefcaseIcon, Buldings3Icon, PackageIcon, ParasolBeachIcon, PiggybankIcon} from "@navikt/aksel-icons";
+import {VedtakDto} from "../../state/dto";
 
 
 type TidslinjeState = {
@@ -21,13 +22,12 @@ export const Tidslinjer = ({valgteTing, toggleValgtTing}: {
     toggleValgtTing: (e: React.MouseEvent, ting: string) => void
 }) => {
     const person = usePerson()
-    const nyestePeriode = person.arbeidsgivere
+    const nyestePeriode = SorterNyesteVedtakØverst(person.arbeidsgivere
         .filter((it) => it.vedtaksperioder.length > 0)
         .map((it) => {
-            const sorterte = it.vedtaksperioder.sort((a, b) => (new Date(b.tom).getTime() - new Date(a.tom).getTime()))
+            const sorterte = SorterNyesteVedtakØverst(it.vedtaksperioder)
             return sorterte[0]
-        })
-        .sort((a, b) => (new Date(b.tom).getTime() - new Date(a.tom).getTime()))
+        }))
 
     const nå = nyestePeriode.length > 0 ? new Date(nyestePeriode[0].tom) : new Date()
     const [tidslinjeperiode, setTidslinjeperiode] = useState({
@@ -37,6 +37,32 @@ export const Tidslinjer = ({valgteTing, toggleValgtTing}: {
     } as TidslinjeState)
     const [skalViseInfotrygdUtvalg, setSkalViseInfotrygdUtvalg] = useState(false)
     const [infotrygdhistorikkElementIndex, setInfotrygdhistorikkElementIndex] = useState(0)
+
+    useEffect(() => {
+        // zoom slik at vedtaksperiodene som er valgt, vises i tidslinjen :)
+        const vedtak = person.arbeidsgivere
+            .flatMap((it) => it.vedtaksperioder)
+            .find((it) => valgteTing.find((a) => it.id === a))
+
+        const alleVedtak = person.arbeidsgivere.flatMap((it) => it.vedtaksperioder)
+        const valgteVedtak = SorterNyesteVedtakØverst(valgteTing
+            .map((valgtTing) => alleVedtak.find((it) => it.id === valgtTing))
+            .filter((it) => typeof it !== 'undefined') as VedtakDto[])
+
+        if (valgteVedtak.length == 0) return
+
+        const nyesteVedtak = valgteVedtak[0]
+        const eldsteVedtak = valgteVedtak[valgteVedtak.length - 1]
+        setTidslinjeperiode((current) => {
+            const endDate = new Date(nyesteVedtak.tom) > current.endDate ? add(new Date(nyesteVedtak.tom), { months: 1 }) : current.endDate
+            const startDate = new Date(eldsteVedtak.fom) < current.startDate ? sub(new Date(eldsteVedtak.fom), { months: 1 }) : current.startDate
+            return {
+                endDate: endDate,
+                startDate: startDate,
+                currentZoom: differenceInMonths(endDate, startDate)
+            }
+        })
+    }, [valgteTing]);
 
     const scrollStep = (tidslinjeperiode: TidslinjeState) => Math.max(1, Math.round(tidslinjeperiode.currentZoom / 3))
     const scroll = (tidslinjeperiode: TidslinjeState, strategy: (d: Date, dd: Duration) => Date): TidslinjeState => {
@@ -139,6 +165,9 @@ export const Tidslinjer = ({valgteTing, toggleValgtTing}: {
         }
     </div>);
 }
+
+const SorterNyesteVedtakØverst = (input: VedtakDto[]): VedtakDto[] =>
+    input.sort((a, b) => (new Date(b.tom).getTime() - new Date(a.tom).getTime()))
 
 function statusForVedtaksperiode(tilstand: string): "success" | "warning" | "danger" | "info" | "neutral" {
     if (tilstand == "AVSLUTTET") return "success"

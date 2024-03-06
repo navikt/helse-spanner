@@ -3,9 +3,9 @@ import parseISO from 'date-fns/parseISO'
 import styles from './PersonHeader.module.css'
 import {usePerson} from '../../state/contexts'
 import {speilUrl} from '../tree/links'
-import {Box} from "@navikt/ds-react";
+import {Box, HStack, Search} from "@navikt/ds-react";
 
-export const PersonHeader = () => {
+export const PersonHeader = ({ toggleValgtTing }: { toggleValgtTing: (e: boolean, ting: string) => void }) => {
     const person = usePerson()
     return (
         <Box background="surface-default" borderRadius="large">
@@ -28,8 +28,33 @@ export const PersonHeader = () => {
                         trykk her
                     </a>
                 </dd>
+
+                <dt>Søk etter vedtaksperiode</dt>
+                <dd><VedtaksperiodeSøk toggleValgtTing={ toggleValgtTing } /></dd>
             </dl>
         </Box>
     )
 }
+
+
+
+const VedtaksperiodeSøk = ({ toggleValgtTing }: { toggleValgtTing: (e: boolean, ting: string) => void }) => {
+    return <form onSubmit={(e) => {
+                e.preventDefault()
+            }}>
+                <Search
+                    id="vedtaksperiode-search"
+                    label="Vedtaksperiodesøk"
+                    size="small"
+                    //value={søketekst}
+                    variant="simple"
+                    placeholder="<vedtaksperiodeID>"
+                    onChange={(verdi) => {
+                        toggleValgtTing(true, verdi)
+                    }}
+                    data-testid="vedtaksperiodeIdfelt"
+                ></Search>
+            </form>
+}
+
 PersonHeader.displayName = 'PersonHeader'

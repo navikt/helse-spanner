@@ -5,8 +5,9 @@ import {Content} from '../content/Content'
 import {useResetRecoilState} from 'recoil'
 import {åpneHendelseDokumentState} from '../../state/state'
 import {usePerson} from '../../state/contexts'
-import {Box, HGrid, Page} from "@navikt/ds-react";
+import {Box, HGrid, HStack, Page, Search} from "@navikt/ds-react";
 import {Tidslinjer} from "./Tidslinjer";
+import {type} from "@testing-library/user-event/dist/type";
 
 export const PersonView = () => {
     const resetÅpneHendelser = useResetRecoilState(åpneHendelseDokumentState)
@@ -18,12 +19,15 @@ export const PersonView = () => {
 
     const [valgteTing, setValgteTing] = useState([person.aktørId])
 
-    const toggleValgtTing = (e: React.MouseEvent, id: string) => {
+    const skalUtvideValgtTing = (e: React.MouseEvent | boolean) => {
+        return (typeof e === 'boolean') ? e : (e.ctrlKey || e.metaKey)
+    }
+    const toggleValgtTing = (e: React.MouseEvent | boolean, id: string) => {
         setValgteTing((previous) => {
             // fjern fra settet hvis iden er der fra før
             if (previous.includes(id)) return previous.filter((it) => it != id)
             // legg til iden i settet hvis ctrl/meta-key holdes inne
-            if (e.ctrlKey || e.metaKey) return [...previous.filter((it) => it != id), id]
+            if (skalUtvideValgtTing(e)) return [...previous.filter((it) => it != id), id]
             return [id]
         })
     }
@@ -31,7 +35,7 @@ export const PersonView = () => {
     return (<>
         <Box background="surface-alt-3-moderate" paddingBlock="5" paddingInline="8" as="header">
             <Page.Block>
-                <PersonHeader />
+                <PersonHeader toggleValgtTing={toggleValgtTing} />
                 <Tidslinjer
                     valgteTing={valgteTing}
                     toggleValgtTing={toggleValgtTing}
