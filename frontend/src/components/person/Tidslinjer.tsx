@@ -69,23 +69,26 @@ export const Tidslinjer = ({valgteTing, toggleValgtTing}: {
                 <p>Skjæringstidspunkt: {it}</p>
             </Timeline.Pin>)}
 
-            {person.arbeidsgivere.map((arbeidsgiver) => {
-                return <Timeline.Row label={arbeidsgiver.organisasjonsnummer} icon={<BriefcaseIcon aria-hidden/>}
-                                     className={styles.tidslijerad}>
-                    {arbeidsgiver.vedtaksperioder.map((vedtaksperiode) => {
-                        const erValgt = typeof valgteTing.find((it) => it == vedtaksperiode.id) !== 'undefined'
-                        const klassenavn = erValgt ? styles.aktiv : undefined
-                        return <Timeline.Period key={vedtaksperiode.id} start={new Date(vedtaksperiode.fom)}
-                                                end={new Date(vedtaksperiode.tom)} status={statusForVedtaksperiode(vedtaksperiode.tilstand)}
-                                                className={ klassenavn }
-                                                onSelectPeriod={(e) => {
-                                                    toggleValgtTing(e, vedtaksperiode.id)
-                                                }}>
-                            <div>{vedtaksperiode.fom} - {vedtaksperiode.tom} : {vedtaksperiode.tilstand}</div>
-                        </Timeline.Period>
-                    })}
-                </Timeline.Row>
-            })}
+            {person.arbeidsgivere
+                .filter((arbeidsgiver) => arbeidsgiver.vedtaksperioder.length > 0)
+                .map((arbeidsgiver) => {
+                    return <Timeline.Row label={arbeidsgiver.organisasjonsnummer} icon={<BriefcaseIcon aria-hidden/>}
+                                         className={styles.tidslijerad}>
+                        {arbeidsgiver.vedtaksperioder.map((vedtaksperiode) => {
+                            const erValgt = typeof valgteTing.find((it) => it == vedtaksperiode.id) !== 'undefined'
+                            const klassenavn = erValgt ? styles.aktiv : undefined
+                            return <Timeline.Period key={vedtaksperiode.id} start={new Date(vedtaksperiode.fom)}
+                                                    end={new Date(vedtaksperiode.tom)} status={statusForVedtaksperiode(vedtaksperiode.tilstand)}
+                                                    className={ klassenavn }
+                                                    onSelectPeriod={(e) => {
+                                                        toggleValgtTing(e, vedtaksperiode.id)
+                                                    }}>
+                                <div>{vedtaksperiode.fom} - {vedtaksperiode.tom} : {vedtaksperiode.tilstand}</div>
+                            </Timeline.Period>
+                        })}
+                    </Timeline.Row>
+                })
+            }
             <Timeline.Row onClick={() => {
                 setSkalViseInfotrygdUtvalg((førverdi) => !førverdi)
             }} label="Infotrygd" icon={<PackageIcon aria-hidden/>} className={styles.tidslijerad}>
