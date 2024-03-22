@@ -52,10 +52,6 @@ spec:
         - application: spurtedu
   secureLogs:
     enabled: true
-  observability:
-    autoInstrumentation:
-      enabled: true
-      runtime: java
   env:
     - name: DEVELOPMENT
       value: "false"
