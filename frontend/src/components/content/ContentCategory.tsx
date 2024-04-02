@@ -15,7 +15,6 @@ type ContentCategoryProperties = {
 }
 
 export function ContentCategory({
-    displayName,
     person,
     Person = undefined,
     Arbeidsgiver = undefined,
