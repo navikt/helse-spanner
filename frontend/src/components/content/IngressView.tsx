@@ -1,10 +1,21 @@
 import React from 'react'
 import { ContentCategory } from './ContentCategory'
 import { ContentView } from '../../state/state'
-import { PersonDto } from '../../state/dto'
+import { PersonDto, VedtakDto } from '../../state/dto'
+import { personSporingUrl, tilstandsmaskinSporingUrl } from '../tree/links'
 
-const _IngressView = () => <div>Vil du til Sporing? Trykk på 🔎-ikonet til venstre!</div>
-_IngressView.displayName = 'IngressView'
+const _IngressView = (url: string) => <div><a href={url}>Sporing</a> 🔎</div>
+
+const Vedtaksperiode = ({ vedtaksperiode }: { vedtaksperiode: VedtakDto }) =>
+    _IngressView(tilstandsmaskinSporingUrl(vedtaksperiode.id))
+Vedtaksperiode.displayName = 'IngressView.Vedtaksperiode'
+
+const ForkastetVedtaksperiode = ({ vedtaksperiode }: { vedtaksperiode: VedtakDto }) =>
+    _IngressView(tilstandsmaskinSporingUrl(vedtaksperiode.id))
+ForkastetVedtaksperiode.displayName = 'IngressView.Vedtaksperiode'
+
+const Person = ({ person }: { person: PersonDto }) => _IngressView(personSporingUrl(person.aktørId))
+Person.displayName = 'IngressView.Vedtaksperiode'
 
 export const IngressView = ({ person, valgteTing }: { person: PersonDto, valgteTing: string[] }) => {
     return (
@@ -12,9 +23,9 @@ export const IngressView = ({ person, valgteTing }: { person: PersonDto, valgteT
             displayName={ContentView.Ingress}
             valgteTing={valgteTing}
             person={person}
-            Person={_IngressView}
-            Vedtaksperiode={_IngressView}
-            ForkastetVedtaksperiode={_IngressView}
+            Person={Person}
+            Vedtaksperiode={Vedtaksperiode}
+            ForkastetVedtaksperiode={ForkastetVedtaksperiode}
         />
     )
 }
