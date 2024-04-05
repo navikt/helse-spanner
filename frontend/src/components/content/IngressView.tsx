@@ -4,7 +4,7 @@ import { ContentView } from '../../state/state'
 import { PersonDto, VedtakDto } from '../../state/dto'
 import { personSporingUrl, tilstandsmaskinSporingUrl } from '../tree/links'
 
-const _IngressView = (url: string) => <div><a href={url}>Sporing</a> 🔎</div>
+const _IngressView = (url: string) => <div><a href={url} target="_blank" rel="noreferrer">Sporing</a> 🔎</div>
 
 const Vedtaksperiode = ({ vedtaksperiode }: { vedtaksperiode: VedtakDto }) =>
     _IngressView(tilstandsmaskinSporingUrl(vedtaksperiode.id))

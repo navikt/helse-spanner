@@ -14,9 +14,12 @@ export default function SelectableTreeNode({className, indent = 0, valgteTing, t
     const farge = fargeForTing(valgteTing, ting)
     return (
         <div
-            style={{marginLeft: `${indent * 0.9}em`, background: farge, cursor: 'pointer'}}
+            style={{ marginLeft: `${indent * 0.9}em`, background: farge, cursor: 'pointer' }}
             className={classNames(styles.TreeNode, !!farge && styles.Highlighted, className)}
-            onClick={(e) => vedValg(e, ting) }
+            onClick={(e) => {
+                if (e.target instanceof HTMLAnchorElement) return
+                vedValg(e, ting)
+            }}
             {...rest}
         >
             {children}
