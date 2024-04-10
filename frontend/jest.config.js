@@ -12,5 +12,6 @@ module.exports = {
     "\\.(gif|ttf|eot|svg)$": "<rootDir>/__mocks__/fileMock.js",
   },
   transformIgnorePatterns: ["<rootDir>/node_modules"],
-  watchPathIgnorePatterns: ["<rootDir>/dist", "<rootDir>/node_modules"]
+  watchPathIgnorePatterns: ["<rootDir>/dist", "<rootDir>/node_modules"],
+  setupFilesAfterEnv: ['<rootDir>/__mocks__/jest-setup.js'],
 };

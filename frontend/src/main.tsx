@@ -10,7 +10,6 @@ import * as query from 'react-query'
 import { RecoilRoot } from 'recoil'
 
 const backend = Environment.isDevelopment ? hardCodedBackend : restBackend(false)
-// let backend = testBackend([], {"40": new finnesIkke})
 
 const queryClient = new query.QueryClient({
     defaultOptions: {
