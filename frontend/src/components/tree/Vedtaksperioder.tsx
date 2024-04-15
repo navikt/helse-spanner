@@ -10,6 +10,7 @@ import {tilstandsmaskinSporingUrl} from "./links";
 import KopierVedtaksperiodePåminnelseJson from "./KopierVedtaksperiodePåminnelseJson";
 import classNames from "classnames";
 import {ArbeidsgiverDto, FokastetVedtaksperiodeDto, VedtakDto} from "../../state/dto";
+import KopierAnmodningOmForkastingJson from "./KopierAnmodningOmForkastingJson";
 
 
 interface VedtaksperioderProps {
@@ -50,6 +51,7 @@ const VedtaksNode = ({ vedtak, organisasjonsnummer, valgteTing, vedValg }: { ved
                 <div className={styles.Knapper}>
                     <SporingLenke url={tilstandsmaskinSporingUrl(vedtak.id)} />
                     <KopierVedtaksperiodePåminnelseJson person={usePerson()} organisasjonsnummer={organisasjonsnummer} vedtak={vedtak} />
+                    { vedtak.tilstand == "AVSLUTTET_UTEN_UTBETALING" ? <KopierAnmodningOmForkastingJson person={usePerson()} organisasjonsnummer={organisasjonsnummer} vedtak={vedtak} /> : null }
                 </div>
             </div>
             <span className={styles.TilstandText}>{vedtak.tilstand}</span>
