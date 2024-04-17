@@ -10,6 +10,7 @@ spec:
   port: 8080
   ingresses:
     - https://spanner.intern.dev.nav.no
+    - https://spanner.ansatt.dev.nav.no
   liveness:
     initialDelay: 10
     path: internal/isalive
@@ -62,7 +63,7 @@ spec:
     - name: HTTP_PORT
       value: "8080"
     - name: HTTP_HOST
-      value: spanner.intern.dev.nav.no
+      value: spanner.ansatt.dev.nav.no
     - name: SPLEIS_API_URL
       value: http://spleis-api
     - name: SPARSOM_API_URL
