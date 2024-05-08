@@ -10,6 +10,7 @@ spec:
   port: 8080
   ingresses:
     - https://spanner.intern.nav.no
+    - https://spanner.ansatt.nav.no
   liveness:
     initialDelay: 10
     path: internal/isalive
