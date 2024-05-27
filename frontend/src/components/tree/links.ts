@@ -11,6 +11,6 @@ export const personSporingUrl = (aktørId: string) => `https://${sporingHostname
 const speilHostname = Environment.isDevelopment
     ? 'localhost'
     : window.location.origin.includes('dev')
-    ? 'speil.intern.dev.nav.no'
+    ? 'speil.ansatt.dev.nav.no'
     : 'speil.intern.nav.no'
 export const speilUrl = (aktørId: string) => `https://${speilHostname}/person/${aktørId}/dagoversikt`
