@@ -4,6 +4,8 @@ import com.fasterxml.jackson.databind.node.ObjectNode
 import com.fasterxml.jackson.databind.util.RawValue
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.github.navikt.tbd_libs.azure.AzureTokenProvider
+import com.github.navikt.tbd_libs.spurtedu.SkjulRequest
+import com.github.navikt.tbd_libs.spurtedu.SpurteDuClient
 import io.ktor.client.*
 import io.ktor.client.engine.cio.*
 import io.ktor.client.plugins.*
@@ -44,7 +46,8 @@ class Spleis(
     spleisScope: String,
     private val sparsomBaseUrl: String = "http://sparsom-api.tbd.svc.cluster.local",
     sparsomScope: String,
-    private val spurteDuClient: SpurteDuClient
+    private val spurteDuClient: SpurteDuClient,
+    private val påkrevdSpurteduTilgang: String = System.getenv("SPURTE_DU_TILGANG")
 ) : Personer {
     private val spleis = ClientIdWithName(spleisScope, "spleis")
     private val sparsom = ClientIdWithName(sparsomScope, "sparsom")
@@ -66,7 +69,10 @@ class Spleis(
             spleisScope = spannerConfig.spleisScope,
             sparsomBaseUrl = spannerConfig.sparsomUrl,
             sparsomScope = spannerConfig.sparsomScope,
-            spurteDuClient = SpurteDuClient(objectMapper)
+            spurteDuClient = SpurteDuClient(
+                objectMapper = objectMapper,
+                tokenProvider = azureAD
+            )
         )
 
         private val ApplicationCall.bearerToken: String? get() {
@@ -77,8 +83,18 @@ class Spleis(
     }
 
     override suspend fun maskerPerson(call: ApplicationCall, id: String, idType: IdType) {
-        val maskertId = spurteDuClient.utveksle(id, idType) ?: throw BadRequestException("kunne ikke kontakte spurte du")
-        call.respondText(""" { "id": "$maskertId" } """, Json, OK)
+        val payload = SkjulRequest.SkjulTekstRequest(
+            tekst = objectMapper.writeValueAsString(mapOf(
+                "ident" to id,
+                "identtype" to when (idType) {
+                    IdType.FNR, IdType.AKTORID -> idType.name
+                    else -> throw BadRequestException("støtter kun fnr og aktorid")
+                }
+            )),
+            påkrevdTilgang = påkrevdSpurteduTilgang
+        )
+        val maskertId = spurteDuClient.skjul(payload)
+        call.respondText(""" { "id": "${maskertId.id}" } """, Json, OK)
     }
 
     override suspend fun person(call: ApplicationCall, id: String, idType: IdType) {

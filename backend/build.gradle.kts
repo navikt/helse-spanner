@@ -3,7 +3,7 @@ import java.nio.file.Paths
 val junitJupiterVersion = "5.10.2"
 val ktorVersion = "2.3.7"
 val tokenValidatorVersion = "1.3.10"
-val tbdLibsVersion = "2024.01.26-10.10-af0ac44d"
+val tbdLibsVersion = "2024.05.31-08.02-2c3441c1"
 
 plugins {
     kotlin("jvm") version "1.9.22"
@@ -28,6 +28,7 @@ repositories {
 
 dependencies {
     implementation("com.github.navikt.tbd-libs:azure-token-client-default:$tbdLibsVersion")
+    implementation("com.github.navikt.tbd-libs:spurtedu-client:$tbdLibsVersion")
 
     implementation("io.ktor:ktor-server-core:$ktorVersion")
     implementation("io.ktor:ktor-server-call-id:$ktorVersion")
