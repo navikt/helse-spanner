@@ -72,7 +72,7 @@ const VedtaksNode = ({ vedtak, organisasjonsnummer, visBehandlinger, valgteTing,
                 <span className={styles.TilstandText}>{vedtak.tilstand}</span>
             </SelectableTreeNode>
             {visBehandlinger && vedtak.behandlinger?.map((behandling: BehandlingDto, index) =>
-                <BehandlingsNode key={behandling.id} behandling={behandling} behandlingIndex={index} valgteTing={valgteTing} vedValg={vedValg}/>)}
+                <BehandlingsNode key={behandling.id} behandling={behandling} valgteTing={valgteTing} vedValg={vedValg}/>)}
         </div>
     )
 }
@@ -91,9 +91,8 @@ const ForkastetVedtaksNode = ( { vedtak, valgteTing, vedValg } : { vedtak: Fokas
 }
 ForkastetVedtaksNode.displayName = 'ForkastetVedtaksNode'
 
-const BehandlingsNode = ({behandling, behandlingIndex, valgteTing, vedValg}: {
+const BehandlingsNode = ({behandling, valgteTing, vedValg}: {
     behandling: BehandlingDto,
-    behandlingIndex: number,
     valgteTing: string[],
     vedValg: (e: React.MouseEvent, ting: string) => void
 }) => {
@@ -101,7 +100,7 @@ const BehandlingsNode = ({behandling, behandlingIndex, valgteTing, vedValg}: {
         <div>
             <SelectableTreeNode key={behandling.id} indent={2.2} valgteTing={valgteTing} ting={behandling.id } className={styles.BehandlingNode}
                                 vedValg={vedValg}>
-                <span className={styles.TilstandText}>{"Behandling " + (behandlingIndex + 1) + ": "+ behandling.tilstand}</span>
+                <span className={styles.TilstandText}>{behandling.tilstand}</span>
             </SelectableTreeNode>
             {behandling.endringer?.map((endring: EndringDto) =>
                 <Endringsnode key={endring.id} endring={endring} valgteTing={valgteTing} vedValg={vedValg}/>
