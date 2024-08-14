@@ -133,16 +133,24 @@ function sykdomstidslinjeShortString(tidslinje: SykdomstidslinjeDto): string {
     tidslinje.dager.forEach((dag: DagDto) => {
             const antallDager: number = dagerMellom(dag.fom, dag.tom)
             for (let i=0; i<=antallDager; i++) {
-                const shortChar: string | null = toShortChar(dag.type)
+                var shortChar: string | null = toShortChar(dag.type)
                 if (shortChar == null){
                     console.log("har ikke fungerende mapping for sykdosmtidslinjedag ", dag.type)
                     ukjentTidslinje = true
                 }
+                const erSøndag = addDays(parseISO(dag.fom), i).getDay() == 0
+                if (erSøndag) shortChar += " "
                 sykdomstidslinje += shortChar
             }
         }
     )
     return ukjentTidslinje ? "Ukjent sykdomstidslinje for spanner🤕 (se console)" : sykdomstidslinje
+}
+
+function addDays(date: Date, days: number) {
+    var result = new Date(date);
+    result.setDate(result.getDate() + days);
+    return result;
 }
 
 function dagerMellom(fom: string, tom: string): number {
