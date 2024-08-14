@@ -1,7 +1,7 @@
 import React from 'react'
 import { ContentCategory } from './ContentCategory'
 import { ContentView } from '../../state/state'
-import { PersonDto, VedtakDto } from '../../state/dto'
+import {FokastetVedtaksperiodeDto, PersonDto, VedtakDto} from '../../state/dto'
 import { personSporingUrl, tilstandsmaskinSporingUrl } from '../tree/links'
 
 const _IngressView = (url: string) => <div><a href={url} target="_blank" rel="noreferrer">Sporing</a> 🔎</div>
@@ -10,7 +10,7 @@ const Vedtaksperiode = ({ vedtaksperiode }: { vedtaksperiode: VedtakDto }) =>
     _IngressView(tilstandsmaskinSporingUrl(vedtaksperiode.id))
 Vedtaksperiode.displayName = 'IngressView.Vedtaksperiode'
 
-const ForkastetVedtaksperiode = ({ vedtaksperiode }: { vedtaksperiode: VedtakDto }) =>
+const ForkastetVedtaksperiode = ({ vedtaksperiode }: { vedtaksperiode: FokastetVedtaksperiodeDto }) =>
     _IngressView(tilstandsmaskinSporingUrl(vedtaksperiode.id))
 ForkastetVedtaksperiode.displayName = 'IngressView.Vedtaksperiode'
 

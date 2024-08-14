@@ -1,4 +1,12 @@
-import { ArbeidsgiverDto, FokastelseDto, FokastetVedtaksperiodeDto, PersonDto, UtbetalingDto, VedtakDto } from './dto'
+import {
+    ArbeidsgiverDto,
+    BehandlingDto, EndringDto,
+    FokastelseDto,
+    FokastetVedtaksperiodeDto,
+    PersonDto,
+    UtbetalingDto,
+    VedtakDto
+} from './dto'
 
 let next_id = 42
 
@@ -44,4 +52,5 @@ export const createTestVedtaksperiode = (
     tom,
     id,
     tilstand: 'START',
+    behandlinger: []
 })

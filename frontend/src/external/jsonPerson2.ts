@@ -25015,6 +25015,25 @@ export const jsonPerson2: PersonDto = {
                 {
                     fom: '2021-06-01',
                     tom: '2021-06-14',
+                    behandlinger: [
+                        {
+                            "id": "4hfdd054-d056-483c-9f70-ec438a1df8af",
+                            "tilstand": "AVSLUTTET_UTEN_VEDTAK",
+                            "endringer": [
+                                {
+                                    "id": "8a3afdee-34da-4c63-98b8-ce85d7edaf89",
+                                    "tidsstempel": "2022-11-01T13:26:58.430636257",
+                                    "sykdomstidslinje": {
+                                        "dager": [{
+                                            "type": "SYKEDAG",
+                                            "fom": "2021-06-01",
+                                            "tom": "2021-06-14",
+                                        }]
+                                    }
+                                }
+                            ]
+                        }
+                    ],
                     sykmeldingFom: '2021-06-01',
                     sykmeldingTom: '2021-06-14',
                     hendelseIder: ['efc014f9-ae24-4400-b776-b27e13bbb5fa', 'd3126e55-c205-4ccf-b5fc-ccd26278f285'],
@@ -25069,6 +25088,25 @@ export const jsonPerson2: PersonDto = {
                 {
                     fom: '2021-07-13',
                     tom: '2021-08-02',
+                    "behandlinger": [
+                        {
+                            "id": "4hfdd054-d056-483c-9f70-ec438a1df8af",
+                            "tilstand": "UBEREGNET",
+                            "endringer": [
+                                {
+                                    "id": "8a3afdee-34da-4c63-98b8-ce85d7edaf89",
+                                    "tidsstempel": "2022-11-01T13:26:58.430636257",
+                                    "sykdomstidslinje": {
+                                        "dager": [{
+                                            "type": "SYKEDAG",
+                                            "fom": "2021-07-13",
+                                            "tom": "2021-08-02",
+                                        }]
+                                    }
+                                }
+                            ]
+                        }
+                    ],
                     sykmeldingFom: '2021-07-13',
                     sykmeldingTom: '2021-08-02',
                     hendelseIder: ['da14abeb-ffb7-44ea-a249-3b8923259f53'],
