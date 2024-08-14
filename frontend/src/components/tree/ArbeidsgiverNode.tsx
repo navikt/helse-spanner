@@ -14,9 +14,10 @@ interface ArbeidsgiverNodeProps {
     toggleUtvidet: () => void
     erUtvidet: boolean
     visForkastede: boolean
+    visBehandlinger: boolean
 }
 
-export const ArbeidsgiverNode = ({ arbeidsgiver, erUtvidet, toggleUtvidet, visForkastede, valgteTing, toggleValgtTing } : ArbeidsgiverNodeProps) => {
+export const ArbeidsgiverNode = ({ arbeidsgiver, erUtvidet, toggleUtvidet, visForkastede, visBehandlinger, valgteTing, toggleValgtTing } : ArbeidsgiverNodeProps) => {
     return (
         <>
             <div className={styles.ArbeidsgiverNode}>
@@ -31,6 +32,7 @@ export const ArbeidsgiverNode = ({ arbeidsgiver, erUtvidet, toggleUtvidet, visFo
                         arbeidsgiver={arbeidsgiver}
                         valgteTing={valgteTing}
                         visForkastede={visForkastede}
+                        visBehandlinger={visBehandlinger}
                         toggleValgtTing={toggleValgtTing}
                     />
                     <Utbetalinger

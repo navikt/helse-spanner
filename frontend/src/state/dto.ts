@@ -47,6 +47,33 @@ export type VedtakDto = {
     tom: string
     id: string
     skjæringstidspunkt?: string
+    behandlinger: BehandlingDto[]
+    [x: string]: any
+}
+
+export type BehandlingDto = {
+    tilstand: string
+    id: string
+    endringer: EndringDto[]
+    [x: string]: any
+}
+
+export type EndringDto = {
+    id: string
+    tidsstempel: string
+    sykdomstidslinje: SykdomstidslinjeDto
+    [x: string]: any
+}
+
+export type SykdomstidslinjeDto = {
+    dager: DagDto[],
+    [x: string]: any
+}
+
+export type DagDto = {
+    fom: string,
+    tom: string,
+    type: string,
     [x: string]: any
 }
 

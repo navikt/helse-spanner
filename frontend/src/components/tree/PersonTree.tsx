@@ -17,6 +17,7 @@ interface PersonTreeProps {
 export const PersonTree = ({valgteTing, toggleValgtTing } : PersonTreeProps) => {
     const person = usePerson()
     const [visForkastede, setVisForkastede] = useState(true)
+    const [visBehandlinger, setVisBehandlinger] = useState(false)
     const [erUtvidet, setErUtvidet] = useState([] as string[])
     const erArbeidsgiverUtvidet = (id: string) => erUtvidet.includes(id)
     const toggleArbeidsgiver = (id: string) => setErUtvidet((arbeidsgivere) => {
@@ -35,6 +36,7 @@ export const PersonTree = ({valgteTing, toggleValgtTing } : PersonTreeProps) => 
                 <HStack gap="5">
                     <Switch size="small" onChange={(e) => toggleArbeidsgivere(e.target.checked) }>Åpne alle</Switch>
                     <Switch size="small" onChange={() => setVisForkastede((forrige) => !forrige) }>Skjul forkastede</Switch>
+                    <Switch size="small" onChange={() => setVisBehandlinger((forrige) => !forrige) }>Vis behandlinger med endringer</Switch>
                 </HStack>
             </Box>
             <Box padding="0">
@@ -52,6 +54,7 @@ export const PersonTree = ({valgteTing, toggleValgtTing } : PersonTreeProps) => 
                         erUtvidet={ erArbeidsgiverUtvidet(arbeidsgiver.id) }
                         toggleUtvidet={() => toggleArbeidsgiver(arbeidsgiver.id) }
                         visForkastede={visForkastede}
+                        visBehandlinger={visBehandlinger}
                         valgteTing={valgteTing}
                         toggleValgtTing={toggleValgtTing}
                     />

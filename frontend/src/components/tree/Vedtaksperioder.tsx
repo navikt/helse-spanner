@@ -9,8 +9,16 @@ import SporingLenke from "./SporingLenke";
 import {tilstandsmaskinSporingUrl} from "./links";
 import KopierVedtaksperiodePåminnelseJson from "./KopierVedtaksperiodePåminnelseJson";
 import classNames from "classnames";
-import {ArbeidsgiverDto, FokastetVedtaksperiodeDto, VedtakDto} from "../../state/dto";
+import {
+    ArbeidsgiverDto,
+    BehandlingDto,
+    DagDto,
+    EndringDto,
+    FokastetVedtaksperiodeDto, SykdomstidslinjeDto,
+    VedtakDto
+} from "../../state/dto";
 import KopierAnmodningOmForkastingJson from "./KopierAnmodningOmForkastingJson";
+import {da} from "date-fns/locale";
 
 
 interface VedtaksperioderProps {
@@ -18,11 +26,12 @@ interface VedtaksperioderProps {
     valgteTing: string[],
     toggleValgtTing: (e: React.MouseEvent, ting: string) => void
     visForkastede: boolean
+    visBehandlinger: boolean
 }
 
-export const Vedtaksperioder = ({ arbeidsgiver, valgteTing, visForkastede, toggleValgtTing } : VedtaksperioderProps) => {
+export const Vedtaksperioder = ({ arbeidsgiver, valgteTing, visForkastede, visBehandlinger, toggleValgtTing } : VedtaksperioderProps) => {
     let vedtaksperioder: [JSX.Element, Date][] = arbeidsgiver.vedtaksperioder.map((vedtak) => [
-        <VedtaksNode key={vedtak.id} vedtak={vedtak} organisasjonsnummer={arbeidsgiver.organisasjonsnummer} valgteTing={valgteTing} vedValg={ toggleValgtTing }/>,
+        <VedtaksNode key={vedtak.id} vedtak={vedtak} organisasjonsnummer={arbeidsgiver.organisasjonsnummer} visBehandlinger={visBehandlinger} valgteTing={valgteTing} vedValg={ toggleValgtTing }/>,
         parseISO(vedtak.fom),
     ])
     let forkastedeVedtaksperioder: [JSX.Element, Date][] = []
@@ -40,22 +49,31 @@ export const Vedtaksperioder = ({ arbeidsgiver, valgteTing, visForkastede, toggl
 Vedtaksperioder.displayName = 'Vedtaksperioder'
 
 
-const VedtaksNode = ({ vedtak, organisasjonsnummer, valgteTing, vedValg }: { vedtak: VedtakDto, organisasjonsnummer: string, valgteTing: string[], vedValg: (e: React.MouseEvent, ting: string) => void }) => {
+const VedtaksNode = ({ vedtak, organisasjonsnummer, visBehandlinger, valgteTing, vedValg }: { vedtak: VedtakDto, organisasjonsnummer: string, visBehandlinger: Boolean, valgteTing: string[], vedValg: (e: React.MouseEvent, ting: string) => void }) => {
     const [fom, tom] = [vedtak.fom, vedtak.tom].map(somNorskDato)
     return (
-        <SelectableTreeNode valgteTing={valgteTing} ting={vedtak.id} indent={1.2} className={styles.LøvNode} vedValg={vedValg}>
-            <div className={styles.VedtakNodeHeader}>
+        <div>
+            <SelectableTreeNode valgteTing={valgteTing} ting={vedtak.id} indent={1.2} className={styles.LøvNode}
+                                vedValg={vedValg}>
+                <div className={styles.VedtakNodeHeader}>
                 <span>
                     {fom} - {tom}
                 </span>
-                <div className={styles.Knapper}>
-                    <SporingLenke url={tilstandsmaskinSporingUrl(vedtak.id)} />
-                    <KopierVedtaksperiodePåminnelseJson person={usePerson()} organisasjonsnummer={organisasjonsnummer} vedtak={vedtak} />
-                    { vedtak.tilstand == "AVSLUTTET_UTEN_UTBETALING" ? <KopierAnmodningOmForkastingJson person={usePerson()} organisasjonsnummer={organisasjonsnummer} vedtak={vedtak} /> : null }
+                    <div className={styles.Knapper}>
+                        <SporingLenke url={tilstandsmaskinSporingUrl(vedtak.id)}/>
+                        <KopierVedtaksperiodePåminnelseJson person={usePerson()}
+                                                            organisasjonsnummer={organisasjonsnummer} vedtak={vedtak}/>
+                        {vedtak.tilstand == "AVSLUTTET_UTEN_UTBETALING" ?
+                            <KopierAnmodningOmForkastingJson person={usePerson()}
+                                                             organisasjonsnummer={organisasjonsnummer}
+                                                             vedtak={vedtak}/> : null}
+                    </div>
                 </div>
-            </div>
-            <span className={styles.TilstandText}>{vedtak.tilstand}</span>
-        </SelectableTreeNode>
+                <span className={styles.TilstandText}>{vedtak.tilstand}</span>
+            </SelectableTreeNode>
+            {visBehandlinger && vedtak.behandlinger?.map((behandling: BehandlingDto, index) =>
+                <BehandlingsNode key={behandling.id} behandling={behandling} behandlingIndex={index} valgteTing={valgteTing} vedValg={vedValg}/>)}
+        </div>
     )
 }
 VedtaksNode.displayName = 'VedtaksNode'
@@ -72,3 +90,96 @@ const ForkastetVedtaksNode = ( { vedtak, valgteTing, vedValg } : { vedtak: Fokas
     )
 }
 ForkastetVedtaksNode.displayName = 'ForkastetVedtaksNode'
+
+const BehandlingsNode = ({behandling, behandlingIndex, valgteTing, vedValg}: {
+    behandling: BehandlingDto,
+    behandlingIndex: number,
+    valgteTing: string[],
+    vedValg: (e: React.MouseEvent, ting: string) => void
+}) => {
+    return (
+        <div>
+            <SelectableTreeNode key={behandling.id} indent={2.2} valgteTing={valgteTing} ting={behandling.id } className={styles.BehandlingNode}
+                                vedValg={vedValg}>
+                <span className={styles.TilstandText}>{"Behandling " + (behandlingIndex + 1) + ": "+ behandling.tilstand}</span>
+            </SelectableTreeNode>
+            {behandling.endringer?.map((endring: EndringDto) =>
+                <Endringsnode key={endring.id} endring={endring} valgteTing={valgteTing} vedValg={vedValg}/>
+            )}
+        </div>
+    )
+}
+BehandlingsNode.displayName = 'Behandlinger'
+
+const Endringsnode = ({endring, valgteTing, vedValg}: {
+    endring: EndringDto,
+    valgteTing: string[],
+    vedValg: (e: React.MouseEvent, ting: string) => void
+}) => {
+    const sykdomstidslinje: string = sykdomstidslinjeShortString(endring.sykdomstidslinje)
+    const dato: string = somNorskDato(endring.tidsstempel)
+    return (
+        <div>
+            <SelectableTreeNode indent={2.7} valgteTing={valgteTing} ting={endring.id} vedValg={vedValg} className={styles.EndringNode}>
+                        <span className={styles.SykdomstidslinjeText}>{sykdomstidslinje + " (" + dato + ")"}</span>
+            </SelectableTreeNode>
+        </div>
+    )
+}
+Endringsnode.displayName = 'Endringer'
+
+function sykdomstidslinjeShortString(tidslinje: SykdomstidslinjeDto): string {
+    var sykdomstidslinje = ""
+    var ukjentTidslinje = false
+    tidslinje.dager.forEach((dag: DagDto) => {
+            const antallDager: number = dagerMellom(dag.fom, dag.tom)
+            for (let i=0; i<=antallDager; i++) {
+                const shortChar: string | null = toShortChar(dag.type)
+                if (shortChar == null){
+                    console.log("har ikke fungerende mapping for sykdosmtidslinjedag ", dag.type)
+                    ukjentTidslinje = true
+                }
+                sykdomstidslinje += shortChar
+            }
+        }
+    )
+    return ukjentTidslinje ? "Ukjent sykdomstidslinje for spanner🤕 (se console)" : sykdomstidslinje
+}
+
+function dagerMellom(fom: string, tom: string): number {
+    const fomDate = parseISO(fom)
+    const tomDate = parseISO(tom)
+    /**
+     * Take the difference between the dates and divide by milliseconds per day.
+     * Round to nearest whole number to deal with DST.
+     */
+    return Math.round((tomDate.valueOf() - fomDate.valueOf()) / (1000 * 60 * 60 * 24));
+}
+
+function toShortChar(dagtype: string): string | null {
+    switch (dagtype) {
+        case "SYKEDAG": return "S";
+        case "ARBEIDSDAG": return "A"
+        case "UKJENTDAG": return "?"
+        case "PROBLEMDAG": return "X"
+        case "SYK_HELGEDAG": return "H"
+        case "ARBEIDSGIVERDAG": return "U"
+        case "ARBEIDSGIVERHELGEDAG": return "G"
+        case "FERIEDAG": return "F"
+        case "ARBEID_IKKE_GJENOPPTATT_DAG": return "J"
+        case "PERMISJONSDAG": return "P"
+        case "FRISK_HELGEDAG": return "R"
+        case "FORELDET_SYKEDAG": return "K"
+        case "SYKEDAGNAV": return "N"
+        case "ANDRE_YTELSER": return "Y"
+        case "ANDRE_YTELSER_FORELDREPENGER": return "Y"
+        case "ANDRE_YTELSER_AAP": return "Y"
+        case "ANDRE_YTELSER_OMSORGSPENGER": return "Y"
+        case "ANDRE_YTELSER_PLEIEPENGER": return "Y"
+        case "ANDRE_YTELSER_SVANGERSKAPSPENGER": return "Y"
+        case "ANDRE_YTELSER_OPPLÆRINGSPENGER": return "Y"
+        case "ANDRE_YTELSER_DAGPENGER": return "Y"
+        default: return null
+    }
+}
+

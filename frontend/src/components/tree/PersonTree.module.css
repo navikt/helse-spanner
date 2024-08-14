@@ -8,6 +8,14 @@
     padding: 0.5em !important;
 }
 
+.EndringNode {
+
+}
+
+.BehandlingNode {
+    
+}
+
 .VedtakNodeHeader {
     display: flex;
     justify-content: space-between;
@@ -123,6 +131,14 @@ div > .PersonNode:first-child {
 
 .TilstandText {
     font-size: small;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.SykdomstidslinjeText {
+    font-size: x-small;
     display: block;
     overflow: hidden;
     text-overflow: ellipsis;

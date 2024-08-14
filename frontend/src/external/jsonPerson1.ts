@@ -13503,6 +13503,76 @@ export let jsonPerson: PersonDto = {
                     inntektskilde: 'FLERE_ARBEIDSGIVERE',
                     id: '79343398-04ca-4a49-91b2-8757caa29bba',
                     tilstand: 'AVSLUTTET',
+                    "behandlinger": [
+                        {
+                            "id": "4bfdd054-d056-483c-9f70-ec438a1df8af",
+                            "tilstand": "VEDTAK_IVERKSATT",
+                            "endringer": [
+                                {
+                                    "id": "8a3afdee-54da-4c63-98b8-ce85d7edaf89",
+                                    "tidsstempel": "2018-11-02T13:26:58.430636257",
+                                    "sykdomstidslinje": {
+                                        "dager": [{
+                                            "type": "SYKEDAG",
+                                            "fom": "2018-01-01",
+                                            "tom": "2018-01-31",
+                                        }]
+                                    }
+                                },
+                                {
+                                    "id": "ba3afdee-54da-4c63-98b8-ce85d7edaf89",
+                                    "tidsstempel": "2018-11-03T13:26:58.430636257",
+                                    "sykdomstidslinje": {
+                                        "dager": [{
+                                            "type": "SYKEDAG",
+                                            "fom": "2018-01-01",
+                                            "tom": "2018-01-25",
+                                        },
+                                            {
+                                                "type": "ARBEIDSDAG",
+                                                "fom": "2018-01-26",
+                                                "tom": "2018-01-31",
+                                            }
+                                        ]
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "id": "4bfdd054-d056-483c-9f70-gc438a1df8af",
+                            "tilstand": "VEDTAK_IVERKSATT",
+                            "endringer": [
+                                {
+                                    "id": "8bcafdee-54da-4c63-98b8-ce85d7edaf89",
+                                    "tidsstempel": "2018-11-02T13:26:58.430636257",
+                                    "sykdomstidslinje": {
+                                        "dager": [{
+                                            "type": "SYKEDAG",
+                                            "fom": "2018-01-01",
+                                            "tom": "2018-01-31",
+                                        }]
+                                    }
+                                },
+                                {
+                                    "id": "ba4gfdee-54da-4c63-98b8-ce85d7edaf89",
+                                    "tidsstempel": "2018-11-03T13:26:58.430636257",
+                                    "sykdomstidslinje": {
+                                        "dager": [{
+                                            "type": "SYKEDAG",
+                                            "fom": "2018-01-01",
+                                            "tom": "2018-01-25",
+                                        },
+                                            {
+                                                "type": "ANDRE_YTELSER",
+                                                "fom": "2018-01-26",
+                                                "tom": "2018-01-31",
+                                            }
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    ],
                     skjæringstidspunktFraInfotrygd: '2017-12-01',
                     inntektsmeldingInfo: null,
                     skjæringstidspunkt: '2017-12-01',
@@ -13711,6 +13781,25 @@ export let jsonPerson: PersonDto = {
                     inntektskilde: 'EN_ARBEIDSGIVER',
                     id: 'e005b52c-986f-471c-a311-16d97efbe937',
                     tilstand: 'AVSLUTTET',
+                    "behandlinger": [
+                        {
+                            "id": "4bfhd054-d056-483c-9f70-ec438a1df8af",
+                            "tilstand": "VEDTAK_IVERKSATT",
+                            "endringer": [
+                                {
+                                    "id": "8a3afbee-34da-4c63-98b9-ce85d7edaf89",
+                                    "tidsstempel": "2022-11-01T13:26:58.430636257",
+                                    "sykdomstidslinje": {
+                                        "dager": [{
+                                            "type": "ASD",
+                                            "fom": "2018-02-01",
+                                            "tom": "2018-02-28",
+                                        }]
+                                    }
+                                }
+                            ]
+                        }
+                    ],
                     skjæringstidspunktFraInfotrygd: '2017-12-01',
                     inntektsmeldingInfo: null,
                     skjæringstidspunkt: '2017-12-01',
@@ -13923,6 +14012,12 @@ export let jsonPerson: PersonDto = {
                         inntektskilde: 'FLERE_ARBEIDSGIVERE',
                         id: 'aa1c6035-10e5-41aa-b775-996dd60b44aa',
                         tilstand: 'TIL_INFOTRYGD',
+                        "behandlinger": [
+                            {
+                                "id": "4afdd054-d056-483c-9f70-ec438a1df8af",
+                                "tilstand": "TIL_INFOTRYGD"
+                            }
+                        ],
                         skjæringstidspunktFraInfotrygd: '2017-12-01',
                         inntektsmeldingInfo: null,
                         skjæringstidspunkt: '2017-12-01',
@@ -22873,6 +22968,25 @@ export let jsonPerson: PersonDto = {
                     inntektskilde: 'FLERE_ARBEIDSGIVERE',
                     id: 'c95128bc-9b82-4aae-9d95-65b73df69c96',
                     tilstand: 'AVSLUTTET',
+                    "behandlinger": [
+                        {
+                            "id": "4hfdd054-d056-483c-9f70-ec438a1df8af",
+                            "tilstand": "VEDTAK_IVERKSATT",
+                            "endringer": [
+                                {
+                                    "id": "8a3afdee-34da-4c63-98b8-ce85d7edaf89",
+                                    "tidsstempel": "2022-11-01T13:26:58.430636257",
+                                    "sykdomstidslinje": {
+                                        "dager": [{
+                                            "type": "SYKEDAG",
+                                            "fom": "2018-01-01",
+                                            "tom": "2018-01-31",
+                                        }]
+                                    }
+                                }
+                            ]
+                        }
+                    ],
                     skjæringstidspunktFraInfotrygd: '2017-12-01',
                     inntektsmeldingInfo: null,
                     skjæringstidspunkt: '2017-12-01',
@@ -24064,6 +24178,25 @@ export let jsonPerson: PersonDto = {
                     inntektskilde: 'FLERE_ARBEIDSGIVERE',
                     id: '0cbdd5ba-3281-4f6f-b0c0-01e02a1d428d',
                     tilstand: 'AVSLUTTET',
+                    "behandlinger": [
+                        {
+                            "id": "4bfdd055-d056-483c-9f70-ec438a1df8af",
+                            "tilstand": "VEDTAK_IVERKSATT",
+                            "endringer": [
+                                {
+                                    "id": "8b3afdee-34da-4c63-98b8-ce85d7edaf89",
+                                    "tidsstempel": "2022-11-01T13:26:58.430636257",
+                                    "sykdomstidslinje": {
+                                        "dager": [{
+                                            "type": "SYKEDAG",
+                                            "fom": "2020-01-01",
+                                            "tom": "2020-01-31",
+                                        }]
+                                    }
+                                }
+                            ]
+                        }
+                    ],
                     skjæringstidspunktFraInfotrygd: '2020-01-01',
                     inntektsmeldingInfo: {
                         id: 'fa2f19e0-de69-4fe2-a5f5-93249298468f',

@@ -15374,6 +15374,25 @@
           "tom": "2018-01-31",
           "sykmeldingFom": "2018-01-01",
           "sykmeldingTom": "2018-01-31",
+          "behandlinger": [
+            {
+              "id": "49f6d054-d056-483c-9f70-ec438a1df8af",
+              "tilstand": "VEDTAK_IVERKSATT",
+              "endringer": [
+                {
+                  "id": "9e3afdee-34da-4c63-98b8-ce85d7edaf89",
+                  "tidsstempel": "2022-11-01T13:26:58.430636257",
+                  "sykdomstidslinje": {
+                    "dager": [{
+                      "type": "SYKEDAG",
+                      "fom": "2018-01-01",
+                      "tom": "2018-01-31"
+                    }]
+                  }
+                }
+              ]
+            }
+          ],
           "hendelseIder": [
             "63551019-688a-47e7-ab03-cdbadc9121aa",
             "2d648189-49f1-4532-b2b3-1e4955c8fe41"
@@ -15594,6 +15613,25 @@
           "inntektskilde": "EN_ARBEIDSGIVER",
           "id": "8b9e808a-255e-4e59-ac5a-27e931ce4e49",
           "tilstand": "AVSLUTTET",
+          "behandlinger": [
+            {
+              "id": "49f6dh54-d056-483c-9f70-ec438a1db8af",
+              "tilstand": "VEDTAK_IVERKSATT",
+              "endringer": [
+                {
+                  "id": "9a3afdee-34da-4c63-98b8-ce85d7edaf89",
+                  "tidsstempel": "2022-11-01T13:26:58.430636257",
+                  "sykdomstidslinje": {
+                    "dager": [{
+                      "type": "SYKEDAG",
+                      "fom": "2018-02-01",
+                      "tom": "2018-02-28"
+                    }]
+                  }
+                }
+              ]
+            }
+          ],
           "skjæringstidspunktFraInfotrygd": "2017-12-01",
           "inntektsmeldingInfo": null,
           "skjæringstidspunkt": "2017-12-01",
@@ -24547,6 +24585,25 @@
           "inntektskilde": "FLERE_ARBEIDSGIVERE",
           "id": "c95128bc-9b82-4aae-9d95-65b73df69c96",
           "tilstand": "AVSLUTTET",
+          "behandlinger": [
+            {
+              "id": "49j6d054-d066-483c-9f70-ec438a1df8af",
+              "tilstand": "VEDTAK_IVERKSATT",
+              "endringer": [
+                {
+                  "id": "9a3ffdee-34da-4c63-98b8-ce85d7edaf89",
+                  "tidsstempel": "2022-11-01T13:26:58.430636257",
+                  "sykdomstidslinje": {
+                    "dager": [{
+                      "type": "SYKEDAG",
+                      "fom": "2018-01-01",
+                      "tom": "2018-01-31"
+                    }]
+                  }
+                }
+              ]
+            }
+          ],
           "skjæringstidspunktFraInfotrygd": "2017-12-01",
           "inntektsmeldingInfo": null,
           "skjæringstidspunkt": "2017-12-01",
@@ -25740,6 +25797,25 @@
           "inntektskilde": "FLERE_ARBEIDSGIVERE",
           "id": "0cbdd5ba-3281-4f6f-b0c0-01e02a1d428d",
           "tilstand": "AVSLUTTET",
+          "behandlinger": [
+            {
+              "id": "49j6d054-d056-483c-9f70-ec438a1df8ag",
+              "tilstand": "VEDTAK_IVERKSATT",
+              "endringer": [
+                {
+                  "id": "9avafdee-34da-4c63-98b8-ce85d7edaf89",
+                  "tidsstempel": "2022-11-01T13:26:58.430636257",
+                  "sykdomstidslinje": {
+                    "dager": [{
+                      "type": "SYKEDAG",
+                      "fom": "2020-01-01",
+                      "tom": "2020-01-31"
+                    }]
+                  }
+                }
+              ]
+            }
+          ],
           "skjæringstidspunktFraInfotrygd": "2020-01-01",
           "inntektsmeldingInfo": {
             "id": "fa2f19e0-de69-4fe2-a5f5-93249298468f",
@@ -27190,6 +27266,26 @@
             "inntektskilde": "FLERE_ARBEIDSGIVERE",
             "id": "f910b376-8ad4-4c96-8e4f-1dfae0d6468f",
             "tilstand": "AVSLUTTET",
+            "behandlinger": [
+              {
+                "id": "5bf6d054-d056-483c-9f70-ec438a1df8af",
+                "tidsstempel": "2022-11-01T13:26:58.430636257",
+                "tilstand": "TIL_INFOTRYGD",
+                "endringer": [
+                  {
+                    "id": "9a3afdeb-34da-4c63-98b8-ce85d7edaf89",
+                    "tidsstempel": "2022-11-01T13:26:58.430636257",
+                    "sykdomstidslinje": {
+                      "dager": [{
+                        "type": "SYKEDAG",
+                        "fom": "2020-01-11",
+                        "tom": "2020-01-31"
+                      }]
+                    }
+                  }
+                ]
+              }
+            ],
             "skjæringstidspunktFraInfotrygd": "2020-01-01",
             "inntektsmeldingInfo": {
               "id": "1435d054-85a6-4d50-b3a6-31b03d94295a",
@@ -27368,6 +27464,25 @@
             "inntektskilde": "EN_ARBEIDSGIVER",
             "id": "65f98a23-8cba-4391-90b7-a3826163ce9f",
             "tilstand": "TIL_INFOTRYGD",
+            "behandlinger": [
+              {
+                "id": "4bfdd054-d056-483c-9f70-ec438a1df8af",
+                "tilstand": "TIL_INFOTRYGD",
+                "endringer": [
+                  {
+                    "id": "8a3afdee-34da-4c63-98b8-ce85d7edaf89",
+                    "tidsstempel": "2022-11-01T13:26:58.430636257",
+                    "sykdomstidslinje": {
+                      "dager": [{
+                        "type": "SYKEDAG",
+                        "fom": "2020-02-01",
+                        "tom": "2020-02-28"
+                      }]
+                    }
+                  }
+                ]
+              }
+            ],
             "skjæringstidspunktFraInfotrygd": null,
             "inntektsmeldingInfo": null,
             "skjæringstidspunkt": "2020-01-01",

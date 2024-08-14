@@ -3,7 +3,14 @@ import ReactJson from 'react-json-view'
 import {ContentView} from '../../state/state'
 import {ContentCategory} from './ContentCategory'
 import {writeToClipboard} from '../../utils'
-import {ArbeidsgiverDto, FokastetVedtaksperiodeDto, PersonDto, UtbetalingDto, VedtakDto} from "../../state/dto";
+import {
+    ArbeidsgiverDto,
+    BehandlingDto, EndringDto,
+    FokastetVedtaksperiodeDto,
+    PersonDto,
+    UtbetalingDto,
+    VedtakDto
+} from "../../state/dto";
 
 const Arbeidsgiver = ({ arbeidsgiver }: { arbeidsgiver: ArbeidsgiverDto }) => {
     return (
@@ -50,6 +57,25 @@ const Utbetaling = ({ utbetaling }: { utbetaling: UtbetalingDto }) => {
 }
 Utbetaling.displayName = 'JsonView.Utbetaling'
 
+const Behandling = ({ behandling }: { behandling: BehandlingDto }) => {
+    return (
+        <div>
+            <ReactJsonMedBedreKopiering src={behandling} />
+        </div>
+    )
+}
+Behandling.displayName = 'JsonView.Behandling'
+
+
+const Endring = ({ endring }: { endring: EndringDto }) => {
+    return (
+        <div>
+            <ReactJsonMedBedreKopiering src={endring} />
+        </div>
+    )
+}
+Endring.displayName = 'JsonView.Endring'
+
 // Vi kan velge mellom to implementasjoner:
 // Stripper vekk anførselstegn fra innholder den kopierer ut fra JSON-en
 // eller
@@ -75,7 +101,7 @@ export const JsonView = ({ person, valgteTing }: { person: PersonDto, valgteTing
             displayName={ContentView.Json}
             person={person}
             valgteTing={valgteTing}
-            {...{ Person, Arbeidsgiver, Vedtaksperiode, ForkastetVedtaksperiode, Utbetaling }}
+            {...{ Person, Arbeidsgiver, Vedtaksperiode, ForkastetVedtaksperiode, Utbetaling, Behandling, Endring }}
         />
     }, [valgteTing])
 }

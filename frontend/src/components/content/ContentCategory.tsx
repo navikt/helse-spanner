@@ -1,7 +1,14 @@
 import React, {ReactNode} from 'react'
 import {ContentView} from '../../state/state'
 import {Card} from "../Card";
-import {ArbeidsgiverDto, FokastetVedtaksperiodeDto, PersonDto, UtbetalingDto, VedtakDto} from "../../state/dto";
+import {
+    ArbeidsgiverDto,
+    BehandlingDto, EndringDto,
+    FokastetVedtaksperiodeDto,
+    PersonDto,
+    UtbetalingDto,
+    VedtakDto
+} from "../../state/dto";
 
 type ContentCategoryProperties = {
     displayName: ContentView
@@ -11,6 +18,8 @@ type ContentCategoryProperties = {
     Vedtaksperiode?: React.FC<{ vedtaksperiode: VedtakDto }>
     ForkastetVedtaksperiode?: React.FC<{ vedtaksperiode: FokastetVedtaksperiodeDto }>
     Utbetaling?: React.FC<{ utbetaling: UtbetalingDto }>,
+    Behandling?: React.FC<{ behandling: BehandlingDto }>,
+    Endring?: React.FC<{ endring: EndringDto }>,
     valgteTing: string[]
 }
 
@@ -21,6 +30,8 @@ export function ContentCategory({
     Vedtaksperiode = undefined,
     ForkastetVedtaksperiode = undefined,
     Utbetaling = undefined,
+    Behandling = undefined,
+    Endring = undefined,
     valgteTing
 } : ContentCategoryProperties) {
     let tingene = HentVisning(person, valgteTing)
@@ -31,6 +42,12 @@ export function ContentCategory({
         )}
         {Vedtaksperiode && tingene.vedtaksperioder.map((it) =>
             <Ramme key={it.id}  valgteTing={valgteTing} ting={it.id}><Vedtaksperiode vedtaksperiode={it} /></Ramme>
+        )}
+        {Behandling && tingene.behandlinger.map((it) =>
+            <Ramme key={it.id}  valgteTing={valgteTing} ting={it.id}><Behandling behandling={it} /></Ramme>
+        )}
+        {Endring && tingene.endringer.map((it) =>
+            <Ramme key={it.id}  valgteTing={valgteTing} ting={it.id}><Endring endring={it} /></Ramme>
         )}
         {ForkastetVedtaksperiode && tingene.forkastedeVedtaksperioder.map((it) =>
             <Ramme key={it.id}  valgteTing={valgteTing} ting={it.id}><ForkastetVedtaksperiode vedtaksperiode={it} /></Ramme>
@@ -52,6 +69,15 @@ function HentVisning(person: PersonDto, valgteTing: string[]) {
         arbeidsgivere: person.arbeidsgivere.filter((it) => valgteTing.includes(it.id)),
         vedtaksperioder: person.arbeidsgivere.flatMap((it) =>
             it.vedtaksperioder.filter((vedtaksperiode) => valgteTing.includes(vedtaksperiode.id))
+        ),
+        behandlinger: person.arbeidsgivere.flatMap((it) =>
+            it.vedtaksperioder.flatMap((v) => v.behandlinger)
+                .filter((behandling) => valgteTing.includes(behandling.id))
+        ),
+        endringer: person.arbeidsgivere.flatMap((it) =>
+            it.vedtaksperioder.flatMap((v) => v.behandlinger)
+                .flatMap((b) => b.endringer)
+                .filter((endring) => valgteTing.includes(endring.id))
         ),
         forkastedeVedtaksperioder: person.arbeidsgivere
             .flatMap((it) =>
