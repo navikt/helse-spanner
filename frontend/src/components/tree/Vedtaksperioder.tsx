@@ -191,7 +191,7 @@ function toShortChar(dagtype: string): string | null {
         case "PERMISJONSDAG": return "P"
         case "FRISK_HELGEDAG": return "R"
         case "FORELDET_SYKEDAG": return "K"
-        case "SYKEDAGNAV": return "N"
+        case "SYKEDAG_NAV": return "N"
         case "ANDRE_YTELSER": return "Y"
         case "ANDRE_YTELSER_FORELDREPENGER": return "Y"
         case "ANDRE_YTELSER_AAP": return "Y"
