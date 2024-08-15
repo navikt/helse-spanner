@@ -116,10 +116,11 @@ const Endringsnode = ({endring, valgteTing, vedValg}: {
 }) => {
     const sykdomstidslinje: string = sykdomstidslinjeShortString(endring.sykdomstidslinje)
     const dato: string = somNorskDato(endring.tidsstempel)
+    const emoji = medEmoji(sykdomstidslinje)
     return (
         <div>
             <SelectableTreeNode indent={2.7} valgteTing={valgteTing} ting={endring.id} vedValg={vedValg} className={styles.EndringNode}>
-                        <span className={styles.SykdomstidslinjeText}>{sykdomstidslinje + " (" + dato + ")"}</span>
+                        <span className={styles.SykdomstidslinjeText}>{sykdomstidslinje + " (" + dato + ")  " + emoji}</span>
             </SelectableTreeNode>
         </div>
     )
@@ -145,6 +146,13 @@ function sykdomstidslinjeShortString(tidslinje: SykdomstidslinjeDto): string {
         }
     )
     return ukjentTidslinje ? "Ukjent sykdomstidslinje for spanner🤕 (se console)" : sykdomstidslinje
+}
+
+function medEmoji(tidslinje: string): string {
+    if (tidslinje.endsWith("A")) return "🏴"
+    if (tidslinje.includes("F")) return "🏝️"
+    if (tidslinje.includes("K")) return "️👵"
+    return ""
 }
 
 function erSøndag(dag: DagDto, i: number): boolean {
