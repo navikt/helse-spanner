@@ -145,6 +145,12 @@ div > .PersonNode:first-child {
     white-space: nowrap;
 }
 
+.SykdomstidslinjeTextHover {
+    font-size: x-small;
+    display: block;
+    overflow: visible;
+}
+
 .PersonNode {
     display: flex;
     justify-content: space-between;

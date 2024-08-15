@@ -1,7 +1,7 @@
 import {usePerson} from "../../state/contexts";
 import parseISO from "date-fns/parseISO";
 import compareAsc from "date-fns/compareAsc";
-import React from "react";
+import React, {useState} from "react";
 import {somNorskDato} from "../i18n";
 import SelectableTreeNode from "./SelectableTreeNode";
 import styles from "./PersonTree.module.css";
@@ -114,13 +114,15 @@ const Endringsnode = ({endring, valgteTing, vedValg}: {
     valgteTing: string[],
     vedValg: (e: React.MouseEvent, ting: string) => void
 }) => {
+    const [hover, setHover] = useState(false)
     const sykdomstidslinje: string = sykdomstidslinjeShortString(endring.sykdomstidslinje)
     const dato: string = somNorskDato(endring.tidsstempel)
     const emoji = medEmoji(sykdomstidslinje)
     return (
-        <div>
+        <div onMouseOver={() => setHover(true)} onMouseLeave={() => setHover(false)}>
             <SelectableTreeNode indent={2.7} valgteTing={valgteTing} ting={endring.id} vedValg={vedValg} className={styles.EndringNode}>
-                        <span className={styles.SykdomstidslinjeText}>{sykdomstidslinje + " (" + dato + ")  " + emoji}</span>
+                {!hover && <span className={styles.SykdomstidslinjeText}>{sykdomstidslinje + " (" + dato + ")  " + emoji}</span>}
+                {hover && <span className={styles.SykdomstidslinjeTextHover}>{sykdomstidslinje + " (" + dato + ")  " + emoji}</span>}
             </SelectableTreeNode>
         </div>
     )
