@@ -18,7 +18,6 @@ import {
     VedtakDto
 } from "../../state/dto";
 import KopierAnmodningOmForkastingJson from "./KopierAnmodningOmForkastingJson";
-import {da} from "date-fns/locale";
 
 
 interface VedtaksperioderProps {
@@ -130,21 +129,27 @@ Endringsnode.displayName = 'Endringer'
 function sykdomstidslinjeShortString(tidslinje: SykdomstidslinjeDto): string {
     var sykdomstidslinje = ""
     var ukjentTidslinje = false
+    if (tidslinje.dager.length == 0) return "Tom tidslinje"
     tidslinje.dager.forEach((dag: DagDto) => {
-            const antallDager: number = dagerMellom(dag.fom, dag.tom)
+            const antallDager: number = dagerMellom(dag.fom, dag.tom, dag.dato)
             for (let i=0; i<=antallDager; i++) {
                 var shortChar: string | null = toShortChar(dag.type)
                 if (shortChar == null){
                     console.log("har ikke fungerende mapping for sykdosmtidslinjedag ", dag.type)
                     ukjentTidslinje = true
                 }
-                const erSøndag = addDays(parseISO(dag.fom), i).getDay() == 0
-                if (erSøndag) shortChar += " "
+                const søndag = erSøndag(dag, i)
+                if (søndag) shortChar += " "
                 sykdomstidslinje += shortChar
             }
         }
     )
     return ukjentTidslinje ? "Ukjent sykdomstidslinje for spanner🤕 (se console)" : sykdomstidslinje
+}
+
+function erSøndag(dag: DagDto, i: number): boolean {
+    if (dag.dato !== null) return parseISO(dag.dato).getDay() == 0
+    return addDays(parseISO(dag.fom!!), i).getDay() == 0
 }
 
 function addDays(date: Date, days: number) {
@@ -153,9 +158,10 @@ function addDays(date: Date, days: number) {
     return result;
 }
 
-function dagerMellom(fom: string, tom: string): number {
-    const fomDate = parseISO(fom)
-    const tomDate = parseISO(tom)
+function dagerMellom(fom: string | null, tom: string | null, dagen: string | null): number {
+    if (dagen !== null) return 0 // enkeltdag
+    const fomDate = parseISO(fom!!)
+    const tomDate = parseISO(tom!!)
     /**
      * Take the difference between the dates and divide by milliseconds per day.
      * Round to nearest whole number to deal with DST.

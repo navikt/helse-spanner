@@ -55,6 +55,7 @@ export type BehandlingDto = {
     tilstand: string
     id: string
     endringer: EndringDto[]
+    kilde: KildeDto
     [x: string]: any
 }
 
@@ -70,9 +71,18 @@ export type SykdomstidslinjeDto = {
     [x: string]: any
 }
 
+export type KildeDto = {
+    avsender: string,
+    innsendt: string,
+    registrert: string,
+    meldingsreferanseId: string,
+    [x: string]: any
+}
+
 export type DagDto = {
-    fom: string,
-    tom: string,
+    fom: string | null,
+    tom: string | null,
+    dato: string | null,
     type: string,
     [x: string]: any
 }

@@ -25019,6 +25019,12 @@ export const jsonPerson2: PersonDto = {
                         {
                             "id": "4hfdd054-d056-483c-9f70-ec438a1df8af",
                             "tilstand": "AVSLUTTET_UTEN_VEDTAK",
+                            "kilde": {
+                                "avsender": "SYKMELDT",
+                                "innsendt": "2018-02-01T14:09:38.279566613",
+                                "meldingsreferanseId": "dacga11d-514c-4b12-b1dc-227657929eab",
+                                "registrert": "2018-02-01T14:09:38.279566613"
+                            },
                             "endringer": [
                                 {
                                     "id": "8a3afdee-34da-4c63-98b8-ce85d7edaf89",
@@ -25028,6 +25034,7 @@ export const jsonPerson2: PersonDto = {
                                             "type": "SYKEDAG",
                                             "fom": "2021-06-01",
                                             "tom": "2021-06-14",
+                                            "dato": null
                                         }]
                                     }
                                 }
@@ -25092,6 +25099,12 @@ export const jsonPerson2: PersonDto = {
                         {
                             "id": "4hfdd054-d056-483c-9f70-ec438a1df8af",
                             "tilstand": "UBEREGNET",
+                            "kilde": {
+                                "avsender": "SYKMELDT",
+                                "innsendt": "2018-02-01T14:09:38.279566613",
+                                "meldingsreferanseId": "dacga11d-514c-4b12-b1dc-227657929eab",
+                                "registrert": "2018-02-01T14:09:38.279566613"
+                            },
                             "endringer": [
                                 {
                                     "id": "8a3afdee-34da-4c63-98b8-ce85d7edaf89",
@@ -25101,6 +25114,7 @@ export const jsonPerson2: PersonDto = {
                                             "type": "SYKEDAG",
                                             "fom": "2021-07-13",
                                             "tom": "2021-08-02",
+                                            "dato": null
                                         }]
                                     }
                                 }

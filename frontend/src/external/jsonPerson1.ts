@@ -13507,31 +13507,53 @@ export let jsonPerson: PersonDto = {
                         {
                             "id": "4bfdd054-d056-483c-9f70-ec438a1df8af",
                             "tilstand": "VEDTAK_IVERKSATT",
+                            "kilde": {
+                                "avsender": "SYKMELDT",
+                                "innsendt": "2018-02-01T14:09:38.279566613",
+                                "meldingsreferanseId": "dacga11d-514c-4b12-b1dc-227657929eab",
+                                "registrert": "2018-02-01T14:09:38.279566613"
+                            },
                             "endringer": [
                                 {
                                     "id": "8a3afdee-54da-4c63-98b8-ce85d7edaf89",
                                     "tidsstempel": "2018-11-02T13:26:58.430636257",
                                     "sykdomstidslinje": {
                                         "dager": [{
-                                            "type": "SYKEDAG",
-                                            "fom": "2018-01-01",
-                                            "tom": "2018-01-31",
-                                        }]
+                                            "type": "ARBEIDSGIVERDAG",
+                                            "dato": "2018-01-01",
+                                            "fom": null,
+                                            "tom": null,
+                                        },
+                                            {
+                                                "type": "FERIEDAG",
+                                                "dato": null,
+                                                "fom": "2018-01-02",
+                                                "tom": "2018-01-31",
+                                            }]
                                     }
                                 },
                                 {
                                     "id": "ba3afdee-54da-4c63-98b8-ce85d7edaf89",
                                     "tidsstempel": "2018-11-03T13:26:58.430636257",
                                     "sykdomstidslinje": {
-                                        "dager": [{
+                                        "dager": [
+                                            {
+                                                "type": "SYKEDAG",
+                                                "fom": "2018-01-01",
+                                                "tom": "2018-01-25",
+                                                "dato": null
+                                            },
+                                            {
                                             "type": "SYKEDAG",
                                             "fom": "2018-01-01",
                                             "tom": "2018-01-25",
+                                            "dato": null
                                         },
                                             {
                                                 "type": "ARBEIDSDAG",
                                                 "fom": "2018-01-26",
                                                 "tom": "2018-01-31",
+                                                "dato": null
                                             }
                                         ]
                                     }
@@ -13541,6 +13563,12 @@ export let jsonPerson: PersonDto = {
                         {
                             "id": "4bfdd054-d056-483c-9f70-gc438a1df8af",
                             "tilstand": "VEDTAK_IVERKSATT",
+                            "kilde": {
+                                "avsender": "SYKMELDT",
+                                "innsendt": "2018-02-01T14:09:38.279566613",
+                                "meldingsreferanseId": "dacga11d-514c-4b12-b1dc-227657929eab",
+                                "registrert": "2018-02-01T14:09:38.279566613"
+                            },
                             "endringer": [
                                 {
                                     "id": "8bcafdee-54da-4c63-98b8-ce85d7edaf89",
@@ -13550,6 +13578,7 @@ export let jsonPerson: PersonDto = {
                                             "type": "SYKEDAG",
                                             "fom": "2018-01-01",
                                             "tom": "2018-01-31",
+                                            "dato": null
                                         }]
                                     }
                                 },
@@ -13561,11 +13590,13 @@ export let jsonPerson: PersonDto = {
                                             "type": "SYKEDAG",
                                             "fom": "2018-01-01",
                                             "tom": "2018-01-25",
+                                            "dato": null
                                         },
                                             {
                                                 "type": "ANDRE_YTELSER",
                                                 "fom": "2018-01-26",
                                                 "tom": "2018-01-31",
+                                                "dato": null
                                             }
                                         ]
                                     }
@@ -13785,6 +13816,12 @@ export let jsonPerson: PersonDto = {
                         {
                             "id": "4bfhd054-d056-483c-9f70-ec438a1df8af",
                             "tilstand": "VEDTAK_IVERKSATT",
+                            "kilde": {
+                                "avsender": "SYKMELDT",
+                                "innsendt": "2018-02-01T14:09:38.279566613",
+                                "meldingsreferanseId": "dacga11d-514c-4b12-b1dc-227657929eab",
+                                "registrert": "2018-02-01T14:09:38.279566613"
+                            },
                             "endringer": [
                                 {
                                     "id": "8a3afbee-34da-4c63-98b9-ce85d7edaf89",
@@ -13794,6 +13831,7 @@ export let jsonPerson: PersonDto = {
                                             "type": "ASD",
                                             "fom": "2018-02-01",
                                             "tom": "2018-02-28",
+                                            "dato": null
                                         }]
                                     }
                                 }
@@ -22972,6 +23010,12 @@ export let jsonPerson: PersonDto = {
                         {
                             "id": "4hfdd054-d056-483c-9f70-ec438a1df8af",
                             "tilstand": "VEDTAK_IVERKSATT",
+                            "kilde": {
+                                "avsender": "SYKMELDT",
+                                "innsendt": "2018-02-01T14:09:38.279566613",
+                                "meldingsreferanseId": "dacga11d-514c-4b12-b1dc-227657929eab",
+                                "registrert": "2018-02-01T14:09:38.279566613"
+                            },
                             "endringer": [
                                 {
                                     "id": "8a3afdee-34da-4c63-98b8-ce85d7edaf89",
@@ -22981,6 +23025,7 @@ export let jsonPerson: PersonDto = {
                                             "type": "SYKEDAG",
                                             "fom": "2018-01-01",
                                             "tom": "2018-01-31",
+                                            "dato": null
                                         }]
                                     }
                                 }
@@ -24182,6 +24227,12 @@ export let jsonPerson: PersonDto = {
                         {
                             "id": "4bfdd055-d056-483c-9f70-ec438a1df8af",
                             "tilstand": "VEDTAK_IVERKSATT",
+                            "kilde": {
+                                "avsender": "SYKMELDT",
+                                "innsendt": "2018-02-01T14:09:38.279566613",
+                                "meldingsreferanseId": "dacga11d-514c-4b12-b1dc-227657929eab",
+                                "registrert": "2018-02-01T14:09:38.279566613"
+                            },
                             "endringer": [
                                 {
                                     "id": "8b3afdee-34da-4c63-98b8-ce85d7edaf89",
@@ -24191,6 +24242,7 @@ export let jsonPerson: PersonDto = {
                                             "type": "SYKEDAG",
                                             "fom": "2020-01-01",
                                             "tom": "2020-01-31",
+                                            "dato": null
                                         }]
                                     }
                                 }
