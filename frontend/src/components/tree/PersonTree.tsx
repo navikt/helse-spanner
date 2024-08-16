@@ -7,6 +7,7 @@ import SporingLenke from "./SporingLenke";
 import KopierPersonPåminnelseJson from "./KopierPersonPåminnelseJson";
 import SelectableTreeNode from "./SelectableTreeNode";
 import {ArbeidsgiverNode} from "./ArbeidsgiverNode";
+import {Key, useKeyboard} from "./useKeyboard";
 
 
 interface PersonTreeProps {
@@ -30,13 +31,20 @@ export const PersonTree = ({valgteTing, toggleValgtTing } : PersonTreeProps) => 
             return []
         })
     }
+    useKeyboard([{
+        key: Key.B,
+        action: () => {
+            setVisBehandlinger((forrige) => !forrige)
+        }
+    }]);
+
     return (
         <Box background="surface-default">
             <Box background="bg-subtle" paddingBlock="4 0">
                 <HStack gap="5">
                     <Switch size="small" onChange={(e) => toggleArbeidsgivere(e.target.checked) }>Åpne alle</Switch>
                     <Switch size="small" onChange={() => setVisForkastede((forrige) => !forrige) }>Skjul forkastede</Switch>
-                    <Switch size="small" onChange={() => setVisBehandlinger((forrige) => !forrige) }>Vis behandlinger med endringer</Switch>
+                    <Switch size="small" checked={visBehandlinger} onChange={() => setVisBehandlinger((forrige) => !forrige) }>Vis behandlinger med endringer</Switch>
                 </HStack>
             </Box>
             <Box padding="0">
