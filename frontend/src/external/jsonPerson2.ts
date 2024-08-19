@@ -25125,6 +25125,28 @@ export const jsonPerson2: PersonDto = {
                                             "dato": null
                                         }]
                                     }
+                                },
+                                {
+                                    "id": "8aeafdee-34da-4c63-98b8-ce85d7edaf89",
+                                    "tidsstempel": "2022-11-01T13:26:58.430636257",
+                                    "dokumentsporing": {
+                                        "dokumentId": "bagafdee-64da-4c63-98b8-ce85d7edaf89",
+                                        "dokumenttype": "Saksbehandler"
+                                    },
+                                    "sykdomstidslinje": {
+                                        "dager": [{
+                                            "type": "ARBEIDSGIVERDAG",
+                                            "fom": "2021-07-13",
+                                            "tom": "2021-07-16",
+                                            "dato": null
+                                        },
+                                            {
+                                                "type": "SYKEDAG",
+                                                "fom": "2021-07-20",
+                                                "tom": "2021-07-25",
+                                                "dato": null
+                                            }]
+                                    }
                                 }
                             ]
                         }

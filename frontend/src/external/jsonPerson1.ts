@@ -13546,12 +13546,6 @@ export let jsonPerson: PersonDto = {
                                     "sykdomstidslinje": {
                                         "dager": [
                                             {
-                                                "type": "SYKEDAG",
-                                                "fom": "2018-01-01",
-                                                "tom": "2018-01-25",
-                                                "dato": null
-                                            },
-                                            {
                                             "type": "SYKEDAG",
                                             "fom": "2018-01-01",
                                             "tom": "2018-01-25",
@@ -13565,7 +13559,38 @@ export let jsonPerson: PersonDto = {
                                             }
                                         ]
                                     }
+                                },
+                                {
+                                    "id": "ba6afdee-54da-4c63-98b8-ce85d7edaf89",
+                                    "tidsstempel": "2018-11-03T13:26:58.430636257",
+                                    "dokumentsporing": {
+                                        "dokumentId": "mafafdee-54da-4c63-98b8-ce85d7edaf89",
+                                        "dokumenttype": "Søknad"
+                                    },
+                                    "sykdomstidslinje": {
+                                        "dager": [
+                                            {
+                                                "type": "ARBEIDSGIVERDAG",
+                                                "fom": "2018-01-01",
+                                                "tom": "2018-01-10",
+                                                "dato": null
+                                            },
+                                            {
+                                                "type": "SYKEDAG",
+                                                "fom": "2018-01-16",
+                                                "tom": "2018-01-25",
+                                                "dato": null
+                                            },
+                                            {
+                                                "type": "SYKEDAG",
+                                                "fom": "2018-01-27",
+                                                "tom": "2018-01-28",
+                                                "dato": null
+                                            }
+                                        ]
+                                    }
                                 }
+
                             ]
                         },
                         {

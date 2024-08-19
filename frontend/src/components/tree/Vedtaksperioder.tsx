@@ -14,11 +14,13 @@ import {
     BehandlingDto,
     DagDto,
     EndringDto,
-    FokastetVedtaksperiodeDto, SykdomstidslinjeDto,
+    FokastetVedtaksperiodeDto,
+    SykdomstidslinjeDto,
     VedtakDto
 } from "../../state/dto";
 import KopierAnmodningOmForkastingJson from "./KopierAnmodningOmForkastingJson";
 import {Key, useKeyboard} from "./useKeyboard";
+import {format} from "date-fns";
 
 
 interface VedtaksperioderProps {
@@ -142,10 +144,18 @@ const Endringsnode = ({endring, visKilder, valgteTing, vedValg}: {
 Endringsnode.displayName = 'Endringer'
 
 function sykdomstidslinjeShortString(tidslinje: SykdomstidslinjeDto): string {
+    if (tidslinje.dager.length == 0) return "Tom tidslinje"
     var sykdomstidslinje = ""
     var ukjentTidslinje = false
-    if (tidslinje.dager.length == 0) return "Tom tidslinje"
-    tidslinje.dager.forEach((dag: DagDto) => {
+    const ukjenteDager = hullITidslinje(tidslinje)
+    const alleDager = [...tidslinje.dager, ...ukjenteDager].sort(((a, b) => {
+            const aDag = (a.fom || a.dato)!!
+            const bDag = (b.fom || b.dato)!!
+            if (somNorskDato(aDag) > somNorskDato(bDag)) return 1
+            else return -1
+        }
+    ))
+    alleDager.forEach((dag: DagDto) => {
             const antallDager: number = dagerMellom(dag.fom, dag.tom, dag.dato)
             for (let i=0; i<=antallDager; i++) {
                 var shortChar: string | null = toShortChar(dag.type)
@@ -162,10 +172,32 @@ function sykdomstidslinjeShortString(tidslinje: SykdomstidslinjeDto): string {
     return ukjentTidslinje ? "Ukjent sykdomstidslinje for spanner🤕 (se console)" : sykdomstidslinje
 }
 
+function hullITidslinje(tidslinje: SykdomstidslinjeDto): DagDto[] {
+    if (tidslinje.dager.length == 0) return []
+    let ukjentDager: DagDto[] = []
+    var forrigeTom = (tidslinje.dager[0].tom ||  tidslinje.dager[0].dato)!!
+    tidslinje.dager.forEach((dag: DagDto) => {
+        const nåværendeFom = (dag.fom || dag.dato)!!
+        const antallDagerMellom = dagerMellom(forrigeTom, nåværendeFom, null)
+        if (antallDagerMellom > 1) { // hull i tidslinja
+            let nyeDager: DagDto = {
+                type: "UKJENTDAG",
+                fom: format(addDays(parseISO(forrigeTom!), 1), 'yyyy-MM-dd'),
+                tom: format(addDays(parseISO(forrigeTom!), antallDagerMellom-1), 'yyyy-MM-dd'),
+                dato: null,
+            }
+            ukjentDager.push(nyeDager)
+        }
+        forrigeTom = (dag.tom || dag.dato)!!
+    })
+    return ukjentDager
+}
+
 function medEmoji(tidslinje: string): string {
     if (tidslinje.endsWith("A")) return "🏴"
     if (tidslinje.includes("F")) return "🏝️"
     if (tidslinje.includes("K")) return "️👵"
+    if (tidslinje.includes("?")) return "️❓"
     return ""
 }
 
