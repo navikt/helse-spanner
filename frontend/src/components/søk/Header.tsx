@@ -2,6 +2,7 @@ import React from 'react'
 import {InternalHeader, Spacer} from "@navikt/ds-react";
 import styles from './Header.module.css'
 import {useQuery} from "react-query";
+import {Link} from "react-router-dom";
 
 export const Header: React.FC<object> = ({ children }) => {
     const hentBrukerinfo = async() => {
@@ -19,6 +20,7 @@ export const Header: React.FC<object> = ({ children }) => {
             </InternalHeader.Title>
             {children}
             <Spacer/>
+            <Link to={"/hotkeys"} className={styles.Lenke}>Hotkeys</ Link>
             <InternalHeader.User className={styles.User} name={ navn } description={ ident }/>
         </InternalHeader>
     )
