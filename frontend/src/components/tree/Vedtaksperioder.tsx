@@ -146,22 +146,16 @@ Endringsnode.displayName = 'Endringer'
 function sykdomstidslinjeShortString(tidslinje: SykdomstidslinjeDto): string {
     if (tidslinje.dager.length == 0) return "Tom tidslinje"
     var sykdomstidslinje = ""
-    var ukjentTidslinje = false
+    var sykomstidslinjeKanIkkeTolkes = false
     const ukjenteDager = hullITidslinje(tidslinje)
-    const alleDager = [...tidslinje.dager, ...ukjenteDager].sort(((a, b) => {
-            const aDag = (a.fom || a.dato)!!
-            const bDag = (b.fom || b.dato)!!
-            if (somNorskDato(aDag) > somNorskDato(bDag)) return 1
-            else return -1
-        }
-    ))
+    const alleDager = [...tidslinje.dager, ...ukjenteDager].sort(sortKronologisk)
     alleDager.forEach((dag: DagDto) => {
             const antallDager: number = dagerMellom(dag.fom, dag.tom, dag.dato)
             for (let i=0; i<=antallDager; i++) {
                 var shortChar: string | null = toShortChar(dag.type)
                 if (shortChar == null){
                     console.log("har ikke fungerende mapping for sykdosmtidslinjedag ", dag.type)
-                    ukjentTidslinje = true
+                    sykomstidslinjeKanIkkeTolkes = true
                 }
                 const søndag = erSøndag(dag, i)
                 if (søndag) shortChar += " "
@@ -169,7 +163,7 @@ function sykdomstidslinjeShortString(tidslinje: SykdomstidslinjeDto): string {
             }
         }
     )
-    return ukjentTidslinje ? "Ukjent sykdomstidslinje for spanner🤕 (se console)" : sykdomstidslinje
+    return sykomstidslinjeKanIkkeTolkes ? "Ukjent sykdomstidslinje for spanner🤕 (se console)" : sykdomstidslinje
 }
 
 function hullITidslinje(tidslinje: SykdomstidslinjeDto): DagDto[] {
@@ -248,5 +242,12 @@ function toShortChar(dagtype: string): string | null {
         case "ANDRE_YTELSER_DAGPENGER": return "Y"
         default: return null
     }
+}
+
+const sortKronologisk = (a: DagDto, b: DagDto) => {
+    const aDag = (a.fom || a.dato)!!
+    const bDag = (b.fom || b.dato)!!
+    if (somNorskDato(aDag) > somNorskDato(bDag)) return 1
+    else return -1
 }
 
