@@ -63,7 +63,14 @@ export type EndringDto = {
     id: string
     tidsstempel: string
     sykdomstidslinje: SykdomstidslinjeDto
+    dokumentsporing: DokumentsporingDto
     [x: string]: any
+}
+
+export type DokumentsporingDto = {
+    "dokumentId": string,
+    "dokumenttype": string,
+    [x: string] : any
 }
 
 export type SykdomstidslinjeDto = {

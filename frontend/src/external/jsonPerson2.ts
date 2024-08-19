@@ -25029,6 +25029,10 @@ export const jsonPerson2: PersonDto = {
                                 {
                                     "id": "8a3afdee-34da-4c63-98b8-ce85d7edaf89",
                                     "tidsstempel": "2022-11-01T13:26:58.430636257",
+                                    "dokumentsporing": {
+                                        "dokumentId": "cafafdee-64da-4c63-98b8-ce85d7edaf89",
+                                        "dokumenttype": "Saksbehandler"
+                                    },
                                     "sykdomstidslinje": {
                                         "dager": [{
                                             "type": "SYKEDAG",
@@ -25109,6 +25113,10 @@ export const jsonPerson2: PersonDto = {
                                 {
                                     "id": "8a3afdee-34da-4c63-98b8-ce85d7edaf89",
                                     "tidsstempel": "2022-11-01T13:26:58.430636257",
+                                    "dokumentsporing": {
+                                        "dokumentId": "bagafdee-64da-4c63-98b8-ce85d7edaf89",
+                                        "dokumenttype": "Saksbehandler"
+                                    },
                                     "sykdomstidslinje": {
                                         "dager": [{
                                             "type": "SYKEDAG",

@@ -13517,6 +13517,10 @@ export let jsonPerson: PersonDto = {
                                 {
                                     "id": "8a3afdee-54da-4c63-98b8-ce85d7edaf89",
                                     "tidsstempel": "2018-11-02T13:26:58.430636257",
+                                    "dokumentsporing": {
+                                        "dokumentId": "bafafdee-54da-4c63-98b8-ce85d7edaf89",
+                                        "dokumenttype": "Søknad"
+                                    },
                                     "sykdomstidslinje": {
                                         "dager": [{
                                             "type": "ARBEIDSGIVERDAG",
@@ -13535,6 +13539,10 @@ export let jsonPerson: PersonDto = {
                                 {
                                     "id": "ba3afdee-54da-4c63-98b8-ce85d7edaf89",
                                     "tidsstempel": "2018-11-03T13:26:58.430636257",
+                                    "dokumentsporing": {
+                                        "dokumentId": "mafafdee-54da-4c63-98b8-ce85d7edaf89",
+                                        "dokumenttype": "Søknad"
+                                    },
                                     "sykdomstidslinje": {
                                         "dager": [
                                             {
@@ -13573,6 +13581,10 @@ export let jsonPerson: PersonDto = {
                                 {
                                     "id": "8bcafdee-54da-4c63-98b8-ce85d7edaf89",
                                     "tidsstempel": "2018-11-02T13:26:58.430636257",
+                                    "dokumentsporing": {
+                                        "dokumentId": "cfafdee-54da-4c63-98b8-ce85d7edaf89",
+                                        "dokumenttype": "System"
+                                    },
                                     "sykdomstidslinje": {
                                         "dager": [{
                                             "type": "SYKEDAG",
@@ -13585,6 +13597,10 @@ export let jsonPerson: PersonDto = {
                                 {
                                     "id": "ba4gfdee-54da-4c63-98b8-ce85d7edaf89",
                                     "tidsstempel": "2018-11-03T13:26:58.430636257",
+                                    "dokumentsporing": {
+                                        "dokumentId": "babafdee-54da-4c63-98b8-ce85d7edaf89",
+                                        "dokumenttype": "Søknad"
+                                    },
                                     "sykdomstidslinje": {
                                         "dager": [{
                                             "type": "SYKEDAG",
@@ -13826,6 +13842,10 @@ export let jsonPerson: PersonDto = {
                                 {
                                     "id": "8a3afbee-34da-4c63-98b9-ce85d7edaf89",
                                     "tidsstempel": "2022-11-01T13:26:58.430636257",
+                                    "dokumentsporing": {
+                                        "dokumentId": "bafafdee-64da-4c63-98b8-ce85d7edaf89",
+                                        "dokumenttype": "Søknad"
+                                    },
                                     "sykdomstidslinje": {
                                         "dager": [{
                                             "type": "ASD",
@@ -23020,6 +23040,10 @@ export let jsonPerson: PersonDto = {
                                 {
                                     "id": "8a3afdee-34da-4c63-98b8-ce85d7edaf89",
                                     "tidsstempel": "2022-11-01T13:26:58.430636257",
+                                    "dokumentsporing": {
+                                        "dokumentId": "bafavfee-54da-4c63-98b8-ce85d7edaf89",
+                                        "dokumenttype": "Søknad"
+                                    },
                                     "sykdomstidslinje": {
                                         "dager": [{
                                             "type": "SYKEDAG",
@@ -24237,6 +24261,10 @@ export let jsonPerson: PersonDto = {
                                 {
                                     "id": "8b3afdee-34da-4c63-98b8-ce85d7edaf89",
                                     "tidsstempel": "2022-11-01T13:26:58.430636257",
+                                    "dokumentsporing": {
+                                        "dokumentId": "bafafdee-64da-4c63-98b8-ce85d7edaf89",
+                                        "dokumenttype": "Saksbehandler"
+                                    },
                                     "sykdomstidslinje": {
                                         "dager": [{
                                             "type": "SYKEDAG",

@@ -18,6 +18,7 @@ import {
     VedtakDto
 } from "../../state/dto";
 import KopierAnmodningOmForkastingJson from "./KopierAnmodningOmForkastingJson";
+import {Key, useKeyboard} from "./useKeyboard";
 
 
 interface VedtaksperioderProps {
@@ -95,22 +96,32 @@ const BehandlingsNode = ({behandling, valgteTing, vedValg}: {
     valgteTing: string[],
     vedValg: (e: React.MouseEvent, ting: string) => void
 }) => {
+    const [visKilder, setVisKilder] = useState(false)
+    useKeyboard([{
+        key: Key.K,
+        action: () => {
+            setVisKilder((forrige) => !forrige)
+        }
+    }]);
+    const tekst = visKilder ? "Kilde: " + behandling.kilde.avsender : behandling.tilstand
+
     return (
         <div>
             <SelectableTreeNode key={behandling.id} indent={2.2} valgteTing={valgteTing} ting={behandling.id } className={styles.BehandlingNode}
                                 vedValg={vedValg}>
-                <span className={styles.TilstandText}>{behandling.tilstand}</span>
+                <span className={styles.TilstandText}>{tekst}</span>
             </SelectableTreeNode>
             {behandling.endringer?.map((endring: EndringDto) =>
-                <Endringsnode key={endring.id} endring={endring} valgteTing={valgteTing} vedValg={vedValg}/>
+                <Endringsnode key={endring.id} endring={endring} visKilder={visKilder} valgteTing={valgteTing} vedValg={vedValg}/>
             )}
         </div>
     )
 }
 BehandlingsNode.displayName = 'Behandlinger'
 
-const Endringsnode = ({endring, valgteTing, vedValg}: {
+const Endringsnode = ({endring, visKilder, valgteTing, vedValg}: {
     endring: EndringDto,
+    visKilder: Boolean,
     valgteTing: string[],
     vedValg: (e: React.MouseEvent, ting: string) => void
 }) => {
@@ -118,11 +129,12 @@ const Endringsnode = ({endring, valgteTing, vedValg}: {
     const sykdomstidslinje: string = sykdomstidslinjeShortString(endring.sykdomstidslinje)
     const dato: string = somNorskDato(endring.tidsstempel)
     const emoji = medEmoji(sykdomstidslinje)
+    const tekst = visKilder ? endring.dokumentsporing.dokumenttype + " (" + dato + ")" : sykdomstidslinje + " (" + dato + ")  " + emoji
     return (
         <div onMouseOver={() => setHover(true)} onMouseLeave={() => setHover(false)}>
             <SelectableTreeNode indent={2.7} valgteTing={valgteTing} ting={endring.id} vedValg={vedValg} className={styles.EndringNode}>
-                {!hover && <span className={styles.SykdomstidslinjeText}>{sykdomstidslinje + " (" + dato + ")  " + emoji}</span>}
-                {hover && <span className={styles.SykdomstidslinjeTextHover}>{sykdomstidslinje + " (" + dato + ")  " + emoji}</span>}
+                {!hover && <span className={styles.SykdomstidslinjeText}>{tekst}</span>}
+                {hover && <span className={styles.SykdomstidslinjeTextHover}>{tekst}</span>}
             </SelectableTreeNode>
         </div>
     )
