@@ -4,6 +4,11 @@
 ## Beskrivelse
 Parser og viser Spleis-JSON på en mer oversiktlig måte
 
+## Koding
+Bruker husky for å kjøre en commit hook som formaterer og linter koden.
+Det er mulig man må kjøre `npm prepare` i frontend-mappa for å installere dette.
+Også mulig man må kjøre `git config core.hooksPath .husky/_`.
+
 ## Henvendelser
 Spørsmål knyttet til koden eller prosjektet kan stilles som issues her på GitHub.
 ### For NAV-ansatte

@@ -1,5 +1,6 @@
-#!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
-
 cd frontend
-npm lint-staged
+
+# Siden kodebasen inneholder så mange filer som ikke er på riktig syntaks (fordi oppsettet av husky
+# har vært feil), bør vi kanskje ta en prat om hvilken syntaks vi vil ha (prettier-oppsett) og så
+# kjøre en reformatering av hele kodebasen - for å unngå støy i fremtidige commits pga. prettier.
+#npm run lint-staged
