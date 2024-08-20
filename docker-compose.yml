@@ -1,5 +1,3 @@
-version: '3'
-
 services:
   mock-oauth2-server:
     hostname: mock-oauth2-server
