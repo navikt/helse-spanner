@@ -3,7 +3,7 @@ export type PersonDto = {
     aktørId: string
     fødselsnummer: string
     opprettet: string
-    aktivitetslogg: AktivitetsloggDto
+    aktivitetslogg?: AktivitetsloggDto
     aktivitetsloggV2?: AktivitetsloggV2Dto
     infotrygdhistorikk: InfotrygdhistorikkDto[]
     [x: string]: any
