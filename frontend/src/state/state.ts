@@ -21,6 +21,11 @@ export const skjulPåminnelserState = Recoil.atom({
     default: true,
 })
 
+export const hendelseprefix = Recoil.atom({
+    key: 'hendelseregex',
+    default: ""
+})
+
 export const åpneHendelseDokumentState = Recoil.atom<KontekstDto[]>({
     key: 'åpneHendelseDokument',
     default: [],
