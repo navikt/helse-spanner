@@ -10,6 +10,7 @@ spec:
   port: 3000
   ingresses:
     - https://spannerish.ansatt.dev.nav.no
+    - https://spannerish.intern.dev.nav.no
   liveness:
     initialDelay: 10
     path: internal/isalive
