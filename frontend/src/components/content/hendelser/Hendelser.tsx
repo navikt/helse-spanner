@@ -17,7 +17,7 @@ export const Hendelser = ({ hendelser }: { hendelser: Hendelsekontekst[] }) => {
     const [prefix, setPrefix] = useRecoilState(hendelseprefix)
     const toggleVisBareFeil = () => setVisBareFeil(!visBareFeil)
     const toggleVisPåminnelser = () => setSkjulPåminnelser(!skjulPåminnelser)
-    const harRettPrefix = (kontekst: Hendelsekontekst) => kontekst.kontekstType.toLowerCase().startsWith(prefix)
+    const harRettPrefix = (kontekst: Hendelsekontekst) => kontekst.kontekstType.toLowerCase().startsWith(prefix.toLowerCase())
     const oppdaterPrefix = (e: React.FormEvent<HTMLInputElement>) => {
         setPrefix(e.currentTarget.value)
     }
