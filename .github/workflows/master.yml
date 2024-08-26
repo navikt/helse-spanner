@@ -34,7 +34,7 @@ jobs:
     outputs:
       image: ${{ steps.docker-build-push.outputs.image }}
 
-  deployDev:
+  deploy:
     name: deploy
     needs: build
     runs-on: ubuntu-latest

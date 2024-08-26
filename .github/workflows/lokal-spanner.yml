@@ -1,0 +1,35 @@
+name: Bygge lokal-spanner image
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    name: build docker image
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21.x'
+          cache: 'gradle'
+      - name: test and build
+        run: ./gradlew build -settings-file lokal-spanner.settings.gradle.kts
+        env:
+          ORG_GRADLE_PROJECT_githubPassword: ${{ secrets.GITHUB_TOKEN }}
+      - name: build docker image
+        uses: nais/docker-build-push@v0
+        id: docker-build-push
+        with:
+          team: tbd
+          tag: latest
+          dockerfile: Dockerfile
+          docker_context: filbackend
+          image_suffix: lokal
+          project_id: ${{ vars.NAIS_MANAGEMENT_PROJECT_ID }}
+          identity_provider: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
