@@ -1,4 +1,4 @@
-rootProject.name = "lokal-spanner"
+rootProject.name = "spannerish"
 
 pluginManagement {
     repositories {

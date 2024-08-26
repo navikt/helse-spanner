@@ -54,6 +54,10 @@ fun main() {
                     else personer[uuid] = json
                     call.respond(Created)
                 }
+
+                get("/internal/*") {
+                    call.respond(OK)
+                }
             }
         }
 

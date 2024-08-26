@@ -1,7 +1,9 @@
-name: Bygge lokal-spanner image
+name: Bygge Spannerish og deploye til dev
 
 on:
   push:
+    paths-ignore:
+      - 'backend/**'
     branches:
       - master
 
@@ -19,7 +21,7 @@ jobs:
           java-version: '21.x'
           cache: 'gradle'
       - name: test and build
-        run: ./gradlew build -settings-file lokal-spanner.settings.gradle.kts
+        run: ./gradlew build -settings-file spannerish.settings.gradle.kts
         env:
           ORG_GRADLE_PROJECT_githubPassword: ${{ secrets.GITHUB_TOKEN }}
       - name: build docker image
@@ -30,6 +32,22 @@ jobs:
           tag: latest
           dockerfile: Dockerfile
           docker_context: filbackend
-          image_suffix: lokal
+          image_suffix: ish
           project_id: ${{ vars.NAIS_MANAGEMENT_PROJECT_ID }}
           identity_provider: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
+    outputs:
+      image: ${{ steps.docker-build-push.outputs.image }}
+
+  deployDev:
+    name: deploy to dev
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: nais/deploy/actions/deploy@v2
+        env:
+          CLUSTER: dev-gcp
+          RESOURCE: deploy/spannerish.yml
+          IMAGE: ${{ needs.build.outputs.image }}

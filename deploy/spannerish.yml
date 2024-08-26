@@ -1,0 +1,28 @@
+apiVersion: nais.io/v1alpha1
+kind: Application
+metadata:
+  name: spannerish
+  namespace: tbd
+  labels:
+    team: tbd
+spec:
+  image: {{image}}
+  port: 3000
+  ingresses:
+    - https://spannerish.ansatt.dev.nav.no
+  liveness:
+    initialDelay: 10
+    path: internal/isalive
+  readiness:
+    initialDelay: 10
+    path: internal/isready
+  replicas:
+    cpuThresholdPercentage: 90
+    max: 1
+    min: 1
+  resources:
+    limits:
+      memory: 4096Mi
+    requests:
+      cpu: 50m
+      memory: 128Mi
