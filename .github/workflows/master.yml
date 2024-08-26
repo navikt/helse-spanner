@@ -2,6 +2,8 @@ name: master
 
 on:
   push:
+    paths-ignore:
+      - 'filbackend/**'
     branches:
       - master
 
