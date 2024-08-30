@@ -1,5 +1,7 @@
 import java.io.File
+import java.time.LocalDateTime
 import java.util.UUID
+import java.util.concurrent.ConcurrentHashMap
 
 sealed interface Lagringsmedium {
     fun lagreHendelse(uuid: UUID, hendelse: String): Boolean
@@ -19,16 +21,40 @@ object Fil: Hentingsmedium {
 }
 
 object Minne: Hentingsmedium, Lagringsmedium {
-    private val personer = mutableMapOf<UUID, String>()
-    private val hendelser = mutableMapOf<UUID, String>()
-    override fun hentPerson(uuid: UUID) = personer[uuid]
-    override fun hentHendelse(uuid: UUID) = hendelser[uuid]
+    private data class Entry(val data: String, val timeout: LocalDateTime = LocalDateTime.now().plusWeeks(1))
+
+    private val personer = ConcurrentHashMap<UUID, Entry>()
+    private val hendelser = ConcurrentHashMap<UUID, Entry>()
+
+    private fun ConcurrentHashMap<UUID, Entry>.rydd(): String? {
+        val nå = LocalDateTime.now()
+        entries.removeIf { (_, entry) -> entry.timeout < nå }
+        return null
+    }
+
+    override fun hentPerson(uuid: UUID): String? {
+        val person = personer[uuid]?.data ?: return personer.rydd()
+        personer.rydd()
+        personer[uuid] = Entry(person) // Oppdaterer timeouten
+        return person
+    }
+
+    override fun hentHendelse(uuid: UUID): String? {
+        val hendelse = hendelser[uuid]?.data ?: return hendelser.rydd()
+        hendelser.rydd()
+        hendelser[uuid] = Entry(hendelse) // Oppdaterer timeouten
+        return hendelse
+    }
+
     override fun lagreHendelse(uuid: UUID, hendelse: String): Boolean {
-        hendelser[uuid] = hendelse
+        hendelser.rydd()
+        hendelser[uuid] = Entry(hendelse)
         return true
     }
+
     override fun lagrePerson(uuid: UUID, person: String): Boolean {
-        personer[uuid] = person
+        personer.rydd()
+        personer[uuid] = Entry(person)
         return true
     }
 }
