@@ -1,5 +1,3 @@
-import Filsluse.finnHendelse
-import Filsluse.finnPerson
 import io.ktor.http.*
 import io.ktor.http.ContentType.Application.Json
 import io.ktor.http.HttpStatusCode.Companion.BadRequest
@@ -17,8 +15,9 @@ import java.util.UUID
 
 fun main() {
     embeddedServer(CIO, environment = applicationEngineEnvironment {
-        val personer = mutableMapOf<UUID, String>()
-        val hendelser = mutableMapOf<UUID, String>()
+        // Mediumenes rekkefølge er _ikke_ likegyldig. De er i prioritert rekkefølge
+        val hentingsmedium = listOf(Minne, Fil)
+        val lagringsmedium = listOf<Lagringsmedium>(Minne)
 
         module {
             routing {
@@ -29,29 +28,34 @@ fun main() {
                 }
 
                 get("/api/person/") {
-                    val maskertId = call.request.headers["maskertId"]?.let { UUID.fromString(it) } ?: return@get call.respond(BadRequest)
-                    val person = personer[maskertId] ?: maskertId.finnPerson() ?: return@get call.respond(NotFound)
+                    val maskertId = call.uuidHeader("maskertId") ?: return@get call.respond(BadRequest)
+                    val person = hentingsmedium.hentPerson(maskertId) ?: return@get call.respond(NotFound)
                     call.respondText(person, Json, OK)
                 }
 
                 post("/api/uuid/") {
-                    val maskertId = call.request.headers["maskertId"]?.let { UUID.fromString(it) } ?: return@post call.respond(BadRequest)
-                    val person = personer[maskertId] ?: maskertId.finnPerson() ?: return@post call.respond(NotFound)
+                    val maskertId = call.uuidHeader("maskertId") ?: return@post call.respond(BadRequest)
+                    val person = hentingsmedium.hentPerson(maskertId) ?: return@post call.respond(NotFound)
                     call.respondText(person, Json, OK)
                 }
 
                 get("/api/hendelse/{meldingsreferanse}") {
-                    val meldingsreferanse = call.parameters["meldingsreferanse"]?.let { UUID.fromString(it) } ?: return@get call.respond(BadRequest)
-                    val hendelse = hendelser[meldingsreferanse] ?: meldingsreferanse.finnHendelse() ?: return@get call.respond(NotFound)
+                    val meldingsreferanse = call.uuidParameter("meldingsreferanse") ?: return@get call.respond(BadRequest)
+                    val hendelse = hentingsmedium.hentHendelse(meldingsreferanse) ?: return@get call.respond(NotFound)
                     call.respondText(hendelse, Json, OK)
                 }
 
-                post("/api/{type}/{uuid}") {
-                    val type = call.parameters["type"]?.takeIf { it in setOf("person", "hendelse") } ?: return@post call.respond(BadRequest)
-                    val uuid = call.parameters["uuid"]?.let { UUID.fromString(it) } ?: return@post call.respond(BadRequest)
-                    val json = call.receiveText()
-                    if (type == "hendelse") hendelser[uuid] = json
-                    else personer[uuid] = json
+                post("/api/person/{uuid}") {
+                    val uuid = call.uuidParameter("uuid") ?: return@post call.respond(BadRequest)
+                    val person = call.receiveText()
+                    lagringsmedium.lagrePerson(uuid, person)
+                    call.respond(Created)
+                }
+
+                post("/api/hendelse/{uuid}") {
+                    val uuid = call.uuidParameter("uuid") ?: return@post call.respond(BadRequest)
+                    val hendelse = call.receiveText()
+                    lagringsmedium.lagreHendelse(uuid, hendelse)
                     call.respond(Created)
                 }
 
@@ -67,6 +71,8 @@ fun main() {
     }).start(true)
 }
 
+private fun ApplicationCall.uuidHeader(navn: String) = request.headers[navn]?.let { UUID.fromString(it) }
+private fun ApplicationCall.uuidParameter(navn: String) = parameters[navn]?.let { UUID.fromString(it) }
 private fun Route.frontendRouting() {
     get("/person/*") {
         call.respondText(
