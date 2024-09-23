@@ -3,12 +3,14 @@ import {ContentView} from '../../state/state'
 import {Card} from "../Card";
 import {
     ArbeidsgiverDto,
-    BehandlingDto, EndringDto,
+    BehandlingDto,
+    EndringDto,
     FokastetVedtaksperiodeDto,
     PersonDto,
     UtbetalingDto,
     VedtakDto
 } from "../../state/dto";
+import parseISO from "date-fns/parseISO";
 
 type ContentCategoryProperties = {
     displayName: ContentView
@@ -43,6 +45,7 @@ export function ContentCategory({
         {Vedtaksperiode && tingene.vedtaksperioder.map((it) =>
             <Ramme key={it.id}  valgteTing={valgteTing} ting={it.id}><Vedtaksperiode vedtaksperiode={it} /></Ramme>
         )}
+        {valgteTing.length === 2 && tingene.vedtaksperioder.length===2 && <DagerMellom vedtaksperioder={tingene.vedtaksperioder}></DagerMellom>}
         {Behandling && tingene.behandlinger.map((it) =>
             <Ramme key={it.id}  valgteTing={valgteTing} ting={it.id}><Behandling behandling={it} /></Ramme>
         )}
@@ -103,7 +106,23 @@ export function fargeForTing(valgteTing: string[], ting: string) {
 export function Ramme({ valgteTing, ting, children }: { valgteTing: string[], ting: string, children: ReactNode }) {
     const color = fargeForTing(valgteTing, ting)
     if (!color) return null
-    return <Card style={{ borderStyle: valgteTing.length > 1 ? `solid` : 'none', borderWidth: '7px', borderColor: color }}>
+    return<Card style={{ borderStyle: valgteTing.length > 1 ? `solid` : 'none', borderWidth: '7px', borderColor: color }}>
         {children}
     </Card>
+}
+
+function DagerMellom({vedtaksperioder}: {vedtaksperioder: VedtakDto[]}) {
+    const sortedVedtaksperioder = vedtaksperioder.sort((v1, v2) => {
+        if (parseISO(v1.fom) > parseISO(v2.fom)) return 1
+        else return -1
+    })
+    const førsteTom = parseISO(sortedVedtaksperioder[0].tom)
+    const sisteFom = parseISO(sortedVedtaksperioder[1].fom)
+
+    /**
+     * Take the difference between the dates and divide by milliseconds per day.
+     * Round to nearest whole number to deal with DST.
+     */
+    const dagerMellom = Math.round((sisteFom.valueOf() - førsteTom.valueOf()) / (1000 * 60 * 60 * 24));
+    return <h3>{`Det er ${dagerMellom} dager mellom disse to vedtaksperiodene`}</h3>
 }
