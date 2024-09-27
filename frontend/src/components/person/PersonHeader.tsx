@@ -29,7 +29,7 @@ export const PersonHeader = ({ toggleValgtTing }: { toggleValgtTing: (e: boolean
                     </a>
                 </dd>
 
-                <dt>Søk etter vedtaksperiode eller utbetaling</dt>
+                <dt>Søk etter vedtaksperiode/utbetaling/behandling/vilkårsgrunnlag</dt>
                 <dd><VedtaksperiodeSøk toggleValgtTing={ toggleValgtTing } /></dd>
             </dl>
         </Box>
