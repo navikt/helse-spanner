@@ -16,10 +16,10 @@ export const VilkårsgrunnlagHistorikkNode = ({ vilkårsgrunnlagHistorikkInnslag
                 <SelectableTreeNode className={styles.VilkårsgrunnlagNode}
                                     indent={0}
                                     valgteTing={valgteTing}
-                                    ting={vilkårsgrunnlag.id}
+                                    ting={vilkårsgrunnlag.vilkårsgrunnlagId}
                                     vedValg={toggleValgtTing}
-                                    key={vilkårsgrunnlag.id}>
-                    <span key={vilkårsgrunnlag.id}>{`📍${vilkårsgrunnlag.skjæringstidspunkt}`} </span>
+                                    key={vilkårsgrunnlag.vilkårsgrunnlagId}>
+                    <span key={vilkårsgrunnlag.vilkårsgrunnlagId}>{`📍${vilkårsgrunnlag.skjæringstidspunkt}`} </span>
                 </SelectableTreeNode>
             ))
             }

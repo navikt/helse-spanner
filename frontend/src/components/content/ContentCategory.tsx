@@ -45,7 +45,7 @@ export function ContentCategory({
             <Ramme key={it.id} valgteTing={valgteTing} ting={it.id}><Arbeidsgiver arbeidsgiver={it} /></Ramme>
         )}
         {Vilkårsgrunnlag && tingene.vilkårsgrunnlag.map((it) =>
-            <Ramme key={it.id} valgteTing={valgteTing} ting={it.id}><Vilkårsgrunnlag vilkårsgrunnlag={it} /></Ramme>
+            <Ramme key={it.id} valgteTing={valgteTing} ting={it.vilkårsgrunnlagId}><Vilkårsgrunnlag vilkårsgrunnlag={it} /></Ramme>
         )}
         {Vedtaksperiode && tingene.vedtaksperioder.map((it) =>
             <Ramme key={it.id}  valgteTing={valgteTing} ting={it.id}><Vedtaksperiode vedtaksperiode={it} /></Ramme>
@@ -76,7 +76,7 @@ function HentVisning(person: PersonDto, valgteTing: string[]) {
         person: valgteTing.includes(person.aktørId) ? person : undefined,
         arbeidsgivere: person.arbeidsgivere.filter((it) => valgteTing.includes(it.id)),
         vilkårsgrunnlag: person.vilkårsgrunnlagHistorikk.length >= 1 ?
-            person.vilkårsgrunnlagHistorikk.flatMap((it) => it.vilkårsgrunnlag.filter((vilkårsgrunnlag) => valgteTing.includes(vilkårsgrunnlag.id)))
+            person.vilkårsgrunnlagHistorikk.flatMap((it) => it.vilkårsgrunnlag.filter((vilkårsgrunnlag) => valgteTing.includes(vilkårsgrunnlag.vilkårsgrunnlagId)))
             : [],
         vedtaksperioder: person.arbeidsgivere.flatMap((it) =>
             it.vedtaksperioder.filter((vedtaksperiode) => valgteTing.includes(vedtaksperiode.id))

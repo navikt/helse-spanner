@@ -26,7 +26,8 @@ export const createTestPerson = (
         aktiviteter: [],
         kontekster: [],
     },
-    infotrygdhistorikk: []
+    infotrygdhistorikk: [],
+    vilkårsgrunnlagHistorikk: []
 })
 
 export const createTestArbeidsgiver = (

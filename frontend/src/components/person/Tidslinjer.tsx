@@ -98,7 +98,7 @@ export const Tidslinjer = ({valgteTing, toggleValgtTing}: {
         <Timeline className={styles.tidslinje} direction={"right"} startDate={tidslinjeperiode.startDate}
                   endDate={tidslinjeperiode.endDate}>
             {skjæringstidspunkter.map((skjæringstidspunkt) => {
-                const detteVilkårsgrunnlaget = vilkårsgrunnlag.find((it) => it.skjæringstidspunkt == skjæringstidspunkt)?.id
+                const detteVilkårsgrunnlaget = vilkårsgrunnlag.find((it) => it.skjæringstidspunkt == skjæringstidspunkt)?.vilkårsgrunnlagId
                 return (<Timeline.Pin date={new Date(skjæringstidspunkt)} onClick={(e) => {
                     if (detteVilkårsgrunnlaget) toggleValgtTing(e, detteVilkårsgrunnlaget)
                 }}>

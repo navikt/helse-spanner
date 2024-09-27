@@ -18,7 +18,7 @@ export type VilkårsgrunnlaghistorikkDto = {
 }
 
 export type VilkårsgrunnlagDto = {
-    id: string,
+    vilkårsgrunnlagId: string,
     skjæringstidspunkt: string,
     [x: string]: any
 }
