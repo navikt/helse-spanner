@@ -87,13 +87,24 @@ export const Tidslinjer = ({valgteTing, toggleValgtTing}: {
         .map((it) => it as string)
     ))
 
+    const vilkårsgrunnlag = person.vilkårsgrunnlagHistorikk.length >= 1
+        ?
+        Array.from(new Set(person.vilkårsgrunnlagHistorikk[0].vilkårsgrunnlag))
+        :
+        []
+
 
     return (<div className="min-w-[800px]">
         <Timeline className={styles.tidslinje} direction={"right"} startDate={tidslinjeperiode.startDate}
                   endDate={tidslinjeperiode.endDate}>
-            {skjæringstidspunkter.map((it) => <Timeline.Pin date={new Date(it)}>
-                <p>Skjæringstidspunkt: {it}</p>
-            </Timeline.Pin>)}
+            {skjæringstidspunkter.map((skjæringstidspunkt) => {
+                const detteVilkårsgrunnlaget = vilkårsgrunnlag.find((it) => it.skjæringstidspunkt == skjæringstidspunkt)?.id
+                return (<Timeline.Pin date={new Date(skjæringstidspunkt)} onClick={(e) => {
+                    if (detteVilkårsgrunnlaget) toggleValgtTing(e, detteVilkårsgrunnlaget)
+                }}>
+                    <p>Skjæringstidspunkt: {skjæringstidspunkt}</p>
+                </Timeline.Pin>)
+            })}
 
             {person.arbeidsgivere
                 .filter((arbeidsgiver) => arbeidsgiver.vedtaksperioder.length > 0)
