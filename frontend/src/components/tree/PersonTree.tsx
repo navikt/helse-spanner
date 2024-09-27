@@ -8,6 +8,7 @@ import KopierPersonPåminnelseJson from "./KopierPersonPåminnelseJson";
 import SelectableTreeNode from "./SelectableTreeNode";
 import {ArbeidsgiverNode} from "./ArbeidsgiverNode";
 import {Key, useKeyboard} from "./useKeyboard";
+import {VilkårsgrunnlagHistorikkNode} from "./VilkårsgrunnlagNode";
 
 
 interface PersonTreeProps {
@@ -67,6 +68,13 @@ export const PersonTree = ({valgteTing, toggleValgtTing } : PersonTreeProps) => 
                         toggleValgtTing={toggleValgtTing}
                     />
                 ))}
+                {person.vilkårsgrunnlagHistorikk.length >= 1 &&
+                    <VilkårsgrunnlagHistorikkNode
+                        valgteTing={valgteTing}
+                        toggleValgtTing={toggleValgtTing}
+                        vilkårsgrunnlagHistorikkInnslag={person.vilkårsgrunnlagHistorikk[0]}
+                    />
+                }
             </Box>
         </Box>
     )

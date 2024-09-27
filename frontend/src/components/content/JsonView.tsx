@@ -9,7 +9,7 @@ import {
     FokastetVedtaksperiodeDto,
     PersonDto,
     UtbetalingDto,
-    VedtakDto
+    VedtakDto, VilkårsgrunnlagDto
 } from "../../state/dto";
 
 const Arbeidsgiver = ({ arbeidsgiver }: { arbeidsgiver: ArbeidsgiverDto }) => {
@@ -29,6 +29,15 @@ const Person = ({ person }: { person: PersonDto }) => {
     )
 }
 Person.displayName = 'JsonView.Person'
+
+const Vilkårsgrunnlag = ({ vilkårsgrunnlag }: { vilkårsgrunnlag: VilkårsgrunnlagDto }) => {
+    return (
+        <div>
+            <ReactJsonMedBedreKopiering src={vilkårsgrunnlag} />
+        </div>
+    )
+}
+Person.displayName = 'JsonView.Vilkårsgrunnlag'
 
 const Vedtaksperiode = ({ vedtaksperiode }: { vedtaksperiode: VedtakDto }) => {
     return (
@@ -101,7 +110,7 @@ export const JsonView = ({ person, valgteTing }: { person: PersonDto, valgteTing
             displayName={ContentView.Json}
             person={person}
             valgteTing={valgteTing}
-            {...{ Person, Arbeidsgiver, Vedtaksperiode, ForkastetVedtaksperiode, Utbetaling, Behandling, Endring }}
+            {...{ Person, Vilkårsgrunnlag, Arbeidsgiver, Vedtaksperiode, ForkastetVedtaksperiode, Utbetaling, Behandling, Endring }}
         />
     }, [valgteTing])
 }

@@ -8,7 +8,7 @@ import {
     FokastetVedtaksperiodeDto,
     PersonDto,
     UtbetalingDto,
-    VedtakDto
+    VedtakDto, VilkårsgrunnlagDto
 } from "../../state/dto";
 import parseISO from "date-fns/parseISO";
 
@@ -17,6 +17,7 @@ type ContentCategoryProperties = {
     person: PersonDto,
     Person?: React.FC<{ person: PersonDto }>
     Arbeidsgiver?: React.FC<{ arbeidsgiver: ArbeidsgiverDto }>
+    Vilkårsgrunnlag?: React.FC<{ vilkårsgrunnlag: VilkårsgrunnlagDto }>
     Vedtaksperiode?: React.FC<{ vedtaksperiode: VedtakDto }>
     ForkastetVedtaksperiode?: React.FC<{ vedtaksperiode: FokastetVedtaksperiodeDto }>
     Utbetaling?: React.FC<{ utbetaling: UtbetalingDto }>,
@@ -29,6 +30,7 @@ export function ContentCategory({
     person,
     Person = undefined,
     Arbeidsgiver = undefined,
+    Vilkårsgrunnlag = undefined,
     Vedtaksperiode = undefined,
     ForkastetVedtaksperiode = undefined,
     Utbetaling = undefined,
@@ -41,6 +43,9 @@ export function ContentCategory({
         {Person && tingene.person && <Ramme key={tingene.person.aktørId} valgteTing={valgteTing} ting={tingene.person.aktørId}><Person person={tingene.person} /></Ramme>}
         {Arbeidsgiver && tingene.arbeidsgivere.map((it) =>
             <Ramme key={it.id} valgteTing={valgteTing} ting={it.id}><Arbeidsgiver arbeidsgiver={it} /></Ramme>
+        )}
+        {Vilkårsgrunnlag && tingene.vilkårsgrunnlag.map((it) =>
+            <Ramme key={it.id} valgteTing={valgteTing} ting={it.id}><Vilkårsgrunnlag vilkårsgrunnlag={it} /></Ramme>
         )}
         {Vedtaksperiode && tingene.vedtaksperioder.map((it) =>
             <Ramme key={it.id}  valgteTing={valgteTing} ting={it.id}><Vedtaksperiode vedtaksperiode={it} /></Ramme>
@@ -70,6 +75,9 @@ function HentVisning(person: PersonDto, valgteTing: string[]) {
     return {
         person: valgteTing.includes(person.aktørId) ? person : undefined,
         arbeidsgivere: person.arbeidsgivere.filter((it) => valgteTing.includes(it.id)),
+        vilkårsgrunnlag: person.vilkårsgrunnlagHistorikk.length >= 1 ?
+            person.vilkårsgrunnlagHistorikk[0].vilkårsgrunnlag.filter((vilkårsgrunnlag) => valgteTing.includes(vilkårsgrunnlag.id))
+            : [],
         vedtaksperioder: person.arbeidsgivere.flatMap((it) =>
             it.vedtaksperioder.filter((vedtaksperiode) => valgteTing.includes(vedtaksperiode.id))
         ),

@@ -6,6 +6,20 @@ export type PersonDto = {
     aktivitetslogg?: AktivitetsloggDto
     aktivitetsloggV2?: AktivitetsloggV2Dto
     infotrygdhistorikk: InfotrygdhistorikkDto[]
+    vilkårsgrunnlagHistorikk: VilkårsgrunnlaghistorikkDto[]
+    [x: string]: any
+}
+
+export type VilkårsgrunnlaghistorikkDto = {
+    id: string,
+    opprettet: string,
+    vilkårsgrunnlag: VilkårsgrunnlagDto[],
+    [x: string]: any
+}
+
+export type VilkårsgrunnlagDto = {
+    id: string,
+    skjæringstidspunkt: string,
     [x: string]: any
 }
 

@@ -26057,11 +26057,13 @@ export let jsonPerson: PersonDto = {
             opprettet: '2021-07-23T15:51:24.883129265',
             vilkårsgrunnlag: [
                 {
+                    id: "c77e2aab-a454-4b78-a3a4-ef87e5f1959b",
                     skjæringstidspunkt: '2017-12-01',
                     type: 'Infotrygd',
                 },
                 {
                     skjæringstidspunkt: '2020-01-01',
+                    id: "a77e2aab-a454-4b78-a3a4-ef87e5f1959c",
                     type: 'Vilkårsprøving',
                     antallOpptjeningsdagerErMinst: 1095,
                     avviksprosent: 0.0,
@@ -26079,6 +26081,7 @@ export let jsonPerson: PersonDto = {
             opprettet: '2021-07-23T15:51:22.51965675',
             vilkårsgrunnlag: [
                 {
+                    id: "b77e2aab-a454-4b78-a3a4-ef87e5f1959h",
                     skjæringstidspunkt: '2017-12-01',
                     type: 'Infotrygd',
                 },
