@@ -89,7 +89,7 @@ export const Tidslinjer = ({valgteTing, toggleValgtTing}: {
 
     const vilkårsgrunnlag = person.vilkårsgrunnlagHistorikk.length >= 1
         ?
-        Array.from(new Set(person.vilkårsgrunnlagHistorikk[0].vilkårsgrunnlag))
+        Array.from(new Set(person.vilkårsgrunnlagHistorikk.flatMap((it) => it.vilkårsgrunnlag)))
         :
         []
 

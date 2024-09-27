@@ -76,7 +76,7 @@ function HentVisning(person: PersonDto, valgteTing: string[]) {
         person: valgteTing.includes(person.aktørId) ? person : undefined,
         arbeidsgivere: person.arbeidsgivere.filter((it) => valgteTing.includes(it.id)),
         vilkårsgrunnlag: person.vilkårsgrunnlagHistorikk.length >= 1 ?
-            person.vilkårsgrunnlagHistorikk[0].vilkårsgrunnlag.filter((vilkårsgrunnlag) => valgteTing.includes(vilkårsgrunnlag.id))
+            person.vilkårsgrunnlagHistorikk.flatMap((it) => it.vilkårsgrunnlag.filter((vilkårsgrunnlag) => valgteTing.includes(vilkårsgrunnlag.id)))
             : [],
         vedtaksperioder: person.arbeidsgivere.flatMap((it) =>
             it.vedtaksperioder.filter((vedtaksperiode) => valgteTing.includes(vedtaksperiode.id))
