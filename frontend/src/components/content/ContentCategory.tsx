@@ -71,12 +71,21 @@ export function ContentCategory({
 
 ContentCategory.displayName = 'ContentCategory'
 
+function filtrerUtDuplikateVilkårsgrunnlag(vilkårsgrunnlagDtos: VilkårsgrunnlagDto[]): VilkårsgrunnlagDto[] {
+    if (vilkårsgrunnlagDtos.length <= 1) return vilkårsgrunnlagDtos
+    let unike: VilkårsgrunnlagDto[] = [];
+    vilkårsgrunnlagDtos.forEach((vilkårsgrunnlag) => {
+        if (!unike.find((it) => it.vilkårsgrunnlagId == vilkårsgrunnlag.vilkårsgrunnlagId)) unike = [...unike, vilkårsgrunnlag]
+    })
+    return unike
+}
+
 function HentVisning(person: PersonDto, valgteTing: string[]) {
     return {
         person: valgteTing.includes(person.aktørId) ? person : undefined,
         arbeidsgivere: person.arbeidsgivere.filter((it) => valgteTing.includes(it.id)),
         vilkårsgrunnlag: person.vilkårsgrunnlagHistorikk.length >= 1 ?
-            [...new Set(person.vilkårsgrunnlagHistorikk.flatMap((it) => it.vilkårsgrunnlag.filter((vilkårsgrunnlag) => valgteTing.includes(vilkårsgrunnlag.vilkårsgrunnlagId))))]
+            filtrerUtDuplikateVilkårsgrunnlag(person.vilkårsgrunnlagHistorikk.flatMap((it) => it.vilkårsgrunnlag.filter((vilkårsgrunnlag) => valgteTing.includes(vilkårsgrunnlag.vilkårsgrunnlagId))))
             : [],
         vedtaksperioder: person.arbeidsgivere.flatMap((it) =>
             it.vedtaksperioder.filter((vedtaksperiode) => valgteTing.includes(vedtaksperiode.id))
