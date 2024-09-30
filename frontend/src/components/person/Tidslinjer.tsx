@@ -87,22 +87,34 @@ export const Tidslinjer = ({valgteTing, toggleValgtTing}: {
         .map((it) => it as string)
     ))
 
-    const vilkårsgrunnlag = person.vilkårsgrunnlagHistorikk.length >= 1
+    const aktiveVilkårsgrunnlag = person.vilkårsgrunnlagHistorikk.length >= 1
+        ?
+        Array.from(new Set(person.vilkårsgrunnlagHistorikk[0].vilkårsgrunnlag))
+        :
+        []
+
+    const alleVilkårsgrunnlag = person.vilkårsgrunnlagHistorikk.length >= 1
         ?
         Array.from(new Set(person.vilkårsgrunnlagHistorikk.flatMap((it) => it.vilkårsgrunnlag)))
         :
         []
 
-
     return (<div className="min-w-[800px]">
         <Timeline className={styles.tidslinje} direction={"right"} startDate={tidslinjeperiode.startDate}
                   endDate={tidslinjeperiode.endDate}>
             {skjæringstidspunkter.map((skjæringstidspunkt) => {
-                const detteVilkårsgrunnlaget = vilkårsgrunnlag.find((it) => it.skjæringstidspunkt == skjæringstidspunkt)?.vilkårsgrunnlagId
+                const detteVilkårsgrunnlaget = alleVilkårsgrunnlag.find((it) => it.skjæringstidspunkt == skjæringstidspunkt)?.vilkårsgrunnlagId
+                const aktivt = aktiveVilkårsgrunnlag.find((it) => it.skjæringstidspunkt == skjæringstidspunkt)
+                const dødt = detteVilkårsgrunnlaget && !aktivt
+                const tekst = aktivt ?
+                    <p>Skjæringstidspunkt: {skjæringstidspunkt} <br/> Status: Med aktivt vilkårsgrunnlag </p>
+                    : dødt ?
+                        <p>Skjæringstidspunkt: {skjæringstidspunkt} <br/> Status: Med dødt vilkårsgrunnlag </p>
+                        : <p>Skjæringstidspunkt: {skjæringstidspunkt} <br/> Status: Ikke vilkårsprøvd </p>
                 return (<Timeline.Pin date={new Date(skjæringstidspunkt)} onClick={(e) => {
                     if (detteVilkårsgrunnlaget) toggleValgtTing(e, detteVilkårsgrunnlaget)
                 }}>
-                    <p>Skjæringstidspunkt: {skjæringstidspunkt}</p>
+                    {tekst}
                 </Timeline.Pin>)
             })}
 
