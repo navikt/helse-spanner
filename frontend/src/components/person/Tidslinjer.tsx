@@ -111,7 +111,7 @@ export const Tidslinjer = ({valgteTing, toggleValgtTing}: {
                     : dødt ?
                         <p>Skjæringstidspunkt: {skjæringstidspunkt} <br/> Status: Med dødt vilkårsgrunnlag </p>
                         : <p>Skjæringstidspunkt: {skjæringstidspunkt} <br/> Status: Ikke vilkårsprøvd </p>
-                return (<Timeline.Pin date={new Date(skjæringstidspunkt)} onClick={(e) => {
+                return (<Timeline.Pin style={aktivt ? {borderStyle: "dotted"} : {}} date={new Date(skjæringstidspunkt)} onClick={(e) => {
                     if (detteVilkårsgrunnlaget) toggleValgtTing(e, detteVilkårsgrunnlaget)
                 }}>
                     {tekst}
