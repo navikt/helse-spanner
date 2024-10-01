@@ -109,15 +109,21 @@ export const Tidslinjer = ({valgteTing, toggleValgtTing}: {
                 const tekst = aktivt ?
                     <p>Skjæringstidspunkt: {skjæringstidspunkt} <br/> Status: Med aktivt vilkårsgrunnlag </p>
                     : dødt ?
-                        <p>Skjæringstidspunkt: {skjæringstidspunkt} <br/> Status: Med dødt vilkårsgrunnlag </p>
+                        <p>Skjæringstidspunkt: {skjæringstidspunkt} <br/> Status: Med dødt vilkårsgrunnlag💀 </p>
                         : <p>Skjæringstidspunkt: {skjæringstidspunkt} <br/> Status: Ikke vilkårsprøvd </p>
-                return (<Timeline.Pin style={aktivt ? {borderStyle: "dotted"} : {}} date={new Date(skjæringstidspunkt)} onClick={(e) => {
-                    if (detteVilkårsgrunnlaget) toggleValgtTing(e, detteVilkårsgrunnlaget)
-                }}>
+                return (<Timeline.Pin
+                    style={aktivt ? {borderStyle: "dotted"} : dødt ? {
+                        borderStyle: "solid",
+                        borderWidth: "thick",
+                        borderColor: "whitesmoke"
+                    } : {}}
+                    date={new Date(skjæringstidspunkt)}
+                    onClick={(e) => {
+                        if (detteVilkårsgrunnlaget) toggleValgtTing(e, detteVilkårsgrunnlaget)
+                    }}>
                     {tekst}
                 </Timeline.Pin>)
             })}
-
             {person.arbeidsgivere
                 .filter((arbeidsgiver) => arbeidsgiver.vedtaksperioder.length > 0)
                 .map((arbeidsgiver) => {
