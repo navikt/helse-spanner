@@ -139,7 +139,9 @@ function DagerMellom({vedtaksperioder}: {vedtaksperioder: VedtakDto[]}) {
     /**
      * Take the difference between the dates and divide by milliseconds per day.
      * Round to nearest whole number to deal with DST.
+     * This computes whole COMPLETED DAYS
+     * -1 to get the number of days in the GAP
      */
-    const dagerMellom = Math.round((sisteFom.valueOf() - førsteTom.valueOf()) / (1000 * 60 * 60 * 24));
+    const dagerMellom = Math.round((sisteFom.valueOf() - førsteTom.valueOf()) / (1000 * 60 * 60 * 24)) - 1;
     return <h3>{`Det er ${dagerMellom} dager mellom disse to vedtaksperiodene`}</h3>
 }
