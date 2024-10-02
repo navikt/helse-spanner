@@ -247,7 +247,7 @@ function toShortChar(dagtype: string): string | null {
 const sortKronologisk = (a: DagDto, b: DagDto) => {
     const aDag = (a.fom || a.dato)!!
     const bDag = (b.fom || b.dato)!!
-    if (somNorskDato(aDag) > somNorskDato(bDag)) return 1
+    if (parseISO(aDag) > parseISO(bDag)) return 1
     else return -1
 }
 
