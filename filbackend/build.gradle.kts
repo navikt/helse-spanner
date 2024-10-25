@@ -1,6 +1,6 @@
 import java.nio.file.Paths
 
-val ktorVersion = "2.3.7"
+val ktorVersion = "2.3.12"
 
 plugins {
     kotlin("jvm") version "1.9.22"
@@ -27,7 +27,7 @@ dependencies {
     implementation("io.ktor:ktor-server-core:$ktorVersion")
     implementation("io.ktor:ktor-server-cio:$ktorVersion")
     implementation("io.ktor:ktor-serialization-jackson:$ktorVersion")
-    implementation("ch.qos.logback:logback-classic:1.4.12")
+    implementation("ch.qos.logback:logback-classic:1.4.14")
     implementation("net.logstash.logback:logstash-logback-encoder:7.4") {
         exclude("com.fasterxml.jackson.core")
         exclude("com.fasterxml.jackson.dataformat")
