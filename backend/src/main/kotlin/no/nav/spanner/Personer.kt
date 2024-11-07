@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode
 import com.fasterxml.jackson.databind.util.RawValue
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.github.navikt.tbd_libs.azure.AzureTokenProvider
+import com.github.navikt.tbd_libs.result_object.getOrThrow
 import com.github.navikt.tbd_libs.spurtedu.SkjulRequest
 import com.github.navikt.tbd_libs.spurtedu.SpurteDuClient
 import io.ktor.client.*
@@ -227,6 +228,6 @@ data class ClientIdWithName(val scope: String, val displayName: String) {
         log.info("Retrieving OBO token for $displayName")
         return azureAD.onBehalfOfToken(scope, accessToken).also {
             log.info("OBO token for $displayName retrieved")
-        }.token
+        }.getOrThrow().token
     }
 }

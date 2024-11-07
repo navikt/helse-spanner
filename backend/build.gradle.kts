@@ -2,11 +2,10 @@ import java.nio.file.Paths
 
 val junitJupiterVersion = "5.10.2"
 val ktorVersion = "2.3.12"
-val tokenValidatorVersion = "1.3.10"
-val tbdLibsVersion = "2024.05.31-08.02-2c3441c1"
+val tbdLibsVersion = "2024.11.07-14.46-324efe0f"
 
 plugins {
-    kotlin("jvm") version "1.9.22"
+    kotlin("jvm") version "2.0.21"
 }
 
 repositories {
