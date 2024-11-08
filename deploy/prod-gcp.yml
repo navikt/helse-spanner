@@ -50,6 +50,7 @@ spec:
         - application: spleis-api
         - application: sparsom-api
         - application: spurtedu
+        - application: speed-api
   secureLogs:
     enabled: true
   env:
