@@ -94,15 +94,10 @@ fun Application.spanner(spleis: Personer, config: AzureADConfig, development: Bo
             }
             get("/api/person/") {
                 audit()
-                val (idType, idValue) = call.personId()
-                logg
-                    .åpent("idType", idType)
-                    .sensitivt("idValue", idValue)
-                    .call(this.call)
-                    .info()
-                if (idValue.isNullOrBlank())
-                    return@get call.respond(HttpStatusCode.BadRequest, FeilRespons("bad_request", "${IdType.AKTORID.header} or ${IdType.FNR.header} must be set"))
-                spleis.person(call, idValue, idType)
+                val maskertId = call.request.headers[IdType.MASKERT_ID.header]
+                    ?: return@get call.respond(HttpStatusCode.BadRequest, FeilRespons("bad_request", "${IdType.AKTORID.header} or ${IdType.FNR.header} must be set"))
+                logg.call(this.call).info()
+                spleis.person(call, maskertId)
             }
             post("/api/uuid/") {
                 audit()

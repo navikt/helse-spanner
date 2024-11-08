@@ -9,11 +9,11 @@ import no.nav.spanner.Personer
 import no.nav.spanner.logger
 
 object LokaleKjenninger : Personer {
-    override suspend fun person(call: ApplicationCall, id: String, idType: IdType) {
-        val response = when (id) {
+    override suspend fun person(call: ApplicationCall, maskertId: String) {
+        val response = when (maskertId) {
             "113eb3df-102d-4a07-9270-2caa648c62f4" -> lesJson("12020052345")
             "48bfef57-3080-4f19-98eb-5cc72d9d16c5" -> lesJson("2392363031327")
-            else -> throw NotFoundException("no person with identifier: ${id}")
+            else -> throw NotFoundException("no person with identifier: $maskertId")
         }.also {
             logger.trace("person fetched = ${it}")
         }

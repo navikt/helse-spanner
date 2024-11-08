@@ -35,7 +35,7 @@ import java.util.*
 val logger = LoggerFactory.getLogger(Spleis::class.java)
 
 interface Personer {
-    suspend fun person(call: ApplicationCall, id: String, idType: IdType)
+    suspend fun person(call: ApplicationCall, maskertId: String)
     suspend fun maskerPerson(call: ApplicationCall, id: String, idType: IdType)
     suspend fun speilperson(call: ApplicationCall, fnr: String)
     suspend fun hendelse(call: ApplicationCall, meldingsreferanse: String)
@@ -98,18 +98,17 @@ class Spleis(
         call.respondText(""" { "id": "${maskertId.id}" } """, Json, OK)
     }
 
-    override suspend fun person(call: ApplicationCall, id: String, idType: IdType) {
+    override suspend fun person(call: ApplicationCall, maskertId: String) {
         val accessToken = call.bearerToken ?: return call.respond(Unauthorized)
         val url = URLBuilder(baseUrl).apply {
-            if (idType == IdType.MASKERT_ID) path("api", "person-json", id)
-            else path("api", "person-json")
+            path("api", "person-json", maskertId)
         }.build()
 
-        val log = Log.logger(Personer::class.java)
+        val log = Log.logger(this::class.java)
 
         val response = coroutineScope {
             val aktivitetslogg: Deferred<String?> = async(Dispatchers.IO) {
-                aktivitetslogg(accessToken, id, call.callId ?: UUID.randomUUID().toString())
+                aktivitetslogg(accessToken, maskertId, call.callId ?: UUID.randomUUID().toString())
             }
 
             val oboToken = spleis.token(azureAD, accessToken)
@@ -118,7 +117,7 @@ class Spleis(
                 try {
                     httpClient.get(url) {
                         header("Authorization", "Bearer $oboToken")
-                        header(idType.header, id)
+                        header(IdType.MASKERT_ID.header, maskertId)
                         accept(Json)
                     }
                 } catch (e: ClientRequestException) {
