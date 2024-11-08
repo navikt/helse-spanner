@@ -133,8 +133,13 @@ fun Application.spanner(
                 }
 
                 if (fødselsnummer == null) return@get call.respond(HttpStatusCode.BadRequest, FeilRespons("bad_request", "maskertId pekte ikke på et fødselsnummer"))
-                val identer = speedClient.hentFødselsnummerOgAktørId(fødselsnummer, call.callId ?: UUID.randomUUID().toString()).getOrThrow()
-                spleis.person(call, fødselsnummer, identer.aktørId)
+                val aktørId = try {
+                    speedClient.hentFødselsnummerOgAktørId(fødselsnummer, call.callId ?: UUID.randomUUID().toString()).getOrThrow().aktørId
+                } catch (err: Exception) {
+                    if (System.getenv("NAIS_CLUSTER_NAME") == "dev-gcp") "0000000000000"
+                    else throw err
+                }
+                spleis.person(call, fødselsnummer, aktørId)
             }
             post("/api/uuid/") {
                 audit()
