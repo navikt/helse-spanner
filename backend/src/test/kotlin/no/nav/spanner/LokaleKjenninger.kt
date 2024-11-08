@@ -6,7 +6,7 @@ import io.ktor.server.response.*
 import no.nav.spanner.Personer
 
 object LokaleKjenninger : Personer {
-    override suspend fun person(call: ApplicationCall, fnr: String) {
+    override suspend fun person(call: ApplicationCall, fnr: String, aktørId: String) {
         val response = lesJson(fnr)
         call.respondText(response, ContentType.Application.Json, HttpStatusCode.OK)
     }

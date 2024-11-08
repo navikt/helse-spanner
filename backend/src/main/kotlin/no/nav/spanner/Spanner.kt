@@ -133,8 +133,8 @@ fun Application.spanner(
                 }
 
                 if (fødselsnummer == null) return@get call.respond(HttpStatusCode.BadRequest, FeilRespons("bad_request", "maskertId pekte ikke på et fødselsnummer"))
-
-                spleis.person(call, fødselsnummer)
+                val identer = speedClient.hentFødselsnummerOgAktørId(fødselsnummer, call.callId ?: UUID.randomUUID().toString()).getOrThrow()
+                spleis.person(call, fødselsnummer, identer.aktørId)
             }
             post("/api/uuid/") {
                 audit()

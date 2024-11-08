@@ -2,6 +2,8 @@ package no.nav.spanner
 
 import com.auth0.jwk.JwkProviderBuilder
 import com.fasterxml.jackson.module.kotlin.readValue
+import com.github.navikt.tbd_libs.result_object.ok
+import com.github.navikt.tbd_libs.speed.IdentResponse
 import com.github.navikt.tbd_libs.speed.SpeedClient
 import com.github.navikt.tbd_libs.spurtedu.SkjulRequest
 import com.github.navikt.tbd_libs.spurtedu.SkjulResponse
@@ -29,7 +31,14 @@ class E2ETest {
         issuer = "default",
         clientId = "whatever"
     )
-    private val speedClient = mockk<SpeedClient>()
+    private val speedClient = mockk<SpeedClient> {
+        every { hentFødselsnummerOgAktørId(any(), any()) } returns IdentResponse(
+            fødselsnummer = "fnr",
+            aktørId = "aktør",
+            npid = null,
+            kilde = IdentResponse.KildeResponse.PDL
+        ).ok()
+    }
     private val påkrevdSpurteduTilgang = "skikkelig_tøysete_claim"
     private val spurteDuClient = mockk<SpurteDuClient> {
         val skjulRequests = mutableListOf<SkjulRequest>()

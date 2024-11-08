@@ -33,7 +33,7 @@ import java.util.*
 val logger = LoggerFactory.getLogger(Spleis::class.java)
 
 interface Personer {
-    suspend fun person(call: ApplicationCall, fnr: String)
+    suspend fun person(call: ApplicationCall, fnr: String, aktørId: String)
     suspend fun speilperson(call: ApplicationCall, fnr: String)
     suspend fun hendelse(call: ApplicationCall, meldingsreferanse: String)
 }
@@ -74,7 +74,7 @@ class Spleis(
         }
     }
 
-    override suspend fun person(call: ApplicationCall, fnr: String) {
+    override suspend fun person(call: ApplicationCall, fnr: String, aktørId: String) {
         val accessToken = call.bearerToken ?: return call.respond(Unauthorized)
         val url = URLBuilder(baseUrl).apply {
             path("api", "person-json")
@@ -112,6 +112,7 @@ class Spleis(
             if (response.status.value !in 200..299) throw BadRequestException("Fikk problemer mot spleis")
 
             val node = objectMapper.readTree(response.bodyAsText()) as ObjectNode
+            node.put("aktørId", aktørId)
             node.putRawValue("aktivitetsloggV2", RawValue(aktivitetslogg.await()))
             node.toString()
         }
