@@ -5,8 +5,6 @@ import com.fasterxml.jackson.databind.util.RawValue
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.github.navikt.tbd_libs.azure.AzureTokenProvider
 import com.github.navikt.tbd_libs.result_object.getOrThrow
-import com.github.navikt.tbd_libs.spurtedu.SkjulRequest
-import com.github.navikt.tbd_libs.spurtedu.SpurteDuClient
 import io.ktor.client.*
 import io.ktor.client.engine.cio.*
 import io.ktor.client.plugins.*
@@ -35,8 +33,7 @@ import java.util.*
 val logger = LoggerFactory.getLogger(Spleis::class.java)
 
 interface Personer {
-    suspend fun person(call: ApplicationCall, maskertId: String)
-    suspend fun maskerPerson(call: ApplicationCall, id: String, idType: IdType)
+    suspend fun person(call: ApplicationCall, fnr: String)
     suspend fun speilperson(call: ApplicationCall, fnr: String)
     suspend fun hendelse(call: ApplicationCall, meldingsreferanse: String)
 }
@@ -46,9 +43,7 @@ class Spleis(
     private val baseUrl: String = "http://spleis-api.tbd.svc.cluster.local",
     spleisScope: String,
     private val sparsomBaseUrl: String = "http://sparsom-api.tbd.svc.cluster.local",
-    sparsomScope: String,
-    private val spurteDuClient: SpurteDuClient,
-    private val påkrevdSpurteduTilgang: String = System.getenv("SPURTE_DU_TILGANG")
+    sparsomScope: String
 ) : Personer {
     private val spleis = ClientIdWithName(spleisScope, "spleis")
     private val sparsom = ClientIdWithName(sparsomScope, "sparsom")
@@ -69,11 +64,7 @@ class Spleis(
             baseUrl = spannerConfig.spleisUrl,
             spleisScope = spannerConfig.spleisScope,
             sparsomBaseUrl = spannerConfig.sparsomUrl,
-            sparsomScope = spannerConfig.sparsomScope,
-            spurteDuClient = SpurteDuClient(
-                objectMapper = objectMapper,
-                tokenProvider = azureAD
-            )
+            sparsomScope = spannerConfig.sparsomScope
         )
 
         private val ApplicationCall.bearerToken: String? get() {
@@ -83,42 +74,30 @@ class Spleis(
         }
     }
 
-    override suspend fun maskerPerson(call: ApplicationCall, id: String, idType: IdType) {
-        val payload = SkjulRequest.SkjulTekstRequest(
-            tekst = objectMapper.writeValueAsString(mapOf(
-                "ident" to id,
-                "identtype" to when (idType) {
-                    IdType.FNR, IdType.AKTORID -> idType.name
-                    else -> throw BadRequestException("støtter kun fnr og aktorid")
-                }
-            )),
-            påkrevdTilgang = påkrevdSpurteduTilgang
-        )
-        val maskertId = spurteDuClient.skjul(payload)
-        call.respondText(""" { "id": "${maskertId.id}" } """, Json, OK)
-    }
-
-    override suspend fun person(call: ApplicationCall, maskertId: String) {
+    override suspend fun person(call: ApplicationCall, fnr: String) {
         val accessToken = call.bearerToken ?: return call.respond(Unauthorized)
         val url = URLBuilder(baseUrl).apply {
-            path("api", "person-json", maskertId)
+            path("api", "person-json")
         }.build()
 
         val log = Log.logger(this::class.java)
 
         val response = coroutineScope {
             val aktivitetslogg: Deferred<String?> = async(Dispatchers.IO) {
-                aktivitetslogg(accessToken, maskertId, call.callId ?: UUID.randomUUID().toString())
+                aktivitetslogg(accessToken, fnr, call.callId ?: UUID.randomUUID().toString())
             }
 
             val oboToken = spleis.token(azureAD, accessToken)
 
             val response =
                 try {
-                    httpClient.get(url) {
+                    httpClient.post(url) {
                         header("Authorization", "Bearer $oboToken")
-                        header(IdType.MASKERT_ID.header, maskertId)
                         accept(Json)
+                        contentType(Json)
+                        setBody(mapOf(
+                            "fødselsnummer" to fnr
+                        ))
                     }
                 } catch (e: ClientRequestException) {
                     if (e.response.status == HttpStatusCode.NotFound) {
@@ -191,7 +170,7 @@ class Spleis(
                 .response(response)
                 .info("Response from sparsom")
             response.bodyAsText()
-        } catch (e : ClientRequestException) {
+        } catch (_ : ClientRequestException) {
             null
         }
     }

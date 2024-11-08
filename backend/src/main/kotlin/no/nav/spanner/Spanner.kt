@@ -1,6 +1,14 @@
 package no.nav.spanner
 
+import com.fasterxml.jackson.core.JsonParseException
+import com.github.navikt.tbd_libs.result_object.getOrThrow
+import com.github.navikt.tbd_libs.speed.SpeedClient
+import com.github.navikt.tbd_libs.spurtedu.SkjulRequest
+import com.github.navikt.tbd_libs.spurtedu.SpurteDuClient
 import io.ktor.http.*
+import io.ktor.http.ContentType.Application.Json
+import io.ktor.http.HttpStatusCode.Companion.OK
+import io.ktor.http.auth.HttpAuthHeader
 import io.ktor.serialization.jackson.*
 import io.ktor.server.application.*
 import io.ktor.server.auth.*
@@ -28,7 +36,14 @@ enum class IdType(val header: String) {
 
 private val logg = Log.logger("Spanner")
 
-fun Application.spanner(spleis: Personer, config: AzureADConfig, development: Boolean) {
+fun Application.spanner(
+    spleis: Personer,
+    speedClient: SpeedClient,
+    spurteDuClient: SpurteDuClient,
+    påkrevdSpurteduTilgang: String,
+    config: AzureADConfig,
+    development: Boolean,
+) {
 
     install(CallId) {
         generate {
@@ -75,7 +90,7 @@ fun Application.spanner(spleis: Personer, config: AzureADConfig, development: Bo
         }
     }
 
-    install(ContentNegotiation) { register(ContentType.Application.Json, JacksonConverter(objectMapper)) }
+    install(ContentNegotiation) { register(Json, JacksonConverter(objectMapper)) }
 
     install(Authentication) {
         config.konfigurerJwtAuth(this)
@@ -90,14 +105,36 @@ fun Application.spanner(spleis: Personer, config: AzureADConfig, development: Bo
                 val principal = call.principal<JWTPrincipal>() ?: return@get call.respond(HttpStatusCode.Unauthorized)
                 val navn = principal["name"]
                 val ident = principal["NAVident"]
-                call.respondText("""{ "navn": "$navn", "ident": "$ident" } """, ContentType.Application.Json, HttpStatusCode.OK)
+                call.respondText("""{ "navn": "$navn", "ident": "$ident" } """, Json, OK)
             }
             get("/api/person/") {
                 audit()
                 val maskertId = call.request.headers[IdType.MASKERT_ID.header]
-                    ?: return@get call.respond(HttpStatusCode.BadRequest, FeilRespons("bad_request", "${IdType.AKTORID.header} or ${IdType.FNR.header} must be set"))
+                    ?: return@get call.respond(HttpStatusCode.BadRequest, FeilRespons("bad_request", "header ${IdType.MASKERT_ID.header} må være satt"))
                 logg.call(this.call).info()
-                spleis.person(call, maskertId)
+
+                val id = try {
+                    UUID.fromString(maskertId)
+                } catch (_: Exception) {
+                    return@get call.respond(HttpStatusCode.BadRequest, FeilRespons("bad_request", "maskert id må være uuid"))
+                }
+
+                val tekstinnhold = spurteDuClient.vis(id, call.bearerToken).text
+                val fødselsnummer = try {
+                    val node = objectMapper.readTree(tekstinnhold)
+                    val ident = node.path("ident").asText()
+                    val identype = node.path("identtype").asText()
+                    when (identype.lowercase()) {
+                        "fnr" -> ident
+                        else -> null
+                    }
+                } catch (_: JsonParseException) {
+                    null
+                }
+
+                if (fødselsnummer == null) return@get call.respond(HttpStatusCode.BadRequest, FeilRespons("bad_request", "maskertId pekte ikke på et fødselsnummer"))
+
+                spleis.person(call, fødselsnummer)
             }
             post("/api/uuid/") {
                 audit()
@@ -109,7 +146,22 @@ fun Application.spanner(spleis: Personer, config: AzureADConfig, development: Bo
                     .info()
                 if (idValue.isNullOrBlank())
                     return@post call.respond(HttpStatusCode.BadRequest, FeilRespons("bad_request", "${IdType.AKTORID.header} or ${IdType.FNR.header} must be set"))
-                spleis.maskerPerson(call, idValue, idType)
+
+                val fnr = when (idType) {
+                    IdType.FNR -> idValue
+                    IdType.AKTORID -> speedClient.hentFødselsnummerOgAktørId(idValue, call.callId ?: UUID.randomUUID().toString()).getOrThrow().fødselsnummer
+                    IdType.MASKERT_ID -> return@post call.respond(HttpStatusCode.BadRequest, FeilRespons("bad_request", "${IdType.AKTORID.header} or ${IdType.FNR.header} must be set"))
+                }
+
+                val payload = SkjulRequest.SkjulTekstRequest(
+                    tekst = objectMapper.writeValueAsString(mapOf(
+                        "ident" to fnr,
+                        "identtype" to IdType.FNR.name
+                    )),
+                    påkrevdTilgang = påkrevdSpurteduTilgang
+                )
+                val maskertId = spurteDuClient.skjul(payload)
+                call.respondText(""" { "id": "${maskertId.id}" } """, Json, OK)
             }
             /*
                 har ikke funksjonalitet fra frontend ennå, men kan kalles manuelt fra devtools feks:
@@ -161,3 +213,9 @@ private fun ApplicationCall.personId() =
     } ?: request.headers[IdType.FNR.header]?.let {
         Pair(IdType.FNR, it)
     } ?: Pair(IdType.AKTORID, request.header(IdType.AKTORID.header))
+
+private val ApplicationCall.bearerToken: String? get() {
+    val httpAuthHeader = request.parseAuthorizationHeader() ?: return null
+    if (httpAuthHeader !is HttpAuthHeader.Single) return null
+    return httpAuthHeader.blob
+}

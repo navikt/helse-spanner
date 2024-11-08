@@ -28,6 +28,7 @@ repositories {
 dependencies {
     implementation("com.github.navikt.tbd-libs:azure-token-client-default:$tbdLibsVersion")
     implementation("com.github.navikt.tbd-libs:spurtedu-client:$tbdLibsVersion")
+    implementation("com.github.navikt.tbd-libs:speed-client:$tbdLibsVersion")
 
     implementation("io.ktor:ktor-server-core:$ktorVersion")
     implementation("io.ktor:ktor-server-call-id:$ktorVersion")
@@ -62,6 +63,7 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter:$junitJupiterVersion")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
+    testImplementation("io.mockk:mockk:1.13.13")
     testImplementation("no.nav.security:mock-oauth2-server:2.1.1")
     testImplementation("io.ktor:ktor-server-test-host:$ktorVersion")
 }
