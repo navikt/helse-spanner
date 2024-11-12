@@ -2,7 +2,7 @@ import java.nio.file.Paths
 
 val junitJupiterVersion = "5.11.3"
 val ktorVersion = "3.0.1"
-val tbdLibsVersion = "2024.11.12-11.09-16cf2599"
+val tbdLibsVersion = "2024.11.12-20.46-e1fd6a25"
 
 plugins {
     kotlin("jvm") version "2.0.21"
@@ -50,8 +50,8 @@ dependencies {
     implementation("com.papertrailapp:logback-syslog4j:1.0.0")
     implementation("com.natpryce:konfig:1.6.10.0")
 
-    implementation("ch.qos.logback:logback-classic:1.4.14")
-    implementation("net.logstash.logback:logstash-logback-encoder:7.4") {
+    implementation("ch.qos.logback:logback-classic:1.5.12")
+    implementation("net.logstash.logback:logstash-logback-encoder:8.0") {
         exclude("com.fasterxml.jackson.core")
         exclude("com.fasterxml.jackson.dataformat")
     }
