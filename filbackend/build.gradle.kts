@@ -3,7 +3,7 @@ import java.nio.file.Paths
 val ktorVersion = "2.3.12"
 
 plugins {
-    kotlin("jvm") version "1.9.22"
+    kotlin("jvm") version "2.0.21"
 }
 
 repositories {
