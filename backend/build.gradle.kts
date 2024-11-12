@@ -1,8 +1,8 @@
 import java.nio.file.Paths
 
 val junitJupiterVersion = "5.11.3"
-val ktorVersion = "2.3.12"
-val tbdLibsVersion = "2024.11.07-14.46-324efe0f"
+val ktorVersion = "3.0.1"
+val tbdLibsVersion = "2024.11.12-11.09-16cf2599"
 
 plugins {
     kotlin("jvm") version "2.0.21"

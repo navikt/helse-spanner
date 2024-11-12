@@ -7,7 +7,7 @@ import io.ktor.http.HttpMethod.Companion.Put
 import io.ktor.server.auth.*
 import io.ktor.server.auth.jwt.*
 import io.ktor.server.request.*
-import io.ktor.util.pipeline.*
+import io.ktor.server.routing.RoutingContext
 import no.nav.spanner.AuditLogger.Operasjon.*
 import org.slf4j.LoggerFactory
 import java.time.ZonedDateTime
@@ -48,7 +48,7 @@ internal class AuditLogger(private val brukerIdent: String) {
 
     companion object {
         private val logger = LoggerFactory.getLogger("auditLogger")
-        fun PipelineContext<Unit, ApplicationCall>.audit() =
+        fun RoutingContext.audit() =
             call.principal<JWTPrincipal>()?.audit()?.log(call)
 
         fun JWTPrincipal.audit(): AuditLogger {

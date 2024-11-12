@@ -42,16 +42,14 @@ fun main() {
     )
     val spleis = Spleis.from(spannerConfig, tokenProvider)
 
-    embeddedServer(CIO, environment = applicationEngineEnvironment {
+    System.setProperty("io.ktor.development", spannerConfig.development.toString())
+    embeddedServer(CIO, environment = applicationEnvironment {
         log = LoggerFactory.getLogger("Spanner")
-        developmentMode = spannerConfig.development
-
-        module {
-            spanner(spleis, speedClient, spurteDuClient, påkrevdSpurteduTilgang = System.getenv("SPURTE_DU_TILGANG"), adConfig, spannerConfig.development)
-        }
-
+    }, configure = {
         connector {
             port = spannerConfig.port
         }
-    }).start(true)
+    }) {
+        spanner(spleis, speedClient, spurteDuClient, påkrevdSpurteduTilgang = System.getenv("SPURTE_DU_TILGANG"), adConfig, spannerConfig.development)
+    }.start(true)
 }

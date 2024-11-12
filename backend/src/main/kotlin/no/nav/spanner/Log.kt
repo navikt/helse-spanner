@@ -3,7 +3,6 @@ package no.nav.spanner
 import io.ktor.server.application.*
 import io.ktor.client.statement.*
 import io.ktor.server.request.*
-import io.ktor.util.*
 import no.nav.spanner.Log.Companion.LogLevel.*
 import org.slf4j.LoggerFactory
 
@@ -31,13 +30,11 @@ data class Log(
             .sensitivt("httpUrl", call.request.uri)
     }
 
-    @OptIn(InternalAPI::class)
     fun response(response: HttpResponse): Log {
         return åpent("requestMethod", response.request.method)
             .åpent("requestPath", response.request.url.encodedPath)
             .sensitivt("requestUrl", response.request.url)
             .åpent("responseStatus", response.status)
-            .åpent("responseBodySize", response.content.availableForRead)
 
     }
 

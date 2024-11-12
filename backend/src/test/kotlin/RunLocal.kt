@@ -6,7 +6,7 @@ import com.github.navikt.tbd_libs.spurtedu.SpurteDuClient
 import io.ktor.server.application.*
 import io.ktor.server.cio.*
 import io.ktor.server.engine.*
-import io.ktor.server.plugins.cors.*
+import io.ktor.server.plugins.cors.routing.CORS
 import io.mockk.mockk
 import no.nav.security.mock.oauth2.MockOAuth2Server
 import no.nav.security.mock.oauth2.OAuth2Config
@@ -44,21 +44,18 @@ fun startLocal() {
     val påkrevdSpurteduTilgang = "skikkelig_tøysete_claim"
     val spleis = LokaleKjenninger
 
-    embeddedServer(CIO, environment = applicationEngineEnvironment {
+    embeddedServer(CIO, environment = applicationEnvironment {
         log = LoggerFactory.getLogger("Spanner")
-        developmentMode = spannerConfig.development
-
-        module {
-            install(CORS) {
-                this.anyHost()
-            }
-            spanner(spleis, speedClient, spurteDuClient, påkrevdSpurteduTilgang, adConfig, spannerConfig.development)
-        }
-
+    }, configure = {
         connector {
             port = spannerConfig.port
         }
-    }).start(true)
+    }) {
+        install(CORS) {
+            this.anyHost()
+        }
+        spanner(spleis, speedClient, spurteDuClient, påkrevdSpurteduTilgang, adConfig, spannerConfig.development)
+    }.start(true)
     mockAuth.shutdown()
 }
 

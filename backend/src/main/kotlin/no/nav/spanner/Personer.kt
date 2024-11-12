@@ -22,7 +22,6 @@ import io.ktor.server.auth.*
 import io.ktor.server.plugins.*
 import io.ktor.server.plugins.callid.*
 import io.ktor.server.response.*
-import io.ktor.util.*
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -119,7 +118,6 @@ class Spleis(
         call.respondText(response, Json, OK)
     }
 
-    @OptIn(InternalAPI::class)
     override suspend fun speilperson(call: ApplicationCall, fnr: String) {
         val accessToken = call.bearerToken ?: return call.respond(Unauthorized)
         val url = URLBuilder(baseUrl).apply { path("graphql") }.build()
@@ -131,13 +129,13 @@ class Spleis(
                 httpClient.post(url) {
                     header("Authorization", "Bearer $oboToken")
                     accept(Json)
-                    body = """{
+                    setBody("""{
             "query": "",
             "variables": {
               "fnr": "$fnr"
             },
             "operationName": "HentSnapshotSpanner"
-        }"""
+        }""")
                 }
             } catch (e: ClientRequestException) {
                 if (e.response.status == HttpStatusCode.NotFound) {

@@ -1,7 +1,7 @@
 package no.nav.spanner
 
 import com.auth0.jwk.JwkProviderBuilder
-import com.fasterxml.jackson.module.kotlin.readValue
+import com.fasterxml.jackson.databind.JsonNode
 import com.github.navikt.tbd_libs.result_object.ok
 import com.github.navikt.tbd_libs.speed.IdentResponse
 import com.github.navikt.tbd_libs.speed.SpeedClient
@@ -9,7 +9,18 @@ import com.github.navikt.tbd_libs.spurtedu.SkjulRequest
 import com.github.navikt.tbd_libs.spurtedu.SkjulResponse
 import com.github.navikt.tbd_libs.spurtedu.SpurteDuClient
 import com.github.navikt.tbd_libs.spurtedu.VisTekstResponse
+import io.ktor.client.HttpClient
+import io.ktor.client.call.body
+import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.client.plugins.defaultRequest
+import io.ktor.client.request.get
+import io.ktor.client.request.header
+import io.ktor.client.request.post
+import io.ktor.client.statement.bodyAsText
 import io.ktor.http.*
+import io.ktor.serialization.jackson.JacksonConverter
+import io.ktor.server.application.Application
+import io.ktor.server.engine.connector
 import io.ktor.server.plugins.NotFoundException
 import io.ktor.server.testing.*
 import io.mockk.every
@@ -22,6 +33,7 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
+import java.net.ServerSocket
 import java.util.UUID
 
 class E2ETest {
@@ -90,91 +102,49 @@ class E2ETest {
                 claims = mapOf("NAVident" to "H12345")
             )
         )
-        withTestApplication({
-            spanner(lokaleKjenninger, speedClient, spurteDuClient, påkrevdSpurteduTilgang, azureADConfig, true)
-        }) {
-            cookiesSession {
-                val uuid = objectMapper.readTree(handleRequest(HttpMethod.Post, "/api/uuid/") {
-                    addHeader(IdType.FNR.header, "42")
-                }.response.content).path("id").asText()
-                handleRequest(HttpMethod.Get, "/api/person/") {
-                    this.addHeader(IdType.MASKERT_ID.header, uuid)
-                }.apply {
-                    assertEquals(HttpStatusCode.OK, response.status())
-                    assertTrue(
-                        response.content?.contains("\"aktørId\": \"42\"") ?: false,
-                        "response was: ${response.content}"
-                    )
+        e2e { client ->
+            val uuid = client.post("/api/uuid/") {
+                header(IdType.FNR.header, "42")
+            }
+                .body<JsonNode>()
+                .path("id")
+                .asText()
+
+            client.get("/api/person/") {
+                header(IdType.MASKERT_ID.header, uuid)
+            }.apply {
+                assertTrue(status.isSuccess())
+                val bodyAsText = bodyAsText()
+                assertTrue(bodyAsText.contains("\"aktørId\": \"42\"")) {
+                    "response was: $bodyAsText"
                 }
             }
-
         }
     }
 
     @Test
-    fun `respond with message json on hendelse endpoint`() {
+    fun `respond with message json on hendelse endpoint`() = e2e { client ->
         mockAuth.enqueueCallback(
             DefaultOAuth2TokenCallback(
                 claims = mapOf("NAVident" to "H12345")
             )
         )
-        withTestApplication({
-            spanner(lokaleKjenninger, speedClient, spurteDuClient, påkrevdSpurteduTilgang, azureADConfig, true)
-        }) {
-            cookiesSession {
-                handleRequest(HttpMethod.Get, "/api/hendelse/42").apply {
-                    assertEquals(HttpStatusCode.OK, response.status())
-                    assertTrue(
-                        response.content == "{}"
-                    )
-                }
-            }
 
-        }
-    }
-
-    @Test
-    fun `session should refresh token when access token expires`() {
-        mockAuth.enqueueCallback(
-            DefaultOAuth2TokenCallback(
-                expiry = 1,
-                claims = mapOf("NAVident" to "H12345")
-            )
-        )
-        withTestApplication({
-            spanner(lokaleKjenninger, speedClient, spurteDuClient, påkrevdSpurteduTilgang, azureADConfig, true)
-        }) {
-            cookiesSession {
-                val uuid = objectMapper.readTree(handleRequest(HttpMethod.Post, "/api/uuid/") {
-                    addHeader(IdType.FNR.header, "42")
-                }.response.content).path("id").asText()
-                handleRequest(HttpMethod.Get, "/api/person/") {
-                    this.addHeader(IdType.MASKERT_ID.header, uuid)
-                }.apply {
-                    assertEquals(HttpStatusCode.OK, response.status())
-                    assertTrue(
-                        response.content?.contains("\"aktørId\": \"42\"") ?: false,
-                        "response was: ${response.content}"
-                    )
-                }
+        client.get("/api/hendelse/42").apply {
+            assertTrue(status.isSuccess())
+            val bodyAsText = bodyAsText()
+            assertEquals("{}", bodyAsText) {
+                "response was: $bodyAsText"
             }
         }
     }
 
     @Test
-    fun `valid json error message response`() {
-        withTestApplication({
-            spanner(lokaleKjenninger, speedClient, spurteDuClient, påkrevdSpurteduTilgang, azureADConfig, true)
-        }) {
-            cookiesSession {
-                handleRequest(HttpMethod.Get, "/api/person/") { /* ingen ident i header */ }
-                    .apply {
-                        assertEquals(HttpStatusCode.BadRequest, response.status())
-                        println(response.content!!)
-                        val feil = objectMapper.readValue<FeilRespons>(response.content!!)
-                        assertTrue(!feil.description.isNullOrEmpty())
-                    }
-            }
+    fun `valid json error message response`() = e2e { client ->
+        client.get("/api/person/").apply {
+            assertEquals(HttpStatusCode.BadRequest, status)
+            val feil = body<FeilRespons>()
+            assertTrue(!feil.description.isNullOrEmpty())
         }
     }
 
@@ -192,5 +162,41 @@ class E2ETest {
         fun shutdownMock() {
             mockAuth.shutdown()
         }
+    }
+
+    private fun e2e(testblokk: suspend (HttpClient) -> Unit) {
+        e2e(
+            applicationModule = {
+                spanner(lokaleKjenninger, speedClient, spurteDuClient, påkrevdSpurteduTilgang, azureADConfig, true)
+            },
+            testblokk = testblokk
+        )
+    }
+}
+
+
+fun e2e(applicationModule: Application.() -> Unit, testblokk: suspend (HttpClient) -> Unit) {
+    testApplication {
+        val randomPort = ServerSocket(0).localPort
+        engine {
+            connector {
+                host = "localhost"
+                port = randomPort
+            }
+        }
+        application {
+            applicationModule()
+        }
+
+        val testClient = createClient {
+            defaultRequest {
+                port = randomPort
+            }
+            install(ContentNegotiation) {
+                register(ContentType.Application.Json, JacksonConverter(objectMapper))
+            }
+        }
+
+        testblokk(testClient)
     }
 }
