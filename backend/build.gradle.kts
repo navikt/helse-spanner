@@ -1,6 +1,6 @@
 import java.nio.file.Paths
 
-val junitJupiterVersion = "5.10.2"
+val junitJupiterVersion = "5.11.3"
 val ktorVersion = "2.3.12"
 val tbdLibsVersion = "2024.11.07-14.46-324efe0f"
 
