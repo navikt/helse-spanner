@@ -2,7 +2,7 @@ import java.nio.file.Paths
 
 val junitJupiterVersion = "5.11.3"
 val ktorVersion = "3.0.1"
-val tbdLibsVersion = "2024.11.12-20.46-e1fd6a25"
+val tbdLibsVersion = "2024.11.14-07.56-63a8564f"
 
 plugins {
     kotlin("jvm") version "2.0.21"
