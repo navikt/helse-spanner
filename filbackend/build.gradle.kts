@@ -1,5 +1,7 @@
 import java.nio.file.Paths
 
+val logbackClassicVersion = "1.5.12"
+val logbackEncoderVersion = "8.0"
 val ktorVersion = "3.0.1"
 
 plugins {
@@ -27,8 +29,8 @@ dependencies {
     implementation("io.ktor:ktor-server-core:$ktorVersion")
     implementation("io.ktor:ktor-server-cio:$ktorVersion")
     implementation("io.ktor:ktor-serialization-jackson:$ktorVersion")
-    implementation("ch.qos.logback:logback-classic:1.5.12")
-    implementation("net.logstash.logback:logstash-logback-encoder:8.0") {
+    implementation("ch.qos.logback:logback-classic:$logbackClassicVersion")
+    implementation("net.logstash.logback:logstash-logback-encoder:$logbackEncoderVersion") {
         exclude("com.fasterxml.jackson.core")
         exclude("com.fasterxml.jackson.dataformat")
     }

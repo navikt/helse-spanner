@@ -1,5 +1,7 @@
 import java.nio.file.Paths
 
+val logbackClassicVersion = "1.5.12"
+val logbackEncoderVersion = "8.0"
 val junitJupiterVersion = "5.11.3"
 val ktorVersion = "3.0.1"
 val tbdLibsVersion = "2024.11.15-09.09-08ca346b"
@@ -50,8 +52,8 @@ dependencies {
     implementation("com.papertrailapp:logback-syslog4j:1.0.0")
     implementation("com.natpryce:konfig:1.6.10.0")
 
-    implementation("ch.qos.logback:logback-classic:1.5.12")
-    implementation("net.logstash.logback:logstash-logback-encoder:8.0") {
+    implementation("ch.qos.logback:logback-classic:$logbackClassicVersion")
+    implementation("net.logstash.logback:logstash-logback-encoder:$logbackEncoderVersion") {
         exclude("com.fasterxml.jackson.core")
         exclude("com.fasterxml.jackson.dataformat")
     }
