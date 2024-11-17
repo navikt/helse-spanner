@@ -155,6 +155,9 @@ class Spleis(
         val log = Log.logger(Personer::class.java)
         val oboToken = sparsom.token(azureAD, accessToken)
 
+        log
+            .sensitivt("ident", ident)
+            .info("henter aktivitetslogg fra sparsom")
         val url = URLBuilder(sparsomBaseUrl).apply {
             path("api", "aktiviteter")
         }.build()
@@ -163,13 +166,15 @@ class Spleis(
                 header("Authorization", "Bearer $oboToken")
                 header("callId", callId)
                 accept(Json)
+                contentType(Json)
                 setBody(mapOf("ident" to ident))
             }
             log
                 .response(response)
                 .info("Response from sparsom")
             response.bodyAsText()
-        } catch (_ : ClientRequestException) {
+        } catch (err : ClientRequestException) {
+            log.info("fikk feil fra sparsom: ${err.message}\n${err.stackTraceToString()}")
             null
         }
     }
