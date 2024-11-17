@@ -157,13 +157,13 @@ class Spleis(
 
         val url = URLBuilder(sparsomBaseUrl).apply {
             path("api", "aktiviteter")
-            parameters.append("ident", ident)
         }.build()
         return try {
-            val response = httpClient.get(url) {
+            val response = httpClient.post(url) {
                 header("Authorization", "Bearer $oboToken")
                 header("callId", callId)
                 accept(Json)
+                setBody(mapOf("ident" to ident))
             }
             log
                 .response(response)
