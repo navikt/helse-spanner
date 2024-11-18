@@ -3,7 +3,11 @@ package no.nav.spanner
 
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import com.github.navikt.tbd_libs.azure.AzureToken
+import com.github.navikt.tbd_libs.azure.AzureTokenProvider
 import com.github.navikt.tbd_libs.azure.createAzureTokenClientFromEnvironment
+import com.github.navikt.tbd_libs.result_object.Result
+import com.github.navikt.tbd_libs.result_object.ok
 import com.github.navikt.tbd_libs.speed.SpeedClient
 import com.github.navikt.tbd_libs.spurtedu.SpurteDuClient
 import com.natpryce.konfig.ConfigurationProperties
@@ -14,6 +18,7 @@ import io.ktor.server.engine.*
 import org.slf4j.LoggerFactory
 import java.io.File
 import java.net.http.HttpClient
+import java.time.LocalDateTime
 
 
 private val logg = Log.logger("Main")
@@ -34,7 +39,20 @@ fun main() {
     val speedClient = SpeedClient(
         httpClient = HttpClient.newHttpClient(),
         objectMapper = jacksonObjectMapper().registerModule(JavaTimeModule()),
-        tokenProvider = tokenProvider
+        tokenProvider = if (System.getenv("NAIS_CLUSTER_NAME") == "dev-gcp") {
+            object : AzureTokenProvider {
+                override fun bearerToken(scope: String): Result<AzureToken> {
+                    return AzureToken("dummy_token_i_dev", LocalDateTime.MAX).ok()
+                }
+
+                override fun onBehalfOfToken(scope: String, token: String): Result<AzureToken> {
+                    return AzureToken("dummy_obo_token_i_dev", LocalDateTime.MAX).ok()
+                }
+            }
+        } else tokenProvider,
+        baseUrl = if (System.getenv("NAIS_CLUSTER_NAME") == "dev-gcp") {
+            "http://speed-api-dev-proxy"
+        } else null
     )
     val spurteDuClient = SpurteDuClient(
         objectMapper = objectMapper,

@@ -48,6 +48,7 @@ spec:
   accessPolicy:
     outbound:
       rules:
+        - application: speed-api-dev-proxy
         - application: spleis-api
         - application: sparsom-api
         - application: spurtedu
