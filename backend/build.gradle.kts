@@ -4,7 +4,7 @@ val logbackClassicVersion = "1.5.12"
 val logbackEncoderVersion = "8.0"
 val junitJupiterVersion = "5.11.3"
 val ktorVersion = "3.0.1"
-val tbdLibsVersion = "2024.11.15-09.09-08ca346b"
+val tbdLibsVersion = "2024.11.24-12.01-42fdc22d"
 
 plugins {
     kotlin("jvm") version "2.0.21"
