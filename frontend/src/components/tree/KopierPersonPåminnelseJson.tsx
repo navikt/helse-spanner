@@ -6,8 +6,7 @@ export default function KopierPersonPåminnelseJson({ person }:  { person: Perso
     const håndterTrykk = () => {
         void navigator.clipboard.writeText(`{ 
     "@event_name": "person_påminnelse",
-    "fødselsnummer": "${person.fødselsnummer}",
-    "aktørId": "${person.aktørId}"
+    "fødselsnummer": "${person.fødselsnummer}"
 }`)
 
     }

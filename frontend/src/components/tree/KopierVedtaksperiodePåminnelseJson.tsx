@@ -11,7 +11,6 @@ export default function KopierVedtaksperiodePåminnelseJson({ person, organisasj
         void navigator.clipboard.writeText(`{ 
     "@event_name": "påminnelse",
     "fødselsnummer": "${person.fødselsnummer}",
-    "aktørId": "${person.aktørId}",
     "organisasjonsnummer": "${organisasjonsnummer}",
     "vedtaksperiodeId": "${vedtak.id}",
     "tilstand": "${vedtak.tilstand}",

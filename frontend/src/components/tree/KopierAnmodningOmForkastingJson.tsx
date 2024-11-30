@@ -11,7 +11,6 @@ export default function KopierAnmodningOmForkastingJson({ person, organisasjonsn
         void navigator.clipboard.writeText(`{ 
     "@event_name": "anmodning_om_forkasting",
     "fødselsnummer": "${person.fødselsnummer}",
-    "aktørId": "${person.aktørId}",
     "organisasjonsnummer": "${organisasjonsnummer}",
     "vedtaksperiodeId": "${vedtak.id}"
 }`)
