@@ -18,7 +18,12 @@ export default function KopierVedtaksperiodePåminnelseJson({ person, organisasj
     "nestePåminnelsestidspunkt": "{{now+1h}}",
     "tilstandsendringstidspunkt": "{{now-1h}}",
     "antallGangerPåminnet": 1,
-    "flagg": ["!ønskerReberegning"]
+    "flagg": [
+        "!ønskerReberegning",
+        "!ønskerInntektFraAOrdningen",
+        "!trengerReplay",
+        "!forkastOverlappendeSykmeldingsperioderAndreArbeidsgivere"
+    ]
 }`)
 
     }
