@@ -204,7 +204,7 @@
         {
           "id": "b4b64502-1b6f-481e-8914-a9548cba9391",
           "gjeldende": {
-            "arbeidsgiverperioder": [
+            "arbeidsgiverperiode": [
               {
                 "fom": "2018-01-01",
                 "tom": "2018-01-16"
@@ -464,7 +464,7 @@
           "fom": "2018-02-01",
           "tom": "2018-02-28",
           "gjeldende": {
-            "arbeidsgiverperioder": [
+            "arbeidsgiverperiode": [
               {
                 "fom": "2018-01-01",
                 "tom": "2018-01-16"

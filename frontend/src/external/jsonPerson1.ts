@@ -13496,7 +13496,7 @@ export let jsonPerson: PersonDto = {
             vedtaksperioder: [
                 {
                     gjeldende: {
-                        arbeidsgiverperioder: [{
+                        arbeidsgiverperiode: [{
                             fom: '2018-01-01',
                             tom: '2018-01-16'
                         }]
@@ -13855,7 +13855,7 @@ export let jsonPerson: PersonDto = {
                     fom: '2018-02-01',
                     tom: '2018-02-28',
                     gjeldende: {
-                        arbeidsgiverperioder: [{
+                        arbeidsgiverperiode: [{
                             fom: '2018-01-01',
                             tom: '2018-01-16'
                         }]
@@ -23060,7 +23060,7 @@ export let jsonPerson: PersonDto = {
                     fom: '2018-01-01',
                     tom: '2018-01-31',
                     gjeldende: {
-                        arbeidsgiverperioder: [{
+                        arbeidsgiverperiode: [{
                             fom: '2018-01-01',
                             tom: '2018-01-16'
                         }]
@@ -24283,7 +24283,7 @@ export let jsonPerson: PersonDto = {
                     fom: '2020-01-01',
                     tom: '2020-01-31',
                     gjeldende: {
-                        arbeidsgiverperioder: [
+                        arbeidsgiverperiode: [
                             {
                                 fom: '2020-01-03',
                                 tom: '2020-01-05'
@@ -24496,7 +24496,7 @@ export let jsonPerson: PersonDto = {
                     fom: '2020-02-01',
                     tom: '2020-02-28',
                     gjeldende: {
-                        arbeidsgiverperioder: [
+                        arbeidsgiverperiode: [
                             {
                                 fom: '2020-01-03',
                                 tom: '2020-01-05'

@@ -67,7 +67,7 @@ export type VedtakDto = {
 }
 
 export type Gjeldende = {
-    arbeidsgiverperioder: {
+    arbeidsgiverperiode: {
         fom: string,
         tom: string
     }[]

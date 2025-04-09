@@ -37,7 +37,7 @@ export const createTestArbeidsgiver = (
     utbetalinger: UtbetalingDto[] = [],
     id: string = new_id(),
     gjeldende: Gjeldende = {
-        arbeidsgiverperioder: [{
+        arbeidsgiverperiode: [{
             fom: "2021-01-01",
             tom: "2021-01-16"
         }]
@@ -61,5 +61,5 @@ export const createTestVedtaksperiode = (
     id,
     tilstand: 'START',
     behandlinger: [],
-    gjeldende: {arbeidsgiverperioder: [{fom: '2021-01-01', tom: '2021-01-16'}]}
+    gjeldende: {arbeidsgiverperiode: [{fom: '2021-01-01', tom: '2021-01-16'}]}
 })
