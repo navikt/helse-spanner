@@ -5,9 +5,8 @@ import {Content} from '../content/Content'
 import {useResetRecoilState} from 'recoil'
 import {åpneHendelseDokumentState} from '../../state/state'
 import {usePerson} from '../../state/contexts'
-import {Box, HGrid, HStack, Page, Search} from "@navikt/ds-react";
+import {Box, HGrid, Page} from "@navikt/ds-react";
 import {Tidslinjer} from "./Tidslinjer";
-import {type} from "@testing-library/user-event/dist/type";
 
 export const PersonView = () => {
     const resetÅpneHendelser = useResetRecoilState(åpneHendelseDokumentState)
@@ -35,7 +34,7 @@ export const PersonView = () => {
     return (<>
         <Box background="surface-alt-3-moderate" paddingBlock="5" paddingInline="8" as="header">
             <Page.Block>
-                <PersonHeader toggleValgtTing={toggleValgtTing} />
+                <PersonHeader toggleValgtTing={toggleValgtTing}/>
                 <Tidslinjer
                     valgteTing={valgteTing}
                     toggleValgtTing={toggleValgtTing}
