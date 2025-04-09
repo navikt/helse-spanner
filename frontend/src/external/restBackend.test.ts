@@ -1,17 +1,18 @@
 import * as RestBackend from './restBackend'
-import fetchMock from 'fetch-mock'
-import { backendFeil, httpFeil } from './feil'
+import {backendFeil, httpFeil} from './feil'
+import fetchMock from "fetch-mock";
+
 const restBackend = RestBackend.restBackend(true)
 test('ok fra backend er ok', async () => {
-    fetchMock.get('http://localhost:8080/api/person/', { foo: 'bar' })
-    expect(await restBackend.personForUUID('foo')).toEqual({ foo: 'bar' })
+    fetchMock.get('http://localhost:8080/api/person/', {foo: 'bar'})
+    expect(await restBackend.personForUUID('foo')).toEqual({foo: 'bar'})
     fetchMock.restore()
 })
 
 test('Feil fra backend kan legge ved feildto i body for mer detaljer', async () => {
     fetchMock.get('http://localhost:8080/api/person/', {
         status: 418,
-        body: JSON.stringify({ error_id: 'FOO', description: 'Bad' }),
+        body: JSON.stringify({error_id: 'FOO', description: 'Bad'}),
     })
     let thrownError = await getBackendFeil(async () => restBackend.personForUUID('foo'))
     expect(thrownError?.feilId).toBe('FOO')

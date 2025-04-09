@@ -4,7 +4,7 @@ module.exports = {
   moduleFileExtensions: ["js", "jsx", "json", "tsx", "ts"],
   transform: {
     ".+\\.css$": "esbuild-jest",
-    "^.+\\.tsx?$": "esbuild-jest"
+    "^.+\\.tsx?$": "esbuild-jest",
   },
   moduleNameMapper: {
     "\\.(css|less|sass|scss)$": "<rootDir>/__mocks__/styleMock.js",
