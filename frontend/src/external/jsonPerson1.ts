@@ -1,4 +1,4 @@
-import { PersonDto } from '../state/dto'
+import {PersonDto} from '../state/dto'
 
 export let jsonPerson: PersonDto = {
     aktørId: '42',
@@ -13495,6 +13495,13 @@ export let jsonPerson: PersonDto = {
             ],
             vedtaksperioder: [
                 {
+                    gjeldende: {
+                        arbeidsgiverperioder: [{
+                            fom: '2018-01-01',
+                            tom: '2018-01-16'
+                        }]
+                    },
+
                     fom: '2018-01-01',
                     tom: '2018-01-31',
                     sykmeldingFom: '2018-01-01',
@@ -13503,7 +13510,7 @@ export let jsonPerson: PersonDto = {
                     inntektskilde: 'FLERE_ARBEIDSGIVERE',
                     id: '79343398-04ca-4a49-91b2-8757caa29bba',
                     tilstand: 'AVSLUTTET',
-                    "behandlinger": [
+                    behandlinger: [
                         {
                             "id": "4bfdd054-d056-483c-9f70-ec438a1df8af",
                             "tilstand": "VEDTAK_IVERKSATT",
@@ -13546,11 +13553,11 @@ export let jsonPerson: PersonDto = {
                                     "sykdomstidslinje": {
                                         "dager": [
                                             {
-                                            "type": "SYKEDAG",
-                                            "fom": "2018-01-01",
-                                            "tom": "2018-01-25",
-                                            "dato": null
-                                        },
+                                                "type": "SYKEDAG",
+                                                "fom": "2018-01-01",
+                                                "tom": "2018-01-25",
+                                                "dato": null
+                                            },
                                             {
                                                 "type": "ARBEIDSDAG",
                                                 "fom": "2018-01-26",
@@ -13847,6 +13854,12 @@ export let jsonPerson: PersonDto = {
                 {
                     fom: '2018-02-01',
                     tom: '2018-02-28',
+                    gjeldende: {
+                        arbeidsgiverperioder: [{
+                            fom: '2018-01-01',
+                            tom: '2018-01-16'
+                        }]
+                    },
                     sykmeldingFom: '2018-02-01',
                     sykmeldingTom: '2018-02-28',
                     hendelseIder: ['e553c3cd-7fef-4b93-b8e4-d13a1c5f4838', '8e4d7dbf-bc83-4c8c-a5f8-758cdca521e8'],
@@ -14336,6 +14349,7 @@ export let jsonPerson: PersonDto = {
         {
             organisasjonsnummer: '888000999',
             id: '224d1fbf-110d-4886-a1dc-33bea43f100f',
+
             beregnetUtbetalingstidslinjer: [
                 {
                     id: 'ae1e7713-30e8-4a35-8b25-f6a56c735a28',
@@ -23045,6 +23059,12 @@ export let jsonPerson: PersonDto = {
                 {
                     fom: '2018-01-01',
                     tom: '2018-01-31',
+                    gjeldende: {
+                        arbeidsgiverperioder: [{
+                            fom: '2018-01-01',
+                            tom: '2018-01-16'
+                        }]
+                    },
                     sykmeldingFom: '2018-01-01',
                     sykmeldingTom: '2018-01-31',
                     hendelseIder: ['ae744f79-76e2-483d-911b-3b53ceab3fba', 'e1affa5a-fc36-40e7-93b0-53b6b3ef3e0b'],
@@ -24262,6 +24282,17 @@ export let jsonPerson: PersonDto = {
                 {
                     fom: '2020-01-01',
                     tom: '2020-01-31',
+                    gjeldende: {
+                        arbeidsgiverperioder: [
+                            {
+                                fom: '2020-01-03',
+                                tom: '2020-01-05'
+                            },
+                            {
+                                fom: '2020-01-07',
+                                tom: '2020-01-10'
+                            }]
+                    },
                     sykmeldingFom: '2020-01-01',
                     sykmeldingTom: '2020-01-31',
                     hendelseIder: [
@@ -24461,6 +24492,224 @@ export let jsonPerson: PersonDto = {
                         ],
                     },
                 },
+                {
+                    fom: '2020-02-01',
+                    tom: '2020-02-28',
+                    gjeldende: {
+                        arbeidsgiverperioder: [
+                            {
+                                fom: '2020-01-03',
+                                tom: '2020-01-05'
+                            },
+                            {
+                                fom: '2020-01-07',
+                                tom: '2020-01-10'
+                            },
+                            {
+                                fom: '2020-02-01',
+                                tom: '2020-02-10'
+                            }
+                            ]
+                    },
+                    sykmeldingFom: '2020-02-01',
+                    sykmeldingTom: '2020-02-28',
+                    hendelseIder: [
+                        '98840587-a5ec-452c-aa8e-dcf8fedb9acf',
+                        '1be09eb6-c2ae-43b2-a229-3b31273bcf35',
+                        'fa2f19e0-de69-4fe2-a5f5-93249298468f',
+                    ],
+                    inntektskilde: 'FLERE_ARBEIDSGIVERE',
+                    id: '0cbdd5ba-3281-4f6f-b0c0-01e02a1d428f',
+                    tilstand: 'AVSLUTTET',
+                    "behandlinger": [
+                        {
+                            "id": "4bfdd055-d056-483c-9f70-ec438a1df8ad",
+                            "tilstand": "VEDTAK_IVERKSATT",
+                            "kilde": {
+                                "avsender": "SYKMELDT",
+                                "innsendt": "2018-02-01T14:09:38.279566613",
+                                "meldingsreferanseId": "dacga11d-514c-4b12-b1dc-227657929eab",
+                                "registrert": "2018-02-01T14:09:38.279566613"
+                            },
+                            "endringer": [
+                                {
+                                    "id": "8b3afdee-34da-4c63-98b8-ce85d7edaf89",
+                                    "tidsstempel": "2022-11-01T13:26:58.430636257",
+                                    "dokumentsporing": {
+                                        "dokumentId": "bafafdee-64da-4c63-98b8-ce85d7edaf89",
+                                        "dokumenttype": "Saksbehandler"
+                                    },
+                                    "sykdomstidslinje": {
+                                        "dager": [{
+                                            "type": "SYKEDAG",
+                                            "fom": "2020-02-01",
+                                            "tom": "2020-02-28",
+                                            "dato": null
+                                        }]
+                                    }
+                                }
+                            ]
+                        }
+                    ],
+                    skjæringstidspunktFraInfotrygd: '2020-02-01',
+                    inntektsmeldingInfo: {
+                        id: 'fa2f19e0-de69-4fe2-a5f5-93249298468f',
+                        arbeidsforholdId: null,
+                    },
+                    skjæringstidspunkt: '2020-01-01',
+                    dataForSimulering: {
+                        totalbeløp: 2000,
+                        perioder: [
+                            {
+                                fom: '2018-01-17',
+                                tom: '2018-01-20',
+                                utbetalinger: [
+                                    {
+                                        forfallsdato: '2018-01-21',
+                                        utbetalesTil: {
+                                            id: '975111975',
+                                            navn: 'Org Orgesen AS',
+                                        },
+                                        feilkonto: false,
+                                        detaljer: [
+                                            {
+                                                fom: '2018-01-17',
+                                                tom: '2018-01-20',
+                                                konto: '81549300',
+                                                beløp: 2000,
+                                                klassekode: {
+                                                    kode: 'SPREFAG-IOP',
+                                                    beskrivelse: 'Sykepenger, Refusjon arbeidsgiver',
+                                                },
+                                                uføregrad: 100,
+                                                utbetalingstype: 'YTEL',
+                                                tilbakeføring: false,
+                                                sats: {
+                                                    sats: 1000,
+                                                    antall: 2,
+                                                    type: 'DAG',
+                                                },
+                                                refunderesOrgnummer: '975111975',
+                                            },
+                                        ],
+                                    },
+                                ],
+                            },
+                        ],
+                    },
+                    utbetalinger: ['cfc54f5a-f065-4cfe-980f-8fca689dd9df'],
+                    utbetalingstidslinje: {
+                        dager: [
+                            {
+                                type: 'ArbeidsgiverperiodeDag',
+                                grad: 0.0,
+                                arbeidsgiverBetalingProsent: 100.0,
+                                skjæringstidspunkt: '2020-01-01',
+                                totalGrad: 0.0,
+                                dekningsgrunnlag: 1430.7692307692307,
+                                aktuellDagsinntekt: 1430.7692307692307,
+                                arbeidsgiverbeløp: 0.0,
+                                personbeløp: 0.0,
+                                er6GBegrenset: false,
+                                fom: '2020-01-01',
+                                tom: '2020-01-16',
+                            },
+                            {
+                                type: 'NavDag',
+                                grad: 100.0,
+                                arbeidsgiverBetalingProsent: 100.0,
+                                skjæringstidspunkt: '2020-01-01',
+                                totalGrad: 49.2063492063492,
+                                dekningsgrunnlag: 1430.7692307692307,
+                                aktuellDagsinntekt: 1430.7692307692307,
+                                arbeidsgiverbeløp: 1134.0,
+                                personbeløp: 0.0,
+                                er6GBegrenset: true,
+                                dato: '2020-01-17',
+                            },
+                            {
+                                type: 'NavHelgDag',
+                                grad: 100.0,
+                                arbeidsgiverBetalingProsent: 100.0,
+                                skjæringstidspunkt: '2020-01-01',
+                                totalGrad: 0.0,
+                                dekningsgrunnlag: 0.0,
+                                aktuellDagsinntekt: 0.0,
+                                arbeidsgiverbeløp: 0.0,
+                                personbeløp: 0.0,
+                                er6GBegrenset: false,
+                                fom: '2020-01-18',
+                                tom: '2020-01-19',
+                            },
+                            {
+                                type: 'NavDag',
+                                grad: 100.0,
+                                arbeidsgiverBetalingProsent: 100.0,
+                                skjæringstidspunkt: '2020-01-01',
+                                totalGrad: 49.2063492063492,
+                                dekningsgrunnlag: 1430.7692307692307,
+                                aktuellDagsinntekt: 1430.7692307692307,
+                                arbeidsgiverbeløp: 1134.0,
+                                personbeløp: 0.0,
+                                er6GBegrenset: true,
+                                fom: '2020-01-20',
+                                tom: '2020-01-24',
+                            },
+                            {
+                                type: 'NavHelgDag',
+                                grad: 100.0,
+                                arbeidsgiverBetalingProsent: 100.0,
+                                skjæringstidspunkt: '2020-01-01',
+                                totalGrad: 0.0,
+                                dekningsgrunnlag: 0.0,
+                                aktuellDagsinntekt: 0.0,
+                                arbeidsgiverbeløp: 0.0,
+                                personbeløp: 0.0,
+                                er6GBegrenset: false,
+                                fom: '2020-01-25',
+                                tom: '2020-01-26',
+                            },
+                            {
+                                type: 'NavDag',
+                                grad: 100.0,
+                                arbeidsgiverBetalingProsent: 100.0,
+                                skjæringstidspunkt: '2020-01-01',
+                                totalGrad: 100.0,
+                                dekningsgrunnlag: 1430.7692307692307,
+                                aktuellDagsinntekt: 1430.7692307692307,
+                                arbeidsgiverbeløp: 1134.0,
+                                personbeløp: 0.0,
+                                er6GBegrenset: true,
+                                fom: '2020-01-27',
+                                tom: '2020-01-31',
+                            },
+                        ],
+                    },
+                    forlengelseFraInfotrygd: 'NEI',
+                    opprettet: '2021-07-23T15:51:24.822087602',
+                    oppdatert: '2021-07-23T15:51:25.436856717',
+                    sykdomstidslinje: {
+                        låstePerioder: [],
+                        periode: {
+                            fom: '2020-01-01',
+                            tom: '2020-01-31',
+                        },
+                        dager: [
+                            {
+                                type: 'SYKEDAG',
+                                kilde: {
+                                    type: 'Søknad',
+                                    id: '1be09eb6-c2ae-43b2-a229-3b31273bcf35',
+                                    tidsstempel: '2020-01-01T00:00:00',
+                                },
+                                grad: 100.0,
+                                arbeidsgiverBetalingProsent: 100.0,
+                                fom: '2020-01-01',
+                                tom: '2020-01-31',
+                            },
+                        ],
+                    },
+                }
             ],
             forkastede: [],
             feriepengeutbetalinger: [],

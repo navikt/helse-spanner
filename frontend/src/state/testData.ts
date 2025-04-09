@@ -1,8 +1,8 @@
 import {
     ArbeidsgiverDto,
-    BehandlingDto, EndringDto,
     FokastelseDto,
     FokastetVedtaksperiodeDto,
+    Gjeldende,
     PersonDto,
     UtbetalingDto,
     VedtakDto
@@ -35,13 +35,20 @@ export const createTestArbeidsgiver = (
     vedtaksperioder: VedtakDto[] = [createTestVedtaksperiode(), createTestVedtaksperiode('2021-01-01', '2021-02-03')],
     forkastedeVedtaksperioder: FokastetVedtaksperiodeDto[] = [],
     utbetalinger: UtbetalingDto[] = [],
-    id: string = new_id()
+    id: string = new_id(),
+    gjeldende: Gjeldende = {
+        arbeidsgiverperioder: [{
+            fom: "2021-01-01",
+            tom: "2021-01-16"
+        }]
+    }
 ): ArbeidsgiverDto => ({
     id,
     organisasjonsnummer,
     vedtaksperioder,
-    forkastede: forkastedeVedtaksperioder.map((it): FokastelseDto => ({ årsak: 'Ikke støttet', vedtaksperiode: it })),
+    forkastede: forkastedeVedtaksperioder.map((it): FokastelseDto => ({årsak: 'Ikke støttet', vedtaksperiode: it})),
     utbetalinger,
+    gjeldende
 })
 
 export const createTestVedtaksperiode = (
@@ -53,5 +60,6 @@ export const createTestVedtaksperiode = (
     tom,
     id,
     tilstand: 'START',
-    behandlinger: []
+    behandlinger: [],
+    gjeldende: {arbeidsgiverperioder: [{fom: '2021-01-01', tom: '2021-01-16'}]}
 })

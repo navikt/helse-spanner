@@ -5,6 +5,8 @@ import {Timeline} from "@navikt/ds-react";
 import styles from "./Tidslinjer.module.css";
 import {BriefcaseIcon, Buldings3Icon, PackageIcon, ParasolBeachIcon, PiggybankIcon} from "@navikt/aksel-icons";
 import {VedtakDto} from "../../state/dto";
+import { format } from 'date-fns'
+import {somNorskDato} from "../i18n";
 
 
 type TidslinjeState = {
@@ -13,8 +15,10 @@ type TidslinjeState = {
     currentZoom: number
 }
 
-const Zoom = ({ step, onClick }: { step: number, onClick: (step: number) => void }) => {
-    return <button onClick={() => { onClick(step) }}>Zoom {step} mnd</button>
+const Zoom = ({step, onClick}: { step: number, onClick: (step: number) => void }) => {
+    return <button onClick={() => {
+        onClick(step)
+    }}>Zoom {step} mnd</button>
 }
 
 export const Tidslinjer = ({valgteTing, toggleValgtTing}: {
@@ -54,8 +58,8 @@ export const Tidslinjer = ({valgteTing, toggleValgtTing}: {
         const nyesteVedtak = valgteVedtak[0]
         const eldsteVedtak = valgteVedtak[valgteVedtak.length - 1]
         setTidslinjeperiode((current) => {
-            const endDate = new Date(nyesteVedtak.tom) > current.endDate ? add(new Date(nyesteVedtak.tom), { months: 1 }) : current.endDate
-            const startDate = new Date(eldsteVedtak.fom) < current.startDate ? sub(new Date(eldsteVedtak.fom), { months: 1 }) : current.startDate
+            const endDate = new Date(nyesteVedtak.tom) > current.endDate ? add(new Date(nyesteVedtak.tom), {months: 1}) : current.endDate
+            const startDate = new Date(eldsteVedtak.fom) < current.startDate ? sub(new Date(eldsteVedtak.fom), {months: 1}) : current.startDate
             return {
                 endDate: endDate,
                 startDate: startDate,
@@ -129,17 +133,54 @@ export const Tidslinjer = ({valgteTing, toggleValgtTing}: {
                 .map((arbeidsgiver) => {
                     return <Timeline.Row label={arbeidsgiver.organisasjonsnummer} icon={<BriefcaseIcon aria-hidden/>}
                                          className={styles.tidslijerad}>
-                        {arbeidsgiver.vedtaksperioder.map((vedtaksperiode) => {
-                            const erValgt = typeof valgteTing.find((it) => it == vedtaksperiode.id) !== 'undefined'
-                            const klassenavn = erValgt ? styles.aktiv : undefined
-                            return <Timeline.Period key={vedtaksperiode.id} start={new Date(vedtaksperiode.fom)}
-                                                    end={new Date(vedtaksperiode.tom)} status={statusForVedtaksperiode(vedtaksperiode.tilstand)}
-                                                    className={ klassenavn }
-                                                    onSelectPeriod={(e) => {
-                                                        toggleValgtTing(e, vedtaksperiode.id)
-                                                    }}>
-                                <div>{vedtaksperiode.fom} - {vedtaksperiode.tom} : {vedtaksperiode.tilstand}</div>
-                            </Timeline.Period>
+                        {arbeidsgiver.vedtaksperioder.flatMap((vedtaksperiode) => {
+                            const vedtaksperiodeTimelineMedArbeidsgiverperiode = getArbeidsgiverperiodeTimeLine(vedtaksperiode)
+
+                            return vedtaksperiodeTimelineMedArbeidsgiverperiode.map((periodeIVedtaksperiode, index) => {
+
+                                let klassenavn: string
+                                if (index == 0) {
+                                    klassenavn = styles.firstElementInVedtaksperiode
+                                } else if (index == vedtaksperiodeTimelineMedArbeidsgiverperiode.length - 1) {
+                                    klassenavn = styles.lastElementInVedtaksperiode
+                                } else {
+                                    klassenavn = styles.elementInTheMiddleOfVedtaksperiode
+                                }
+                                if (periodeIVedtaksperiode.type == 'arbeidsgiverperiode') {
+                                    klassenavn += " " + styles.arbeidsgiverperiode
+                                }
+                                const erValgt = typeof valgteTing.find((it) => it == vedtaksperiode.id) !== 'undefined'
+                                if (erValgt) {
+                                    klassenavn += " " + styles.aktiv
+                                }
+
+                                return <Timeline.Period
+                                    key={vedtaksperiode.id}
+                                    start={periodeIVedtaksperiode.fom}
+                                    end={periodeIVedtaksperiode.tom}
+                                    status={statusForVedtaksperiode((vedtaksperiode.tilstand))}
+                                    className={klassenavn}
+                                    onSelectPeriod={(e) => {
+                                        toggleValgtTing(e, vedtaksperiode.id)
+                                    }}
+                                >
+                                    {periodeIVedtaksperiode.type == 'arbeidsgiverperiode' ?
+                                        <div>
+                                            Arbeidsgiverperiode: {format(periodeIVedtaksperiode.fom, 'dd.MM.yyyy')} - {format(periodeIVedtaksperiode.tom, 'dd.MM.yyyy')}
+                                            <br></br>
+                                            Tilstand: {vedtaksperiode.tilstand}
+                                        </div>
+                                            :
+                                        <div>
+                                            Vedtaksperiode: {somNorskDato(vedtaksperiode.fom)} - {somNorskDato(vedtaksperiode.tom)}
+                                            <br></br>
+                                            Tilstand: {vedtaksperiode.tilstand}
+                                        </div>
+
+                                    }
+
+                                </Timeline.Period>
+                            })
                         })}
                     </Timeline.Row>
                 })
@@ -184,15 +225,18 @@ export const Tidslinjer = ({valgteTing, toggleValgtTing}: {
                 </button>
             </Timeline.Zoom>
         </Timeline>
-        {skalViseInfotrygdUtvalg && (<>
-            <p>Hvilken Infotrygdhistorikk vil du basere visningen på?</p>
-            <select onChange={(e) => {
-                setInfotrygdhistorikkElementIndex(e.target.selectedIndex)
-                setSkalViseInfotrygdUtvalg(false)
-            }}>{person.infotrygdhistorikk.map((a, i) => <option value={i} selected={i == infotrygdhistorikkElementIndex}>index {i}</option>)}</select>
-        </>)
+        {
+            skalViseInfotrygdUtvalg && (<>
+                <p>Hvilken Infotrygdhistorikk vil du basere visningen på?</p>
+                <select onChange={(e) => {
+                    setInfotrygdhistorikkElementIndex(e.target.selectedIndex)
+                    setSkalViseInfotrygdUtvalg(false)
+                }}>{person.infotrygdhistorikk.map((a, i) => <option value={i}
+                                                                    selected={i == infotrygdhistorikkElementIndex}>index {i}</option>)}</select>
+            </>)
         }
-    </div>);
+    </div>)
+        ;
 }
 
 const SorterNyesteVedtakØverst = (input: VedtakDto[]): VedtakDto[] =>
@@ -203,4 +247,71 @@ function statusForVedtaksperiode(tilstand: string): "success" | "warning" | "dan
     if (tilstand == "AVSLUTTET_UTEN_UTBETALING") return "neutral"
     if (tilstand in ["AVVENTER_GODKJENNING", "AVVENTER_GODKJENNING_REVURDERING"]) return "warning"
     return "info"
+}
+
+function nextDay(date: Date) {
+    return new Date(date.setDate(date.getDate() + 1));
+}
+
+function previousDay(tempFom: Date) {
+    return new Date(tempFom.setDate(tempFom.getDate() - 1));
+}
+
+function getArbeidsgiverperiodeTimeLine(vedtak: VedtakDto): { fom: Date, tom: Date, type: string }[] {
+    let vedtaksperiodeFom = new Date(vedtak.fom)
+
+    let vedtaksperiodeTom = new Date(vedtak.tom)
+
+    const listeOverDager: { fom: Date, tom: Date, type: string }[] = []
+    vedtak.gjeldende.arbeidsgiverperioder.map((arbeidsgiverperiode) => {
+        const agpFom = new Date(arbeidsgiverperiode.fom)
+        const agpTom = new Date(arbeidsgiverperiode.tom)
+        const liggerArbeidsgiverperiodenUtenforVedtaksperioden = agpFom.getTime() > new Date(vedtak.tom).getTime() || agpTom.getTime() < new Date(vedtak.fom).getTime();
+        if (liggerArbeidsgiverperiodenUtenforVedtaksperioden) {
+        } else {
+            if (agpFom.getTime() > vedtaksperiodeFom.getTime()) {
+                const tempFom = new Date(agpFom)
+                const tempTom = new Date(agpTom)
+                listeOverDager.push({
+                    fom: vedtaksperiodeFom,
+                    tom: previousDay(tempFom),
+                    type: 'syk',
+                })
+                listeOverDager.push({
+                    fom: agpFom,
+                    tom: agpTom,
+                    type: 'arbeidsgiverperiode',
+                })
+                vedtaksperiodeFom = nextDay(tempTom)
+
+            } else if (agpFom.getTime() == vedtaksperiodeFom.getTime()) {
+                const tempTom = new Date(agpTom)
+                listeOverDager.push({
+                    fom: agpFom,
+                    tom: agpTom,
+                    type: 'arbeidsgiverperiode',
+                })
+                vedtaksperiodeFom = nextDay(tempTom)
+            } else {
+                // Nothing, ligger i en annen vedtaksperiode
+            }
+        }
+    })
+    if (listeOverDager.length > 0 && listeOverDager[listeOverDager.length - 1].tom.getTime() < vedtaksperiodeTom.getTime()) {
+        const tempTom = new Date(listeOverDager[listeOverDager.length - 1].tom)
+        listeOverDager.push({
+            fom: nextDay(tempTom),
+            tom: vedtaksperiodeTom,
+            type: 'syk',
+        })
+    }
+
+    if (listeOverDager.length == 0) {
+        listeOverDager.push({
+            fom: new Date(vedtak.fom),
+            tom: new Date(vedtak.tom),
+            type: 'syk',
+        })
+    }
+    return listeOverDager
 }

@@ -203,6 +203,14 @@
       "vedtaksperioder": [
         {
           "id": "b4b64502-1b6f-481e-8914-a9548cba9391",
+          "gjeldende": {
+            "arbeidsgiverperioder": [
+              {
+                "fom": "2018-01-01",
+                "tom": "2018-01-16"
+              }
+            ]
+          },
           "tilstand": "AVSLUTTET",
           "skjæringstidspunkt": "2018-01-01",
           "fom": "2018-01-01",
@@ -455,6 +463,14 @@
           "skjæringstidspunkt": "2018-01-01",
           "fom": "2018-02-01",
           "tom": "2018-02-28",
+          "gjeldende": {
+            "arbeidsgiverperioder": [
+              {
+                "fom": "2018-01-01",
+                "tom": "2018-01-16"
+              }
+            ]
+          },
           "sykmeldingFom": "2018-02-01",
           "sykmeldingTom": "2018-02-28",
           "behandlinger": [
