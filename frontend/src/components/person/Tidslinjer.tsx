@@ -26,14 +26,17 @@ export const Tidslinjer = ({valgteTing, toggleValgtTing}: {
     toggleValgtTing: (e: React.MouseEvent, ting: string) => void
 }) => {
     const person = usePerson()
-    const nyestePeriode = SorterNyesteVedtakØverst(person.arbeidsgivere
-        .filter((it) => it.vedtaksperioder.length > 0)
-        .map((it) => {
-            const sorterte = SorterNyesteVedtakØverst(it.vedtaksperioder)
-            return sorterte[0]
-        }))
+    const j = person.arbeidsgivere.flatMap((it) => {
+        return [...it.vedtaksperioder.map((vedtaksperiode) => vedtaksperiode.fom), ...it.forkastede.map((forkastet) => forkastet.vedtaksperiode.fom)]
+    })
+    const sortertePerioder = person.arbeidsgivere
+        .flatMap((it) => {
+            return [...it.vedtaksperioder.map((vedtaksperiode) => vedtaksperiode.tom), ...it.forkastede.map((forkastet) => forkastet.vedtaksperiode.tom)]
+        })
+        .map((it) => new Date(it))
+        .sort((a, b) => (b.getTime() - a.getTime()))
 
-    const nå = nyestePeriode.length > 0 ? new Date(nyestePeriode[0].tom) : new Date()
+    const nå = sortertePerioder.length > 0 ? sortertePerioder[0] : new Date()
     const [tidslinjeperiode, setTidslinjeperiode] = useState({
         endDate: add(nå, {months: 1}),
         startDate: sub(nå, {months: 11}),
