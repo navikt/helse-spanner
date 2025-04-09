@@ -3,7 +3,7 @@ import {usePerson} from "../../state/contexts";
 import {add, differenceInMonths, sub} from "date-fns";
 import {Timeline} from "@navikt/ds-react";
 import styles from "./Tidslinjer.module.css";
-import {BriefcaseIcon, Buldings3Icon, PackageIcon, ParasolBeachIcon, PiggybankIcon} from "@navikt/aksel-icons";
+import {BriefcaseIcon, Buldings3Icon, PackageIcon, ParasolBeachIcon, PiggybankIcon, TrashIcon} from "@navikt/aksel-icons";
 import {VedtakDto} from "../../state/dto";
 import { format } from 'date-fns'
 import {somNorskDato} from "../i18n";
@@ -129,11 +129,11 @@ export const Tidslinjer = ({valgteTing, toggleValgtTing}: {
                 </Timeline.Pin>)
             })}
             {person.arbeidsgivere
-                .filter((arbeidsgiver) => arbeidsgiver.vedtaksperioder.length > 0)
+                .filter((arbeidsgiver) => arbeidsgiver.vedtaksperioder.length > 0 || arbeidsgiver.forkastede.length > 0)
                 .map((arbeidsgiver) => {
                     return <Timeline.Row label={arbeidsgiver.organisasjonsnummer} icon={<BriefcaseIcon aria-hidden/>}
                                          className={styles.tidslijerad}>
-                        {arbeidsgiver.vedtaksperioder.flatMap((vedtaksperiode) => {
+                        {[...arbeidsgiver.vedtaksperioder.flatMap((vedtaksperiode) => {
                             const vedtaksperiodeTimelineMedArbeidsgiverperiode = getArbeidsgiverperiodeTimeLine(vedtaksperiode)
 
                             return vedtaksperiodeTimelineMedArbeidsgiverperiode.map((periodeIVedtaksperiode, index) => {
@@ -170,7 +170,7 @@ export const Tidslinjer = ({valgteTing, toggleValgtTing}: {
                                             <br></br>
                                             Tilstand: {vedtaksperiode.tilstand}
                                         </div>
-                                            :
+                                        :
                                         <div>
                                             Vedtaksperiode: {somNorskDato(vedtaksperiode.fom)} - {somNorskDato(vedtaksperiode.tom)}
                                             <br></br>
@@ -181,7 +181,26 @@ export const Tidslinjer = ({valgteTing, toggleValgtTing}: {
 
                                 </Timeline.Period>
                             })
-                        })}
+                        }), ...arbeidsgiver.forkastede.map((forkastet) => {
+                            const fom = new Date(forkastet.vedtaksperiode.fom)
+                            const tom = new Date(forkastet.vedtaksperiode.tom)
+                            return <Timeline.Period
+                                key={forkastet.vedtaksperiode.id}
+                                start={fom}
+                                end={tom}
+                                status="danger"
+                                icon={<TrashIcon aria-hidden/>}
+                                onSelectPeriod={(e) => {
+                                    toggleValgtTing(e, forkastet.vedtaksperiode.id)
+                                }}
+                            >
+                                <div>
+                                    {somNorskDato(forkastet.vedtaksperiode.fom)} - {somNorskDato(forkastet.vedtaksperiode.tom)}
+                                    <br></br>
+                                    Tilstand: {forkastet.vedtaksperiode.tilstand}
+                                </div>
+                            </Timeline.Period>
+                        })]}
                     </Timeline.Row>
                 })
             }
