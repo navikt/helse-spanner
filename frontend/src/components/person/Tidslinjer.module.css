@@ -1,39 +1,11 @@
 .tidslinje {
-    margin-top: 20px
+    margin-top:20px
 }
 
 .tidslijerad {
     background-color: var(--a-surface-alt-3-subtle);
 }
 
-.firstElementInVedtaksperiode {
-    border: 1px solid black !important;
-    border-left: 0 !important;
-    box-shadow: none !important;
-}
-
-.lastElementInVedtaksperiode {
-    border: 1px solid black !important;
-    border-right: 0 !important;
-    box-shadow: none !important;
-}
-
-.elementInTheMiddleOfVedtaksperiode {
-    border: 1px solid !important;
-    border-left: 0 !important;
-    border-right: 0 !important;
-    box-shadow: none !important;
-}
-
 .aktiv {
-    border-color: red !important;
+    border: 1px solid red !important;
 }
-
-
-.arbeidsgiverperiode {
-    background-color: #EEC9F1 !important;
-}
-.arbeidsgiverperiode:hover {
-    background-color: #ECAAEE !important;
-}
-

@@ -62,15 +62,7 @@ export type VedtakDto = {
     id: string
     skjæringstidspunkt?: string
     behandlinger: BehandlingDto[]
-    gjeldende: Gjeldende
     [x: string]: any
-}
-
-export type Gjeldende = {
-    arbeidsgiverperioder: {
-        fom: string,
-        tom: string
-    }[]
 }
 
 export type BehandlingDto = {
