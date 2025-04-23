@@ -293,7 +293,19 @@ function getArbeidsgiverperiodeTimeLine(vedtak: VedtakDto): { fom: Date, tom: Da
                 })
                 vedtaksperiodeFom = nextDay(tempTom)
             } else {
-                // Nothing, ligger i en annen vedtaksperiode
+                // Startdatoet, ligger i en annen vedtaksperiode
+                if(agpTom.getTime() >= vedtaksperiodeFom.getTime()){
+                    const tempTom = new Date(agpTom)
+                    listeOverDager.push({
+                        fom: vedtaksperiodeFom,
+                        tom: agpTom,
+                        type: 'arbeidsgiverperiode',
+                    })
+                    vedtaksperiodeFom = nextDay(tempTom)
+                }
+                else {
+                    // Arbeidsgiverperioden overlapper ikke i det heletatt med vedtaksperioden
+                }
             }
         }
     })

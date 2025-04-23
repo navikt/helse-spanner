@@ -24291,7 +24291,12 @@ export let jsonPerson: PersonDto = {
                             {
                                 fom: '2020-01-07',
                                 tom: '2020-01-10'
-                            }]
+                            },
+                            {
+                                fom: '2020-01-29',
+                                tom: '2020-02-01'
+                            },
+                        ]
                     },
                     sykmeldingFom: '2020-01-01',
                     sykmeldingTom: '2020-01-31',
@@ -24506,9 +24511,9 @@ export let jsonPerson: PersonDto = {
                                 tom: '2020-01-10'
                             },
                             {
-                                fom: '2020-02-01',
-                                tom: '2020-02-10'
-                            }
+                                fom: '2020-01-29',
+                                tom: '2020-02-01'
+                            },
                             ]
                     },
                     sykmeldingFom: '2020-02-01',
