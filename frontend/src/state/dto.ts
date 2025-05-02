@@ -49,6 +49,7 @@ export type FeilDto = {
 export type ArbeidsgiverDto = {
     id: string
     organisasjonsnummer: string
+    yrkesaktivitetstype: string
     vedtaksperioder: VedtakDto[]
     forkastede: FokastelseDto[]
     utbetalinger: UtbetalingDto[]

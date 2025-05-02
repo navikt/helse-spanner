@@ -33,7 +33,7 @@ interface VedtaksperioderProps {
 
 export const Vedtaksperioder = ({ arbeidsgiver, valgteTing, visForkastede, visBehandlinger, toggleValgtTing } : VedtaksperioderProps) => {
     let vedtaksperioder: [JSX.Element, Date][] = arbeidsgiver.vedtaksperioder.map((vedtak) => [
-        <VedtaksNode key={vedtak.id} vedtak={vedtak} organisasjonsnummer={arbeidsgiver.organisasjonsnummer} visBehandlinger={visBehandlinger} valgteTing={valgteTing} vedValg={ toggleValgtTing }/>,
+        <VedtaksNode key={vedtak.id} vedtak={vedtak} yrkesaktivitetstype={arbeidsgiver.yrkesaktivitetstype} organisasjonsnummer={arbeidsgiver.organisasjonsnummer} visBehandlinger={visBehandlinger} valgteTing={valgteTing} vedValg={ toggleValgtTing }/>,
         parseISO(vedtak.fom),
     ])
     let forkastedeVedtaksperioder: [JSX.Element, Date][] = []
@@ -51,7 +51,14 @@ export const Vedtaksperioder = ({ arbeidsgiver, valgteTing, visForkastede, visBe
 Vedtaksperioder.displayName = 'Vedtaksperioder'
 
 
-const VedtaksNode = ({ vedtak, organisasjonsnummer, visBehandlinger, valgteTing, vedValg }: { vedtak: VedtakDto, organisasjonsnummer: string, visBehandlinger: Boolean, valgteTing: string[], vedValg: (e: React.MouseEvent, ting: string) => void }) => {
+const VedtaksNode = ({ vedtak, yrkesaktivitetstype, organisasjonsnummer, visBehandlinger, valgteTing, vedValg }: {
+    vedtak: VedtakDto,
+    yrkesaktivitetstype: string,
+    organisasjonsnummer: string,
+    visBehandlinger: Boolean,
+    valgteTing: string[],
+    vedValg: (e: React.MouseEvent, ting: string) => void
+}) => {
     const [fom, tom] = [vedtak.fom, vedtak.tom].map(somNorskDato)
     return (
         <div>
@@ -64,7 +71,9 @@ const VedtaksNode = ({ vedtak, organisasjonsnummer, visBehandlinger, valgteTing,
                     <div className={styles.Knapper}>
                         <SporingLenke url={tilstandsmaskinSporingUrl(vedtak.id)}/>
                         <KopierVedtaksperiodePåminnelseJson person={usePerson()}
-                                                            organisasjonsnummer={organisasjonsnummer} vedtak={vedtak}/>
+                                                            yrkesaktivitetstype={yrkesaktivitetstype}
+                                                            organisasjonsnummer={organisasjonsnummer}
+                                                            vedtak={vedtak}/>
                         {vedtak.tilstand == "AVSLUTTET_UTEN_UTBETALING" ?
                             <KopierAnmodningOmForkastingJson person={usePerson()}
                                                              organisasjonsnummer={organisasjonsnummer}

@@ -44,6 +44,7 @@ export const createTestArbeidsgiver = (
     }
 ): ArbeidsgiverDto => ({
     id,
+    yrkesaktivitetstype: 'ARBEIDSTAKER',
     organisasjonsnummer,
     vedtaksperioder,
     forkastede: forkastedeVedtaksperioder.map((it): FokastelseDto => ({årsak: 'Ikke støttet', vedtaksperiode: it})),

@@ -4143,6 +4143,7 @@ export let jsonPerson: PersonDto = {
     arbeidsgivere: [
         {
             organisasjonsnummer: '999888777',
+            yrkesaktivitetstype: 'ARBEIDSTAKER',
             id: '7925315b-1083-4722-87fa-c32f802d89d1',
             beregnetUtbetalingstidslinjer: [
                 {
@@ -14348,6 +14349,7 @@ export let jsonPerson: PersonDto = {
         },
         {
             organisasjonsnummer: '888000999',
+            yrkesaktivitetstype: 'ARBEIDSTAKER',
             id: '224d1fbf-110d-4886-a1dc-33bea43f100f',
 
             beregnetUtbetalingstidslinjer: [
@@ -23335,6 +23337,7 @@ export let jsonPerson: PersonDto = {
         },
         {
             organisasjonsnummer: '975111975',
+            yrkesaktivitetstype: 'ARBEIDSTAKER',
             id: '4d233c7e-87e9-4dd4-99bb-acdbce59f449',
             beregnetUtbetalingstidslinjer: [
                 {
@@ -24722,6 +24725,7 @@ export let jsonPerson: PersonDto = {
         },
         {
             organisasjonsnummer: '987111666',
+            yrkesaktivitetstype: 'ARBEIDSTAKER',
             id: 'e0675396-66b2-4c23-a290-aed8f93cbf68',
             beregnetUtbetalingstidslinjer: [
                 {

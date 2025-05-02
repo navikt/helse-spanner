@@ -2,8 +2,9 @@ import React from "react";
 import {PersonDto, VedtakDto} from "../../state/dto";
 import styles from "./PersonTree.module.css";
 
-export default function KopierVedtaksperiodePåminnelseJson({ person, organisasjonsnummer, vedtak } : {
+export default function KopierVedtaksperiodePåminnelseJson({ person, yrkesaktivitetstype, organisasjonsnummer, vedtak } : {
     person: PersonDto,
+    yrkesaktivitetstype: string,
     organisasjonsnummer: string,
     vedtak: VedtakDto
 }) {
@@ -12,6 +13,7 @@ export default function KopierVedtaksperiodePåminnelseJson({ person, organisasj
     "@event_name": "påminnelse",
     "fødselsnummer": "${person.fødselsnummer}",
     "organisasjonsnummer": "${organisasjonsnummer}",
+    "yrkesaktivitetstype": "${yrkesaktivitetstype}",
     "vedtaksperiodeId": "${vedtak.id}",
     "tilstand": "${vedtak.tilstand}",
     "påminnelsestidspunkt": "{{now}}",

@@ -5,6 +5,7 @@
   "arbeidsgivere": [
     {
       "organisasjonsnummer": "987654321",
+      "yrkesaktivitetstype": "ARBEIDSTAKER",
       "id": "ace24176-766a-4aa5-b67b-1c51e9446a5d",
       "inntektshistorikk": [
         {

@@ -22715,6 +22715,7 @@ export const jsonPerson2: PersonDto = {
     arbeidsgivere: [
         {
             organisasjonsnummer: '972674818',
+            yrkesaktivitetstype: 'ARBEIDSTAKER',
             id: 'e2f57fa3-8e95-4dd8-a1d7-7b292449a6b9',
             beregnetUtbetalingstidslinjer: [],
             refusjonOpphører: [],
