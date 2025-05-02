@@ -22,7 +22,8 @@ export default function KopierVedtaksperiodePåminnelseJson({ person, organisasj
         "!ønskerReberegning",
         "!ønskerInntektFraAOrdningen",
         "!trengerReplay",
-        "!forkastOverlappendeSykmeldingsperioderAndreArbeidsgivere"
+        "!forkastOverlappendeSykmeldingsperioderAndreArbeidsgivere",
+        "!nullstillEgenmeldingsdager"
     ]
 }`)
 
