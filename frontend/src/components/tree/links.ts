@@ -6,7 +6,7 @@ const sporingHostname = Environment.isDevelopment
     ? 'sporing.ansatt.dev.nav.no'
     : 'sporing.ansatt.nav.no'
 export const tilstandsmaskinSporingUrl = (id: string) => `https://${sporingHostname}/tilstandsmaskin/${id}`
-export const personSporingUrl = (aktørId: string) => `https://${sporingHostname}/person/${aktørId}`
+export const personSporingUrl = (pid: string) => `https://${sporingHostname}/person/${pid}`
 
 const speilHostname = Environment.isDevelopment
     ? 'localhost'

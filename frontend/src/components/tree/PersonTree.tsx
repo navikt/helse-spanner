@@ -52,7 +52,7 @@ export const PersonTree = ({valgteTing, toggleValgtTing } : PersonTreeProps) => 
                 <SelectableTreeNode indent={0} className={styles.PersonNode} valgteTing={valgteTing} ting={person.aktørId} vedValg={toggleValgtTing}>
                     <span>{person.aktørId}</span>
                     <div className={styles.Knapper}>
-                        <SporingLenke url={personSporingUrl(person.aktørId)} />
+                        <SporingLenke url={personSporingUrl(person.fødselsnummer)} />
                         <KopierPersonPåminnelseJson person={person} />
                     </div>
                 </SelectableTreeNode>
