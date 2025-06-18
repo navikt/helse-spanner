@@ -47,6 +47,8 @@ spec:
   accessPolicy:
     outbound:
       rules:
+        - application: logging
+          namespace: nais-system
         - application: spleis-api
         - application: sparsom-api
         - application: spurtedu

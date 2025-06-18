@@ -48,6 +48,8 @@ spec:
   accessPolicy:
     outbound:
       rules:
+        - application: logging
+          namespace: nais-system
         - application: speed-api-dev-proxy
         - application: spleis-api
         - application: sparsom-api
