@@ -34,3 +34,9 @@ Hvis du har gjort endringer i backend-koden må du selv sørge for bygging av ny
 Hele runden: `./gradlew build && docker build -t helse-spanner-spanner -f Dockerfile backend && docker compose up -d`
 
 ![Eventuelt sånn](https://github.com/navikt/helse-spanner/blob/master/docs/spanner-instruksjoner.png?raw=true)
+
+## Henvendelser
+
+Spørsmål knyttet til koden eller prosjektet kan stilles som issues her på GitHub.
+
+Interne henvendelser kan sendes via Slack i kanalen [#team-bømlo-værsågod](https://nav-it.slack.com/archives/C019637N90X).
