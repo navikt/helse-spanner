@@ -5,7 +5,7 @@ val logbackEncoderVersion = "8.0"
 val ktorVersion = "3.1.2"
 
 plugins {
-    kotlin("jvm") version "2.1.20"
+    kotlin("jvm") version "2.2.0"
 }
 
 repositories {
