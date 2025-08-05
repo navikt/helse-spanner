@@ -20,8 +20,11 @@ jobs:
           distribution: 'temurin'
           java-version: '21.x'
           cache: 'gradle'
+      - name: overskriv settings.gradle.kts
+        run: |
+          mv -f spannerish.settings.gradle.kts settings.gradle.kts
       - name: test and build
-        run: ./gradlew build -settings-file spannerish.settings.gradle.kts
+        run: ./gradlew build
         env:
           ORG_GRADLE_PROJECT_githubPassword: ${{ secrets.GITHUB_TOKEN }}
       - name: build docker image
