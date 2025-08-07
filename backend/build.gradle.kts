@@ -3,8 +3,8 @@ import java.nio.file.Paths
 val logbackClassicVersion = "1.5.12"
 val logbackEncoderVersion = "8.0"
 val junitJupiterVersion = "5.12.1"
-val ktorVersion = "3.1.2"
-val tbdLibsVersion = "2025.03.27-18.30-c228796d"
+val ktorVersion = "3.2.3"
+val tbdLibsVersion = "2025.08.07-09.55-15719a86"
 
 plugins {
     kotlin("jvm") version "2.2.0"

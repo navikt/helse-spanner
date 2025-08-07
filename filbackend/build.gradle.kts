@@ -2,7 +2,7 @@ import java.nio.file.Paths
 
 val logbackClassicVersion = "1.5.12"
 val logbackEncoderVersion = "8.0"
-val ktorVersion = "3.1.2"
+val ktorVersion = "3.2.3"
 
 plugins {
     kotlin("jvm") version "2.2.0"
