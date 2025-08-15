@@ -265,9 +265,9 @@ const SorterNyesteVedtakØverst = (input: VedtakDto[]): VedtakDto[] =>
     input.sort((a, b) => (new Date(b.tom).getTime() - new Date(a.tom).getTime()))
 
 function statusForVedtaksperiode(tilstand: string): "success" | "warning" | "danger" | "info" | "neutral" {
-    if (tilstand == "AVSLUTTET") return "success"
-    if (tilstand == "AVSLUTTET_UTEN_UTBETALING") return "neutral"
-    if (tilstand in ["AVVENTER_GODKJENNING", "AVVENTER_GODKJENNING_REVURDERING"]) return "warning"
+    if (tilstand.endsWith("AVSLUTTET")) return "success"
+    if (tilstand.endsWith("AVSLUTTET_UTEN_UTBETALING")) return "neutral"
+    if (["AVVENTER_GODKJENNING", "AVVENTER_GODKJENNING_REVURDERING"].includes(tilstand)) return "warning"
     return "info"
 }
 
