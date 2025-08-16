@@ -7,7 +7,7 @@ val ktorVersion = "3.2.3"
 val tbdLibsVersion = "2025.08.07-09.55-15719a86"
 
 plugins {
-    kotlin("jvm") version "2.2.0"
+    kotlin("jvm") version "2.2.10"
 }
 
 repositories {
