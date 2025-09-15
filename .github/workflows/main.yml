@@ -1,11 +1,11 @@
-name: master
+name: main
 
 on:
   push:
     paths-ignore:
       - 'filbackend/**'
     branches:
-      - master
+      - main
 
 jobs:
   build:
