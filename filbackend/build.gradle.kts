@@ -1,6 +1,6 @@
 import java.nio.file.Paths
 
-val logbackClassicVersion = "1.5.12"
+val logbackClassicVersion = "1.5.18"
 val logbackEncoderVersion = "8.0"
 val ktorVersion = "3.2.3"
 
