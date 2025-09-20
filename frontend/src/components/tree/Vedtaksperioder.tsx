@@ -74,7 +74,7 @@ const VedtaksNode = ({ vedtak, yrkesaktivitetstype, organisasjonsnummer, visBeha
                                                             yrkesaktivitetstype={yrkesaktivitetstype}
                                                             organisasjonsnummer={organisasjonsnummer}
                                                             vedtak={vedtak}/>
-                        {vedtak.tilstand == "AVSLUTTET_UTEN_UTBETALING" ?
+                        {vedtak.tilstand == "AVSLUTTET_UTEN_UTBETALING" || vedtak.tilstand == "AVVENTER_INNTEKTSMELDING" ?
                             <KopierAnmodningOmForkastingJson person={usePerson()}
                                                              organisasjonsnummer={organisasjonsnummer}
                                                              vedtak={vedtak}/> : null}
