@@ -205,12 +205,14 @@
         {
           "id": "b4b64502-1b6f-481e-8914-a9548cba9391",
           "gjeldende": {
-            "arbeidsgiverperiode": [
-              {
-                "fom": "2018-01-01",
-                "tom": "2018-01-16"
-              }
-            ]
+            "arbeidsgiverperiode": {
+              "dager": [
+                {
+                  "fom": "2018-01-01",
+                  "tom": "2018-01-16"
+                }
+              ]
+            }
           },
           "tilstand": "AVSLUTTET",
           "skjæringstidspunkt": "2018-01-01",
@@ -269,7 +271,10 @@
                     "dokumentId": "61ad6b21-c5ee-4110-8091-7410b4176432",
                     "dokumenttype": "Søknad"
                   },
-                  "arbeidsgiverperiode": []
+                  "arbeidsgiverperiode": {
+                    "ferdigAvklart": false,
+                    "dager": []
+                  }
                 },
                 {
                   "id": "7931045d-5fff-45ed-9a1b-4b2d20316329",
@@ -309,12 +314,15 @@
                     "dokumentId": "61ad6b21-c5ee-4110-8091-7410b4176432",
                     "dokumenttype": "Søknad"
                   },
-                  "arbeidsgiverperiode": [
-                    {
-                      "fom": "2018-01-01",
-                      "tom": "2018-01-16"
-                    }
-                  ]
+                  "arbeidsgiverperiode": {
+                    "ferdigAvklart": true,
+                    "dager": [
+                      {
+                        "fom": "2018-01-01",
+                        "tom": "2018-01-16"
+                      }
+                    ]
+                  }
                 },
                 {
                   "id": "e2296131-7485-45fd-8b6d-11f7425716ba",
@@ -354,12 +362,15 @@
                     "dokumentId": "849bac5d-6b32-4957-ab18-e3efd1af37de",
                     "dokumenttype": "InntektsmeldingDager"
                   },
-                  "arbeidsgiverperiode": [
-                    {
-                      "fom": "2018-01-01",
-                      "tom": "2018-01-16"
-                    }
-                  ]
+                  "arbeidsgiverperiode": {
+                    "ferdigAvklart": true,
+                    "dager": [
+                      {
+                        "fom": "2018-01-01",
+                        "tom": "2018-01-16"
+                      }
+                    ]
+                  }
                 },
                 {
                   "id": "401eba7d-2dd5-4490-bf79-9fed80ed52ba",
@@ -399,12 +410,15 @@
                     "dokumentId": "849bac5d-6b32-4957-ab18-e3efd1af37de",
                     "dokumenttype": "InntektsmeldingInntekt"
                   },
-                  "arbeidsgiverperiode": [
-                    {
-                      "fom": "2018-01-01",
-                      "tom": "2018-01-16"
-                    }
-                  ]
+                  "arbeidsgiverperiode": {
+                    "ferdigAvklart": true,
+                    "dager": [
+                      {
+                        "fom": "2018-01-01",
+                        "tom": "2018-01-16"
+                      }
+                    ]
+                  }
                 },
                 {
                   "id": "7046767a-1942-4049-a881-2641ba123c62",
@@ -444,12 +458,15 @@
                     "dokumentId": "849bac5d-6b32-4957-ab18-e3efd1af37de",
                     "dokumenttype": "InntektsmeldingInntekt"
                   },
-                  "arbeidsgiverperiode": [
-                    {
-                      "fom": "2018-01-01",
-                      "tom": "2018-01-16"
-                    }
-                  ]
+                  "arbeidsgiverperiode": {
+                    "ferdigAvklart": true,
+                    "dager": [
+                      {
+                        "fom": "2018-01-01",
+                        "tom": "2018-01-16"
+                      }
+                    ]
+                  }
                 }
               ]
             }
@@ -465,12 +482,14 @@
           "fom": "2018-02-01",
           "tom": "2018-02-28",
           "gjeldende": {
-            "arbeidsgiverperiode": [
-              {
-                "fom": "2018-01-01",
-                "tom": "2018-01-16"
-              }
-            ]
+            "arbeidsgiverperiode": {
+              "dager": [
+                {
+                  "fom": "2018-01-01",
+                  "tom": "2018-01-16"
+                }
+              ]
+            }
           },
           "sykmeldingFom": "2018-02-01",
           "sykmeldingTom": "2018-02-28",
@@ -565,12 +584,15 @@
                     "dokumentId": "716c392b-3b1c-49b1-b131-2dbbfe19760e",
                     "dokumenttype": "Søknad"
                   },
-                  "arbeidsgiverperiode": [
-                    {
-                      "fom": "2018-01-01",
-                      "tom": "2018-01-16"
-                    }
-                  ]
+                  "arbeidsgiverperiode": {
+                    "ferdigAvklart": true,
+                    "dager": [
+                      {
+                        "fom": "2018-01-01",
+                        "tom": "2018-01-16"
+                      }
+                    ]
+                  }
                 }
               ]
             }

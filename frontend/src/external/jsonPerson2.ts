@@ -25017,12 +25017,14 @@ export const jsonPerson2: PersonDto = {
                     fom: '2021-06-01',
                     tom: '2021-06-14',
                     gjeldende: {
-                        arbeidsgiverperiode: [
-                            {
-                                fom: '2021-06-01',
-                                tom: '2020-06-14'
-                            }
-                        ]
+                        arbeidsgiverperiode: {
+                            dager: [
+                                {
+                                    fom: '2021-06-01',
+                                    tom: '2020-06-14'
+                                }
+                            ]
+                        }
                     },
                     behandlinger: [
                         {
@@ -25109,12 +25111,14 @@ export const jsonPerson2: PersonDto = {
                     fom: '2021-07-13',
                     tom: '2021-08-02',
                     gjeldende: {
-                        arbeidsgiverperiode: [
-                            {
-                                fom: '2021-07-13',
-                                tom: '2021-07-28'
-                            }
-                        ]
+                        arbeidsgiverperiode: {
+                            dager: [
+                                {
+                                    fom: '2021-07-13',
+                                    tom: '2021-07-28'
+                                }
+                            ]
+                        }
                     },
                     "behandlinger": [
                         {

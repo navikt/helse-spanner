@@ -13497,10 +13497,12 @@ export let jsonPerson: PersonDto = {
             vedtaksperioder: [
                 {
                     gjeldende: {
-                        arbeidsgiverperiode: [{
-                            fom: '2018-01-01',
-                            tom: '2018-01-16'
-                        }]
+                        arbeidsgiverperiode: {
+                            dager: [{
+                                fom: '2018-01-01',
+                                tom: '2018-01-16'
+                            }]
+                        }
                     },
 
                     fom: '2018-01-01',
@@ -13856,10 +13858,12 @@ export let jsonPerson: PersonDto = {
                     fom: '2018-02-01',
                     tom: '2018-02-28',
                     gjeldende: {
-                        arbeidsgiverperiode: [{
-                            fom: '2018-01-01',
-                            tom: '2018-01-16'
-                        }]
+                        arbeidsgiverperiode: {
+                            dager: [{
+                                fom: '2018-01-01',
+                                tom: '2018-01-16'
+                            }]
+                        }
                     },
                     sykmeldingFom: '2018-02-01',
                     sykmeldingTom: '2018-02-28',
@@ -23062,10 +23066,12 @@ export let jsonPerson: PersonDto = {
                     fom: '2018-01-01',
                     tom: '2018-01-31',
                     gjeldende: {
-                        arbeidsgiverperiode: [{
-                            fom: '2018-01-01',
-                            tom: '2018-01-16'
-                        }]
+                        arbeidsgiverperiode: {
+                            dager: [{
+                                fom: '2018-01-01',
+                                tom: '2018-01-16'
+                            }]
+                        }
                     },
                     sykmeldingFom: '2018-01-01',
                     sykmeldingTom: '2018-01-31',
@@ -24286,20 +24292,22 @@ export let jsonPerson: PersonDto = {
                     fom: '2020-01-01',
                     tom: '2020-01-31',
                     gjeldende: {
-                        arbeidsgiverperiode: [
-                            {
-                                fom: '2020-01-03',
-                                tom: '2020-01-05'
-                            },
-                            {
-                                fom: '2020-01-07',
-                                tom: '2020-01-10'
-                            },
-                            {
-                                fom: '2020-01-29',
-                                tom: '2020-02-01'
-                            },
-                        ]
+                        arbeidsgiverperiode: {
+                            dager: [
+                                {
+                                    fom: '2020-01-03',
+                                    tom: '2020-01-05'
+                                },
+                                {
+                                    fom: '2020-01-07',
+                                    tom: '2020-01-10'
+                                },
+                                {
+                                    fom: '2020-01-29',
+                                    tom: '2020-02-01'
+                                },
+                            ]
+                        }
                     },
                     sykmeldingFom: '2020-01-01',
                     sykmeldingTom: '2020-01-31',
@@ -24504,20 +24512,22 @@ export let jsonPerson: PersonDto = {
                     fom: '2020-02-01',
                     tom: '2020-02-28',
                     gjeldende: {
-                        arbeidsgiverperiode: [
-                            {
-                                fom: '2020-01-03',
-                                tom: '2020-01-05'
-                            },
-                            {
-                                fom: '2020-01-07',
-                                tom: '2020-01-10'
-                            },
-                            {
-                                fom: '2020-01-29',
-                                tom: '2020-02-01'
-                            },
+                        arbeidsgiverperiode: {
+                            dager: [
+                                {
+                                    fom: '2020-01-03',
+                                    tom: '2020-01-05'
+                                },
+                                {
+                                    fom: '2020-01-07',
+                                    tom: '2020-01-10'
+                                },
+                                {
+                                    fom: '2020-01-29',
+                                    tom: '2020-02-01'
+                                },
                             ]
+                        }
                     },
                     sykmeldingFom: '2020-02-01',
                     sykmeldingTom: '2020-02-28',

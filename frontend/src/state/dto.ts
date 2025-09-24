@@ -69,9 +69,11 @@ export type VedtakDto = {
 
 export type Gjeldende = {
     arbeidsgiverperiode: {
-        fom: string,
-        tom: string
-    }[]
+        dager: {
+            fom: string,
+            tom: string
+        }[]
+    }
 }
 
 export type BehandlingDto = {
