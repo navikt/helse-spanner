@@ -25017,7 +25017,7 @@ export const jsonPerson2: PersonDto = {
                     fom: '2021-06-01',
                     tom: '2021-06-14',
                     gjeldende: {
-                        arbeidsgiverperiode: {
+                        dagerUtenNavAnsvar: {
                             dager: [
                                 {
                                     fom: '2021-06-01',
@@ -25111,7 +25111,7 @@ export const jsonPerson2: PersonDto = {
                     fom: '2021-07-13',
                     tom: '2021-08-02',
                     gjeldende: {
-                        arbeidsgiverperiode: {
+                        dagerUtenNavAnsvar: {
                             dager: [
                                 {
                                     fom: '2021-07-13',

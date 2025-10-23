@@ -205,7 +205,7 @@
         {
           "id": "b4b64502-1b6f-481e-8914-a9548cba9391",
           "gjeldende": {
-            "arbeidsgiverperiode": {
+            "dagerUtenNavAnsvar": {
               "dager": [
                 {
                   "fom": "2018-01-01",
@@ -271,7 +271,7 @@
                     "dokumentId": "61ad6b21-c5ee-4110-8091-7410b4176432",
                     "dokumenttype": "Søknad"
                   },
-                  "arbeidsgiverperiode": {
+                  "dagerUtenNavAnsvar": {
                     "ferdigAvklart": false,
                     "dager": []
                   }
@@ -314,7 +314,7 @@
                     "dokumentId": "61ad6b21-c5ee-4110-8091-7410b4176432",
                     "dokumenttype": "Søknad"
                   },
-                  "arbeidsgiverperiode": {
+                  "dagerUtenNavAnsvar": {
                     "ferdigAvklart": true,
                     "dager": [
                       {
@@ -362,7 +362,7 @@
                     "dokumentId": "849bac5d-6b32-4957-ab18-e3efd1af37de",
                     "dokumenttype": "InntektsmeldingDager"
                   },
-                  "arbeidsgiverperiode": {
+                  "dagerUtenNavAnsvar": {
                     "ferdigAvklart": true,
                     "dager": [
                       {
@@ -410,7 +410,7 @@
                     "dokumentId": "849bac5d-6b32-4957-ab18-e3efd1af37de",
                     "dokumenttype": "InntektsmeldingInntekt"
                   },
-                  "arbeidsgiverperiode": {
+                  "dagerUtenNavAnsvar": {
                     "ferdigAvklart": true,
                     "dager": [
                       {
@@ -458,7 +458,7 @@
                     "dokumentId": "849bac5d-6b32-4957-ab18-e3efd1af37de",
                     "dokumenttype": "InntektsmeldingInntekt"
                   },
-                  "arbeidsgiverperiode": {
+                  "dagerUtenNavAnsvar": {
                     "ferdigAvklart": true,
                     "dager": [
                       {
@@ -482,7 +482,7 @@
           "fom": "2018-02-01",
           "tom": "2018-02-28",
           "gjeldende": {
-            "arbeidsgiverperiode": {
+            "dagerUtenNavAnsvar": {
               "dager": [
                 {
                   "fom": "2018-01-01",
@@ -544,7 +544,7 @@
                     "dokumentId": "716c392b-3b1c-49b1-b131-2dbbfe19760e",
                     "dokumenttype": "Søknad"
                   },
-                  "arbeidsgiverperiode": []
+                  "dagerUtenNavAnsvar": []
                 },
                 {
                   "id": "47d9aeca-5a54-47e6-a857-fd7844525e83",
@@ -584,7 +584,7 @@
                     "dokumentId": "716c392b-3b1c-49b1-b131-2dbbfe19760e",
                     "dokumenttype": "Søknad"
                   },
-                  "arbeidsgiverperiode": {
+                  "dagerUtenNavAnsvar": {
                     "ferdigAvklart": true,
                     "dager": [
                       {

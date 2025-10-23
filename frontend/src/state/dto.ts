@@ -68,7 +68,7 @@ export type VedtakDto = {
 }
 
 export type Gjeldende = {
-    arbeidsgiverperiode: {
+    dagerUtenNavAnsvar: {
         dager: {
             fom: string,
             tom: string

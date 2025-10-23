@@ -285,7 +285,7 @@ function getArbeidsgiverperiodeTimeLine(vedtak: VedtakDto): { fom: Date, tom: Da
     let vedtaksperiodeTom = new Date(vedtak.tom)
 
     const listeOverDager: { fom: Date, tom: Date, type: string }[] = []
-    vedtak.gjeldende.arbeidsgiverperiode.dager.map((arbeidsgiverperiode) => {
+    vedtak.gjeldende.dagerUtenNavAnsvar.dager.map((arbeidsgiverperiode) => {
         const agpFom = new Date(arbeidsgiverperiode.fom)
         const agpTom = new Date(arbeidsgiverperiode.tom)
         const liggerArbeidsgiverperiodenUtenforVedtaksperioden = agpFom.getTime() > new Date(vedtak.tom).getTime() || agpTom.getTime() < new Date(vedtak.fom).getTime();
