@@ -33,7 +33,7 @@ interface VedtaksperioderProps {
 
 export const Vedtaksperioder = ({ arbeidsgiver, valgteTing, visForkastede, visBehandlinger, toggleValgtTing } : VedtaksperioderProps) => {
     let vedtaksperioder: [JSX.Element, Date][] = arbeidsgiver.vedtaksperioder.map((vedtak) => [
-        <VedtaksNode key={vedtak.id} vedtak={vedtak} yrkesaktivitetstype={arbeidsgiver.yrkesaktivitetstype} organisasjonsnummer={arbeidsgiver.organisasjonsnummer} visBehandlinger={visBehandlinger} valgteTing={valgteTing} vedValg={ toggleValgtTing }/>,
+        <VedtaksNode key={vedtak.id} vedtak={vedtak} yrkesaktivitetstype={arbeidsgiver.yrkesaktivitetstype} organisasjonsnummer={arbeidsgiver.organisasjonsnummer} visBehandlinger={visBehandlinger} valgteTing={valgteTing} vedValg={ toggleValgtTing } />,
         parseISO(vedtak.fom),
     ])
     let forkastedeVedtaksperioder: [JSX.Element, Date][] = []
@@ -73,11 +73,17 @@ const VedtaksNode = ({ vedtak, yrkesaktivitetstype, organisasjonsnummer, visBeha
                         <KopierVedtaksperiodePåminnelseJson person={usePerson()}
                                                             yrkesaktivitetstype={yrkesaktivitetstype}
                                                             organisasjonsnummer={organisasjonsnummer}
-                                                            vedtak={vedtak}/>
+                                                            vedtak={vedtak}
+                        />
                         {vedtak.tilstand == "AVSLUTTET_UTEN_UTBETALING" || vedtak.tilstand == "AVVENTER_INNTEKTSMELDING" ?
-                            <KopierAnmodningOmForkastingJson person={usePerson()}
-                                                             organisasjonsnummer={organisasjonsnummer}
-                                                             vedtak={vedtak}/> : null}
+                            <KopierAnmodningOmForkastingJson
+                                person={usePerson()}
+                                organisasjonsnummer={organisasjonsnummer}
+                                vedtak={vedtak}
+                                yrkesaktivitetstype={yrkesaktivitetstype}
+                            />
+                            : null
+                        }
                     </div>
                 </div>
                 <span className={styles.TilstandText}>{vedtak.tilstand}</span>

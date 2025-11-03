@@ -35,6 +35,7 @@ export const createTestArbeidsgiver = (
     vedtaksperioder: VedtakDto[] = [createTestVedtaksperiode(), createTestVedtaksperiode('2021-01-01', '2021-02-03')],
     forkastedeVedtaksperioder: FokastetVedtaksperiodeDto[] = [],
     utbetalinger: UtbetalingDto[] = [],
+    yrkesaktivitetstype: string = 'ARBEIDSTAKER',
     id: string = new_id(),
     gjeldende: Gjeldende = {
         dagerUtenNavAnsvar: {
@@ -46,7 +47,7 @@ export const createTestArbeidsgiver = (
     }
 ): ArbeidsgiverDto => ({
     id,
-    yrkesaktivitetstype: 'ARBEIDSTAKER',
+    yrkesaktivitetstype: yrkesaktivitetstype,
     organisasjonsnummer,
     vedtaksperioder,
     forkastede: forkastedeVedtaksperioder.map((it): FokastelseDto => ({årsak: 'Ikke støttet', vedtaksperiode: it})),
