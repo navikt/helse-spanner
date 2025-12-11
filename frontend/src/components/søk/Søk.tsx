@@ -77,4 +77,3 @@ export const Søk = () => {
         </Box>
     )
 }
-Søk.displayName = 'Søk'

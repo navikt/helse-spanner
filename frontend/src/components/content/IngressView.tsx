@@ -8,14 +8,11 @@ const _IngressView = (url: string) => <div><a href={url} target="_blank" rel="no
 
 const Vedtaksperiode = ({ vedtaksperiode }: { vedtaksperiode: VedtakDto }) =>
     _IngressView(tilstandsmaskinSporingUrl(vedtaksperiode.id))
-Vedtaksperiode.displayName = 'IngressView.Vedtaksperiode'
 
 const ForkastetVedtaksperiode = ({ vedtaksperiode }: { vedtaksperiode: FokastetVedtaksperiodeDto }) =>
     _IngressView(tilstandsmaskinSporingUrl(vedtaksperiode.id))
-ForkastetVedtaksperiode.displayName = 'IngressView.Vedtaksperiode'
 
 const Person = ({ person }: { person: PersonDto }) => _IngressView(personSporingUrl(person.fødselsnummer))
-Person.displayName = 'IngressView.Vedtaksperiode'
 
 export const IngressView = ({ person, valgteTing }: { person: PersonDto, valgteTing: string[] }) => {
     return (
@@ -30,4 +27,3 @@ export const IngressView = ({ person, valgteTing }: { person: PersonDto, valgteT
     )
 }
 
-IngressView.displayName = 'IngressView'

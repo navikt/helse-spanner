@@ -4,23 +4,20 @@ import classNames from 'classnames'
 
 interface CardProps extends React.HTMLAttributes<HTMLDivElement> {}
 
-export const Card: React.FC<CardProps> = ({ className, children, ...rest }) => (
+export const Card = ({ className, children, ...rest }: CardProps) => (
     <div className={classNames(styles.Card, className)} {...rest}>
         {children}
     </div>
 )
-Card.displayName = 'Card'
 
-export const ContentCard: React.FC<CardProps> = ({ className, children, ...rest }) => (
+export const ContentCard = ({ className, children, ...rest }: CardProps) => (
     <div className={classNames(styles.ContentCard, className)} {...rest}>
         {children}
     </div>
 )
-ContentCard.displayName = 'ContentCard'
 
-export const HeaderCard: React.FC<CardProps> = ({ className, children, ...rest }) => (
+export const HeaderCard = ({ className, children, ...rest }: CardProps) => (
     <div className={classNames(styles.HeaderCard, className)} {...rest}>
         {children}
     </div>
 )
-HeaderCard.displayName = 'HeaderCard'

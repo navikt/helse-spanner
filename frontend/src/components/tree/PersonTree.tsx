@@ -13,7 +13,7 @@ import {VilkårsgrunnlagHistorikkNode} from "./VilkårsgrunnlagNode";
 
 interface PersonTreeProps {
     valgteTing: string[],
-    toggleValgtTing: (e: React.MouseEvent, ting: string) => void
+    toggleValgtTing: (e: React.MouseEvent | React.KeyboardEvent, ting: string) => void
 }
 
 export const PersonTree = ({valgteTing, toggleValgtTing } : PersonTreeProps) => {
@@ -79,4 +79,3 @@ export const PersonTree = ({valgteTing, toggleValgtTing } : PersonTreeProps) => 
         </Box>
     )
 }
-PersonTree.displayName = 'PersonTree'

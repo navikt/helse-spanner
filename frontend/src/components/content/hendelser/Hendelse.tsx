@@ -42,7 +42,7 @@ export const Hendelse = ({ kontekst }: { kontekst: Hendelsekontekst }) => {
             const unique = nyåpneHendelser.filter((v, i, a) => a.indexOf(v) === i)
             setÅpneHendelser(() => unique)
         },
-        [åpneHendelser, setÅpneHendelser]
+        [åpneHendelser, setÅpneHendelser, kontekst]
     )
 
     const isError = aktiviteter.find((it) => it.nivå == 'FUNKSJONELL_FEIL')
@@ -95,4 +95,3 @@ export const Hendelse = ({ kontekst }: { kontekst: Hendelsekontekst }) => {
     )
 }
 
-Hendelse.displayName = 'Hendelse'

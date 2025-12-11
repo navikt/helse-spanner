@@ -88,7 +88,7 @@ const VedtaksNode = ({ vedtak, yrkesaktivitetstype, organisasjonsnummer, visBeha
                 </div>
                 <span className={styles.TilstandText}>{vedtak.tilstand}</span>
             </SelectableTreeNode>
-            {visBehandlinger && vedtak.behandlinger?.map((behandling: BehandlingDto, index) =>
+            {visBehandlinger && vedtak.behandlinger?.map((behandling: BehandlingDto) =>
                 <BehandlingsNode key={behandling.id} behandling={behandling} valgteTing={valgteTing} vedValg={vedValg}/>)}
         </div>
     )
@@ -156,7 +156,6 @@ const Endringsnode = ({endring, visKilder, valgteTing, vedValg}: {
         </div>
     )
 }
-Endringsnode.displayName = 'Endringer'
 
 function sykdomstidslinjeShortString(tidslinje: SykdomstidslinjeDto): string {
     if (tidslinje.dager.length == 0) return "Tom tidslinje"

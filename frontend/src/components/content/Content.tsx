@@ -1,4 +1,4 @@
-import React, {useMemo} from 'react'
+import React from 'react'
 import {JsonView} from './JsonView'
 import {HendelseView} from './hendelser/HendelseView'
 import {ContentView} from '../../state/state'
@@ -30,7 +30,6 @@ export const Content = ({ person, valgteTing }: { person: PersonDto, valgteTing:
         </Box>
     )
 }
-Content.displayName = 'Content'
 
 function ViewButton({ value }: { value: ContentView }) {
     return <Tabs.Tab value={value} label={value} />

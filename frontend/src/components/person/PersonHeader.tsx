@@ -3,7 +3,7 @@ import parseISO from 'date-fns/parseISO'
 import styles from './PersonHeader.module.css'
 import {usePerson} from '../../state/contexts'
 import {speilUrl} from '../tree/links'
-import {Box, HStack, Search} from "@navikt/ds-react";
+import {Box, Search} from "@navikt/ds-react";
 
 export const PersonHeader = ({ toggleValgtTing }: { toggleValgtTing: (e: boolean, ting: string) => void }) => {
     const person = usePerson()
@@ -57,4 +57,3 @@ const VedtaksperiodeSøk = ({ toggleValgtTing }: { toggleValgtTing: (e: boolean,
             </form>
 }
 
-PersonHeader.displayName = 'PersonHeader'

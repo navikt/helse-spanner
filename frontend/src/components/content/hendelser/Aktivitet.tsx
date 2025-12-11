@@ -28,4 +28,3 @@ export const Aktivitet: React.FC<AktivitetViewProps> = ({ aktivitet }: { aktivit
     )
 }
 
-Aktivitet.displayName = 'Aktivitet'

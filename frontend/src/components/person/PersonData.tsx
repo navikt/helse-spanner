@@ -6,7 +6,6 @@ import {PersonContext} from '../../state/contexts'
 import {Spinner} from '../Spinner'
 import {Feilmelding} from '../Feilmelding'
 import {useParams} from 'react-router-dom'
-import {Box, HGrid, Spacer, VStack} from "@navikt/ds-react";
 
 export const PersonData = () => {
     const {personId} = useParams<string>()
@@ -22,4 +21,3 @@ export const PersonData = () => {
         </PersonContext.Provider>
     )
 }
-PersonData.displayName = 'PersonData'

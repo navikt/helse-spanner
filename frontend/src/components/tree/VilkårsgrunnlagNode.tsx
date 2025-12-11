@@ -6,7 +6,7 @@ import {VilkårsgrunnlaghistorikkDto} from "../../state/dto";
 interface VilkårsgrunnlagNodeProps {
     vilkårsgrunnlagHistorikkInnslag: VilkårsgrunnlaghistorikkDto,
     valgteTing: string[],
-    toggleValgtTing: (e: React.MouseEvent, ting: string) => void
+    toggleValgtTing: (e: React.MouseEvent | React.KeyboardEvent, ting: string) => void
 }
 
 export const VilkårsgrunnlagHistorikkNode = ({ vilkårsgrunnlagHistorikkInnslag, valgteTing, toggleValgtTing } : VilkårsgrunnlagNodeProps) => {
@@ -27,4 +27,3 @@ export const VilkårsgrunnlagHistorikkNode = ({ vilkårsgrunnlagHistorikkInnslag
     )
 }
 
-VilkårsgrunnlagHistorikkNode.displayName = 'VilkårsgrunnlagHistorikkNode'

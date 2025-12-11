@@ -1,11 +1,17 @@
+import { test, expect, afterEach } from 'vitest'
 import * as RestBackend from './restBackend'
 import fetchMock from 'fetch-mock'
 import { backendFeil, httpFeil } from './feil'
+
 const restBackend = RestBackend.restBackend(true)
+
+afterEach(() => {
+    fetchMock.restore()
+})
+
 test('ok fra backend er ok', async () => {
     fetchMock.get('http://localhost:8080/api/person/', { foo: 'bar' })
     expect(await restBackend.personForUUID('foo')).toEqual({ foo: 'bar' })
-    fetchMock.restore()
 })
 
 test('Feil fra backend kan legge ved feildto i body for mer detaljer', async () => {
@@ -17,7 +23,6 @@ test('Feil fra backend kan legge ved feildto i body for mer detaljer', async () 
     expect(thrownError?.feilId).toBe('FOO')
     expect(thrownError?.message).toContain('Feil fra server')
     expect(thrownError?.message).toContain('Bad')
-    fetchMock.restore()
 })
 
 test('Feil fra backend uten gyldig feildto blir fortsatt backendfeil', async () => {
@@ -29,7 +34,6 @@ test('Feil fra backend uten gyldig feildto blir fortsatt backendfeil', async () 
 
     expect(thrownError?.feilId).toBe(undefined)
     expect(thrownError?.message).toContain('Feil fra server')
-    fetchMock.restore()
 })
 
 test('Feil fra nettverksstacke reject gir httpError', async () => {
@@ -40,7 +44,6 @@ test('Feil fra nettverksstacke reject gir httpError', async () => {
 
     expect(thrownError?.message).toBe('Feil under nettverkskall: Connection refused')
     expect(thrownError?.cause).toBeInstanceOf(Error)
-    fetchMock.restore()
 })
 
 async function getBackendFeil(f: () => Promise<any>): Promise<backendFeil> {

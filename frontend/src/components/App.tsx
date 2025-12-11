@@ -4,7 +4,7 @@ import {PersonData} from './person/PersonData'
 import {Header} from './søk/Header'
 import {BrowserRouter, Route, Routes, useNavigate} from 'react-router-dom'
 import "@navikt/ds-css";
-import {Alert, Box, ErrorSummary, Page} from "@navikt/ds-react";
+import {Page} from "@navikt/ds-react";
 
 const EmptyState = () => <></>
 
@@ -51,7 +51,6 @@ export const Hotkeys = () => {
             </div>
         </div>)
 }
-Hotkeys.displayName = 'Hotkeys'
 
 const TilbakeKnapp= ({onClose, children}: {onClose: () => void, children: React.ReactNode}) => {
     return (

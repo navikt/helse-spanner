@@ -9,4 +9,3 @@ export const ExpandToggle = (props: React.PropsWithoutRef<{ onClick: () => void;
         </button>
     )
 }
-ExpandToggle.displayName = 'ExpandToggle'

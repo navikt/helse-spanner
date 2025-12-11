@@ -3,7 +3,7 @@ import {usePerson} from "../../state/contexts";
 import {add, differenceInMonths, sub} from "date-fns";
 import {Timeline} from "@navikt/ds-react";
 import styles from "./Tidslinjer.module.css";
-import {BriefcaseIcon, Buldings3Icon, PackageIcon, ParasolBeachIcon, PiggybankIcon, TrashIcon} from "@navikt/aksel-icons";
+import {BriefcaseIcon, Buildings3Icon, PackageIcon, ParasolBeachIcon, PiggybankIcon, TrashIcon} from "@navikt/aksel-icons";
 import {VedtakDto} from "../../state/dto";
 import { format } from 'date-fns'
 import {somNorskDato} from "../i18n";
@@ -23,12 +23,9 @@ const Zoom = ({step, onClick}: { step: number, onClick: (step: number) => void }
 
 export const Tidslinjer = ({valgteTing, toggleValgtTing}: {
     valgteTing: string[],
-    toggleValgtTing: (e: React.MouseEvent, ting: string) => void
+    toggleValgtTing: (e: React.MouseEvent | React.KeyboardEvent, ting: string) => void
 }) => {
     const person = usePerson()
-    const j = person.arbeidsgivere.flatMap((it) => {
-        return [...it.vedtaksperioder.map((vedtaksperiode) => vedtaksperiode.fom), ...it.forkastede.map((forkastet) => forkastet.vedtaksperiode.fom)]
-    })
     const sortertePerioder = person.arbeidsgivere
         .flatMap((it) => {
             return [...it.vedtaksperioder.map((vedtaksperiode) => vedtaksperiode.tom), ...it.forkastede.map((forkastet) => forkastet.vedtaksperiode.tom)]
@@ -47,10 +44,6 @@ export const Tidslinjer = ({valgteTing, toggleValgtTing}: {
 
     useEffect(() => {
         // zoom slik at vedtaksperiodene som er valgt, vises i tidslinjen :)
-        const vedtak = person.arbeidsgivere
-            .flatMap((it) => it.vedtaksperioder)
-            .find((it) => valgteTing.find((a) => it.id === a))
-
         const alleVedtak = person.arbeidsgivere.flatMap((it) => it.vedtaksperioder)
         const valgteVedtak = SorterNyesteVedtakØverst(valgteTing
             .map((valgtTing) => alleVedtak.find((it) => it.id === valgtTing))
@@ -223,7 +216,7 @@ export const Tidslinjer = ({valgteTing, toggleValgtTing}: {
                         </Timeline.Period>
                     }), ...person.infotrygdhistorikk[infotrygdhistorikkElementIndex].arbeidsgiverutbetalingsperioder.map((it) => {
                         return <Timeline.Period start={new Date(it.fom)} end={new Date(it.tom)} status="success"
-                                                icon={<Buldings3Icon aria-hidden/>}>
+                                                icon={<Buildings3Icon aria-hidden/>}>
                             <div>{it.fom} - {it.tom} - refusjon
                                 til {it.hasOwnProperty("orgnr") ? it.orgnr : "N/A"}</div>
                         </Timeline.Period>

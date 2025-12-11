@@ -18,10 +18,10 @@ export const PersonView = () => {
 
     const [valgteTing, setValgteTing] = useState([person.aktørId])
 
-    const skalUtvideValgtTing = (e: React.MouseEvent | boolean) => {
+    const skalUtvideValgtTing = (e: React.MouseEvent | React.KeyboardEvent | boolean) => {
         return (typeof e === 'boolean') ? e : (e.ctrlKey || e.metaKey)
     }
-    const toggleValgtTing = (e: React.MouseEvent | boolean, id: string) => {
+    const toggleValgtTing = (e: React.MouseEvent | React.KeyboardEvent | boolean, id: string) => {
         setValgteTing((previous) => {
             // fjern fra settet hvis iden er der fra før
             if (previous.includes(id)) return previous.filter((it) => it != id)
@@ -60,4 +60,3 @@ export const PersonView = () => {
     </>)
 }
 
-PersonView.displayName = 'PersonView'

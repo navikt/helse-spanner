@@ -21,7 +21,6 @@ const Person = (aktivitetslogg: AktivitetsloggV2) => {
         return <Hendelser hendelser={hendelser} />
     }
 }
-Person.displayName = 'HendelseView.Person'
 
 const Arbeidsgiver = (aktivitetslogg: AktivitetsloggV2) => {
     return ({ arbeidsgiver }: { arbeidsgiver: ArbeidsgiverDto }) => {
@@ -74,7 +73,6 @@ const Utbetaling = (aktivitetslogg: AktivitetsloggV2) => {
         return <Hendelser hendelser={hendelser} />
     }
 }
-Utbetaling.displayName = 'HendelseView.Utbetaling'
 
 export const HendelseView = ({ person, valgteTing }: { person: PersonDto, valgteTing: string[] }) => {
     const aktivitetslogg: AktivitetsloggV2 = React.useMemo(() => aktivitetsloggFraPerson(person), [person])
@@ -91,7 +89,6 @@ export const HendelseView = ({ person, valgteTing }: { person: PersonDto, valgte
         />
     )
 }
-HendelseView.displayName = 'HendelseView'
 
 function aktivitetsloggFraPerson(person: PersonDto): AktivitetsloggV2 {
     let alleAktiviteter = person.aktivitetsloggV2?.aktiviteter ?? [];

@@ -46,4 +46,3 @@ export const ArbeidsgiverNode = ({ arbeidsgiver, erUtvidet, toggleUtvidet, visFo
     )
 }
 
-ArbeidsgiverNode.displayName = 'ArbeidsgiverNode'

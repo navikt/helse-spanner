@@ -1,5 +1,5 @@
 import React, {useMemo} from 'react'
-import ReactJson from 'react-json-view'
+import ReactJson from '@microlink/react-json-view'
 import {ContentView} from '../../state/state'
 import {ContentCategory} from './ContentCategory'
 import {writeToClipboard} from '../../utils'
@@ -46,7 +46,6 @@ const Vedtaksperiode = ({ vedtaksperiode }: { vedtaksperiode: VedtakDto }) => {
         </div>
     )
 }
-Vedtaksperiode.displayName = 'JsonView.Vedtaksperiode'
 
 const ForkastetVedtaksperiode = ({ vedtaksperiode }: { vedtaksperiode: FokastetVedtaksperiodeDto }) => {
     return (
@@ -112,6 +111,5 @@ export const JsonView = ({ person, valgteTing }: { person: PersonDto, valgteTing
             valgteTing={valgteTing}
             {...{ Person, Vilkårsgrunnlag, Arbeidsgiver, Vedtaksperiode, ForkastetVedtaksperiode, Utbetaling, Behandling, Endring }}
         />
-    }, [valgteTing])
+    }, [valgteTing, person])
 }
-JsonView.displayName = 'JsonView'

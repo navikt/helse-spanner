@@ -1,13 +1,14 @@
-import UserEvent from '@testing-library/user-event'
+import { test, expect } from 'vitest'
+import userEvent from '@testing-library/user-event'
 import {testApp} from '../../testApp'
 import {createTestPerson} from '../../state/testData'
 import {lagfinnesIkkeFeil} from '../../external/feil'
 import testingLibrary, {getByTestId} from '@testing-library/react'
-import {act} from "react-dom/test-utils";
 
-function søk(text: string = '42') {
-    UserEvent.type(søkefelt(), text)
-    UserEvent.click(søkeknapp())
+async function søk(text: string = '42') {
+    const user = userEvent.setup()
+    await user.type(søkefelt(), text)
+    await user.click(søkeknapp())
 }
 
 function søkefelt(container: HTMLElement = document.body) {
@@ -26,10 +27,6 @@ function person(container: HTMLElement = document.body) {
     return testingLibrary.getByTestId(container, 'person-header-fnr')
 }
 
-function uuidRespons(container: HTMLElement = document.body) {
-    return console.log(testingLibrary.prettyDOM())
-}
-
 function respons(container: HTMLElement = document.body) {
     return testingLibrary.waitForElementToBeRemoved(() => getByTestId(container, 'spinner'))
 }
@@ -39,7 +36,7 @@ test.skip('bruker søker opp en person', async () => {
     console.log(`per aktor = ${per.aktørId}`)
     testApp([per])
 
-    act(() => søk(per.aktørId))
+    await søk(per.aktørId)
     console.log(location.pathname)
     await respons()
     console.log(`body!! ${document.body}`)
@@ -48,7 +45,7 @@ test.skip('bruker søker opp en person', async () => {
 
 test.skip('bruker søker opp en person som ikke finnes', async () => {
     testApp([], { '43': lagfinnesIkkeFeil() })
-    søk('43')
+    await søk('43')
     await respons()
     expect(feilmelding().textContent).toContain('Ressursen finnes ikke i spleis')
 })

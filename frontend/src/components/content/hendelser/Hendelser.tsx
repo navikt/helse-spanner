@@ -32,8 +32,8 @@ export const Hendelser = ({ hendelser }: { hendelser: Hendelsekontekst[] }) => {
     return (
         <>
             <HStack gap="5">
-                <Switch size="small" onChange={(e) => toggleVisBareFeil() }>Bare feil</Switch>
-                <Switch size="small" checked={skjulPåminnelser} onChange={(e) => toggleVisPåminnelser() }>Skjul påminnelser og utbetalingshistorikk</Switch>
+                <Switch size="small" onChange={(_) => toggleVisBareFeil() }>Bare feil</Switch>
+                <Switch size="small" checked={skjulPåminnelser} onChange={(_) => toggleVisPåminnelser() }>Skjul påminnelser og utbetalingshistorikk</Switch>
                 <TextField id={"hendelseprefix_input"} size={"small"} onInput={(e) => oppdaterPrefix(e) } label={"prefix (optional)"} ></TextField>
             </HStack>
             {sorterteHendelser.map((it) => {
@@ -42,4 +42,3 @@ export const Hendelser = ({ hendelser }: { hendelser: Hendelsekontekst[] }) => {
         </>
     )
 }
-Hendelser.displayName = 'Hendelser'

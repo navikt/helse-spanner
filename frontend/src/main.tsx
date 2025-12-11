@@ -1,5 +1,5 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
+import { createRoot } from 'react-dom/client'
 import './index.css'
 import { App } from './components/App'
 import { Environment } from './external/environment'
@@ -22,7 +22,11 @@ const queryClient = new query.QueryClient({
     },
 })
 
-ReactDOM.render(
+const container = document.getElementById('root')
+if (!container) throw new Error('Failed to find the root element')
+
+const root = createRoot(container)
+root.render(
     <React.StrictMode>
         <RecoilRoot>
             <BackendContext.Provider value={backend}>
@@ -31,6 +35,5 @@ ReactDOM.render(
                 </query.QueryClientProvider>
             </BackendContext.Provider>
         </RecoilRoot>
-    </React.StrictMode>,
-    document.getElementById('root')
+    </React.StrictMode>
 )

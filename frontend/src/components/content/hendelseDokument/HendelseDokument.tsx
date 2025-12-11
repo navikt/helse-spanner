@@ -10,7 +10,7 @@ import { useBackend } from '../../../external/backend'
 import { useQuery } from 'react-query'
 import { Spinner } from '../../Spinner'
 import { Feilmelding } from '../../Feilmelding'
-import ReactJson from 'react-json-view'
+import ReactJson from '@microlink/react-json-view'
 
 export const HendelseDokument = React.memo<{ kontekst: KontekstDto }>(({ kontekst }) => {
     const setÅpneHendelser = useSetRecoilState(åpneHendelseDokumentState)
@@ -61,4 +61,3 @@ const HendelseJson = (props: FetchHendelseProps) => {
         return <Feilmelding feil={error} />
     }
 }
-HendelseJson.displayName = 'HendelseJson'

@@ -27,4 +27,3 @@ export const Feilmelding = ({ feil }: { feil: any }) => {
     )
 }
 
-Feilmelding.displayName = 'Feilmelding'

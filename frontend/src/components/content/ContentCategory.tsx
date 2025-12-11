@@ -69,7 +69,6 @@ export function ContentCategory({
     </>
 }
 
-ContentCategory.displayName = 'ContentCategory'
 
 function filtrerUtDuplikateVilkårsgrunnlag(vilkårsgrunnlagDtos: VilkårsgrunnlagDto[]): VilkårsgrunnlagDto[] {
     if (vilkårsgrunnlagDtos.length <= 1) return vilkårsgrunnlagDtos

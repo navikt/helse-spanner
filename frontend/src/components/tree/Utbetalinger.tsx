@@ -39,7 +39,6 @@ export const Utbetalinger = ({ arbeidsgiver, valgteTing, toggleValgtTing } : Utb
     return <>{utbetalinger}</>
 }
 
-Utbetalinger.displayName = 'Utbetalinger'
 
 function GruppertUtbetaling({ gruppe, valgteTing, toggleValgtTing }: { gruppe: GruppertUtbetaling, valgteTing: string[], toggleValgtTing: (e: React.MouseEvent, ting: string) => void }) {
     const [isExpanded, setIsExpanded] = useState(true)

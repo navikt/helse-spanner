@@ -27,4 +27,3 @@ export default function SelectableTreeNode({className, indent = 0, valgteTing, t
     )
 }
 
-SelectableTreeNode.displayName = 'SelectableTreeNode'
