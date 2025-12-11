@@ -51,8 +51,6 @@ tasks {
     }
 
     jar {
-        mustRunAfter(":frontend:npm_run_build")
-
         archiveFileName.set("app.jar")
 
         manifest {
@@ -63,7 +61,7 @@ tasks {
         }
 
 
-        from({ Paths.get(project(":frontend").layout.buildDirectory.get().toString()) }) {
+        from("${rootProject.projectDir}/frontend/dist") {
             into("static")
         }
 
