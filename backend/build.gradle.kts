@@ -1,5 +1,3 @@
-import java.nio.file.Paths
-
 val logbackClassicVersion = "1.5.18"
 val logbackEncoderVersion = "8.0"
 val junitJupiterVersion = "5.12.1"
@@ -85,8 +83,6 @@ tasks {
     }
 
     jar {
-        mustRunAfter(":frontend:npm_run_build")
-
         archiveFileName.set("app.jar")
 
         manifest {
@@ -96,8 +92,7 @@ tasks {
             }
         }
 
-
-        from({ Paths.get(project(":frontend").layout.buildDirectory.get().toString()) }) {
+        from("${rootProject.projectDir}/frontend/dist") {
             into("static")
         }
 
