@@ -1,0 +1,19 @@
+engineStrict: true
+
+ignoreScripts: true
+
+lockfile: true
+
+# Retain minimum release age of 7 days (10080 minutes) before packages are updated
+minimumReleaseAge: 10080
+
+nodeVersion: 24.11.1
+
+overrides:
+  esbuild@<=0.24.2: '>=0.25.0'
+
+preferFrozenLockfile: true
+
+trustPolicy: no-downgrade
+trustPolicyExclude:
+  - semver
