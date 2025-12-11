@@ -5,7 +5,7 @@ import { useSetRecoilState } from 'recoil'
 import { åpneHendelseDokumentState } from '../../../state/state'
 import classNames from 'classnames'
 import styles from './HendelseDokument.module.css'
-import { Close } from '@navikt/ds-icons'
+import { XMarkIcon } from '@navikt/aksel-icons'
 import { useBackend } from '../../../external/backend'
 import { useQuery } from 'react-query'
 import { Spinner } from '../../Spinner'
@@ -28,7 +28,7 @@ export const HendelseDokument = React.memo<{ kontekst: KontekstDto }>(({ konteks
                 aria-label={'Lukk hendelse dokument'}
                 onClick={fjernFraÅpneHendelser}
             >
-                <Close color={'black'} />
+                <XMarkIcon color={'black'} />
             </button>
             <br />
             <br />

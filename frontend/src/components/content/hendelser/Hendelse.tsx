@@ -3,7 +3,7 @@ import { useRecoilState } from 'recoil'
 import { expandedHendelserState, åpneHendelseDokumentState } from '../../../state/state'
 import classNames from 'classnames'
 import styles from './Hendelse.module.css'
-import { Copy, FileContent } from '@navikt/ds-icons'
+import { FileJsonIcon, FilesIcon } from '@navikt/aksel-icons'
 import { Aktivitet } from './Aktivitet'
 import commonStyles from '../../Common.module.css'
 import { Hendelsekontekst } from '../../../state/model'
@@ -74,14 +74,14 @@ export const Hendelse = ({ kontekst }: { kontekst: Hendelsekontekst }) => {
                     aria-label={'Kopier melding-id'}
                     onClick={copyMeldingRefId}
                 >
-                    <Copy color={'black'} />
+                    <FilesIcon color={'black'} />
                 </button>
                 <button
                     className={classNames(styles.KopierMeldingsreferanse)}
                     aria-label={'Åpne hendelsedokument'}
                     onClick={åpneHendelse}
                 >
-                    <FileContent color={'black'} />
+                    <FileJsonIcon color={'black'} />
                 </button>
             </div>
             {isExpanded && (
