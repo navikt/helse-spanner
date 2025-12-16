@@ -22,7 +22,16 @@ updates:
 
   # Maintain dependencies for gradle
   - package-ecosystem: "gradle"
-    directory: "/"
+    directory: "/backend"
+    commit-message:
+      prefix: "⬆️ "
+    schedule:
+      interval: "daily"
+    cooldown:
+      default-days: 7
+
+  - package-ecosystem: "gradle"
+    directory: "/filbackend"
     commit-message:
       prefix: "⬆️ "
     schedule:
