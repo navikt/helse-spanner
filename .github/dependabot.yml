@@ -1,0 +1,46 @@
+version: 2
+updates:
+  # Maintain dependencies for GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    commit-message:
+      prefix: "⬆️ "
+    schedule:
+      interval: "daily"
+    cooldown:
+      default-days: 7
+
+  # Maintain dependencies for docker
+  - package-ecosystem: "docker"
+    directory: "/"
+    commit-message:
+      prefix: "⬆️ "
+    schedule:
+      interval: "daily"
+    cooldown:
+      default-days: 7
+
+  # Maintain dependencies for gradle
+  - package-ecosystem: "gradle"
+    directory: "/"
+    commit-message:
+      prefix: "⬆️ "
+    schedule:
+      interval: "daily"
+    cooldown:
+      default-days: 7
+
+  # Maintain dependencies for npm
+  - package-ecosystem: "npm"
+    directory: "/frontend"
+    cooldown:
+      default-days: 7 # Delay all updates by 7 days by default
+    commit-message:
+      prefix: "⬆️ "
+    schedule:
+      interval: "daily"
+    registries: '*'
+    ignore:
+      - dependency-name: '@type/node'
+      - dependency-name: 'eslint'
+        version: [ '9.x' ]
