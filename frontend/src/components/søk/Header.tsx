@@ -1,10 +1,16 @@
 import React, { PropsWithChildren } from 'react'
-import {InternalHeader, Spacer} from "@navikt/ds-react";
+import {Button, InternalHeader, Spacer} from "@navikt/ds-react";
 import styles from './Header.module.css'
 import {useQuery} from "@tanstack/react-query";
 import {Link} from "react-router-dom";
+import {MoonIcon, SunIcon} from "@navikt/aksel-icons";
+import {useAtom} from "jotai";
+import {themeAtom} from "../../state/state";
 
 export const Header = ({ children }: PropsWithChildren) => {
+    const [theme, setTheme] = useAtom(themeAtom)
+    const toggleTheme = () => setTheme(theme === 'dark' ? 'light' : 'dark')
+
     const hentBrukerinfo = async() => {
         return await fetch("/api/meg")
             .then(response => response.json())
@@ -20,6 +26,11 @@ export const Header = ({ children }: PropsWithChildren) => {
             </InternalHeader.Title>
             {children}
             <Spacer/>
+            <Button
+                variant="tertiary-neutral"
+                icon={theme === 'dark' ? <SunIcon title="Bytt til lyst tema"/> : <MoonIcon title="Bytt til mørkt tema"/>}
+                onClick={toggleTheme}
+            />
             <Link to={"/hotkeys"} className={styles.Lenke}>Hotkeys</Link>
             <InternalHeader.User className={styles.User} name={ navn } description={ ident }/>
         </InternalHeader>

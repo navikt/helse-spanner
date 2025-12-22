@@ -7,6 +7,10 @@ import { hardCodedBackend } from './external/jsonBackend'
 import { restBackend } from './external/restBackend'
 import { BackendContext } from './external/backend'
 import * as query from '@tanstack/react-query'
+import "@navikt/ds-css/darkside";
+import {Theme} from "@navikt/ds-react";
+import {useAtomValue} from "jotai";
+import {themeAtom} from "./state/state";
 
 const backend = Environment.isDevelopment ? hardCodedBackend : restBackend(false)
 
@@ -21,6 +25,15 @@ const queryClient = new query.QueryClient({
     },
 })
 
+const ThemedApp = () => {
+    const theme = useAtomValue(themeAtom)
+    return (
+        <Theme theme={theme}>
+            <App />
+        </Theme>
+    )
+}
+
 const container = document.getElementById('root')
 if (!container) throw new Error('Failed to find the root element')
 
@@ -29,7 +42,7 @@ root.render(
     <React.StrictMode>
         <BackendContext.Provider value={backend}>
             <query.QueryClientProvider client={queryClient}>
-                <App />
+                <ThemedApp />
             </query.QueryClientProvider>
         </BackendContext.Provider>
     </React.StrictMode>

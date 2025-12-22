@@ -1,5 +1,10 @@
 import { atom } from 'jotai'
+import { atomWithStorage } from 'jotai/utils'
 import {KontekstDto} from './dto'
+
+export type ThemeMode = 'light' | 'dark'
+
+export const themeAtom = atomWithStorage<ThemeMode>('theme', 'dark')
 
 export enum ContentView {
     Json = 'Data',
