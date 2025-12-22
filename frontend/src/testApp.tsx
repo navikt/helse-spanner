@@ -5,7 +5,6 @@ import { App } from './components/App'
 import { PersonDto } from './state/dto'
 import testingLibrary from '@testing-library/react'
 import { testBackend } from './external/testBackend'
-import { RecoilRoot } from 'recoil'
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -22,13 +21,11 @@ type TestAppProps = {
 
 export const TestApp = (props: TestAppProps) => (
     <React.StrictMode>
-        <RecoilRoot>
-            <BackendContext.Provider value={props.backend}>
-                <QueryClientProvider client={queryClient}>
-                    <App />
-                </QueryClientProvider>
-            </BackendContext.Provider>
-        </RecoilRoot>
+        <BackendContext.Provider value={props.backend}>
+            <QueryClientProvider client={queryClient}>
+                <App />
+            </QueryClientProvider>
+        </BackendContext.Provider>
     </React.StrictMode>
 )
 

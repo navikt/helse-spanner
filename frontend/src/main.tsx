@@ -7,7 +7,6 @@ import { hardCodedBackend } from './external/jsonBackend'
 import { restBackend } from './external/restBackend'
 import { BackendContext } from './external/backend'
 import * as query from '@tanstack/react-query'
-import { RecoilRoot } from 'recoil'
 
 const backend = Environment.isDevelopment ? hardCodedBackend : restBackend(false)
 
@@ -28,12 +27,10 @@ if (!container) throw new Error('Failed to find the root element')
 const root = createRoot(container)
 root.render(
     <React.StrictMode>
-        <RecoilRoot>
-            <BackendContext.Provider value={backend}>
-                <query.QueryClientProvider client={queryClient}>
-                    <App />
-                </query.QueryClientProvider>
-            </BackendContext.Provider>
-        </RecoilRoot>
+        <BackendContext.Provider value={backend}>
+            <query.QueryClientProvider client={queryClient}>
+                <App />
+            </query.QueryClientProvider>
+        </BackendContext.Provider>
     </React.StrictMode>
 )

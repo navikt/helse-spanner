@@ -2,14 +2,15 @@ import React, {useEffect, useState} from 'react'
 import {PersonHeader} from './PersonHeader'
 import {PersonTree} from '../tree/PersonTree'
 import {Content} from '../content/Content'
-import {useResetRecoilState} from 'recoil'
+import {useSetAtom} from 'jotai'
 import {åpneHendelseDokumentState} from '../../state/state'
 import {usePerson} from '../../state/contexts'
 import {Box, HGrid, Page} from "@navikt/ds-react";
 import {Tidslinjer} from "./Tidslinjer";
 
 export const PersonView = () => {
-    const resetÅpneHendelser = useResetRecoilState(åpneHendelseDokumentState)
+    const setÅpneHendelser = useSetAtom(åpneHendelseDokumentState)
+    const resetÅpneHendelser = () => setÅpneHendelser([])
     const person = usePerson()
     useEffect(() => {
         resetÅpneHendelser()

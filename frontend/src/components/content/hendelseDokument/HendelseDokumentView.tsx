@@ -1,10 +1,10 @@
 import React from 'react'
-import { useRecoilValue } from 'recoil'
+import { useAtomValue } from 'jotai'
 import { åpneHendelseDokumentState } from '../../../state/state'
 import { HendelseDokument } from './HendelseDokument'
 
-export const HendelseDokumentView = ({}) => {
-    const åpneHendelser = useRecoilValue(åpneHendelseDokumentState)
+export const HendelseDokumentView = () => {
+    const åpneHendelser = useAtomValue(åpneHendelseDokumentState)
 
     return (
         <>

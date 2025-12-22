@@ -1,7 +1,7 @@
 import React from 'react'
 import { KontekstDto, MeldingDto } from '../../../state/dto'
 import { Card } from '../../Card'
-import { useSetRecoilState } from 'recoil'
+import { useSetAtom } from 'jotai'
 import { åpneHendelseDokumentState } from '../../../state/state'
 import classNames from 'classnames'
 import styles from './HendelseDokument.module.css'
@@ -13,8 +13,8 @@ import { Feilmelding } from '../../Feilmelding'
 import ReactJson from '@microlink/react-json-view'
 
 export const HendelseDokument = React.memo<{ kontekst: KontekstDto }>(({ kontekst }) => {
-    const setÅpneHendelser = useSetRecoilState(åpneHendelseDokumentState)
-    const fjernFraÅpneHendelser = () => setÅpneHendelser((prev) => prev.filter((hendelse) => hendelse !== kontekst))
+    const setÅpneHendelser = useSetAtom(åpneHendelseDokumentState)
+    const fjernFraÅpneHendelser = () => setÅpneHendelser((prev: KontekstDto[]) => prev.filter((hendelse) => hendelse !== kontekst))
 
     if (kontekst.kontekstMap.meldingsreferanseId == undefined) {
         throw Error('Kontekst mangler meldingsreferanse, burde ikke kunne skje')

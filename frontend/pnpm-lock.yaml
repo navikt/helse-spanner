@@ -32,6 +32,9 @@ importers:
       date-fns:
         specifier: ^2.23.0
         version: 2.30.0
+      jotai:
+        specifier: ^2.10.0
+        version: 2.16.0(@babel/core@7.28.5)(@babel/template@7.27.2)(@types/react@19.2.7)(react@19.2.3)
       react:
         specifier: ^19.2.3
         version: 19.2.3
@@ -41,9 +44,6 @@ importers:
       react-router-dom:
         specifier: ^7.11.0
         version: 7.11.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
-      recoil:
-        specifier: ^0.7.7
-        version: 0.7.7(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
     devDependencies:
       '@testing-library/dom':
         specifier: ^10.4.1
@@ -895,9 +895,6 @@ packages:
   glob-to-regexp@0.4.1:
     resolution: {integrity: sha512-lkX1HJXwyMcprw/5YUZc2s7DrpAiHB21/V+E1rHUrVNokkvB6bqMzT0VfV6/86ZNabt1k14YOIaT7nDvOX3Iiw==}
 
-  hamt_plus@1.0.2:
-    resolution: {integrity: sha512-t2JXKaehnMb9paaYA7J0BX8QQAY8lwfQ9Gjf4pg/mk4krt+cmwmU652HOoWonf+7+EQV97ARPMhhVgU1ra2GhA==}
-
   has-flag@4.0.0:
     resolution: {integrity: sha512-EykJT/Q1KjTWctppgIAgfSO0tKVuZUjhgMr17kqTumMl6Afv3EISleU7qZUzoXDFTAHTDC4NOoG/ZxU3EvlMPQ==}
     engines: {node: '>=8'}
@@ -931,6 +928,24 @@ packages:
 
   is-subset@0.1.1:
     resolution: {integrity: sha512-6Ybun0IkarhmEqxXCNw/C0bna6Zb/TkfUX9UbwJtK6ObwAVCxmAP308WWTHviM/zAqXk05cdhYsUsZeGQh99iw==}
+
+  jotai@2.16.0:
+    resolution: {integrity: sha512-NmkwPBet0SHQ28GBfEb10sqnbVOYyn6DL4iazZgGRDUKxSWL0iqcm+IK4TqTSFC2ixGk+XX2e46Wbv364a3cKg==}
+    engines: {node: '>=12.20.0'}
+    peerDependencies:
+      '@babel/core': '>=7.0.0'
+      '@babel/template': '>=7.0.0'
+      '@types/react': '>=17.0.0'
+      react: '>=17.0.0'
+    peerDependenciesMeta:
+      '@babel/core':
+        optional: true
+      '@babel/template':
+        optional: true
+      '@types/react':
+        optional: true
+      react:
+        optional: true
 
   js-tokens@4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
@@ -1096,18 +1111,6 @@ packages:
   react@19.2.3:
     resolution: {integrity: sha512-Ku/hhYbVjOQnXDZFv2+RibmLFGwFdeeKHFcOTlrt7xplBnya5OGn/hIRDsqDiSUcfORsDC7MPxwork8jBwsIWA==}
     engines: {node: '>=0.10.0'}
-
-  recoil@0.7.7:
-    resolution: {integrity: sha512-8Og5KPQW9LwC577Vc7Ug2P0vQshkv1y3zG3tSSkWMqkWSwHmE+by06L8JtnGocjW6gcCvfwB3YtrJG6/tWivNQ==}
-    peerDependencies:
-      react: '>=16.13.1'
-      react-dom: '*'
-      react-native: '*'
-    peerDependenciesMeta:
-      react-dom:
-        optional: true
-      react-native:
-        optional: true
 
   regenerator-runtime@0.14.1:
     resolution: {integrity: sha512-dYnhHh0nJoMfnkZs6GmmhFknAGRrLznOu5nc9ML+EJxGvrx6H7teuevqVqCuPcPK//3eDrrjQhehXVx9cnkGdw==}
@@ -2122,8 +2125,6 @@ snapshots:
 
   glob-to-regexp@0.4.1: {}
 
-  hamt_plus@1.0.2: {}
-
   has-flag@4.0.0: {}
 
   html-encoding-sniffer@4.0.0:
@@ -2155,6 +2156,13 @@ snapshots:
   is-potential-custom-element-name@1.0.1: {}
 
   is-subset@0.1.1: {}
+
+  jotai@2.16.0(@babel/core@7.28.5)(@babel/template@7.27.2)(@types/react@19.2.7)(react@19.2.3):
+    optionalDependencies:
+      '@babel/core': 7.28.5
+      '@babel/template': 7.27.2
+      '@types/react': 19.2.7
+      react: 19.2.3
 
   js-tokens@4.0.0: {}
 
@@ -2307,13 +2315,6 @@ snapshots:
       - '@types/react'
 
   react@19.2.3: {}
-
-  recoil@0.7.7(react-dom@19.2.3(react@19.2.3))(react@19.2.3):
-    dependencies:
-      hamt_plus: 1.0.2
-      react: 19.2.3
-    optionalDependencies:
-      react-dom: 19.2.3(react@19.2.3)
 
   regenerator-runtime@0.14.1: {}
 

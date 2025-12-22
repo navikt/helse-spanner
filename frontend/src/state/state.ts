@@ -1,4 +1,4 @@
-import Recoil from 'recoil'
+import { atom } from 'jotai'
 import {KontekstDto} from './dto'
 
 export enum ContentView {
@@ -7,26 +7,12 @@ export enum ContentView {
     Ingress = 'Ingress',
 }
 
-export const expandedHendelserState = Recoil.atom<number[]>({
-    key: 'expandedHendelser',
-    default: [],
-})
+export const expandedHendelserState = atom<number[]>([])
 
-export const visBareFeilState = Recoil.atom({
-    key: 'visBareFeil',
-    default: false,
-})
-export const skjulPåminnelserState = Recoil.atom({
-    key: 'skjulPåminnelser',
-    default: true,
-})
+export const visBareFeilState = atom(false)
 
-export const hendelseprefix = Recoil.atom({
-    key: 'hendelseregex',
-    default: ""
-})
+export const skjulPåminnelserState = atom(true)
 
-export const åpneHendelseDokumentState = Recoil.atom<KontekstDto[]>({
-    key: 'åpneHendelseDokument',
-    default: [],
-})
+export const hendelseprefix = atom("")
+
+export const åpneHendelseDokumentState = atom<KontekstDto[]>([])

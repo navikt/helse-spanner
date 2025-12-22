@@ -1,5 +1,5 @@
 import React from 'react'
-import { useRecoilState } from 'recoil'
+import { useAtom } from 'jotai'
 import { expandedHendelserState, åpneHendelseDokumentState } from '../../../state/state'
 import classNames from 'classnames'
 import styles from './Hendelse.module.css'
@@ -20,17 +20,17 @@ export const Hendelse = ({ kontekst }: { kontekst: Hendelsekontekst }) => {
     }
     const copyMeldingRefId = () => writeToClipboard(meldingsReferanseId)
 
-    const [expandedHendelser, setExpandedHendelser] = useRecoilState(expandedHendelserState)
+    const [expandedHendelser, setExpandedHendelser] = useAtom(expandedHendelserState)
     const isExpanded = expandedHendelser.includes(kontekst.id)
     const toggleSelected = () => {
         if (isExpanded) {
-            setExpandedHendelser(expandedHendelser.filter((it) => it !== kontekst.id))
+            setExpandedHendelser(expandedHendelser.filter((it: number) => it !== kontekst.id))
         } else {
             setExpandedHendelser([...expandedHendelser, kontekst.id])
         }
     }
 
-    const [åpneHendelser, setÅpneHendelser] = useRecoilState(åpneHendelseDokumentState)
+    const [åpneHendelser, setÅpneHendelser] = useAtom(åpneHendelseDokumentState)
     const åpneHendelse = React.useMemo(
         () => () => {
             const ikkeLagretISpleis = ['Utbetalingshistorikk', 'Påminnelse']

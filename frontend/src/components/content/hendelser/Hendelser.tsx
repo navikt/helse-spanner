@@ -1,7 +1,7 @@
 import React from 'react'
 import { Hendelse } from './Hendelse'
 import compareAsc from 'date-fns/compareAsc'
-import { useRecoilState } from 'recoil'
+import { useAtom } from 'jotai'
 import {hendelseprefix, skjulPåminnelserState, visBareFeilState} from '../../../state/state'
 import {Hendelsekontekst} from '../../../state/model'
 import {HStack, Switch, TextField} from "@navikt/ds-react";
@@ -12,9 +12,9 @@ const erPåminnelse = (kontekst: Hendelsekontekst) =>
 const harFeil = (kontekst: Hendelsekontekst) => kontekst.harError || kontekst.harWarning
 
 export const Hendelser = ({ hendelser }: { hendelser: Hendelsekontekst[] }) => {
-    const [visBareFeil, setVisBareFeil] = useRecoilState(visBareFeilState)
-    const [skjulPåminnelser, setSkjulPåminnelser] = useRecoilState(skjulPåminnelserState)
-    const [prefix, setPrefix] = useRecoilState(hendelseprefix)
+    const [visBareFeil, setVisBareFeil] = useAtom(visBareFeilState)
+    const [skjulPåminnelser, setSkjulPåminnelser] = useAtom(skjulPåminnelserState)
+    const [prefix, setPrefix] = useAtom(hendelseprefix)
     const toggleVisBareFeil = () => setVisBareFeil(!visBareFeil)
     const toggleVisPåminnelser = () => setSkjulPåminnelser(!skjulPåminnelser)
     const harRettPrefix = (kontekst: Hendelsekontekst) => kontekst.kontekstType.toLowerCase().startsWith(prefix.toLowerCase())
