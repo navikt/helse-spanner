@@ -1,23 +1,19 @@
 import React from 'react'
 import { Backend, BackendContext } from './external/backend'
-import query from 'react-query'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { App } from './components/App'
 import { PersonDto } from './state/dto'
 import testingLibrary from '@testing-library/react'
 import { testBackend } from './external/testBackend'
 import { RecoilRoot } from 'recoil'
 
-const queryClient = new query.QueryClient({
+const queryClient = new QueryClient({
     defaultOptions: {
         queries: {
             retryDelay: 0,
+            retry: false,
         },
     },
-})
-query.setLogger({
-    log: () => {},
-    warn: () => {},
-    error: () => {},
 })
 
 type TestAppProps = {
@@ -28,9 +24,9 @@ export const TestApp = (props: TestAppProps) => (
     <React.StrictMode>
         <RecoilRoot>
             <BackendContext.Provider value={props.backend}>
-                <query.QueryClientProvider client={queryClient}>
+                <QueryClientProvider client={queryClient}>
                     <App />
-                </query.QueryClientProvider>
+                </QueryClientProvider>
             </BackendContext.Provider>
         </RecoilRoot>
     </React.StrictMode>

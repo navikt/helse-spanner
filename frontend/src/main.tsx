@@ -6,7 +6,7 @@ import { Environment } from './external/environment'
 import { hardCodedBackend } from './external/jsonBackend'
 import { restBackend } from './external/restBackend'
 import { BackendContext } from './external/backend'
-import * as query from 'react-query'
+import * as query from '@tanstack/react-query'
 import { RecoilRoot } from 'recoil'
 
 const backend = Environment.isDevelopment ? hardCodedBackend : restBackend(false)
@@ -17,7 +17,7 @@ const queryClient = new query.QueryClient({
             retryDelay: 500,
             retry: (failureCount: number, error: any) => error.status != 404 && failureCount < 1,
             refetchOnWindowFocus: false,
-            cacheTime: 0,
+            gcTime: 0,
         },
     },
 })

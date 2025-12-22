@@ -1,5 +1,5 @@
 import React from 'react'
-import { KontekstDto } from '../../../state/dto'
+import { KontekstDto, MeldingDto } from '../../../state/dto'
 import { Card } from '../../Card'
 import { useSetRecoilState } from 'recoil'
 import { åpneHendelseDokumentState } from '../../../state/state'
@@ -7,7 +7,7 @@ import classNames from 'classnames'
 import styles from './HendelseDokument.module.css'
 import { XMarkIcon } from '@navikt/aksel-icons'
 import { useBackend } from '../../../external/backend'
-import { useQuery } from 'react-query'
+import { useQuery } from '@tanstack/react-query'
 import { Spinner } from '../../Spinner'
 import { Feilmelding } from '../../Feilmelding'
 import ReactJson from '@microlink/react-json-view'
@@ -44,8 +44,9 @@ export type FetchHendelseProps = {
 const HendelseJson = (props: FetchHendelseProps) => {
     const backend = useBackend()
     try {
-        const { isLoading, isError, data, error } = useQuery(['melding', props.meldingsReferanse], () => {
-            return backend.hendelseForRef(props.meldingsReferanse)
+        const { isLoading, isError, data, error } = useQuery<MeldingDto>({
+            queryKey: ['melding', props.meldingsReferanse],
+            queryFn: () => backend.hendelseForRef(props.meldingsReferanse),
         })
         if (isLoading) {
             return <Spinner />

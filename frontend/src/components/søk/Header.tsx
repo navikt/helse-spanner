@@ -1,7 +1,7 @@
 import React, { PropsWithChildren } from 'react'
 import {InternalHeader, Spacer} from "@navikt/ds-react";
 import styles from './Header.module.css'
-import {useQuery} from "react-query";
+import {useQuery} from "@tanstack/react-query";
 import {Link} from "react-router-dom";
 
 export const Header = ({ children }: PropsWithChildren) => {
@@ -9,7 +9,7 @@ export const Header = ({ children }: PropsWithChildren) => {
         return await fetch("/api/meg")
             .then(response => response.json())
     }
-    const { isLoading, isError, data } = useQuery(['brukerinfo'], hentBrukerinfo)
+    const { isLoading, isError, data } = useQuery({ queryKey: ['brukerinfo'], queryFn: hentBrukerinfo })
 
     const navn = isLoading ? '[laster]' : isError ? '[feil]' : data?.navn ?? '[ukjent]'
     const ident = isLoading ? '[laster]' : isError ? '[feil]' : data?.ident ?? '[ukjent]'
