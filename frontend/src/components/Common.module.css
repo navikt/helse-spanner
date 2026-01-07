@@ -3,7 +3,7 @@
 }
 
 .Error {
-    background-color: lightpink;
+    background-color: var(--ax-border-danger-subtleA);
 }
 
 .AktivKnapp {

@@ -68,20 +68,22 @@ export const Hendelse = ({ kontekst }: { kontekst: Hendelsekontekst }) => {
                 <button onClick={toggleSelected} className={styles.Hendelsetype}>
                     {kontekst.kontekstType}
                 </button>
-                <div className={classNames(styles.Meldingsreferanse, styles.SkriftMedNestenLikBredde)}>{kontekst.kontekstMap.meldingsreferanseId}</div>
+                <div className={classNames(styles.Meldingsreferanse, styles.SkriftMedNestenLikBredde)}>
+                    {kontekst.kontekstMap.meldingsreferanseId}
+                </div>
                 <button
                     className={classNames(styles.KopierMeldingsreferanse)}
                     aria-label={'Kopier melding-id'}
                     onClick={copyMeldingRefId}
                 >
-                    <FilesIcon color={'black'} />
+                    <FilesIcon className={classNames(styles.Fil)} />
                 </button>
                 <button
                     className={classNames(styles.KopierMeldingsreferanse)}
                     aria-label={'Åpne hendelsedokument'}
                     onClick={åpneHendelse}
                 >
-                    <FileJsonIcon color={'black'} />
+                    <FileJsonIcon className={classNames(styles.Json)} />
                 </button>
             </div>
             {isExpanded && (
