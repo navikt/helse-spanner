@@ -4,7 +4,7 @@
 }
 
 .LøvNode {
-    background-color: seashell;
+    background-color: var(--ax-bg-accent-moderate);
     padding: 0.5em !important;
 }
 
@@ -13,7 +13,7 @@
 }
 
 .BehandlingNode {
-    
+
 }
 
 .VedtakNodeHeader {
@@ -55,22 +55,22 @@ div > .PersonNode:first-child {
 }
 
 .ArbeidsgiverSummary .antallAktive {
-    color: black;
+    color: var(--ax-text-neutral);
 }
 
 .ArbeidsgiverSummary .antallForkastede {
-    color: darkgray;
+    color: var(--ax-text-neutral-decoration);
 }
 
 .ArbeidsgiverSummary .antallUtbetalinger {
-    color: green;
+    color: var(--ax-text-success-subtle);
 }
 
 .ArbeidsgiverSummary .tall {
     display: inline-flex;
     min-width: 5rem;
     justify-content: space-around;
-    background-color: #f8f8f8;
+    background-color: var(--ax-bg-neutral-soft);
     border-radius: 0.5rem;
     padding: 0.3rem .75rem;
     margin: -0.2rem;
@@ -80,7 +80,7 @@ div > .PersonNode:first-child {
     margin: 0 0 0.6em;
     border: none;
     cursor: pointer;
-    background-color: transparent;
+    background-color: var(--ax-bg-default);
 }
 
 .ExpandArbeidsgiverButton:hover {

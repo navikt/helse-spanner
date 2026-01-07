@@ -115,7 +115,16 @@ function HentVisning(person: PersonDto, valgteTing: string[]) {
 export function fargeForTing(valgteTing: string[], ting: string) {
     const index = valgteTing.findIndex((it) => it === ting)
     if (index == -1) return undefined
-    const selectColors = ['LightBlue', 'DarkGray', 'DarkOrange', 'Turquoise', 'DarkSeaGreen', 'Orchid', 'Gold', 'LawnGreen']
+    const selectColors = [
+        '--ax-bg-accent-strong-pressed',
+        '--ax-bg-neutral-strong',
+        '--ax-bg-warning-moderate',
+        '--ax-bg-accent-strong',
+        '--ax-bg-meta-lime-strong',
+        '--ax-bg-meta-purple-moderate',
+        '--ax-bg-meta-lime-soft',
+        '--ax-bg-success-strong',
+    ]
     return selectColors[index % selectColors.length]
 }
 
