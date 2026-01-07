@@ -32113,6 +32113,33 @@ export let jsonPerson: PersonDto = {
                 }
             },
             {
+                id: 583114,
+                tidsstempel: "2022-09-13T04:21:50.385",
+                nivå: "VARSEL",
+                tekst: "Forsøker å gjenoppta 2022-06-15 - 2022-07-15 (AvventerGodkjenning)",
+                kontekster: {
+                    Person: {
+                        aktørId: "42",
+                        fødselsnummer: "12020052345"
+                    },
+                    Arbeidsgiver: {
+                        organisasjonsnummer: "805824352"
+                    },
+                    Påminnelse: {
+                        meldingsreferanseId: "68697d23-613b-403b-83b8-40eb31c8a4af",
+                        aktørId: "42",
+                        fødselsnummer: "12020052345",
+                        organisasjonsnummer: "999888777"
+                    },
+                    Vedtaksperiode: {
+                        vedtaksperiodeId: "79343398-04ca-4a49-91b2-8757caa29bba"
+                    },
+                    Tilstand: {
+                        tilstand: "AVVENTER_GODKJENNING"
+                    }
+                }
+            },
+            {
                 id: 583571,
                 tidsstempel: "2022-09-13T18:54:31.442",
                 nivå: "INFO",

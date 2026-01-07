@@ -1,5 +1,5 @@
 .Warning {
-    background-color: wheat;
+    background-color: var(--ax-border-warning-subtleA);
 }
 
 .Error {
