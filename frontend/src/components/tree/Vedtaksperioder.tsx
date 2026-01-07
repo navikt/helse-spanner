@@ -1,6 +1,6 @@
 import {usePerson} from "../../state/contexts";
-import parseISO from "date-fns/parseISO";
-import compareAsc from "date-fns/compareAsc";
+import { parseISO } from "date-fns/parseISO";
+import { compareAsc } from "date-fns/compareAsc";
 import React, { JSX, useState } from 'react'
 import {somNorskDato} from "../i18n";
 import SelectableTreeNode from "./SelectableTreeNode";

@@ -1,5 +1,5 @@
 import { format } from 'date-fns'
-import parseISO from 'date-fns/parseISO'
+import { parseISO } from 'date-fns/parseISO'
 
 function parseDate(dato: string, dateFormat: string) {
     try {

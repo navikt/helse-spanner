@@ -11,8 +11,8 @@ import {
     UtbetalingDto,
     VedtakDto
 } from '../../../state/dto'
-import parseISO from 'date-fns/parseISO'
-import compareAsc from 'date-fns/compareAsc'
+import { parseISO } from 'date-fns/parseISO'
+import { compareAsc } from 'date-fns/compareAsc'
 import {hasValue} from '../../../utils'
 
 const Person = (aktivitetslogg: AktivitetsloggV2) => {

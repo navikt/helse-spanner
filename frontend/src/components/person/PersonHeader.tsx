@@ -1,5 +1,5 @@
 import React from 'react'
-import parseISO from 'date-fns/parseISO'
+import { parseISO } from 'date-fns/parseISO'
 import styles from './PersonHeader.module.css'
 import {usePerson} from '../../state/contexts'
 import {speilUrl} from '../tree/links'

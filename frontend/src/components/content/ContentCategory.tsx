@@ -10,7 +10,7 @@ import {
     UtbetalingDto,
     VedtakDto, VilkårsgrunnlagDto
 } from "../../state/dto";
-import parseISO from "date-fns/parseISO";
+import { parseISO } from "date-fns/parseISO";
 
 type ContentCategoryProperties = {
     displayName: ContentView

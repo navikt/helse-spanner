@@ -1,6 +1,6 @@
 import React from 'react'
 import { Hendelse } from './Hendelse'
-import compareAsc from 'date-fns/compareAsc'
+import { compareAsc } from 'date-fns/compareAsc'
 import { useAtom } from 'jotai'
 import {hendelseprefix, skjulPåminnelserState, visBareFeilState} from '../../../state/state'
 import {Hendelsekontekst} from '../../../state/model'

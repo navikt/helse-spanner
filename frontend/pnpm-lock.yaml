@@ -30,8 +30,8 @@ importers:
         specifier: ^2.3.1
         version: 2.3.1
       date-fns:
-        specifier: ^2.23.0
-        version: 2.30.0
+        specifier: ^4.1.0
+        version: 4.1.0
       jotai:
         specifier: ^2.10.0
         version: 2.16.0(@babel/core@7.28.5)(@babel/template@7.27.2)(@types/react@19.2.7)(react@19.2.3)
@@ -805,10 +805,6 @@ packages:
 
   date-fns-jalali@4.1.0-0:
     resolution: {integrity: sha512-hTIP/z+t+qKwBDcmmsnmjWTduxCg+5KfdqWQvb2X/8C9+knYY6epN/pfxdDuyVlSVeFz0sM5eEfwIUQ70U4ckg==}
-
-  date-fns@2.30.0:
-    resolution: {integrity: sha512-fnULvOpxnC5/Vg3NCiWelDsLiUc9bRwAPs/+LfTLNvetFCtCTN+yQz15C/fs4AwX1R9K5GLtLfn8QW+dWisaAw==}
-    engines: {node: '>=0.11'}
 
   date-fns@4.1.0:
     resolution: {integrity: sha512-Ukq0owbQXxa/U3EGtsdVBkR1w7KOQ5gIBqdH2hkvknzZPYvBxb/aa6E8L7tmjFtkwZBu3UXBbjIgPo/Ez4xaNg==}
@@ -2004,10 +2000,6 @@ snapshots:
       whatwg-url: 15.1.0
 
   date-fns-jalali@4.1.0-0: {}
-
-  date-fns@2.30.0:
-    dependencies:
-      '@babel/runtime': 7.23.6
 
   date-fns@4.1.0: {}
 

@@ -1,4 +1,4 @@
-import parseISO from "date-fns/parseISO";
+import { parseISO } from "date-fns/parseISO";
 import React, {useState} from "react";
 import {somNorskDato} from "../i18n";
 import SelectableTreeNode from "./SelectableTreeNode";
