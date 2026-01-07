@@ -1,12 +1,18 @@
-import { test, expect, afterEach } from 'vitest'
+import { test, expect, afterEach, beforeEach } from 'vitest'
 import * as RestBackend from './restBackend'
 import fetchMock from 'fetch-mock'
 import { backendFeil, httpFeil } from './feil'
 
 const restBackend = RestBackend.restBackend(true)
 
+beforeEach(() => {
+    fetchMock.mockGlobal()
+})
+
 afterEach(() => {
-    fetchMock.restore()
+    fetchMock.removeRoutes()
+    fetchMock.clearHistory()
+    fetchMock.unmockGlobal()
 })
 
 test('ok fra backend er ok', async () => {

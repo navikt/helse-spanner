@@ -1,7 +1,6 @@
 import {Backend} from './backend'
 import {MaskertDto, MeldingDto, PersonDto} from '../state/dto'
 import {feilVedDårligRespons, wrapNnettverksFeil} from './feil'
-import {head} from "fetch-mock";
 
 export const restBackend = (development: boolean): Backend => {
     const baseUrl: string = development ? 'http://localhost:8080' : ''
