@@ -9,15 +9,3 @@ export const Card = ({ className, children, ...rest }: CardProps) => (
         {children}
     </div>
 )
-
-export const ContentCard = ({ className, children, ...rest }: CardProps) => (
-    <div className={classNames(styles.ContentCard, className)} {...rest}>
-        {children}
-    </div>
-)
-
-export const HeaderCard = ({ className, children, ...rest }: CardProps) => (
-    <div className={classNames(styles.HeaderCard, className)} {...rest}>
-        {children}
-    </div>
-)

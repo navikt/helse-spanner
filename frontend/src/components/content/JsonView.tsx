@@ -96,14 +96,16 @@ Endring.displayName = 'JsonView.Endring'
 // Jeg tar en råsjans og bruker JSON.stringify nå, siden det er sykt mye vanskeligere å få ut en fornuftig json enn å fjerne fnutter.
 const ReactJsonMedBedreKopiering = (props: { src: object }) => {
     const theme = useAtomValue(themeAtom)
-    return <ReactJson
-        theme={theme === 'light' ? 'rjv-default' : 'harmonic'}
-        src={props.src}
-        name={null}
-        collapsed={1}
-        enableClipboard={(data) => writeToClipboard(JSON.stringify(data.src))}
-        sortKeys={true}
-    />
+    return (
+        <ReactJson
+            theme={theme === 'light' ? 'summerfruit:inverted' : 'summerfruit'}
+            src={props.src}
+            name={null}
+            collapsed={1}
+            enableClipboard={(data) => writeToClipboard(JSON.stringify(data.src))}
+            sortKeys={true}
+        />
+    )
 }
 
 export const JsonView = ({ person, valgteTing }: { person: PersonDto, valgteTing: string[] }) => {

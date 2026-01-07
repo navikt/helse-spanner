@@ -1,8 +1,8 @@
 import React from 'react'
 import { KontekstDto, MeldingDto } from '../../../state/dto'
 import { Card } from '../../Card'
-import { useSetAtom } from 'jotai'
-import { åpneHendelseDokumentState } from '../../../state/state'
+import { useAtomValue, useSetAtom } from 'jotai'
+import { themeAtom, åpneHendelseDokumentState } from '../../../state/state'
 import classNames from 'classnames'
 import styles from './HendelseDokument.module.css'
 import { XMarkIcon } from '@navikt/aksel-icons'
@@ -43,6 +43,7 @@ export type FetchHendelseProps = {
 
 const HendelseJson = (props: FetchHendelseProps) => {
     const backend = useBackend()
+    const theme = useAtomValue(themeAtom)
     try {
         const { isLoading, isError, data, error } = useQuery<MeldingDto>({
             queryKey: ['melding', props.meldingsReferanse],
@@ -57,7 +58,15 @@ const HendelseJson = (props: FetchHendelseProps) => {
         if (data === undefined) {
             return <Spinner />
         }
-        return <ReactJson src={data} name={null} collapsed={1} sortKeys={true} />
+        return (
+            <ReactJson
+                theme={theme === "light" ? "bright:inverted" : "bright"}
+                src={data}
+                name={null}
+                collapsed={1}
+                sortKeys={true}
+            />
+        )
     } catch (error) {
         return <Feilmelding feil={error} />
     }
