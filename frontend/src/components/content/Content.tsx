@@ -9,7 +9,7 @@ import {PersonDto} from "../../state/dto";
 
 export const Content = ({ person, valgteTing }: { person: PersonDto, valgteTing: string[] }) => {
     return (
-        <Box>
+        <Box.New>
             <Tabs defaultValue={ ContentView.Json }>
                 <Tabs.List>
                     <ViewButton value={ ContentView.Json } />
@@ -27,7 +27,7 @@ export const Content = ({ person, valgteTing }: { person: PersonDto, valgteTing:
                 </Tabs.Panel>
             </Tabs>
             <HendelseDokumentView />
-        </Box>
+        </Box.New>
     )
 }
 

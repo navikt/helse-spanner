@@ -4,7 +4,7 @@ import compareAsc from 'date-fns/compareAsc'
 import { useAtom } from 'jotai'
 import {hendelseprefix, skjulPåminnelserState, visBareFeilState} from '../../../state/state'
 import {Hendelsekontekst} from '../../../state/model'
-import {HStack, Switch, TextField} from "@navikt/ds-react";
+import {Box, HStack, Switch, TextField} from "@navikt/ds-react";
 
 const erPåminnelse = (kontekst: Hendelsekontekst) =>
     kontekst.kontekstType == 'Påminnelse' || kontekst.kontekstType == 'Utbetalingshistorikk'
@@ -30,7 +30,7 @@ export const Hendelser = ({ hendelser }: { hendelser: Hendelsekontekst[] }) => {
     const sorterteHendelser = filtrerteHendelser.sort((a, b) => compareAsc(a.opprettet, b.opprettet))
 
     return (
-        <>
+        <Box.New background='default'>
             <HStack gap="5">
                 <Switch size="small" onChange={(_) => toggleVisBareFeil() }>Bare feil</Switch>
                 <Switch size="small" checked={skjulPåminnelser} onChange={(_) => toggleVisPåminnelser() }>Skjul påminnelser og utbetalingshistorikk</Switch>
@@ -39,6 +39,6 @@ export const Hendelser = ({ hendelser }: { hendelser: Hendelsekontekst[] }) => {
             {sorterteHendelser.map((it) => {
                 return (!visBareFeil || it.harError || it.harWarning) && <Hendelse kontekst={it} key={it.id} />
             })}
-        </>
+        </Box.New>
     )
 }

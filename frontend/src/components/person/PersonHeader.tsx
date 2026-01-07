@@ -8,7 +8,7 @@ import {Box, Search} from "@navikt/ds-react";
 export const PersonHeader = ({ toggleValgtTing }: { toggleValgtTing: (e: boolean, ting: string) => void }) => {
     const person = usePerson()
     return (
-        <Box background="surface-default" borderRadius="large">
+        <Box.New background='default' borderRadius="large">
             <dl className={styles.Ingress}>
                 <dt>fnr</dt>
                 <dd>
@@ -32,7 +32,7 @@ export const PersonHeader = ({ toggleValgtTing }: { toggleValgtTing: (e: boolean
                 <dt>Søk etter vedtaksperiode/utbetaling/behandling/vilkårsgrunnlag</dt>
                 <dd><VedtaksperiodeSøk toggleValgtTing={ toggleValgtTing } /></dd>
             </dl>
-        </Box>
+        </Box.New>
     )
 }
 
@@ -53,7 +53,7 @@ const VedtaksperiodeSøk = ({ toggleValgtTing }: { toggleValgtTing: (e: boolean,
                         toggleValgtTing(true, verdi)
                     }}
                     data-testid="vedtaksperiodeIdfelt"
-                ></Search>
+                />
             </form>
 }
 

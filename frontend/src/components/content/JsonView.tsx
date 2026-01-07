@@ -1,6 +1,6 @@
 import React, {useMemo} from 'react'
 import ReactJson from '@microlink/react-json-view'
-import {ContentView} from '../../state/state'
+import {ContentView, themeAtom} from '../../state/state'
 import {ContentCategory} from './ContentCategory'
 import {writeToClipboard} from '../../utils'
 import {
@@ -11,6 +11,7 @@ import {
     UtbetalingDto,
     VedtakDto, VilkårsgrunnlagDto
 } from "../../state/dto";
+import {useAtomValue} from "jotai";
 
 const Arbeidsgiver = ({ arbeidsgiver }: { arbeidsgiver: ArbeidsgiverDto }) => {
     return (
@@ -93,15 +94,17 @@ Endring.displayName = 'JsonView.Endring'
 // og kjører JSON.stringify(src.data) om det er en json-struktur eller String(data.src) om det er et verdi-felt.
 //
 // Jeg tar en råsjans og bruker JSON.stringify nå, siden det er sykt mye vanskeligere å få ut en fornuftig json enn å fjerne fnutter.
-const ReactJsonMedBedreKopiering = (props: { src: object }) => (
-    <ReactJson
+const ReactJsonMedBedreKopiering = (props: { src: object }) => {
+    const theme = useAtomValue(themeAtom)
+    return <ReactJson
+        theme={theme === 'light' ? 'rjv-default' : 'harmonic'}
         src={props.src}
         name={null}
         collapsed={1}
         enableClipboard={(data) => writeToClipboard(JSON.stringify(data.src))}
         sortKeys={true}
     />
-)
+}
 
 export const JsonView = ({ person, valgteTing }: { person: PersonDto, valgteTing: string[] }) => {
     return useMemo(() => {

@@ -1,9 +1,9 @@
 .SpannSpan {
-    font-size: var(--a-font-size-heading-2xlarge);
+    font-size: var(--ax-font-size-heading-2xlarge);
 }
 
 .User {
-    color: var(--a-deepblue-100)
+    color: var(--ax-brand-blue-200)
 }
 
 .Lenke {
@@ -13,12 +13,12 @@
 }
 
 [data-theme="spanner"] {
-    --ac-internalheader-bg: var(--a-deepblue-500);
-    --ac-internalheader-hover-bg: var(--a-deepblue-600);
-    --ac-internalheader-divider: var(--a-deepblue-900);
+    --ac-internalheader-bg: var(--ax-brand-blue-600);
+    --ac-internalheader-hover-bg: var(--ax-brand-blue-700);
+    --ac-internalheader-divider: var(--ax-brand-blue-1000);
     --ac-internalheader-text: var(--a-white);
-    --ac-button-primary-bg: var(--a-deepblue-100);
-    --ac-button-primary-hover-bg: var(--a-deepblue-200);
-    --ac-button-primary-focus-bg: var(--a-deepblue-300);
+    --ac-button-primary-bg: var(--ax-brand-blue-200);
+    --ac-button-primary-hover-bg: var(--ax-brand-blue-300);
+    --ac-button-primary-focus-bg: var(--ax-brand-blue-400);
     --ac-button-primary-text: #000;
 }

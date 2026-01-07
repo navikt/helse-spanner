@@ -33,7 +33,7 @@ export const PersonView = () => {
     }
 
     return (<>
-        <Box background="surface-alt-3-moderate" paddingBlock="5" paddingInline="8" as="header">
+        <Box.New background={'info-moderate'} paddingBlock="5" paddingInline="8" as="header">
             <Page.Block>
                 <PersonHeader toggleValgtTing={toggleValgtTing}/>
                 <Tidslinjer
@@ -41,9 +41,9 @@ export const PersonView = () => {
                     toggleValgtTing={toggleValgtTing}
                 />
             </Page.Block>
-        </Box>
-        <Box
-            background="bg-subtle"
+        </Box.New>
+        <Box.New
+            background='neutral-moderate'
             paddingBlock="10"
             paddingInline="8"
             as="main"
@@ -57,7 +57,7 @@ export const PersonView = () => {
                     <Content person={person} valgteTing={valgteTing} />
                 </HGrid>
             </Page.Block>
-        </Box>
+        </Box.New>
     </>)
 }
 

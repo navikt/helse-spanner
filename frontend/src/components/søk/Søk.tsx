@@ -47,7 +47,7 @@ export const Søk = () => {
     }
 
     return (
-        <Box paddingBlock="4" paddingInline="2 0">
+        <Box.New paddingBlock="4" paddingInline="2 0">
             <HStack gap="5">
                 <form onSubmit={(e) => {
                     e.preventDefault()
@@ -59,21 +59,19 @@ export const Søk = () => {
                         label="Personsøk"
                         size="small"
                         value={søketekst}
-                        variant="primary"
+                        variant="simple"
                         placeholder="fnr/aktør-id"
                         onChange={(value) => {
                             setFeilmelding('')
                             setSøketekst(value.trim())
                         }}
                         data-testid="søkefelt"
-                    >
-                        <Search.Button type="submit" loading={ isLoading } />
-                    </Search>
+                    />
                 </form>
                 <div>
                     { !!feilmelding && <Alert style={{ color: "var(--a-white)" }} inline variant="error">{ feilmelding }</Alert> }
                 </div>
             </HStack>
-        </Box>
+        </Box.New>
     )
 }
