@@ -33,7 +33,7 @@ export const PersonView = () => {
     }
 
     return (<>
-        <Box.New background={'info-moderate'} paddingBlock="5" paddingInline="8" as="header">
+        <Box.New background={'accent-moderate'} paddingBlock="5" paddingInline="8" as="header">
             <Page.Block>
                 <PersonHeader toggleValgtTing={toggleValgtTing}/>
                 <Tidslinjer

@@ -3,7 +3,7 @@
 }
 
 .tidslijerad {
-    background-color: var(--ax-bg-brand-blue-soft);
+    background-color: var(--ax-bg-default);
 }
 
 .firstElementInVedtaksperiode {
@@ -25,15 +25,81 @@
     box-shadow: none !important;
 }
 
-.aktiv {
-    border-color: red !important;
+.normalTilstand {
+    background-color: var(--ax-bg-accent-moderate-pressed);
 }
+.normalTilstand:hover {
+    background-color: var(--ax-bg-accent-moderate-hover);
+}
+
+.avsluttet {
+    background-color: var(--ax-bg-success-moderate-pressed);
+}
+.avsluttet:hover {
+    background-color: var(--ax-bg-success-moderate-hover);
+}
+
+.avsluttetUtenUtbetaling {
+    background-color: var(--ax-bg-neutral-moderate-pressed);
+}
+.avsluttetUtenUtbetaling:hover {
+    background-color: var(--ax-bg-neutral-moderate-hover);
+}
+
+.godkjenning {
+    background-color: var(--ax-bg-brand-beige-moderate-pressed)
+}
+.godkjenning:hover {
+    background-color: var(--ax-bg-brand-beige-moderate-hover)
+}
+
+
+.normalTilstandDark {
+    background-color: var(--ax-bg-accent-strong-pressed);
+}
+.normalTilstandDark:hover {
+    background-color: var(--ax-bg-accent-strong-hover);
+}
+
+.avsluttetDark {
+    background-color: var(--ax-bg-success-strong-pressed);
+}
+.avsluttetDark:hover {
+    background-color: var(--ax-bg-success-strong-hover);
+}
+
+.avsluttetUtenUtbetalingDark {
+    background-color: var(--ax-bg-neutral-strong);
+}
+.avsluttetUtenUtbetalingDark:hover {
+    background-color: var(--ax-bg-neutral-strong-hover);
+}
+
+.godkjenningDark {
+    background-color: var(--ax-bg-brand-beige-strong)
+}
+.godkjenningDark:hover {
+    background-color: var(--ax-bg-brand-beige-strong-hover)
+}
+
+
 
 
 .arbeidsgiverperiode {
-    background-color: #EEC9F1 !important;
+    background-color: var(--ax-bg-brand-magenta-moderate-pressed);
 }
 .arbeidsgiverperiode:hover {
-    background-color: #ECAAEE !important;
+    background-color: var(--ax-bg-brand-magenta-moderate-hover)
 }
 
+.arbeidsgiverperiodeDark {
+    background-color: var(--ax-bg-brand-magenta-strong);
+}
+.arbeidsgiverperiodeDark:hover {
+    background-color: var(--ax-bg-brand-magenta-strong-hover)
+}
+
+
+.aktiv {
+    border-color: red !important;
+}

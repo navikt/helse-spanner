@@ -7,6 +7,8 @@ import {BriefcaseIcon, Buildings3Icon, PackageIcon, ParasolBeachIcon, PiggybankI
 import {VedtakDto} from "../../state/dto";
 import { format } from 'date-fns'
 import {somNorskDato} from "../i18n";
+import { useAtom } from 'jotai'
+import { themeAtom } from '../../state/state'
 
 
 type TidslinjeState = {
@@ -25,6 +27,7 @@ export const Tidslinjer = ({valgteTing, toggleValgtTing}: {
     valgteTing: string[],
     toggleValgtTing: (e: React.MouseEvent | React.KeyboardEvent, ting: string) => void
 }) => {
+    const [theme, _] = useAtom(themeAtom)
     const person = usePerson()
     const sortertePerioder = person.arbeidsgivere
         .flatMap((it) => {
@@ -127,8 +130,7 @@ export const Tidslinjer = ({valgteTing, toggleValgtTing}: {
             {person.arbeidsgivere
                 .filter((arbeidsgiver) => arbeidsgiver.vedtaksperioder.length > 0 || arbeidsgiver.forkastede.length > 0)
                 .map((arbeidsgiver) => {
-                    return <Timeline.Row label={arbeidsgiver.organisasjonsnummer} icon={<BriefcaseIcon aria-hidden/>}
-                                         className={styles.tidslijerad}>
+                    return <Timeline.Row label={arbeidsgiver.organisasjonsnummer} icon={<BriefcaseIcon aria-hidden/>} className={styles.tidslijerad}>
                         {[...arbeidsgiver.vedtaksperioder.flatMap((vedtaksperiode) => {
                             const vedtaksperiodeTimelineMedArbeidsgiverperiode = getArbeidsgiverperiodeTimeLine(vedtaksperiode)
 
@@ -142,9 +144,52 @@ export const Tidslinjer = ({valgteTing, toggleValgtTing}: {
                                 } else {
                                     klassenavn = styles.elementInTheMiddleOfVedtaksperiode
                                 }
-                                if (periodeIVedtaksperiode.type == 'arbeidsgiverperiode') {
-                                    klassenavn += " " + styles.arbeidsgiverperiode
+
+                                const tilstand =  vedtaksperiode.tilstand
+                                if(theme == 'light'){
+                                    if (periodeIVedtaksperiode.type == 'arbeidsgiverperiode') {
+                                        klassenavn += ' ' + styles.arbeidsgiverperiode
+                                    }
+                                    switch (true) {
+                                        case tilstand.endsWith('AVSLUTTET'):
+                                            klassenavn += ' ' + styles.avsluttet
+                                            break
+                                        case tilstand.endsWith('AVSLUTTET_UTEN_UTBETALING'):
+                                            klassenavn += ' ' + styles.avsluttetUtenUtbetaling
+                                            break
+                                        case ['AVVENTER_GODKJENNING', 'AVVENTER_GODKJENNING_REVURDERING'].includes(
+                                            tilstand
+                                        ):
+                                            klassenavn += ' ' + styles.godkjenning
+                                            break
+                                        default:
+                                            klassenavn += ' ' + styles.normalTilstand
+                                            break
+                                    }
                                 }
+                                else {
+                                    if (periodeIVedtaksperiode.type == 'arbeidsgiverperiode') {
+                                        klassenavn += ' ' + styles.arbeidsgiverperiodeDark
+                                    }
+                                    switch (true) {
+                                        case tilstand.endsWith('AVSLUTTET'):
+                                            klassenavn += ' ' + styles.avsluttetDark
+                                            break
+                                        case tilstand.endsWith('AVSLUTTET_UTEN_UTBETALING'):
+                                            klassenavn += ' ' + styles.avsluttetUtenUtbetalingDark
+                                            break
+                                        case ['AVVENTER_GODKJENNING', 'AVVENTER_GODKJENNING_REVURDERING'].includes(
+                                            tilstand
+                                        ):
+                                            klassenavn += ' ' + styles.godkjenningDark
+                                            break
+                                        default:
+                                            klassenavn += ' ' + styles.normalTilstandDark
+                                            break
+                                    }
+                                }
+
+                                console.log(vedtaksperiode.tilstand)
                                 const erValgt = typeof valgteTing.find((it) => it == vedtaksperiode.id) !== 'undefined'
                                 if (erValgt) {
                                     klassenavn += " " + styles.aktiv
@@ -154,7 +199,7 @@ export const Tidslinjer = ({valgteTing, toggleValgtTing}: {
                                     key={vedtaksperiode.id}
                                     start={periodeIVedtaksperiode.fom}
                                     end={periodeIVedtaksperiode.tom}
-                                    status={statusForVedtaksperiode((vedtaksperiode.tilstand))}
+                                    //status={statusForVedtaksperiode((vedtaksperiode.tilstand))}
                                     className={klassenavn}
                                     onSelectPeriod={(e) => {
                                         toggleValgtTing(e, vedtaksperiode.id)
@@ -256,13 +301,6 @@ export const Tidslinjer = ({valgteTing, toggleValgtTing}: {
 
 const SorterNyesteVedtakØverst = (input: VedtakDto[]): VedtakDto[] =>
     input.sort((a, b) => (new Date(b.tom).getTime() - new Date(a.tom).getTime()))
-
-function statusForVedtaksperiode(tilstand: string): "success" | "warning" | "danger" | "info" | "neutral" {
-    if (tilstand.endsWith("AVSLUTTET")) return "success"
-    if (tilstand.endsWith("AVSLUTTET_UTEN_UTBETALING")) return "neutral"
-    if (["AVVENTER_GODKJENNING", "AVVENTER_GODKJENNING_REVURDERING"].includes(tilstand)) return "warning"
-    return "info"
-}
 
 function nextDay(date: Date) {
     return new Date(date.setDate(date.getDate() + 1));

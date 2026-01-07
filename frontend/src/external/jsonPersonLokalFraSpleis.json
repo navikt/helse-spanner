@@ -748,7 +748,145 @@
               },
               "opprettet": "2024-08-22T15:47:32.191295",
               "oppdatert": "2024-08-22T15:47:32.193419"
+          },
+          {
+              "id": "d1b442d4-dcf4-4f2c-b0c5-feff1f3c1d66",
+              "tilstand": "AVVENTER_GODKJENNING",
+              "skjæringstidspunkt": "2018-01-01",
+              "fom": "2018-03-29",
+              "tom": "2018-04-28",
+              "gjeldende": {
+                  "dagerUtenNavAnsvar": {
+                      "dager": [
+                          {
+                              "fom": "2018-01-01",
+                              "tom": "2018-01-16"
+                          }
+                      ]
+                  }
+              },
+              "sykmeldingFom": "2018-02-01",
+              "sykmeldingTom": "2018-02-28",
+              "behandlinger": [
+                  {
+                      "id": "ce50891f-ffeb-4f9d-85f9-257cc9e35a2d",
+                      "tilstand": "UBEREGNET",
+                      "vedtakFattet": null,
+                      "avsluttet": null,
+                      "kilde": {
+                          "meldingsreferanseId": "716c392b-3b1c-49b1-b131-2dbbfe19760e",
+                          "innsendt": "2018-02-28T00:00:00",
+                          "registrert": "2024-08-22T15:47:32.191026",
+                          "avsender": "SYKMELDT"
+                      },
+                      "endringer": [
+                          {
+                              "id": "fecea2e6-2734-4e3b-8294-5c914c31ee2d",
+                              "tidsstempel": "2024-08-22T15:47:32.191331",
+                              "sykmeldingsperiodeFom": "2018-02-01",
+                              "sykmeldingsperiodeTom": "2018-02-28",
+                              "fom": "2018-02-01",
+                              "tom": "2018-02-28",
+                              "utbetalingId": null,
+                              "skjæringstidspunkt": "-999999999-01-01",
+                              "utbetalingstatus": null,
+                              "vilkårsgrunnlagId": null,
+                              "sykdomstidslinje": {
+                                  "dager": [
+                                      {
+                                          "type": "SYKEDAG",
+                                          "kilde": {
+                                              "type": "Søknad",
+                                              "id": "716c392b-3b1c-49b1-b131-2dbbfe19760e",
+                                              "tidsstempel": "2018-02-01T00:00:00"
+                                          },
+                                          "grad": 100.0,
+                                          "other": null,
+                                          "melding": null,
+                                          "fom": "2018-02-01",
+                                          "tom": "2018-02-28",
+                                          "dato": null
+                                      }
+                                  ],
+                                  "periode": {
+                                      "fom": "2018-02-01",
+                                      "tom": "2018-02-28"
+                                  },
+                                  "låstePerioder": []
+                              },
+                              "dokumentsporing": {
+                                  "dokumentId": "716c392b-3b1c-49b1-b131-2dbbfe19760e",
+                                  "dokumenttype": "Søknad"
+                              },
+                              "dagerUtenNavAnsvar": []
+                          },
+                          {
+                              "id": "47d9aeca-5a54-47e6-a857-fd7844525e83",
+                              "tidsstempel": "2024-08-22T15:47:32.192442",
+                              "sykmeldingsperiodeFom": "2018-02-01",
+                              "sykmeldingsperiodeTom": "2018-02-28",
+                              "fom": "2018-02-01",
+                              "tom": "2018-02-28",
+                              "utbetalingId": null,
+                              "skjæringstidspunkt": "2018-01-01",
+                              "utbetalingstatus": null,
+                              "vilkårsgrunnlagId": null,
+                              "sykdomstidslinje": {
+                                  "dager": [
+                                      {
+                                          "type": "SYKEDAG",
+                                          "kilde": {
+                                              "type": "Søknad",
+                                              "id": "716c392b-3b1c-49b1-b131-2dbbfe19760e",
+                                              "tidsstempel": "2018-02-01T00:00:00"
+                                          },
+                                          "grad": 100.0,
+                                          "other": null,
+                                          "melding": null,
+                                          "fom": "2018-02-01",
+                                          "tom": "2018-02-28",
+                                          "dato": null
+                                      }
+                                  ],
+                                  "periode": {
+                                      "fom": "2018-02-01",
+                                      "tom": "2018-02-28"
+                                  },
+                                  "låstePerioder": []
+                              },
+                              "dokumentsporing": {
+                                  "dokumentId": "716c392b-3b1c-49b1-b131-2dbbfe19760e",
+                                  "dokumenttype": "Søknad"
+                              },
+                              "dagerUtenNavAnsvar": {
+                                  "ferdigAvklart": true,
+                                  "dager": [
+                                      {
+                                          "fom": "2018-01-01",
+                                          "tom": "2018-01-16"
+                                      }
+                                  ]
+                              }
+                          }
+                      ]
+                  }
+              ],
+              "venteårsak": {
+                  "ventetSiden": "2024-08-22T15:47:32.193419",
+                  "venterTil": "+999999999-12-31T23:59:59.999999999",
+                  "venterPå": {
+                      "vedtaksperiodeId": "d1b442d4-dcf4-4f2c-b0c5-feff1f3c1d66",
+                      "organisasjonsnummer": "987654321",
+                      "venteårsak": {
+                          "hva": "BEREGNING",
+                          "hvorfor": null
+                      }
+                  }
+              },
+              "opprettet": "2024-08-22T15:47:32.191295",
+              "oppdatert": "2024-08-22T15:47:32.193419"
           }
+
 
       ],
       "forkastede": [],
