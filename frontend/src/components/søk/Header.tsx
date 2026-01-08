@@ -3,7 +3,7 @@ import {Button, InternalHeader, Spacer} from "@navikt/ds-react";
 import styles from './Header.module.css'
 import {useQuery} from "@tanstack/react-query";
 import {Link} from "react-router-dom";
-import {MoonIcon, SunIcon} from "@navikt/aksel-icons";
+import {SunIcon} from "@navikt/aksel-icons";
 import {useAtom} from "jotai";
 import {themeAtom} from "../../state/state";
 
@@ -25,14 +25,22 @@ export const Header = ({ children }: PropsWithChildren) => {
                 <span className={styles.SpannSpan}>🪣</span>er
             </InternalHeader.Title>
             {children}
-            <Spacer/>
+            <Spacer />
             <Button
                 variant="tertiary-neutral"
-                icon={theme === 'dark' ? <SunIcon title="Bytt til lyst tema"/> : <MoonIcon title="Bytt til mørkt tema"/>}
+                icon={
+                    theme === 'dark' ? (
+                        <SunIcon title="Bytt til lyst tema" />
+                    ) : (
+                        <img rel="icon" src="/darkmode.png" title={'Bytt til mørkt tema'}  alt={""}/>
+                    )
+                }
                 onClick={toggleTheme}
             />
-            <Link to={"/hotkeys"} className={styles.Lenke}>Hotkeys</Link>
-            <InternalHeader.User className={styles.User} name={ navn } description={ ident }/>
+            <Link to={'/hotkeys'} className={styles.Lenke}>
+                Hotkeys
+            </Link>
+            <InternalHeader.User className={styles.User} name={navn} description={ident} />
         </InternalHeader>
     )
 }

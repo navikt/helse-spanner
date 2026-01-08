@@ -189,7 +189,6 @@ export const Tidslinjer = ({valgteTing, toggleValgtTing}: {
                                     }
                                 }
 
-                                console.log(vedtaksperiode.tilstand)
                                 const erValgt = typeof valgteTing.find((it) => it == vedtaksperiode.id) !== 'undefined'
                                 if (erValgt) {
                                     klassenavn += " " + styles.aktiv
