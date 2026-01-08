@@ -214,7 +214,7 @@
               ]
             }
           },
-          "tilstand": "AVSLUTTET",
+          "tilstand": "AVVENTER_GODKJENNING",
           "skjæringstidspunkt": "2018-01-01",
           "fom": "2018-01-01",
           "tom": "2018-01-31",

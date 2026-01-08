@@ -86,17 +86,17 @@
 
 
 .arbeidsgiverperiode {
-    background-color: var(--ax-bg-brand-magenta-moderate-pressed);
+    background-color: var(--ax-bg-meta-purple-strong-pressed);
 }
 .arbeidsgiverperiode:hover {
-    background-color: var(--ax-bg-brand-magenta-moderate-hover)
+    background-color: var(--ax-bg-meta-purple-strong-hover)
 }
 
 .arbeidsgiverperiodeDark {
-    background-color: var(--ax-bg-brand-magenta-strong);
+    background-color: var(--ax-bg-meta-purple-strong-pressed);
 }
 .arbeidsgiverperiodeDark:hover {
-    background-color: var(--ax-bg-brand-magenta-strong-hover)
+    background-color: var(--ax-bg-meta-purple-strong-hover)
 }
 
 
