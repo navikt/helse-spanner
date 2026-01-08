@@ -32,7 +32,7 @@ export const Header = ({ children }: PropsWithChildren) => {
                     theme === 'dark' ? (
                         <SunIcon title="Bytt til lyst tema" />
                     ) : (
-                        <img rel="icon" src="/darkmode.png" title={'Bytt til mørkt tema'}  alt={""}/>
+                        <img rel="icon" src="/darkmode.png" title={'Bytt til mørkt tema'} alt={""}/>
                     )
                 }
                 onClick={toggleTheme}
