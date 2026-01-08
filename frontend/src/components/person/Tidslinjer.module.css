@@ -7,19 +7,19 @@
 }
 
 .firstElementInVedtaksperiode {
-    border: 1px solid black !important;
+    border: 1px solid var(--ax-border-focus) !important;
     border-left: 0 !important;
     box-shadow: none !important;
 }
 
 .lastElementInVedtaksperiode {
-    border: 1px solid black !important;
+    border: 1px solid var(--ax-border-focus) !important;
     border-right: 0 !important;
     box-shadow: none !important;
 }
 
 .elementInTheMiddleOfVedtaksperiode {
-    border: 1px solid !important;
+    border: 1px solid var(--ax-border-focus) !important;
     border-left: 0 !important;
     border-right: 0 !important;
     box-shadow: none !important;
@@ -101,5 +101,5 @@
 
 
 .aktiv {
-    border-color: red !important;
+    border-color: var(--ax-border-danger) !important;
 }

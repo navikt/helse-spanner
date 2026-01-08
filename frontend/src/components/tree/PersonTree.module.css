@@ -90,7 +90,7 @@ div > .PersonNode:first-child {
 
 .FremhevetUtbetaling .TreeNode,
 .Highlighted {
-    border: red 2px solid;
+    border: var(--ax-border-danger) 2px solid;
     box-shadow: 0 0 0 1px rgba(144, 202, 249, 0.5);
 }
 
