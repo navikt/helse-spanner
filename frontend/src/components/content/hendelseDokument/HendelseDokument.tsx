@@ -60,7 +60,7 @@ const HendelseJson = (props: FetchHendelseProps) => {
         }
         return (
             <ReactJson
-                theme={theme === "light" ? "bright:inverted" : "bright"}
+                theme={theme === 'light' ? 'summerfruit:inverted' : 'chalk'}
                 src={data}
                 name={null}
                 collapsed={1}

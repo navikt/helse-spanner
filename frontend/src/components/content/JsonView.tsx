@@ -98,7 +98,7 @@ const ReactJsonMedBedreKopiering = (props: { src: object }) => {
     const theme = useAtomValue(themeAtom)
     return (
         <ReactJson
-            theme={theme === 'light' ? 'summerfruit:inverted' : 'summerfruit'}
+            theme={theme === 'light' ? 'summerfruit:inverted' : 'chalk'}
             src={props.src}
             name={null}
             collapsed={1}
