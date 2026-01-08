@@ -47,10 +47,10 @@
 }
 
 .godkjenning {
-    background-color: var(--ax-bg-brand-beige-moderate-pressed)
+    background-color: var(--a-orange-200);
 }
 .godkjenning:hover {
-    background-color: var(--ax-bg-brand-beige-moderate-hover)
+    background-color: var(--a-orange-300);
 }
 
 
@@ -76,10 +76,10 @@
 }
 
 .godkjenningDark {
-    background-color: var(--ax-bg-brand-beige-strong)
+    background-color: var(--a-orange-200);
 }
 .godkjenningDark:hover {
-    background-color: var(--ax-bg-brand-beige-strong-hover)
+    background-color: var(--a-orange-300);
 }
 
 
