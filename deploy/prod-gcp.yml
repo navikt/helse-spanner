@@ -53,8 +53,6 @@ spec:
         - application: sparsom-api
         - application: spurtedu
         - application: speed-api
-  secureLogs:
-    enabled: true
   env:
     - name: DEVELOPMENT
       value: "false"

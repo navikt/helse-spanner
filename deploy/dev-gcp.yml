@@ -54,8 +54,6 @@ spec:
         - application: spleis-api
         - application: sparsom-api
         - application: spurtedu
-  secureLogs:
-    enabled: true
   env:
     - name: DEVELOPMENT
       value: "false"
