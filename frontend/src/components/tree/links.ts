@@ -13,4 +13,4 @@ const speilHostname = Environment.isDevelopment
     : window.location.origin.includes('dev')
     ? 'speil.ansatt.dev.nav.no'
     : 'speil.ansatt.nav.no'
-export const speilUrl = (aktørId: string) => `https://${speilHostname}/person/${aktørId}/dagoversikt`
+export const speilUrl = () => `https://${speilHostname}/person`

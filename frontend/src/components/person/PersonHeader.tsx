@@ -24,9 +24,10 @@ export const PersonHeader = ({ toggleValgtTing }: { toggleValgtTing: (e: boolean
                 </dd>
                 <dt>🪞</dt>
                 <dd>
-                    <a href={speilUrl(person.aktørId)} target="_blank" rel="noreferrer" className={styles.SpeilLink}>
-                        trykk her
-                    </a>
+                    <form action={speilUrl()} method="POST" target="_blank" rel="noreferrer" >
+                        <input type="hidden" name="aktørId" value={person.aktørId} />
+                        <button type="submit">trykk her</button>
+                    </form>
                 </dd>
 
                 <dt>Søk etter vedtaksperiode/utbetaling/behandling/vilkårsgrunnlag</dt>
