@@ -7,7 +7,7 @@ import { hardCodedBackend } from './external/jsonBackend'
 import { restBackend } from './external/restBackend'
 import { BackendContext } from './external/backend'
 import * as query from '@tanstack/react-query'
-import "@navikt/ds-css/darkside";
+import "@navikt/ds-css";
 import {Theme} from "@navikt/ds-react";
 import {useAtomValue} from "jotai";
 import {themeAtom} from "./state/state";

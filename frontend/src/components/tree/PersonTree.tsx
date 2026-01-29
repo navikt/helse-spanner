@@ -40,15 +40,15 @@ export const PersonTree = ({valgteTing, toggleValgtTing } : PersonTreeProps) => 
     }]);
 
     return (
-        <Box.New>
-            <Box.New paddingBlock="4 0">
-                <HStack gap="5">
+        <Box>
+            <Box paddingBlock="space-16 space-0">
+                <HStack gap="space-16">
                     <Switch size="small" onChange={(e) => toggleArbeidsgivere(e.target.checked) }>Åpne alle</Switch>
                     <Switch size="small" onChange={() => setVisForkastede((forrige) => !forrige) }>Skjul forkastede</Switch>
                     <Switch size="small" checked={visBehandlinger} onChange={() => setVisBehandlinger((forrige) => !forrige) }>Vis behandlinger med endringer</Switch>
                 </HStack>
-            </Box.New>
-            <Box.New background='default' padding="0">
+            </Box>
+            <Box background='default' padding="space-0">
                 <SelectableTreeNode indent={0} className={styles.PersonNode} valgteTing={valgteTing} ting={person.aktørId} vedValg={toggleValgtTing}>
                     <span>{person.aktørId}</span>
                     <div className={styles.Knapper}>
@@ -75,7 +75,7 @@ export const PersonTree = ({valgteTing, toggleValgtTing } : PersonTreeProps) => 
                         vilkårsgrunnlagHistorikkInnslag={person.vilkårsgrunnlagHistorikk[0]}
                     />
                 }
-            </Box.New>
-        </Box.New>
+            </Box>
+        </Box>
     )
 }

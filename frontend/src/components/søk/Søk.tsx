@@ -47,8 +47,8 @@ export const Søk = () => {
     }
 
     return (
-        <Box.New paddingBlock="4" paddingInline="2 0">
-            <HStack gap="5">
+        <Box paddingBlock="space-16" paddingInline="space-8 space-0">
+            <HStack>
                 <form onSubmit={(e) => {
                     e.preventDefault()
                     sendSøk()
@@ -72,6 +72,6 @@ export const Søk = () => {
                     { !!feilmelding && <Alert style={{ color: "var(--a-white)" }} inline variant="error">{ feilmelding }</Alert> }
                 </div>
             </HStack>
-        </Box.New>
+        </Box>
     )
 }

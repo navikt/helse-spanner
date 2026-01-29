@@ -20,7 +20,7 @@ export const Header = ({ children }: PropsWithChildren) => {
     const navn = isLoading ? '[laster]' : isError ? '[feil]' : data?.navn ?? '[ukjent]'
     const ident = isLoading ? '[laster]' : isError ? '[feil]' : data?.ident ?? '[ukjent]'
     return (
-        <InternalHeader data-theme="spanner">
+        <InternalHeader>
             <InternalHeader.Title href="/">
                 <span className={styles.SpannSpan}>🪣</span>er
             </InternalHeader.Title>

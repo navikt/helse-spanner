@@ -32,32 +32,23 @@ export const PersonView = () => {
         })
     }
 
-    return (<>
-        <Box.New background={'accent-moderate'} paddingBlock="5" paddingInline="8" as="header">
-            <Page.Block>
-                <PersonHeader toggleValgtTing={toggleValgtTing}/>
-                <Tidslinjer
-                    valgteTing={valgteTing}
-                    toggleValgtTing={toggleValgtTing}
-                />
-            </Page.Block>
-        </Box.New>
-        <Box.New
-            background='neutral-moderate'
-            paddingBlock="10"
-            paddingInline="8"
-            as="main"
-        >
-            <Page.Block>
-                <HGrid gap="6" columns="300px auto">
-                    <PersonTree
-                        valgteTing={valgteTing}
-                        toggleValgtTing={toggleValgtTing}
-                    />
-                    <Content person={person} valgteTing={valgteTing} />
-                </HGrid>
-            </Page.Block>
-        </Box.New>
-    </>)
+    return (
+        <>
+            <Box background={'accent-moderate'} paddingBlock="space-16" paddingInline="space-32">
+                <Page.Block>
+                    <PersonHeader toggleValgtTing={toggleValgtTing} />
+                    <Tidslinjer valgteTing={valgteTing} toggleValgtTing={toggleValgtTing} />
+                </Page.Block>
+            </Box>
+            <Box background={'neutral-moderate'} paddingBlock="space-16" paddingInline="space-32" as="main">
+                <Page.Block>
+                    <HGrid gap="space-24" columns="300px auto">
+                        <PersonTree valgteTing={valgteTing} toggleValgtTing={toggleValgtTing} />
+                        <Content person={person} valgteTing={valgteTing} />
+                    </HGrid>
+                </Page.Block>
+            </Box>
+        </>
+    )
 }
 

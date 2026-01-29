@@ -30,8 +30,8 @@ export const Hendelser = ({ hendelser }: { hendelser: Hendelsekontekst[] }) => {
     const sorterteHendelser = filtrerteHendelser.sort((a, b) => compareAsc(a.opprettet, b.opprettet))
 
     return (
-        <Box.New background='default'>
-            <HStack gap="5">
+        <Box background='default'>
+            <HStack gap="space-16">
                 <Switch size="small" onChange={(_) => toggleVisBareFeil() }>Bare feil</Switch>
                 <Switch size="small" checked={skjulPåminnelser} onChange={(_) => toggleVisPåminnelser() }>Skjul påminnelser og utbetalingshistorikk</Switch>
                 <TextField id={"hendelseprefix_input"} size={"small"} onInput={(e) => oppdaterPrefix(e) } label={"prefix (optional)"} ></TextField>
@@ -39,6 +39,6 @@ export const Hendelser = ({ hendelser }: { hendelser: Hendelsekontekst[] }) => {
             {sorterteHendelser.map((it) => {
                 return (!visBareFeil || it.harError || it.harWarning) && <Hendelse kontekst={it} key={it.id} />
             })}
-        </Box.New>
+        </Box>
     )
 }

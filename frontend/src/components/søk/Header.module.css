@@ -12,13 +12,3 @@
     font-size: x-small;
 }
 
-[data-theme="spanner"] {
-    --ac-internalheader-bg: var(--ax-brand-blue-600);
-    --ac-internalheader-hover-bg: var(--ax-brand-blue-700);
-    --ac-internalheader-divider: var(--ax-brand-blue-1000);
-    --ac-internalheader-text: var(--a-white);
-    --ac-button-primary-bg: var(--ax-brand-blue-200);
-    --ac-button-primary-hover-bg: var(--ax-brand-blue-300);
-    --ac-button-primary-focus-bg: var(--ax-brand-blue-400);
-    --ac-button-primary-text: #000;
-}
