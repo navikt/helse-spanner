@@ -146,7 +146,7 @@ export const Tidslinjer = ({valgteTing, toggleValgtTing}: {
                                 }
 
                                 const tilstand =  vedtaksperiode.tilstand
-                                if(theme == 'light'){
+                                if (theme == 'light'){
                                     if (periodeIVedtaksperiode.type == 'arbeidsgiverperiode') {
                                         klassenavn += ' ' + styles.arbeidsgiverperiode
                                     }
