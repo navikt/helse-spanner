@@ -58,11 +58,8 @@ export const Hendelse = ({ kontekst }: { kontekst: Hendelsekontekst }) => {
                     isError && commonStyles.Error
                 )}
             >
-                <div
-                    title={'Kl. ' + somNorskKlokkeslett(aktiviteter[0].tidsstempel)}
-                    className={classNames(styles.DatoText, styles.SkriftMedNestenLikBredde, styles.FokusPåHover)}
-                >
-                    {somNorskDato(aktiviteter[0].tidsstempel)}
+                <div className={classNames(styles.DatoText, styles.SkriftMedNestenLikBredde)}>
+                    {somNorskDato(aktiviteter[0].tidsstempel)} <i>{somNorskKlokkeslett(aktiviteter[0].tidsstempel)}</i>
                 </div>
 
                 <button onClick={toggleSelected} className={styles.Hendelsetype}>
