@@ -44,6 +44,7 @@ class Spleis(
     private val baseUrl: String = "http://spleis-api.tbd.svc.cluster.local",
     spleisScope: String,
     private val sparsomBaseUrl: String = "http://sparsom-api.tbd.svc.cluster.local",
+    private val spiskammersetBaseUrl: String = "http://spiskammerset.tbd.svc.cluster.local",
     sparsomScope: String,
     spiskammersetScope: String?
 ) : Personer {
@@ -159,7 +160,7 @@ class Spleis(
     override suspend fun spiskammersetPerioder(call: ApplicationCall, fnr: String, fom: LocalDate, tom: LocalDate) {
         if (spiskammerset == null) return call.respond(HttpStatusCode.NotFound)
         val accessToken = call.bearerToken ?: return call.respond(Unauthorized)
-        val url = URLBuilder(baseUrl).build()
+        val url = URLBuilder(spiskammersetBaseUrl).build()
         val oboToken = spiskammerset.token(azureAD, accessToken)
         val log = Log.logger(Personer::class.java)
 
