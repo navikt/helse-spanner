@@ -28,6 +28,7 @@ import no.nav.spanner.Log.Companion.LogLevel.*
 import org.slf4j.LoggerFactory
 import org.slf4j.event.Level
 import java.io.IOException
+import java.time.LocalDate
 import java.util.*
 
 enum class IdType(val header: String) {
@@ -191,6 +192,38 @@ fun Application.spanner(
                 if (idValue.isNullOrBlank())
                     return@get call.respond(HttpStatusCode.BadRequest, FeilRespons("bad_request", "${IdType.FNR.header} must be set"))
                 spleis.speilperson(call, idValue)
+            }
+
+            /*
+                har ikke funksjonalitet fra frontend ennå, men kan kalles manuelt fra devtools feks:
+
+                fetch("/api/spiskammerset/perioder?fom=2026-01-01&tom=2026-01-31", {
+                    method: 'get',
+                    headers: {
+                        Accept: 'application/json',
+                        fnr: 'xxxxxxxxxxx'
+                    }
+                }).then(function (response) {
+                    console.log(response)
+                    response.json().then(function (json) {
+                        console.log(json)
+                    })
+                })
+            */
+            get("/api/spiskammerset/perioder") {
+                audit()
+                val (idType, idValue) = call.personId()
+                if (idType != IdType.FNR) return@get call.respond(HttpStatusCode.BadRequest, "funker bare med fnr")
+                val fom = LocalDate.parse(call.queryParameters["fom"]!!)
+                val tom = LocalDate.parse(call.queryParameters["tom"]!!)
+                logg
+                    .åpent("idType", idType)
+                    .sensitivt("idValue", idValue)
+                    .call(this.call)
+                    .info()
+                if (idValue.isNullOrBlank())
+                    return@get call.respond(HttpStatusCode.BadRequest, FeilRespons("bad_request", "${IdType.FNR.header} must be set"))
+                spleis.spiskammersetPerioder(call, idValue, fom, tom)
             }
 
             get("/api/hendelse/{meldingsreferanse}") {

@@ -9,7 +9,8 @@ data class Config (
     val spleisUrl: String,
     val spleisScope: String,
     val sparsomUrl: String,
-    val sparsomScope: String
+    val sparsomScope: String,
+    val spiskammersetScope: String?
 ) {
     companion object {
         fun from(configuration: Configuration) = Config(
@@ -19,7 +20,8 @@ data class Config (
             spleisUrl = configuration[Key("SPLEIS_API_URL", stringType)],
             spleisScope = configuration[Key("SPLEIS_SCOPE", stringType)],
             sparsomUrl = configuration[Key("SPARSOM_API_URL", stringType)],
-            sparsomScope = configuration[Key("SPARSOM_SCOPE", stringType)]
+            sparsomScope = configuration[Key("SPARSOM_SCOPE", stringType)],
+            spiskammersetScope = configuration.getOrNull(Key("SPISKAMMERSET_SCOPE", stringType))
         )
     }
 }

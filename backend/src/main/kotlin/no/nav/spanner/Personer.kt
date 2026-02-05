@@ -22,6 +22,7 @@ import io.ktor.server.auth.*
 import io.ktor.server.plugins.*
 import io.ktor.server.plugins.callid.*
 import io.ktor.server.response.*
+import java.time.LocalDate
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -34,6 +35,7 @@ val logger = LoggerFactory.getLogger(Spleis::class.java)
 interface Personer {
     suspend fun person(call: ApplicationCall, fnr: String, aktørId: String)
     suspend fun speilperson(call: ApplicationCall, fnr: String)
+    suspend fun spiskammersetPerioder(call: ApplicationCall, fnr: String, fom: LocalDate, tom: LocalDate)
     suspend fun hendelse(call: ApplicationCall, meldingsreferanse: String)
 }
 
@@ -42,10 +44,12 @@ class Spleis(
     private val baseUrl: String = "http://spleis-api.tbd.svc.cluster.local",
     spleisScope: String,
     private val sparsomBaseUrl: String = "http://sparsom-api.tbd.svc.cluster.local",
-    sparsomScope: String
+    sparsomScope: String,
+    spiskammersetScope: String?
 ) : Personer {
     private val spleis = ClientIdWithName(spleisScope, "spleis")
     private val sparsom = ClientIdWithName(sparsomScope, "sparsom")
+    private val spiskammerset = spiskammersetScope?.let { ClientIdWithName(it, "spiskammerset") }
     private val httpClient = HttpClient(CIO) {
         engine {
             requestTimeout = 60000
@@ -63,7 +67,8 @@ class Spleis(
             baseUrl = spannerConfig.spleisUrl,
             spleisScope = spannerConfig.spleisScope,
             sparsomBaseUrl = spannerConfig.sparsomUrl,
-            sparsomScope = spannerConfig.sparsomScope
+            sparsomScope = spannerConfig.sparsomScope,
+            spiskammersetScope = spannerConfig.spiskammersetScope
         )
 
         private val ApplicationCall.bearerToken: String? get() {
@@ -147,6 +152,31 @@ class Spleis(
         log
             .response(response)
             .info("Response from spleis")
+        val node = objectMapper.readTree(response.bodyAsText()) as ObjectNode
+        call.respondText(node.toString(), Json, OK)
+    }
+
+    override suspend fun spiskammersetPerioder(call: ApplicationCall, fnr: String, fom: LocalDate, tom: LocalDate) {
+        if (spiskammerset == null) return call.respond(HttpStatusCode.NotFound)
+        val accessToken = call.bearerToken ?: return call.respond(Unauthorized)
+        val url = URLBuilder(baseUrl).build()
+        val oboToken = spiskammerset.token(azureAD, accessToken)
+        val log = Log.logger(Personer::class.java)
+
+        val response =
+            httpClient.post(url) {
+                header("Authorization", "Bearer $oboToken")
+                accept(Json)
+                setBody(
+                    """{
+                    "personIdenter": ["$fnr"],
+                    "fom": "$fom",
+                    "tom": "$tom"
+                   }"""
+                )
+            }
+
+        log.response(response).info("Response from spiskammerset")
         val node = objectMapper.readTree(response.bodyAsText()) as ObjectNode
         call.respondText(node.toString(), Json, OK)
     }
