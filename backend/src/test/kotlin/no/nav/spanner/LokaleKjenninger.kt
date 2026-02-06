@@ -4,6 +4,7 @@ import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.response.*
 import java.time.LocalDate
+import java.util.UUID
 import no.nav.spanner.Personer
 
 object LokaleKjenninger : Personer {
@@ -21,6 +22,10 @@ object LokaleKjenninger : Personer {
     }
 
     override suspend fun spiskammersetPerioder(call: ApplicationCall, fnr: String, fom: LocalDate, tom: LocalDate) {
+        call.respondText("{}", ContentType.Application.Json, HttpStatusCode.OK)
+    }
+
+    override suspend fun spiskammersetOpplysninger(call: ApplicationCall, behandlingId: UUID, opplysninger: List<String>) {
         call.respondText("{}", ContentType.Application.Json, HttpStatusCode.OK)
     }
 

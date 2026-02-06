@@ -226,6 +226,37 @@ fun Application.spanner(
                 spleis.spiskammersetPerioder(call, idValue, fom, tom)
             }
 
+            /*
+            har ikke funksjonalitet fra frontend ennå, men kan kalles manuelt fra devtools feks:
+
+            fetch("/api/spiskammerset/behandling/{behandlingId}?opplysning=forsikring&opplysning=noe-annet", {
+                method: 'get',
+                headers: {
+                    Accept: 'application/json',
+                    fnr: 'xxxxxxxxxxx'
+                }
+            }).then(function (response) {
+                console.log(response)
+                response.json().then(function (json) {
+                    console.log(json)
+                })
+            })
+            */
+            get("/api/spiskammerset/behandling/{behandlingId}") {
+                audit()
+                val (idType, idValue) = call.personId()
+                if (idType != IdType.FNR) return@get call.respond(HttpStatusCode.BadRequest, "funker bare med fnr")
+                val behandlingId = call.parameters["behandlingId"]?.let { UUID.fromString(it) } ?: return@get call.respond(HttpStatusCode.BadRequest, "mangler behandlingId")
+                val opplysninger = call.queryParameters.getAll("opplysning") ?: emptyList()
+                logg
+                    .åpent("idType", idType)
+                    .sensitivt("idValue", idValue)
+                    .call(this.call)
+                    .info()
+                if (idValue.isNullOrBlank()) return@get call.respond(HttpStatusCode.BadRequest, FeilRespons("bad_request", "${IdType.FNR.header} must be set"))
+                spleis.spiskammersetOpplysninger(call, behandlingId, opplysninger)
+            }
+
             get("/api/hendelse/{meldingsreferanse}") {
                 audit()
                 val meldingsreferanse = call.parameters["meldingsreferanse"] ?: throw BadRequestException("Mangler meldingsreferanse")

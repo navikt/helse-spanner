@@ -36,6 +36,7 @@ interface Personer {
     suspend fun person(call: ApplicationCall, fnr: String, aktørId: String)
     suspend fun speilperson(call: ApplicationCall, fnr: String)
     suspend fun spiskammersetPerioder(call: ApplicationCall, fnr: String, fom: LocalDate, tom: LocalDate)
+    suspend fun spiskammersetOpplysninger(call: ApplicationCall, behandlingId: UUID, opplysninger: List<String>)
     suspend fun hendelse(call: ApplicationCall, meldingsreferanse: String)
 }
 
@@ -175,6 +176,27 @@ class Spleis(
                         "tom": "$tom"
                    }"""
                 )
+            }
+
+        log.response(response).info("Response from spiskammerset")
+        val node = objectMapper.readTree(response.bodyAsText()) as ObjectNode
+        call.respondText(node.toString(), Json, OK)
+    }
+
+    override suspend fun spiskammersetOpplysninger(call: ApplicationCall, behandlingId: UUID, opplysninger: List<String>) {
+        if (spiskammerset == null) return call.respond(HttpStatusCode.NotFound)
+        val accessToken = call.bearerToken ?: return call.respond(Unauthorized)
+        val url = URLBuilder(spiskammersetBaseUrl).apply {
+            path("behandling", behandlingId.toString())
+            parameters.appendAll("opplysning", opplysninger)
+        }.build()
+        val oboToken = spiskammerset.token(azureAD, accessToken)
+        val log = Log.logger(Personer::class.java)
+
+        val response =
+            httpClient.get(url) {
+                header("Authorization", "Bearer $oboToken")
+                accept(Json)
             }
 
         log.response(response).info("Response from spiskammerset")
