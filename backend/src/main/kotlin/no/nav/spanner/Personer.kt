@@ -160,7 +160,7 @@ class Spleis(
     override suspend fun spiskammersetPerioder(call: ApplicationCall, fnr: String, fom: LocalDate, tom: LocalDate) {
         if (spiskammerset == null) return call.respond(HttpStatusCode.NotFound)
         val accessToken = call.bearerToken ?: return call.respond(Unauthorized)
-        val url = URLBuilder(spiskammersetBaseUrl).build()
+        val url = URLBuilder(spiskammersetBaseUrl).apply { path("perioder") }.build()
         val oboToken = spiskammerset.token(azureAD, accessToken)
         val log = Log.logger(Personer::class.java)
 
@@ -170,9 +170,9 @@ class Spleis(
                 accept(Json)
                 setBody(
                     """{
-                    "personIdenter": ["$fnr"],
-                    "fom": "$fom",
-                    "tom": "$tom"
+                        "personidentifikatorer": ["$fnr"],
+                        "fom": "$fom",
+                        "tom": "$tom"
                    }"""
                 )
             }
