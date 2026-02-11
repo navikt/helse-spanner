@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { Button, TextField, Alert } from '@navikt/ds-react'
 import ReactJson from '@microlink/react-json-view'
 import { useAtomValue } from 'jotai'
-import { themeAtom } from '../../state/state'
-import { writeToClipboard } from '../../utils'
+import { themeAtom } from '../../../state/state'
+import { writeToClipboard } from '../../../utils'
 import { getMockSpiskammersetData } from './spiskammersetMockData'
 
 export const SpiskammersetView = () => {
@@ -116,9 +116,8 @@ export const SpiskammersetView = () => {
                 <Alert variant="info" style={{ marginBottom: '20px' }}>
                     <strong>Tilgjengelige mock behandling-IDer:</strong>
                     <ul style={{ marginTop: '8px', marginBottom: 0 }}>
-                        <li><code>test-123</code> - Sykepenger (avsluttet)</li>
-                        <li><code>behandling-abc</code> - Foreldrepenger (under behandling)</li>
-                        <li><code>error-example</code> - Feilhåndtering eksempel</li>
+                        <li><code>test</code> - Sykepenger (avsluttet)</li>
+                        <li><code>error</code> - Feilhåndtering eksempel</li>
                     </ul>
                     <p style={{ marginTop: '8px', marginBottom: 0 }}>
                         Du kan bruke hvilket som helst fødselsnummer for testing.

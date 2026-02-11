@@ -5,7 +5,7 @@ import {Header} from './søk/Header'
 import {BrowserRouter, Route, Routes, useNavigate} from 'react-router-dom'
 import "@navikt/ds-css";
 import {Page} from "@navikt/ds-react";
-import {SpiskammersetView} from './content/SpiskammersetView'
+import {SpiskammersetView} from './content/spiskammerset/SpiskammersetView'
 
 const EmptyState = () => <></>
 

@@ -15,6 +15,10 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
     setupFiles: './__mocks__/vitest-setup.ts',
-    css: true,
+    css: {
+      modules: {
+        classNameStrategy: 'non-scoped',
+      },
+    },
   },
 })

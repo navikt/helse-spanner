@@ -70,16 +70,12 @@ describe('SpiskammersetView', () => {
     test('successfully fetches and displays data from backend', async () => {
         const user = userEvent.setup()
         const mockData = {
-            behandlingId: '123-456-789',
             forsikring: {
-                type: 'sykepenger',
-                status: 'aktiv',
-            },
-            metadata: {
-                timestamp: '2026-02-11T10:00:00Z',
+                dekningsgrad: 100,
+                dag1Eller17: 1,
+                versjon: 1,
             },
         }
-
         fetchMock.get('path:/api/spiskammerset/behandling/123-456-789', {
             status: 200,
             body: mockData,
