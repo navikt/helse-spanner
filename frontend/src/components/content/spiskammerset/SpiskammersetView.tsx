@@ -44,15 +44,16 @@ export const SpiskammersetView = () => {
                 if (mockData) {
                     setData(mockData)
                     setUsedMockData(true)
-                    return
+                } else {
+                    setError(`HTTP error! status: ${response.status}`)
                 }
-                throw new Error(`HTTP error! status: ${response.status}`)
+                return
             }
 
             const result = await response.json()
             setData(result)
         } catch (err) {
-            // Try mock data as fallback
+            // Try mock data as fallback on network errors
             const mockData = getMockSpiskammersetData(behandlingId)
             if (mockData) {
                 setData(mockData)
