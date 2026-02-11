@@ -4,17 +4,15 @@
 
 Parser og viser Spleis-JSON på en mer oversiktlig måte
 
-## Henvendelser
-
-Spørsmål knyttet til koden eller prosjektet kan stilles som issues her på GitHub.
-
-### For NAV-ansatte
-
-Interne henvendelser kan sendes via Slack i kanalen [#helseytelser](https://nav-it.slack.com/archives/CD1KVMPJ6).
-
 ## Lokal utvikling
 
 Det er mulig å teste lokalt med OAuth, audit-logging og ekte kall til backend.
+
+### Koding
+
+Bruker husky for å kjøre en commit hook som formaterer og linter koden.
+Det er mulig man må kjøre `pnpm prepare` i frontend-mappa for å installere dette.
+Også muuuulig man må kjøre `git config core.hooksPath .husky/_`.
 
 #### Hva trenger du?
 
