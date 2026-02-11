@@ -69,6 +69,13 @@ export const SpiskammersetView = () => {
         <div style={{ padding: '20px', maxWidth: '1200px' }}>
             <h2>Spiskammerset API</h2>
 
+            <Alert variant="warning" style={{ marginBottom: '20px' }}>
+                <strong>Kun tilgjengelig i dev-miljø</strong>
+                <p style={{ marginTop: '4px', marginBottom: 0 }}>
+                    Dette endepunktet er kun tilgjengelig i utviklingsmiljøet og vil ikke være tilgjengelig i produksjon.
+                </p>
+            </Alert>
+
             <div style={{ marginBottom: '20px', display: 'flex', gap: '10px', flexDirection: 'column', maxWidth: '500px' }}>
                 <TextField
                     label="Behandling ID"
