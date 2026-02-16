@@ -21,25 +21,21 @@ import io.ktor.server.application.*
 import io.ktor.server.auth.*
 import io.ktor.server.plugins.*
 import io.ktor.server.plugins.callid.*
-import io.ktor.server.request.receive
 import io.ktor.server.response.*
 import java.time.LocalDate
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
-import org.slf4j.LoggerFactory
 import java.util.*
 import no.nav.spanner.requests.HentAltSpiskammersetRequest
-
-val logger = LoggerFactory.getLogger(Spleis::class.java)
 
 interface Personer {
     suspend fun person(call: ApplicationCall, fnr: String, aktørId: String)
     suspend fun speilperson(call: ApplicationCall, fnr: String)
     suspend fun spiskammersetPerioder(call: ApplicationCall, fnr: String, fom: LocalDate, tom: LocalDate)
     suspend fun spiskammersetOpplysninger(call: ApplicationCall, behandlingId: UUID, opplysninger: List<String>)
-    suspend fun spiskammersetHentAlt(call: ApplicationCall)
+    suspend fun spiskammersetHentAlt(call: ApplicationCall, request: HentAltSpiskammersetRequest)
     suspend fun hendelse(call: ApplicationCall, meldingsreferanse: String)
 }
 
@@ -207,7 +203,7 @@ class Spleis(
         call.respondText(node.toString(), Json, OK)
     }
 
-    override suspend fun spiskammersetHentAlt(call: ApplicationCall) {
+    override suspend fun spiskammersetHentAlt(call: ApplicationCall, request: HentAltSpiskammersetRequest) {
         if (spiskammerset == null) return call.respond(HttpStatusCode.NotFound)
         val accessToken = call.bearerToken ?: return call.respond(Unauthorized)
         val url = URLBuilder(spiskammersetBaseUrl).apply {
@@ -221,7 +217,7 @@ class Spleis(
             httpClient.post(url) {
                 header("Authorization", "Bearer $oboToken")
                 accept(Json)
-                setBody(call.receive<HentAltSpiskammersetRequest>())
+                setBody(request)
             }
 
         log.response(response).info("Response from spiskammerset")

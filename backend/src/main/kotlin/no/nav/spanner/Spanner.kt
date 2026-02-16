@@ -277,7 +277,7 @@ fun Application.spanner(
                     .sensitivt("fnr", request.personidentifikator)
                     .call(this.call)
                     .info()
-                spleis.spiskammersetHentAlt(call)
+                spleis.spiskammersetHentAlt(call, request)
             }
 
         }

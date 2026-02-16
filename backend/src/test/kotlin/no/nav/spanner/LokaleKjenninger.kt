@@ -6,6 +6,7 @@ import io.ktor.server.response.*
 import java.time.LocalDate
 import java.util.UUID
 import no.nav.spanner.Personer
+import no.nav.spanner.requests.HentAltSpiskammersetRequest
 
 object LokaleKjenninger : Personer {
     override suspend fun person(call: ApplicationCall, fnr: String, aktørId: String) {
@@ -29,7 +30,7 @@ object LokaleKjenninger : Personer {
         call.respondText("{}", ContentType.Application.Json, HttpStatusCode.OK)
     }
 
-    override suspend fun spiskammersetHentAlt(call: ApplicationCall) {
+    override suspend fun spiskammersetHentAlt(call: ApplicationCall, request: HentAltSpiskammersetRequest) {
         call.respondText("{}", ContentType.Application.Json, HttpStatusCode.OK)
     }
 
