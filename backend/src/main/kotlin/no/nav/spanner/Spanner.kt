@@ -30,6 +30,7 @@ import org.slf4j.event.Level
 import java.io.IOException
 import java.time.LocalDate
 import java.util.*
+import no.nav.spanner.requests.HentAltSpiskammersetRequest
 
 enum class IdType(val header: String) {
     FNR("fnr"), AKTORID("aktorId"), MASKERT_ID("maskertId")
@@ -267,6 +268,18 @@ fun Application.spanner(
 
                 spleis.hendelse(call, meldingsreferanse)
             }
+
+            post("/api/spiskammerset/hentAlt") {
+                audit()
+                val request = call.receive<HentAltSpiskammersetRequest>()
+
+                logg
+                    .sensitivt("fnr", request.personidentifikator)
+                    .call(this.call)
+                    .info()
+                spleis.spiskammersetHentAlt(call)
+            }
+
         }
     }
 }

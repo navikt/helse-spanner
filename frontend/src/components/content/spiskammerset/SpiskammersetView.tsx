@@ -4,20 +4,30 @@ import ReactJson from '@microlink/react-json-view'
 import { useAtomValue } from 'jotai'
 import { themeAtom } from '../../../state/state'
 import { writeToClipboard } from '../../../utils'
-import { getMockSpiskammersetData } from './spiskammersetMockData'
+import { getMockSpiskammersetDataByFnr } from './spiskammersetMockData'
 
 export const SpiskammersetView = () => {
-    const [behandlingId, setBehandlingId] = useState('')
     const [fnr, setFnr] = useState('')
     const [data, setData] = useState<any>(null)
     const [error, setError] = useState<string | null>(null)
     const [loading, setLoading] = useState(false)
     const [usedMockData, setUsedMockData] = useState(false)
+    const [selectedOpplysninger, setSelectedOpplysninger] = useState<Set<string>>(new Set(['forsikring']))
     const theme = useAtomValue(themeAtom)
 
+    const toggleOpplysning = (opplysning: string) => {
+        const newSelected = new Set(selectedOpplysninger)
+        if (newSelected.has(opplysning)) {
+            newSelected.delete(opplysning)
+        } else {
+            newSelected.add(opplysning)
+        }
+        setSelectedOpplysninger(newSelected)
+    }
+
     const handleFetch = async () => {
-        if (!behandlingId || !fnr) {
-            setError('Både behandlingId og fnr må fylles ut')
+        if (!fnr) {
+            setError('Fødselsnummer må fylles ut')
             return
         }
 
@@ -27,40 +37,50 @@ export const SpiskammersetView = () => {
         setUsedMockData(false)
 
         try {
+            const requestBody = {
+                personidentifikator: fnr,
+                etterspurteOpplysninger: Array.from(selectedOpplysninger)
+            }
+
             const response = await fetch(
-                `/api/spiskammerset/behandling/${behandlingId}?opplysning=forsikring`,
+                '/api/spiskammerset/hentAlt',
                 {
-                    method: 'GET',
+                    method: 'POST',
                     headers: {
-                        Accept: 'application/json',
-                        fnr: fnr
-                    }
+                        'Content-Type': 'application/json',
+                        Accept: 'application/json'
+                    },
+                    body: JSON.stringify(requestBody)
                 }
             )
 
             if (!response.ok) {
-                // Try mock data if backend fails
-                const mockData = getMockSpiskammersetData(behandlingId)
+                // Try to use mock data as fallback
+                const mockData = getMockSpiskammersetDataByFnr(fnr)
                 if (mockData) {
                     setData(mockData)
                     setUsedMockData(true)
-                } else {
-                    setError(`HTTP error! status: ${response.status}`)
+                    return
                 }
+
+                setError(`HTTP error! status: ${response.status}`)
                 return
             }
 
             const result = await response.json()
             setData(result)
         } catch (err) {
-            // Try mock data as fallback on network errors
-            const mockData = getMockSpiskammersetData(behandlingId)
+            const errorMsg = err instanceof Error ? err.message : 'En ukjent feil oppstod'
+
+            // Try to use mock data as fallback on network errors
+            const mockData = getMockSpiskammersetDataByFnr(fnr)
             if (mockData) {
                 setData(mockData)
                 setUsedMockData(true)
-            } else {
-                setError(err instanceof Error ? err.message : 'En ukjent feil oppstod')
+                return
             }
+
+            setError(errorMsg)
         } finally {
             setLoading(false)
         }
@@ -79,23 +99,27 @@ export const SpiskammersetView = () => {
 
             <div style={{ marginBottom: '20px', display: 'flex', gap: '10px', flexDirection: 'column', maxWidth: '500px' }}>
                 <TextField
-                    label="Behandling ID"
-                    value={behandlingId}
-                    onChange={(e) => setBehandlingId(e.target.value)}
-                    placeholder="Skriv inn behandling ID"
-                />
-
-                <TextField
                     label="Fødselsnummer"
                     value={fnr}
                     onChange={(e) => setFnr(e.target.value)}
                     placeholder="Skriv inn fødselsnummer"
                 />
 
+                <div style={{ marginTop: '10px' }}>
+                    <label style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px', cursor: 'pointer' }}>
+                        <input
+                            type="checkbox"
+                            checked={selectedOpplysninger.has('forsikring')}
+                            onChange={() => toggleOpplysning('forsikring')}
+                        />
+                        Forsikring
+                    </label>
+                </div>
+
                 <Button
                     onClick={handleFetch}
                     loading={loading}
-                    disabled={!behandlingId || !fnr}
+                    disabled={!fnr}
                 >
                     Hent data
                 </Button>
@@ -109,20 +133,11 @@ export const SpiskammersetView = () => {
 
             {usedMockData && (
                 <Alert variant="info" style={{ marginBottom: '20px' }}>
-                    ℹ️ Viser mockdata (backend ikke tilgjengelig)
-                </Alert>
-            )}
-
-            {!data && !error && !loading && (
-                <Alert variant="info" style={{ marginBottom: '20px' }}>
-                    <strong>Tilgjengelige mock behandling-IDer:</strong>
-                    <ul style={{ marginTop: '8px', marginBottom: 0 }}>
-                        <li><code>test</code> - Sykepenger (avsluttet)</li>
-                        <li><code>error</code> - Feilhåndtering eksempel</li>
+                    ℹ️ Viser mockdata (backend ikke tilgjengelig). Bruk følgende fnr for testing:
+                    <ul style={{ marginTop: '8px', marginBottom: 0, paddingLeft: '20px' }}>
+                        <li><code>12345678901</code> - Standard mock data forsikring</li>
+                        <li><code>98765432100</code> - Kun forsikring data</li>
                     </ul>
-                    <p style={{ marginTop: '8px', marginBottom: 0 }}>
-                        Du kan bruke hvilket som helst fødselsnummer for testing.
-                    </p>
                 </Alert>
             )}
 

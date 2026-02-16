@@ -21,6 +21,7 @@ import io.ktor.server.application.*
 import io.ktor.server.auth.*
 import io.ktor.server.plugins.*
 import io.ktor.server.plugins.callid.*
+import io.ktor.server.request.receive
 import io.ktor.server.response.*
 import java.time.LocalDate
 import kotlinx.coroutines.Deferred
@@ -29,6 +30,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import org.slf4j.LoggerFactory
 import java.util.*
+import no.nav.spanner.requests.HentAltSpiskammersetRequest
 
 val logger = LoggerFactory.getLogger(Spleis::class.java)
 
@@ -37,6 +39,7 @@ interface Personer {
     suspend fun speilperson(call: ApplicationCall, fnr: String)
     suspend fun spiskammersetPerioder(call: ApplicationCall, fnr: String, fom: LocalDate, tom: LocalDate)
     suspend fun spiskammersetOpplysninger(call: ApplicationCall, behandlingId: UUID, opplysninger: List<String>)
+    suspend fun spiskammersetHentAlt(call: ApplicationCall)
     suspend fun hendelse(call: ApplicationCall, meldingsreferanse: String)
 }
 
@@ -203,6 +206,29 @@ class Spleis(
         val node = objectMapper.readTree(response.bodyAsText()) as ObjectNode
         call.respondText(node.toString(), Json, OK)
     }
+
+    override suspend fun spiskammersetHentAlt(call: ApplicationCall) {
+        if (spiskammerset == null) return call.respond(HttpStatusCode.NotFound)
+        val accessToken = call.bearerToken ?: return call.respond(Unauthorized)
+        val url = URLBuilder(spiskammersetBaseUrl).apply {
+            path("hentAlt")
+        }.build()
+
+        val oboToken = spiskammerset.token(azureAD, accessToken)
+        val log = Log.logger(Personer::class.java)
+
+        val response =
+            httpClient.post(url) {
+                header("Authorization", "Bearer $oboToken")
+                accept(Json)
+                setBody(call.receive<HentAltSpiskammersetRequest>())
+            }
+
+        log.response(response).info("Response from spiskammerset")
+        val node = objectMapper.readTree(response.bodyAsText()) as ObjectNode
+        call.respondText(node.toString(), Json, OK)
+    }
+
 
     private suspend fun aktivitetslogg(accessToken: String, ident: String, callId: String): String? {
         val log = Log.logger(Personer::class.java)
