@@ -29,6 +29,10 @@ object LokaleKjenninger : Personer {
         call.respondText("{}", ContentType.Application.Json, HttpStatusCode.OK)
     }
 
+    override suspend fun spiskammersetHentAlt(call: ApplicationCall) {
+        call.respondText("{}", ContentType.Application.Json, HttpStatusCode.OK)
+    }
+
     private fun lesJson(filnavn: String) =
         Personer::class.java.getResource("/personer/$filnavn.json")?.readText()!!
 }
