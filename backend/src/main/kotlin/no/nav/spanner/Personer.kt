@@ -216,6 +216,7 @@ class Spleis(
         val response =
             httpClient.post(url) {
                 header("Authorization", "Bearer $oboToken")
+                contentType(Json)
                 accept(Json)
                 setBody(request)
             }
