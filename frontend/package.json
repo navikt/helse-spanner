@@ -11,18 +11,9 @@
         "start": "vite",
         "build": "tsc && vite build",
         "serve": "vite preview",
-        "prepare": "cd .. && npx husky install frontend/.husky",
         "test": "vitest run",
         "test-watch": "vitest watch",
         "prettier": "prettier --write index.html package.json \"src/**/*.{js,jsx,ts,tsx,css,json,svg}\""
-    },
-    "lint-staged": {
-        "*.{js,jsx,ts,tsx,css,json,md,svg}": [
-            "prettier --write"
-        ],
-        "*.{js,jsx,ts,tsx}": [
-            "eslint --fix --rule react-hooks/exhaustive-deps:off"
-        ]
     },
     "dependencies": {
         "@microlink/react-json-view": "^1.21.3",
@@ -47,7 +38,6 @@
         "@vitest/ui": "^4.0.15",
         "esbuild": "^0.25.0",
         "fetch-mock": "^12.6.0",
-        "husky": "^7.0.2",
         "jsdom": "^27.3.0",
         "node-fetch": "^2.6.7",
         "prettier": "^2.3.2",
