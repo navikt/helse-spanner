@@ -9,8 +9,8 @@ export const tilstandsmaskinSporingUrl = (id: string) => `https://${sporingHostn
 export const personSporingUrl = (pid: string) => `https://${sporingHostname}/person/${pid}`
 
 const speilHostname = Environment.isDevelopment
-    ? 'localhost'
+    ? 'http://localhost:1234'
     : window.location.origin.includes('dev')
-    ? 'speil.ansatt.dev.nav.no'
-    : 'speil.ansatt.nav.no'
-export const speilUrl = () => `https://${speilHostname}/person`
+      ? 'https://speil.ansatt.dev.nav.no'
+      : 'https://speil.ansatt.nav.no'
+export const speilUrl = () => `${speilHostname}/person`
