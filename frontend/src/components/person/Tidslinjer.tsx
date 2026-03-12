@@ -1,14 +1,20 @@
 import React, {useEffect, useState} from "react";
 import {usePerson} from "../../state/contexts";
-import {add, differenceInMonths, sub, Duration} from "date-fns";
+import {add, differenceInMonths, Duration, format, sub} from "date-fns";
 import {Timeline} from "@navikt/ds-react";
 import styles from "./Tidslinjer.module.css";
-import {BriefcaseIcon, Buildings3Icon, PackageIcon, ParasolBeachIcon, PiggybankIcon, TrashIcon} from "@navikt/aksel-icons";
+import {
+    BriefcaseIcon,
+    Buildings3Icon,
+    PackageIcon,
+    ParasolBeachIcon,
+    PiggybankIcon,
+    TrashIcon
+} from "@navikt/aksel-icons";
 import {VedtakDto} from "../../state/dto";
-import { format } from 'date-fns'
 import {somNorskDato} from "../i18n";
-import { useAtom } from 'jotai'
-import { themeAtom } from '../../state/state'
+import {useAtom} from 'jotai'
+import {themeAtom} from '../../state/state'
 
 
 type TidslinjeState = {
@@ -206,6 +212,8 @@ export const Tidslinjer = ({valgteTing, toggleValgtTing}: {
                                 >
                                     {periodeIVedtaksperiode.type == 'arbeidsgiverperiode' ?
                                         <div>
+                                            Vedtaksperiode: {somNorskDato(vedtaksperiode.fom)} - {somNorskDato(vedtaksperiode.tom)}
+                                            <br></br>
                                             Arbeidsgiverperiode: {format(periodeIVedtaksperiode.fom, 'dd.MM.yyyy')} - {format(periodeIVedtaksperiode.tom, 'dd.MM.yyyy')}
                                             <br></br>
                                             Tilstand: {vedtaksperiode.tilstand}
