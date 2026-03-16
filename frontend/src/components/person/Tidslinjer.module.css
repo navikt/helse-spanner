@@ -103,3 +103,34 @@
 .aktiv {
     border-color: var(--ax-border-danger) !important;
 }
+
+/* Centre each month/year label within its own date range */
+.tidslinje :global(.aksel-timeline__axislabels-label) {
+    text-align: center;
+}
+
+/* ── Horizontal scrollbar ── */
+.scrollbarWrapper {
+    margin-top: 4px;
+    margin-bottom: 4px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.scrollbarWrapper:hover,
+.scrollbarVisible {
+    opacity: 1;
+}
+
+.scrollbar {
+    appearance: none;
+    display: block;
+    width: 100%;
+    height: 10px;
+    border-radius: 5px;
+    background: var(--ax-bg-neutral-moderate-pressed, #d0d0d0);
+    accent-color: var(--ax-bg-neutral-strong, #888);
+    outline: none;
+    cursor: pointer;
+}
+

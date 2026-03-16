@@ -1,6 +1,7 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useLayoutEffect, useRef, useState} from "react";
+import {createPortal} from "react-dom";
 import {usePerson} from "../../state/contexts";
-import {add, differenceInMonths, Duration, format, sub} from "date-fns";
+import {add, differenceInDays, differenceInMonths, Duration, format, sub} from "date-fns";
 import {Timeline} from "@navikt/ds-react";
 import styles from "./Tidslinjer.module.css";
 import {
@@ -50,6 +51,78 @@ export const Tidslinjer = ({valgteTing, toggleValgtTing}: {
     } as TidslinjeState)
     const [skalViseInfotrygdUtvalg, setSkalViseInfotrygdUtvalg] = useState(false)
     const [infotrygdhistorikkElementIndex, setInfotrygdhistorikkElementIndex] = useState(0)
+
+    // ── Scrollbar: portal into the aksel-timeline grid so it sits in column 2 ──
+    const tidslinjeWrapperRef = useRef<HTMLDivElement>(null)
+    const [navdsTimelineEl, setNavdsTimelineEl] = useState<Element | null>(null)
+    const [isScrolling, setIsScrolling] = useState(false)
+    const scrollTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+    // Run once after mount – tidslinjeWrapperRef is already set by then.
+    // Timeline's TypeScript interface omits RefAttributes so we can't pass ref to it directly.
+    useLayoutEffect(() => {
+        setNavdsTimelineEl(tidslinjeWrapperRef.current?.querySelector('.aksel-timeline') ?? null)
+    }, [])
+
+    // Full data range (used to define scrollbar extent)
+    const alleDataDatoer = person.arbeidsgivere.flatMap(arbeidsgiver => [
+        ...arbeidsgiver.vedtaksperioder.flatMap(vedtak => [new Date(vedtak.fom), new Date(vedtak.tom)]),
+        ...arbeidsgiver.forkastede.flatMap(forkastet => [new Date(forkastet.vedtaksperiode.fom), new Date(forkastet.vedtaksperiode.tom)])
+    ])
+    const minDataDato = alleDataDatoer.length > 0
+        ? sub(new Date(Math.min(...alleDataDatoer.map(d => d.getTime()))), {months: 2})
+        : sub(new Date(), {years: 3})
+    const maxDataDato = alleDataDatoer.length > 0
+        ? add(new Date(Math.max(...alleDataDatoer.map(d => d.getTime()))), {months: 2})
+        : new Date()
+
+    const visibleDager = differenceInDays(tidslinjeperiode.endDate, tidslinjeperiode.startDate)
+    const totalDager = Math.max(1, differenceInDays(maxDataDato, minDataDato))
+    const scrollbarMax = Math.max(0, totalDager - visibleDager)
+    // Inverted: thumb all the way left → newest (rightmost) dates visible
+    const scrollbarValue = scrollbarMax - Math.max(0, Math.min(scrollbarMax,
+        differenceInDays(tidslinjeperiode.startDate, minDataDato)))
+
+    const onScrollbarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const dager = scrollbarMax - parseInt(e.target.value)
+        const newStart = add(minDataDato, {days: dager})
+        const newEnd = add(newStart, {days: visibleDager})
+        setTidslinjeperiode({
+            startDate: newStart,
+            endDate: newEnd,
+            currentZoom: differenceInMonths(newEnd, newStart)
+        })
+    }
+
+    const onWheel = (e: WheelEvent) => {
+        const delta = Math.abs(e.deltaX) >= Math.abs(e.deltaY) ? e.deltaX : e.deltaY
+        if (delta === 0) return
+        e.preventDefault()
+        setIsScrolling(true)
+        if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current)
+        scrollTimeoutRef.current = setTimeout(() => setIsScrolling(false), 1000)
+        const dager = Math.round(delta / 7)
+        setTidslinjeperiode((current) => {
+            const currentOffset = differenceInDays(current.startDate, minDataDato)
+            const newOffset = Math.max(0, Math.min(scrollbarMax, currentOffset - dager))
+            const newStart = add(minDataDato, {days: newOffset})
+            const newEnd = add(newStart, {days: visibleDager})
+            return {
+                startDate: newStart,
+                endDate: newEnd,
+                currentZoom: differenceInMonths(newEnd, newStart)
+            }
+        })
+    }
+
+    // Must be non-passive so we can call preventDefault and stop the page scroll
+    useEffect(() => {
+        const el = tidslinjeWrapperRef.current
+        if (!el) return
+        el.addEventListener('wheel', onWheel, {passive: false})
+        return () => el.removeEventListener('wheel', onWheel)
+    })
+    // ─────────────────────────────────────────────────────────────────────────────
 
     useEffect(() => {
         // zoom slik at vedtaksperiodene som er valgt, vises i tidslinjen :)
@@ -108,7 +181,7 @@ export const Tidslinjer = ({valgteTing, toggleValgtTing}: {
         :
         []
 
-    return (<div className="min-w-[800px]">
+    return (<div className="min-w-[800px]" ref={tidslinjeWrapperRef}>
         <Timeline className={styles.tidslinje} direction={"right"} startDate={tidslinjeperiode.startDate}
                   endDate={tidslinjeperiode.endDate}>
             {skjæringstidspunkter.map((skjæringstidspunkt) => {
@@ -275,23 +348,38 @@ export const Tidslinjer = ({valgteTing, toggleValgtTing}: {
                     })]
                 ) : null}
             </Timeline.Row>
-            <Timeline.Zoom>
-                <Zoom step={48} onClick={oppdaterZoom}/>
-                <Zoom step={24} onClick={oppdaterZoom}/>
-                <Zoom step={12} onClick={oppdaterZoom}/>
-                <Zoom step={6} onClick={oppdaterZoom}/>
-                <Zoom step={2} onClick={oppdaterZoom}/>
-
-                <button onClick={() => {
-                    setTidslinjeperiode((current) => scroll(current, add))
-                }}>« fremover {scrollStep(tidslinjeperiode)} mnd
-                </button>
-                <button onClick={() => {
-                    setTidslinjeperiode((current) => scroll(current, sub))
-                }}>tilbake {scrollStep(tidslinjeperiode)} mnd »
-                </button>
-            </Timeline.Zoom>
         </Timeline>
+        {navdsTimelineEl && createPortal(
+            <div className={`${styles.scrollbarWrapper} ${isScrolling ? styles.scrollbarVisible : ''}`}
+                 style={{gridColumn: 2}}>
+                <input
+                    type="range"
+                    min={0}
+                    max={scrollbarMax}
+                    value={scrollbarValue}
+                    onChange={onScrollbarChange}
+                    className={styles.scrollbar}
+                    aria-label="Scroll tidslinje horisontalt"
+                />
+            </div>,
+            navdsTimelineEl
+        )}
+        <Timeline.Zoom>
+            <Zoom step={48} onClick={oppdaterZoom}/>
+            <Zoom step={24} onClick={oppdaterZoom}/>
+            <Zoom step={12} onClick={oppdaterZoom}/>
+            <Zoom step={6} onClick={oppdaterZoom}/>
+            <Zoom step={2} onClick={oppdaterZoom}/>
+
+            <button onClick={() => {
+                setTidslinjeperiode((current) => scroll(current, add))
+            }}>« fremover {scrollStep(tidslinjeperiode)} mnd
+            </button>
+            <button onClick={() => {
+                setTidslinjeperiode((current) => scroll(current, sub))
+            }}>tilbake {scrollStep(tidslinjeperiode)} mnd »
+            </button>
+        </Timeline.Zoom>
         {
             skalViseInfotrygdUtvalg && (<>
                 <p>Hvilken Infotrygdhistorikk vil du basere visningen på?</p>
