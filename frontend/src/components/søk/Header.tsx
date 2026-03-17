@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from 'react'
+import React, {PropsWithChildren} from 'react'
 import {Button, InternalHeader, Spacer} from "@navikt/ds-react";
 import styles from './Header.module.css'
 import {useQuery} from "@tanstack/react-query";
@@ -20,7 +20,7 @@ export const Header = ({ children }: PropsWithChildren) => {
     const navn = isLoading ? '[laster]' : isError ? '[feil]' : data?.navn ?? '[ukjent]'
     const ident = isLoading ? '[laster]' : isError ? '[feil]' : data?.ident ?? '[ukjent]'
     return (
-        <InternalHeader>
+        <InternalHeader className={styles.InternalHeader}>
             <InternalHeader.Title href="/">
                 <span className={styles.SpannSpan}>🪣</span>er
             </InternalHeader.Title>
