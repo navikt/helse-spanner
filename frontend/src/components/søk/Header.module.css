@@ -13,8 +13,9 @@
 }
 
 .InternalHeader {
-    background-image: url('../../Påskebilder/headerBakgrund.svg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
 }
+
+

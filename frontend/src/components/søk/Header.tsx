@@ -6,6 +6,8 @@ import {Link} from "react-router-dom";
 import {SunIcon} from "@navikt/aksel-icons";
 import {useAtom} from "jotai";
 import {themeAtom} from "../../state/state";
+import lightBg from '../../Påskebilder/PåskeLightmodeBakgrunn.svg'
+import darkBg from '../../Påskebilder/PåskeDarkmodeBakgrunn.svg'
 
 export const Header = ({ children }: PropsWithChildren) => {
     const [theme, setTheme] = useAtom(themeAtom)
@@ -20,7 +22,7 @@ export const Header = ({ children }: PropsWithChildren) => {
     const navn = isLoading ? '[laster]' : isError ? '[feil]' : data?.navn ?? '[ukjent]'
     const ident = isLoading ? '[laster]' : isError ? '[feil]' : data?.ident ?? '[ukjent]'
     return (
-        <InternalHeader className={styles.InternalHeader}>
+        <InternalHeader className={styles.InternalHeader} style={{ backgroundImage: `url(${theme === 'dark' ? darkBg : lightBg})` }}>
             <InternalHeader.Title href="/">
                 <span className={styles.SpannSpan}>🪣</span>er
             </InternalHeader.Title>
