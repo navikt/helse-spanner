@@ -6,7 +6,6 @@ import {BrowserRouter, Route, Routes, useNavigate} from 'react-router-dom'
 import "@navikt/ds-css";
 import {Page} from "@navikt/ds-react";
 import {SpiskammersetView} from './content/spiskammerset/SpiskammersetView'
-import {GodPåske} from "./søk/påskebilder/GodPåske";
 
 const EmptyState = () => <></>
 
@@ -16,7 +15,6 @@ export const App = () => {
             <Page>
                 <Header>
                     <Søk />
-                    <GodPåske/>
                 </Header>
                 <Routes>
                     <Route path="/person/:personId" element={<PersonData />} />

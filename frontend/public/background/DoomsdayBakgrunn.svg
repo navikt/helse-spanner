@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 80" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="skyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a0000;stop-opacity:1" />
+      <stop offset="60%" style="stop-color:#3d0a00;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#7a1500;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="sunGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#ffaa00;stop-opacity:1" />
+      <stop offset="40%" style="stop-color:#ff4400;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#ff0000;stop-opacity:0" />
+    </radialGradient>
+    <filter id="smokeBlur">
+      <feGaussianBlur stdDeviation="2"/>
+    </filter>
+    <filter id="glowFilter">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Sky -->
+  <rect width="1200" height="80" fill="url(#skyGrad)" />
+
+  <!-- Ominous sun glow on horizon -->
+  <ellipse cx="600" cy="80" rx="300" ry="60" fill="url(#sunGlow)" opacity="0.6"/>
+
+  <!-- Smoke clouds -->
+  <ellipse cx="100" cy="20" rx="90" ry="18" fill="#1a0000" opacity="0.7" filter="url(#smokeBlur)"/>
+  <ellipse cx="180" cy="10" rx="70" ry="14" fill="#2a0500" opacity="0.6" filter="url(#smokeBlur)"/>
+  <ellipse cx="350" cy="15" rx="110" ry="20" fill="#1a0000" opacity="0.8" filter="url(#smokeBlur)"/>
+  <ellipse cx="500" cy="8" rx="80" ry="15" fill="#300800" opacity="0.6" filter="url(#smokeBlur)"/>
+  <ellipse cx="700" cy="12" rx="120" ry="22" fill="#1a0000" opacity="0.75" filter="url(#smokeBlur)"/>
+  <ellipse cx="900" cy="6" rx="90" ry="16" fill="#2a0500" opacity="0.65" filter="url(#smokeBlur)"/>
+  <ellipse cx="1050" cy="18" rx="100" ry="19" fill="#1a0000" opacity="0.7" filter="url(#smokeBlur)"/>
+  <ellipse cx="1180" cy="10" rx="70" ry="13" fill="#300800" opacity="0.6" filter="url(#smokeBlur)"/>
+
+  <!-- Distant ruined cityscape -->
+  <rect x="60" y="38" width="8" height="30" fill="#0d0000"/>
+  <rect x="55" y="44" width="18" height="24" fill="#0d0000"/>
+  <rect x="80" y="42" width="6" height="26" fill="#0d0000"/>
+  <rect x="88" y="48" width="14" height="20" fill="#110000"/>
+  <rect x="140" y="35" width="10" height="33" fill="#0d0000"/>
+  <rect x="135" y="50" width="20" height="18" fill="#110000"/>
+  <rect x="158" y="40" width="7" height="28" fill="#0d0000"/>
+  <!-- Broken tower left -->
+  <polygon points="200,30 207,30 210,55 197,55" fill="#0d0000"/>
+  <polygon points="200,30 204,22 208,30" fill="#110000"/>
+  <!-- crack in tower -->
+  <line x1="203" y1="30" x2="206" y2="50" stroke="#3d0a00" stroke-width="1"/>
+
+  <rect x="250" y="45" width="22" height="23" fill="#0d0000"/>
+  <rect x="256" y="38" width="10" height="30" fill="#110000"/>
+  <rect x="300" y="40" width="18" height="28" fill="#0d0000"/>
+  <rect x="320" y="36" width="8" height="32" fill="#110000"/>
+
+  <!-- Middle ruins -->
+  <rect x="480" y="42" width="24" height="26" fill="#0d0000"/>
+  <rect x="490" y="33" width="12" height="35" fill="#110000"/>
+  <polygon points="490,33 496,24 502,33" fill="#0d0000"/>
+  <rect x="516" y="46" width="16" height="22" fill="#0d0000"/>
+
+  <!-- Right ruins -->
+  <rect x="900" y="40" width="20" height="28" fill="#0d0000"/>
+  <rect x="908" y="32" width="9" height="36" fill="#110000"/>
+  <rect x="930" y="44" width="18" height="24" fill="#0d0000"/>
+  <rect x="960" y="38" width="7" height="30" fill="#110000"/>
+  <rect x="1000" y="42" width="22" height="26" fill="#0d0000"/>
+  <rect x="1008" y="34" width="10" height="34" fill="#0d0000"/>
+  <polygon points="1008,34 1013,26 1018,34" fill="#110000"/>
+  <rect x="1060" y="46" width="16" height="22" fill="#0d0000"/>
+  <rect x="1090" y="40" width="8" height="28" fill="#110000"/>
+  <rect x="1110" y="44" width="20" height="24" fill="#0d0000"/>
+
+  <!-- Glowing embers / sparks -->
+  <circle cx="220" cy="35" r="1.5" fill="#ff6600" opacity="0.9" filter="url(#glowFilter)"/>
+  <circle cx="340" cy="28" r="1" fill="#ff4400" opacity="0.8" filter="url(#glowFilter)"/>
+  <circle cx="460" cy="32" r="1.5" fill="#ffaa00" opacity="0.9" filter="url(#glowFilter)"/>
+  <circle cx="610" cy="25" r="1" fill="#ff6600" opacity="0.7" filter="url(#glowFilter)"/>
+  <circle cx="750" cy="30" r="2" fill="#ff4400" opacity="0.85" filter="url(#glowFilter)"/>
+  <circle cx="870" cy="22" r="1.5" fill="#ffaa00" opacity="0.8" filter="url(#glowFilter)"/>
+  <circle cx="990" cy="35" r="1" fill="#ff6600" opacity="0.9" filter="url(#glowFilter)"/>
+  <circle cx="1100" cy="28" r="1.5" fill="#ff4400" opacity="0.75" filter="url(#glowFilter)"/>
+
+  <!-- Ground crack line -->
+  <polyline points="0,78 120,76 180,78 300,75 420,77 540,74 660,76 780,74 900,77 1020,75 1140,77 1200,76"
+            stroke="#3d0a00" stroke-width="2" fill="none" opacity="0.8"/>
+
+  <!-- Lava/fire glow at base -->
+  <rect x="0" y="74" width="1200" height="6" fill="#7a1500" opacity="0.5"/>
+</svg>
+

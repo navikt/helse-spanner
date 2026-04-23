@@ -1,6 +1,6 @@
 import React from 'react'
-import lightUrl from '../../../Påskebilder/PåskeTekstLightmode.svg'
-import darkUrl from '../../../Påskebilder/PåskeTekstDarkmode.svg'
+const lightUrl = '/easter/PåskeTekstLightmode.svg'
+const darkUrl = '/easter/PåskeTekstDarkmode.svg'
 import { useAtomValue } from 'jotai'
 import { themeAtom } from '../../../state/state'
 

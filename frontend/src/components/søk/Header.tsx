@@ -6,12 +6,17 @@ import {Link} from "react-router-dom";
 import {SunIcon} from "@navikt/aksel-icons";
 import {useAtom} from "jotai";
 import {themeAtom} from "../../state/state";
-import lightBg from '../../Påskebilder/PåskeLightmodeBakgrunn.svg'
-import darkBg from '../../Påskebilder/PåskeDarkmodeBakgrunn.svg'
+import {GodPåske} from './påskebilder/GodPåske'
+import {isEasterPeriod} from '../../utils/isEaster'
+
+const imgBg = '/background/DoomsdayBakgrunn.svg'
+const easterLightBg = '/easter/PåskeLightmodeBakgrunn.svg'
+const easterDarkBg = '/easter/PåskeDarkmodeBakgrunn.svg'
 
 export const Header = ({ children }: PropsWithChildren) => {
     const [theme, setTheme] = useAtom(themeAtom)
     const toggleTheme = () => setTheme(theme === 'dark' ? 'light' : 'dark')
+    const isPåske = isEasterPeriod()
 
     const hentBrukerinfo = async() => {
         return await fetch("/api/meg")
@@ -21,12 +26,17 @@ export const Header = ({ children }: PropsWithChildren) => {
 
     const navn = isLoading ? '[laster]' : isError ? '[feil]' : data?.navn ?? '[ukjent]'
     const ident = isLoading ? '[laster]' : isError ? '[feil]' : data?.ident ?? '[ukjent]'
+    const backgroundImage = isPåske
+        ? `url(${theme === 'dark' ? easterDarkBg : easterLightBg})`
+        : `url(${imgBg})`
+
     return (
-        <InternalHeader className={styles.InternalHeader} style={{ backgroundImage: `url(${theme === 'dark' ? darkBg : lightBg})` }}>
+        <InternalHeader className={styles.InternalHeader} style={{ backgroundImage }}>
             <InternalHeader.Title href="/">
                 <span className={styles.SpannSpan}>🪣</span>er
             </InternalHeader.Title>
             {children}
+            {isPåske && <GodPåske />}
             <Spacer />
             <Button
                 variant="tertiary-neutral"
