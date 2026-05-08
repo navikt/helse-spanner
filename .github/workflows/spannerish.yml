@@ -6,6 +6,9 @@ on:
       - 'backend/**'
     branches:
       - main
+  schedule:
+    - cron: '0 4 * * 3'
+      timezone: 'Europe/Oslo'
 
 jobs:
   build:
