@@ -1,9 +1,12 @@
-name: main
+name: Bygg og deploy Spanner
 
 on:
   push:
     paths-ignore:
       - 'filbackend/**'
+    branches:
+      - main
+  pull_request:
     branches:
       - main
   schedule:
@@ -12,7 +15,7 @@ on:
 
 jobs:
   build:
-    name: build docker image
+    name: Build docker image
     runs-on: ubuntu-latest
     permissions:
       id-token: write
@@ -48,11 +51,12 @@ jobs:
         run: pnpm run build
         working-directory: frontend
 
-      - name: test and build backend
+      - name: Test and build backend
         run: ./gradlew build
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: build docker image
+      - name: Build container image
+        if: ${{ github.ref_name == 'main' }}
         uses: nais/docker-build-push@v0
         id: docker-build-push
         with:
@@ -63,9 +67,10 @@ jobs:
       image: ${{ steps.docker-build-push.outputs.image }}
 
   deploy:
-    name: deploy
-    needs: build
+    name: Deploy
+    needs: [build]
     runs-on: ubuntu-latest
+    if: ${{ github.ref_name == 'main' }}
     permissions:
       id-token: write
     strategy:
