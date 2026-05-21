@@ -14,7 +14,8 @@ export default function KopierAnmodningOmForkastingJson({ person, organisasjonsn
     "yrkesaktivitetstype": "${yrkesaktivitetstype}",
     "fødselsnummer": "${person.fødselsnummer}",
     "organisasjonsnummer": "${organisasjonsnummer}",
-    "vedtaksperiodeId": "${vedtak.id}"
+    "vedtaksperiodeId": "${vedtak.id}",
+    "årsaker": ["Forkastet manuelt av utvikler"]
 }`)
 
     }
