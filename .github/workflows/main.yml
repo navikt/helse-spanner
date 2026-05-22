@@ -28,7 +28,7 @@ jobs:
           cache: 'gradle'
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@v6
         with:
           package_json_file: "frontend/package.json"
 
@@ -80,7 +80,7 @@ jobs:
           - dev-gcp
           - prod-gcp
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: nais/deploy/actions/deploy@v2
         env:
           CLUSTER: ${{ matrix.cluster }}
