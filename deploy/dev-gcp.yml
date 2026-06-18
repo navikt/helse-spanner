@@ -41,6 +41,7 @@ spec:
           - "NAVident"
         groups:
           - id: "9046ac9d-bb00-47dc-bcfb-e5221bf8d7f9" # tbd-dev
+          - id: "cda797bb-ac3b-4440-b661-2cd5eb3edba0" # 0000-CA-Speil-Saksbehandler
       allowAllUsers: false
   accessPolicy:
     outbound:
@@ -70,7 +71,7 @@ spec:
     - name: SPARSOM_API_URL
       value: http://sparsom-api
     - name: SPURTE_DU_TILGANG
-      value: "9046ac9d-bb00-47dc-bcfb-e5221bf8d7f9"
+      value: "9046ac9d-bb00-47dc-bcfb-e5221bf8d7f9, cda797bb-ac3b-4440-b661-2cd5eb3edba0"
     - name: SPEED_API_URL
       value: http://speed-api-dev-proxy
     - name: TOKEN_ENDPOINT_ENV_KEY
