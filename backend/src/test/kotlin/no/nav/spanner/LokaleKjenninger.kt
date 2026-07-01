@@ -34,6 +34,10 @@ object LokaleKjenninger : Personer {
         call.respondText("{}", ContentType.Application.Json, HttpStatusCode.OK)
     }
 
+    override suspend fun sendteMeldinger(call: ApplicationCall, meldingsreferanse: String) {
+        call.respondText("{}", ContentType.Application.Json, HttpStatusCode.OK)
+    }
+
     private fun lesJson(filnavn: String) =
         Personer::class.java.getResource("/personer/$filnavn.json")?.readText()!!
 }

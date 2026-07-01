@@ -269,6 +269,34 @@ fun Application.spanner(
                 spleis.hendelse(call, meldingsreferanse)
             }
 
+            /*
+            har ikke funksjonalitet fra frontend ennå, men kan kalles manuelt fra devtools feks:
+
+            fetch("/api/sendte-meldinger/{hendelseUuid}", {
+                method: 'get',
+                headers: {
+                    Accept: 'application/json',
+                    fnr: 'xxxxxxxxxxx'
+                }
+            }).then(function (response) {
+                console.log(response)
+                response.json().then(function (json) {
+                    console.log(json)
+                })
+            })
+        */
+
+            get("/api/sendte-meldinger/{meldingsreferanse}") {
+                audit()
+                val meldingsreferanse = call.parameters["meldingsreferanse"] ?: throw BadRequestException("Mangler meldingsreferanse")
+                logg
+                    .åpent("meldingsreferanse", meldingsreferanse)
+                    .call(this.call)
+                    .info()
+
+                spleis.sendteMeldinger(call, meldingsreferanse)
+            }
+
             post("/api/spiskammerset/hentAlt") {
                 audit()
                 val request = call.receive<HentAltSpiskammersetRequest>()

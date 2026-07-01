@@ -37,6 +37,7 @@ interface Personer {
     suspend fun spiskammersetOpplysninger(call: ApplicationCall, behandlingId: UUID, opplysninger: List<String>)
     suspend fun spiskammersetHentAlt(call: ApplicationCall, request: HentAltSpiskammersetRequest)
     suspend fun hendelse(call: ApplicationCall, meldingsreferanse: String)
+    suspend fun sendteMeldinger(call: ApplicationCall, meldingsreferanse: String)
 }
 
 class Spleis(
@@ -268,6 +269,28 @@ class Spleis(
         } catch (e : ClientRequestException) {
             if (e.response.status == HttpStatusCode.NotFound) {
                 throw NotFoundException("Fant ikke melding med referanse $meldingsreferanse")
+            }
+            throw e
+        }
+        log
+            .response(response)
+            .info("Response from spleis")
+        call.respondText(response.bodyAsText(), Json, OK)
+    }
+
+    override suspend fun sendteMeldinger(call: ApplicationCall, meldingsreferanse: String) {
+        val accessToken = call.bearerToken ?: return call.respond(Unauthorized)
+        val url = URLBuilder(baseUrl).apply { path("api", "sendte-meldinger", meldingsreferanse) }.build()
+        val log = Log.logger(Personer::class.java)
+        val oboToken = spleis.token(azureAD, accessToken)
+        val response = try {
+            httpClient.get(url) {
+                header("Authorization", "Bearer $oboToken")
+                accept(Json)
+            }
+        } catch (e : ClientRequestException) {
+            if (e.response.status == HttpStatusCode.NotFound) {
+                throw NotFoundException("Fant ikke sendte meldinger med referanse $meldingsreferanse")
             }
             throw e
         }
