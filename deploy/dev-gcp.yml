@@ -48,7 +48,7 @@ spec:
       rules:
         - application: logging
           namespace: nais-system
-        - application: speed-api-dev-proxy
+        - application: speed-api
         - application: spleis-api
         - application: sparsom-api
         - application: spurtedu
@@ -72,12 +72,6 @@ spec:
       value: http://sparsom-api
     - name: SPURTE_DU_TILGANG
       value: "9046ac9d-bb00-47dc-bcfb-e5221bf8d7f9, cda797bb-ac3b-4440-b661-2cd5eb3edba0"
-    - name: SPEED_API_URL
-      value: http://speed-api-dev-proxy
-    - name: TOKEN_ENDPOINT_ENV_KEY
-      value: SPEED_API_DEV_PROXY_TOKEN_ENDPOINT
-    - name: SPEED_API_DEV_PROXY_TOKEN_ENDPOINT
-      value: http://speed-api-dev-proxy/token
   observability:
     logging:
       destinations:

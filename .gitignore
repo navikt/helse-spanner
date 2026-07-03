@@ -1,10 +1,7 @@
 build/
 out/
 .gradle/
-
-.DS_Store
-
 .idea/
+.kotlin/
 
-backend/src/jvmMain/resources/.env
 .env

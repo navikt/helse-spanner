@@ -41,11 +41,10 @@ fun main() {
         httpClient = HttpClient.newHttpClient(),
         objectMapper = jacksonObjectMapper().registerModule(JavaTimeModule()),
         tokenProvider = createDefaultAzureTokenClient(
-            tokenEndpoint = URI(config.stringProp(config.stringProp("TOKEN_ENDPOINT_ENV_KEY"))),
+            tokenEndpoint = URI(config.stringProp("AZURE_OPENID_CONFIG_TOKEN_ENDPOINT")),
             clientId = config.stringProp("AZURE_APP_CLIENT_ID"),
             clientSecret = config.stringProp("AZURE_APP_CLIENT_SECRET")
         ),
-        baseUrl = config.stringProp("SPEED_API_URL")
     )
 
     val tokenProvider = createAzureTokenClientFromEnvironment()
