@@ -1,5 +1,5 @@
 [versions]
-jjwt = "0.11.2"
+jjwt = "0.13.0"
 konfig = "1.6.10.0"
 logback = "1.6.1"
 logback-syslog4j = "1.0.0"
