@@ -1,7 +1,6 @@
-build/
-out/
 .gradle/
 .idea/
 .kotlin/
-
-.env
+build/
+out/
+.DS_Store

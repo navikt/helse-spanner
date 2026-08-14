@@ -1,109 +1,55 @@
-val logbackClassicVersion = "1.5.25"
-val logbackEncoderVersion = "8.0"
-val junitJupiterVersion = "5.12.1"
-val ktorVersion = "3.2.3"
-val tbdLibsVersion = "2026.01.22-09.16-1d3f6039"
-
 plugins {
-    kotlin("jvm") version "2.3.0"
+    id("no.nav.helse.sas.sas-deployable")
 }
 
-// Sett opp repositories basert på om vi kjører i CI eller ikke
-// Jf. https://github.com/navikt/utvikling/blob/main/docs/teknisk/Konsumere%20biblioteker%20fra%20Github%20Package%20Registry.md
-repositories {
-    mavenCentral()
-    if (providers.environmentVariable("GITHUB_ACTIONS").orNull == "true") {
-        maven {
-            url = uri("https://maven.pkg.github.com/navikt/maven-release")
-            credentials {
-                username = "token"
-                password = providers.environmentVariable("GITHUB_TOKEN").orNull!!
-            }
-        }
-    } else {
-        maven("https://repo.adeo.no/repository/github-package-registry-navikt/")
-    }
+sasDeployable {
+    mainClass = "no.nav.spanner.AppKt"
 }
 
 dependencies {
-    implementation("com.github.navikt.tbd-libs:azure-token-client-default:$tbdLibsVersion")
-    implementation("com.github.navikt.tbd-libs:spurtedu-client:$tbdLibsVersion")
-    implementation("com.github.navikt.tbd-libs:speed-client:$tbdLibsVersion")
+    implementation(libs.tbd.libs.azure.token.client.default)
+    implementation(libs.tbd.libs.spurtedu.client)
+    implementation(libs.tbd.libs.speed.client)
 
-    implementation("io.ktor:ktor-server-core:$ktorVersion")
-    implementation("io.ktor:ktor-server-call-id:$ktorVersion")
-    implementation("io.ktor:ktor-server-forwarded-header:$ktorVersion")
-    implementation("io.ktor:ktor-server-status-pages:$ktorVersion")
-    implementation("io.ktor:ktor-server-cio:$ktorVersion")
-    implementation("io.ktor:ktor-server-cors:$ktorVersion")
-    implementation("io.ktor:ktor-server-sessions:$ktorVersion")
-    implementation("io.ktor:ktor-server-content-negotiation:$ktorVersion")
-    implementation("io.ktor:ktor-server-auth:$ktorVersion")
-    implementation("io.ktor:ktor-server-auth-jwt:$ktorVersion")
+    implementation(libs.ktor.server.core)
+    implementation(libs.ktor.server.call.id)
+    implementation(libs.ktor.server.forwarded.header)
+    implementation(libs.ktor.server.status.pages)
+    implementation(libs.ktor.server.cio)
+    implementation(libs.ktor.server.cors)
+    implementation(libs.ktor.server.sessions)
+    implementation(libs.ktor.server.content.negotiation)
+    implementation(libs.ktor.server.auth)
+    implementation(libs.ktor.server.auth.jwt)
 
-    implementation("io.ktor:ktor-client-cio:$ktorVersion")
-    implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
+    implementation(libs.ktor.client.cio)
+    implementation(libs.ktor.client.content.negotiation)
 
-    implementation("io.ktor:ktor-serialization-jackson:$ktorVersion")
-    implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
+    implementation(libs.ktor.serialization.jackson)
+    implementation(libs.ktor.serialization.kotlinx.json)
 
-    implementation("com.papertrailapp:logback-syslog4j:1.0.0")
-    implementation("com.natpryce:konfig:1.6.10.0")
+    implementation(libs.logback.syslog4j)
+    implementation(libs.konfig)
 
-    implementation("ch.qos.logback:logback-classic:$logbackClassicVersion")
-    implementation("net.logstash.logback:logstash-logback-encoder:$logbackEncoderVersion") {
+    implementation(libs.logback.classic)
+    implementation(libs.logstash.logback.encoder) {
         exclude("com.fasterxml.jackson.core")
         exclude("com.fasterxml.jackson.dataformat")
     }
 
-    implementation("io.jsonwebtoken:jjwt-api:0.11.2")
-    runtimeOnly("io.jsonwebtoken:jjwt-impl:0.11.2")
-    runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.11.2")
+    implementation(libs.jjwt.api)
+    runtimeOnly(libs.jjwt.impl)
+    runtimeOnly(libs.jjwt.jackson)
 
-    testImplementation("org.junit.jupiter:junit-jupiter:$junitJupiterVersion")
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-
-    testImplementation("io.mockk:mockk:1.13.13")
-    testImplementation("no.nav.security:mock-oauth2-server:2.1.1")
-    testImplementation("io.ktor:ktor-server-test-host:$ktorVersion")
-}
-
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
-    }
+    testImplementation(libs.mockk)
+    testImplementation(libs.mock.oauth2.server)
+    testImplementation(libs.ktor.server.test.host)
 }
 
 tasks {
-    test {
-        useJUnitPlatform()
-        testLogging {
-            events("passed", "skipped", "failed")
-        }
-    }
-
-    jar {
-        archiveFileName.set("app.jar")
-
-        manifest {
-            attributes["Main-Class"] = "no.nav.spanner.AppKt"
-            attributes["Class-Path"] = configurations.runtimeClasspath.get().joinToString(separator = " ") {
-                it.name
-            }
-        }
-
+    processResources {
         from("${rootProject.projectDir}/frontend/dist") {
             into("static")
         }
-
-        doLast {
-            configurations.runtimeClasspath.get()
-                .filter { it.name != "app.jar" }
-                .forEach {
-                    val file = File("${layout.buildDirectory.get()}/libs/${it.name}")
-                    if (!file.exists()) it.copyTo(file)
-                }
-        }
     }
 }
-
