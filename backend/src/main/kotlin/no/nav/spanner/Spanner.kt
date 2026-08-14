@@ -25,15 +25,19 @@ import io.ktor.server.routing.*
 import no.nav.spanner.AuditLogger.Companion.audit
 import no.nav.spanner.Log.Companion.LogLevel
 import no.nav.spanner.Log.Companion.LogLevel.*
+import no.nav.spanner.requests.HentAltSpiskammersetRequest
 import org.slf4j.LoggerFactory
 import org.slf4j.event.Level
 import java.io.IOException
 import java.time.LocalDate
 import java.util.*
-import no.nav.spanner.requests.HentAltSpiskammersetRequest
 
-enum class IdType(val header: String) {
-    FNR("fnr"), AKTORID("aktorId"), MASKERT_ID("maskertId")
+enum class IdType(
+    val header: String,
+) {
+    FNR("fnr"),
+    AKTORID("aktorId"),
+    MASKERT_ID("maskertId"),
 }
 
 private val logg = Log.logger("Spanner")
@@ -46,7 +50,6 @@ fun Application.spanner(
     config: AzureADConfig,
     development: Boolean,
 ) {
-
     install(CallId) {
         generate {
             UUID.randomUUID().toString()
@@ -66,7 +69,7 @@ fun Application.spanner(
             status: HttpStatusCode,
             call: ApplicationCall,
             cause: Throwable,
-            level: LogLevel
+            level: LogLevel,
         ) {
             val errorId = UUID.randomUUID()
             logg
@@ -84,8 +87,11 @@ fun Application.spanner(
             respondToException(HttpStatusCode.BadRequest, call, cause, INFO)
         }
         exception<IOException> { call, cause ->
-            if (cause.message == "Broken pipe") respondToException(HttpStatusCode.ServiceUnavailable, call, cause, WARN)
-            else respondToException(HttpStatusCode.InternalServerError, call, cause, ERROR)
+            if (cause.message == "Broken pipe") {
+                respondToException(HttpStatusCode.ServiceUnavailable, call, cause, WARN)
+            } else {
+                respondToException(HttpStatusCode.InternalServerError, call, cause, ERROR)
+            }
         }
         exception<Throwable> { call, cause ->
             respondToException(HttpStatusCode.InternalServerError, call, cause, ERROR)
@@ -111,28 +117,31 @@ fun Application.spanner(
             }
             get("/api/person/") {
                 audit()
-                val maskertId = call.request.headers[IdType.MASKERT_ID.header]
-                    ?: return@get call.respond(HttpStatusCode.BadRequest, FeilRespons("bad_request", "header ${IdType.MASKERT_ID.header} må være satt"))
+                val maskertId =
+                    call.request.headers[IdType.MASKERT_ID.header]
+                        ?: return@get call.respond(HttpStatusCode.BadRequest, FeilRespons("bad_request", "header ${IdType.MASKERT_ID.header} må være satt"))
                 logg.call(this.call).info()
 
-                val id = try {
-                    UUID.fromString(maskertId)
-                } catch (_: Exception) {
-                    return@get call.respond(HttpStatusCode.BadRequest, FeilRespons("bad_request", "maskert id må være uuid"))
-                }
+                val id =
+                    try {
+                        UUID.fromString(maskertId)
+                    } catch (_: Exception) {
+                        return@get call.respond(HttpStatusCode.BadRequest, FeilRespons("bad_request", "maskert id må være uuid"))
+                    }
 
                 val tekstinnhold = spurteDuClient.vis(id, call.bearerToken).text
-                val fødselsnummer = try {
-                    val node = objectMapper.readTree(tekstinnhold)
-                    val ident = node.path("ident").asText()
-                    val identype = node.path("identtype").asText()
-                    when (identype.lowercase()) {
-                        "fnr" -> ident
-                        else -> null
+                val fødselsnummer =
+                    try {
+                        val node = objectMapper.readTree(tekstinnhold)
+                        val ident = node.path("ident").asText()
+                        val identype = node.path("identtype").asText()
+                        when (identype.lowercase()) {
+                            "fnr" -> ident
+                            else -> null
+                        }
+                    } catch (_: JsonParseException) {
+                        null
                     }
-                } catch (_: JsonParseException) {
-                    null
-                }
 
                 if (fødselsnummer == null) return@get call.respond(HttpStatusCode.BadRequest, FeilRespons("bad_request", "maskertId pekte ikke på et fødselsnummer"))
                 val aktørId = speedClient.hentFødselsnummerOgAktørId(fødselsnummer, call.callId ?: UUID.randomUUID().toString()).getOrThrow().aktørId
@@ -146,22 +155,28 @@ fun Application.spanner(
                     .sensitivt("idValue", idValue)
                     .call(this.call)
                     .info()
-                if (idValue.isNullOrBlank())
+                if (idValue.isNullOrBlank()) {
                     return@post call.respond(HttpStatusCode.BadRequest, FeilRespons("bad_request", "${IdType.AKTORID.header} or ${IdType.FNR.header} must be set"))
-
-                val fnr = when (idType) {
-                    IdType.FNR -> idValue
-                    IdType.AKTORID -> speedClient.hentFødselsnummerOgAktørId(idValue, call.callId ?: UUID.randomUUID().toString()).getOrThrow().fødselsnummer
-                    IdType.MASKERT_ID -> return@post call.respond(HttpStatusCode.BadRequest, FeilRespons("bad_request", "${IdType.AKTORID.header} or ${IdType.FNR.header} must be set"))
                 }
 
-                val payload = SkjulRequest.SkjulTekstRequest(
-                    tekst = objectMapper.writeValueAsString(mapOf(
-                        "ident" to fnr,
-                        "identtype" to IdType.FNR.name
-                    )),
-                    påkrevdTilgang = påkrevdSpurteduTilgang
-                )
+                val fnr =
+                    when (idType) {
+                        IdType.FNR -> idValue
+                        IdType.AKTORID -> speedClient.hentFødselsnummerOgAktørId(idValue, call.callId ?: UUID.randomUUID().toString()).getOrThrow().fødselsnummer
+                        IdType.MASKERT_ID -> return@post call.respond(HttpStatusCode.BadRequest, FeilRespons("bad_request", "${IdType.AKTORID.header} or ${IdType.FNR.header} must be set"))
+                    }
+
+                val payload =
+                    SkjulRequest.SkjulTekstRequest(
+                        tekst =
+                            objectMapper.writeValueAsString(
+                                mapOf(
+                                    "ident" to fnr,
+                                    "identtype" to IdType.FNR.name,
+                                ),
+                            ),
+                        påkrevdTilgang = påkrevdSpurteduTilgang,
+                    )
                 val maskertId = spurteDuClient.skjul(payload)
                 call.respondText(""" { "id": "${maskertId.id}" } """, Json, OK)
             }
@@ -190,8 +205,9 @@ fun Application.spanner(
                     .sensitivt("idValue", idValue)
                     .call(this.call)
                     .info()
-                if (idValue.isNullOrBlank())
+                if (idValue.isNullOrBlank()) {
                     return@get call.respond(HttpStatusCode.BadRequest, FeilRespons("bad_request", "${IdType.FNR.header} must be set"))
+                }
                 spleis.speilperson(call, idValue)
             }
 
@@ -210,7 +226,7 @@ fun Application.spanner(
                         console.log(json)
                     })
                 })
-            */
+             */
             get("/api/spiskammerset/perioder") {
                 audit()
                 val (idType, idValue) = call.personId()
@@ -222,8 +238,9 @@ fun Application.spanner(
                     .sensitivt("idValue", idValue)
                     .call(this.call)
                     .info()
-                if (idValue.isNullOrBlank())
+                if (idValue.isNullOrBlank()) {
                     return@get call.respond(HttpStatusCode.BadRequest, FeilRespons("bad_request", "${IdType.FNR.header} must be set"))
+                }
                 spleis.spiskammersetPerioder(call, idValue, fom, tom)
             }
 
@@ -242,7 +259,7 @@ fun Application.spanner(
                     console.log(json)
                 })
             })
-            */
+             */
             get("/api/spiskammerset/behandling/{behandlingId}") {
                 audit()
                 val (idType, idValue) = call.personId()
@@ -284,7 +301,7 @@ fun Application.spanner(
                     console.log(json)
                 })
             })
-        */
+             */
 
             get("/api/sendte-meldinger/{meldingsreferanse}") {
                 audit()
@@ -307,7 +324,6 @@ fun Application.spanner(
                     .info()
                 spleis.spiskammersetHentAlt(call, request)
             }
-
         }
     }
 }

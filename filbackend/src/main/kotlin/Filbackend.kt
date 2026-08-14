@@ -21,7 +21,7 @@ fun main() {
             connector {
                 port = 3000
             }
-        }
+        },
     ) {
         // Mediumenes rekkefølge er _ikke_ likegyldig. De er i prioritert rekkefølge
         val hentingsmedium = listOf(Minne, Fil)
@@ -74,12 +74,16 @@ fun main() {
 }
 
 private fun ApplicationCall.uuidHeader(navn: String) = request.headers[navn]?.let { UUID.fromString(it) }
+
 private fun ApplicationCall.uuidParameter(navn: String) = parameters[navn]?.let { UUID.fromString(it) }
+
 private fun Route.frontendRouting() {
     get("/person/*") {
         call.respondText(
-            this::class.java.classLoader.getResource("static/index.html")!!.readText(),
-            ContentType.Text.Html
+            this::class.java.classLoader
+                .getResource("static/index.html")!!
+                .readText(),
+            ContentType.Text.Html,
         )
     }
     staticResources("/", "/static/")

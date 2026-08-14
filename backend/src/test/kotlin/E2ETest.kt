@@ -37,61 +37,69 @@ import java.net.ServerSocket
 import java.util.UUID
 
 class E2ETest {
-
-    private val azureADConfig = AzureADConfig(
-        jwkProvider = JwkProviderBuilder(mockAuth.wellKnownUrl("default").toUrl()).build(),
-        issuer = "default",
-        clientId = "whatever"
-    )
-    private val speedClient = mockk<SpeedClient> {
-        every { hentFødselsnummerOgAktørId(any(), any()) } returns IdentResponse(
-            fødselsnummer = "fnr",
-            aktørId = "aktør",
-            npid = null,
-            kilde = IdentResponse.KildeResponse.PDL
-        ).ok()
-    }
-    private val påkrevdSpurteduTilgang = "skikkelig_tøysete_claim"
-    private val spurteDuClient = mockk<SpurteDuClient> {
-        val skjulRequests = mutableListOf<SkjulRequest>()
-        every { skjul(capture(skjulRequests)) } answers {
-            val forrigeRequest = skjulRequests.last()
-            check(forrigeRequest.påkrevdTilgang == påkrevdSpurteduTilgang) {
-                "påkrevd tilgang er ikke $påkrevdSpurteduTilgang"
-            }
-            val maskertId = when (forrigeRequest) {
-                is SkjulRequest.SkjulTekstRequest -> {
-                    val skjultVerdi = objectMapper.readTree(forrigeRequest.tekst).path("ident").asText()
-                    when (skjultVerdi) {
-                        "42",
-                        "12020052345" -> "113eb3df-102d-4a07-9270-2caa648c62f4"
-                        "2392363031327" -> "48bfef57-3080-4f19-98eb-5cc72d9d16c5"
-                        else -> throw NotFoundException("no person with identifier: $skjultVerdi")
-                    }
-                }
-                is SkjulRequest.SkjulUrlRequest -> error("Støtter ikke dette")
-            }
-            SkjulResponse(
-                id = UUID.fromString(maskertId),
-                url = "http://foo/",
-                path = "/foo"
-            )
+    private val azureADConfig =
+        AzureADConfig(
+            jwkProvider = JwkProviderBuilder(mockAuth.wellKnownUrl("default").toUrl()).build(),
+            issuer = "default",
+            clientId = "whatever",
+        )
+    private val speedClient =
+        mockk<SpeedClient> {
+            every { hentFødselsnummerOgAktørId(any(), any()) } returns
+                IdentResponse(
+                    fødselsnummer = "fnr",
+                    aktørId = "aktør",
+                    npid = null,
+                    kilde = IdentResponse.KildeResponse.PDL,
+                ).ok()
         }
-
-        val visRequests = mutableListOf<UUID>()
-        every { vis(capture(visRequests), any(), any()) } answers {
-            val maskertId = visRequests.last()
-            val ident = when (maskertId.toString()) {
-                "113eb3df-102d-4a07-9270-2caa648c62f4" -> "12020052345"
-                "48bfef57-3080-4f19-98eb-5cc72d9d16c5" -> "2392363031327"
-                else -> error("Kjenner ikke til $maskertId")
+    private val påkrevdSpurteduTilgang = "skikkelig_tøysete_claim"
+    private val spurteDuClient =
+        mockk<SpurteDuClient> {
+            val skjulRequests = mutableListOf<SkjulRequest>()
+            every { skjul(capture(skjulRequests)) } answers {
+                val forrigeRequest = skjulRequests.last()
+                check(forrigeRequest.påkrevdTilgang == påkrevdSpurteduTilgang) {
+                    "påkrevd tilgang er ikke $påkrevdSpurteduTilgang"
+                }
+                val maskertId =
+                    when (forrigeRequest) {
+                        is SkjulRequest.SkjulTekstRequest -> {
+                            val skjultVerdi = objectMapper.readTree(forrigeRequest.tekst).path("ident").asText()
+                            when (skjultVerdi) {
+                                "42",
+                                "12020052345",
+                                -> "113eb3df-102d-4a07-9270-2caa648c62f4"
+                                "2392363031327" -> "48bfef57-3080-4f19-98eb-5cc72d9d16c5"
+                                else -> throw NotFoundException("no person with identifier: $skjultVerdi")
+                            }
+                        }
+                        is SkjulRequest.SkjulUrlRequest -> error("Støtter ikke dette")
+                    }
+                SkjulResponse(
+                    id = UUID.fromString(maskertId),
+                    url = "http://foo/",
+                    path = "/foo",
+                )
             }
-            VisTekstResponse(text = """{
+
+            val visRequests = mutableListOf<UUID>()
+            every { vis(capture(visRequests), any(), any()) } answers {
+                val maskertId = visRequests.last()
+                val ident =
+                    when (maskertId.toString()) {
+                        "113eb3df-102d-4a07-9270-2caa648c62f4" -> "12020052345"
+                        "48bfef57-3080-4f19-98eb-5cc72d9d16c5" -> "2392363031327"
+                        else -> error("Kjenner ikke til $maskertId")
+                    }
+                VisTekstResponse(
+                    text = """{
                 "ident": "$ident",
                 "identtype": "FNR"
-            }""")
+            }""",
+                )
+            }
         }
-    }
 
     private val lokaleKjenninger = LokaleKjenninger
 
@@ -99,54 +107,58 @@ class E2ETest {
     fun `respond with person json on person endpoint`() {
         mockAuth.enqueueCallback(
             DefaultOAuth2TokenCallback(
-                claims = mapOf("NAVident" to "H12345")
-            )
+                claims = mapOf("NAVident" to "H12345"),
+            ),
         )
         e2e { client ->
-            val uuid = client.post("/api/uuid/") {
-                header(IdType.FNR.header, "42")
-            }
-                .body<JsonNode>()
-                .path("id")
-                .asText()
+            val uuid =
+                client
+                    .post("/api/uuid/") {
+                        header(IdType.FNR.header, "42")
+                    }.body<JsonNode>()
+                    .path("id")
+                    .asText()
 
-            client.get("/api/person/") {
-                header(IdType.MASKERT_ID.header, uuid)
-            }.apply {
+            client
+                .get("/api/person/") {
+                    header(IdType.MASKERT_ID.header, uuid)
+                }.apply {
+                    assertTrue(status.isSuccess())
+                    val bodyAsText = bodyAsText()
+                    assertTrue(bodyAsText.contains("\"aktørId\": \"42\"")) {
+                        "response was: $bodyAsText"
+                    }
+                }
+        }
+    }
+
+    @Test
+    fun `respond with message json on hendelse endpoint`() =
+        e2e { client ->
+            mockAuth.enqueueCallback(
+                DefaultOAuth2TokenCallback(
+                    claims = mapOf("NAVident" to "H12345"),
+                ),
+            )
+
+            client.get("/api/hendelse/42").apply {
                 assertTrue(status.isSuccess())
                 val bodyAsText = bodyAsText()
-                assertTrue(bodyAsText.contains("\"aktørId\": \"42\"")) {
+                assertEquals("{}", bodyAsText) {
                     "response was: $bodyAsText"
                 }
             }
         }
-    }
 
     @Test
-    fun `respond with message json on hendelse endpoint`() = e2e { client ->
-        mockAuth.enqueueCallback(
-            DefaultOAuth2TokenCallback(
-                claims = mapOf("NAVident" to "H12345")
-            )
-        )
-
-        client.get("/api/hendelse/42").apply {
-            assertTrue(status.isSuccess())
-            val bodyAsText = bodyAsText()
-            assertEquals("{}", bodyAsText) {
-                "response was: $bodyAsText"
+    fun `valid json error message response`() =
+        e2e { client ->
+            client.get("/api/person/").apply {
+                assertEquals(HttpStatusCode.BadRequest, status)
+                val feil = body<FeilRespons>()
+                assertTrue(!feil.description.isNullOrEmpty())
             }
         }
-    }
-
-    @Test
-    fun `valid json error message response`() = e2e { client ->
-        client.get("/api/person/").apply {
-            assertEquals(HttpStatusCode.BadRequest, status)
-            val feil = body<FeilRespons>()
-            assertTrue(!feil.description.isNullOrEmpty())
-        }
-    }
 
     companion object {
         val mockAuth = MockOAuth2Server()
@@ -169,13 +181,15 @@ class E2ETest {
             applicationModule = {
                 spanner(lokaleKjenninger, speedClient, spurteDuClient, påkrevdSpurteduTilgang, azureADConfig, true)
             },
-            testblokk = testblokk
+            testblokk = testblokk,
         )
     }
 }
 
-
-fun e2e(applicationModule: Application.() -> Unit, testblokk: suspend (HttpClient) -> Unit) {
+fun e2e(
+    applicationModule: Application.() -> Unit,
+    testblokk: suspend (HttpClient) -> Unit,
+) {
     testApplication {
         val randomPort = ServerSocket(0).localPort
         engine {
@@ -188,14 +202,15 @@ fun e2e(applicationModule: Application.() -> Unit, testblokk: suspend (HttpClien
             applicationModule()
         }
 
-        val testClient = createClient {
-            defaultRequest {
-                port = randomPort
+        val testClient =
+            createClient {
+                defaultRequest {
+                    port = randomPort
+                }
+                install(ContentNegotiation) {
+                    register(ContentType.Application.Json, JacksonConverter(objectMapper))
+                }
             }
-            install(ContentNegotiation) {
-                register(ContentType.Application.Json, JacksonConverter(objectMapper))
-            }
-        }
 
         testblokk(testClient)
     }

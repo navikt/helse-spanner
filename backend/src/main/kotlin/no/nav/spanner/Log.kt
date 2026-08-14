@@ -1,7 +1,7 @@
 package no.nav.spanner
 
-import io.ktor.server.application.*
 import io.ktor.client.statement.*
+import io.ktor.server.application.*
 import io.ktor.server.request.*
 import no.nav.spanner.Log.Companion.LogLevel.*
 import org.slf4j.LoggerFactory
@@ -13,36 +13,44 @@ data class Log(
     val exception: Throwable? = null,
     val sensitivContext: Map<String, String> = mapOf(),
 ) {
-    private fun context(key: String, value: String, sensitivt: Boolean = false): Log {
+    private fun context(
+        key: String,
+        value: String,
+        sensitivt: Boolean = false,
+    ): Log {
         val pair = key to value
         val context = if (!sensitivt) context + pair else context
         val sensitivContext = sensitivContext + pair
         return copy(context = context, sensitivContext = sensitivContext)
     }
 
-    fun åpent(key: String, value: Any?) = context(key, value.toString(), false)
-    fun sensitivt(key: String, value: Any?) = context(key, value.toString(), true)
+    fun åpent(
+        key: String,
+        value: Any?,
+    ) = context(key, value.toString(), false)
 
+    fun sensitivt(
+        key: String,
+        value: Any?,
+    ) = context(key, value.toString(), true)
 
-    fun call(call: ApplicationCall): Log {
-        return åpent("httpMethod", call.request.httpMethod.value)
+    fun call(call: ApplicationCall): Log =
+        åpent("httpMethod", call.request.httpMethod.value)
             .åpent("httpPath", call.request.path())
             .sensitivt("httpUrl", call.request.uri)
-    }
 
-    fun response(response: HttpResponse): Log {
-        return åpent("requestMethod", response.request.method)
+    fun response(response: HttpResponse): Log =
+        åpent("requestMethod", response.request.method)
             .åpent("requestPath", response.request.url.encodedPath)
             .sensitivt("requestUrl", response.request.url)
             .åpent("responseStatus", response.status)
 
-    }
+    fun exception(error: Throwable): Log = copy(exception = error)
 
-    fun exception(error: Throwable): Log {
-        return copy(exception = error)
-    }
-
-    private fun doLog(level: LogLevel, message: String?) {
+    private fun doLog(
+        level: LogLevel,
+        message: String?,
+    ) {
         val pair = "class" to (loggerName ?: loggerClass!!.toString())
         val applikasjonsLog = loggerName?.let { LoggerFactory.getLogger(it) } ?: LoggerFactory.getLogger(loggerClass!!)
         val messageStr = message?.let { "$message, " } ?: ""
@@ -83,17 +91,17 @@ data class Log(
         doLog(ERROR, message)
     }
 
-    fun log(level: LogLevel, message: String? = null) {
+    fun log(
+        level: LogLevel,
+        message: String? = null,
+    ) {
         doLog(level, message)
     }
 
-
     companion object {
-        fun logger(loggerName: String) =
-            Log(loggerName = loggerName)
+        fun logger(loggerName: String) = Log(loggerName = loggerName)
 
-        fun logger(loggingClass: Class<out Any>) =
-            Log(loggerClass = loggingClass)
+        fun logger(loggingClass: Class<out Any>) = Log(loggerClass = loggingClass)
 
         enum class LogLevel { INFO, WARN, ERROR }
     }

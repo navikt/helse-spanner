@@ -19,39 +19,46 @@ fun startLocal() {
     mockAuth.enqueueCallback(
         DefaultOAuth2TokenCallback(
             expiry = 3600,
-            claims = mapOf("NAVident" to "H12345")
-        )
+            claims = mapOf("NAVident" to "H12345"),
+        ),
     )
     mockAuth.start()
 
-    val adConfig = AzureADConfig(
-        jwkProvider = JwkProviderBuilder(mockAuth.wellKnownUrl("default").toUrl()).build(),
-        issuer = "default",
-        clientId = "whatever"
-    )
-    val spannerConfig = Config(
-        true,
-        8080,
-        "0.0.0.0",
-        "not is use",
-        "not is use",
-        "not is use",
-        "not is use",
-        null
-    )
+    val adConfig =
+        AzureADConfig(
+            jwkProvider = JwkProviderBuilder(mockAuth.wellKnownUrl("default").toUrl()).build(),
+            issuer = "default",
+            clientId = "whatever",
+        )
+    val spannerConfig =
+        Config(
+            true,
+            8080,
+            "0.0.0.0",
+            "not is use",
+            "not is use",
+            "not is use",
+            "not is use",
+            null,
+        )
 
     val speedClient = mockk<SpeedClient>()
     val spurteDuClient = mockk<SpurteDuClient>()
     val påkrevdSpurteduTilgang = "skikkelig_tøysete_claim"
     val spleis = LokaleKjenninger
 
-    embeddedServer(CIO, environment = applicationEnvironment {
-        log = LoggerFactory.getLogger("Spanner")
-    }, configure = {
-        connector {
-            port = spannerConfig.port
-        }
-    }) {
+    embeddedServer(
+        CIO,
+        environment =
+            applicationEnvironment {
+                log = LoggerFactory.getLogger("Spanner")
+            },
+        configure = {
+            connector {
+                port = spannerConfig.port
+            }
+        },
+    ) {
         install(CORS) {
             this.anyHost()
         }

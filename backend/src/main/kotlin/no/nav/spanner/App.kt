@@ -1,6 +1,5 @@
 package no.nav.spanner
 
-
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.github.navikt.tbd_libs.azure.createAzureTokenClientFromEnvironment
@@ -23,10 +22,12 @@ import java.net.URI
 import java.net.http.HttpClient
 
 private val logg = Log.logger("Main")
+
 private fun Configuration.stringProp(navn: String) = get(Key(navn, stringType))
 
 fun main() {
-    val config = ConfigurationProperties.systemProperties() overriding
+    val config =
+        ConfigurationProperties.systemProperties() overriding
             ConfigurationProperties.fromOptionalFile(File(".env")) overriding
             EnvironmentVariables()
 
@@ -37,31 +38,39 @@ fun main() {
 
     val adConfig = AzureADConfig.fromEnv(config)
 
-    val speedClient = SpeedClient(
-        httpClient = HttpClient.newHttpClient(),
-        objectMapper = jacksonObjectMapper().registerModule(JavaTimeModule()),
-        tokenProvider = createDefaultAzureTokenClient(
-            tokenEndpoint = URI(config.stringProp("AZURE_OPENID_CONFIG_TOKEN_ENDPOINT")),
-            clientId = config.stringProp("AZURE_APP_CLIENT_ID"),
-            clientSecret = config.stringProp("AZURE_APP_CLIENT_SECRET")
-        ),
-    )
+    val speedClient =
+        SpeedClient(
+            httpClient = HttpClient.newHttpClient(),
+            objectMapper = jacksonObjectMapper().registerModule(JavaTimeModule()),
+            tokenProvider =
+                createDefaultAzureTokenClient(
+                    tokenEndpoint = URI(config.stringProp("AZURE_OPENID_CONFIG_TOKEN_ENDPOINT")),
+                    clientId = config.stringProp("AZURE_APP_CLIENT_ID"),
+                    clientSecret = config.stringProp("AZURE_APP_CLIENT_SECRET"),
+                ),
+        )
 
     val tokenProvider = createAzureTokenClientFromEnvironment()
-    val spurteDuClient = SpurteDuClient(
-        objectMapper = objectMapper,
-        tokenProvider = tokenProvider
-    )
+    val spurteDuClient =
+        SpurteDuClient(
+            objectMapper = objectMapper,
+            tokenProvider = tokenProvider,
+        )
     val spleis = Spleis.from(spannerConfig, tokenProvider)
 
     System.setProperty("io.ktor.development", spannerConfig.development.toString())
-    embeddedServer(CIO, environment = applicationEnvironment {
-        log = LoggerFactory.getLogger("Spanner")
-    }, configure = {
-        connector {
-            port = spannerConfig.port
-        }
-    }) {
+    embeddedServer(
+        CIO,
+        environment =
+            applicationEnvironment {
+                log = LoggerFactory.getLogger("Spanner")
+            },
+        configure = {
+            connector {
+                port = spannerConfig.port
+            }
+        },
+    ) {
         spanner(spleis, speedClient, spurteDuClient, påkrevdSpurteduTilgang = System.getenv("SPURTE_DU_TILGANG"), adConfig, spannerConfig.development)
     }.start(true)
 }

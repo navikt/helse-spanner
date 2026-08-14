@@ -8,8 +8,10 @@ import io.ktor.server.routing.*
 internal fun Route.frontendRouting() {
     get("/person/*") {
         call.respondText(
-            this::class.java.classLoader.getResource("static/index.html")!!.readText(),
-            ContentType.Text.Html
+            this::class.java.classLoader
+                .getResource("static/index.html")!!
+                .readText(),
+            ContentType.Text.Html,
         )
     }
     staticResources("/", "/static/")

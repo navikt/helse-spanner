@@ -7,7 +7,6 @@ import java.time.ZonedDateTime.now
 import java.util.*
 
 class AuditLogTest {
-
     @Test
     fun auditLogVerifiedFnr() {
         val nå = now()
@@ -28,6 +27,7 @@ class AuditLogTest {
 
         Assertions.assertEquals(expected, actual)
     }
+
     @Test
     fun `om både fnr og aktørId er oppgitt, logger vi fnr`() {
         val nå = now()

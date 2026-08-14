@@ -4,24 +4,38 @@ import java.util.UUID
 import java.util.concurrent.ConcurrentHashMap
 
 sealed interface Lagringsmedium {
-    fun lagreHendelse(uuid: UUID, hendelse: String): Boolean
-    fun lagrePerson(uuid: UUID, person: String): Boolean
+    fun lagreHendelse(
+        uuid: UUID,
+        hendelse: String,
+    ): Boolean
+
+    fun lagrePerson(
+        uuid: UUID,
+        person: String,
+    ): Boolean
 }
 
 interface Hentingsmedium {
     fun hentPerson(uuid: UUID): String?
+
     fun hentHendelse(uuid: UUID): String?
 }
 
-object Fil: Hentingsmedium {
+object Fil : Hentingsmedium {
     private fun String.innhold() = File(this).takeIf { it.exists() }?.readText()
+
     private fun spannerRoot() = System.getenv("SPANNER_ROOT").takeUnless { it.isNullOrBlank() } ?: "${System.getenv("HOME")}/.spanner"
+
     override fun hentPerson(uuid: UUID) = "${spannerRoot()}/personer/$uuid.json".innhold()
+
     override fun hentHendelse(uuid: UUID) = "${spannerRoot()}/hendelser/$this.json".innhold()
 }
 
-object Minne: Hentingsmedium, Lagringsmedium {
-    private data class Entry(val data: String, val timeout: LocalDateTime = LocalDateTime.now().plusWeeks(1))
+object Minne : Hentingsmedium, Lagringsmedium {
+    private data class Entry(
+        val data: String,
+        val timeout: LocalDateTime = LocalDateTime.now().plusWeeks(1),
+    )
 
     private val personer = ConcurrentHashMap<UUID, Entry>()
     private val hendelser = ConcurrentHashMap<UUID, Entry>()
@@ -46,13 +60,19 @@ object Minne: Hentingsmedium, Lagringsmedium {
         return hendelse
     }
 
-    override fun lagreHendelse(uuid: UUID, hendelse: String): Boolean {
+    override fun lagreHendelse(
+        uuid: UUID,
+        hendelse: String,
+    ): Boolean {
         hendelser.rydd()
         hendelser[uuid] = Entry(hendelse)
         return true
     }
 
-    override fun lagrePerson(uuid: UUID, person: String): Boolean {
+    override fun lagrePerson(
+        uuid: UUID,
+        person: String,
+    ): Boolean {
         personer.rydd()
         personer[uuid] = Entry(person)
         return true
@@ -60,6 +80,19 @@ object Minne: Hentingsmedium, Lagringsmedium {
 }
 
 internal fun List<Hentingsmedium>.hentPerson(uuid: UUID) = firstNotNullOfOrNull { it.hentPerson(uuid) }
+
 internal fun List<Hentingsmedium>.hentHendelse(uuid: UUID) = firstNotNullOfOrNull { it.hentHendelse(uuid) }
-internal fun List<Lagringsmedium>.lagrePerson(uuid: UUID, person: String) { firstOrNull { it.lagrePerson(uuid, person) } ?: error("Ingen lagringsmedium lagret personen.") }
-internal fun List<Lagringsmedium>.lagreHendelse(uuid: UUID, hendelse: String) { firstOrNull { it.lagreHendelse(uuid, hendelse) } ?: error("Ingen lagringsmedium lagret hendelsen.") }
+
+internal fun List<Lagringsmedium>.lagrePerson(
+    uuid: UUID,
+    person: String,
+) {
+    firstOrNull { it.lagrePerson(uuid, person) } ?: error("Ingen lagringsmedium lagret personen.")
+}
+
+internal fun List<Lagringsmedium>.lagreHendelse(
+    uuid: UUID,
+    hendelse: String,
+) {
+    firstOrNull { it.lagreHendelse(uuid, hendelse) } ?: error("Ingen lagringsmedium lagret hendelsen.")
+}

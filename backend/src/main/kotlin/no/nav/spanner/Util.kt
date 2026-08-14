@@ -10,21 +10,19 @@ import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import java.time.ZoneId
 import java.util.*
 
-internal val objectMapper = jacksonObjectMapper()
-    .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
-    .registerModule(JavaTimeModule())
-    .setDefaultPrettyPrinter(DefaultPrettyPrinter().apply {
-        indentArraysWith(DefaultPrettyPrinter.FixedSpaceIndenter.instance)
-        indentObjectsWith(DefaultIndenter("  ", "\n"))
-    })
-
-
-
-
+internal val objectMapper =
+    jacksonObjectMapper()
+        .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
+        .registerModule(JavaTimeModule())
+        .setDefaultPrettyPrinter(
+            DefaultPrettyPrinter().apply {
+                indentArraysWith(DefaultPrettyPrinter.FixedSpaceIndenter.instance)
+                indentObjectsWith(DefaultIndenter("  ", "\n"))
+            },
+        )
 
 internal fun Date.toLocalDateTime() = toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime()
 
 internal fun JsonNode.isMissingOrNull() = isMissingNode || isNull
 
-fun String.asJwt() =
-    JWT.decode(this)
+fun String.asJwt() = JWT.decode(this)
