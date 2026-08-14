@@ -1,7 +1,7 @@
 [versions]
 jjwt = "0.11.2"
 konfig = "1.6.10.0"
-logback = "1.5.38"
+logback = "1.6.1"
 logback-syslog4j = "1.0.0"
 logstash-logback-encoder = "8.0"
 mock-oauth2-server = "2.1.1"
