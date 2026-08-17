@@ -7,7 +7,7 @@ logstash-logback-encoder = "9.0"
 mock-oauth2-server = "6.0.0"
 mockk = "1.14.11"
 sasGradlePlugins = "20260807.0944"
-tbd-libs = "2026.01.22-09.16-1d3f6039"
+tbd-libs = "20260811.1310"
 
 [libraries]
 jjwt-api = { module = "io.jsonwebtoken:jjwt-api", version.ref = "jjwt" }
