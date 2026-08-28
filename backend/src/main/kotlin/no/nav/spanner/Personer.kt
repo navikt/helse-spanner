@@ -175,7 +175,7 @@ class Spleis(
         fnr: String,
     ) {
         val accessToken = call.bearerToken ?: return call.respond(Unauthorized)
-        val url = URLBuilder(baseUrl).apply { path("graphql") }.build()
+        val url = URLBuilder(baseUrl).apply { path("api", "person") }.build()
         val oboToken = spleis.token(azureAD, accessToken)
         val log = Log.logger(Personer::class.java)
 
@@ -184,15 +184,10 @@ class Spleis(
                 httpClient.post(url) {
                     header("Authorization", "Bearer $oboToken")
                     accept(Json)
-                    setBody(
-                        """{
-            "query": "",
-            "variables": {
-              "fnr": "$fnr"
-            },
-            "operationName": "HentSnapshotSpanner"
-        }""",
-                    )
+                    contentType(Json)
+                    setBody(mapOf(
+                        "fødselsnummer" to fnr
+                    ))
                 }
             } catch (e: ClientRequestException) {
                 if (e.response.status == HttpStatusCode.NotFound) {
