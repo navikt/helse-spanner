@@ -25,11 +25,9 @@ import io.ktor.server.routing.*
 import no.nav.spanner.AuditLogger.Companion.audit
 import no.nav.spanner.Log.Companion.LogLevel
 import no.nav.spanner.Log.Companion.LogLevel.*
-import no.nav.spanner.requests.HentAltSpiskammersetRequest
 import org.slf4j.LoggerFactory
 import org.slf4j.event.Level
 import java.io.IOException
-import java.time.LocalDate
 import java.util.*
 
 enum class IdType(
@@ -211,70 +209,6 @@ fun Application.spanner(
                 spleis.speilperson(call, idValue)
             }
 
-            /*
-                har ikke funksjonalitet fra frontend ennå, men kan kalles manuelt fra devtools feks:
-
-                fetch("/api/spiskammerset/perioder?fom=2026-01-01&tom=2026-01-31", {
-                    method: 'get',
-                    headers: {
-                        Accept: 'application/json',
-                        fnr: 'xxxxxxxxxxx'
-                    }
-                }).then(function (response) {
-                    console.log(response)
-                    response.json().then(function (json) {
-                        console.log(json)
-                    })
-                })
-             */
-            get("/api/spiskammerset/perioder") {
-                audit()
-                val (idType, idValue) = call.personId()
-                if (idType != IdType.FNR) return@get call.respond(HttpStatusCode.BadRequest, "funker bare med fnr")
-                val fom = LocalDate.parse(call.queryParameters["fom"]!!)
-                val tom = LocalDate.parse(call.queryParameters["tom"]!!)
-                logg
-                    .åpent("idType", idType)
-                    .sensitivt("idValue", idValue)
-                    .call(this.call)
-                    .info()
-                if (idValue.isNullOrBlank()) {
-                    return@get call.respond(HttpStatusCode.BadRequest, FeilRespons("bad_request", "${IdType.FNR.header} must be set"))
-                }
-                spleis.spiskammersetPerioder(call, idValue, fom, tom)
-            }
-
-            /*
-            har ikke funksjonalitet fra frontend ennå, men kan kalles manuelt fra devtools feks:
-
-            fetch("/api/spiskammerset/behandling/{behandlingId}?opplysning=forsikring&opplysning=noe-annet", {
-                method: 'get',
-                headers: {
-                    Accept: 'application/json',
-                    fnr: 'xxxxxxxxxxx'
-                }
-            }).then(function (response) {
-                console.log(response)
-                response.json().then(function (json) {
-                    console.log(json)
-                })
-            })
-             */
-            get("/api/spiskammerset/behandling/{behandlingId}") {
-                audit()
-                val (idType, idValue) = call.personId()
-                if (idType != IdType.FNR) return@get call.respond(HttpStatusCode.BadRequest, "funker bare med fnr")
-                val behandlingId = call.parameters["behandlingId"]?.let { UUID.fromString(it) } ?: return@get call.respond(HttpStatusCode.BadRequest, "mangler behandlingId")
-                val opplysninger = call.queryParameters.getAll("opplysning") ?: emptyList()
-                logg
-                    .åpent("idType", idType)
-                    .sensitivt("idValue", idValue)
-                    .call(this.call)
-                    .info()
-                if (idValue.isNullOrBlank()) return@get call.respond(HttpStatusCode.BadRequest, FeilRespons("bad_request", "${IdType.FNR.header} must be set"))
-                spleis.spiskammersetOpplysninger(call, behandlingId, opplysninger)
-            }
-
             get("/api/hendelse/{meldingsreferanse}") {
                 audit()
                 val meldingsreferanse = call.parameters["meldingsreferanse"] ?: throw BadRequestException("Mangler meldingsreferanse")
@@ -312,17 +246,6 @@ fun Application.spanner(
                     .info()
 
                 spleis.sendteMeldinger(call, meldingsreferanse)
-            }
-
-            post("/api/spiskammerset/hentAlt") {
-                audit()
-                val request = call.receive<HentAltSpiskammersetRequest>()
-
-                logg
-                    .sensitivt("fnr", request.personidentifikator)
-                    .call(this.call)
-                    .info()
-                spleis.spiskammersetHentAlt(call, request)
             }
         }
     }

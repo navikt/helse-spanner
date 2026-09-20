@@ -52,9 +52,6 @@ export const Header = ({ children }: PropsWithChildren) => {
             <Link to={'/hotkeys'} className={styles.Lenke}>
                 Hotkeys
             </Link>
-            <Link to={'/spiskammerset'} className={styles.Lenke}>
-                Spiskammerset
-            </Link>
             <InternalHeader.User className={styles.User} name={navn} description={ident} />
         </InternalHeader>
     )

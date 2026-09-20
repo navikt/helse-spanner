@@ -4,9 +4,6 @@ import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.response.*
 import no.nav.spanner.Personer
-import no.nav.spanner.requests.HentAltSpiskammersetRequest
-import java.time.LocalDate
-import java.util.UUID
 
 object LokaleKjenninger : Personer {
     override suspend fun person(
@@ -28,30 +25,6 @@ object LokaleKjenninger : Personer {
     override suspend fun speilperson(
         call: ApplicationCall,
         fnr: String,
-    ) {
-        call.respondText("{}", ContentType.Application.Json, HttpStatusCode.OK)
-    }
-
-    override suspend fun spiskammersetPerioder(
-        call: ApplicationCall,
-        fnr: String,
-        fom: LocalDate,
-        tom: LocalDate,
-    ) {
-        call.respondText("{}", ContentType.Application.Json, HttpStatusCode.OK)
-    }
-
-    override suspend fun spiskammersetOpplysninger(
-        call: ApplicationCall,
-        behandlingId: UUID,
-        opplysninger: List<String>,
-    ) {
-        call.respondText("{}", ContentType.Application.Json, HttpStatusCode.OK)
-    }
-
-    override suspend fun spiskammersetHentAlt(
-        call: ApplicationCall,
-        request: HentAltSpiskammersetRequest,
     ) {
         call.respondText("{}", ContentType.Application.Json, HttpStatusCode.OK)
     }

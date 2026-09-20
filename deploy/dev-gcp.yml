@@ -51,7 +51,6 @@ spec:
         - application: spleis-api
         - application: sparsom-api
         - application: spurtedu
-        - application: spiskammerset
   env:
     - name: DEVELOPMENT
       value: "false"
@@ -59,8 +58,6 @@ spec:
       value: api://dev-gcp.tbd.spleis-api/.default
     - name: SPARSOM_SCOPE
       value: api://dev-gcp.tbd.sparsom-api/.default
-    - name: SPISKAMMERSET_SCOPE
-      value: api://dev-gcp.tbd.spiskammerset/.default
     - name: HTTP_PORT
       value: "8080"
     - name: HTTP_HOST
