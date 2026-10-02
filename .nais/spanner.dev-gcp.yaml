@@ -1,0 +1,23 @@
+spec:
+  ingresses:
+    - https://spanner.intern.dev.nav.no
+    - https://spanner.ansatt.dev.nav.no
+  resources:
+    limits:
+      memory: 512Mi
+  azure:
+    application:
+      tenant: trygdeetaten.no
+      claims:
+        groups:
+          - id: "9046ac9d-bb00-47dc-bcfb-e5221bf8d7f9" # tbd-dev
+          - id: "cda797bb-ac3b-4440-b661-2cd5eb3edba0" # 0000-CA-Speil-Saksbehandler
+  env:
+    - name: SPLEIS_SCOPE
+      value: api://dev-gcp.tbd.spleis-api/.default
+    - name: SPARSOM_SCOPE
+      value: api://dev-gcp.tbd.sparsom-api/.default
+    - name: HTTP_HOST
+      value: spanner.ansatt.dev.nav.no
+    - name: SPURTE_DU_TILGANG
+      value: "9046ac9d-bb00-47dc-bcfb-e5221bf8d7f9, cda797bb-ac3b-4440-b661-2cd5eb3edba0"

@@ -7,9 +7,6 @@ metadata:
     team: tbd
 spec:
   port: 8080
-  ingresses:
-    - https://spanner.intern.dev.nav.no
-    - https://spanner.ansatt.dev.nav.no
   liveness:
     initialDelay: 10
     path: internal/isalive
@@ -21,8 +18,6 @@ spec:
     max: 1
     min: 1
   resources:
-    limits:
-      memory: 512Mi
     requests:
       cpu: 50m
       memory: 64Mi
@@ -33,41 +28,29 @@ spec:
       autoLoginIgnorePaths:
         - /assets/**
     application:
-      tenant: trygdeetaten.no
       enabled: true
       claims:
         extra:
           - "NAVident"
-        groups:
-          - id: "9046ac9d-bb00-47dc-bcfb-e5221bf8d7f9" # tbd-dev
-          - id: "cda797bb-ac3b-4440-b661-2cd5eb3edba0" # 0000-CA-Speil-Saksbehandler
       allowAllUsers: false
   accessPolicy:
     outbound:
       rules:
         - application: logging
           namespace: nais-system
-        - application: speed-api
         - application: spleis-api
         - application: sparsom-api
         - application: spurtedu
+        - application: speed-api
   env:
     - name: DEVELOPMENT
       value: "false"
-    - name: SPLEIS_SCOPE
-      value: api://dev-gcp.tbd.spleis-api/.default
-    - name: SPARSOM_SCOPE
-      value: api://dev-gcp.tbd.sparsom-api/.default
     - name: HTTP_PORT
       value: "8080"
-    - name: HTTP_HOST
-      value: spanner.ansatt.dev.nav.no
     - name: SPLEIS_API_URL
       value: http://spleis-api
     - name: SPARSOM_API_URL
       value: http://sparsom-api
-    - name: SPURTE_DU_TILGANG
-      value: "9046ac9d-bb00-47dc-bcfb-e5221bf8d7f9, cda797bb-ac3b-4440-b661-2cd5eb3edba0"
   observability:
     logging:
       destinations:
