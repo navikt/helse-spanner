@@ -1,25 +1,22 @@
 package no.nav.spanner
 
 import com.auth0.jwt.JWT
-import com.fasterxml.jackson.core.util.DefaultIndenter
-import com.fasterxml.jackson.core.util.DefaultPrettyPrinter
-import com.fasterxml.jackson.databind.JsonNode
-import com.fasterxml.jackson.databind.SerializationFeature
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import tools.jackson.core.util.DefaultIndenter
+import tools.jackson.core.util.DefaultPrettyPrinter
+import tools.jackson.databind.JsonNode
+import tools.jackson.databind.cfg.DateTimeFeature
+import tools.jackson.module.kotlin.jacksonMapperBuilder
 import java.time.ZoneId
 import java.util.*
 
 internal val objectMapper =
-    jacksonObjectMapper()
-        .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
-        .registerModule(JavaTimeModule())
-        .setDefaultPrettyPrinter(
-            DefaultPrettyPrinter().apply {
-                indentArraysWith(DefaultPrettyPrinter.FixedSpaceIndenter.instance)
-                indentObjectsWith(DefaultIndenter("  ", "\n"))
-            },
-        )
+    jacksonMapperBuilder()
+        .disable(DateTimeFeature.WRITE_DATES_AS_TIMESTAMPS)
+        .defaultPrettyPrinter(
+            DefaultPrettyPrinter()
+                .withArrayIndenter(DefaultPrettyPrinter.FixedSpaceIndenter.instance())
+                .withObjectIndenter(DefaultIndenter("  ", "\n")),
+        ).build()
 
 internal fun Date.toLocalDateTime() = toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime()
 

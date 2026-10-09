@@ -10,7 +10,7 @@ sykepengerDeployable {
 dependencies {
     implementation(libs.ktor.server.core)
     implementation(libs.ktor.server.cio)
-    implementation(libs.ktor.serialization.jackson)
+    implementation(libs.ktor.serialization.jackson3)
     implementation(libs.logback.classic)
     implementation(libs.logstash.logback.encoder) {
         exclude("com.fasterxml.jackson.core")
