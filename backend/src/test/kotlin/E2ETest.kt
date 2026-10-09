@@ -1,7 +1,6 @@
 package no.nav.spanner
 
 import com.auth0.jwk.JwkProviderBuilder
-import com.fasterxml.jackson.databind.JsonNode
 import com.github.navikt.tbd_libs.result_object.ok
 import com.github.navikt.tbd_libs.speed.IdentResponse
 import com.github.navikt.tbd_libs.speed.SpeedClient
@@ -18,7 +17,7 @@ import io.ktor.client.request.header
 import io.ktor.client.request.post
 import io.ktor.client.statement.bodyAsText
 import io.ktor.http.*
-import io.ktor.serialization.jackson.JacksonConverter
+import io.ktor.serialization.jackson3.JacksonConverter
 import io.ktor.server.application.Application
 import io.ktor.server.engine.connector
 import io.ktor.server.plugins.NotFoundException
@@ -33,6 +32,7 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
+import tools.jackson.databind.JsonNode
 import java.net.ServerSocket
 import java.util.UUID
 
@@ -65,7 +65,7 @@ class E2ETest {
                 val maskertId =
                     when (forrigeRequest) {
                         is SkjulRequest.SkjulTekstRequest -> {
-                            val skjultVerdi = objectMapper.readTree(forrigeRequest.tekst).path("ident").asText()
+                            val skjultVerdi = objectMapper.readTree(forrigeRequest.tekst).path("ident").asString()
                             when (skjultVerdi) {
                                 "42",
                                 "12020052345",
@@ -208,7 +208,7 @@ fun e2e(
                     port = randomPort
                 }
                 install(ContentNegotiation) {
-                    register(ContentType.Application.Json, JacksonConverter(objectMapper))
+                    register(ContentType.Application.Json, JacksonConverter(objectMapper, true))
                 }
             }
 

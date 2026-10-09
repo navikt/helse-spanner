@@ -1,6 +1,5 @@
 package no.nav.spanner
 
-import com.fasterxml.jackson.core.JsonParseException
 import com.github.navikt.tbd_libs.result_object.getOrThrow
 import com.github.navikt.tbd_libs.speed.SpeedClient
 import com.github.navikt.tbd_libs.spurtedu.SkjulRequest
@@ -9,7 +8,7 @@ import io.ktor.http.*
 import io.ktor.http.ContentType.Application.Json
 import io.ktor.http.HttpStatusCode.Companion.OK
 import io.ktor.http.auth.HttpAuthHeader
-import io.ktor.serialization.jackson.*
+import io.ktor.serialization.jackson3.*
 import io.ktor.server.application.*
 import io.ktor.server.auth.*
 import io.ktor.server.auth.jwt.*
@@ -27,6 +26,7 @@ import no.nav.spanner.Log.Companion.LogLevel
 import no.nav.spanner.Log.Companion.LogLevel.*
 import org.slf4j.LoggerFactory
 import org.slf4j.event.Level
+import tools.jackson.core.exc.StreamReadException
 import java.io.IOException
 import java.util.*
 
@@ -96,7 +96,7 @@ fun Application.spanner(
         }
     }
 
-    install(ContentNegotiation) { register(Json, JacksonConverter(objectMapper)) }
+    install(ContentNegotiation) { register(Json, JacksonConverter(objectMapper, true)) }
 
     install(Authentication) {
         config.konfigurerJwtAuth(this)
@@ -131,13 +131,13 @@ fun Application.spanner(
                 val fødselsnummer =
                     try {
                         val node = objectMapper.readTree(tekstinnhold)
-                        val ident = node.path("ident").asText()
-                        val identype = node.path("identtype").asText()
+                        val ident = node.path("ident").asString()
+                        val identype = node.path("identtype").asString()
                         when (identype.lowercase()) {
                             "fnr" -> ident
                             else -> null
                         }
-                    } catch (_: JsonParseException) {
+                    } catch (_: StreamReadException) {
                         null
                     }
 

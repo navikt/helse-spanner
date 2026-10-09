@@ -1,7 +1,5 @@
 package no.nav.spanner
 
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.github.navikt.tbd_libs.azure.createAzureTokenClientFromEnvironment
 import com.github.navikt.tbd_libs.azure.createDefaultAzureTokenClient
 import com.github.navikt.tbd_libs.speed.SpeedClient
@@ -17,6 +15,7 @@ import io.ktor.server.engine.applicationEnvironment
 import io.ktor.server.engine.connector
 import io.ktor.server.engine.embeddedServer
 import org.slf4j.LoggerFactory
+import tools.jackson.module.kotlin.jacksonObjectMapper
 import java.io.File
 import java.net.URI
 import java.net.http.HttpClient
@@ -41,7 +40,7 @@ fun main() {
     val speedClient =
         SpeedClient(
             httpClient = HttpClient.newHttpClient(),
-            objectMapper = jacksonObjectMapper().registerModule(JavaTimeModule()),
+            objectMapper = jacksonObjectMapper(),
             tokenProvider =
                 createDefaultAzureTokenClient(
                     tokenEndpoint = URI(config.stringProp("AZURE_OPENID_CONFIG_TOKEN_ENDPOINT")),

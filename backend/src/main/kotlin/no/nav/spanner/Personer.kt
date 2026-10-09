@@ -1,8 +1,5 @@
 package no.nav.spanner
 
-import com.fasterxml.jackson.databind.node.ObjectNode
-import com.fasterxml.jackson.databind.util.RawValue
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.github.navikt.tbd_libs.azure.AzureTokenProvider
 import com.github.navikt.tbd_libs.result_object.getOrThrow
 import io.ktor.client.*
@@ -16,7 +13,7 @@ import io.ktor.http.ContentType.Application.Json
 import io.ktor.http.HttpStatusCode.Companion.OK
 import io.ktor.http.HttpStatusCode.Companion.Unauthorized
 import io.ktor.http.auth.*
-import io.ktor.serialization.jackson.*
+import io.ktor.serialization.jackson3.*
 import io.ktor.server.application.*
 import io.ktor.server.auth.*
 import io.ktor.server.plugins.*
@@ -26,6 +23,8 @@ import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
+import tools.jackson.databind.node.ObjectNode
+import tools.jackson.databind.util.RawValue
 import java.util.*
 
 interface Personer {
@@ -66,9 +65,7 @@ class Spleis(
                 requestTimeout = 60000
             }
             install(ContentNegotiation) {
-                jackson {
-                    registerModule(JavaTimeModule())
-                }
+                jackson(contentType = Json, streamRequestBody = true, block = {})
             }
         }
 
