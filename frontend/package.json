@@ -39,7 +39,7 @@
         "fetch-mock": "^12.6.0",
         "prettier": "^2.3.2",
         "typescript": "^5.9.3",
-        "vite": "^7.2.7",
+        "vite": "^7.3.5",
         "vitest": "^4.1.11"
     }
 }
