@@ -2,6 +2,7 @@ package no.nav.spanner
 
 import com.github.navikt.tbd_libs.azure.createAzureTokenClientFromEnvironment
 import com.github.navikt.tbd_libs.azure.createDefaultAzureTokenClient
+import com.github.navikt.tbd_libs.personpseudoid.ValkeyPersonPseudoIdProvider
 import com.github.navikt.tbd_libs.speed.SpeedClient
 import com.github.navikt.tbd_libs.spurtedu.SpurteDuClient
 import com.natpryce.konfig.Configuration
@@ -56,6 +57,7 @@ fun main() {
             tokenProvider = tokenProvider,
         )
     val spleis = Spleis.from(spannerConfig, tokenProvider)
+    val personPseudoIdProvider = ValkeyPersonPseudoIdProvider.fraEnv(instansNavn = "personpseudoid", env = System.getenv())
 
     System.setProperty("io.ktor.development", spannerConfig.development.toString())
     embeddedServer(
@@ -70,6 +72,6 @@ fun main() {
             }
         },
     ) {
-        spanner(spleis, speedClient, spurteDuClient, påkrevdSpurteduTilgang = System.getenv("SPURTE_DU_TILGANG"), adConfig, spannerConfig.development)
+        spanner(spleis, speedClient, personPseudoIdProvider, spurteDuClient, adConfig, spannerConfig.development)
     }.start(true)
 }

@@ -4,8 +4,6 @@ import com.auth0.jwk.JwkProviderBuilder
 import com.github.navikt.tbd_libs.result_object.ok
 import com.github.navikt.tbd_libs.speed.IdentResponse
 import com.github.navikt.tbd_libs.speed.SpeedClient
-import com.github.navikt.tbd_libs.spurtedu.SkjulRequest
-import com.github.navikt.tbd_libs.spurtedu.SkjulResponse
 import com.github.navikt.tbd_libs.spurtedu.SpurteDuClient
 import com.github.navikt.tbd_libs.spurtedu.VisTekstResponse
 import io.ktor.client.HttpClient
@@ -20,7 +18,6 @@ import io.ktor.http.*
 import io.ktor.serialization.jackson3.JacksonConverter
 import io.ktor.server.application.Application
 import io.ktor.server.engine.connector
-import io.ktor.server.plugins.NotFoundException
 import io.ktor.server.testing.*
 import io.mockk.every
 import io.mockk.mockk
@@ -53,43 +50,15 @@ class E2ETest {
                     kilde = IdentResponse.KildeResponse.PDL,
                 ).ok()
         }
-    private val påkrevdSpurteduTilgang = "skikkelig_tøysete_claim"
+    private val personPseudoIdProvider = InMemoryPersonPseudoIdProvider()
     private val spurteDuClient =
         mockk<SpurteDuClient> {
-            val skjulRequests = mutableListOf<SkjulRequest>()
-            every { skjul(capture(skjulRequests)) } answers {
-                val forrigeRequest = skjulRequests.last()
-                check(forrigeRequest.påkrevdTilgang == påkrevdSpurteduTilgang) {
-                    "påkrevd tilgang er ikke $påkrevdSpurteduTilgang"
-                }
-                val maskertId =
-                    when (forrigeRequest) {
-                        is SkjulRequest.SkjulTekstRequest -> {
-                            val skjultVerdi = objectMapper.readTree(forrigeRequest.tekst).path("ident").asString()
-                            when (skjultVerdi) {
-                                "42",
-                                "12020052345",
-                                -> "113eb3df-102d-4a07-9270-2caa648c62f4"
-                                "2392363031327" -> "48bfef57-3080-4f19-98eb-5cc72d9d16c5"
-                                else -> throw NotFoundException("no person with identifier: $skjultVerdi")
-                            }
-                        }
-                        is SkjulRequest.SkjulUrlRequest -> error("Støtter ikke dette")
-                    }
-                SkjulResponse(
-                    id = UUID.fromString(maskertId),
-                    url = "http://foo/",
-                    path = "/foo",
-                )
-            }
-
             val visRequests = mutableListOf<UUID>()
             every { vis(capture(visRequests), any(), any()) } answers {
                 val maskertId = visRequests.last()
                 val ident =
                     when (maskertId.toString()) {
-                        "113eb3df-102d-4a07-9270-2caa648c62f4" -> "12020052345"
-                        "48bfef57-3080-4f19-98eb-5cc72d9d16c5" -> "2392363031327"
+                        GAMMEL_SPURTEDU_ID -> "12020052345"
                         else -> error("Kjenner ikke til $maskertId")
                     }
                 VisTekstResponse(
@@ -114,7 +83,7 @@ class E2ETest {
             val uuid =
                 client
                     .post("/api/uuid/") {
-                        header(IdType.FNR.header, "42")
+                        header(IdType.FNR.header, "12020052345")
                     }.body<JsonNode>()
                     .path("id")
                     .asText()
@@ -131,6 +100,32 @@ class E2ETest {
                 }
         }
     }
+
+    @Test
+    fun `slår opp i spurtedu når maskert id ikke finnes i valkey`() =
+        e2e { client ->
+            client
+                .get("/api/person/") {
+                    header(IdType.MASKERT_ID.header, GAMMEL_SPURTEDU_ID)
+                }.apply {
+                    assertTrue(status.isSuccess())
+                    val bodyAsText = bodyAsText()
+                    assertTrue(bodyAsText.contains("\"aktørId\": \"42\"")) {
+                        "response was: $bodyAsText"
+                    }
+                }
+        }
+
+    @Test
+    fun `ugyldig fødselsnummer gir bad request`() =
+        e2e { client ->
+            client
+                .post("/api/uuid/") {
+                    header(IdType.FNR.header, "42")
+                }.apply {
+                    assertEquals(HttpStatusCode.BadRequest, status)
+                }
+        }
 
     @Test
     fun `respond with message json on hendelse endpoint`() =
@@ -161,6 +156,7 @@ class E2ETest {
         }
 
     companion object {
+        private const val GAMMEL_SPURTEDU_ID = "113eb3df-102d-4a07-9270-2caa648c62f4"
         val mockAuth = MockOAuth2Server()
 
         @BeforeAll
@@ -179,7 +175,7 @@ class E2ETest {
     private fun e2e(testblokk: suspend (HttpClient) -> Unit) {
         e2e(
             applicationModule = {
-                spanner(lokaleKjenninger, speedClient, spurteDuClient, påkrevdSpurteduTilgang, azureADConfig, true)
+                spanner(lokaleKjenninger, speedClient, personPseudoIdProvider, spurteDuClient, azureADConfig, true)
             },
             testblokk = testblokk,
         )

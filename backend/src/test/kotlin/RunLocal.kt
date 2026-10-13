@@ -42,8 +42,8 @@ fun startLocal() {
         )
 
     val speedClient = mockk<SpeedClient>()
+    val personPseudoIdProvider = InMemoryPersonPseudoIdProvider()
     val spurteDuClient = mockk<SpurteDuClient>()
-    val påkrevdSpurteduTilgang = "skikkelig_tøysete_claim"
     val spleis = LokaleKjenninger
 
     embeddedServer(
@@ -61,7 +61,7 @@ fun startLocal() {
         install(CORS) {
             this.anyHost()
         }
-        spanner(spleis, speedClient, spurteDuClient, påkrevdSpurteduTilgang, adConfig, spannerConfig.development)
+        spanner(spleis, speedClient, personPseudoIdProvider, spurteDuClient, adConfig, spannerConfig.development)
     }.start(true)
     mockAuth.shutdown()
 }

@@ -9,6 +9,7 @@ sykepengerDeployable {
 dependencies {
     implementation(libs.tbd.libs.azure.token.client.default)
     implementation(libs.tbd.libs.spurtedu.client)
+    implementation(libs.tbd.libs.person.pseudo.id)
     implementation(libs.tbd.libs.speed.client)
 
     implementation(libs.ktor.server.core)

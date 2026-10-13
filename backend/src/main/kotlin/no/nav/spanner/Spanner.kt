@@ -1,8 +1,10 @@
 package no.nav.spanner
 
+import com.github.navikt.tbd_libs.personpseudoid.Identitetsnummer
+import com.github.navikt.tbd_libs.personpseudoid.PersonPseudoId
+import com.github.navikt.tbd_libs.personpseudoid.PersonPseudoIdProvider
 import com.github.navikt.tbd_libs.result_object.getOrThrow
 import com.github.navikt.tbd_libs.speed.SpeedClient
-import com.github.navikt.tbd_libs.spurtedu.SkjulRequest
 import com.github.navikt.tbd_libs.spurtedu.SpurteDuClient
 import io.ktor.http.*
 import io.ktor.http.ContentType.Application.Json
@@ -40,11 +42,31 @@ enum class IdType(
 
 private val logg = Log.logger("Spanner")
 
+// Fallback for maskerte id-er laget i spurtedu før vi gikk over til personpseudoid i Valkey
+private fun fødselsnummerFraSpurteDu(
+    spurteDuClient: SpurteDuClient,
+    maskertId: UUID,
+    bearerToken: String?,
+): String? {
+    val tekstinnhold = spurteDuClient.vis(maskertId, bearerToken).text
+    return try {
+        val node = objectMapper.readTree(tekstinnhold)
+        val ident = node.path("ident").asString()
+        val identype = node.path("identtype").asString()
+        when (identype.lowercase()) {
+            "fnr" -> ident
+            else -> null
+        }
+    } catch (_: StreamReadException) {
+        null
+    }
+}
+
 fun Application.spanner(
     spleis: Personer,
     speedClient: SpeedClient,
+    personPseudoIdProvider: PersonPseudoIdProvider,
     spurteDuClient: SpurteDuClient,
-    påkrevdSpurteduTilgang: String,
     config: AzureADConfig,
     development: Boolean,
 ) {
@@ -127,23 +149,13 @@ fun Application.spanner(
                         return@get call.respond(HttpStatusCode.BadRequest, FeilRespons("bad_request", "maskert id må være uuid"))
                     }
 
-                val tekstinnhold = spurteDuClient.vis(id, call.bearerToken).text
-                val fødselsnummer =
-                    try {
-                        val node = objectMapper.readTree(tekstinnhold)
-                        val ident = node.path("ident").asString()
-                        val identype = node.path("identtype").asString()
-                        when (identype.lowercase()) {
-                            "fnr" -> ident
-                            else -> null
-                        }
-                    } catch (_: StreamReadException) {
-                        null
-                    }
+                val identitetsnummer =
+                    personPseudoIdProvider.finnIdentitetsnummer(PersonPseudoId(id))?.value
+                        ?: fødselsnummerFraSpurteDu(spurteDuClient, id, call.bearerToken)
 
-                if (fødselsnummer == null) return@get call.respond(HttpStatusCode.BadRequest, FeilRespons("bad_request", "maskertId pekte ikke på et fødselsnummer"))
-                val aktørId = speedClient.hentFødselsnummerOgAktørId(fødselsnummer, call.callId ?: UUID.randomUUID().toString()).getOrThrow().aktørId
-                spleis.person(call, fødselsnummer, aktørId)
+                if (identitetsnummer == null) return@get call.respond(HttpStatusCode.BadRequest, FeilRespons("bad_request", "maskertId pekte ikke på et fødselsnummer"))
+                val aktørId = speedClient.hentFødselsnummerOgAktørId(identitetsnummer, call.callId ?: UUID.randomUUID().toString()).getOrThrow().aktørId
+                spleis.person(call, identitetsnummer, aktørId)
             }
             post("/api/uuid/") {
                 audit()
@@ -164,19 +176,11 @@ fun Application.spanner(
                         IdType.MASKERT_ID -> return@post call.respond(HttpStatusCode.BadRequest, FeilRespons("bad_request", "${IdType.AKTORID.header} or ${IdType.FNR.header} must be set"))
                     }
 
-                val payload =
-                    SkjulRequest.SkjulTekstRequest(
-                        tekst =
-                            objectMapper.writeValueAsString(
-                                mapOf(
-                                    "ident" to fnr,
-                                    "identtype" to IdType.FNR.name,
-                                ),
-                            ),
-                        påkrevdTilgang = påkrevdSpurteduTilgang,
-                    )
-                val maskertId = spurteDuClient.skjul(payload)
-                call.respondText(""" { "id": "${maskertId.id}" } """, Json, OK)
+                val identitetsnummer =
+                    runCatching { Identitetsnummer(fnr) }.getOrNull()
+                        ?: return@post call.respond(HttpStatusCode.BadRequest, FeilRespons("bad_request", "fødselsnummer må bestå av 11 siffer"))
+                val personPseudoId = personPseudoIdProvider.nyPersonPseudoId(identitetsnummer)
+                call.respondText(""" { "id": "$personPseudoId" } """, Json, OK)
             }
             /*
                 har ikke funksjonalitet fra frontend ennå, men kan kalles manuelt fra devtools feks:

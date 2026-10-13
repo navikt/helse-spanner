@@ -19,5 +19,3 @@ spec:
       value: api://dev-gcp.tbd.sparsom-api/.default
     - name: HTTP_HOST
       value: spanner.ansatt.dev.nav.no
-    - name: SPURTE_DU_TILGANG
-      value: "9046ac9d-bb00-47dc-bcfb-e5221bf8d7f9, cda797bb-ac3b-4440-b661-2cd5eb3edba0"

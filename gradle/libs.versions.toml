@@ -37,6 +37,7 @@ mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 tbd-libs-azure-token-client-default = { module = "com.github.navikt.tbd-libs:azure-token-client-default", version.ref = "tbd-libs" }
 tbd-libs-speed-client = { module = "com.github.navikt.tbd-libs:speed-client", version.ref = "tbd-libs" }
 tbd-libs-spurtedu-client = { module = "com.github.navikt.tbd-libs:spurtedu-client", version.ref = "tbd-libs" }
+tbd-libs-person-pseudo-id = { module = "com.github.navikt.tbd-libs:person-pseudo-id", version.ref = "tbd-libs" }
 
 [plugins]
 sykepenger-deployable = { id = "no.nav.sykepenger.deployable", version.ref = "sykepengerGradlePlugins" }
