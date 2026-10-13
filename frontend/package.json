@@ -16,7 +16,7 @@
         "prettier": "prettier --write index.html package.json \"src/**/*.{js,jsx,ts,tsx,css,json,svg}\""
     },
     "dependencies": {
-        "@microlink/react-json-view": "^1.31.38",
+        "@microlink/react-json-view": "^1.31.40",
         "@navikt/aksel-icons": "^8.18.0",
         "@navikt/ds-css": "^8.18.0",
         "@navikt/ds-react": "^8.18.0",
@@ -34,12 +34,12 @@
         "@testing-library/user-event": "^14.6.7",
         "@types/react": "^19.3.0",
         "@types/react-dom": "^19.3.0",
-        "@vitejs/plugin-react": "^6.1.1",
+        "@vitejs/plugin-react": "^6.1.2",
         "@vitest/ui": "^5.0.3",
         "fetch-mock": "^12.6.0",
         "prettier": "^3.9.9",
         "typescript": "^7.0.2",
-        "vite": "^8.3.2",
+        "vite": "^8.3.3",
         "vitest": "^5.0.3"
     }
 }
