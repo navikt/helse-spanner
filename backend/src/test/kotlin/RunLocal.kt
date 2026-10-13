@@ -2,7 +2,6 @@ package no.nav.spanner
 
 import com.auth0.jwk.JwkProviderBuilder
 import com.github.navikt.tbd_libs.speed.SpeedClient
-import com.github.navikt.tbd_libs.spurtedu.SpurteDuClient
 import io.ktor.server.application.*
 import io.ktor.server.cio.*
 import io.ktor.server.engine.*
@@ -12,6 +11,7 @@ import no.nav.security.mock.oauth2.MockOAuth2Server
 import no.nav.security.mock.oauth2.OAuth2Config
 import no.nav.security.mock.oauth2.token.DefaultOAuth2TokenCallback
 import no.nav.spanner.no.nav.spanner.LokaleKjenninger
+import no.nav.spanner.spurtedu.SpurteDuClient
 import org.slf4j.LoggerFactory
 
 fun startLocal() {

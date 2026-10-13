@@ -4,8 +4,6 @@ import com.auth0.jwk.JwkProviderBuilder
 import com.github.navikt.tbd_libs.result_object.ok
 import com.github.navikt.tbd_libs.speed.IdentResponse
 import com.github.navikt.tbd_libs.speed.SpeedClient
-import com.github.navikt.tbd_libs.spurtedu.SpurteDuClient
-import com.github.navikt.tbd_libs.spurtedu.VisTekstResponse
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
@@ -24,6 +22,8 @@ import io.mockk.mockk
 import no.nav.security.mock.oauth2.MockOAuth2Server
 import no.nav.security.mock.oauth2.token.DefaultOAuth2TokenCallback
 import no.nav.spanner.no.nav.spanner.LokaleKjenninger
+import no.nav.spanner.spurtedu.SpurteDuClient
+import no.nav.spanner.spurtedu.VisTekstResponse
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
@@ -54,7 +54,7 @@ class E2ETest {
     private val spurteDuClient =
         mockk<SpurteDuClient> {
             val visRequests = mutableListOf<UUID>()
-            every { vis(capture(visRequests), any(), any()) } answers {
+            every { vis(capture(visRequests), any()) } answers {
                 val maskertId = visRequests.last()
                 val ident =
                     when (maskertId.toString()) {

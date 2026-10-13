@@ -5,7 +5,6 @@ import com.github.navikt.tbd_libs.personpseudoid.PersonPseudoId
 import com.github.navikt.tbd_libs.personpseudoid.PersonPseudoIdProvider
 import com.github.navikt.tbd_libs.result_object.getOrThrow
 import com.github.navikt.tbd_libs.speed.SpeedClient
-import com.github.navikt.tbd_libs.spurtedu.SpurteDuClient
 import io.ktor.http.*
 import io.ktor.http.ContentType.Application.Json
 import io.ktor.http.HttpStatusCode.Companion.OK
@@ -26,6 +25,7 @@ import io.ktor.server.routing.*
 import no.nav.spanner.AuditLogger.Companion.audit
 import no.nav.spanner.Log.Companion.LogLevel
 import no.nav.spanner.Log.Companion.LogLevel.*
+import no.nav.spanner.spurtedu.SpurteDuClient
 import org.slf4j.LoggerFactory
 import org.slf4j.event.Level
 import tools.jackson.core.exc.StreamReadException

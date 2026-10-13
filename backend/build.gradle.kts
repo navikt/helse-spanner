@@ -8,7 +8,6 @@ sykepengerDeployable {
 
 dependencies {
     implementation(libs.tbd.libs.azure.token.client.default)
-    implementation(libs.tbd.libs.spurtedu.client)
     implementation(libs.tbd.libs.person.pseudo.id)
     implementation(libs.tbd.libs.speed.client)
 
@@ -43,6 +42,7 @@ dependencies {
     runtimeOnly(libs.jjwt.jackson)
 
     testImplementation(libs.mockk)
+    testImplementation(libs.tbd.libs.mock.http.client)
     testImplementation(libs.mock.oauth2.server)
     testImplementation(libs.ktor.server.test.host)
 }
