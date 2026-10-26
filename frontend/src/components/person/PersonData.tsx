@@ -12,7 +12,7 @@ export const PersonData = () => {
     const {personId} = useParams<string>()
     if (personId === undefined) return null
     const backend = useBackend()
-    const request = () => backend.personForUUID(personId)
+    const request = () => backend.personForPersonPseudoId(personId)
     const {isLoading, isError, data, error} = useQuery<PersonDto>({ queryKey: ['person', personId], queryFn: request })
     if (isLoading) return <div style={{display: "grid", placeContent: "center"}}><Spinner/></div>
     if (isError) return <Feilmelding feil={error}/>

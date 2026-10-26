@@ -11,19 +11,19 @@ const person2 = "ac427542-11e0-4f84-bb7e-1343b6103fa5"
 const personLokal = "fde700bb-997c-43e2-a7d7-ec60647421c2"
 
 export let hardCodedBackend: Backend = {
-    uuidForFnr(fnr: string): Promise<PersonPseudoIdDto> {
+    personPseudoIdForFnr(fnr: string): Promise<PersonPseudoIdDto> {
         return Promise.resolve({id: person1})
     },
-    uuidForAktørId(aktorid: string): Promise<PersonPseudoIdDto> {
+    personPseudoIdForAktørId(aktorid: string): Promise<PersonPseudoIdDto> {
         if (aktorid === '43') return Promise.resolve({id: person2})
         if (aktorid === '42') return Promise.resolve({id: person1})
         if (aktorid === 'lokal') return Promise.resolve({id: personLokal})
         else return Promise.reject(lagfinnesIkkeFeil())
     },
-    personForUUID(uuid: string): Promise<PersonDto> {
-        if (uuid === person2) return Promise.resolve(jsonPerson2)
-        if (uuid === person1) return Promise.resolve(jsonPerson)
-        if (uuid === personLokal) {
+    personForPersonPseudoId(personPseudoId: string): Promise<PersonDto> {
+        if (personPseudoId === person2) return Promise.resolve(jsonPerson2)
+        if (personPseudoId === person1) return Promise.resolve(jsonPerson)
+        if (personPseudoId === personLokal) {
             try {
                 return Promise.resolve(json)
             } catch (e) {

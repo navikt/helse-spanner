@@ -11,9 +11,9 @@ export const Søk = () => {
     const [feilmelding, setFeilmelding] = useState('')
     const inputRef = useRef<HTMLInputElement>(null)
 
-    const updatePath = (uuid: string) => {
+    const updatePath = (personPseudoId: string) => {
         setIsLoading(false)
-        const newPath = `/person/${uuid}`
+        const newPath = `/person/${personPseudoId}`
         console.log(`oppdaterer pathname med ${newPath}`)
         if (newPath === location.pathname) return
         setSøketekst('')

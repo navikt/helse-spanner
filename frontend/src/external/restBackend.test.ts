@@ -17,7 +17,7 @@ afterEach(() => {
 
 test('ok fra backend er ok', async () => {
     fetchMock.get('http://localhost:8080/api/person/', { foo: 'bar' })
-    expect(await restBackend.personForUUID('foo')).toEqual({ foo: 'bar' })
+    expect(await restBackend.personForPersonPseudoId('foo')).toEqual({ foo: 'bar' })
 })
 
 test('Feil fra backend kan legge ved feildto i body for mer detaljer', async () => {
@@ -25,7 +25,7 @@ test('Feil fra backend kan legge ved feildto i body for mer detaljer', async () 
         status: 418,
         body: JSON.stringify({ error_id: 'FOO', description: 'Bad' }),
     })
-    let thrownError = await getBackendFeil(async () => restBackend.personForUUID('foo'))
+    let thrownError = await getBackendFeil(async () => restBackend.personForPersonPseudoId('foo'))
     expect(thrownError?.feilId).toBe('FOO')
     expect(thrownError?.message).toContain('Feil fra server')
     expect(thrownError?.message).toContain('Bad')
@@ -36,7 +36,7 @@ test('Feil fra backend uten gyldig feildto blir fortsatt backendfeil', async () 
         status: 418,
     })
 
-    let thrownError = await getBackendFeil(async () => restBackend.personForUUID('foo'))
+    let thrownError = await getBackendFeil(async () => restBackend.personForPersonPseudoId('foo'))
 
     expect(thrownError?.feilId).toBe(undefined)
     expect(thrownError?.message).toContain('Feil fra server')
@@ -46,7 +46,7 @@ test('Feil fra nettverksstacke reject gir httpError', async () => {
     fetchMock.get('http://localhost:8080/api/person/', {
         throws: Error('Connection refused'),
     })
-    let thrownError = await getHttpFeil(async () => restBackend.personForUUID('foo'))
+    let thrownError = await getHttpFeil(async () => restBackend.personForPersonPseudoId('foo'))
 
     expect(thrownError?.message).toBe('Feil under nettverkskall: Connection refused')
     expect(thrownError?.cause).toBeInstanceOf(Error)

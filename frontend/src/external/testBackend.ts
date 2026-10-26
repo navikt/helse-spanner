@@ -35,22 +35,22 @@ export let testBackend = (
             }
             return Promise.resolve(melding)
         },
-        uuidForAktørId(aktørId: string): Promise<PersonPseudoIdDto> {
+        personPseudoIdForAktørId(aktørId: string): Promise<PersonPseudoIdDto> {
             return Promise.resolve({ id: aktørId })
         },
 
-        uuidForFnr(fnr: string): Promise<PersonPseudoIdDto> {
+        personPseudoIdForFnr(fnr: string): Promise<PersonPseudoIdDto> {
             return Promise.resolve({ id: fnr })
         },
 
-        personForUUID(uuid: string): Promise<PersonDto> {
-            let person = aktorPersoner[uuid]
+        personForPersonPseudoId(personPseudoId: string): Promise<PersonDto> {
+            let person = aktorPersoner[personPseudoId]
             if (person) return Promise.resolve(person)
-            let fnrperson = fnrPersoner[uuid]
+            let fnrperson = fnrPersoner[personPseudoId]
             if (fnrperson) return Promise.resolve(fnrperson)
-            let testError = errorPersoner[uuid]
+            let testError = errorPersoner[personPseudoId]
             if (!testError) {
-                throw Error(`No test fixture with ${uuid}`)
+                throw Error(`No test fixture with ${personPseudoId}`)
             }
             return Promise.reject(testError)
         },

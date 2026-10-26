@@ -59,9 +59,9 @@ class E2ETest {
             ),
         )
         e2e { client ->
-            val uuid =
+            val personPseudoId =
                 client
-                    .post("/api/uuid/") {
+                    .post("/api/person-pseudo-id/") {
                         header(IdType.FNR.header, "12020052345")
                     }.body<JsonNode>()
                     .path("id")
@@ -69,7 +69,7 @@ class E2ETest {
 
             client
                 .get("/api/person/") {
-                    header(IdType.PERSON_PSEUDO_ID.header, uuid)
+                    header(IdType.PERSON_PSEUDO_ID.header, personPseudoId)
                 }.apply {
                     assertTrue(status.isSuccess())
                     val bodyAsText = bodyAsText()
@@ -84,7 +84,7 @@ class E2ETest {
     fun `ugyldig fødselsnummer gir bad request`() =
         e2e { client ->
             client
-                .post("/api/uuid/") {
+                .post("/api/person-pseudo-id/") {
                     header(IdType.FNR.header, "42")
                 }.apply {
                     assertEquals(HttpStatusCode.BadRequest, status)

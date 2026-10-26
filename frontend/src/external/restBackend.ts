@@ -5,13 +5,13 @@ import {feilVedDårligRespons, wrapNnettverksFeil} from './feil'
 export const restBackend = (development: boolean): Backend => {
     const baseUrl: string = development ? 'http://localhost:8080' : ''
     return {
-        uuidForAktørId(aktørId: string): Promise<PersonPseudoIdDto> {
-            return fetchUUID(baseUrl, {aktorId: `${aktørId}` })
+        personPseudoIdForAktørId(aktørId: string): Promise<PersonPseudoIdDto> {
+            return fetchPersonPseudoId(baseUrl, {aktorId: `${aktørId}` })
         },
-        uuidForFnr(fnr: string): Promise<PersonPseudoIdDto> {
-            return fetchUUID(baseUrl, { fnr: `${fnr}` })
+        personPseudoIdForFnr(fnr: string): Promise<PersonPseudoIdDto> {
+            return fetchPersonPseudoId(baseUrl, { fnr: `${fnr}` })
         },
-        personForUUID(personPseudoId: string): Promise<PersonDto> {
+        personForPersonPseudoId(personPseudoId: string): Promise<PersonDto> {
             let headers: { [key: string]: string } = {
                 Accept: 'application/json',
             }
@@ -45,8 +45,8 @@ export const restBackend = (development: boolean): Backend => {
     }
 }
 
-const fetchUUID = (baseUrl: string, headervalue: Record<string,string>): Promise<PersonPseudoIdDto> => {
-    return fetch(`${baseUrl}/api/uuid/`, {
+const fetchPersonPseudoId = (baseUrl: string, headervalue: Record<string,string>): Promise<PersonPseudoIdDto> => {
+    return fetch(`${baseUrl}/api/person-pseudo-id/`, {
         method: 'post',
         headers: {
             Accept: 'application/json',

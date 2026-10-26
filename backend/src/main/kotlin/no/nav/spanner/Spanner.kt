@@ -131,7 +131,7 @@ fun Application.spanner(
                 val aktørId = speedClient.hentFødselsnummerOgAktørId(identitetsnummer, call.callId ?: UUID.randomUUID().toString()).getOrThrow().aktørId
                 spleis.person(call, identitetsnummer, aktørId)
             }
-            post("/api/uuid/") {
+            post("/api/person-pseudo-id/") {
                 audit()
                 val (idType, idValue) = call.personId()
                 logg

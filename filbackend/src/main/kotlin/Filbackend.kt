@@ -40,7 +40,7 @@ fun main() {
                 call.respondText(person, Json, OK)
             }
 
-            post("/api/uuid/") {
+            post("/api/person-pseudo-id/") {
                 val personPseudoId = call.uuidHeader("personPseudoId") ?: return@post call.respond(BadRequest)
                 val person = hentingsmedium.hentPerson(personPseudoId) ?: return@post call.respond(NotFound)
                 call.respondText(person, Json, OK)
@@ -52,10 +52,10 @@ fun main() {
                 call.respondText(hendelse, Json, OK)
             }
 
-            post("/api/person/{uuid}") {
-                val uuid = call.uuidParameter("uuid") ?: return@post call.respond(BadRequest)
+            post("/api/person/{personPseudoId}") {
+                val personPseudoId = call.uuidParameter("personPseudoId") ?: return@post call.respond(BadRequest)
                 val person = call.receiveText()
-                lagringsmedium.lagrePerson(uuid, person)
+                lagringsmedium.lagrePerson(personPseudoId, person)
                 call.respond(Created)
             }
 

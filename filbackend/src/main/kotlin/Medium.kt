@@ -10,13 +10,13 @@ sealed interface Lagringsmedium {
     ): Boolean
 
     fun lagrePerson(
-        uuid: UUID,
+        personPseudoId: UUID,
         person: String,
     ): Boolean
 }
 
 interface Hentingsmedium {
-    fun hentPerson(uuid: UUID): String?
+    fun hentPerson(personPseudoId: UUID): String?
 
     fun hentHendelse(uuid: UUID): String?
 }
@@ -26,7 +26,7 @@ object Fil : Hentingsmedium {
 
     private fun spannerRoot() = System.getenv("SPANNER_ROOT").takeUnless { it.isNullOrBlank() } ?: "${System.getenv("HOME")}/.spanner"
 
-    override fun hentPerson(uuid: UUID) = "${spannerRoot()}/personer/$uuid.json".innhold()
+    override fun hentPerson(personPseudoId: UUID) = "${spannerRoot()}/personer/$personPseudoId.json".innhold()
 
     override fun hentHendelse(uuid: UUID) = "${spannerRoot()}/hendelser/$this.json".innhold()
 }
@@ -46,10 +46,10 @@ object Minne : Hentingsmedium, Lagringsmedium {
         return null
     }
 
-    override fun hentPerson(uuid: UUID): String? {
-        val person = personer[uuid]?.data ?: return personer.rydd()
+    override fun hentPerson(personPseudoId: UUID): String? {
+        val person = personer[personPseudoId]?.data ?: return personer.rydd()
         personer.rydd()
-        personer[uuid] = Entry(person) // Oppdaterer timeouten
+        personer[personPseudoId] = Entry(person) // Oppdaterer timeouten
         return person
     }
 
@@ -70,24 +70,24 @@ object Minne : Hentingsmedium, Lagringsmedium {
     }
 
     override fun lagrePerson(
-        uuid: UUID,
+        personPseudoId: UUID,
         person: String,
     ): Boolean {
         personer.rydd()
-        personer[uuid] = Entry(person)
+        personer[personPseudoId] = Entry(person)
         return true
     }
 }
 
-internal fun List<Hentingsmedium>.hentPerson(uuid: UUID) = firstNotNullOfOrNull { it.hentPerson(uuid) }
+internal fun List<Hentingsmedium>.hentPerson(personPseudoId: UUID) = firstNotNullOfOrNull { it.hentPerson(personPseudoId) }
 
 internal fun List<Hentingsmedium>.hentHendelse(uuid: UUID) = firstNotNullOfOrNull { it.hentHendelse(uuid) }
 
 internal fun List<Lagringsmedium>.lagrePerson(
-    uuid: UUID,
+    personPseudoId: UUID,
     person: String,
 ) {
-    firstOrNull { it.lagrePerson(uuid, person) } ?: error("Ingen lagringsmedium lagret personen.")
+    firstOrNull { it.lagrePerson(personPseudoId, person) } ?: error("Ingen lagringsmedium lagret personen.")
 }
 
 internal fun List<Lagringsmedium>.lagreHendelse(
