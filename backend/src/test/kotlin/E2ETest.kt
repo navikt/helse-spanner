@@ -22,8 +22,6 @@ import io.mockk.mockk
 import no.nav.security.mock.oauth2.MockOAuth2Server
 import no.nav.security.mock.oauth2.token.DefaultOAuth2TokenCallback
 import no.nav.spanner.no.nav.spanner.LokaleKjenninger
-import no.nav.spanner.spurtedu.SpurteDuClient
-import no.nav.spanner.spurtedu.VisTekstResponse
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
@@ -31,7 +29,6 @@ import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 import tools.jackson.databind.JsonNode
 import java.net.ServerSocket
-import java.util.UUID
 
 class E2ETest {
     private val azureADConfig =
@@ -51,24 +48,6 @@ class E2ETest {
                 ).ok()
         }
     private val personPseudoIdProvider = InMemoryPersonPseudoIdProvider()
-    private val spurteDuClient =
-        mockk<SpurteDuClient> {
-            val visRequests = mutableListOf<UUID>()
-            every { vis(capture(visRequests), any()) } answers {
-                val maskertId = visRequests.last()
-                val ident =
-                    when (maskertId.toString()) {
-                        GAMMEL_SPURTEDU_ID -> "12020052345"
-                        else -> error("Kjenner ikke til $maskertId")
-                    }
-                VisTekstResponse(
-                    text = """{
-                "ident": "$ident",
-                "identtype": "FNR"
-            }""",
-                )
-            }
-        }
 
     private val lokaleKjenninger = LokaleKjenninger
 
@@ -90,7 +69,7 @@ class E2ETest {
 
             client
                 .get("/api/person/") {
-                    header(IdType.MASKERT_ID.header, uuid)
+                    header(IdType.PERSON_PSEUDO_ID.header, uuid)
                 }.apply {
                     assertTrue(status.isSuccess())
                     val bodyAsText = bodyAsText()
@@ -100,21 +79,6 @@ class E2ETest {
                 }
         }
     }
-
-    @Test
-    fun `slår opp i spurtedu når maskert id ikke finnes i valkey`() =
-        e2e { client ->
-            client
-                .get("/api/person/") {
-                    header(IdType.MASKERT_ID.header, GAMMEL_SPURTEDU_ID)
-                }.apply {
-                    assertTrue(status.isSuccess())
-                    val bodyAsText = bodyAsText()
-                    assertTrue(bodyAsText.contains("\"aktørId\": \"42\"")) {
-                        "response was: $bodyAsText"
-                    }
-                }
-        }
 
     @Test
     fun `ugyldig fødselsnummer gir bad request`() =
@@ -156,7 +120,6 @@ class E2ETest {
         }
 
     companion object {
-        private const val GAMMEL_SPURTEDU_ID = "113eb3df-102d-4a07-9270-2caa648c62f4"
         val mockAuth = MockOAuth2Server()
 
         @BeforeAll
@@ -175,7 +138,7 @@ class E2ETest {
     private fun e2e(testblokk: suspend (HttpClient) -> Unit) {
         e2e(
             applicationModule = {
-                spanner(lokaleKjenninger, speedClient, personPseudoIdProvider, spurteDuClient, azureADConfig, true)
+                spanner(lokaleKjenninger, speedClient, personPseudoIdProvider, azureADConfig, true)
             },
             testblokk = testblokk,
         )

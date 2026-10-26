@@ -40,7 +40,6 @@ spec:
           namespace: nais-system
         - application: spleis-api
         - application: sparsom-api
-        - application: spurtedu
         - application: speed-api
   valkey:
     - instance: personpseudoid

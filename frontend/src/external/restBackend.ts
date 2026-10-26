@@ -1,26 +1,26 @@
 import {Backend} from './backend'
-import {MaskertDto, MeldingDto, PersonDto} from '../state/dto'
+import {MeldingDto, PersonDto, PersonPseudoIdDto} from '../state/dto'
 import {feilVedDårligRespons, wrapNnettverksFeil} from './feil'
 
 export const restBackend = (development: boolean): Backend => {
     const baseUrl: string = development ? 'http://localhost:8080' : ''
     return {
-        uuidForAktørId(aktørId: string): Promise<MaskertDto> {
+        uuidForAktørId(aktørId: string): Promise<PersonPseudoIdDto> {
             return fetchUUID(baseUrl, {aktorId: `${aktørId}` })
         },
-        uuidForFnr(fnr: string): Promise<MaskertDto> {
+        uuidForFnr(fnr: string): Promise<PersonPseudoIdDto> {
             return fetchUUID(baseUrl, { fnr: `${fnr}` })
         },
-        personForUUID(maskertId: string): Promise<PersonDto> {
+        personForUUID(personPseudoId: string): Promise<PersonDto> {
             let headers: { [key: string]: string } = {
                 Accept: 'application/json',
             }
-            if (maskertId.length == 11) {
-                headers = {...headers, fnr: maskertId }
-            } else if (maskertId.length == 13) {
-                headers = {...headers, aktorId: maskertId }
+            if (personPseudoId.length == 11) {
+                headers = {...headers, fnr: personPseudoId }
+            } else if (personPseudoId.length == 13) {
+                headers = {...headers, aktorId: personPseudoId }
             } else {
-                headers = {...headers, maskertId: maskertId }
+                headers = {...headers, personPseudoId: personPseudoId }
             }
 
             return fetch(`${baseUrl}/api/person/`, {
@@ -45,7 +45,7 @@ export const restBackend = (development: boolean): Backend => {
     }
 }
 
-const fetchUUID = (baseUrl: string, headervalue: Record<string,string>): Promise<MaskertDto> => {
+const fetchUUID = (baseUrl: string, headervalue: Record<string,string>): Promise<PersonPseudoIdDto> => {
     return fetch(`${baseUrl}/api/uuid/`, {
         method: 'post',
         headers: {

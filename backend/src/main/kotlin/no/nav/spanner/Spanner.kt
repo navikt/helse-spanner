@@ -8,7 +8,6 @@ import com.github.navikt.tbd_libs.speed.SpeedClient
 import io.ktor.http.*
 import io.ktor.http.ContentType.Application.Json
 import io.ktor.http.HttpStatusCode.Companion.OK
-import io.ktor.http.auth.HttpAuthHeader
 import io.ktor.serialization.jackson3.*
 import io.ktor.server.application.*
 import io.ktor.server.auth.*
@@ -25,10 +24,8 @@ import io.ktor.server.routing.*
 import no.nav.spanner.AuditLogger.Companion.audit
 import no.nav.spanner.Log.Companion.LogLevel
 import no.nav.spanner.Log.Companion.LogLevel.*
-import no.nav.spanner.spurtedu.SpurteDuClient
 import org.slf4j.LoggerFactory
 import org.slf4j.event.Level
-import tools.jackson.core.exc.StreamReadException
 import java.io.IOException
 import java.util.*
 
@@ -37,36 +34,15 @@ enum class IdType(
 ) {
     FNR("fnr"),
     AKTORID("aktorId"),
-    MASKERT_ID("maskertId"),
+    PERSON_PSEUDO_ID("personPseudoId"),
 }
 
 private val logg = Log.logger("Spanner")
-
-// Fallback for maskerte id-er laget i spurtedu før vi gikk over til personpseudoid i Valkey
-private fun fødselsnummerFraSpurteDu(
-    spurteDuClient: SpurteDuClient,
-    maskertId: UUID,
-    bearerToken: String?,
-): String? {
-    val tekstinnhold = spurteDuClient.vis(maskertId, bearerToken).text
-    return try {
-        val node = objectMapper.readTree(tekstinnhold)
-        val ident = node.path("ident").asString()
-        val identype = node.path("identtype").asString()
-        when (identype.lowercase()) {
-            "fnr" -> ident
-            else -> null
-        }
-    } catch (_: StreamReadException) {
-        null
-    }
-}
 
 fun Application.spanner(
     spleis: Personer,
     speedClient: SpeedClient,
     personPseudoIdProvider: PersonPseudoIdProvider,
-    spurteDuClient: SpurteDuClient,
     config: AzureADConfig,
     development: Boolean,
 ) {
@@ -137,23 +113,21 @@ fun Application.spanner(
             }
             get("/api/person/") {
                 audit()
-                val maskertId =
-                    call.request.headers[IdType.MASKERT_ID.header]
-                        ?: return@get call.respond(HttpStatusCode.BadRequest, FeilRespons("bad_request", "header ${IdType.MASKERT_ID.header} må være satt"))
+                val personPseudoIdHeader =
+                    call.request.headers[IdType.PERSON_PSEUDO_ID.header]
+                        ?: return@get call.respond(HttpStatusCode.BadRequest, FeilRespons("bad_request", "header ${IdType.PERSON_PSEUDO_ID.header} må være satt"))
                 logg.call(this.call).info()
 
-                val id =
+                val personPseudoId =
                     try {
-                        UUID.fromString(maskertId)
+                        PersonPseudoId(UUID.fromString(personPseudoIdHeader))
                     } catch (_: Exception) {
-                        return@get call.respond(HttpStatusCode.BadRequest, FeilRespons("bad_request", "maskert id må være uuid"))
+                        return@get call.respond(HttpStatusCode.BadRequest, FeilRespons("bad_request", "${IdType.PERSON_PSEUDO_ID.header} må være uuid"))
                     }
 
-                val identitetsnummer =
-                    personPseudoIdProvider.finnIdentitetsnummer(PersonPseudoId(id))?.value
-                        ?: fødselsnummerFraSpurteDu(spurteDuClient, id, call.bearerToken)
+                val identitetsnummer = personPseudoIdProvider.finnIdentitetsnummer(personPseudoId)?.value
 
-                if (identitetsnummer == null) return@get call.respond(HttpStatusCode.BadRequest, FeilRespons("bad_request", "maskertId pekte ikke på et fødselsnummer"))
+                if (identitetsnummer == null) return@get call.respond(HttpStatusCode.BadRequest, FeilRespons("bad_request", "${IdType.PERSON_PSEUDO_ID.header} pekte ikke på et fødselsnummer"))
                 val aktørId = speedClient.hentFødselsnummerOgAktørId(identitetsnummer, call.callId ?: UUID.randomUUID().toString()).getOrThrow().aktørId
                 spleis.person(call, identitetsnummer, aktørId)
             }
@@ -173,7 +147,7 @@ fun Application.spanner(
                     when (idType) {
                         IdType.FNR -> idValue
                         IdType.AKTORID -> speedClient.hentFødselsnummerOgAktørId(idValue, call.callId ?: UUID.randomUUID().toString()).getOrThrow().fødselsnummer
-                        IdType.MASKERT_ID -> return@post call.respond(HttpStatusCode.BadRequest, FeilRespons("bad_request", "${IdType.AKTORID.header} or ${IdType.FNR.header} must be set"))
+                        IdType.PERSON_PSEUDO_ID -> return@post call.respond(HttpStatusCode.BadRequest, FeilRespons("bad_request", "${IdType.AKTORID.header} or ${IdType.FNR.header} must be set"))
                     }
 
                 val identitetsnummer =
@@ -256,14 +230,8 @@ fun Application.spanner(
 }
 
 private fun ApplicationCall.personId() =
-    request.headers[IdType.MASKERT_ID.header]?.let {
-        Pair(IdType.MASKERT_ID, it)
+    request.headers[IdType.PERSON_PSEUDO_ID.header]?.let {
+        Pair(IdType.PERSON_PSEUDO_ID, it)
     } ?: request.headers[IdType.FNR.header]?.let {
         Pair(IdType.FNR, it)
     } ?: Pair(IdType.AKTORID, request.header(IdType.AKTORID.header))
-
-private val ApplicationCall.bearerToken: String? get() {
-    val httpAuthHeader = request.parseAuthorizationHeader() ?: return null
-    if (httpAuthHeader !is HttpAuthHeader.Single) return null
-    return httpAuthHeader.blob
-}

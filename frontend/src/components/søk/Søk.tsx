@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react'
 import {useLocation, useNavigate} from 'react-router-dom'
-import {maskertRequestFactory, useBackend} from "../../external/backend";
+import {personPseudoIdRequestFactory, useBackend} from "../../external/backend";
 import {Alert, Box, HStack, Search} from "@navikt/ds-react";
 
 export const Søk = () => {
@@ -31,7 +31,7 @@ export const Søk = () => {
         if (søketekst.length == 36) return updatePath(søketekst)
         try {
             setIsLoading(true)
-            maskertRequestFactory(søketekst, backend)
+            personPseudoIdRequestFactory(søketekst, backend)
                 .catch((e: Error) => {
                     setIsLoading(false)
                     setFeilmelding(e.message)

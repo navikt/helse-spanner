@@ -35,14 +35,14 @@ fun main() {
             }
 
             get("/api/person/") {
-                val maskertId = call.uuidHeader("maskertId") ?: return@get call.respond(BadRequest)
-                val person = hentingsmedium.hentPerson(maskertId) ?: return@get call.respond(NotFound)
+                val personPseudoId = call.uuidHeader("personPseudoId") ?: return@get call.respond(BadRequest)
+                val person = hentingsmedium.hentPerson(personPseudoId) ?: return@get call.respond(NotFound)
                 call.respondText(person, Json, OK)
             }
 
             post("/api/uuid/") {
-                val maskertId = call.uuidHeader("maskertId") ?: return@post call.respond(BadRequest)
-                val person = hentingsmedium.hentPerson(maskertId) ?: return@post call.respond(NotFound)
+                val personPseudoId = call.uuidHeader("personPseudoId") ?: return@post call.respond(BadRequest)
+                val person = hentingsmedium.hentPerson(personPseudoId) ?: return@post call.respond(NotFound)
                 call.respondText(person, Json, OK)
             }
 

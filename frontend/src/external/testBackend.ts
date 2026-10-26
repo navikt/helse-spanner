@@ -1,4 +1,4 @@
-import {MaskertDto, MeldingDto, PersonDto} from '../state/dto'
+import {MeldingDto, PersonDto, PersonPseudoIdDto} from '../state/dto'
 import {Backend} from './backend'
 
 export let testBackend = (
@@ -35,11 +35,11 @@ export let testBackend = (
             }
             return Promise.resolve(melding)
         },
-        uuidForAktørId(aktørId: string): Promise<MaskertDto> {
+        uuidForAktørId(aktørId: string): Promise<PersonPseudoIdDto> {
             return Promise.resolve({ id: aktørId })
         },
 
-        uuidForFnr(fnr: string): Promise<MaskertDto> {
+        uuidForFnr(fnr: string): Promise<PersonPseudoIdDto> {
             return Promise.resolve({ id: fnr })
         },
 

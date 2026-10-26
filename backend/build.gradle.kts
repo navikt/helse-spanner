@@ -42,7 +42,6 @@ dependencies {
     runtimeOnly(libs.jjwt.jackson)
 
     testImplementation(libs.mockk)
-    testImplementation(libs.tbd.libs.mock.http.client)
     testImplementation(libs.mock.oauth2.server)
     testImplementation(libs.ktor.server.test.host)
 }

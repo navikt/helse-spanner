@@ -11,7 +11,6 @@ import no.nav.security.mock.oauth2.MockOAuth2Server
 import no.nav.security.mock.oauth2.OAuth2Config
 import no.nav.security.mock.oauth2.token.DefaultOAuth2TokenCallback
 import no.nav.spanner.no.nav.spanner.LokaleKjenninger
-import no.nav.spanner.spurtedu.SpurteDuClient
 import org.slf4j.LoggerFactory
 
 fun startLocal() {
@@ -43,7 +42,6 @@ fun startLocal() {
 
     val speedClient = mockk<SpeedClient>()
     val personPseudoIdProvider = InMemoryPersonPseudoIdProvider()
-    val spurteDuClient = mockk<SpurteDuClient>()
     val spleis = LokaleKjenninger
 
     embeddedServer(
@@ -61,7 +59,7 @@ fun startLocal() {
         install(CORS) {
             this.anyHost()
         }
-        spanner(spleis, speedClient, personPseudoIdProvider, spurteDuClient, adConfig, spannerConfig.development)
+        spanner(spleis, speedClient, personPseudoIdProvider, adConfig, spannerConfig.development)
     }.start(true)
     mockAuth.shutdown()
 }

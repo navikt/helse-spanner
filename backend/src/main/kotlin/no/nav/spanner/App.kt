@@ -14,7 +14,6 @@ import io.ktor.server.cio.CIO
 import io.ktor.server.engine.applicationEnvironment
 import io.ktor.server.engine.connector
 import io.ktor.server.engine.embeddedServer
-import no.nav.spanner.spurtedu.SpurteDuClient
 import org.slf4j.LoggerFactory
 import tools.jackson.module.kotlin.jacksonObjectMapper
 import java.io.File
@@ -51,14 +50,6 @@ fun main() {
         )
 
     val tokenProvider = createAzureTokenClientFromEnvironment()
-    val spurteDuClient =
-        SpurteDuClient(
-            httpClient = HttpClient.newHttpClient(),
-            objectMapper = objectMapper,
-            tokenProvider = tokenProvider,
-            baseUrl = "http://spurtedu",
-            scope = "api://${System.getenv("NAIS_CLUSTER_NAME")}.tbd.spurtedu/.default",
-        )
     val spleis = Spleis.from(spannerConfig, tokenProvider)
     val personPseudoIdProvider = ValkeyPersonPseudoIdProvider.fraEnv(instansNavn = "personpseudoid", env = System.getenv())
 
@@ -75,6 +66,6 @@ fun main() {
             }
         },
     ) {
-        spanner(spleis, speedClient, personPseudoIdProvider, spurteDuClient, adConfig, spannerConfig.development)
+        spanner(spleis, speedClient, personPseudoIdProvider, adConfig, spannerConfig.development)
     }.start(true)
 }

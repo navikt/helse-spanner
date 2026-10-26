@@ -36,7 +36,7 @@ export type InfotrygdperiodeDto = {
     [x: string]: any
 }
 
-export type MaskertDto = {
+export type PersonPseudoIdDto = {
     id: string
 }
 
