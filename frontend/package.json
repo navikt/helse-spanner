@@ -16,11 +16,11 @@
         "prettier": "prettier --write index.html package.json \"src/**/*.{js,jsx,ts,tsx,css,json,svg}\""
     },
     "dependencies": {
-        "@microlink/react-json-view": "^1.31.40",
+        "@microlink/react-json-view": "^1.31.41",
         "@navikt/aksel-icons": "^8.19.2",
         "@navikt/ds-css": "^8.19.2",
         "@navikt/ds-react": "^8.19.2",
-        "@tanstack/react-query": "^5.104.4",
+        "@tanstack/react-query": "^5.104.5",
         "classnames": "^2.5.1",
         "date-fns": "^4.4.0",
         "jotai": "^3.0.1",
