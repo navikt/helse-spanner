@@ -12,8 +12,8 @@ importers:
   .:
     dependencies:
       '@microlink/react-json-view':
-        specifier: ^1.31.41
-        version: 1.31.41(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
+        specifier: ^1.31.42
+        version: 1.31.42(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
       '@navikt/aksel-icons':
         specifier: ^8.20.0
         version: 8.20.0
@@ -182,8 +182,8 @@ packages:
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
 
-  '@microlink/react-json-view@1.31.41':
-    resolution: {integrity: sha512-d/T7/KrRlJ8Gi84Cyr39QXui71lauue/ewVYkX3xUO2opzQlx5pqaA5TAixO+jHlsyGGz5+1O3PHK8mEHN08TQ==}
+  '@microlink/react-json-view@1.31.42':
+    resolution: {integrity: sha512-0j23jlOfG1mGTPJAXvGAFMyH85LF0SmpiWh1GMrS/s/oo/wyZ2IEqbtZlns5e6JVoqFS2qUqGfERsNCeg5offA==}
     engines: {node: '>=17'}
     peerDependencies:
       react: '>= 15'
@@ -362,8 +362,8 @@ packages:
   '@types/glob-to-regexp@0.4.4':
     resolution: {integrity: sha512-nDKoaKJYbnn1MZxUY0cA1bPmmgZbg0cTq7Rh13d0KWYNOiKbqoR+2d89SnRPszGh7ROzSwZ/GOjZ4jPbmmZ6Eg==}
 
-  '@types/lodash@4.17.26':
-    resolution: {integrity: sha512-48NWfiY6oNcKOh47Z4h+sIvwcQR91h6KPhaYKgeMIrkT2jV82Gy90SErj60vW8jQbeMSOSbhIv3bZ7JoqPPVhA==}
+  '@types/lodash@4.17.27':
+    resolution: {integrity: sha512-VenMRv/eKNrspX9v3H4dbmjsrnCOYdYBG3kxXKk3dG6X+urBGcj2Prww3xw1U5K4FV/mE4h5GbWd0szEKf+9ew==}
 
   '@types/node@25.0.0':
     resolution: {integrity: sha512-rl78HwuZlaDIUSeUKkmogkhebA+8K1Hy7tddZuJ3D0xV8pZSfsYGTsliGUol1JPzu9EKnTxPC4L1fiWouStRew==}
@@ -1256,7 +1256,7 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.6.0
 
-  '@microlink/react-json-view@1.31.41(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)':
+  '@microlink/react-json-view@1.31.42(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)':
     dependencies:
       react: 19.3.1
       react-base16-styling: 0.10.0
@@ -1382,7 +1382,7 @@ snapshots:
 
   '@types/glob-to-regexp@0.4.4': {}
 
-  '@types/lodash@4.17.26': {}
+  '@types/lodash@4.17.27': {}
 
   '@types/node@25.0.0':
     dependencies:
@@ -1772,7 +1772,7 @@ snapshots:
 
   react-base16-styling@0.10.0:
     dependencies:
-      '@types/lodash': 4.17.26
+      '@types/lodash': 4.17.27
       color: 4.2.3
       csstype: 3.2.3
       lodash-es: 4.18.1
