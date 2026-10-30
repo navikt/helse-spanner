@@ -16,7 +16,7 @@
         "prettier": "prettier --write index.html package.json \"src/**/*.{js,jsx,ts,tsx,css,json,svg}\""
     },
     "dependencies": {
-        "@microlink/react-json-view": "^1.31.41",
+        "@microlink/react-json-view": "^1.31.42",
         "@navikt/aksel-icons": "^8.20.0",
         "@navikt/ds-css": "^8.20.0",
         "@navikt/ds-react": "^8.20.0",
