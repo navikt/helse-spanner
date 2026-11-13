@@ -12,8 +12,8 @@ importers:
   .:
     dependencies:
       '@microlink/react-json-view':
-        specifier: ^1.31.47
-        version: 1.31.47(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
+        specifier: ^1.31.48
+        version: 1.31.48(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
       '@navikt/aksel-icons':
         specifier: ^8.22.1
         version: 8.22.1
@@ -182,8 +182,8 @@ packages:
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
 
-  '@microlink/react-json-view@1.31.47':
-    resolution: {integrity: sha512-Y0yvwz3LmiMc1s8WGmnvaLvGITjwewXfBowTQ95zr7vpbktQYyEPUqtupvcM1MBURV70OBXuNM9z6W5RJ2U15Q==}
+  '@microlink/react-json-view@1.31.48':
+    resolution: {integrity: sha512-DqWxyfeksOCeHaUZq0x6AK2x260jIrvrQFIpi+CI36AEWAJCHCjxMc37DvIuj/WXeesf2Sa/sZMwD7OW6n7ohg==}
     engines: {node: '>=17'}
     peerDependencies:
       react: '>= 15'
@@ -1256,7 +1256,7 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.6.0
 
-  '@microlink/react-json-view@1.31.47(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)':
+  '@microlink/react-json-view@1.31.48(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)':
     dependencies:
       react: 19.3.1
       react-base16-styling: 0.10.0
